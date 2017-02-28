@@ -1,0 +1,62 @@
+#----------------------------------------------------------
+# Ce script comprend la methode calc_frais de la classe FraisPassif
+#----------------------------------------------------------
+# Suivi version
+# Version 1.0 du 09/02/2017. Fait par MT : initialisation
+#----------------------------------------------------------
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#           calc_frais
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+##' Methode generique de calcul des frais
+##'
+##' \code{calc_frais} est une methode generique permettant de calculer les frais sur prestations, sur primes
+##' et sur encours.
+##' @name calc_frais
+##' @docType methods
+##' @param x objet de la classe \code{FraisPassif}.
+##' @param type un \code{character} desiqnant le type de frais applique.
+##' @param nom_prod est le nom de produit de type \code{character}.
+##' @param nb correspond a un nombre de contrats, utilise comme assiette de frais fixe par contrat.
+##' @param mt correspond a un montant, utilise comme assiette de frais variable.
+##' @param coef_inf correspond au coefficient d'inflation applique.
+##' @details Le type du contrats prend pour valeur \code{prime} pour les frais sur primes, \code{prest} pour les frais
+##' sur prestations et \code{enc} pour les frais sur encours.
+#' @return Une liste contenant les montants de frais fixes et variables.
+##' @author Prim'Act
+##' @export
+##' @aliases FraisPassif
+
+setGeneric(name = "calc_frais", def = function(x, type, nom_prod, nb, mt, coef_inf)
+{standardGeneric("calc_frais")})
+setMethod(
+  f = "calc_frais",
+  signature = c(x = "FraisPassif", type = "character", nom_prod ="character", nb = "numeric", mt ="numeric", coef_inf ="numeric"),
+  def = function(x, type, nom_prod, nb, mt, coef_inf){
+
+
+    # Nom de la ligne produit et des colonnes
+    row <- which(x@mp$nom_prod == nom_prod)
+    names_col <- names(x@mp)
+    frais_fixe <- which(names_col == paste("frais_fixe", type, sep ="_"))
+    frais_var <- which(names_col == paste("frais_var", type, sep ="_"))
+    ind_inf_frais_fixe <- which(names_col == paste("ind_inf_frais_fixe", type, sep ="_"))
+    ind_inf_frais_var <- which(names_col == paste("ind_inf_frais_var", type, sep ="_"))
+
+    # Calcul des frais fixes et des frais variables
+    frais_fixe <- nb * .subset2(x@mp, frais_fixe)[row] *
+      (1 + .subset2(x@mp, ind_inf_frais_fixe)[row] * (coef_inf - 1))
+
+    frais_var <- mt * .subset2(x@mp, frais_var)[row] *
+      (1 + .subset2(x@mp, ind_inf_frais_var)[row] * (coef_inf - 1))
+
+
+    # Output
+    ret = list(frais_fixe, frais_var)
+    # Nommage des sorties
+    names(ret) <- c(paste("frais_fixe", type, sep = "_"), paste("frais_var", type, sep = "_"))
+    return(ret)
+  }
+)
+
+

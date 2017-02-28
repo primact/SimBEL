@@ -1,0 +1,191 @@
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Ce script comprend les fonctions permettant de calculer le financement de la PB contractuelle.
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#           calc_revalo
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+##' Applique la politique de revalorisation d'un canton.
+##'
+##' \code{calc_revalo} est une methode permettant de
+##'  d'appliquer l'ensemble de la politique de revalorisation d'un assureur.
+##' @name base_prod_fin
+##' @docType methods
+##' @param x un objet de la classe \code{Canton}.
+##' @param passif_av_pb est une liste produit par la methode \code{viellissement_av_pb}
+##' appliquee a un portefeuille de passif.
+##' @param tra est la valeur \code{numeric} du taux de rendement de l'actif.
+##' @param plac_moy_vnc est la valeur \code{numeric} moyenne des actifs.
+##' @param result_tech est la valeur \code{numeric} du resultats techniques prise en compte de la PB.
+##' @return Une liste avec la valeur de la revalorisation additionelle nette servie par
+##'  produit, la ppb mise a jour, la PPB mise a jour et le resultat technique avant PB.
+##' @author Prim'Act
+##' @export
+##' @aliases RevaloEngine
+
+setGeneric(name = "calc_revalo", def = function(x, passif_av_pb, tra, plac_moy_vnc, result_tech){
+  standardGeneric("calc_revalo")})
+setMethod(
+  f = "calc_revalo",
+  signature = c(x = "Canton", passif_av_pb ="list", tra = "numeric", plac_moy_vnc ="numeric", result_tech ="numeric"),
+  definition = function(x, passif_av_pb, tra, plac_moy_vnc, result_tech){
+
+    #---------------------------------------------------------------
+    # Etape 1 : Evaluation de la base de produits financier
+    #---------------------------------------------------------------
+
+    # Base de produits financiers
+    base_fin <- base_prod_fin(tra, passif_av_pb[["result_av_pb"]][["stock_agg"]][,"pm_moy"][[1]], x@ppb)
+
+    #---------------------------------------------------------------
+    # Etape 2 : Calcul de la PB contractuelle
+    #---------------------------------------------------------------
+
+    # Extraction et verification des taux de PB
+      tx_pb <- x@ptf_passif@tx_pb@mp # Extrait le vecteur des taux de PB contractuelle
+      names_class_prod <- x@ptf_passif@names_class_prod # Nom des classes de produits
+      nom_prod <- sapply(names_class_prod, function(i){
+        names(x@ptf_passif[i])
+      }) # Extrait les numeros de produits
+      nom_prod <- unlist(nom_prod) # Place les numeros de produit dans un vecteur de caracteres
+      tx_pb <- tx_pb[which(tx_pb$nom_prod == nom_prod), "taux_pb"] # Taux de PB reordonnees selon le nom des produits
+
+      # Chargement sur encours theorique par produit
+      ch_enc_th <- passif_av_pb[["result_av_pb"]][["flux_agg"]][,"enc_charg_base_th"][[1]] +
+        passif_av_pb[["result_av_pb"]][["flux_agg"]][,"enc_charg_rmin_th"][[1]]
+
+      # Evaluation du taux de chargement sur encours moyen par produit
+      tx_enc_moy <- ch_enc_th / passif_av_pb[["result_av_pb"]][["flux_agg"]][,"base_enc_th"][[1]]
+
+      # Gestion des divisions par 0
+      tx_enc_moy[passif_av_pb[["result_av_pb"]][["flux_agg"]][,"base_enc_th"][[1]] == 0] <- 0
+
+
+      # Evaluation de la PB contractuelle nette
+      revalo_contr <- pb_contr(base_fin[["base_prod_fin"]], tx_pb,
+                               passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_stock_brut"][[1]],
+                               ch_enc_th,
+                               tx_enc_moy)
+      #---------------------------------------------------------------
+      # Etape 3 : Financement des TMG par la PPB
+      #---------------------------------------------------------------
+
+      # Financement des TMG par la PPB
+      financement_tmg <- finance_tmg(passif_av_pb[["result_av_pb"]][["flux_agg"]][,"bes_tmg_prest"][[1]],
+                                     passif_av_pb[["result_av_pb"]][["flux_agg"]][,"bes_tmg_stock"][[1]],
+                                     x@ppb)
+      # Mise a jour de la PPB
+      x["ppb"] <- financement_tmg[["ppb"]]
+
+      #---------------------------------------------------------------
+      # Etape 4 : Financement du taux cible par la PPB
+      #---------------------------------------------------------------
+      bes_tx_cible <- passif_av_pb[["result_av_pb"]][["flux_agg"]][,"bes_tx_cible"][[1]] # Besoin taux cible
+
+      # Financement du taux cible par la PPB
+      tx_cibl_ppb <- finance_cible_ppb(bes_tx_cible,
+                                       revalo_contr[["rev_stock_nette_contr"]], x@ppb)
+
+      # Mise a jour de la PPB
+      x["ppb"] <- tx_cibl_ppb[["ppb"]]
+
+      #---------------------------------------------------------------
+      # Etape 5 : Financement du taux cible par des cessions de PVL actions
+      #---------------------------------------------------------------
+
+      # Calcul du coefficient d'ajustement pour ajustement a l'echelle du passif
+      coef_ajust <-  base_fin[["base_prod_fin_port"]] / plac_moy_vnc
+
+      # Calcul du seuil de PMVL action
+      seuil_pmvl <- x@param_alm@seuil_realisation_PVL * x@ptf_fin@pvl_action * coef_ajust
+
+      # Financement du taux cible par des cessions de PVL actions
+      tx_cibl_pmvl <- finance_cible_pmvl(bes_tx_cible,
+                                         tx_cibl_ppb[["rev_stock_nette"]],
+                                         base_fin[["base_prod_fin"]],
+                                         seuil_pmvl,
+                                         tx_pb)
+
+      # Met a jour la base financiere
+      if(base_fin[["base_prod_fin_port"]] != 0){
+        base_fin[["base_prod_fin"]] <- base_fin[["base_prod_fin"]] + tx_cibl_pmvl[["pmvl_liq"]] *
+          base_fin[["base_prod_fin"]] / base_fin[["base_prod_fin_port"]] # Allocation par produit
+        base_fin[["base_prod_fin_port"]] <- sum(base_fin[["base_prod_fin"]])
+      }
+
+      # Extraction et remise a l'echelle de l'actif de la PMVL action realisee
+      if(coef_ajust != 0){
+        pmvl_liq <- tx_cibl_pmvl[["pmvl_liq"]] / coef_ajust
+      }else{
+        pmvl_liq <- 0
+      }
+
+
+      #---------------------------------------------------------------
+      # Etape 6 : Financement du taux cible par la marge de l'assureur
+      #---------------------------------------------------------------
+
+      # Marge minimum que veut realisee l'assureur
+      marge_min <- passif_av_pb[["result_av_pb"]][["stock_agg"]][,"pm_moy"][[1]] * x@param_revalo@tx_marge_min
+
+      # Calcul de la marge financiere de l'assureur
+      marge_fin <- calc_marge_fin(base_fin[["base_prod_fin"]],
+                                  passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_prest_nette"][[1]],
+                                  tx_cibl_pmvl[["rev_stock_nette"]],
+                                  financement_tmg[["contrib_tmg_prest"]],
+                                  financement_tmg[["contrib_tmg_stock"]],
+                                  tx_cibl_ppb[["reprise"]])
+
+      # Financement du taux cible par la marge de l'assureur
+      tx_cibl_marge <- finance_cible_marge(marge_fin,
+                                           bes_tx_cible,
+                                           tx_cibl_pmvl[["rev_stock_nette"]],
+                                           marge_min)
+
+
+      #---------------------------------------------------------------
+      # Etape 7 : Application de la contrainte de PB reglementaire
+      #---------------------------------------------------------------
+
+      # Evaluation d'une base de produits financiers etendue qui comprend le hors modele
+      base_fin_etendu <- base_fin[["base_prod_fin_port"]] +
+        (passif_av_pb[["result_autres_passifs"]]$pm_fin + passif_av_pb[["result_autres_passifs"]]$pm_deb ) / 2
+
+
+      revalo_finale <- finance_contrainte_legale(base_fin[["base_prod_fin"]], base_fin_etendu,
+                                                 result_tech,
+                                                 passif_av_pb[["result_av_pb"]][["flux_agg"]][,"it_tech_stock"][[1]],
+                                                 tx_cibl_marge[["rev_stock_nette"]],
+                                                 passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_prest_nette"][[1]],
+                                                 tx_cibl_ppb[["dotation"]],
+                                                 tx_cibl_marge[["marge_fin"]], x@ppb,
+                                                 x@param_revalo)
+
+      # Mise a jour de la PPB
+      x["ppb"] <- revalo_finale[["ppb"]]
+
+      # On calcule le montant de revalorisation nette au dela de la revalorisation nette
+      # au taux minimum.
+      add_rev_nette_stock <- revalo_finale[["rev_stock_nette"]] -
+                                    (passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_stock_brut"][[1]] -
+                                       ch_enc_th)
+
+      # Ce montant ne doit pas etre negatif
+      if(sum(add_rev_nette_stock) < 0){ stop("[RevaloEngine_calc_revalo] Le montant de le revalorisation additionnelle
+                                             ne peut pas etre negatif.")}
+
+      # Output
+
+      return(list(
+        add_rev_nette_stock = add_rev_nette_stock,
+        pmvl_liq = pmvl_liq,
+        ppb = x@ppb,
+        tx_pb = tx_pb,
+        tx_enc_moy = tx_enc_moy
+      ))
+    }
+
+)
+
+

@@ -1,0 +1,30 @@
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#           calc_frais_fin
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+##' Calcul des frais financier.
+##'
+##' \code{calc_frais_fin} est une methode permettant de calculer les frais financiers.
+##' @name calc_frais_fin
+##' @docType methods
+##' @param x est un objet de type \code{FraisFin}.
+##' @param vm_moy est un objet de type \code{numeric} correspondant a la valeur moyenne de l'actif en valeur
+##' de marche.
+##' @param coef_inflation est un objet de type \code{numeric} correspondant au coefficient d'inflation des frais.
+##' @return La valeur des frais financiers.
+##' @author Prim'Act
+##' @export
+##' @aliases FraisFin
+##'
+setGeneric(name = "calc_frais_fin", def = function(x, vm_moy, coef_inflation){standardGeneric("calc_frais_fin")})
+setMethod(
+    f = "calc_frais_fin",
+    signature = c(x = "FraisFin", vm_moy = "numeric", coef_inflation ="numeric"),
+    definition = function(x, vm_moy, coef_inflation){
+        # Verification des inputs
+        # Suppose une dimension de 1 pour l'instant
+        if (length(vm_moy) != length(coef_inflation) | length(coef_inflation) != 1) { stop("[Frais : calc_frais] : Les inputs ne sont pas de la meme dimension \n")}
+        # Calcul des frais
+        return (x@tx_chargement * vm_moy * ((x@indicatrice_inflation == FALSE) + coef_inflation * (x@indicatrice_inflation == TRUE)))
+    }
+)
