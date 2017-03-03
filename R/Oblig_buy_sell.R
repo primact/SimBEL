@@ -91,7 +91,7 @@ setMethod(
       temp_part["ptf_oblig"][,"val_achat"]  <- temp_part["ptf_oblig"][,"val_achat"]  * (1 - nb_sold_part / temp_part["ptf_oblig"][,"nb_unit"])
       temp_part["ptf_oblig"][,"val_marche"] <- temp_part["ptf_oblig"][,"val_marche"] * (1 - nb_sold_part / temp_part["ptf_oblig"][,"nb_unit"])
       temp_part["ptf_oblig"][,"nb_unit"]    <- temp_part["ptf_oblig"][, "nb_unit"] - nb_sold_part
-      df_surcote_decote_vnc                 <- calc_sur_dec_vnc(temp_part)
+      df_surcote_decote_vnc                 <- calc_sur_dec(temp_part)
       temp_part["ptf_oblig"][,"sd"]         <- df_surcote_decote_vnc[,"surcote_decote"]
       temp_part["ptf_oblig"][,"val_nc"]     <- df_surcote_decote_vnc[,"val_nc"]
     }
