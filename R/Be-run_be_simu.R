@@ -46,6 +46,7 @@ setMethod(
       # Extraction du model point ESG
       mp_esg <- extract_ESG(x@esg, i, an)
       deflateur <- c(deflateur, mp_esg@deflateur)
+      canton@mp_esg <- mp_esg
 
       # Projection d'un canton sur une annee
       result_proj_an <- proj_an(canton, x@param_be@nb_annee)

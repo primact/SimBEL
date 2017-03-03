@@ -47,7 +47,7 @@ setMethod(
 )
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           calc_sur_dec_vnc
+#           calc_sur_dec
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Calcul les surcote/decote de chaque composante d'un portefeuille obligataire.
 ##'
@@ -59,21 +59,31 @@ setMethod(
 ##' @author Prim'Act
 ##' @export
 ##' @aliases Oblig
-setGeneric(name = "calc_sur_dec_vnc", def = function(x){standardGeneric("calc_sur_dec_vnc")})
+setGeneric(name = "calc_sur_dec", def = function(x){standardGeneric("calc_sur_dec")})
 setMethod(
-  f = "calc_sur_dec_vnc",
+  f = "calc_sur_dec",
   signature = "Oblig",
   definition = function(x){
     if(nrow(x["ptf_oblig"]) == 0) {stop("[Oblig:calc_sur_dec_vnc] : Portefeuille obligataire vide")}
-    nominal           <- calc_nominal(x)
-    achat             <- x["ptf_oblig"][,"val_achat"]
-    maturite_initiale <- x["ptf_oblig"][,"mat_res"] + x["ptf_oblig"][,"dur_det"]
-    surcote_decote    <- (nominal - achat) / maturite_initiale
-    val_nc            <- x["ptf_oblig"][,"val_nc"] + surcote_decote
-    return(data.frame(surcote_decote,val_nc))
+    nominal           <- calc_nominal(x) / x["ptf_oblig"][,"nb_unit"]
+    vnc             <- x["ptf_oblig"][,"val_nc"] / x["ptf_oblig"][,"nb_unit"]
+    maturite_initiale <- x["ptf_oblig"][,"mat_res"]
+    surcote_decote    <- (nominal - vnc) / maturite_initiale
+    return(surcote_decote)
   }
 )
 
+
+setGeneric(name = "calc_vnc", def = function(x, sd_unitaire){standardGeneric("calc_vnc")})
+setMethod(
+  f = "calc_vnc",
+  signature = c("Oblig","numeric"),
+  definition = function(x, sd_unitaire){
+    if(nrow(x["ptf_oblig"]) == 0) {stop("[Oblig:calc_vnc] : Portefeuille obligataire vide")}
+    if(length(sd_unitaire) != nrow(x["ptf_oblig"])) {stop("[[Oblig:calc_vnc] : Inputs de mauvaise dimension")}
+    return(x["ptf_oblig"][,"val_nc"] + sd_unitaire * x["ptf_oblig"][,"nb_unit"])
+  }
+)
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -35,9 +35,10 @@ setMethod(
     if(n_bought == 0) {stop("[Oblig : buy_oblig] : Tentative d'achat d'un portefeuille vide\n")}
 
     ptf_bought["ptf_oblig"][,"num_mp"] <- c((n_init+1):(n_init+n_bought))
+    # Mise a jour de la surcote decote du portefeuille achete en date d'achat
+    ptf_bought <- update_sd_oblig(ptf_bought, calc_sur_dec(ptf_bought))
     x["ptf_oblig"] <- rbind(x["ptf_oblig"], ptf_bought["ptf_oblig"])
 
-    validObject(x)
     return(x)
   }
 )

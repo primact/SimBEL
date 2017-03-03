@@ -1,8 +1,15 @@
-# Script contenant la methode init
-# x <- new("Initialisation")
-# x["root_address"] <- "Z:/02 - Missions/OUTIL BE PRIMACT/06_Env_Dev"
-# nb_simu = as.integer(2)
-# nb_annee_proj = as.integer(50)
+##' Initialisation d'un workspace.
+##'
+##' \code{init_SimBEL} est la methode d'initialisation d'un workspace.
+##' @name init_SimBEL
+##' @docType methods
+##' @param x un objet de la classe \code{Initialisation}.
+##' @param nb_simu nombre de simulation.
+##' @param nb_annee_proj nombre d'annee de projection.  
+##' @return Pas de sortie.
+##' @author Prim'Act
+##' @export
+##' @aliases Initialisation
 setGeneric(name = "init_SimBEL", def = function(x, nb_simu, nb_annee_proj){standardGeneric("init_SimBEL")})
 setMethod(
     f = "init_SimBEL",
@@ -31,7 +38,7 @@ setMethod(
         canton_init@ptf_passif   <- Ptf_Passif
         canton_init@mp_esg       <- mp_ESG_init
         canton_init@ppb          <- new("Ppb") # Tout a 0 car MGP pas de PPB
-        canton_init@hyp_canton   <- new("HypCanton", tx_soc = .15, tx_import = .33)
+        canton_init@hyp_canton   <- new("HypCanton", tx_soc = .15, tx_import = .33, method_taux_cible = "Meth1") # Pas propre
         canton_init@param_alm    <- new("ParamAlmEngine") # Canton initial port fin de ref vide
         canton_init@param_revalo <- new("ParamRevaloEngine", taux_pb_fi = .85, taux_pb_tech = .9, tx_marge_min = 0)
         

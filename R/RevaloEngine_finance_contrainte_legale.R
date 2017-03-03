@@ -91,7 +91,7 @@ setMethod(
     # Calcul de la revalorisation du stock nette apres prise en compte de la contrainte legale
     # L'attribution s'effectue uniquement sur les produits modelises.
     if(sum(base_fin) != 0){
-      rev_stock_nette_regl <- rev_stock_nette + add_rev_regl * pmax(0, base_fin) / sum(base_fin)
+      rev_stock_nette_regl <- rev_stock_nette + add_rev_regl * base_fin / sum(base_fin)
     } else{ # Repartition au prorara si la base financiere est nulle
       nb_prod <- length(base_fin)
       rev_stock_nette_regl <- rev_stock_nette + add_rev_regl * 1 / nb_prod

@@ -6,7 +6,7 @@
 \alias{calc_sur_dec}
 \title{Calcul les surcote/decote de chaque composante d'un portefeuille obligataire.}
 \usage{
-calc_sur_dec_vnc(x)
+calc_sur_dec(x)
 }
 \arguments{
 \item{x}{objet de la classe Oblig (decrivant le portefeuile obligataire).}

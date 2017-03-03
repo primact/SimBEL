@@ -1,10 +1,12 @@
 Package: SimBEL
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Title: Un package de calcul du best estimate epargne sous Solvabilite II.
+Version: 0.2.0
+Author: Prim'Act
+Maintainer: Quentin Guibert <quentin.guibert@primact.fr>
+Description: Un modele de simulation Monte-Carlo s'appuyant sur une projection d'un canton (actif et passif)
+             permettant l'évaluation des provisions best estimate d'un contrat d'epargne francais en euros.
+             Plusieurs chocs de la formule standard peuvent etre effectues.
+License: GPL-2
 LazyData: TRUE
 RoxygenNote: 5.0.1

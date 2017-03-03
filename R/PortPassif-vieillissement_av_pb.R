@@ -52,8 +52,8 @@ setMethod(
     x <- result_av_pb[["x"]]
 
     # Totaux
-    prest_tot <- sum(result_av_pb[["flux_agg"]][, "prest"][[1]])
-    pm_av_pb_tot <- sum(result_av_pb[["stock_agg"]][, "pm_fin"][[1]])
+    prest_tot <- sum(result_av_pb[["flux_agg"]][, "prest"])
+    pm_av_pb_tot <- sum(result_av_pb[["stock_agg"]][, "pm_fin"])
 
     #---------------------------------------------------------------
     # Etape 2 : Evaluation des flux et de PM sur les produits hors modeles
@@ -79,27 +79,27 @@ setMethod(
 
     # Evaluation du besoin pour le financement des TMG sur prestations et  stock
     result_av_pb[["flux_agg"]] <- cbind(result_av_pb[["flux_agg"]],
-                                        bes_tmg_prest = result_av_pb[["flux_agg"]][,"rev_prest_nette"][[1]] -
-                                          result_av_pb[["flux_agg"]][,"it_tech_prest"][[1]],
-                                        bes_tmg_stock = result_av_pb[["flux_agg"]][,"rev_stock_nette"][[1]] -
-                                          result_av_pb[["flux_agg"]][,"it_tech_stock"][[1]]
+                                        bes_tmg_prest = result_av_pb[["flux_agg"]][,"rev_prest"] -
+                                          result_av_pb[["flux_agg"]][,"it_tech_prest"],
+                                        bes_tmg_stock = result_av_pb[["flux_agg"]][,"rev_stock_brut"] -
+                                          result_av_pb[["flux_agg"]][,"it_tech_stock"]
                                         )
 
     #---------------------------------------------------------------
     # Etape 5 : Evaluation des flux interagissant avec l'actif
     #---------------------------------------------------------------
     # Calcul des flux de mileu d'annee
-    flux_milieu <- sum(result_av_pb[["flux_agg"]][, "pri_brut"][[1]] - # Primes
+    flux_milieu <- sum(result_av_pb[["flux_agg"]][, "pri_brut"] - # Primes
       ( # Prestations
-        result_av_pb[["flux_agg"]][,"rev_prest_nette"][[1]] +
-          result_av_pb[["flux_agg"]][,"prest"][[1]] -
-          result_av_pb[["flux_agg"]][,"rach_charg"][[1]]
+        result_av_pb[["flux_agg"]][,"rev_prest_nette"] +
+          result_av_pb[["flux_agg"]][,"prest"] -
+          result_av_pb[["flux_agg"]][,"rach_charg"]
         ) - # Frais sur primes et sur prestations
       (
-        result_av_pb[["flux_agg"]][,"frais_var_prime"][[1]] +
-          result_av_pb[["flux_agg"]][,"frais_fixe_prime"][[1]] +
-          result_av_pb[["flux_agg"]][,"frais_var_prest"][[1]] +
-          result_av_pb[["flux_agg"]][,"frais_fixe_prest"][[1]]
+        result_av_pb[["flux_agg"]][,"frais_var_prime"] +
+        result_av_pb[["flux_agg"]][,"frais_fixe_prime"] +
+        result_av_pb[["flux_agg"]][,"frais_var_prest"] +
+        result_av_pb[["flux_agg"]][,"frais_fixe_prest"]
         ))
 
     # Ajout des flux hors modele
@@ -112,8 +112,8 @@ setMethod(
 
     # Calcul du flux de fin d'annee
     flux_fin <- -sum( # Frais sur encours
-      result_av_pb[["flux_agg"]][,"frais_var_enc"][[1]] +
-        result_av_pb[["flux_agg"]][,"frais_fixe_enc"][[1]]
+      result_av_pb[["flux_agg"]][,"frais_var_enc"] +
+      result_av_pb[["flux_agg"]][,"frais_fixe_enc"]
     )
 
 

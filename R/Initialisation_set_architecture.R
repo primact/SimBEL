@@ -1,3 +1,13 @@
+##' Definition de l'architecture d'un workspace.
+##'
+##' \code{set_architecture}.
+##' @name set_architecture
+##' @docType methods
+##' @param x un objet de la classe \code{Initialisation}.
+##' @return Objet mis a jour des chemins.
+##' @author Prim'Act
+##' @export
+##' @aliases Initialisation
 setGeneric(name = "set_architecture", def = function(x){standardGeneric("set_architecture")})
 setMethod(
     f = "set_architecture",
@@ -8,7 +18,8 @@ setMethod(
         # x@address$scripts_canton      <- paste(x@root_address, "internal_ws/script/canton", sep="/") 
         # x@address$scripts_passif      <- paste(x@root_address, "internal_ws/script/passif", sep="/") 
         # x@address$scripts_init        <- paste(x@root_address, "internal_ws/script/initialisation", sep="/") 
-        x@address$init_save_folder    <- paste(x@root_address, "internal_ws/data/init", sep="/") 
+        x@address$init_save_folder    <- paste(x@root_address, "internal_ws/data/init", sep="/")
+        x@address$init_save_folder_central    <- paste(x@root_address, "internal_ws/data/scenario/central", sep="/")
         x@address$data_actif          <- paste(x@root_address, "input/donnees/actif", sep="/") 
         x@address$data_ESG            <- paste(x@root_address, "input/donnees/actif/ESG", sep="/") 
         x@address$data_Ptf_reference  <- paste(x@root_address, "input/donnees/actif/Portefeuille_reference", sep="/")

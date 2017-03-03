@@ -42,7 +42,7 @@ setMethod(
     if(sum (x@tab@tab[["bes_tx_cible"]]) != 0){
       rev_net_alloue_mp <- rev_net_alloue * (x@tab@tab[["bes_tx_cible"]] / sum (x@tab@tab[["bes_tx_cible"]]))
     }else{ # Attribution proportionnelle
-      rev_net_alloue_mp <- rev_net_alloue * (rep(1,nb_mp) / nb_mp)
+      rev_net_alloue_mp <- rev_net_alloue * (rep(1, nb_mp) / nb_mp)
       }
 
 
@@ -76,8 +76,8 @@ setMethod(
     tx_rev_net <- rev_stock_nette_ap_pb / (x@tab@tab[["pm_deb"]] - x@tab@tab[["prest"]]
                                            + 0.5 * x@tab@tab[["pri_net"]])
     # Controle des denominateurs negatifs
-    tx_rev_net[(x@tab@tab[["pm_deb"]] - x@tab@tab[["prest"]]
-                + 0.5 * x@tab@tab[["pri_net"]]) == 0] <- 0
+    tx_rev_net[which((x@tab@tab[["pm_deb"]] - x@tab@tab[["prest"]]
+                + 0.5 * x@tab@tab[["pri_net"]]) == 0)] <- 0
 
 
     # Prelevements sociaux

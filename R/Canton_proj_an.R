@@ -30,7 +30,7 @@ setMethod(
     #---------------------------------------------------------------
     # Etape 1 : Mise a jour des annees de projection
     #---------------------------------------------------------------
-    x["annee"] <- x@annee + as.integer(1)
+    x@annee <- x@annee + as.integer(1)
 
     #---------------------------------------------------------------
     # Etape 2 : variables economiques utilisees au passif
@@ -50,14 +50,14 @@ setMethod(
     # Evaluation du passif vieilli d'un an
     passif_av_pb <- viellissement_av_pb(x@annee, x@ptf_passif, coef_inf, list_rd, x@hyp_canton@tx_soc)
     # Mise a jour des passifs
-    x["ptf_passif"] <- passif_av_pb[["ptf"]]
+    x@ptf_passif <- passif_av_pb[["ptf"]]
 
     #---------------------------------------------------------------
     # Etape 4 : Gestion des actifs avant allocation
     #---------------------------------------------------------------
     actif_vieil <- update_PortFin(x@annee, x@ptf_fin, x@mp_esg, passif_av_pb[["flux_milieu"]], passif_av_pb[["flux_fin"]])
     # Mise a jour des actifs
-    x["ptf_fin"] <- actif_vieil[["ptf"]]
+    x@ptf_fin <- actif_vieil[["ptf"]]
     # Extraction des revenus financiers et de la variation de VNC obligataires
     revenu_fin <- actif_vieil[["revenu_fin"]]
     var_vnc_oblig <- actif_vieil[["var_vnc_oblig"]]
@@ -65,15 +65,15 @@ setMethod(
     rm(actif_vieil)
 
     # Mise a jour du portfeuille de reference
-    x@param_alm["ptf_reference"] <- update_PortFin_reference(x@annee, x@param_alm@ptf_reference, x@mp_esg)
+    x@param_alm@ptf_reference <- update_PortFin_reference(x@annee, x@param_alm@ptf_reference, x@mp_esg)
 
     #---------------------------------------------------------------
     # Etape 5 : Re-allocation des actifs et mise a jour de la PRE et de la RC
     #---------------------------------------------------------------
     # Reallocation a l'allocation cible
 
-    actif_realloc <- reallocate(x@ptf_fin, x@param_alm@ptf_reference, param_alm_engine@alloc_cible)
-    x["ptf_fin"] <- actif_realloc[["portFin"]]
+    actif_realloc <- reallocate(x@ptf_fin, x@param_alm@ptf_reference, x@param_alm@alloc_cible)
+    x@ptf_fin <- actif_realloc[["portFin"]]
 
     #---------------------------------------------------------------
     # Etape 6 : Calcul des frais financiers
@@ -105,7 +105,7 @@ setMethod(
     result_revalo <- calc_revalo(x, passif_av_pb, tra, actif_realloc[["plac_moy_vnc"]], resultat_tech)
 
     # Mise a jour de la PPB
-    x["ppb"] <- result_revalo[["ppb"]]
+    x@ppb <- result_revalo[["ppb"]]
 
     #---------------------------------------------------------------
     # Etape 10 : Mise a jour des passifs
@@ -114,7 +114,7 @@ setMethod(
     # Evaluation du passif vieilli d'un an apres pb
     passif_ap_pb <- vieillissment_ap_pb(x@ptf_passif, result_revalo[["add_rev_nette_stock"]], x@hyp_canton@tx_soc)
     # Mise a jour des passifs a fin d'annee
-    x["ptf_passif"] <- passif_ap_pb[["ptf"]]
+    x@ptf_passif <- passif_ap_pb[["ptf"]]
 
     #---------------------------------------------------------------
     # Etape 11 : Mise a jour des actifs
@@ -122,10 +122,10 @@ setMethod(
 
     # Realisation des eventuelles ventes de PVL actions realisees a l etape 9
     # mise a jour des actions.
-    x["ptf_fin"]["ptf_action"] <- sell_pvl_action(x@ptf_fin@ptf_action, result_revalo[["pmvl_liq"]])[["action"]]
+    x@ptf_fin@ptf_action <- sell_pvl_action(x@ptf_fin@ptf_action, result_revalo[["pmvl_liq"]])[["action"]]
 
     # Mise a jour des PMVL Action/Immo/Oblig
-    x["ptf_fin"] <- do_update_pmvl(x@ptf_fin)
+    x@ptf_fin <- do_update_pmvl(x@ptf_fin)
 
     # Re-evaluation et mise a jour de la PRE
     res_pre <- calc_PRE(x@ptf_fin@pre, x@ptf_fin@pvl_action + x@ptf_fin@mvl_action +
@@ -156,19 +156,19 @@ setMethod(
     # Si resultats brut negatif alors actionnaires compensent. Sinon sortie du resultats bruts.
     # On fait l'hypothese que le resultats net n'est pas reintegre.
 
-    x@ptf_fin["ptf_treso"] <- update_treso(x@ptf_fin@ptf_treso , - result_brut -
-                                             sum(passif_ap_pb[["flux_agg"]][,"soc_stock_ap_pb"][[1]]))
+    x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso , - result_brut -
+                                             sum(passif_ap_pb[["flux_agg"]][,"soc_stock_ap_pb"]))
     # Mise a jour des montant totaux de VM et de VNC des actifs
-    x["ptf_fin"] <- do_update_vm_vnc_precedent(x@ptf_fin)
+    x@ptf_fin <- do_update_vm_vnc_precedent(x@ptf_fin)
 
     # PPB
-    x["ppb"] <- init_debut_ppb(x@ppb)
+    x@ppb <- init_debut_ppb(x@ppb)
 
     # PRE, RC
-    x@ptf_fin["rc"] <-  do_update_RC_val_debut(x@ptf_fin@rc, x@ptf_fin@rc@val_courante)
-    x@ptf_fin["pre"] <-  do_update_PRE_val_debut(x@ptf_fin@pre, x@ptf_fin@pre@val_courante)
+    x@ptf_fin@rc <-  do_update_RC_val_debut(x@ptf_fin@rc, x@ptf_fin@rc@val_courante)
+    x@ptf_fin["pre"] <-  do_update_PRE_val_debut(x@ptf_fin@pre, x@ptf_fin@pre@val_courante) # On conserve la validation car pas fait dans l'objet
     # PGG, PSAP
-    x@ptf_passif["autres_reserves"] <-  init_debut_pgg_psap(x@ptf_passif@autres_reserves)
+    x@ptf_passif["autres_reserves"] <-  init_debut_pgg_psap(x@ptf_passif@autres_reserves) # On conserve la validation car pas fait dans l'objet
 
 
     #---------------------------------------------------------------
@@ -176,7 +176,7 @@ setMethod(
     #---------------------------------------------------------------
     if(x@annee == annee_fin){
       # Calcul des fins de projection
-      fin_proj <- calc_fin_proj(x, resultat_fin, resultat_tech, passif_ap_pb[["stock_agg"]][,"pm_fin_ap_pb"][[1]],
+      fin_proj <- calc_fin_proj(x, resultat_fin, resultat_tech, passif_ap_pb[["stock_agg"]][,"pm_fin_ap_pb"],
                                 result_revalo[["tx_pb"]], result_revalo[["tx_enc_moy"]])
 
       # Extraction des resultats
@@ -197,10 +197,10 @@ setMethod(
     #---------------------------------------------------------------
 
     # Reprendre les flux de resultats
-    flux_produit = cbind(passif_av_pb[["result_av_pb"]][["flux_agg"]],
+    flux_produit <- cbind(passif_av_pb[["result_av_pb"]][["flux_agg"]],
                          passif_ap_pb[["flux_agg"]])
 
-    stock_produit = cbind(passif_av_pb[["result_av_pb"]][["stock_agg"]],
+    stock_produit <- cbind(passif_av_pb[["result_av_pb"]][["stock_agg"]],
                          passif_ap_pb[["stock_agg"]])
 
     # Reprendre les flux de resultats hors models
@@ -212,17 +212,20 @@ setMethod(
                            )
 
 
-    output_be <- list(prime = c(flux_produit[, "pri_brut"][[1]], hors_model$prime),
-                      prestation = c(flux_produit[, "prest"][[1]] +
-                        flux_produit[, "rev_prest_nette"][[1]] -
-                        flux_produit[,"rach_charg"][[1]] +
-                        flux_produit[,"soc_stock_ap_pb"][[1]] +
+    output_be <- list(prime = c(flux_produit[, "pri_brut"], hors_model$prime),
+                      prestation = c(flux_produit[, "prest"] +
+                        flux_produit[, "rev_prest_nette"] -
+                          flux_produit[,"rach_charg"] +
+                          flux_produit[,"soc_stock_ap_pb"] +
                         flux_fin_passif, hors_model$prestation),
-                      prestation_fdb = c(flux_produit[, "prest_fdb"][[1]], 0),
-                      frais = c(flux_produit[,"frais_var_prime"][[1]] +
-                        flux_produit[,"frais_fixe_prime"][[1]] +
-                        flux_produit[,"frais_var_prest"][[1]] +
-                        flux_produit[,"frais_fixe_prest"][[1]], hors_model$frais))
+                      prestation_fdb = c(flux_produit[, "prest_fdb"], 0),
+                      frais = c(flux_produit[,"frais_var_prime"] +
+                                  flux_produit[,"frais_fixe_prime"] +
+                                  flux_produit[,"frais_var_prest"] +
+                                  flux_produit[,"frais_fixe_prest"], hors_model$frais))
+
+    # validation de l'objet
+    validObject(x)
 
     # Output
     return(list(canton = x,

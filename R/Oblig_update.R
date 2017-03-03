@@ -88,8 +88,8 @@ setMethod(
     x["ptf_oblig"][,"dur_det"] <- x["ptf_oblig"][,"dur_det"] + 1
 
     # Operation de suppression des elements de maturite residuelle negative apres mise a jour
-    if(length(which(x["ptf_oblig"][,"mat_res"] == -1))>0) {
-      num_del         <- x["ptf_oblig"][which(x["ptf_oblig"][,"mat_res"] == -1),"num_mp"]
+    if(length(which(x["ptf_oblig"][,"mat_res"] <= 0))>0) {
+      num_del         <- x["ptf_oblig"][which(x["ptf_oblig"][,"mat_res"] <= 0),"num_mp"]
       x["ptf_oblig"]  <- x["ptf_oblig"][which(!(x["ptf_oblig"][,"num_mp"] %in% num_del)),]
     }
     # Reordonnancement des num_mp et verification que l'on ne vide pas le portefeuille

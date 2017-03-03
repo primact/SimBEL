@@ -36,7 +36,7 @@ setMethod(
     #---------------------------------------------------------------
 
     # Base de produits financiers
-    base_fin <- base_prod_fin(tra, passif_av_pb[["result_av_pb"]][["stock_agg"]][,"pm_moy"][[1]], x@ppb)
+    base_fin <- base_prod_fin(tra, passif_av_pb[["result_av_pb"]][["stock_agg"]][,"pm_moy"], x@ppb)
 
     #---------------------------------------------------------------
     # Etape 2 : Calcul de la PB contractuelle
@@ -52,19 +52,19 @@ setMethod(
       tx_pb <- tx_pb[which(tx_pb$nom_prod == nom_prod), "taux_pb"] # Taux de PB reordonnees selon le nom des produits
 
       # Chargement sur encours theorique par produit
-      ch_enc_th <- passif_av_pb[["result_av_pb"]][["flux_agg"]][,"enc_charg_base_th"][[1]] +
-        passif_av_pb[["result_av_pb"]][["flux_agg"]][,"enc_charg_rmin_th"][[1]]
+      ch_enc_th <- passif_av_pb[["result_av_pb"]][["flux_agg"]][,"enc_charg_base_th"] +
+        passif_av_pb[["result_av_pb"]][["flux_agg"]][,"enc_charg_rmin_th"]
 
       # Evaluation du taux de chargement sur encours moyen par produit
-      tx_enc_moy <- ch_enc_th / passif_av_pb[["result_av_pb"]][["flux_agg"]][,"base_enc_th"][[1]]
+      tx_enc_moy <- ch_enc_th / passif_av_pb[["result_av_pb"]][["flux_agg"]][,"base_enc_th"]
 
       # Gestion des divisions par 0
-      tx_enc_moy[passif_av_pb[["result_av_pb"]][["flux_agg"]][,"base_enc_th"][[1]] == 0] <- 0
+      tx_enc_moy[which(passif_av_pb[["result_av_pb"]][["flux_agg"]][,"base_enc_th"] == 0)] <- 0
 
 
       # Evaluation de la PB contractuelle nette
       revalo_contr <- pb_contr(base_fin[["base_prod_fin"]], tx_pb,
-                               passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_stock_brut"][[1]],
+                               passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_stock_brut"],
                                ch_enc_th,
                                tx_enc_moy)
       #---------------------------------------------------------------
@@ -72,23 +72,23 @@ setMethod(
       #---------------------------------------------------------------
 
       # Financement des TMG par la PPB
-      financement_tmg <- finance_tmg(passif_av_pb[["result_av_pb"]][["flux_agg"]][,"bes_tmg_prest"][[1]],
-                                     passif_av_pb[["result_av_pb"]][["flux_agg"]][,"bes_tmg_stock"][[1]],
+      financement_tmg <- finance_tmg(passif_av_pb[["result_av_pb"]][["flux_agg"]][,"bes_tmg_prest"],
+                                     passif_av_pb[["result_av_pb"]][["flux_agg"]][,"bes_tmg_stock"],
                                      x@ppb)
       # Mise a jour de la PPB
-      x["ppb"] <- financement_tmg[["ppb"]]
+      x@ppb <- financement_tmg[["ppb"]]
 
       #---------------------------------------------------------------
       # Etape 4 : Financement du taux cible par la PPB
       #---------------------------------------------------------------
-      bes_tx_cible <- passif_av_pb[["result_av_pb"]][["flux_agg"]][,"bes_tx_cible"][[1]] # Besoin taux cible
+      bes_tx_cible <- passif_av_pb[["result_av_pb"]][["flux_agg"]][,"bes_tx_cible"] # Besoin taux cible
 
       # Financement du taux cible par la PPB
       tx_cibl_ppb <- finance_cible_ppb(bes_tx_cible,
                                        revalo_contr[["rev_stock_nette_contr"]], x@ppb)
 
       # Mise a jour de la PPB
-      x["ppb"] <- tx_cibl_ppb[["ppb"]]
+      x@ppb <- tx_cibl_ppb[["ppb"]]
 
       #---------------------------------------------------------------
       # Etape 5 : Financement du taux cible par des cessions de PVL actions
@@ -127,11 +127,11 @@ setMethod(
       #---------------------------------------------------------------
 
       # Marge minimum que veut realisee l'assureur
-      marge_min <- passif_av_pb[["result_av_pb"]][["stock_agg"]][,"pm_moy"][[1]] * x@param_revalo@tx_marge_min
+      marge_min <- passif_av_pb[["result_av_pb"]][["stock_agg"]][,"pm_moy"] * x@param_revalo@tx_marge_min
 
       # Calcul de la marge financiere de l'assureur
       marge_fin <- calc_marge_fin(base_fin[["base_prod_fin"]],
-                                  passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_prest_nette"][[1]],
+                                  passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_prest_nette"],
                                   tx_cibl_pmvl[["rev_stock_nette"]],
                                   financement_tmg[["contrib_tmg_prest"]],
                                   financement_tmg[["contrib_tmg_stock"]],
@@ -155,25 +155,29 @@ setMethod(
 
       revalo_finale <- finance_contrainte_legale(base_fin[["base_prod_fin"]], base_fin_etendu,
                                                  result_tech,
-                                                 passif_av_pb[["result_av_pb"]][["flux_agg"]][,"it_tech_stock"][[1]],
+                                                 passif_av_pb[["result_av_pb"]][["flux_agg"]][,"it_tech_stock"],
                                                  tx_cibl_marge[["rev_stock_nette"]],
-                                                 passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_prest_nette"][[1]],
+                                                 passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_prest_nette"],
                                                  tx_cibl_ppb[["dotation"]],
                                                  tx_cibl_marge[["marge_fin"]], x@ppb,
                                                  x@param_revalo)
 
       # Mise a jour de la PPB
-      x["ppb"] <- revalo_finale[["ppb"]]
+      x@ppb <- revalo_finale[["ppb"]]
 
       # On calcule le montant de revalorisation nette au dela de la revalorisation nette
       # au taux minimum.
       add_rev_nette_stock <- revalo_finale[["rev_stock_nette"]] -
-                                    (passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_stock_brut"][[1]] -
+                                    (passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_stock_brut"] -
                                        ch_enc_th)
 
       # Ce montant ne doit pas etre negatif
       if(sum(add_rev_nette_stock) < 0){ stop("[RevaloEngine_calc_revalo] Le montant de le revalorisation additionnelle
                                              ne peut pas etre negatif.")}
+
+
+      # Validation de la PPB
+      validObject(x@ppb)
 
       # Output
 

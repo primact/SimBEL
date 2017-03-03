@@ -1,7 +1,17 @@
-# alloc_cible = c(.25,.25,.48,.02)
-# seuil_realisation_PVL = 0
-
-
+##' Initialisation des scenarios de chocs d'un workspace.
+##'
+##' \code{init_scenario} est la methode d'initialisation.
+##' @name init_scenario
+##' @docType methods
+##' @param x un objet de la classe \code{Initialisation}.
+##' @param alloc_cible
+##' @param seuil_realisation_PVL
+##' @param nb_simu
+##' @param nb_annee_proj
+##' @return Pas de sortie.
+##' @author Prim'Act
+##' @export
+##' @aliases Initialisation
 setGeneric(name = "init_scenario", def = function(x, alloc_cible, seuil_realisation_PVL, nb_simu, nb_annee_proj){standardGeneric("init_scenario")})
 setMethod(
     f = "init_scenario",
@@ -28,6 +38,7 @@ setMethod(
         best_estimate@canton    <- canton_init
         best_estimate@esg       <- chargement_ESG(x@address$data_ESG, nb_simu, nb_annee_proj)
         
-        #save()
+        # Sauvegarde
+        save(best_estimate, file = paste(x@address$init_save_folder_central, "best_estimate.RData", sep = "/"))
     }
 )

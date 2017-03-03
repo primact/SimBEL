@@ -41,9 +41,9 @@ setMethod(
       S_prev_immo   <- S_immo
     }
 
-    indice_inflation <- as.numeric(x["ind_inflation"][num_trajectoire,])
+    indice_inflation <- as.numeric(x["ind_inflation"][num_trajectoire, annee + 1])
     yield_curve <- as.numeric(unlist(as.data.frame(x["yield_curve"][paste("annee", annee, sep = "")])[num_trajectoire,]))
-    deflateur   <- as.numeric(x["deflateur"][num_trajectoire,annee + 1])
+    deflateur   <- as.numeric(x["deflateur"][num_trajectoire, annee + 1])
 
     x <- new("ModelPointESG",
              annee        = annee,

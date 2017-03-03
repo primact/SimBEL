@@ -75,11 +75,19 @@ setMethod(
       x[ncpi] <- list_prodi
     }
 
+    # Mise au format matrice des listes de flug_agg et stock_agg
+    flux_agg = matrix(unlist(do.call("rbind",list_res_flux_agg)), length(index), byrow = F)
+    stock_agg = matrix(unlist(do.call("rbind",list_res_stock_agg)), length(index), byrow = F)
+
+    # Nom des colonnes matrices
+    colnames(flux_agg) <- names(list_res_flux_agg[[1]])
+    colnames(stock_agg) <- names(list_res_stock_agg[[1]])
+
     # Stockage dans une liste generale en aggregeant par produit
     res <- list(ptf = x,
                 nom_produit = index,
-                flux_agg = do.call("rbind",list_res_flux_agg),
-                stock_agg = do.call("rbind",list_res_stock_agg)
+                flux_agg = flux_agg,
+                stock_agg = stock_agg
                 )
     # output
     return(res)

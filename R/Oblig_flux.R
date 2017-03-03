@@ -149,7 +149,7 @@ setMethod(
   signature = "Oblig",
   definition = function(x){
     tombee_coupon   <- calc_coupon(x)
-    tombee_echeance <- calc_nominal(x) * (x["ptf_oblig"][,"mat_res"] < 1) * 1
+    tombee_echeance <- calc_nominal(x) * (x["ptf_oblig"][,"mat_res"] <= 1) * 1
     return(list(tombee_coupon = tombee_coupon, tombee_echeance = tombee_echeance))
   }
 )

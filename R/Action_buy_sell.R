@@ -130,22 +130,24 @@ setMethod(
     signature = c(x = "Action", montant = "numeric"),
     definition = function(x, montant){
         # Verification des inputs
-        pvl_action <- calc_pmvl_action(x)$pvl 
-        if(pvl_action < montant) {stop("[Action : sell_pvl_action] : Tentative de realisation de plus de plus value latente que ce que le portefeuille contient. \n")}
+        if(nrow(x@ptf_action) > 0) {
+            pvl_action <- calc_pmvl_action(x)$pvl 
+            if(pvl_action < montant) {stop("[Action : sell_pvl_action] : Tentative de realisation de plus de plus value latente que ce que le portefeuille contient. \n")}
         
-        # Selection des lignes soumises a une operation de realisation des pvl
-        temp              <- x@ptf_action[which(x@ptf_action$val_marche > x@ptf_action$val_nc),]
-        num_mp_pvl        <- temp$num_mp 
-        vecteur_poids_pvl <- (temp$val_marche - temp$val_nc)/pvl_action
+            # Selection des lignes soumises a une operation de realisation des pvl
+            temp              <- x@ptf_action[which(x@ptf_action$val_marche > x@ptf_action$val_nc),]
+            num_mp_pvl        <- temp$num_mp 
+            vecteur_poids_pvl <- (temp$val_marche - temp$val_nc)/pvl_action
         
-        # Realisation des pvl de maniere proportionnelle
-        # Reviens uniquement a vendre et a racheter immediatement : seule la val_nc et la val_achat sont augmentees de montant * vecteur_poids_pvl 
-        identifiant <- which(x@ptf_action$num_mp %in% num_mp_pvl)
-        x@ptf_action$val_nc[identifiant]    <- x@ptf_action$val_nc[identifiant] + vecteur_poids_pvl * montant
-        x@ptf_action$val_achat[identifiant] <- x@ptf_action$val_achat[identifiant] + vecteur_poids_pvl * montant
-
-        validObject(x)
-        return(list(action = x, pmvr = montant))
+            # Realisation des pvl de maniere proportionnelle
+            # Reviens uniquement a vendre et a racheter immediatement : seule la val_nc et la val_achat sont augmentees de montant * vecteur_poids_pvl 
+            identifiant <- which(x@ptf_action$num_mp %in% num_mp_pvl)
+            x@ptf_action$val_nc[identifiant]    <- x@ptf_action$val_nc[identifiant] + vecteur_poids_pvl * montant
+            x@ptf_action$val_achat[identifiant] <- x@ptf_action$val_achat[identifiant] + vecteur_poids_pvl * montant
+            return(list(action = x, pmvr = montant))
+        } else {
+            return(list(action = x, pmvr = 0))
+        }
     }
 )
 

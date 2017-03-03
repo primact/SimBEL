@@ -24,11 +24,14 @@ setMethod(
   definition = function(x){
 
     # Mise a jour du montant de PPB initial
-    x["ppb_debut"] <- x["valeur_ppb"]
+    x@ppb_debut <- x@valeur_ppb
 
     # Remise a zero des compteurs
-    x["compte_dot"] <- 0
-    x["compte_rep"] <- 0
+    x@compte_dot <- 0
+    x@compte_rep <- 0
+
+    # Validation
+    validObject(x)
 
     # Output
     return(x)

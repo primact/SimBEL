@@ -21,10 +21,10 @@ setMethod(
   f = "reallocate",
   signature = c(x = "PortFin", ptf_reference = "PortFin", alloc_cible = "numeric"),
   definition = function(x, ptf_reference, alloc_cible){
-    
+
     # Verification des inputs
-    if(sum(alloc_cible) != 1 | sum(alloc_cible < 0) > 0) { stop("[AlmEngine : reallocate] : L'allocation cible doit etre un vecteur constitue d'elements positifs ou nuls, dont la somme totale vaut 1. \n")} 
-      
+    if(sum(alloc_cible) != 1 | sum(alloc_cible < 0) > 0) { stop("[AlmEngine : reallocate] : L'allocation cible doit etre un vecteur constitue d'elements positifs ou nuls, dont la somme totale vaut 1. \n")}
+
     # memoire n'est pas branche pour l'instant du fait de la necessite de coder les operations en cas de vente pour chaque portefeuille (le plus simple est de faire sortir les portefeuilles vendues par chaque fonction sell de base (Action Immo ou Oblig)),
     # une fois ceci code il permettra de conserver une memorisation de cacune des operations effectuees dans un dataframe
     # Initialisation du stock de plus ou moins value realisee
@@ -52,19 +52,19 @@ setMethod(
         ptf_ref_action  <- ptf_reference["ptf_action"]
         coeff_mult      <- vm_achat[1] * ptf_ref_action["ptf_action"][,"nb_unit"] / ptf_ref_action["ptf_action"][,"val_marche"]
         ptf_bought      <- create_ptf_bought_action(ptf_ref_action, coeff_mult)
-        x["ptf_action"] <- buy_action(x["ptf_action"], ptf_bought)
+        x@ptf_action <- buy_action(x@ptf_action, ptf_bought)
 
-    } else {
+    } else if(vm_achat[1] < 0) {
       # Vente
         # Calculer le nombre, hypothese de vente proportionnelle precisee dans la fonction : do_calc_nb_sold
         montant_vente   <- -vm_achat[1]
-        inputs_vente    <- do_calc_nb_sold_action(x["ptf_action"], montant_vente, "proportionnelle")
-        temp_operation  <- sell_action(x["ptf_action"], inputs_vente[,"num_mp"], inputs_vente[,"nb_sold"])
-        x["ptf_action"] <- temp_operation[["action"]]
+        inputs_vente    <- do_calc_nb_sold_action(x@ptf_action, montant_vente, "proportionnelle")
+        temp_operation  <- sell_action(x@ptf_action, inputs_vente[,"num_mp"], inputs_vente[,"nb_sold"])
+        x@ptf_action <- temp_operation[["action"]]
         pmvr_action <- temp_operation[["pmvr"]]
         pmvr <- pmvr + pmvr_action
     }
-    
+
     # Immo
     if(vm_achat[2] > 0){
       # Achat
@@ -73,14 +73,14 @@ setMethod(
         ptf_ref_immo  <- ptf_reference["ptf_immo"]
         coeff_mult    <- vm_achat[2] * ptf_ref_immo["ptf_immo"][,"nb_unit"] / ptf_ref_immo["ptf_immo"][,"val_marche"]
         ptf_bought    <- create_ptf_bought_immo(ptf_ref_immo, coeff_mult)
-        x["ptf_immo"] <- buy_immo(x["ptf_immo"], ptf_bought)
-    } else {
+        x@ptf_immo <- buy_immo(x@ptf_immo, ptf_bought)
+    } else if(vm_achat[2] < 0){
       # Vente
         # Calculer le nombre, hypothese de vente proportionnelle precisee dans la fonction : do_calc_nb_sold
         montant_vente  <- -vm_achat[2]
-        inputs_vente   <- do_calc_nb_sold_immo(x["ptf_immo"], montant_vente, "proportionnelle")
-        temp_operation <- sell_immo(x["ptf_immo"], inputs_vente[,"num_mp"], inputs_vente[,"nb_sold"])
-        x["ptf_immo"]  <- temp_operation[["immo"]]
+        inputs_vente   <- do_calc_nb_sold_immo(x@ptf_immo, montant_vente, "proportionnelle")
+        temp_operation <- sell_immo(x@ptf_immo, inputs_vente[,"num_mp"], inputs_vente[,"nb_sold"])
+        x@ptf_immo  <- temp_operation[["immo"]]
         pmvr_immo <- temp_operation[["pmvr"]]
         pmvr <- pmvr + pmvr_immo
     }
@@ -93,19 +93,19 @@ setMethod(
         ptf_ref_oblig  <- ptf_reference["ptf_oblig"]
         coeff_mult     <- vm_achat[3] * ptf_ref_oblig["ptf_oblig"][,"nb_unit"] / ptf_ref_oblig["ptf_oblig"][,"val_marche"]
         ptf_bought     <- create_ptf_bought_oblig(ptf_ref_oblig, coeff_mult)
-        x["ptf_oblig"] <- buy_oblig(x["ptf_oblig"], ptf_bought)
-    } else {
+        x@ptf_oblig <- buy_oblig(x@ptf_oblig, ptf_bought)
+    } else if(vm_achat[3] < 0) {
       # Vente
         # Calculer le nombre, hypothese de vente proportionnelle precisee dans la fonction : do_calc_nb_sold
         montant_vente  <- -vm_achat[3]
-        inputs_vente   <- do_calc_nb_sold_oblig(x["ptf_oblig"], montant_vente, "proportionnelle")
-        temp_operation <- sell_oblig(x["ptf_oblig"], inputs_vente[,"num_mp"], inputs_vente[,"nb_sold"])
-        x["ptf_oblig"] <- temp_operation[["oblig"]]
+        inputs_vente   <- do_calc_nb_sold_oblig(x@ptf_oblig, montant_vente, "proportionnelle")
+        temp_operation <- sell_oblig(x@ptf_oblig, inputs_vente[,"num_mp"], inputs_vente[,"nb_sold"])
+        x@ptf_oblig <- temp_operation[["oblig"]]
         pmvr_oblig <- temp_operation[["pmvr"]]
         pmvr <- pmvr + pmvr_oblig
     }
     # Tresorerie
-      x["ptf_treso"] <- update_treso(x@ptf_treso, vm_achat[4])
+      x@ptf_treso <- update_treso(x@ptf_treso, vm_achat[4])
 
       # Mise a jour des PMVL Action/Immo/Oblig
       x <- do_update_pmvl(x)
@@ -113,12 +113,12 @@ setMethod(
       # Re-evaluation et mise a jour de la Reserve de capitalisation
       res_rc <- calc_RC(x@rc, pmvr_oblig)
       # Mise a jour de la valeur courante
-      x["rc"] <-  do_update_RC_val_courante(x@rc, res_rc[["rc_courante"]])
+      x@rc <-  do_update_RC_val_courante(x@rc, res_rc[["rc_courante"]])
 
       # Re-evaluation et mise a jour de la PRE
       res_pre <- calc_PRE(x@pre, x@pvl_action + x@mvl_action + x@pvl_immo + x@mvl_immo)
       # Mise a jour de la valeur courante
-      x["pre"] <-  do_update_PRE_val_courante(x@pre, res_pre[["pre_courante"]])
+      x@pre <-  do_update_PRE_val_courante(x@pre, res_pre[["pre_courante"]])
 
       # Calcul des valeurs moyennes
       alloc_cour <- print_alloc(x)
@@ -145,11 +145,11 @@ setMethod(
   signature = c(x = "Action", montant_vente = "numeric", method_vente = "character"),
   definition = function(x, montant_vente, method_vente){
     if(method_vente == "proportionnelle"){
-      alloc         <- x["ptf_action"][,"val_marche"] / sum(x["ptf_action"][,"val_marche"])
+      alloc         <- x@ptf_action[,"val_marche"] / sum(x@ptf_action[,"val_marche"])
       montant_vente <- montant_vente * alloc
-      vm_unitaire   <- x["ptf_action"][,"val_marche"] / x["ptf_action"][,"nb_unit"]
+      vm_unitaire   <- x@ptf_action[,"val_marche"] / x@ptf_action[,"nb_unit"]
 
-      num_mp  <- x["ptf_action"][,"num_mp"]
+      num_mp  <- x@ptf_action[,"num_mp"]
       nb_sold <- montant_vente / vm_unitaire
     }
     return(data.frame(num_mp = num_mp, nb_sold = nb_sold))
@@ -162,11 +162,11 @@ setMethod(
   signature = c(x = "Immo", montant_vente = "numeric", method_vente = "character"),
   definition = function(x, montant_vente, method_vente){
     if(method_vente == "proportionnelle"){
-      alloc         <- x["ptf_immo"][,"val_marche"] / sum(x["ptf_immo"][,"val_marche"])
+      alloc         <- x@ptf_immo[,"val_marche"] / sum(x@ptf_immo[,"val_marche"])
       montant_vente <- montant_vente * alloc
-      vm_unitaire   <- x["ptf_immo"][,"val_marche"] / x["ptf_immo"][,"nb_unit"]
+      vm_unitaire   <- x@ptf_immo[,"val_marche"] / x@ptf_immo[,"nb_unit"]
 
-      num_mp  <- x["ptf_immo"][,"num_mp"]
+      num_mp  <- x@ptf_immo[,"num_mp"]
       nb_sold <- montant_vente / vm_unitaire
     }
     return(data.frame(num_mp = num_mp, nb_sold = nb_sold))
@@ -179,11 +179,11 @@ setMethod(
   signature = c(x = "Oblig", montant_vente = "numeric", method_vente = "character"),
   definition = function(x, montant_vente, method_vente){
     if(method_vente == "proportionnelle"){
-      alloc         <- x["ptf_oblig"][,"val_marche"] / sum(x["ptf_oblig"][,"val_marche"])
+      alloc         <- x@ptf_oblig[,"val_marche"] / sum(x@ptf_oblig[,"val_marche"])
       montant_vente <- montant_vente * alloc
-      vm_unitaire   <- x["ptf_oblig"][,"val_marche"] / x["ptf_oblig"][,"nb_unit"]
+      vm_unitaire   <- x@ptf_oblig[,"val_marche"] / x@ptf_oblig[,"nb_unit"]
 
-      num_mp  <- x["ptf_oblig"][,"num_mp"]
+      num_mp  <- x@ptf_oblig[,"num_mp"]
       nb_sold <- montant_vente / vm_unitaire
     }
     return(data.frame(num_mp = num_mp, nb_sold = nb_sold))
@@ -201,11 +201,11 @@ setMethod(
   f = "create_ptf_bought_action",
   signature = c(x = "Action", coefficient = "numeric"),
   definition = function(x, coefficient){
-    if (length(coefficient) != nrow(x["ptf_action"])){stop("[Action : create_ptf_bought_action] : Les inputs sont de dimensions distinctes \n")}
-    x["ptf_action"][,"val_marche"] <- coefficient * x["ptf_action"][,"val_marche"]
-    x["ptf_action"][,"val_nc"]     <- coefficient * x["ptf_action"][,"val_nc"]
-    x["ptf_action"][,"val_achat"]  <- coefficient * x["ptf_action"][,"val_achat"]
-    x["ptf_action"][,"nb_unit"]    <- coefficient * x["ptf_action"][,"nb_unit"]
+    if (length(coefficient) != nrow(x@ptf_action)){stop("[Action : create_ptf_bought_action] : Les inputs sont de dimensions distinctes \n")}
+    x@ptf_action[,"val_marche"] <- coefficient * x@ptf_action[,"val_marche"]
+    x@ptf_action[,"val_nc"]     <- coefficient * x@ptf_action[,"val_nc"]
+    x@ptf_action[,"val_achat"]  <- coefficient * x@ptf_action[,"val_achat"]
+    x@ptf_action[,"nb_unit"]    <- coefficient * x@ptf_action[,"nb_unit"]
     return(x)
   }
 )
@@ -217,11 +217,11 @@ setMethod(
   f = "create_ptf_bought_immo",
   signature = c(x = "Immo", coefficient = "numeric"),
   definition = function(x, coefficient){
-    if (length(coefficient) != nrow(x["ptf_immo"])){stop("[Immo : create_ptf_bought_immo] : Les inputs sont de dimensions distinctes \n")}
-    x["ptf_immo"][,"val_marche"] <- coefficient * x["ptf_immo"][,"val_marche"]
-    x["ptf_immo"][,"val_nc"]     <- coefficient * x["ptf_immo"][,"val_nc"]
-    x["ptf_immo"][,"val_achat"]  <- coefficient * x["ptf_immo"][,"val_achat"]
-    x["ptf_immo"][,"nb_unit"]    <- coefficient * x["ptf_immo"][,"nb_unit"]
+    if (length(coefficient) != nrow(x@ptf_immo)){stop("[Immo : create_ptf_bought_immo] : Les inputs sont de dimensions distinctes \n")}
+    x@ptf_immo[,"val_marche"] <- coefficient * x@ptf_immo[,"val_marche"]
+    x@ptf_immo[,"val_nc"]     <- coefficient * x@ptf_immo[,"val_nc"]
+    x@ptf_immo[,"val_achat"]  <- coefficient * x@ptf_immo[,"val_achat"]
+    x@ptf_immo[,"nb_unit"]    <- coefficient * x@ptf_immo[,"nb_unit"]
     return(x)
   }
 )
@@ -233,14 +233,18 @@ setMethod(
   f = "create_ptf_bought_oblig",
   signature = c(x = "Oblig", coefficient = "numeric"),
   definition = function(x,coefficient){
-    if (length(coefficient) != nrow(x["ptf_oblig"])){stop("[Oblig : create_ptf_bought_oblig] : Les inputs sont de dimensions distinctes \n")}
-    x["ptf_oblig"][,"val_marche"] <- coefficient * x["ptf_oblig"][,"val_marche"]
-    x["ptf_oblig"][,"val_nc"]     <- coefficient * x["ptf_oblig"][,"val_nc"]
-    x["ptf_oblig"][,"val_achat"]  <- coefficient * x["ptf_oblig"][,"val_achat"]
-    x["ptf_oblig"][,"nb_unit"]    <- coefficient * x["ptf_oblig"][,"nb_unit"]
-    x["ptf_oblig"][,"cc"]         <- coefficient * x["ptf_oblig"][,"cc"]
-    x["ptf_oblig"][,"sd"]         <- coefficient * x["ptf_oblig"][,"sd"]
+    if (length(coefficient) != nrow(x@ptf_oblig)){stop("[Oblig : create_ptf_bought_oblig] : Les inputs sont de dimensions distinctes \n")}
+    x@ptf_oblig[,"val_marche"] <- coefficient * x@ptf_oblig[,"val_marche"]
+    x@ptf_oblig[,"val_nc"]     <- coefficient * x@ptf_oblig[,"val_nc"]
+    x@ptf_oblig[,"val_achat"]  <- coefficient * x@ptf_oblig[,"val_achat"]
+    x@ptf_oblig[,"nb_unit"]    <- coefficient * x@ptf_oblig[,"nb_unit"]
+    x@ptf_oblig[,"cc"]         <- coefficient * x@ptf_oblig[,"cc"]
+    x@ptf_oblig[,"sd"]         <- coefficient * x@ptf_oblig[,"sd"]
     # Il n'y a pas a ajuster les durations et Zsp car un mouvement parallele des flux n'impacte pas ces quantites
+
+    # Validation de l'objet
+    validObject(x)
+
     return(x)
   }
 )

@@ -25,9 +25,20 @@ setMethod(
     # Nombre de simulations
     nb_simu <- x@esg@nb_simu
 
+    # Barre de progression
+    pb <- txtProgressBar(min = 0, max = nb_simu, style = 3)
+    
     # Boucle sur les simulations
-    result_simu <- lapply(1:nb_simu,function(i){run_be_simu(x, i)})
+    result_simu <- lapply(1:nb_simu,function(i){
+      
+      # Mise a jour barre de progression
+      setTxtProgressBar(pb, i)
+      
+      return(run_be_simu(x, i))})
 
+    # Ferme la barre de progression
+    close(pb)
+    
     # Alimentation des tableaux de resultats
     # Nom de la liste qui permettent d'alimenter les tableaux de flux
     nom_flux <- c("nom_produit","prime", "prestation", "prestation_fdb", "frais", "flux_be")

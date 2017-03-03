@@ -31,17 +31,17 @@ setMethod(
   signature = c(x = "EpEuroInd", pm_fin_ap_pb = "numeric", tx_revalo = "numeric"),
   def = function(x, pm_fin_ap_pb, tx_revalo){
     # viellissement de 1 an
-    x["mp"]$age <- x@mp$age + as.integer(1)
-    x["mp"]$anc <- x@mp$anc + as.integer(1)
+    x@mp$age <- x@mp$age + as.integer(1)
+    x@mp$anc <- x@mp$anc + as.integer(1)
 
     # Ajustement du nombre de contrat, de la PM garanti (calcul FDB) et du taux cible.
-    x["mp"]$nb_contr <- x@tab@tab[["nb_contr"]]
-    x["mp"]$pm_gar <- x@tab@tab[["pm_gar"]]
-    x["mp"]$tx_cible_prec <- x@tab@tab[["tx_cible"]]
+    x@mp$nb_contr <- x@tab@tab[["nb_contr"]]
+    x@mp$pm_gar <- x@tab@tab[["pm_gar"]]
+    x@mp$tx_cible_prec <- x@tab@tab[["tx_cible"]]
 
     # Ajustement de PM de fin
-    x["mp"]$pm <- pm_fin_ap_pb
-    x["mp"]$tx_revalo_prec <- tx_revalo
+    x@mp$pm <- pm_fin_ap_pb
+    x@mp$tx_revalo_prec <- tx_revalo
 
     # output
     return(x)
