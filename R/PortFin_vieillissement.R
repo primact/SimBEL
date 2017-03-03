@@ -24,11 +24,14 @@ setMethod(
         # Viellissement des maturites et suppression des lignes obligataires arrivees au terme
         x["ptf_oblig"] <- update_mat_res(x["ptf_oblig"])
         # Mise a jour des VM
-        x["ptf_oblig"] <- update_vm_oblig(x["ptf_oblig"], calc_vm_oblig(x["ptf_oblig"], new_mp_ESG["yield_curve"]))
+        if( nrow(x["ptf_oblig"]["ptf_oblig"])>0) x["ptf_oblig"] <- update_vm_oblig(x["ptf_oblig"], calc_vm_oblig(x["ptf_oblig"], new_mp_ESG["yield_curve"]))
         # Mise a jour des VNC
-        x["ptf_oblig"] <- update_vnc_oblig(x["ptf_oblig"], calc_vnc(x["ptf_oblig"], x["ptf_oblig"]["ptf_oblig"][,"sd"]))
+        if( nrow(x["ptf_oblig"]["ptf_oblig"])>0) x["ptf_oblig"] <- update_vnc_oblig(x["ptf_oblig"], calc_vnc(x["ptf_oblig"], x["ptf_oblig"]["ptf_oblig"][,"sd"]))
+        
         # Calcul la VNC de fin et sa variation
-        vnc_fin       <- sum(x@ptf_oblig@ptf_oblig$val_nc)
+        if( nrow(x["ptf_oblig"]["ptf_oblig"])>0)  vnc_fin       <- sum(x@ptf_oblig@ptf_oblig$val_nc)
+        if( nrow(x["ptf_oblig"]["ptf_oblig"])==0) vnc_fin <- 0
+        
         var_vnc_oblig <- vnc_fin - vnc_debut
 
         # Renvoi le portfeuille financier dont les lignes obligataires sont a jour, et les echeances (remboursement obligataire) a venir en fin d'annee
