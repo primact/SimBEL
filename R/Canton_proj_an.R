@@ -13,16 +13,18 @@
 ##' @docType methods
 ##' @param x est un objet de type \code{Canton}.
 ##' @param annee_fin est une valeur \code{numeric} correpondant a l'annee de fin de projection.
+##' @param pre_on est une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
+##' de PRE dans le resultat technique utilisee pour le calcul de la participation aux benefices reglementaires.
 ##' @return Une liste comprenant l'objet x mis a jour, les flux de best estimate, les resultats comptables.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases Canton
 ##'
-setGeneric(name = "proj_an", def = function(x, annee_fin){standardGeneric("proj_an")})
+setGeneric(name = "proj_an", def = function(x, annee_fin, pre_on){standardGeneric("proj_an")})
 setMethod(
   f = "proj_an",
-  signature = c(x = "Canton", annee_fin = "numeric"),
-  definition = function(x, annee_fin){
+  signature = c(x = "Canton", annee_fin = "numeric", pre_on = "logical"),
+  definition = function(x, annee_fin, pre_on){
 
     # TO DO
     # PPB sur la partie garantie
@@ -67,8 +69,22 @@ setMethod(
     # Mise a jour du portfeuille de reference
     x@param_alm@ptf_reference <- update_PortFin_reference(x@annee, x@param_alm@ptf_reference, x@mp_esg)
 
+
     #---------------------------------------------------------------
-    # Etape 5 : Re-allocation des actifs et mise a jour de la PRE et de la RC
+    # Etape 5 : Calcul des frais financiers
+    #---------------------------------------------------------------
+    # Calcul des valeurs moyennes
+    alloc_cour <- print_alloc(x@ptf_fin)
+    # Valeur moyenne des placements en valeur de marche
+    plac_moy_vm <- (.subset2(alloc_cour, 1)[5] + sum(unlist(x@ptf_fin@vm_vnc_precedent[["vm"]]))) /2
+
+    frais_fin <- calc_frais_fin(x@ptf_fin@frais_fin, plac_moy_vm, coef_inf)
+
+    #  Mise a jour de la tresorie
+    x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso , - frais_fin)
+
+    #---------------------------------------------------------------
+    # Etape 6 : Re-allocation des actifs et mise a jour de la PRE et de la RC
     #---------------------------------------------------------------
     # Reallocation a l'allocation cible
 
@@ -76,15 +92,10 @@ setMethod(
     x@ptf_fin <- actif_realloc[["portFin"]]
 
     #---------------------------------------------------------------
-    # Etape 6 : Calcul des frais financiers
-    #---------------------------------------------------------------
-    frais_fin <- calc_frais_fin(x@ptf_fin@frais_fin, actif_realloc[["plac_moy_vm"]], coef_inf)
-
-    #---------------------------------------------------------------
     # Etape 7 : Calcul du resultat technique
     #---------------------------------------------------------------
     # Calcul du resultats technique avec attribution de PB
-    resultat_tech <- calc_result_technique(passif_av_pb, actif_realloc[["var_pre"]])
+    resultat_tech <- calc_result_technique(passif_av_pb, actif_realloc[["var_pre"]] * pre_on)
 
     #---------------------------------------------------------------
     # Etape 8 : Calcul du resultat financier et du TRA
@@ -116,6 +127,20 @@ setMethod(
     # Mise a jour des passifs a fin d'annee
     x@ptf_passif <- passif_ap_pb[["ptf"]]
 
+    # Allocation des frais financiers par produit
+    pm_moy <- passif_av_pb[["result_av_pb"]][["stock_agg"]][, "pm_moy"]
+    if(sum(pm_moy) != 0){
+      coef_alloc <- pm_moy / sum(pm_moy)
+      # Les frais financiers sont mis a l'echelle des passifs et alloues
+      frais_fin_prod <- frais_fin * (sum(pm_moy) + x@ppb["ppb_debut"]) / plac_moy_vm * coef_alloc
+    }else{ # Division par 0
+      frais_fin_prod <- rep(0, length(pm_moy))
+    }
+
+    # Frais financier associes au autres passifs
+    frais_fin_hors_model <- frais_fin * ((passif_av_pb[["result_autres_passifs"]]$pm_fin + 
+                                            passif_av_pb[["result_autres_passifs"]]$pm_deb ) / 2) / plac_moy_vm
+    
     #---------------------------------------------------------------
     # Etape 11 : Mise a jour des actifs
     #---------------------------------------------------------------
@@ -139,6 +164,8 @@ setMethod(
 
     # Mise a jour du resultat financier des eventuelles PVL actions realisees a l etape 9
     resultat_fin <- resultat_fin + result_revalo[["pmvl_liq"]]
+    # Calcul du TRA
+    tra <- calc_tra(actif_realloc[["plac_moy_vnc"]], resultat_fin)
 
     # Mise a jour du resultat technique
     resultat_tech <- calc_result_technique_ap_pb(passif_av_pb, passif_ap_pb, x@ppb, res_pre[["var_pre"]])
@@ -152,12 +179,8 @@ setMethod(
     # Etape 13 : Mise a jour (des elements restants) du canton pour l'annee suivante
     #---------------------------------------------------------------
 
-    #  Mise a jour de la tresorie : prelevement sociaux sur stock et sortie des resultats bruts
-    # Si resultats brut negatif alors actionnaires compensent. Sinon sortie du resultats bruts.
-    # On fait l'hypothese que le resultats net n'est pas reintegre.
-
-    x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso , - result_brut -
-                                             sum(passif_ap_pb[["flux_agg"]][,"soc_stock_ap_pb"]))
+    #  Mise a jour de la tresorie : prelevement sociaux sur stock
+    x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso , - sum(passif_ap_pb[["flux_agg"]][,"soc_stock_ap_pb"]))
     # Mise a jour des montant totaux de VM et de VNC des actifs
     x@ptf_fin <- do_update_vm_vnc_precedent(x@ptf_fin)
 
@@ -170,6 +193,9 @@ setMethod(
     # PGG, PSAP
     x@ptf_passif["autres_reserves"] <-  init_debut_pgg_psap(x@ptf_passif@autres_reserves) # On conserve la validation car pas fait dans l'objet
 
+    # Controle que l'actif en valeur de marche n'est pas negatif
+    if(.subset2(print_alloc(x@ptf_fin), 1)[5] < 0)
+      print("[Canton_proj_an] : Attention, la valeur de marche des actifs est devenue negative.")
 
     #---------------------------------------------------------------
     # Etape 14 : Gestion des fins de projection
@@ -191,14 +217,13 @@ setMethod(
       flux_fin_passif = rep(0, length(passif_av_pb[["nom_produit"]]))
     }
 
-
     #---------------------------------------------------------------
     # Etape 15 : Creation d'une liste stockant les flux de BE
     #---------------------------------------------------------------
 
     # Reprendre les flux de resultats
     flux_produit <- cbind(passif_av_pb[["result_av_pb"]][["flux_agg"]],
-                         passif_ap_pb[["flux_agg"]])
+                         passif_ap_pb[["flux_agg"]], frais_fin = frais_fin_prod)
 
     stock_produit <- cbind(passif_av_pb[["result_av_pb"]][["stock_agg"]],
                          passif_ap_pb[["stock_agg"]])
@@ -222,7 +247,10 @@ setMethod(
                       frais = c(flux_produit[,"frais_var_prime"] +
                                   flux_produit[,"frais_fixe_prime"] +
                                   flux_produit[,"frais_var_prest"] +
-                                  flux_produit[,"frais_fixe_prest"], hors_model$frais))
+                                  flux_produit[,"frais_fixe_prest"] +
+                                  flux_produit[,"frais_var_enc"] +
+                                  flux_produit[,"frais_fixe_enc"] +
+                                  flux_produit[,"frais_fin"], hors_model$frais + frais_fin_hors_model))
 
     # validation de l'objet
     validObject(x)
@@ -233,8 +261,9 @@ setMethod(
                 nom_produit = c(passif_av_pb[["nom_produit"]], "hors_model"),
                 output_produit = output_produit,
                 output_be = output_be,
-                resultat_tech = resultat_tech,
+                result_tech = resultat_tech,
                 result_fin = resultat_fin,
+                tra = tra,
                 result_brut = result_brut,
                 result_net = result_net
                  ))

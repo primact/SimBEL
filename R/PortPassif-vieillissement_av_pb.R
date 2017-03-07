@@ -106,7 +106,7 @@ setMethod(
     flux_milieu <- flux_milieu +
       result_autres_passifs$prime -
       result_autres_passifs$prestation -
-      result_autres_passifs$it -
+      # result_autres_passifs$it - # Interet technique deja inclus dans les prestations
       result_autres_passifs$frais
 
 

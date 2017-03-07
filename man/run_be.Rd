@@ -6,10 +6,13 @@
 \alias{run_be}
 \title{Calcul d'un BE}
 \usage{
-run_be(x)
+run_be(x, pre_on)
 }
 \arguments{
 \item{x}{est un objet de type \code{Be}.}
+
+\item{pre_on}{est une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
+de PRE dans le resultat technique utilisee pour le calcul de la participation aux benefices reglementaires.}
 }
 \value{
 L'objet BE avec les tables de resultats mise a jour.

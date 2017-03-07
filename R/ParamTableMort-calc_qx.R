@@ -37,7 +37,13 @@ setMethod(
     res1 <- table_mort@table[table_mort@table["gen"]==gen_app & table_mort@table["age"]==age_app,3]
     res2 <- table_mort@table[table_mort@table["gen"]==gen_app & table_mort@table["age"]==(age_app+1),3]
     
-    return((res1-res2)/res1)
+    if(res1 == 0){
+      return(0)
+    }else{
+      return((res1-res2)/res1)
+    }
+    
+    
   }
 )
 

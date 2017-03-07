@@ -150,7 +150,7 @@ setMethod(
 
       # Evaluation d'une base de produits financiers etendue qui comprend le hors modele
       base_fin_etendu <- base_fin[["base_prod_fin_port"]] +
-        (passif_av_pb[["result_autres_passifs"]]$pm_fin + passif_av_pb[["result_autres_passifs"]]$pm_deb ) / 2
+        tra * (passif_av_pb[["result_autres_passifs"]]$pm_fin + passif_av_pb[["result_autres_passifs"]]$pm_deb ) / 2
 
 
       revalo_finale <- finance_contrainte_legale(base_fin[["base_prod_fin"]], base_fin_etendu,

@@ -125,7 +125,7 @@ setMethod(
 
     # Calcul des flux rachats partiels
     # Taux de rachat incluant les rachats structurels et conjoncturels sur la population des non rachetes et vivants
-    qx_rach_part_glob <- (1 - qx_rach_tot_glob) * (1 - qx_dc) *
+    qx_rach_part_glob <- (1 - qx_rach_tot_glob) * (1 - tx_sortie[, "qx_dc"]) *
       pmax(0, pmin(1, tx_sortie[, "qx_rach_part"] + tx_sortie[ ,"qx_rach_part_dyn"]))
     rach_part <- pm_deb * qx_rach_part_glob * ind_ech # Flux de rachats partiels
     rev_rach_part <- rach_part * tx_min_se # revalorisation au taux minimum

@@ -13,17 +13,19 @@
 ##' @docType methods
 ##' @param x est un objet de type \code{Be}.
 ##' @param i est un entier (\code{integer}) correspondant au numero de la simulation.
-##' @return Une liste contenant les noms de produits calcules, les flux par produits et par annee pour une simuation sous
+##' @param pre_on est une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
+##' de PRE dans le resultat technique utilisee pour le calcul de la participation aux benefices reglementaires.
+##' @return Une liste contenant les noms de produits calcules, les flux par produits et par annee pour une simulation sous
 ##' forme de matrice et les flux actualises par produits.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases Be
 ##'
-setGeneric(name = "run_be_simu", def = function(x, i){standardGeneric("run_be_simu")})
+setGeneric(name = "run_be_simu", def = function(x, i, pre_on){standardGeneric("run_be_simu")})
 setMethod(
   f = "run_be_simu",
-  signature = c(x = "Be", i = "integer"),
-  definition = function(x, i){
+  signature = c(x = "Be", i = "integer", pre_on = "logical"),
+  definition = function(x, i, pre_on){
 
     # Controle
     if(i < 0 | i > x@esg@nb_simu){
@@ -49,7 +51,7 @@ setMethod(
       canton@mp_esg <- mp_esg
 
       # Projection d'un canton sur une annee
-      result_proj_an <- proj_an(canton, x@param_be@nb_annee)
+      result_proj_an <- proj_an(canton, x@param_be@nb_annee, pre_on)
 
       # Mise a jour du canton
       canton <- result_proj_an[["canton"]]
@@ -68,6 +70,13 @@ setMethod(
     prestation_fdb <- do.call("rbind", prestation_fdb)
     frais <- do.call("rbind", frais)
     flux_be <- prestation + frais - prime
+
+    # Suppression des noms parasites de colonnes de matrice
+    colnames(prime) <- NULL
+    colnames(prestation) <- NULL
+    colnames(prestation_fdb) <- NULL
+    colnames(frais) <- NULL
+    colnames(flux_be) <- NULL
 
     # Actualisation
     prime_actu <- deflateur %*% prime

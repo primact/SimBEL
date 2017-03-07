@@ -4,7 +4,7 @@
 \name{calc_revalo_pm}
 \alias{EpEuroInd}
 \alias{calc_revalo_pm}
-\title{Calcul la revalo pour des PM d'un model point epargne en euros.}
+\title{Calcul la revalorisation pour des PM d'un model point epargne en euros.}
 \usage{
 calc_revalo_pm(x, rev_net_alloue, tx_soc)
 }
@@ -14,11 +14,9 @@ calc_revalo_pm(x, rev_net_alloue, tx_soc)
 \item{rev_net_alloue}{une valeur de type \code{numeric} correspondant au montant de revalorisation a allouer}
 
 \item{tx_soc}{le taux de charges sociales}
-
-\item{rev_net_alloue}{une valeur de type \code{numeric} correspondant au montant de revalorisation a allouer}
 }
 \description{
-\code{calc_revalo_pm} est une methode permettant de calculer les PM sur une annee.
+\code{calc_revalo_pm} est une methode permettant de calculer la revallorisation des PM sur une annee.
 }
 \author{
 Prim'Act

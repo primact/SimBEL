@@ -30,7 +30,7 @@ setMethod(
 
     # Boucle sur les flux de BE
     for(i in nom_flux[- which(nom_flux == "nom_produit")]){
-      m <- tab_flux[[i]] # Matrice de flux
+      m <- x@tab_flux[[i]] # Matrice de flux
       colnames(m) <- nom_flux[["nom_produit"]] # Nom des produits en colonne
 
       # Sauvegarde des resultats
@@ -39,7 +39,7 @@ setMethod(
 
     # Boucle sur les elements de BE
     for(i in nom_be[- which(nom_be == "nom_produit")]){
-      vec <- tab_be[[i]] # vecteur de be
+      vec <- x@tab_be[[i]] # vecteur de be
       names(vec) <- nom_be[["nom_produit"]] # Nom des produits en colonne
 
       # Sauvegarde des resultats

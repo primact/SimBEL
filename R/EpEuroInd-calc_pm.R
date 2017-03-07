@@ -6,7 +6,6 @@
 #----------------------------------------------------------
 
 
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Fonction de calcul des flux de pm d un model point
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -73,6 +72,10 @@ setMethod(
                 an = "numeric", method = "character", tx_soc = "numeric"),
   def = function(x, tab_prime, tab_prest, tx_cible, tx_min, an, method, tx_soc){
 
+    
+    # Seuil pour gerer les problemes d'arrondi
+    SEUIL_ARRONDI <- 0.00001
+    
     # Applique la method de calcul
     if(method == "normal"){ # calcul des flux normaux
       pm_deb <- x@mp$pm
@@ -129,6 +132,9 @@ setMethod(
 
     # Evaluation des provisions mathematiques avant PB
     pm_fin <- pm_deb - tab_prest[["prest"]] + tab_prime[["pri_net"]] + rev_stock_nette -  soc_stock
+    
+    # Application d'un seuil pour eviter les problemes d'arrondi
+    pm_fin[which(abs(pm_fin) < SEUIL_ARRONDI)] <- 0 
 
     # Message d'erreur si PM negative
     if( ! prod(pm_fin >= 0)){

@@ -6,15 +6,18 @@
 \alias{run_be_simu}
 \title{Calcul d'un BE par simulation}
 \usage{
-run_be_simu(x, i)
+run_be_simu(x, i, pre_on)
 }
 \arguments{
 \item{x}{est un objet de type \code{Be}.}
 
 \item{i}{est un entier (\code{integer}) correspondant au numero de la simulation.}
+
+\item{pre_on}{est une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
+de PRE dans le resultat technique utilisee pour le calcul de la participation aux benefices reglementaires.}
 }
 \value{
-Une liste contenant les noms de produits calcules, les flux par produits et par annee pour une simuation sous
+Une liste contenant les noms de produits calcules, les flux par produits et par annee pour une simulation sous
 forme de matrice et les flux actualises par produits.
 }
 \description{
