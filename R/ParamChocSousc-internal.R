@@ -1,5 +1,13 @@
+#----------------------------------------------------------
+# Ce script comprend les methodes internes de la classe ParamChoc
+#----------------------------------------------------------
+# Suivi version
+# Version 1.0 du 22/01/2017. Fait par MT : initialisation
+#----------------------------------------------------------
+
+
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           Fonction d'initialisation
+#           Fonction d'initialisation d'un model point
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Initialisateur : permet de construire l'objet initial, selon 2 cas :
@@ -7,26 +15,13 @@
 #           - Erreur autrement
 setMethod(
   f = "initialize",
-  signature = "AutresPassifs",
-  definition = function(.Object, mp = data.frame()){
-
-    if(! missing(mp)){
-      .Object@mp <- mp
-
-      # Validation du format
-      validObject(.Object)
-    } else {
-      #Traitement du cas vide
-      .Object@mp <- data.frame(annee = numeric(),
-                               prime = numeric(),
-                               prestation = numeric(),
-                               frais = numeric(),
-                               pm_deb = numeric(),
-                               pm_fin = numeric(),
-                               it = numeric()
-                                 )
-    }
-    # Output
+  signature = "ParamChocSousc",
+  definition = function(.Object, df_mp){
+    if( missing(df_mp)){
+      stop("L'objet 'df_mp' doit etre renseigne")
+    }else{
+      .Object@mp <- df_mp
+      validObject(.Object)}
     return(.Object)
   }
 )
@@ -37,7 +32,7 @@ setMethod(
 # Getteur
 setMethod(
   f = "[",
-  signature = "AutresPassifs",
+  signature = "ParamChocSousc",
   definition = function(x, i){
     switch(EXPR = i,
            "mp" = {return(x@mp)},
@@ -50,7 +45,7 @@ setMethod(
 # Setteur
 setReplaceMethod(
   f = "[",
-  signature = "AutresPassifs",
+  signature = "ParamChocSousc",
   definition = function(x, i, value){
     switch(EXPR = i,
            "mp" = {x@mp <- value},
@@ -60,4 +55,3 @@ setReplaceMethod(
     return(x)
   }
 )
-

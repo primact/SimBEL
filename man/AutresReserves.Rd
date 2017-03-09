@@ -5,15 +5,15 @@
 \alias{AutresReserves}
 \title{La classe AutreReserves}
 \description{
-Classe permettant de gerer le stock de provision globale de gestion (PGG) et de
-provision pour sinistres a payer (PSAP)
+Une  classe permettant de gerer le stock de provision globale de gestion (PGG) et de
+provision pour sinistres a payer (PSAP).
 }
 \section{Slots}{
 
 \describe{
-\item{\code{pgg_debut}}{la valeur de la PGG en debut de periode}
+\item{\code{pgg_debut}}{la valeur de la PGG en debut de periode.}
 
-\item{\code{psap_debut}}{la valeur de la PSAP en debut de periode}
+\item{\code{psap_debut}}{la valeur de la PSAP en debut de periode.}
 
 \item{\code{pgg_valeur}}{la valeur courant de la PGG.}
 
@@ -27,14 +27,11 @@ provision pour sinistres a payer (PSAP)
 
 \item{\code{tx_psap_autres}}{le taux de PGG applique sur les autres passifs.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+Le calcul et la mise a jour des autres reserves \code{\link{update_reserves}} et
+\code{\link{init_debut_pgg_psap}}.
 }
-\keyword{classes}
 

@@ -21,8 +21,9 @@
 setClass(
     Class = "Initialisation",
     representation = representation(
-        root_address = "character",
-        address      = "list"
-    )
+        root_address  = "character",
+        address       = "list",
+        nb_simu       = "integer",
+        nb_annee_proj = "integer")
 )
 

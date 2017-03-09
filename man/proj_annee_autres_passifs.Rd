@@ -2,7 +2,7 @@
 % Please edit documentation in R/AutresPassifs-proj_annee.R
 \docType{methods}
 \name{proj_annee_autres_passifs}
-\alias{PortPassif}
+\alias{AutresPassifs}
 \alias{proj_annee_autres_passifs}
 \title{Extrait les flux et les PM des produits non modelises}
 \usage{
@@ -13,11 +13,12 @@ proj_annee_autres_passifs(an, x, coef_inf)
 
 \item{x}{un objet de la classe \code{AutresPassifs} contenant l'ensemble des donnees de passifs non modelises.}
 
-\item{coef_inf}{un \code{numeric} coorrepodant au coefficient d'inflation a appliquer sur les frais.}
+\item{coef_inf}{un \code{numeric} correpodant au coefficient d'inflation a appliquer sur les frais.}
 }
 \description{
-\code{proj_annee_autres_passifs} est une methode permettant de calculer les PM et les flux sur une annee des.
-passif non modelises. Cette methode calcule egalement les frais et leur applique une inflation.
+\code{proj_annee_autres_passifs} est une methode permettant de calculer les PM et les flux sur une annee pour
+des passif non modelises.
+Cette methode calcule applique une inflation au frais.
 }
 \author{
 Prim'Act

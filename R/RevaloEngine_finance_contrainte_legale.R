@@ -28,7 +28,8 @@
 ##' @param param_revalo est un objet de la classe \code{ParamRevaloEngine}
 ##' comprenant les parametres de revalorisation.
 ##' @return Une liste avec la revalorisation nette affectee au stock
-##' la marge financiere de l'assureur apres prise en compte de la contrainte legale, et la PPB.
+##' la marge financiere de l'assureur apres prise en compte de la contrainte legale, la PPB et
+##' l'objet \code{param_revalo} qui comprend l'etat du solde de participation aux benefices reglementaire.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases RevaloEngine
@@ -65,9 +66,21 @@ setMethod(
 
     # Calcul de la revalorisation legale
     ind_result_tech <- (result_tech > 0)
-    rev_reg <- max (0, param_revalo@taux_pb_fi * base_fin_etendu  +
-                      param_revalo@taux_pb_tech * result_tech * ind_result_tech +
-                      result_tech * (1 - ind_result_tech) - sum(it_stock))
+    solde_pb <- param_revalo@taux_pb_fi * base_fin_etendu  +
+      param_revalo@taux_pb_tech * result_tech * ind_result_tech +
+      result_tech * (1 - ind_result_tech) - sum(it_stock)
+    # Report du solde negatif
+    solde_pb <- solde_pb + param_revalo@solde_pb_regl
+
+    # Mise a jour du solde de PB minimale
+    if(solde_pb < 0){
+      param_revalo@solde_pb_regl <- solde_pb
+    } else{
+      param_revalo@solde_pb_regl <- 0
+    }
+
+    # Calcul de la revalorisation legale
+    rev_reg <- max (0, solde_pb)
 
     # Montant de PB deja distribue
     tot_rev_assure <- sum(rev_stock_nette + rev_prest_nette) + dot_ppb
@@ -99,7 +112,10 @@ setMethod(
     }
 
     # Output
-    return(list(rev_stock_nette = rev_stock_nette_regl, marge_fin = marge_fin, ppb = ppb))
+    return(list(rev_stock_nette = rev_stock_nette_regl,
+                marge_fin = marge_fin,
+                ppb = ppb,
+                param_revalo = param_revalo))
     }
 )
 

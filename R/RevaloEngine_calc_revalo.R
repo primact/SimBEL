@@ -164,20 +164,22 @@ setMethod(
 
       # Mise a jour de la PPB
       x@ppb <- revalo_finale[["ppb"]]
+      # Mise a jour du parametres de revalorisation (solde de PB reglementaire)
+      x@param_revalo <- revalo_finale[["param_revalo"]]
 
       # On calcule le montant de revalorisation nette au dela de la revalorisation nette
       # au taux minimum.
       add_rev_nette_stock <- revalo_finale[["rev_stock_nette"]] -
                                     (passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_stock_brut"] -
                                        ch_enc_th)
-      
+
       # Permet de gerer le cas ou la revalo nette apres PB est positive et la revalo nette avant est negative
-      ind <- ((passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_stock_brut"] - ch_enc_th) <= 0) & 
+      ind <- ((passif_av_pb[["result_av_pb"]][["flux_agg"]][,"rev_stock_brut"] - ch_enc_th) <= 0) &
         (revalo_finale[["rev_stock_nette"]] > 0)
-      
-      
+
+
       add_rev_nette_stock <- pmax(0, add_rev_nette_stock) * (1 - ind) + revalo_finale[["rev_stock_nette"]] * ind
-      
+
 
       # Ce montant ne doit pas etre negatif
       if(sum(add_rev_nette_stock) < 0){ stop("[RevaloEngine_calc_revalo] Le montant de le revalorisation additionnelle

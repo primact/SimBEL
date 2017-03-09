@@ -1,11 +1,7 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend une fonction permettant d'initialiser les autres reserves en debut de periode.
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           init_debut_pgg_psap
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Re-initialise un objet AutresReserves en debut d'annee
+##' Re-initialise un objet \code{AutresReserves} en debut d'annee.
 ##'
 ##' \code{init_debut_pgg_psap} est une methode permettant de re-initialiser les montants
 ##' de PGG et de PSAP de debut de periode.
@@ -16,6 +12,7 @@
 ##' @author Prim'Act
 ##' @export
 ##' @aliases AutresReserves
+##' @include AutresReserves-class.R
 
 setGeneric(name = "init_debut_pgg_psap", def = function(x){standardGeneric("init_debut_pgg_psap")})
 setMethod(

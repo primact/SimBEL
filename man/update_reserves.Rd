@@ -4,34 +4,38 @@
 \name{update_reserves}
 \alias{AutresReserves}
 \alias{update_reserves}
-\title{Evalue et met a jour la valeur des autres reserves}
+\title{Evalue et met a jour la valeur des autres reserves.}
 \usage{
 update_reserves(x, prest_ep, prest_autres, pm_ep, pm_autres)
 }
 \arguments{
 \item{x}{objet de la classe \code{AutresReserves}.}
 
-\item{prest_ep}{est un valeur correspondant a la somme des prestations nettes de chargement et
+\item{prest_ep}{est une valeur \code{numeric} correspondant a la somme des prestations nettes de chargement et
 de charges sociales sur epargne.}
 
-\item{prest_autres}{est un valeur correspondant a la somme des prestations nettes de chargements et
-de charges sociales sur autres passifs.}
+\item{prest_autres}{est une valeur \code{numeric} correspondant a la somme des prestations nettes
+de chargements et de charges sociales sur autres passifs.}
 
-\item{pm_ep}{est un valeur correspondant a la somme des PM nettes de chargements et
+\item{pm_ep}{est une valeur \code{numeric}  correspondant a la somme des PM nettes de chargements et
 de charges sociales sur epargne.}
 
-\item{pm_autres}{est un valeur correspondant a la somme des PM nettes de chargement et
+\item{pm_autres}{est une valeur \code{numeric} correspondant a la somme des PM nettes de chargement et
 de charges sociales sur autres passifs.}
 }
 \value{
-Une liste comprenant la PGG et la PSAP mise a jour, ainsi que les variations de ces deux provisions.
+\code{x} l'objet  \code{AutresReserves} mis a jour.
+
+\code{var_psap} une valeur \code{numeric} correspondant a la variation de PSAP.
+
+\code{var_gg} une valeur \code{numeric} correspondant a la variation de PGG.
 }
 \description{
 \code{update_reserves} est une methode permettant de calculer la valeur de la nouvelle PGG et de la nouvelle
 PSAP et les met a jour.
 }
 \note{
-Il s'agit d'une methode specifique a la MPG et qui comprend des approximations.
+Il s'agit d'une methode simplifiee.
 }
 \author{
 Prim'Act

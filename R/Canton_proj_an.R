@@ -138,9 +138,9 @@ setMethod(
     }
 
     # Frais financier associes au autres passifs
-    frais_fin_hors_model <- frais_fin * ((passif_av_pb[["result_autres_passifs"]]$pm_fin + 
+    frais_fin_hors_model <- frais_fin * ((passif_av_pb[["result_autres_passifs"]]$pm_fin +
                                             passif_av_pb[["result_autres_passifs"]]$pm_deb ) / 2) / plac_moy_vm
-    
+
     #---------------------------------------------------------------
     # Etape 11 : Mise a jour des actifs
     #---------------------------------------------------------------

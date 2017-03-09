@@ -3,23 +3,19 @@
 \docType{class}
 \name{AutresPassifs}
 \alias{AutresPassifs}
-\title{La classe AutresPassifs}
+\title{La classe \code{AutresPassifs}}
 \description{
-Classe pour les Autres Passifs
+Une classe pour la gestion des passifs hors modele.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{mp}}{un objet data.frame au format fige contenant l'ensemble de model points Autres Passifs}
+\item{\code{mp}}{un objet \code{data.frame} au format fige contenant les flux des passifs hors modele.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+La lecture des flux d'une annee \code{\link{proj_annee_autres_passifs}}.
 }
-\keyword{classes}
 

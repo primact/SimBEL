@@ -73,10 +73,10 @@ setMethod(
         # La colonne 2 contient le nom du fichier,
         # la colonne 3 contient le type (Action / Immo / Inflation / Deflateur)
         # On veut pouvoir avoir plusieurs indices actions/immo
-        file_name           <- read.csv2(paste(folder_ESG_address, "/noms_liens.csv", sep = ""), header = T)[1:6,1:3]
-        folder_Indices      <- paste(folder_ESG_address, "/Simulation_Indices", sep = "")
-        folder_yield_curve  <- paste(folder_ESG_address, "/Simulation_CourbeDesTaux", sep = "")
-        folder_deflateur    <- paste(folder_ESG_address, "/Simulation_Deflateurs", sep = "")
+        file_name           <- read.csv2(paste(folder_ESG_address, "noms_liens.csv", sep = "/"), header = T)[1:6,1:3]
+        folder_Indices      <- paste(folder_ESG_address, "Simulation_Indices", sep = "/")
+        folder_yield_curve  <- paste(folder_ESG_address, "Simulation_CourbeDesTaux", sep = "/")
+        folder_deflateur    <- paste(folder_ESG_address, "Simulation_Deflateurs", sep = "/")
 
         # Tables d'identifiant des differents indices actions et immo
         id_indices_action   <- file_name[which(file_name[,3] == "Action"),]

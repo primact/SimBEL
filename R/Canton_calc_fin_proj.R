@@ -62,8 +62,16 @@ setMethod(
       coef_alloc <- rep(1, length(pm_fin_ap_pb)) / length(pm_fin_ap_pb)
     }
 
-
-    revalo_fin_passif <- max(0, flux_fin_actif) *coef_alloc
+    # Coefficient de mise a l'echelle
+    vnc_actif <- .subset2(print_alloc(x@ptf_fin), 3)[5]
+    if(vnc_actif == 0){ # Gestion des divisions par 0
+      coef_scale <- 0
+    }else{
+      coef_scale <- (pm_fin_ap_pb + x@ppb@valeur_ppb) / vnc_actif  
+    }
+    
+    
+    revalo_fin_passif <- max(0, flux_fin_actif) * coef_alloc * coef_scale
 
     # Choix de modelisation : application des taux de PB contractuel et liquidation de la PPB
     revalo_fin_passif <- revalo_fin_passif * tx_pb + x@ppb@valeur_ppb

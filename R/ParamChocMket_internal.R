@@ -4,24 +4,27 @@
 # Getteur
 setMethod(
     f = "[",
-    signature = "ChocSolvabilite2",
-    definition = function(x,i){
+    signature = "ParamChocMket",
+    definition = function(x, i){
         switch(EXPR = i,
-               # Data frame Financier
-               "param_choc_mket"  = {return(x@param_choc_mket)},
-               "param_choc_sousc" = {return(x@param_choc_sousc)},
+               "table_choc_action" = {return(x@table_choc_action)},
+               "table_choc_immo"   = {return(x@table_choc_immo)},
+               "table_choc_spread" = {return(x@table_choc_spread)},
                stop("Cet attribut n'existe pas!")
         )
     }
 )
+
+
 # Setteur
 setReplaceMethod(
     f = "[",
-    signature = "ChocSolvabilite2",
-    definition = function(x,i,value){
+    signature = "ParamChocMket",
+    definition = function(x, i, value){
         switch(EXPR = i,
-               "param_choc_mket"  = {x@param_choc_mket <- value},
-               "param_choc_sousc" = {x@param_choc_sousc <- value},
+               "table_choc_action" = {x@table_choc_action <- value},
+               "table_choc_immo"   = {x@table_choc_immo <- value},
+               "table_choc_spread" = {x@table_choc_spread <- value},
                stop("Cet attribut n'existe pas!")
         )
         validObject(x)

@@ -4,7 +4,7 @@
 \name{init_debut}
 \alias{AutresReserves}
 \alias{init_debut}
-\title{Re-initialise un objet AutresReserves en debut d'annee}
+\title{Re-initialise un objet \code{AutresReserves} en debut d'annee.}
 \usage{
 init_debut_pgg_psap(x)
 }

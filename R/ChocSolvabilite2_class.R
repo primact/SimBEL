@@ -14,7 +14,7 @@
 ##'
 ##' @name ChocSolvabilite2
 ##' @slot param_choc_mket
-##' @slot param_choc_sousc
+##' @slot param_choc_sousc : objet de la classe ParamChoc
 ##' @docType class
 ##' @section Lien a creer
 ##' @author Prim'Act
@@ -25,6 +25,6 @@
 setClass(
     Class = "ChocSolvabilite2",
     representation = representation(
-        param_choc_mket  = "list",
-        param_choc_sousc = "list")
+        param_choc_mket  = "ParamChocMket",
+        param_choc_sousc = "ParamChocSousc")
 )

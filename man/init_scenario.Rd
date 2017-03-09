@@ -6,7 +6,7 @@
 \alias{init_scenario}
 \title{Initialisation des scenarios de chocs d'un workspace.}
 \usage{
-init_scenario(x, alloc_cible, seuil_realisation_PVL, nb_simu, nb_annee_proj)
+init_scenario(x)
 }
 \arguments{
 \item{x}{un objet de la classe \code{Initialisation}.}

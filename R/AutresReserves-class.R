@@ -1,6 +1,6 @@
 #----------------------------------------------------------
-# Ce script est la definition de la classe AutresPassifs dediee aux model points des autres passifs
-# Il s'agit d'une classe ajoutee specificaquement pour le besoin MGP
+# Ce script est la definition de la classe AutresPassifs dediee aux model points des autres reserves
+# Il s'agit d'une classe ajoutee specifiquement pour le besoin MGP.
 #----------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -9,12 +9,12 @@
 
 ##' La classe AutreReserves
 ##'
-##' Classe permettant de gerer le stock de provision globale de gestion (PGG) et de
-##' provision pour sinistres a payer (PSAP)
+##' Une  classe permettant de gerer le stock de provision globale de gestion (PGG) et de
+##' provision pour sinistres a payer (PSAP).
 ##'
 ##' @name AutresReserves
-##' @slot pgg_debut la valeur de la PGG en debut de periode
-##' @slot psap_debut la valeur de la PSAP en debut de periode
+##' @slot pgg_debut la valeur de la PGG en debut de periode.
+##' @slot psap_debut la valeur de la PSAP en debut de periode.
 ##' @slot pgg_valeur la valeur courant de la PGG.
 ##' @slot psap_valeur la valeur courant de la PSAP.
 ##' @slot tx_pgg_ep le taux de PGG applique sur l'epargne.
@@ -22,10 +22,9 @@
 ##' @slot tx_psap_ep le taux de PGG applique sur l'epargne.
 ##' @slot tx_psap_autres le taux de PGG applique sur les autres passifs.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
-##' @keywords classes
+##' @seealso Le calcul et la mise a jour des autres reserves \code{\link{update_reserves}} et
+##' \code{\link{init_debut_pgg_psap}}.
 ##' @export
 setClass(
   Class = "AutresReserves",

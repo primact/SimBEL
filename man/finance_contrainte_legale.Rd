@@ -37,7 +37,8 @@ y compris passifs non modelises.}
 }
 \value{
 Une liste avec la revalorisation nette affectee au stock
-la marge financiere de l'assureur apres prise en compte de la contrainte legale, et la PPB.
+la marge financiere de l'assureur apres prise en compte de la contrainte legale, la PPB et
+l'objet \code{param_revalo} qui comprend l'etat du solde de participation aux benefices reglementaire.
 }
 \description{
 \code{finance_contrainte_legale} est une methode permettant de calculer la contrainte legale

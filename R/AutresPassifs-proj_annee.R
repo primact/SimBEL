@@ -1,25 +1,22 @@
-#----------------------------------------------------------
-# Ce script comprend les methodes de flux et de prestations la classe AutresPassifs
-#----------------------------------------------------------
-
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Fonction de calcul des flux et de pm des autras passifs. Methode specifique MGP
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Extrait les flux et les PM des produits non modelises
 ##'
-##' \code{proj_annee_autres_passifs} est une methode permettant de calculer les PM et les flux sur une annee des.
-##' passif non modelises. Cette methode calcule egalement les frais et leur applique une inflation.
+##' \code{proj_annee_autres_passifs} est une methode permettant de calculer les PM et les flux sur une annee pour
+##' des passif non modelises.
+##' Cette methode calcule applique une inflation au frais.
 ##' @name proj_annee_autres_passifs
 ##' @docType methods
 ##' @param an est l'annee de projection.
 ##' @param x un objet de la classe \code{AutresPassifs} contenant l'ensemble des donnees de passifs non modelises.
-##' @param coef_inf un \code{numeric} coorrepodant au coefficient d'inflation a appliquer sur les frais.
+##' @param coef_inf un \code{numeric} correpodant au coefficient d'inflation a appliquer sur les frais.
 ##' @author Prim'Act
+##' @return Un \code{data.frame] contenant les flux des passifs de l'annee.
 ##' @export
-##' @aliases PortPassif
+##' @aliases AutresPassifs
+##' @include AutresPassifs-class.R
 ##'
-
 setGeneric(name = "proj_annee_autres_passifs", def = function(an, x, coef_inf)
 {standardGeneric("proj_annee_autres_passifs")})
 setMethod(

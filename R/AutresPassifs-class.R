@@ -1,25 +1,17 @@
-#----------------------------------------------------------
-# Ce script est la definition de la classe AutresPassifs dediee aux model points des autres passifs
-#----------------------------------------------------------
-# Suivi version
-# Version 1.0 du 01/02/2017. Fait par MT : initialisation
-#----------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Definition de la classe AutresPassifs
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 
-##' La classe AutresPassifs
+##' La classe \code{AutresPassifs}
 ##'
-##' Classe pour les Autres Passifs
+##' Une classe pour la gestion des passifs hors modele.
 ##'
 ##' @name AutresPassifs
-##' @slot mp un objet data.frame au format fige contenant l'ensemble de model points Autres Passifs
+##' @slot mp un objet \code{data.frame} au format fige contenant les flux des passifs hors modele.
 ##' @docType class
-##' @section Lien a creer
+##' @section
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
-##' @keywords classes
+##' @seealso La lecture des flux d'une annee \code{\link{proj_annee_autres_passifs}}.
 ##' @export
 setClass(
   Class = "AutresPassifs",

@@ -1,30 +1,29 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les fonctions permettant de calculer et de mettre a jour la valeur des autres reserves
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           update_reserves
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Evalue et met a jour la valeur des autres reserves
+##' Evalue et met a jour la valeur des autres reserves.
 ##'
 ##' \code{update_reserves} est une methode permettant de calculer la valeur de la nouvelle PGG et de la nouvelle
 ##' PSAP et les met a jour.
 ##' @name update_reserves
 ##' @docType methods
 ##' @param x objet de la classe \code{AutresReserves}.
-##' @param prest_ep est un valeur correspondant a la somme des prestations nettes de chargement et
+##' @param prest_ep est une valeur \code{numeric} correspondant a la somme des prestations nettes de chargement et
 ##' de charges sociales sur epargne.
-##' @param prest_autres est un valeur correspondant a la somme des prestations nettes de chargements et
-##' de charges sociales sur autres passifs.
-##' @param pm_ep est un valeur correspondant a la somme des PM nettes de chargements et
+##' @param prest_autres est une valeur \code{numeric} correspondant a la somme des prestations nettes
+##'  de chargements et de charges sociales sur autres passifs.
+##' @param pm_ep est une valeur \code{numeric}  correspondant a la somme des PM nettes de chargements et
 ##' de charges sociales sur epargne.
-##' @param pm_autres est un valeur correspondant a la somme des PM nettes de chargement et
+##' @param pm_autres est une valeur \code{numeric} correspondant a la somme des PM nettes de chargement et
 ##' de charges sociales sur autres passifs.
-##' @return Une liste comprenant la PGG et la PSAP mise a jour, ainsi que les variations de ces deux provisions.
-##' @note Il s'agit d'une methode specifique a la MPG et qui comprend des approximations.
+##' @return \code{x} l'objet  \code{AutresReserves} mis a jour.
+##' @return \code{var_psap} une valeur \code{numeric} correspondant a la variation de PSAP.
+##' @return \code{var_gg} une valeur \code{numeric} correspondant a la variation de PGG.
+##' @note Il s'agit d'une methode simplifiee.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases AutresReserves
+##' @include AutresReserves-class.R
 
 setGeneric(name = "update_reserves", def = function(x, prest_ep, prest_autres, pm_ep, pm_autres){
   standardGeneric("update_reserves")})
