@@ -12,14 +12,23 @@ setMethod(
                         taux_pb_tech = numeric(),
                         tx_marge_min = numeric(),
                         solde_pb_regl = numeric()){
-    .Object@taux_pb_fi  <- taux_pb_fi
-    .Object@taux_pb_tech  <- taux_pb_tech
-    .Object@tx_marge_min  <- tx_marge_min
-    .Object@solde_pb_regl  <- solde_pb_regl
+    if(!missing(taux_pb_fi) & !missing(taux_pb_tech) & ! missing(tx_marge_min) & !missing(solde_pb_regl)){
+      .Object@taux_pb_fi <- taux_pb_fi
+      .Object@taux_pb_tech <- taux_pb_tech
+      .Object@tx_marge_min <- tx_marge_min
+      .Object@solde_pb_regl <- solde_pb_regl
+    } else {
+      #Traitement du cas vide
+      .Object@taux_pb_fi <- 0.85
+      .Object@taux_pb_tech <- 0.9
+      .Object@tx_marge_min   <- 0
+      .Object@solde_pb_regl  <- 0
+    }
     validObject(.Object)
     return(.Object)
   }
 )
+
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Getteur et Setteur et Constructeur grand public

@@ -18,7 +18,7 @@ setMethod(
   signature = "Initialisation",
   def = function(x){
     
-    input_epeuroind <- read.csv2(paste(x@address[["data"]][["passif_chgmt"]],"empl_tables_epeuroind.csv",sep="/"),header = TRUE)
+    input_epeuroind <- read.csv2(paste(x@address[["data"]][["passif"]],"empl_tables_epeuroind.csv",sep="/"),header = TRUE)
     
     list_epeuroind <-list()
     

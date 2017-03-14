@@ -1,7 +1,7 @@
 Package: SimBEL
 Type: Package
 Title: Un package de calcul du best estimate epargne sous Solvabilite II.
-Version: 0.2.5
+Version: 0.2.6
 Author: Prim'Act
 Maintainer: Quentin Guibert <quentin.guibert@primact.fr>
 Description: Un modele de simulation Monte-Carlo s'appuyant sur une projection
@@ -27,7 +27,7 @@ Collate:
     'AutresPassifs-load.R'
     'AutresPassifs-proj_annee.R'
     'AutresReserves-class.R'
-    'AutresReserves-init_debut.R'
+    'AutresReserves-init_debut_pgg_psap.R'
     'AutresReserves-internal.R'
     'AutresReserves-load.R'
     'AutresReserves-update_reserves.R'
@@ -47,6 +47,7 @@ Collate:
     'ChocSolvabilite2_internal.R'
     'ChocSolvabilite2_load.R'
     'ESG_class.R'
+    'ESG-get_choc_inflation_frais.R'
     'ESG_internal.R'
     'ESG_load.R'
     'EpEuroInd-calc_bes_tx_cible.R'

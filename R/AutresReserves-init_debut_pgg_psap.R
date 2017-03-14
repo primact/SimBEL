@@ -5,7 +5,7 @@
 ##'
 ##' \code{init_debut_pgg_psap} est une methode permettant de re-initialiser les montants
 ##' de PGG et de PSAP de debut de periode.
-##' @name init_debut
+##' @name init_debut_pgg_psap
 ##' @docType methods
 ##' @param x objet de la classe \code{AutresReserves}.
 #' @return L'objet x reinitialise.

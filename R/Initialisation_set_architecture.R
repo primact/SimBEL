@@ -14,12 +14,12 @@ setMethod(
     signature = "Initialisation",
     definition = function(x){
         # Adresse des scripts : paragraphe a mettre en commentaire lors du passage en scripts
-        x@address[["scripts"]] <- list()
-            x@address[["scripts"]][["actif"]]       <- paste(x@root_address, "internal_ws/script/actif", sep="/") 
-            x@address[["scripts"]][["be"]]          <- paste(x@root_address, "internal_ws/script/be", sep="/") 
-            x@address[["scripts"]][["canton"]]      <- paste(x@root_address, "internal_ws/script/canton", sep="/") 
-            x@address[["scripts"]][["passif"]]      <- paste(x@root_address, "internal_ws/script/passif", sep="/") 
-            x@address[["scripts"]][["init"]]        <- paste(x@root_address, "internal_ws/script/initialisation", sep="/") 
+        # x@address[["scripts"]] <- list()
+        #     x@address[["scripts"]][["actif"]]       <- paste(x@root_address, "internal_ws/script/actif", sep="/") 
+        #     x@address[["scripts"]][["be"]]          <- paste(x@root_address, "internal_ws/script/be", sep="/") 
+        #     x@address[["scripts"]][["canton"]]      <- paste(x@root_address, "internal_ws/script/canton", sep="/") 
+        #     x@address[["scripts"]][["passif"]]      <- paste(x@root_address, "internal_ws/script/passif", sep="/") 
+        #     x@address[["scripts"]][["init"]]        <- paste(x@root_address, "internal_ws/script/initialisation", sep="/") 
         
         # Adresses sauvegardes
         x@address[["save_folder"]] <- list()
@@ -28,7 +28,8 @@ setMethod(
             # Scenario central
             x@address[["save_folder"]][["central"]]     <- paste(x@root_address, "internal_ws/data/scenario/central", sep="/")
             # Choc marche
-            x@address[["save_folder"]][["action"]]      <- paste(x@root_address, "internal_ws/data/scenario/action", sep="/")
+            x@address[["save_folder"]][["action_type1"]]<- paste(x@root_address, "internal_ws/data/scenario/action_type1", sep="/")
+            x@address[["save_folder"]][["action_type2"]]<- paste(x@root_address, "internal_ws/data/scenario/action_type2", sep="/")
             x@address[["save_folder"]][["taux_up"]]     <- paste(x@root_address, "internal_ws/data/scenario/taux_up", sep="/")
             x@address[["save_folder"]][["taux_down"]]   <- paste(x@root_address, "internal_ws/data/scenario/taux_down", sep="/")
             x@address[["save_folder"]][["immo"]]        <- paste(x@root_address, "internal_ws/data/scenario/immobilier", sep="/")
@@ -44,8 +45,9 @@ setMethod(
         x@address[["data"]] <- list()
             x@address[["data"]][["actif"]]           <- paste(x@root_address, "input/donnees/actif", sep="/")
             x@address[["data"]][["ptf_reference"]]   <- paste(x@root_address, "input/donnees/actif/Portefeuille_reference", sep="/")
-            x@address[["data"]][["passif_chgmt"]]    <- paste(x@root_address, "input/donnees/location", sep="/")
+            # x@address[["data"]][["passif_chgmt"]]    <- paste(x@root_address, "input/donnees/location", sep="/")
             x@address[["data"]][["passif"]]          <- paste(x@root_address, "input/donnees/passif", sep="/")
+            x@address[["data"]][["autres_passifs_choc"]] <- paste(x@root_address, "input/donnees/passif/autres_passifs_choc", sep="/")
         
         # Adresses parametres
         x@address[["param"]] <- list()

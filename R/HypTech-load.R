@@ -17,9 +17,9 @@ setMethod(
   f = "load_ht",
   signature = "Initialisation",
   def = function(x){
-    input_morta      <- read.csv2(paste(x@address[["data"]][["passif_chgmt"]],"empl_tables_morta.csv",sep="/"),header = TRUE)
-    input_rach       <- read.csv2(paste(x@address[["data"]][["passif_chgmt"]],"empl_tables_rachats.csv",sep="/"),header = TRUE)
-    input_param_rach <- read.csv2(paste(x@address[["data"]][["passif_chgmt"]],"empl_param_rachats_conj.csv",sep="/"),header = TRUE)
+    input_morta      <- read.csv2(paste(x@address[["data"]][["passif"]],"empl_tables_morta.csv",sep="/"),header = TRUE)
+    input_rach       <- read.csv2(paste(x@address[["data"]][["passif"]],"empl_tables_rachats.csv",sep="/"),header = TRUE)
+    input_param_rach <- read.csv2(paste(x@address[["data"]][["passif"]],"empl_param_rachats_conj.csv",sep="/"),header = TRUE)
 
     list_morta       <- list()
     list_rach        <- list()
