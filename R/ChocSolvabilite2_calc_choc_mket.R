@@ -34,6 +34,15 @@ setMethod(
     # Resortir un objet action, dont l'attribut ptf_action est trie comme initialement i.e. par ordre croissant du num_mp
     ptf_action_mod    <- new("Action", merged_ptf_action[order(merged_ptf_action$num_mp),])
     canton@ptf_fin@ptf_action <- ptf_action_mod
+
+    # Mise a jour des PMVL Action/Immo/Oblig
+    canton@ptf_fin <- do_update_pmvl(canton@ptf_fin)
+    
+    # Convention : on ne remet pas a jour la valeur de la PRE
+    
+    # Mise a jour des montant totaux de VM et de VNC des actifs
+    canton@ptf_fin <- do_update_vm_vnc_precedent(canton@ptf_fin)
+    
     return(canton)
     }
 )
@@ -73,6 +82,16 @@ setMethod(
     # Resortir un objet action, dont l'attribut ptf_action est trie comme initialement i.e. par ordre croissant du num_mp
     ptf_action_mod    <- new("Action", merged_ptf_action[order(merged_ptf_action$num_mp),])
     canton@ptf_fin@ptf_action <- ptf_action_mod
+    
+    
+    # Mise a jour des PMVL Action/Immo/Oblig
+    canton@ptf_fin <- do_update_pmvl(canton@ptf_fin)
+    
+    # Convention : on ne remet pas a jour la valeur de la PRE
+    
+    # Mise a jour des montant totaux de VM et de VNC des actifs
+    canton@ptf_fin <- do_update_vm_vnc_precedent(canton@ptf_fin)
+    
     return(canton)
   }
 )
@@ -114,6 +133,15 @@ setMethod(
     ptf_immo_mod    <- new("Immo", merged_ptf_immo[order(merged_ptf_immo$num_mp),])
     canton@ptf_fin@ptf_immo <- ptf_immo_mod
 
+    
+    # Mise a jour des PMVL Action/Immo/Oblig
+    canton@ptf_fin <- do_update_pmvl(canton@ptf_fin)
+    
+    # Convention : on ne remet pas a jour la valeur de la PRE
+    
+    # Mise a jour des montant totaux de VM et de VNC des actifs
+    canton@ptf_fin <- do_update_vm_vnc_precedent(canton@ptf_fin)
+    
     return(canton)
     }
 )
@@ -132,6 +160,14 @@ setMethod(
     temp$val_marche <- unlist(lapply(1:nrow(temp), function(x){do_choc_spread_unitaire(table_choc_spread, temp[x,])}))
     canton@ptf_fin@ptf_oblig <- new("Oblig", temp)
 
+    # Mise a jour des PMVL Action/Immo/Oblig
+    canton@ptf_fin <- do_update_pmvl(canton@ptf_fin)
+    
+    # Convention : on ne remet pas a jour la valeur de la PRE
+    
+    # Mise a jour des montant totaux de VM et de VNC des actifs
+    canton@ptf_fin <- do_update_vm_vnc_precedent(canton@ptf_fin)
+    
     return(canton)
     }
 )
@@ -146,11 +182,21 @@ setMethod(
                                                             tentative de calcul du choc taux avec un objet Oblig vide
                                                             impossible. \n")}
     # Mise a jour des valeurs de marche du portefeuille
-    canton@ptf_fin["ptf_oblig"]$val_marche <- calc_vm_oblig(canton@ptf_fin@ptf_oblig,
+    canton@ptf_fin@ptf_oblig@ptf_oblig$val_marche <- calc_vm_oblig(canton@ptf_fin@ptf_oblig,
                                                             canton@mp_esg@yield_curve)
     # Mise a jour des valeurs de marche du portefeuille de reference
-    canton@param_alm@ptf_reference["ptf_oblig"]$val_marche <- calc_vm_oblig(canton@param_alm@ptf_reference@ptf_oblig,
+    canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig$val_marche <- calc_vm_oblig(canton@param_alm@ptf_reference@ptf_oblig,
                                                                             canton@mp_esg@yield_curve)
+    
+    
+    # Mise a jour des PMVL Action/Immo/Oblig
+    canton@ptf_fin <- do_update_pmvl(canton@ptf_fin)
+    
+    # Convention : on ne remet pas a jour la valeur de la PRE
+    
+    # Mise a jour des montant totaux de VM et de VNC des actifs
+    canton@ptf_fin <- do_update_vm_vnc_precedent(canton@ptf_fin)
+    
     return(canton)
   }
 )

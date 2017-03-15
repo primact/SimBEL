@@ -19,6 +19,10 @@ setMethod(
     f = "init_scenario",
     signature = "Initialisation",
     definition = function(x){
+
+        # Message utilisateur
+        print("Initialisation des donnees et parametres pour chaque choc")
+
         # Creation des dossiers initiaux
         init_create_folder(x)
 
@@ -31,7 +35,10 @@ setMethod(
                      "taux_up", "taux_down",
                      "spread")
 
-        lapply(scenario, function(name_scenario){
+        for(name_scenario in scenario){
+          # Message
+          print(paste("Chargement du choc : ", name_scenario, sep = ""))
+
             if (name_scenario != "taux_up" & name_scenario != "taux_down"){
                 # Chargement de la photo initiale
                 canton_init <- get(load(paste(x@address[["save_folder"]][["init"]], "canton_init.RData", sep = "/")))
@@ -42,7 +49,7 @@ setMethod(
                 # Application d'un choc sur l'inflation pour le choc frais
                 if( name_scenario == "frais"){
                   table_ESG <- get_choc_inflation_frais(table_ESG,
-                                                        table_choc@param_choc_sousc@mp@choc_frais_inflation)
+                                                        table_choc@param_choc_sousc@mp$choc_frais_inflation)
                 }
 
                 # Mise a jour du Model Point d'ESG du canton init en accord avec le scenario :
@@ -56,7 +63,7 @@ setMethod(
                 # Autres passifs choques
                 input_autres_passifs_choc <- read.csv2(paste(x@address[["data"]][["autres_passifs_choc"]],"noms_liens_autres_passifs_choc.csv",sep="/"),
                                                        header = TRUE)
-
+                # Chargement des passifs choques
                 autres_passifs_choc <- switch(EXPR = name_scenario,
                                               "action_type1"      = canton_init@ptf_passif@autres_passifs,
                                               "action_type2"      = canton_init@ptf_passif@autres_passifs,
@@ -85,7 +92,7 @@ setMethod(
                                               "central"     = canton_init@ptf_passif@autres_passifs)
 
 
-
+                # Transformation du canton apres choc
                 canton_init <- switch(EXPR = name_scenario,
                                          "action_type1"      = do_choc_action_type1(table_choc, canton_init),
                                          "action_type2"      = do_choc_action_type2(table_choc, canton_init),
@@ -106,6 +113,7 @@ setMethod(
                 zspread                                       <- calc_z_spread(canton_init@param_alm@ptf_reference@ptf_oblig, canton_init@mp_esg@yield_curve)
                 canton_init@param_alm@ptf_reference@ptf_oblig <- update_zsp_oblig(canton_init@param_alm@ptf_reference@ptf_oblig, zspread)
 
+                # creation du nouvel objet best estimate en situation de choc
                 best_estimate           <- new("Be")
                 best_estimate@param_be  <- new("ParamBe", x@nb_annee_proj)
                 best_estimate@canton    <- canton_init
@@ -142,7 +150,7 @@ setMethod(
                 # Mise a jour du Model Point d'ESG du canton init en accord avec le scenario :
                 canton_init@mp_esg <- extract_ESG(table_ESG, x@nb_simu, as.integer(0))
 
-
+                # creation du nouvel objet best estimate en situation de choc
                 best_estimate           <- new("Be")
                 best_estimate@param_be  <- new("ParamBe", x@nb_annee_proj)
                 best_estimate@esg       <- table_ESG
@@ -152,6 +160,9 @@ setMethod(
                 # Sauvegarde
                 save(best_estimate, file = paste(x@address[["save_folder"]][[name_scenario]], "best_estimate.RData", sep = "/"))
             }
-        })
+        }
+        # Output
+        return(print("Fin du chargement des chocs"))
+
     }
 )

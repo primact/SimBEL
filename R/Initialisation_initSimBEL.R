@@ -5,7 +5,7 @@
 ##' @docType methods
 ##' @param x un objet de la classe \code{Initialisation}.
 ##' @param nb_simu nombre de simulation.
-##' @param nb_annee_proj nombre d'annee de projection.  
+##' @param nb_annee_proj nombre d'annee de projection.
 ##' @return Pas de sortie.
 ##' @author Prim'Act
 ##' @export
@@ -18,8 +18,10 @@ setMethod(
     signature = "Initialisation",
     definition = function(x){
         # Verification des inputs
-        if(length(x@address) == 0) {stop("[Initialisation : init_SimBEL] : Veuillez faire tourner la fonction set_architecture sur l'objet Initialisation avant de lancer le processus d'initialisation. \n")}        
-         
+        if(length(x@address) == 0) {stop("[Initialisation : init_SimBEL] : Veuillez faire tourner la fonction set_architecture sur l'objet Initialisation avant de lancer le processus d'initialisation. \n")}
+
+        # Message
+        print("Chargement des donnees et parametres du canton initial")
         # Actif
             # ESG et ModelPoint_ESG
             table_ESG   <- chargement_ESG(x@address[["param"]][["ESG"]], x@nb_simu, x@nb_annee_proj)
@@ -28,7 +30,7 @@ setMethod(
             Ptf_Fin     <- chargement_PortFin(x@address[["data"]][["actif"]], mp_ESG_init)
         # Passif
             Ptf_Passif <- load_pp(x)
-        
+
         # Chargement d'un canton initial
             canton_init <- new("Canton")
             canton_init@annee        <- as.integer(0)
@@ -39,9 +41,12 @@ setMethod(
             canton_init@hyp_canton   <- hyp_canton_load(paste(x@address[["param"]][["hyp_canton"]], "param_hyp_canton.csv", sep = "/"))
             canton_init@param_alm    <- param_alm_engine_load(paste(x@address[["param"]][["alm"]], "param_alm.csv", sep = "/"), new("PortFin"))
             canton_init@param_revalo <- param_revalo_load(paste(x@address[["param"]][["revalo"]], "param_revalo.csv", sep = "/"))
-            
-        
+
+
         # Sauvegarde au format .RData du canton initial
         save(canton_init, file = paste(x@address[["save_folder"]][["init"]], "canton_init.RData", sep = "/"))
+
+        # Output
+        return(print("Fin du chargement des donnees du canton initial"))
     }
 )
