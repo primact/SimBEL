@@ -31,7 +31,7 @@ setMethod(
     # Boucle sur les flux de BE
     for(i in nom_flux[- which(nom_flux == "nom_produit")]){
       m <- x@tab_flux[[i]] # Matrice de flux
-      colnames(m) <- nom_flux[["nom_produit"]] # Nom des produits en colonne
+      colnames(m) <- nom_flux # Nom des produits en colonne
 
       # Sauvegarde des resultats
       write.csv2(m, file = paste(path, nom_run, "_", i,  ".csv", sep = ""))
@@ -40,7 +40,7 @@ setMethod(
     # Boucle sur les elements de BE
     for(i in nom_be[- which(nom_be == "nom_produit")]){
       vec <- x@tab_be[[i]] # vecteur de be
-      names(vec) <- nom_be[["nom_produit"]] # Nom des produits en colonne
+      names(vec) <- nom_be # Nom des produits en colonne
 
       # Sauvegarde des resultats
       write.csv2(vec, file = paste(path, nom_run, "_", i, ".csv", sep = ""))

@@ -15,7 +15,8 @@ run_be(x, pre_on)
 de PRE dans le resultat technique utilisee pour le calcul de la participation aux benefices reglementaires.}
 }
 \value{
-L'objet BE avec les tables de resultats mise a jour.
+L'objet BE avec les tables de resultats mise a jour et la liste des simulations ignorees en
+cas d'erreur.
 }
 \description{
 \code{run_be} est une methode permettant de calcul un best estimate pour un canton.

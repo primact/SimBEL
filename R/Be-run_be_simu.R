@@ -53,6 +53,14 @@ setMethod(
       # Projection d'un canton sur une annee
       result_proj_an <- proj_an(canton, x@param_be@nb_annee, pre_on)
 
+      # Gestion des simulation pour lesquel l'actif devient negatif
+      # On retourne le numero de simulation
+      if(is.logical(result_proj_an)){
+        if(! result_proj_an){
+          return(list(erreur = i))
+        }
+      }
+
       # Mise a jour du canton
       canton <- result_proj_an[["canton"]]
 

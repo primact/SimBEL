@@ -88,6 +88,15 @@ setMethod(
     #---------------------------------------------------------------
     # Reallocation a l'allocation cible
 
+    # Gestion de l'anomalie : valeur de marche des actifs negatives
+    if(.subset2(print_alloc(x@ptf_fin), 1)[5] < 0){
+      warning(paste("Attention, la valeur de marche des actifs est negative pour
+                    la simulation ", x@mp_esg@num_traj, " en annee ", x@annee,".", sep = ""))
+
+      # Dans le cas d'un actif negatif, la simulation est arretee.
+      return(FALSE)
+    }
+
     actif_realloc <- reallocate(x@ptf_fin, x@param_alm@ptf_reference, x@param_alm@alloc_cible)
     x@ptf_fin <- actif_realloc[["portFin"]]
 
@@ -193,9 +202,9 @@ setMethod(
     # PGG, PSAP
     x@ptf_passif["autres_reserves"] <-  init_debut_pgg_psap(x@ptf_passif@autres_reserves) # On conserve la validation car pas fait dans l'objet
 
-    # Controle que l'actif en valeur de marche n'est pas negatif
-    if(.subset2(print_alloc(x@ptf_fin), 1)[5] < 0)
-      print("[Canton_proj_an] : Attention, la valeur de marche des actifs est devenue negative.")
+    # # Controle que l'actif en valeur de marche n'est pas negatif
+    # if(.subset2(print_alloc(x@ptf_fin), 1)[5] < 0)
+    #   warning("Attention, la valeur de marche des actifs est negative.")
 
     #---------------------------------------------------------------
     # Etape 14 : Gestion des fins de projection
