@@ -9,9 +9,9 @@
 ##' @name AutresPassifs
 ##' @slot mp un objet \code{data.frame} au format fige contenant les flux des passifs hors modele.
 ##' @docType class
-##' @section
 ##' @author Prim'Act
 ##' @seealso La lecture des flux d'une annee \code{\link{proj_annee_autres_passifs}}.
+##' @keywords classes
 ##' @export
 setClass(
   Class = "AutresPassifs",

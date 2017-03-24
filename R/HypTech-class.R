@@ -1,29 +1,30 @@
-#---------------------------------------------------------------------------------------------------------
-# Ce script est la definition de la classe HypTech qui contient les hypotheses techniques chargees, i.e.
-# les tables de mortalite, les tables de rachat et les parametres de rachats dynamiques
-#---------------------------------------------------------------------------------------------------------
-# Suivi version
-# Version 1.0 du 21/01/2017. Fait par QG : initialisation
-#----------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Definition de la classe HypTech
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-##' La classe HypTech
+##' La classe \code{HypTech}.
 ##'
-##' Classe pour pour les tables de rachat
-##'
+##' Une classe contenant les listes de tables de mortalite, de rachat, les parametres de rachat dynamique et
+##' les parametres comportementaux qui permettent
+##' de calculer les attentes en matiere de taux de revalorisation cible.
 ##' @name HypTech
-##' @slot 4 listes contenant les data frame relatifs aux tables de mortalite, tables de rachat et parametres de rachat conjoncturels
+##' @slot tables_mort une liste contenant des tables de mortalite au format \code{\link{ParamTableMort}}.
+##' @slot tables_rach une liste contenant des tables de rachat (structurel) au format \code{\link{ParamTableRach}}.
+##' @slot param_rach_dyn une liste contenant des parametres de rachat dynamique
+##' au format \code{\link{ParamRachDyn}}.
+##' @slot param_comport une liste contenant des des parametres comportementaux au format \code{\link{ParamComport}}.
 ##' @docType class
-##' @section Lien a creer
+##' @details Chaque elements de ces liste doit avoir prealablement ete nomme.
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
+##' @seealso Les classes de parametres contenues \code{\link{ParamTableMort}}, \code{\link{ParamTableRach}},
+##' \code{\link{ParamRachDyn}}, \code{\link{ParamComport}}.
+##' La methode pour l'application des chocs de mortalite et de longevite : \code{\link{get_choc_table}}.
+##' La methode pour l'application des chocs de rachat haut et bas : \code{\link{get_choc_rach}}.
+##' La methode pour la recuperation des parametres comportementaux : \code{\link{get_comport}}.
+##' La methode pour la recuperation des taux de deces : \code{\link{get_qx_mort}}.
+##' La methode pour la recuperation des taux de rachat structurel : \code{\link{get_qx_rach}}.
+##' La methode pour la recuperation des taux de rachat dynamique : \code{\link{get_rach_dyn}}.
 ##' @keywords classes
 ##' @export
-
 setClass(
   Class = "HypTech",
   slots = c(tables_mort = "list",

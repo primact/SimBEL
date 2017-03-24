@@ -9,7 +9,7 @@
 ##'
 ##' \code{finance_cible_pmvl} est une methode permettant de
 ##'  determiner le financement de taux cibles par des cessions de plus-values latentes.
-##' @name base_prod_fin
+##' @name finance_cible_pmvl
 ##' @docType methods
 ##' @param bes_cible est un vecteur de type \code{numeric} comprenant par produit le besoin de financement aux taux cible.
 ##' @param rev_stock_nette est un vecteur de type \code{numeric} comprenant par produit le montant de revalorisation nette atteint.

@@ -21,7 +21,8 @@
 ##' @seealso Mettre le lien vers les methodes de la classe
 ##' @keywords classes
 ##' @export
-#removeClass("Treso")
+##' @aliases Treso
+
 setClass(
   Class = "Treso",
   representation = representation(
@@ -41,8 +42,8 @@ setValidity(Class = "Treso",
               if(nrow(object@ptf_treso) > 1)         {retval <-c(retval, "[Treso] : Un seul compte de tresorerie est tolere \n")}
               # Verification du type des colonnes
               if (!is.integer(object@ptf_treso[,1]))  {retval <- c(retval, "[Treso] : num_mp n'est pas entier\n")}
-              if (!is.double(object@ptf_treso[,2]))   {retval <- c(retval, "[Treso] : val_marche n'est pas reel\n")}
-              if (!is.double(object@ptf_treso[,3]))   {retval <- c(retval, "[Treso] : val_nc n'est pas reel\n")}
+              if (!is.numeric(object@ptf_treso[,2]))   {retval <- c(retval, "[Treso] : val_marche n'est pas reel\n")}
+              if (!is.numeric(object@ptf_treso[,3]))   {retval <- c(retval, "[Treso] : val_nc n'est pas reel\n")}
 
               # Verification du nom des colonnes
               if(sum(colnames(object@ptf_treso) == c("num_mp","val_marche","val_nc")) != nb_col)
@@ -64,7 +65,7 @@ setMethod(
     if( !missing(ptf)){
       if(ncol(ptf) != nb_col | sum(names(ptf) != c("num_mp", "val_marche", "val_nc")) != 0)
       {stop("[Treso] : Nombre ou nommage des colonnes du dataframe incorrect")}
-      else if(!is.integer(ptf[,"num_mp"])   | !is.double(ptf[,"val_marche"]) | !is.double(ptf[,"val_nc"])) {
+      else if(!is.integer(ptf[,"num_mp"])   | !is.numeric(ptf[,"val_marche"]) | !is.numeric(ptf[,"val_nc"])) {
         stop("[Treso] : Typage incorrect des colonnes du dataframe")
       } else{
         .Object@ptf_treso <- ptf
@@ -73,7 +74,7 @@ setMethod(
     }
     #Traitement du cas vide
     else
-    {.Object@ptf_treso  <- data.frame(integer(),double(),double())
+    {.Object@ptf_treso  <- data.frame(integer(),numeric(),numeric())
     colnames(.Object@ptf_treso) <- c("num_mp","val_marche","val_nc")
     }
     return(.Object)

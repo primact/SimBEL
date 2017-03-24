@@ -10,9 +10,9 @@
 ##'
 ##' \code{calc_revalo} est une methode permettant de
 ##'  d'appliquer l'ensemble de la politique de revalorisation d'un assureur.
-##' @name base_prod_fin
+##' @name calc_revalo
 ##' @docType methods
-##' @param x un objet de la classe \code{Canton}.
+##' @param x un objet de la classe \code{\link{Canton}}.
 ##' @param passif_av_pb est une liste produit par la methode \code{viellissement_av_pb}
 ##' appliquee a un portefeuille de passif.
 ##' @param tra est la valeur \code{numeric} du taux de rendement de l'actif.

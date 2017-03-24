@@ -1,4 +1,17 @@
-#file_lancement_address <- paste(x@address[["param"]][["lancement"]], "param_lancement.csv", sep = "/")
+##' Chargement de certains attributs dans un objet \code{Initialisation}  
+##'
+##' \code{initialisation_load} est la methode de chargement des attributs nb_simu et nb_annee_proj a partir des donnees de l'environnement utilisateur.
+##' @name initialisation_load
+##' @docType methods
+##' @param x un objet de la classe \code{\link{Initialisation}}.
+##' @return Pas de sortie.
+##' @note  Cette methode permet de creer l'objet \code{\link{Canton}} initial et de le sauvegarder dans le repertoire adequat de l'architecture.
+##' @author Prim'Act
+##' @export
+##' @aliases Initialisation
+##' @include Initialisation_class.R
+
+
 setGeneric(name = "initialisation_load", def = function(x, file_lancement_address){standardGeneric("initialisation_load")})
 setMethod(
     f = "initialisation_load",

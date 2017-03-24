@@ -1,26 +1,27 @@
-#----------------------------------------------------------
-# Ce script comprend les methodes de flux et de prestations la classe PortPassif avant PB
-#----------------------------------------------------------
-
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           Fonction de calcul des flux et de pm d un model point
+#           Fonction de calcul de flux et de prestations la classe PortPassif apres PB
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcul les flux et les PM des produits modelises apres participation aux benefices
+##' Vieillissement du portefeuille sur l'annee apres attribution
+##' de participation aux benefices.
 ##'
 ##' \code{vieillissment_ap_pb} est une methode permettant de calculer les PM et les flux sur une annee apres PB.
-##' Cette methode produit le portefeuille de passifs mis a jour.
+##' Cette methode vieilli le portefeuille de passifs apres attribution de PB.
 ##' @name vieillissment_ap_pb
 ##' @docType methods
-##' @param x un objet de la classe \code{PortPassif} contenant l'ensemble des produits de passifs.
-##' @param rev_nette_alloue un vecteur \code{numeric} contenant par produit le supplement de revalorisation par rapport au taux minimum.
-##' @param tx_soc le taux de charges sociales.
-##' @return Une liste dont le premier element designe le portefeuille mis a jour, puis
-##' les noms des produits, puis deux matrices de resultats aggreges : une pour les flux
-##' et une pour le stock.
+##' @param x un objet de la classe \code{\link{PortPassif}} contenant l'ensemble des produits de passifs.
+##' @param rev_nette_alloue un vecteur \code{numeric} contenant par produit
+##'  le supplement de revalorisation par rapport au taux minimum.
+##' @param tx_soc une valeur \code{numeric} correspondant au taux de charges sociales.
+##' @return \code{x} l'objet \code{x} mis a jour.
+##' @return \code{nom_produit} un vecteur de \code{character} contenant les noms des produits.
+##' @return \code{flux_agg} une matrice contenant les flux aggreges par produits.
+##' @return \code{stock_agg} une matrice contenant les stocks aggreges par produits.
 ##' @author Prim'Act
+##' @seealso L'attribution de la revalorisation par model point : \code{\link{calc_revalo_pm}}
+##' Le viellissement des model points : \code{\link{vieilli_mp}}.
 ##' @export
 ##' @aliases PortPassif
+##' @include PortPassif-class.R
 ##'
 
 setGeneric(name = "vieillissment_ap_pb", def = function(x, rev_nette_alloue, tx_soc)

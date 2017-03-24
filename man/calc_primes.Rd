@@ -4,24 +4,25 @@
 \name{calc_primes}
 \alias{EpEuroInd}
 \alias{calc_primes}
-\title{Calcul les flux de primes d'un model point epargne en euros.}
+\title{Calcul les flux de primes pour des contrats epargne en euros.}
 \usage{
 calc_primes(x)
 }
 \arguments{
-\item{x}{un objet de la classe \code{EpEuroInd} contenant les model points epargne euros}
+\item{x}{un objet de la classe \code{\link{EpEuroInd}} contenant les model points epargne euros.}
 }
 \value{
-Un data.frame contenant :
-\describe{
-\item{\code{pri_brut} : }{un vecteur contenant les flux de primes brutes de chargements de l'annee}
-\item{\code{pri_net} : }{un vecteur contenant les flux de primes nettes de chargements de l'annee}
-\item{\code{pri_chgt} : }{un vecteur contenant les flux de chargements de l'annee}
-}
+\code{stock} : une liste contenent le nombre de versements \code{nb_vers} associe a chaque model point.
+
+\code{flux} : une liste contenant pour chaque model point les montants de primes brutes \code{pri_brut},
+les montants de primes nettes \code{pri_net} et les chargemenets sur primes \code{pri_chgt}.
 }
 \description{
 \code{calc_primes} est une methode permettant de calculer les flux de primes sur
- une annee.
+ une periode.
+}
+\details{
+Cette fonction permet de projeter uniquement des primes periodiques de contrats epargne en euros.
 }
 \author{
 Prim'Act

@@ -1,33 +1,25 @@
-#----------------------------------------------------------
-# Ce script comprend les methodes de la classe EpEuroInd
-#----------------------------------------------------------
-# Suivi version
-# Version 1.0 du 22/01/2017. Fait par QG : initialisation
-# Version 1.1 du 23/01/2017. Fait par QG : ajout d autre taux de revalorisation
-#----------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#           Fonction de calcul des taux de revalorisation minimum d un model point
+#----------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-##' Calcul des differents taux  revalorisation minimum d'un model point.
+##' Calcul le taux de revalorisation contractuel minimum pour des contrats epargne en euros.
 ##'
-##' \code{calc_tx_min} est une methode permettant de calculer le taux de revalorisation minimum sur
-##'  une annee.
+##' \code{calc_tx_min} est une methode permettant de calculer les taux de revalorisation minimum
+##'   sur une periode. La revalorisation minimum est le maximum entre le taux technique et
+##'   le taux minimim garanti (TMG) du contrat.
 ##' @name calc_tx_min
 ##' @docType methods
-##' @param x un objet de la classe \code{EpEuroInd} contenant les model points epargne euros.
-##' @param an un numeric represant l'annee de projection courante
-##' @return Une data.frame contenant :
-##' \describe{
-##' \item{\code{tx_tech_an} : }{un vecteur contenant les taux de technique de l'annee}
-##' \item{\code{tx_tech_an} : }{un vecteur contenant les taux de technique de l'annee sur base semestrielle}
-##' \item{\code{tx_an} : }{un vecteur contenant les taux de revalorisation minimum de l'annee}
-##' \item{\code{tx_se} : }{un vecteur contenant les taux de revalorisation minimum de l'annee exprimes en semestriel}
-##' }
-##'
-##'
+##' @param x un objet de la classe \code{\link{EpEuroInd}} contenant les model points epargne euros.
+##' @param an un \code{numeric} representant l'annee de projection courante.
+##' @return \code{tx_tech_an} : un vecteur contenant les taux de technique de l'annee
+##' @return \code{tx_tech_se} : un vecteur contenant les taux de technique de l'annee sur base semestrielle
+##' @return \code{tx_an} : un vecteur contenant les taux de revalorisation minimum de l'annee
+##' @return \code{x_se} : un vecteur contenant les taux de revalorisation minimum de l'annee exprimes en semestriel.
+##' @note Pour les besoins des calculs a mi-annee, des taux semestriels sont produits.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases EpEuroInd
-##'
+##' @include EpEuroInd-class.R
 
 setGeneric(name = "calc_tx_min", def = function(x, an){standardGeneric("calc_tx_min")})
 #--------------------------------------------------------

@@ -4,14 +4,27 @@
 \name{get_choc_rach}
 \alias{HypTech}
 \alias{get_choc_rach}
-\title{donne le résulat d'un choc de rachat sur toutes les tables de rachat d'un objet HypTech}
+\title{Applique les chocs de rachat de la formule standard.}
 \usage{
 get_choc_rach(x, type_choc_rach, choc, choc_lim)
 }
-\description{
-\code{get_choc_rach}
+\arguments{
+\item{type_choc_rach}{est un character renseignant le type de choc a applique : \code{up}
+pour le choc a la hausse, et \code{down} pour le choc a la baisse.}
+
+\item{choc}{une valeur \code{numeric} indiquant le taux de choc.}
+
+\item{choc_lim}{une valeur \code{numeric} indiquant la limite haute pour le choc a la hausse,
+ou une limite basse pour le choc a baisse.}
+
+\item{ht}{un objet de la classe \code{\link{HypTech}} contenant differentes
+lois de rachat partielles et totales.}
 }
-\author{
-Prim'Act
+\value{
+L'objet \code{ht} apres choc.
+}
+\description{
+\code{get_choc_rach} est une methode permettant d'appliquer a l'ensemble des lois de rachat
+structurelle d'un objet \code{\link{HypTech}} les chocs a la hausse ou a la baisse de la formule standard.
 }
 

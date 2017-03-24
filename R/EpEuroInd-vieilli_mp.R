@@ -1,29 +1,23 @@
-#----------------------------------------------------------
-# Ce script comprend les methodes de la classe EpEuroInd
-#----------------------------------------------------------
-# Suivi version
-# Version 1.0 du 22/01/2017. Fait par QG : initialisation
-#----------------------------------------------------------
-
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           Fonction de veillissement d un model point
+#           Fonction de veillissement d'un model point
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Veilli un model point.
+##' Veillissement d'un an des contrats epargne en euros.
 ##'
 ##' \code{vieilli_mp} est une methode permettant de vieillir
-##'  un model point de 1 an.
+##'  les model points epargne en euros d'une peridoe.
 ##' @name vieilli_mp
 ##' @docType methods
-##' @param x un objet de la classe \code{EpEuroInd} contenant les model points epargne euros
-##' @param pm_fin_ap_pb un vecteur de type \code{numeric} contenant par model points
-##' les montants de PM revalorises.
-##' @param tx_revalo un vecteur de type \code{numeric} contenant par model points
+##' @param x un objet de la classe \code{\link{EpEuroInd}} contenant les model points epargne euros.
+##' @param pm_fin_ap_pb un vecteur de type \code{numeric} contenant par model point
+##' les montants de PM revalorises apres participation aux benefices.
+##' @param tx_revalo un vecteur de type \code{numeric} contenant par model point
 ##' les taux de revalorisation nets appliques.
-##' @return l'objet \code{x} vieilli d'une annee.
+##' @return l'objet \code{x} vieilli d'une periode.
 ##' @author Prim'Act
+##' @seealso Calcul de la revalorisation des PM \code{\link{calc_revalo_pm}}.
 ##' @export
 ##' @aliases EpEuroInd
+##' @include EpEuroInd-class.R
 ##'
 setGeneric(name = "vieilli_mp", def = function(x, pm_fin_ap_pb, tx_revalo){standardGeneric("vieilli_mp")})
 setMethod(

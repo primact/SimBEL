@@ -3,23 +3,39 @@
 \docType{class}
 \name{HypTech}
 \alias{HypTech}
-\title{La classe HypTech}
+\title{La classe \code{HypTech}.}
 \description{
-Classe pour pour les tables de rachat
+Une classe contenant les listes de tables de mortalite, de rachat, les parametres de rachat dynamique et
+les parametres comportementaux qui permettent
+de calculer les attentes en matiere de taux de revalorisation cible.
+}
+\details{
+Chaque elements de ces liste doit avoir prealablement ete nomme.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{4}}{listes contenant les data frame relatifs aux tables de mortalite, tables de rachat et parametres de rachat conjoncturels}
-}}
-\section{Lien a creer}{
+\item{\code{tables_mort}}{une liste contenant des tables de mortalite au format \code{\link{ParamTableMort}}.}
 
-}
+\item{\code{tables_rach}}{une liste contenant des tables de rachat (structurel) au format \code{\link{ParamTableRach}}.}
+
+\item{\code{param_rach_dyn}}{une liste contenant des parametres de rachat dynamique
+au format \code{\link{ParamRachDyn}}.}
+
+\item{\code{param_comport}}{une liste contenant des des parametres comportementaux au format \code{\link{ParamComport}}.}
+}}
 \author{
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+Les classes de parametres contenues \code{\link{ParamTableMort}}, \code{\link{ParamTableRach}},
+\code{\link{ParamRachDyn}}, \code{\link{ParamComport}}.
+La methode pour l'application des chocs de mortalite et de longevite : \code{\link{get_choc_table}}.
+La methode pour l'application des chocs de rachat haut et bas : \code{\link{get_choc_rach}}.
+La methode pour la recuperation des parametres comportementaux : \code{\link{get_comport}}.
+La methode pour la recuperation des taux de deces : \code{\link{get_qx_mort}}.
+La methode pour la recuperation des taux de rachat structurel : \code{\link{get_qx_rach}}.
+La methode pour la recuperation des taux de rachat dynamique : \code{\link{get_rach_dyn}}.
 }
 \keyword{classes}
 

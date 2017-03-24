@@ -4,26 +4,67 @@
 \name{proj_an}
 \alias{Canton}
 \alias{proj_an}
-\title{Projette un canton sur une annee.}
+\title{Projette un canton sur une periode.}
 \usage{
 proj_an(x, annee_fin, pre_on)
 }
 \arguments{
-\item{x}{est un objet de type \code{Canton}.}
+\item{x}{est un objet de type \code{\link{Canton}}.}
 
 \item{annee_fin}{est une valeur \code{numeric} correpondant a l'annee de fin de projection.}
 
 \item{pre_on}{est une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
-de PRE dans le resultat technique utilisee pour le calcul de la participation aux benefices reglementaires.}
+de PRE dans le resultat technique, utilisee pour le calcul de la participation aux benefices reglementaires.}
 }
 \value{
-Une liste comprenant l'objet x mis a jour, les flux de best estimate, les resultats comptables.
+\code{canton} l'objet  \code{x} vieilli d'une annee.
+
+\code{annee} l'annee de projection.
+
+\code{nom_produit} le nom des produits de passifs consideres.
+
+\code{output_produit} une liste comprenant les variables de flux, les variables de stocks et les resultats
+des passifs non-modelises.
+
+\code{output_be} une liste comprenant les flux utilises pour le calcul du best estimate par produit.
+
+\code{result_tech} la valeur du resultat technique.
+
+\code{result_fin} la valeur du resultat financier.
+
+\code{tra} la valeur du taux de rendement de l'actif.
+
+\code{result_brut} la valeur du resultat brut d'impot.
+
+\code{result_net} la valeur du resultat net d'impot.
 }
 \description{
-\code{proj_an} est une methode permettant de projeter un canton sur une annee pour le calcul
-des flux de best estimate.
+\code{proj_an} est une methode permettant de projeter un canton sur une annee. Cette methode calcule
+les flux de best estimate des passifs et fait vieillir d'une annee les elements du canton.
+}
+\details{
+Cette methode est la procedure central du package \code{SimBEL} puisqu'elle cohorde les interactions entre
+les actifs et les passifs, declenche l'algorithme de revalorisation, calcule le resultat comptable et evalue les 
+flux de best estimate.
 }
 \author{
 Prim'Act
+}
+\seealso{
+Le viellissement du portefeuille de passif avant PB : \code{\link{viellissement_av_pb}}.
+Le viellissement du portefeuille financier : \code{\link{update_PortFin}}, \code{\link{update_PortFin_reference}}.
+L'affiche de l'etat courant du portefeuille financier : \code{\link{print_alloc}}.
+Le calcul des frais financier : \code{\link{calc_frais_fin}}.
+La reallocation du portefeuille financier : \code{\link{reallocate}}.
+Le calcul de la PRE : \code{\link{calc_PRE}}.
+Le calcul du resultat technique : \code{\link{calc_result_technique}}, \code{\link{calc_result_technique_ap_pb}}.
+Le calcul du resultat financier et du TRA : \code{\link{calc_resultat_fin}}, \code{\link{calc_tra}}.
+L'application de l'algorithme d'attribution de la participation aux benefices : \code{\link{calc_revalo}}.
+Le viellissement du portefeuille de passif apres PB : \code{\link{viellissement_ap_pb}}.
+Les autres methodes de vieillissement des actifs et de passifs: \code{\link{sell_pvl_action}}, 
+\code{\link{do_update_pmvl}}, \code{\link{do_update_PRE_val_courante}},
+\code{\link{do_update_vm_vnc_precedent}}, \code{\link{init_debut_ppb}}, \code{\link{do_update_RC_val_debut}},
+\code{\link{do_update_PRE_val_debut}}, \code{\link{init_debut_pgg_psap}}.
+Le calcul des fins de projection : \code{\link{calc_fin_proj}}.
 }
 

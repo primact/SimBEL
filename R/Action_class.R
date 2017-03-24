@@ -17,10 +17,10 @@
 ##' @docType class
 ##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
-##' @keywords classes
 ##' @export
-#removeClass("Action")
+##' @seealso Les operations d'achat vente action  \code{\link{buy_action}},
+##' \code{\link{sell_action}} et \code{\link{sell_pvl_action}}.
+
 setClass(
   Class = "Action",
   representation = representation(
@@ -40,16 +40,16 @@ setValidity ("Action",
 
                # Verification du type des colonnes
                if (!is.integer(object@ptf_action[,1]))  {retval <- c(retval, "[Action] : num_mp n'est pas entier/n")}
-               if (!is.double(object@ptf_action[,2]))   {retval <- c(retval, "[Action] : val_marche n'est pas reel/n")}
-               if (!is.double(object@ptf_action[,3]))   {retval <- c(retval, "[Action] : val_nc n'est pas reel/n")}
-               if (!is.double(object@ptf_action[,4]))   {retval <- c(retval, "[Action] : val_achat n'est pas reel/n")}
+               if (!is.numeric(object@ptf_action[,2]))   {retval <- c(retval, "[Action] : val_marche n'est pas reel/n")}
+               if (!is.numeric(object@ptf_action[,3]))   {retval <- c(retval, "[Action] : val_nc n'est pas reel/n")}
+               if (!is.numeric(object@ptf_action[,4]))   {retval <- c(retval, "[Action] : val_achat n'est pas reel/n")}
                if (!is.logical(object@ptf_action[,5]))  {retval <- c(retval, "[Action] : presence n'est pas logical/n")}
                if (!is.logical(object@ptf_action[,6]))  {retval <- c(retval, "[Action] : cessible n'est pas logical/n")}
-               if (!is.double(object@ptf_action[,7]))   {retval <- c(retval, "[Action] : nb_unit n'est pas reel/n")}
-               if (!is.double(object@ptf_action[,8]))   {retval <- c(retval, "[Action] : dur_det n'est pas reel/n")}
-               if (!is.double(object@ptf_action[,9]))   {retval <- c(retval, "[Action] : pdd n'est pas reel/n")}
+               if (!is.numeric(object@ptf_action[,7]))   {retval <- c(retval, "[Action] : nb_unit n'est pas reel/n")}
+               if (!is.numeric(object@ptf_action[,8]))   {retval <- c(retval, "[Action] : dur_det n'est pas reel/n")}
+               if (!is.numeric(object@ptf_action[,9]))   {retval <- c(retval, "[Action] : pdd n'est pas reel/n")}
                if (!is.integer(object@ptf_action[,10])) {retval <- c(retval, "[Action] : num_index n'est pas integer/n")}
-               if (!is.double(object@ptf_action[,11]))  {retval <- c(retval, "[Action] : div n'est pas reel/n")}
+               if (!is.numeric(object@ptf_action[,11]))  {retval <- c(retval, "[Action] : div n'est pas reel/n")}
                if (!is.logical(object@ptf_action[,12])) {retval <- c(retval, "[Action] : ind_invest n'est pas logical/n")}
 
                # Verification du nom des colonnes
@@ -77,9 +77,9 @@ setMethod(
                                            "pdd","num_index","div","ind_invest"))!=0)
       {stop("[Action] : Nombre ou nommage des colonnes du dataframe incorrect")}
       else if(
-        !is.integer(ptf[,"num_mp"])   | !is.double(ptf[,"val_marche"]) | !is.double(ptf[,"val_nc"])  | !is.double(ptf[,"val_achat"]) |
-        !is.logical(ptf[,"presence"]) | !is.logical(ptf[,"cessible"])  | !is.double(ptf[,"nb_unit"]) | !is.double(ptf[,"dur_det"])   |
-        !is.double(ptf[,"pdd"])       | !is.integer(ptf[,"num_index"]) | !is.double(ptf[,"div"])     | !is.logical(ptf[,"ind_invest"]))
+        !is.integer(ptf[,"num_mp"])   | !is.numeric(ptf[,"val_marche"]) | !is.numeric(ptf[,"val_nc"])  | !is.numeric(ptf[,"val_achat"]) |
+        !is.logical(ptf[,"presence"]) | !is.logical(ptf[,"cessible"])  | !is.numeric(ptf[,"nb_unit"]) | !is.numeric(ptf[,"dur_det"])   |
+        !is.numeric(ptf[,"pdd"])       | !is.integer(ptf[,"num_index"]) | !is.numeric(ptf[,"div"])     | !is.logical(ptf[,"ind_invest"]))
       {stop("[Action] : Typage incorrect des colonnes du dataframe")}
       else
       {.Object@ptf_action <- ptf
@@ -87,7 +87,7 @@ setMethod(
     }
     #Traitement du cas vide
     else
-    {.Object@ptf_action  <- data.frame(integer(),double(),double(),double(),logical(),logical(),double(),double(),double(),integer(),double(),logical())
+    {.Object@ptf_action  <- data.frame(integer(),numeric(),numeric(),numeric(),logical(),logical(),numeric(),numeric(),numeric(),integer(),numeric(),logical())
     colnames(.Object@ptf_action) <- c("num_mp","val_marche","val_nc","val_achat","presence","cessible","nb_unit","dur_det","pdd","num_index","div","ind_invest")
     }
     return(.Object)

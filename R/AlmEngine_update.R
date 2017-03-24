@@ -1,5 +1,5 @@
 # L'update permet de mettre a jour le journal d'une nouvelle ligne
-
+# MISE A JOUR DU JOURNAL ALM ENGINE NON COMPLETEMENT IMPLEMENTEE / INUTILE ?
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           update ptf manuelle

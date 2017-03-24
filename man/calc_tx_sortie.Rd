@@ -4,30 +4,36 @@
 \name{calc_tx_sortie}
 \alias{EpEuroInd}
 \alias{calc_tx_sortie}
-\title{Calcul des differents taux de sortie pour chaque model point de la classe EpEuroInd}
+\title{Calcul des taux de sortie pour des contrats epargne en euros.}
 \usage{
-calc_tx_sortie(epi, ht)
+calc_tx_sortie(x, ht)
 }
 \arguments{
-\item{epi}{un objet de la classe \code{EpEuroInd} contenant les model points epargne euros.}
+\item{x}{un objet de la classe \code{\link{EpEuroInd}} contenant les model points epargne euros.}
 
-\item{ht}{un objet de la classe \code{HypTech} contenant differentes tables en entree.}
+\item{ht}{un objet de la classe \code{\link{HypTech}} contenant differentes tables de mortalite et differentes
+lois de rachat.}
 }
 \value{
-Une data.frame contenant :
+Une matrice contenant pour chaque model points en ligne :
 \describe{
 \item{\code{qx_rach_tot} : }{un vecteur contenant les taux de rachats totaux}
 \item{\code{qx_rach_tot_dyn} : }{un vecteur contenant les taux de rachats totaux dynamiques}
 \item{\code{qx_dc} : }{un vecteur contenant les taux de deces}
 \item{\code{qx_rach_part} : }{un vecteur contenant les taux de rachats partiels}
-\item{\code{qx_rach_part_dyn} : }{un vecteur contenant les taux de rachats partiels dynamiques}
+\item{\code{qx_rach_part_dyn} : }{un vecteur contenant les taux de rachats partiels dynamiques}.
 }
 }
 \description{
 \code{calc_tx_sortie} est une methode permettant de calculer les differents taux de sortie
-  pour chaque model point de la classe EpEuroInd.
+  sur une periode.
 }
 \author{
 Prim'Act
+}
+\seealso{
+La recuperation des taux de rachat structurel : \code{\link{get_qx_rach}}.
+La recuperation des taux de rachat dynamique : \code{\link{get_rach_dyn}}.
+La recuperation des taux de deces : \code{\link{get_qx_mort}}.
 }
 

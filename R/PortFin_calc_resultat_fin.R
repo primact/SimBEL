@@ -18,6 +18,7 @@
 ##' @author Prim'Act
 ##' @export
 ##' @aliases PortFin
+##' @include PortFin_class.R
 
 setGeneric(name = "calc_resultat_fin", def = function(revenu, produit, frais_fin, var_rc){standardGeneric("calc_resultat_fin")})
 setMethod(

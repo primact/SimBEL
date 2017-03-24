@@ -9,7 +9,7 @@
 
 ##' La classe AutreReserves
 ##'
-##' Une  classe permettant de gerer le stock de provision globale de gestion (PGG) et de
+##' Une classe de parametres permettant de gerer le stock de provision globale de gestion (PGG) et de
 ##' provision pour sinistres a payer (PSAP).
 ##'
 ##' @name AutresReserves
@@ -25,6 +25,7 @@
 ##' @author Prim'Act
 ##' @seealso Le calcul et la mise a jour des autres reserves \code{\link{update_reserves}} et
 ##' \code{\link{init_debut_pgg_psap}}.
+##' @keywords classes
 ##' @export
 setClass(
   Class = "AutresReserves",

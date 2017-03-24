@@ -4,12 +4,22 @@
 \name{get_choc_table}
 \alias{HypTech}
 \alias{get_choc_table}
-\title{donne le résulat d'un choc sur toutes les tables d'un objet HypTech}
+\title{Applique les chocs de mortalite et de longevite de la formule standard.}
 \usage{
 get_choc_table(x, choc)
 }
+\arguments{
+\item{choc}{une valeur \code{numeric} indiquant le taux de choc.}
+
+\item{ht}{un objet de la classe \code{\link{HypTech}} contenant differentes tables de
+mortalite.}
+}
+\value{
+L'objet \code{ht} apres choc.
+}
 \description{
-\code{get_choc_table}
+\code{get_choc_table} est une methode permettant d'appliquer a l'ensemble des table de mortalite
+d'un objet \code{\link{HypTech}} les chocs de mortalite ou de longevite de la formule standard.
 }
 \author{
 Prim'Act

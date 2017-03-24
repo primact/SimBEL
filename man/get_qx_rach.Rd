@@ -4,26 +4,34 @@
 \name{get_qx_rach}
 \alias{HypTech}
 \alias{get_qx_rach}
-\title{Calcule le taux de rachat total ou partiel}
+\title{Recuperer les taux de rachat calcules.}
 \usage{
 get_qx_rach(x, nom_table, age, anc)
 }
 \arguments{
-\item{x}{un objet de la classe \code{HypTech}.}
+\item{x}{un objet de la classe \code{\link{HypTech}}.}
 
-\item{nom_table}{: nom de la table de rachat consideree}
+\item{nom_table}{un nom de la table de rachat.}
 
-\item{age}{: age en numerique}
+\item{age}{est la valeur \code{numeric} de l'age.}
 
-\item{anc}{: anciennete en numerique}
+\item{anc}{est la valeur \code{numeric} de l'anciennete du contrat.}
 }
 \value{
-le taux de rachat total ou partiel
+Le taux de rachat.
 }
 \description{
-\code{get_qx_rach} est une methode permettant de calculer le taux de rachat total ou partiel.
+\code{get_qx_rach} est une methode permettant d'executer le calcul des taux de rachat structurel. Il
+peut s'agir soit de taux de rachat partiels, soit de taux de rachat totaux.
+}
+\details{
+Selon le nom de la table \code{nom_table}, le resultat de cette fonction sera un taux
+de rachat partiel ou un taux de rachat total.
 }
 \author{
 Prim'Act
+}
+\seealso{
+Le calcul du taux de rachat \code{\link{calc_rach}}.
 }
 

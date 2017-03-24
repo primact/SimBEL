@@ -22,7 +22,7 @@
 ##' @seealso Mettre le lien vers les methodes de la classe
 ##' @keywords classes
 ##' @export
-object <- 
+
 setClass(
     Class = "ParamChocMket",
     representation = representation(

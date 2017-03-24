@@ -1,36 +1,27 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-# calc_rach_dyn : Methode de la classe ParamRachDynt
+# calc_rach_dyn : Methode de calcul des taux de rachat dynamique.
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcule la composante rachats dynamique
+##' Calcule la composante rachats dynamique.
 ##'
-##' \code{calc_rach_dyn} est une methode permettant de calculer la composante rachats dynamique.
+##' \code{calc_rach_dyn} est une methode permettant de calculer la composante rachat dynamique
+##' selon la methodologie transmise dans le ONC de l'ACPR de 2013.
 ##' @name calc_rach_dyn
 ##' @docType methods
-##' @param p un objet de la classe \code{ParamRachDyn} contenant les parametres de rachats dynamiques.
-##' @param tx_cible : taux cible en numerique
-##' @param tx_serv : taux servi en numerique
-##' @return la composante rachats dynamique en numerique
+##' @param p un objet de la classe \code{\link{ParamRachDyn}} contenant les parametres de rachats dynamiques.
+##' @param tx_cible une valeur \code{numeric} correspondant au taux de revalorisation cible.
+##' @param tx_serv une valeur \code{numeric} correspondant au taux de revalorisation servi.
+##' @return La valeur du taux rachat.
 ##' @author Prim'Act
-##' @export
 ##' @aliases ParamRachDyn
+##' @include ParamRachDyn-class.R
+##' @export
 
 
-setGeneric("calc_rach_dyn",function(p,tx_cible,tx_serv){standardGeneric("calc_rach_dyn")})
+setGeneric("calc_rach_dyn", function(p, tx_cible, tx_serv){standardGeneric("calc_rach_dyn")})
 setMethod(
   f = "calc_rach_dyn",
-  signature = c(p="ParamRachDyn",tx_cible="numeric",tx_serv="numeric"),
-  def = function(p,tx_cible,tx_serv){
-
-    # # Ajout de test sur le format
-    # if(tx_cible < 0){
-    #   stop("Le taux cible doit etre superieur a 0")
-    # }
-    #
-    # # Ajout de test sur le format
-    # if(tx_serv < 0){
-    #   stop("Le taux servi doit etre superieur a 0")
-    # }
+  signature = c(p = "ParamRachDyn", tx_cible = "numeric", tx_serv = "numeric"),
+  def = function(p, tx_cible, tx_serv){
 
     RC <- 0
     v <- as.numeric(p@vec_param)

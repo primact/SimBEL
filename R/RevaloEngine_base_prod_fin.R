@@ -29,7 +29,7 @@ setMethod(
     pm_moy_port <- sum(pm_moy)
 
     # calcul de la base de produit financier au global et par produit
-    base_prod_fin_port <- tra * (pm_moy_port + ppb["ppb_debut"])
+    base_prod_fin_port <- tra * (pm_moy_port + ppb@ppb_debut)
 
     if(pm_moy_port == 0){
       base_prod_fin <- pm_moy * 0

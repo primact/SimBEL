@@ -1,4 +1,4 @@
-
+# 10/03/2017 Guillaume de Kervenoael, Quentin Guibert
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           calc_frais_fin
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -7,15 +7,16 @@
 ##' \code{calc_frais_fin} est une methode permettant de calculer les frais financiers.
 ##' @name calc_frais_fin
 ##' @docType methods
-##' @param x est un objet de type \code{FraisFin}.
+##' @param x est un objet de type \code{FraisFin} contenant les parametres de Frais financier associes a un canton.
 ##' @param vm_moy est un objet de type \code{numeric} correspondant a la valeur moyenne de l'actif en valeur
 ##' de marche.
 ##' @param coef_inflation est un objet de type \code{numeric} correspondant au coefficient d'inflation des frais.
-##' @return La valeur des frais financiers.
+##' @return La valeur des frais financiers : un reel de type \code{numeric}.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases FraisFin
-##'
+##' @include FraisFin_class.R
+
 setGeneric(name = "calc_frais_fin", def = function(x, vm_moy, coef_inflation){standardGeneric("calc_frais_fin")})
 setMethod(
     f = "calc_frais_fin",

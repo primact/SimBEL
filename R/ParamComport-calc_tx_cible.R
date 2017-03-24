@@ -1,19 +1,27 @@
-#----------------------------------------------------------
-# Ce script comprend les methodes de la classe ParamComport
-#----------------------------------------------------------
-
-##' Calcul des differents taux cible pour chaque model point de la classe EpEuroInd
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# calc_tx_cible_ref_marche : methode pour le calcul du taux cible.
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+##' Calcule le taux de revalorisation cible.
 ##'
-##' \code{calc_tx_cible_ref_marche} est une methode permettant de calculer un taux cible.
+##' \code{calc_tx_cible_ref_marche} est une methode permettant de calculer le taux de revalorisation cible
+##' en evaluant le taux de rendement des assureurs sur le marche.
 ##' @name calc_tx_cible_ref_marche
 ##' @docType methods
-##' @param param_comport un objet de la classe \code{ParamComport}.
-##' @param list_rd une liste qui comprend les taux de rendement de reference.
-##' @param tx_cible_prec le taux cible individuel de l'annee precedente.
-##' @return Le taux cible annuel.
+##' @param param_comport un objet de la classe \code{\link{ParamComport}} contenant les parametres
+##'  comportementaux.
+##' @param list_rd une liste contenant les rendements de reference. Le format de cette liste est :
+##' \describe{
+##' \item{le taux de rendement obligataire}{}
+##' \item{le taux de rendement de l'indice action de reference}{}
+##' \item{le taux de rendement de l'indice immobilier de reference}{}
+##' \item{le taux de rendement de l'indice tresorerie de reference}{}
+##' }
+##' @param tx_cible_prec une valeur \code{numeric} correspondant au taux cible de la periode precedente.
+##' @return La valeur du taux cible.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases ParamComport
+##' @include ParamComport-class.R
 
 setGeneric(name = "calc_tx_cible_ref_marche",
            def = function(param_comport, list_rd, tx_cible_prec)

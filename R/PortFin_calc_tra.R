@@ -17,6 +17,7 @@
 ##' @author Prim'Act
 ##' @export
 ##' @aliases PortFin
+##' @include PortFin_class.R
 
 setGeneric(name = "calc_tra", def = function(plac_moy, res_fin){standardGeneric("calc_tra")})
 setMethod(

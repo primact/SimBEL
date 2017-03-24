@@ -15,7 +15,7 @@
 ##' @slot indice_action
 ##' @slot indice_immo
 ##' @slot indice_inflation
-##' @slot yield_curve
+##' @slot yield_curve Courbe des R(k, k+i) ou i va de 1 au \code{nb_annee_proj}.
 ##' @slot deflateur
 ##' @docType class
 ##' @section Lien a creer
@@ -23,6 +23,7 @@
 ##' @seealso Mettre le lien vers les methodes de la classe
 ##' @keywords classes
 ##' @export
+##' @aliases ModelPointESG
 
 setClass(
   Class =  "ModelPointESG",

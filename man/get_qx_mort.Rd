@@ -4,26 +4,29 @@
 \name{get_qx_mort}
 \alias{HypTech}
 \alias{get_qx_mort}
-\title{Calcule le taux de mortalite}
+\title{Recuperer les taux de deces calcules.}
 \usage{
 get_qx_mort(x, nom_table, age, gen)
 }
 \arguments{
-\item{x}{un objet de la classe \code{HypTech}.}
+\item{x}{un objet de la classe \code{\link{HypTech}}.}
 
-\item{nom_table}{: nom de la table de mortalite consideree}
+\item{nom_table}{un nom de la table de mortalite.}
 
-\item{age}{: age en numerique}
+\item{age}{est la valeur \code{numeric} de l'age.}
 
-\item{gen}{: generation en numerique}
+\item{gen}{est la valeur \code{numeric} de la generation.}
 }
 \value{
-le taux de mortalite
+Le taux de deces.
 }
 \description{
-\code{get_qx_mort} est une methode permettant de calculer le taux de mortalite.
+\code{get_qx_mort} est une methode permettant d'executer le calcul des taux de deces.
 }
 \author{
 Prim'Act
+}
+\seealso{
+Le calcul du taux de deces \code{\link{calc_qx}}.
 }
 

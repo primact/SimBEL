@@ -5,7 +5,7 @@
 \alias{AutresReserves}
 \title{La classe AutreReserves}
 \description{
-Une  classe permettant de gerer le stock de provision globale de gestion (PGG) et de
+Une classe de parametres permettant de gerer le stock de provision globale de gestion (PGG) et de
 provision pour sinistres a payer (PSAP).
 }
 \section{Slots}{
@@ -34,4 +34,5 @@ Prim'Act
 Le calcul et la mise a jour des autres reserves \code{\link{update_reserves}} et
 \code{\link{init_debut_pgg_psap}}.
 }
+\keyword{classes}
 

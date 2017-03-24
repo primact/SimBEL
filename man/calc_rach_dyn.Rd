@@ -4,22 +4,23 @@
 \name{calc_rach_dyn}
 \alias{ParamRachDyn}
 \alias{calc_rach_dyn}
-\title{Calcule la composante rachats dynamique}
+\title{Calcule la composante rachats dynamique.}
 \usage{
 calc_rach_dyn(p, tx_cible, tx_serv)
 }
 \arguments{
-\item{p}{un objet de la classe \code{ParamRachDyn} contenant les parametres de rachats dynamiques.}
+\item{p}{un objet de la classe \code{\link{ParamRachDyn}} contenant les parametres de rachats dynamiques.}
 
-\item{tx_cible}{: taux cible en numerique}
+\item{tx_cible}{une valeur \code{numeric} correspondant au taux de revalorisation cible.}
 
-\item{tx_serv}{: taux servi en numerique}
+\item{tx_serv}{une valeur \code{numeric} correspondant au taux de revalorisation servi.}
 }
 \value{
-la composante rachats dynamique en numerique
+La valeur du taux rachat.
 }
 \description{
-\code{calc_rach_dyn} est une methode permettant de calculer la composante rachats dynamique.
+\code{calc_rach_dyn} est une methode permettant de calculer la composante rachat dynamique
+selon la methodologie transmise dans le ONC de l'ACPR de 2013.
 }
 \author{
 Prim'Act

@@ -1,43 +1,44 @@
-#----------------------------------------------------------
-# Ce script comprend les methodes de la classe EpEuroInd
-#----------------------------------------------------------
-# Suivi version
-# Version 1.0 du 25/01/2017. Fait par MT : initialisation
-#----------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#           Fonction de calcul des taux de sortie d un model point
+#----------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-##' Calcul des differents taux de sortie pour chaque model point de la classe EpEuroInd
+##' Calcul des taux de sortie pour des contrats epargne en euros.
 ##'
 ##' \code{calc_tx_sortie} est une methode permettant de calculer les differents taux de sortie
-##'   pour chaque model point de la classe EpEuroInd.
+##'   sur une periode.
 ##' @name calc_tx_sortie
 ##' @docType methods
-##' @param epi un objet de la classe \code{EpEuroInd} contenant les model points epargne euros.
-##' @param ht un objet de la classe \code{HypTech} contenant differentes tables en entree.
-##' @return Une data.frame contenant :
+##' @param x un objet de la classe \code{\link{EpEuroInd}} contenant les model points epargne euros.
+##' @param ht un objet de la classe \code{\link{HypTech}} contenant differentes tables de mortalite et differentes
+##' lois de rachat.
+##' @return Une matrice contenant pour chaque model points en ligne :
 ##' \describe{
 ##' \item{\code{qx_rach_tot} : }{un vecteur contenant les taux de rachats totaux}
 ##' \item{\code{qx_rach_tot_dyn} : }{un vecteur contenant les taux de rachats totaux dynamiques}
 ##' \item{\code{qx_dc} : }{un vecteur contenant les taux de deces}
 ##' \item{\code{qx_rach_part} : }{un vecteur contenant les taux de rachats partiels}
-##' \item{\code{qx_rach_part_dyn} : }{un vecteur contenant les taux de rachats partiels dynamiques}
+##' \item{\code{qx_rach_part_dyn} : }{un vecteur contenant les taux de rachats partiels dynamiques}.
 ##' }
 ##' @author Prim'Act
+##' @seealso La recuperation des taux de rachat structurel : \code{\link{get_qx_rach}}.
+##' La recuperation des taux de rachat dynamique : \code{\link{get_rach_dyn}}.
+##' La recuperation des taux de deces : \code{\link{get_qx_mort}}.
 ##' @export
 ##' @aliases EpEuroInd
+##' @include EpEuroInd-class.R HypTech-class.R
 
-setGeneric(name = "calc_tx_sortie", def = function(epi, ht){standardGeneric("calc_tx_sortie")})
+setGeneric(name = "calc_tx_sortie", def = function(x, ht){standardGeneric("calc_tx_sortie")})
 #--------------------------------------------------------
 setMethod(
   f = "calc_tx_sortie",
-  signature = c(epi = "EpEuroInd", ht = "HypTech"),
-  def = function(epi, ht){
+  signature = c(x = "EpEuroInd", ht = "HypTech"),
+  def = function(x, ht){
 
 
-    epi_mp <- epi@mp
+    epi_mp <- x@mp
 
-    # Nom de ligne
-    nb_mp <- nrow(epi@mp)
+    # Nombre de lignes
+    nb_mp <- nrow(x@mp)
 
     # Gestion des noms de colonnes du data.frame de donnnees
     nom_epi <- names(epi_mp)

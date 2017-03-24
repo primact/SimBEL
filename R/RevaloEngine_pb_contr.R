@@ -3,12 +3,12 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           base_prod_fin
+#           pb_contr
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Calcule la PB contractuelle.
 ##'
 ##' \code{pb_contr} est une methode permettant de calculer la participation aux benefices contractuelle par produit.
-##' @name base_prod_fin
+##' @name pb_contr
 ##' @docType methods
 ##' @param base_fin est un vecteur de type \code{numeric} comprenant par produit la base de produits financiers.
 ##' @param tx_pb est un vecteur de type \code{numeric} comprenant par produit les taux de participation aux benefices contractuels.

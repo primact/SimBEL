@@ -3,7 +3,6 @@
 \docType{class}
 \name{ParamChocMket}
 \alias{ParamChocMket}
-\alias{object}
 \title{La classe ESG}
 \description{
 Classe pour les donnees globales d'actif

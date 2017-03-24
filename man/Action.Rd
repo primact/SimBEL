@@ -19,7 +19,7 @@ Classe pour les actifs de type Action
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+Les operations d'achat vente action  \code{\link{buy_action}},
+\code{\link{sell_action}} et \code{\link{sell_pvl_action}}.
 }
-\keyword{classes}
 

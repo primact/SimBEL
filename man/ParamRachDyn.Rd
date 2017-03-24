@@ -3,23 +3,20 @@
 \docType{class}
 \name{ParamRachDyn}
 \alias{ParamRachDyn}
-\title{La classe ParamRachDyn}
+\title{La classe de parametres de rachat dynamique \code{ParamRachDyn}.}
 \description{
-Classe pour les tables de parametres pour les rachats dynamiques
+Une classe pour les parametres de des lois de rachat dynamique.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{vec_param}}{un data frame contenant les parametres pour les rachats dynamiques}
+\item{\code{vec_param}}{un \code{data frame} contenant les parametres pour les rachats dynamiques.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+Le calcul du taux de rachat dynamique \code{\link{calc_rach_dyn}}.
 }
 \keyword{classes}
 

@@ -3,14 +3,13 @@
 ##' \code{init_SimBEL} est la methode d'initialisation d'un workspace.
 ##' @name init_SimBEL
 ##' @docType methods
-##' @param x un objet de la classe \code{Initialisation}.
-##' @param nb_simu nombre de simulation.
-##' @param nb_annee_proj nombre d'annee de projection.
+##' @param x un objet de la classe \code{\link{Initialisation}}.
 ##' @return Pas de sortie.
+##' @note  Cette methode permet de creer l'objet \code{\link{Canton}} initial et de le sauvegarder dans le repertoire adequat de l'architecture.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases Initialisation
-# x <- racine
+##' @include Initialisation_class.R
 
 setGeneric(name = "init_SimBEL", def = function(x){standardGeneric("init_SimBEL")})
 setMethod(

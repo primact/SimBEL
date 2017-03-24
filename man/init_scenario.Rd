@@ -4,18 +4,21 @@
 \name{init_scenario}
 \alias{Initialisation}
 \alias{init_scenario}
-\title{Initialisation des scenarios de chocs d'un workspace.}
+\title{Initialisation des scenarios central et de chocs d'un workspace.}
 \usage{
 init_scenario(x)
 }
 \arguments{
-\item{x}{un objet de la classe \code{Initialisation}.}
+\item{x}{un objet de la classe \code{\link{Initialisation}}}
 }
 \value{
 Pas de sortie.
 }
 \description{
 \code{init_scenario} est la methode d'initialisation.
+}
+\note{
+Cette methode cree l'architecture, puis les objets \code{\link{Be}} correspondant a chacun des scenarios central et de chocs de la formule standard.
 }
 \author{
 Prim'Act

@@ -4,25 +4,39 @@
 \name{calc_tx_cible}
 \alias{EpEuroInd}
 \alias{calc_tx_cible}
-\title{Calcul des differents taux cible pour chaque model point de la classe EpEuroInd}
+\title{Calcul du taux cible pour des contrats epargne en euros.}
 \usage{
-calc_tx_cible(epi, ht, list_rd)
+calc_tx_cible(x, ht, list_rd)
 }
 \arguments{
-\item{epi}{un objet de la classe \code{EpEuroInd} contenant les model points epargne euros.}
+\item{x}{un objet de la classe \code{\link{EpEuroInd}} contenant les model points epargne euros.}
 
-\item{ht}{un objet de la classe \code{HypTech} contenant differentes tables en entree.}
+\item{ht}{un objet de la classe \code{\link{HypTech}} contenant differentes lois de comportement.}
 
-\item{list_rd}{une liste contenant les rendements de reference.}
+\item{list_rd}{une liste contenant les rendements de reference. Le format de cette liste est :
+\describe{
+\item{le taux de rendement obligataire}{}
+\item{le taux de rendement de l'indice action de reference}{}
+\item{le taux de rendement de l'indice immobilier de reference}{}
+\item{le taux de rendement de l'indice tresorerie de reference}{}
+}}
 }
 \value{
-Une liste contenant le taux cible annuel et le taux cible semestriel par model points.
+\code{tx_cible_an} : un vecteur contenant les taux cible de l'annee
+
+\code{tx_cible_se} : un vecteur contenant les taux cible de l'annee sur base semestrielle
 }
 \description{
-\code{calc_tx_cible} est une methode permettant de calculer un taux cible
-  pour chaque model point de la classe EpEuroInd.
+\code{calc_tx_cible} est une methode permettant d'evaluer le taux de revalorisation cible
+  de chaque model point.
+}
+\note{
+Pour les besoins des calculs a mi-annee, des taux semestriels sont produits.
 }
 \author{
 Prim'Act
+}
+\seealso{
+La recuperation des taux cibles calcules : \code{\link{get_comport}}.
 }
 

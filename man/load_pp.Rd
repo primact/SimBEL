@@ -4,14 +4,26 @@
 \name{load_pp}
 \alias{PortPassif}
 \alias{load_pp}
-\title{permet de charger et d'instancier la classe PortPassif}
+\title{Methode permettant de charger et d'instancier un portfeuille de passif.}
 \usage{
 load_pp(x)
 }
+\arguments{
+\item{x}{est un objet de la classe \code{\link{Initialisation}} qui est utilise pour renseigner le chemin
+d'acces de tous les parametres et les donnees necessaires.}
+}
+\value{
+L'objet de la classe \code{\link{PortPassif}} construit a partir des inputs renseignes par l'utilisateur.
+}
 \description{
-\code{load_pp} est une methode permettant charger la class PortPassif
+\code{load_pp} est une methode permettant de charger les parametres et les donnees associees a un
+objet de classe \code{\link{PortPassifs}}.
 }
 \author{
 Prim'Act
+}
+\seealso{
+La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
+ pour renseigner l’input.
 }
 

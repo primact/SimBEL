@@ -4,27 +4,30 @@
 \name{vieilli_mp}
 \alias{EpEuroInd}
 \alias{vieilli_mp}
-\title{Veilli un model point.}
+\title{Veillissement d'un an des contrats epargne en euros.}
 \usage{
 vieilli_mp(x, pm_fin_ap_pb, tx_revalo)
 }
 \arguments{
-\item{x}{un objet de la classe \code{EpEuroInd} contenant les model points epargne euros}
+\item{x}{un objet de la classe \code{\link{EpEuroInd}} contenant les model points epargne euros.}
 
-\item{pm_fin_ap_pb}{un vecteur de type \code{numeric} contenant par model points
-les montants de PM revalorises.}
+\item{pm_fin_ap_pb}{un vecteur de type \code{numeric} contenant par model point
+les montants de PM revalorises apres participation aux benefices.}
 
-\item{tx_revalo}{un vecteur de type \code{numeric} contenant par model points
+\item{tx_revalo}{un vecteur de type \code{numeric} contenant par model point
 les taux de revalorisation nets appliques.}
 }
 \value{
-l'objet \code{x} vieilli d'une annee.
+l'objet \code{x} vieilli d'une periode.
 }
 \description{
 \code{vieilli_mp} est une methode permettant de vieillir
- un model point de 1 an.
+ les model points epargne en euros d'une peridoe.
 }
 \author{
 Prim'Act
+}
+\seealso{
+Calcul de la revalorisation des PM \code{\link{calc_revalo_pm}}.
 }
 

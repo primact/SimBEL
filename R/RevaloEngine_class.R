@@ -16,7 +16,6 @@
 ##' @author Prim'Act
 ##' @seealso Mettre le lien vers les methodes de la classe
 ##' @keywords classes
-##' @export
 setClass(
   Class = "RevaloEngine",
   representation = representation(

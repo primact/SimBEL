@@ -4,14 +4,14 @@
 \name{calc_frais}
 \alias{FraisPassif}
 \alias{calc_frais}
-\title{Methode generique de calcul des frais}
+\title{Calcule des frais de passif.}
 \usage{
 calc_frais(x, type, nom_prod, nb, mt, coef_inf)
 }
 \arguments{
-\item{x}{objet de la classe \code{FraisPassif}.}
+\item{x}{objet de la classe \code{\link{FraisPassif}}.}
 
-\item{type}{un \code{character} desiqnant le type de frais applique.}
+\item{type}{un \code{character} designant le type de frais applique.}
 
 \item{nom_prod}{est le nom de produit de type \code{character}.}
 
@@ -22,14 +22,14 @@ calc_frais(x, type, nom_prod, nb, mt, coef_inf)
 \item{coef_inf}{correspond au coefficient d'inflation applique.}
 }
 \value{
-Une liste contenant les montants de frais fixes et variables.
+Une liste contenant les montants de frais fixes et de frais variables.
 }
 \description{
 \code{calc_frais} est une methode generique permettant de calculer les frais sur prestations, sur primes
 et sur encours.
 }
 \details{
-Le type du contrats prend pour valeur \code{prime} pour les frais sur primes, \code{prest} pour les frais
+Le type du contrat prend pour valeur \code{prime} pour les frais sur primes, \code{prest} pour les frais
 sur prestations et \code{enc} pour les frais sur encours.
 }
 \author{

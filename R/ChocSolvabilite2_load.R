@@ -1,5 +1,22 @@
-# Ce script charge dans une liste l'ensemble des scenarios de choc S2 marche
-# folder_chocs_address <- racine@address[["param"]][["chocs"]]
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#           chargement_choc
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+##' Permet de charger dans un objet de la classe \code{ChocSolvabilite2} l'ensemble des parametres necessaires a la bonne application des chocs de marche et
+##' de souscription au sens de la formule standard de la directive Solvabilite 2.
+##'
+##' \code{chargement_choc} est une methode permettant de charger les parametres des differents chocs de marche et de souscription, tels que renseignes par l'utilisateur.
+##' @name chargement_choc
+##' @docType methods
+##' @param x objet de la classe \code{ChocSolvabilite2}.
+##' @param folder_choc_address est un \code{character}. Cette chaine de caractere est construite par la fonction \code{\link{set_architecture}} de la classe \code{\link{Initialisation}}, 
+##' elle contient l'adresse du dossier contenant les fichiers de parametres des chocs de la formule standard a appliquer renseignes par l'utilisateur.
+##' @return \code{x} l'objet  de la classe \code{ChocSolvabilite2} dont les attributs \code{param_choc_mket} et \code{param_choc_sousc} ont ete mis a jour.
+##' @author Prim'Act
+##' @export
+##' @seealso La creation de l'architecture de chargement des donnees et parametres renseignes par l'utilisateur \code{\link{set_architecture}},
+##' ainsi que les classes \code{\link{ParamChocMket}} et \code{\link{ParamChocSousc}}.
+##' @aliases ChocSolvabilite2
+##' @include ChocSolvabilite2_class.R
 
 setGeneric(name = "chargement_choc", def = function(x, folder_chocs_address){standardGeneric("chargement_choc")})
 setMethod(

@@ -1,28 +1,21 @@
-#----------------------------------------------------------
-# Ce script est la definition de la classe ParamTableMort dedie aux tables de mortalite
-#----------------------------------------------------------
-# Suivi version
-# Version 1.0 du 23/01/2017. Fait par MT : initialisation
-#----------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Definition de la classe ParamTableMort
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-##' La classe ParamTableMort
+##' La classe de parametres pour les tables de mortalite \code{ParamTableMort}.
 ##'
-##' Classe pour pour les tables de mortalite
-##'
+##' Une classe de parametres pour les tables de mortalite.
 ##' @name ParamTableMort
-##' @slot table un data frame contenant les taux de mortalite
+##' @slot age_min un entier correspondant a l'age minimal de la table.
+##' @slot age_max un entier correspondant a l'age maximal de la table.
+##' @slot gen_min un entier correspondant a la premiere generation de la table.
+##' @slot gen_max un entier correspondant a la derniere generation de la table.
+##' @slot table un \code{data frame} contenant la table de mortalite.
+##' @note Les tables de mortalite doivent contenir des effectifs sous risque par age (Lx).
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
+##' @seealso Le calcul du taux de deces \code{\link{calc_qx}}.
 ##' @keywords classes
 ##' @export
-
 
 setClass(
   Class = "ParamTableMort",

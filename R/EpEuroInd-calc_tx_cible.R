@@ -1,48 +1,53 @@
 #----------------------------------------------------------
 # Ce script comprend les methodes de la classe EpEuroInd
-#----------------------------------------------------------
-# Suivi version
-# Version 1.0 du 31/01/2017. Fait par MT : initialisation
-#----------------------------------------------------------
-
-
-##' Calcul des differents taux cible pour chaque model point de la classe EpEuroInd
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+##' Calcul du taux cible pour des contrats epargne en euros.
 ##'
-##' \code{calc_tx_cible} est une methode permettant de calculer un taux cible
-##'   pour chaque model point de la classe EpEuroInd.
+##' \code{calc_tx_cible} est une methode permettant d'evaluer le taux de revalorisation cible
+##'   de chaque model point.
 ##' @name calc_tx_cible
 ##' @docType methods
-##' @param epi un objet de la classe \code{EpEuroInd} contenant les model points epargne euros.
-##' @param ht un objet de la classe \code{HypTech} contenant differentes tables en entree.
-##' @param list_rd une liste contenant les rendements de reference.
-##' @return Une liste contenant le taux cible annuel et le taux cible semestriel par model points.
+##' @param x un objet de la classe \code{\link{EpEuroInd}} contenant les model points epargne euros.
+##' @param ht un objet de la classe \code{\link{HypTech}} contenant differentes lois de comportement.
+##' @param list_rd une liste contenant les rendements de reference. Le format de cette liste est :
+##' \describe{
+##' \item{le taux de rendement obligataire}{}
+##' \item{le taux de rendement de l'indice action de reference}{}
+##' \item{le taux de rendement de l'indice immobilier de reference}{}
+##' \item{le taux de rendement de l'indice tresorerie de reference}{}
+##' }
+##' @return \code{tx_cible_an} : un vecteur contenant les taux cible de l'annee
+##' @return \code{tx_cible_se} : un vecteur contenant les taux cible de l'annee sur base semestrielle
+##' @note Pour les besoins des calculs a mi-annee, des taux semestriels sont produits.
 ##' @author Prim'Act
+##' @seealso La recuperation des taux cibles calcules : \code{\link{get_comport}}.
 ##' @export
 ##' @aliases EpEuroInd
+##' @include EpEuroInd-class.R HypTech-class.R
 
 setGeneric(name = "calc_tx_cible",
-           def = function(epi, ht, list_rd)
+           def = function(x, ht, list_rd)
           {standardGeneric("calc_tx_cible")})
 #--------------------------------------------------------
 
 setMethod(
   f = "calc_tx_cible",
-  signature = c(epi = "EpEuroInd", ht = "HypTech", list_rd = "list"),
-  def = function(epi, ht, list_rd){
+  signature = c(x = "EpEuroInd", ht = "HypTech", list_rd = "list"),
+  def = function(x, ht, list_rd){
 
     # Nom de ligne
-    nb_mp <- nrow(epi@mp)
+    nb_mp <- nrow(x@mp)
 
     # Gestion des noms de colonnes du data.frame de donnnees
-    nom_table = which(names(epi@mp) == "tx_cible")
-    tx_cible_prec = which(names(epi@mp) == "tx_cible_prec")
+    nom_table = which(names(x@mp) == "tx_cible")
+    tx_cible_prec = which(names(x@mp) == "tx_cible_prec")
 
     # Fonction d'extraction du taux cible
     calc_tx_cible_mp <- function(i) {return(
       get_comport(ht,
-        as.character(.subset2(epi@mp, nom_table)[i]),
+        as.character(.subset2(x@mp, nom_table)[i]),
         list_rd,
-        .subset2(epi@mp, tx_cible_prec)[i])
+        .subset2(x@mp, tx_cible_prec)[i])
       )
     }
 

@@ -3,23 +3,20 @@
 \docType{class}
 \name{FraisPassif}
 \alias{FraisPassif}
-\title{La classe FraisPassif}
+\title{La classe \code{FraisPassif}}
 \description{
-Classe pour pour les frais de passif
+Une classe de parametres pour les frais des produits du portefeuille de passif.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{mp}}{data frame contenant les paramètres des taux de passif par produit}
+\item{\code{mp}}{un objet \code{data.frame} contenant les parametres de frais au passif par produit.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+Le calcul des frais de passif \code{\link{calc_frais}}.
 }
 \keyword{classes}
 

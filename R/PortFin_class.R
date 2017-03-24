@@ -13,16 +13,26 @@
 ##' Classe pour le portefeuille global d'actif
 ##'
 ##' @name PortFin
-##' @slot ptf_action est un objet de type Action, qui represente le portefeuille d'action d'un canton.
-##' @slot ptf_immo est un objet de type Immo, qui represente le portefeuille immobilier d'un canton.
-##' @slot ptf_oblig est un objet de type Oblig, qui represente le portefeuille obligataire d'un canton.
-##' @slot ptf_treso est un objet de type Treso, qui represente le portefeuille monetaire d'un canton.
+##' @slot ptf_action est un objet de type \code{Action}, qui represente le portefeuille d'action d'un canton.
+##' @slot ptf_immo est un objet de type \code{Immo}, qui represente le portefeuille immobilier d'un canton.
+##' @slot ptf_oblig est un objet de type \code{Oblig}, qui represente le portefeuille obligataire d'un canton.
+##' @slot ptf_treso est un objet de type \code{Treso}, qui represente le portefeuille monetaire d'un canton.
+##' @slot pre est un objet de type \code{PRE}, qui represente la PRE d'un canton.
+##' @slot rc est un objet de type \code{RC}, qui represente la RC d'un canton.
+##' @slot frais_fin est un objet de type \code{FraisFin}, qui represente les frais financiers d'un canton.
+##' @slot pvl_action est un \code{numeric}, qui correspond a la somme des plus values latentes des actifs Actions qui sont en situation de plus values latentes.
+##' @slot pvl_immo est un \code{numeric}, qui correspond a la somme des plus values latentes des actifs Immo qui sont en situation de plus values latentes.
+##' @slot pvl_oblig est un \code{numeric}, qui correspond a la somme des plus values latentes des actifs Obligs qui sont en situation de plus values latentes.
+##' @slot mvl_action est un \code{numeric}, qui correspond a la somme des moins values latentes des actifs Actions qui sont en situation de moins values latentes.
+##' @slot mvl_immo est un \code{numeric}, qui correspond a la somme des moins values latentes des actifs Immos qui sont en situation de moins values latentes.
+##' @slot mvl_oblig est un \code{numeric}, qui correspond a la somme des moins values latentes des actifs Obligs qui sont en situation de moins values latentes.
+##' @slot vm_vnc_precedent est une \code{liste} composee de deux elements : la vm_precedente et la vnc_precedente, correspondant respectivement a la valeur de marche
+##' et a la valeur nette comptable en debut d'annee de l'objet PortFin.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
 ##' @keywords classes
 ##' @export
+
 setClass(
   Class = "PortFin",
   representation = representation(

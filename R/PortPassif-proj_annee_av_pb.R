@@ -1,29 +1,36 @@
-#----------------------------------------------------------
-# Ce script comprend les methodes de flux et de prestations la classe PortPassif avant PB
-#----------------------------------------------------------
-
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Fonction de calcul des flux et de pm d un model point
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcul les flux et les PM des produits modelises
+##' Calcule les flux et les PM des produits modelises
 ##'
 ##' \code{proj_annee_av_pb} est une methode permettant de calculer les PM et les flux sur une annee avant PB.
-##' Cette me
-##' thode calcule egalement les frais sur flux et PM.
+##' Cette methode calcule egalement les frais sur flux et sur primes.
 ##' @name proj_annee_av_pb
 ##' @docType methods
-##' @param an est l'annee de projection.
-##' @param x un objet de la classe \code{PortPassif} contenant l'ensemble des produits de passifs.
-##' @param tx_soc le taux de charges sociales.
-##' @param coef_inf est le coefficient d'inflation considere pour le traitement des frais.
-##' @param list_rd est une liste contenant les rendements des actifs de references.
-##' @details L'annee de projection est utilisee pour gerer les produits dont les clauses dependent de l'annee
-##' @return Une liste dont le premier element designe les noms des produits, puis deux matrices de resultats aggreges : une pour les flux
-##' et une pour le stock. Retourne egalement le portefeuille avec une mise a jour des tables de resultats intermediaires.
+##' @param an une valeur \code{numeric} correspondant a l'annee de projection.
+##' @param x un objet de la classe \code{\link{PortPassif}} contenant l'ensemble des produits de passifs.
+##' @param tx_soc une valeur \code{numeric} correspondant au taux de charges sociales.
+##' @param coef_inf une valeur \code{numeric} correspondant au coefficient d'inflation
+##'  considere pour le traitement des frais.
+##' @param list_rd une liste contenant les rendements de reference. Le format de cette liste est :
+##' \describe{
+##' \item{le taux de rendement obligataire}{}
+##' \item{le taux de rendement de l'indice action de reference}{}
+##' \item{le taux de rendement de l'indice immobilier de reference}{}
+##' \item{le taux de rendement de l'indice tresorerie de reference}{}
+##' }
+##' @details L'annee de projection est utilisee pour gerer les produits dont les clauses dependent de l'annee.
+##' Cette methode calcule deux fois les prestations et les PM pour permettre de calculer le montant de FDB.
+##' @return \code{x} l'objet pour lequel les tableaux de resultats des objets \code{\link{EpEuroInd}} sont mis a jour.
+##' @return \code{nom_produit} un vecteur de \code{character} contenant les noms des produits.
+##' @return \code{flux_agg} une matrice contenant les flux aggreges par produits.
+##' @return \code{stock_agg} une matrice contenant les stocks aggreges par produits.
 ##' @author Prim'Act
+##' @seealso La classe \code{\link{EpEuroInd}} et ses methodes.
+##' La classe \code{\link{FraisPassif}} et ses methodes.
 ##' @export
 ##' @aliases PortPassif
+##' @include PortPassif-class.R
 ##'
 
 setGeneric(name = "proj_annee_av_pb", def = function(an, x, tx_soc, coef_inf, list_rd)

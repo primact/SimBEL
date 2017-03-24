@@ -1,18 +1,14 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend la fonction permettant de calculer les fins de projection d'un canton
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           calc_fin_proj
+#           Methode de calcul des fins de projection : calc_fin_proj
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' calcule le flux et les resultats ajustes en fin de projection
+##' calcule le flux et les resultats ajustes en fin de projection.
 ##'
 ##' \code{calc_fin_proj} est une methode permettant de calculer au niveau du canton les resultats financier, technique,
 ##' brut et net d'impot, ainsi que le flux de passifs soldant une projection.
 ##' @name calc_fin_proj
 ##' @docType methods
-##' @param x est un objet de la classe \code{Canton}.
+##' @param x est un objet de la classe \code{\link{Canton}}.
 ##' @param resultat_fin est la valeur \code{numeric} du resultat financier avant fin de projection.
 ##' @param result_tech est la valeur \code{numeric} du resultat technique avant fin de projection.
 ##' @param pm_fin_ap_pb est un vecteur \code{numeric} par produit
@@ -21,9 +17,17 @@
 ##' correspond au taux de PB contractuel.
 ##' @param tx_enc_moy est un vecteur \code{numeric} par produit
 ##' correspond au taux chargement sur encours moyens.
-##' @return Une liste avec le flux de fin sur les passifs et les differents composantes du resultats.
+##' @return \code{flux_fin_passif} un vecteur de flux de fin par produit.
+##' @return \code{result_tech} le montant de resultat technique en fin de projection.
+##' @return \code{result_fin} le montant de resultat finanacier en fin de projection.
+##' @return \code{result_brut} le montant de resultat brut d'impot en fin de projection.
+##' @return \code{result_net} le montant de resultat net d'impot en fin de projection.
+##' @return \code{impot} le montant d'impot sur le resultat en fin de projection.
+##' @seealso La classe \code{\link{EpEuroInd}} et ses methodes.
+##' La classe \code{\link{FraisPassif}} et ses methodes.
 ##' @export
 ##' @aliases Canton
+##' @include Canton_class.R
 
 setGeneric(name = "calc_fin_proj", def = function(x, resultat_fin, result_tech, pm_fin_ap_pb, tx_pb, tx_enc_moy){
   standardGeneric("calc_fin_proj")})
@@ -67,10 +71,10 @@ setMethod(
     if(vnc_actif == 0){ # Gestion des divisions par 0
       coef_scale <- 0
     }else{
-      coef_scale <- (pm_fin_ap_pb + x@ppb@valeur_ppb) / vnc_actif  
+      coef_scale <- (pm_fin_ap_pb + x@ppb@valeur_ppb) / vnc_actif
     }
-    
-    
+
+
     revalo_fin_passif <- max(0, flux_fin_actif) * coef_alloc * coef_scale
 
     # Choix de modelisation : application des taux de PB contractuel et liquidation de la PPB
@@ -89,7 +93,7 @@ setMethod(
     # etre compensee par un flux immediat de prestations
 
     #---------------------------------------------------------------
-    # Etape 14.3 : Recalcul du resultat
+    # Etape 3 : Recalcul du resultat
     #---------------------------------------------------------------
 
     # Calcul du resultats brut et net d'impot

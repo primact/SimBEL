@@ -4,26 +4,35 @@
 \name{get_comport}
 \alias{HypTech}
 \alias{get_comport}
-\title{Calcule le taux cible.}
+\title{Recuperer les taux de revalorisation cible calcules.}
 \usage{
 get_comport(x, nom_table, list_rd, tx_cible_prec)
 }
 \arguments{
-\item{x}{un objet de la classe \code{HypTech}.}
+\item{x}{un objet de la classe \code{\link{HypTech}}.}
 
 \item{nom_table}{un nom de la table de parametres de taux cible.}
 
-\item{list_rd}{une liste de taux de rendement.}
+\item{list_rd}{une liste contenant les rendements de reference. Le format de cette liste est :
+\describe{
+\item{le taux de rendement obligataire}{}
+\item{le taux de rendement de l'indice action de reference}{}
+\item{le taux de rendement de l'indice immobilier de reference}{}
+\item{le taux de rendement de l'indice tresorerie de reference}{}
+}}
 
-\item{tx_cible_prec}{un taux cible en numerique.}
+\item{tx_cible_prec}{une valeur \code{numeric} correspondant au taux cible de la periode precedente.}
 }
 \value{
 La valeur du taux cible.
 }
 \description{
-\code{get_comport} est une methode permettant de calculer le taux cible.
+\code{get_comport} est une methode permettant d'executer le calcul des taux de revalorisation cible.
 }
 \author{
 Prim'Act
+}
+\seealso{
+Le calcul du taux cible \code{\link{calc_tx_cible_ref_marche}}.
 }
 

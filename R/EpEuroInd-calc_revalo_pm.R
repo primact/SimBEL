@@ -1,25 +1,45 @@
-#----------------------------------------------------------
-# Ce script comprend les methodes de la classe EpEuroInd
-#----------------------------------------------------------
-# Suivi version
-# Version 1.0 du 02/02/2017. Fait par QG : initialisation
-#----------------------------------------------------------
-
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           Fonction de calcul de la revalo des pm d'un model point
+#           Fonction de calcul de la revalo des PM d'un model point
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcul la revalorisation pour des PM d'un model point epargne en euros.
+##' Calcule et applique la revalorisation pour des PM pour des contrats epargne en euros.
 ##'
 ##' \code{calc_revalo_pm} est une methode permettant de calculer la revallorisation des PM sur une annee.
 ##' @name calc_revalo_pm
 ##' @docType methods
-##' @param x un objet de la classe \code{EpEuroInd} contenant les model points epargne euros.
-##' @param rev_net_alloue une valeur de type \code{numeric} correspondant au montant de revalorisation a allouer
-##' @param tx_soc le taux de charges sociales
+##' @param x un objet de la classe \code{\link{EpEuroInd}} contenant les model points epargne euros.
+##' @param rev_net_alloue une valeur de type \code{numeric} correspondant au montant de revalorisation a allouer.
+##' @param tx_soc est une valeur \code{numeric} correspondant au taux de prelevement sociaux.
+##' @details Cette methode permet de calculer les montants de PM de fin d'annee avec une revalorisation
+##' minimale et une revalorisation additionnelle au titre de la participation aux benefices de l'annee.
+##' Les chargements sur encours sont egalement calcules et preleves.
+##' Cette methode permet de gerer les contrats a taux de revalorisation net negatif.
+##' @return Une liste contenant :
+##' \describe{
+##' \item{\code{flux} : }{une liste comprenant les flux de l'annee}
+##' \item{\code{stock} : }{une liste comprenant les nombres de sorties}
+##' \item{\code{tx_rev_net} : }{un vecteur correspondant au taux de revalorisation net appliques
+##'  a chaque model point.}
+##' }
+##' @return Le format de la liste \code{flux} est :
+##' \describe{
+##' \item{\code{rev_stock_brut_ap_pb} : }{un vecteur contenant la revalorisation
+##' brute de l'annee appliquee au PM}
+##' \item{\code{rev_stock_nette_ap_pb} : }{un vecteur contenant la revalorisation
+##' nette de l'annee appliquee au PM. Elle peut etre negative pour des contrats a taux negatif.}
+##' \item{\code{enc_charg_stock_ap_pb} : }{un vecteur contenant les montants de chargement sur encours
+##' de l'annee calcules pour le stock de PM}
+##' \item{\code{soc_stock_ap_pb} : }{un vecteur contenant les prelevements sociaux de l'annee}
+##' }
+##' @return Le format de la liste \code{stock} est :
+##' s\describe{
+##' \item{\code{pm_fin_ap_pb : }}{un vecteur contenant le montant de PM en fin d'annee}
+##' }
 ##' @author Prim'Act
+##' @seealso Le calcul des PM avec revalorisation minimale uniquement \code{\link{calc_pm}}.
 ##' @export
 ##' @aliases EpEuroInd
+##' @include EpEuroInd-class.R
 ##'
 setGeneric(name = "calc_revalo_pm", def = function(x, rev_net_alloue, tx_soc)
   {standardGeneric("calc_revalo_pm")})

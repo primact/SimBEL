@@ -3,18 +3,44 @@
 \docType{class}
 \name{ParamComport}
 \alias{ParamComport}
-\title{La classe ParamComport}
+\title{La classe de parametres de comportement \code{ParamComport}.}
 \description{
-Classe pour pour les parametres de comportement
+Une classe pour les parametres de comportement.
 }
-\section{Lien a creer}{
+\section{Slots}{
 
-}
+\describe{
+\item{\code{mat_oblig}}{une valeur \code{numeric} correspondant a la maturite du taux de rendement obligataire pris en
+reference sur le marche.}
+
+\item{\code{alloc_mar}}{un vecteur \code{numeric} correspondant a l'allocation pris en reference sur le marche.
+Le format de cette liste est :
+\describe{
+\item{le taux de rendement obligataire}{}
+\item{le taux de rendement de l'indice action de reference}{}
+\item{le taux de rendement de l'indice immobilier de reference}{}
+\item{le taux de rendement de l'indice tresorerie de reference.}{}
+}}
+
+\item{\code{w_n}}{une valeur \code{numeric} correspondant au poids accorde au rendement de l'annee courante par
+rapport a l'annee precedente.}
+
+\item{\code{marge_mar}}{une valeur \code{numeric} correspondant a la marge financiere pris en reference sur le marche.}
+
+\item{\code{ch_enc_mar}}{une valeur \code{numeric} correspondant au niveau de chargement sur encours
+pris en reference sur le marche.}
+
+\item{\code{ind_ref_action}}{une valeur \code{numeric} correspondant au numero de l'indice action
+pris en reference sur le marche.}
+
+\item{\code{ind_ref_immo}}{une valeur \code{numeric} correspondant au numero de l'indice immobilier
+pris en reference sur le marche.}
+}}
 \author{
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+Le calcul du taux cible \code{\link{calc_tx_cible_ref_marche}}.
 }
 \keyword{classes}
 

@@ -4,12 +4,12 @@
 \name{calc_fin_proj}
 \alias{Canton}
 \alias{calc_fin_proj}
-\title{calcule le flux et les resultats ajustes en fin de projection}
+\title{calcule le flux et les resultats ajustes en fin de projection.}
 \usage{
 calc_fin_proj(x, resultat_fin, result_tech, pm_fin_ap_pb, tx_pb, tx_enc_moy)
 }
 \arguments{
-\item{x}{est un objet de la classe \code{Canton}.}
+\item{x}{est un objet de la classe \code{\link{Canton}}.}
 
 \item{resultat_fin}{est la valeur \code{numeric} du resultat financier avant fin de projection.}
 
@@ -25,10 +25,24 @@ correspond au taux de PB contractuel.}
 correspond au taux chargement sur encours moyens.}
 }
 \value{
-Une liste avec le flux de fin sur les passifs et les differents composantes du resultats.
+\code{flux_fin_passif} un vecteur de flux de fin par produit.
+
+\code{result_tech} le montant de resultat technique en fin de projection.
+
+\code{result_fin} le montant de resultat finanacier en fin de projection.
+
+\code{result_brut} le montant de resultat brut d'impot en fin de projection.
+
+\code{result_net} le montant de resultat net d'impot en fin de projection.
+
+\code{impot} le montant d'impot sur le resultat en fin de projection.
 }
 \description{
 \code{calc_fin_proj} est une methode permettant de calculer au niveau du canton les resultats financier, technique,
 brut et net d'impot, ainsi que le flux de passifs soldant une projection.
+}
+\seealso{
+La classe \code{\link{EpEuroInd}} et ses methodes.
+La classe \code{\link{FraisPassif}} et ses methodes.
 }
 

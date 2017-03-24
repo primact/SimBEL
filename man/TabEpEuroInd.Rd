@@ -3,23 +3,17 @@
 \docType{class}
 \name{TabEpEuroInd}
 \alias{TabEpEuroInd}
-\title{La classe TabEpEuroInd}
+\title{La classe \code{TabEpEuroInd}.}
 \description{
-Classe pour le stockage en memoire de variable de calcul au niveau du model points
+Une classe pour le stockage en memoire de variable de calcul au niveau du model point \code{\link{EpEuroInd}}.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{tab}}{un objet \code{list} au format fige contenant l'ensemble des variables stockees}
+\item{\code{tab}}{un objet \code{list} au format fige contenant l'ensemble des variables stockees.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
-}
-\seealso{
-Mettre le lien vers les methodes de la classe
 }
 \keyword{classes}
 

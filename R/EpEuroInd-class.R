@@ -1,26 +1,22 @@
-#----------------------------------------------------------
-# Ce script est la definition de la classe EpEuroInd dedie au model points de
-# type epargne en euros
-#----------------------------------------------------------
-# Suivi version
-# Version 1.0 du 19/01/2017. Fait par MT : initialisation
-# Version 1.1 du 20/01/2017. Fait par QG : fonctions de flux
-#----------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Definition de la classe EpEuroInd
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 
-##' La classe EpEuroInd
+##' La classe \code{EpEuroInd}.
 ##'
-##' Classe pour les passifs epargne en euros
+##' Une classe pour les passifs epargne en euros.
 ##'
 ##' @name EpEuroInd
-##' @slot mp un objet data.frame au format fige contenant l'ensemble de model points epargne en euros
+##' @slot mp un objet \code{data.frame} au format fige contenant l'ensemble de model points epargne en euros.
+##' @slot tab un objet de la classe \code{\link{TabEpEuroInd}} dedie au stockage de variables intermediaires.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
+##' @seealso Le calcul des primes, des prestations et des PM : \code{\link{calc_primes}},
+##' \code{\link{calc_prest}}, \code{\link{calc_pm}}.
+##' Le calcul des taux de sortie, du taux minimum et des taux cible de revalorisation :
+##' \code{\link{calc_tx_sortie}}, \code{\link{calc_tx_min}}, \code{\link{calc_tx_cible}}.
+##' La revalorisation des PM apres participation aux benefices : \code{\link{calc_relavo_pm}}.
+##' Le vieillissement des model points sur une periode : \code{\link{vieilli_mp}}.
 ##' @keywords classes
 ##' @export
 setClass(

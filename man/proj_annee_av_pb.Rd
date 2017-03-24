@@ -4,34 +4,50 @@
 \name{proj_annee_av_pb}
 \alias{PortPassif}
 \alias{proj_annee_av_pb}
-\title{Calcul les flux et les PM des produits modelises}
+\title{Calcule les flux et les PM des produits modelises}
 \usage{
 proj_annee_av_pb(an, x, tx_soc, coef_inf, list_rd)
 }
 \arguments{
-\item{an}{est l'annee de projection.}
+\item{an}{une valeur \code{numeric} correspondant a l'annee de projection.}
 
-\item{x}{un objet de la classe \code{PortPassif} contenant l'ensemble des produits de passifs.}
+\item{x}{un objet de la classe \code{\link{PortPassif}} contenant l'ensemble des produits de passifs.}
 
-\item{tx_soc}{le taux de charges sociales.}
+\item{tx_soc}{une valeur \code{numeric} correspondant au taux de charges sociales.}
 
-\item{coef_inf}{est le coefficient d'inflation considere pour le traitement des frais.}
+\item{coef_inf}{une valeur \code{numeric} correspondant au coefficient d'inflation
+considere pour le traitement des frais.}
 
-\item{list_rd}{est une liste contenant les rendements des actifs de references.}
+\item{list_rd}{une liste contenant les rendements de reference. Le format de cette liste est :
+\describe{
+\item{le taux de rendement obligataire}{}
+\item{le taux de rendement de l'indice action de reference}{}
+\item{le taux de rendement de l'indice immobilier de reference}{}
+\item{le taux de rendement de l'indice tresorerie de reference}{}
+}}
 }
 \value{
-Une liste dont le premier element designe les noms des produits, puis deux matrices de resultats aggreges : une pour les flux
-et une pour le stock. Retourne egalement le portefeuille avec une mise a jour des tables de resultats intermediaires.
+\code{x} l'objet pour lequel les tableaux de resultats des objets \code{\link{EpEuroInd}} sont mis a jour.
+
+\code{nom_produit} un vecteur de \code{character} contenant les noms des produits.
+
+\code{flux_agg} une matrice contenant les flux aggreges par produits.
+
+\code{stock_agg} une matrice contenant les stocks aggreges par produits.
 }
 \description{
 \code{proj_annee_av_pb} est une methode permettant de calculer les PM et les flux sur une annee avant PB.
-Cette me
-thode calcule egalement les frais sur flux et PM.
+Cette methode calcule egalement les frais sur flux et sur primes.
 }
 \details{
-L'annee de projection est utilisee pour gerer les produits dont les clauses dependent de l'annee
+L'annee de projection est utilisee pour gerer les produits dont les clauses dependent de l'annee.
+Cette methode calcule deux fois les prestations et les PM pour permettre de calculer le montant de FDB.
 }
 \author{
 Prim'Act
+}
+\seealso{
+La classe \code{\link{EpEuroInd}} et ses methodes.
+La classe \code{\link{FraisPassif}} et ses methodes.
 }
 

@@ -4,27 +4,37 @@
 \name{vieillissment_ap_pb}
 \alias{PortPassif}
 \alias{vieillissment_ap_pb}
-\title{Calcul les flux et les PM des produits modelises apres participation aux benefices}
+\title{Vieillissement du portefeuille sur l'annee apres attribution
+de participation aux benefices.}
 \usage{
 vieillissment_ap_pb(x, rev_nette_alloue, tx_soc)
 }
 \arguments{
-\item{x}{un objet de la classe \code{PortPassif} contenant l'ensemble des produits de passifs.}
+\item{x}{un objet de la classe \code{\link{PortPassif}} contenant l'ensemble des produits de passifs.}
 
-\item{rev_nette_alloue}{un vecteur \code{numeric} contenant par produit le supplement de revalorisation par rapport au taux minimum.}
+\item{rev_nette_alloue}{un vecteur \code{numeric} contenant par produit
+le supplement de revalorisation par rapport au taux minimum.}
 
-\item{tx_soc}{le taux de charges sociales.}
+\item{tx_soc}{une valeur \code{numeric} correspondant au taux de charges sociales.}
 }
 \value{
-Une liste dont le premier element designe le portefeuille mis a jour, puis
-les noms des produits, puis deux matrices de resultats aggreges : une pour les flux
-et une pour le stock.
+\code{x} l'objet \code{x} mis a jour.
+
+\code{nom_produit} un vecteur de \code{character} contenant les noms des produits.
+
+\code{flux_agg} une matrice contenant les flux aggreges par produits.
+
+\code{stock_agg} une matrice contenant les stocks aggreges par produits.
 }
 \description{
 \code{vieillissment_ap_pb} est une methode permettant de calculer les PM et les flux sur une annee apres PB.
-Cette methode produit le portefeuille de passifs mis a jour.
+Cette methode vieilli le portefeuille de passifs apres attribution de PB.
 }
 \author{
 Prim'Act
+}
+\seealso{
+L'attribution de la revalorisation par model point : \code{\link{calc_revalo_pm}}
+Le viellissement des model points : \code{\link{vieilli_mp}}.
 }
 

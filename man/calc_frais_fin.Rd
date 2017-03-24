@@ -9,7 +9,7 @@
 calc_frais_fin(x, vm_moy, coef_inflation)
 }
 \arguments{
-\item{x}{est un objet de type \code{FraisFin}.}
+\item{x}{est un objet de type \code{FraisFin} contenant les parametres de Frais financier associes a un canton.}
 
 \item{vm_moy}{est un objet de type \code{numeric} correspondant a la valeur moyenne de l'actif en valeur
 de marche.}
@@ -17,7 +17,7 @@ de marche.}
 \item{coef_inflation}{est un objet de type \code{numeric} correspondant au coefficient d'inflation des frais.}
 }
 \value{
-La valeur des frais financiers.
+La valeur des frais financiers : un reel de type \code{numeric}.
 }
 \description{
 \code{calc_frais_fin} est une methode permettant de calculer les frais financiers.

@@ -1,36 +1,31 @@
-#----------------------------------------------------------
-# Ce script est la definition de la classe PortPassif dedie aux differents produits existants du passif
-#----------------------------------------------------------
-# Suivi version
-# Version 1.0 du 25/01/2017. Fait par MT : initialisation
-#----------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Definition de la classe PortPassif
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 
-##' La classe PortPassif
+##' La classe \code{PortPassif}.
+##'
+##' Une classe regroupant l'ensemble des donnees de passifs et les hypotheses correspondantes.
 ##'
 ##' @name PortPassif
-##' @slot eei une liste d'objets de classe \code{EpEuroInd} contenant l'ensemble portefeuilles
-##'  relatifs aux model points epargne en euros.
-##' @slot names_class_prod un vecteur \code{character} indique les noms de classes de produits.
-##' @slot ht un objet de classe \code{HypTech}.
-##' @slot fp un objet de classe \code{FraisPassif}.
-##' @slot tx_pb un objet de classe \code{Taux_PB}.
-##' @slot autres_passifs un objet de classe \code{AutresPassifs}.
-##' @slot autres_reserves un objet de classe \code{AutresReserves}.
-#' @slot ere une liste d'objets de classe EpRetrInd contenant l'ensemble portefeuilles relatifs aux model points epargne retraite en euros
-#' @slot erp une liste d'objets de classe EpRetrPoint contenant l'ensemble portefeuilles relatifs aux model points epargne retraite en points
-#' @slot ren une liste d'objets de classe Rente contenant l'ensemble portefeuilles relatifs aux model points rente en euros
-
+##' @slot annee une valeur entiere correspondant a l'annee de projection.
+##' @slot eei une liste d'objets de la classe \code{\link{EpEuroInd}} contenant l'ensemble
+##' des produits de type epargne en euros.
+##' @slot names_class_prod un vecteur \code{character} indiquant les noms de classes de produits.
+##' @slot ht un objet de classe \code{\link{HypTech}} contenant les hypotheses techniques.
+##' @slot fp un objet de classe \code{\link{FraisPassif}} contenant les hypotheses de frais de passif
+##' par produit.
+##' @slot tx_pb un objet de classe \code{\link{TauxPB}} contenant les taux contractuel de participation
+##' aux benefices par produit.
+##' @slot autres_passifs un objet de classe \code{\link{AutresPassifs}}.
+##' @slot autres_reserves un objet de classe \code{\link{AutresReserves}}.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
+##' @seealso La projection des produits sur l'annee avant attributiuon de participation
+##' aux benefices : \code{\link{proj_annee_av_pb}}.
+##' Le vieillissement des model points de passifs avant et apres attributiuon de participation
+##' aux benefices : \code{\link{vieillissement_av_pb}}, \code{\link{vieillissement_ap_pb}}.
 ##' @keywords classes
 ##' @export
-
 setClass(
   Class = "PortPassif",
   representation = representation(

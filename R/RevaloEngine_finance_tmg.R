@@ -9,13 +9,13 @@
 ##'
 ##' \code{finance_tmg} est une methode permettant d'evaluer le contribution de la PPB
 ##' au financement des taux minimum garanti sur prestations et sur stock.
-##' @name base_prod_fin
+##' @name finance_tmg
 ##' @docType methods
 ##' @param bes_tmg_prest est un vecteur de type \code{numeric} comprenant
 ##'  par produit le besoin de finance des TMG sur prestations.
 ##'  @param bes_tmg_stock est un vecteur de type \code{numeric} comprenant
 ##'  par produit le besoin de finance des TMG sur le stock.
-##' @param ppb est un objet de la classe \code{Ppb} qui renvoie l'etat courant de la PPB.
+##' @param ppb est un objet de la classe \code{\link{Ppb}} qui renvoie l'etat courant de la PPB.
 ##' @return Une liste comprenant la valeur de la contribution au financement des TMG sur prestations et sur stock.
 ##' Cette liste comprend egalement la PPB mise a jour.
 ##' @details Cette fonction priorise le financement des TMG prestations. Elle met a jour la PPB des reprises effectuees.

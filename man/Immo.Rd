@@ -3,14 +3,14 @@
 \docType{class}
 \name{Immo}
 \alias{Immo}
-\title{La classe Immo}
+\title{Classe pour les actifs de type immobilier.}
 \description{
-Classe pour les actifs de type Immo
+Classe pour les actifs de type immobilier.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{ptf_immo}}{est un dataframe, chaque ligne represente un actif immobilier du portefeuille d'Immobilier.}
+\item{\code{ptf_immo}}{est un dataframe, chaque ligne represente un actif immobilier du portefeuille d'immobilier.}
 }}
 \section{Lien a creer}{
 
@@ -20,6 +20,7 @@ Prim'Act
 }
 \seealso{
 Mettre le lien vers les methodes de la classe
+
+Les operations d'achat vente immo  \code{\link{buy_immo}} et \code{\link{sell_immo}}.
 }
-\keyword{classes}
 

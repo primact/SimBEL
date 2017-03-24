@@ -4,27 +4,31 @@
 \name{calc_tx_min}
 \alias{EpEuroInd}
 \alias{calc_tx_min}
-\title{Calcul des differents taux  revalorisation minimum d'un model point.}
+\title{Calcul le taux de revalorisation contractuel minimum pour des contrats epargne en euros.}
 \usage{
 calc_tx_min(x, an)
 }
 \arguments{
-\item{x}{un objet de la classe \code{EpEuroInd} contenant les model points epargne euros.}
+\item{x}{un objet de la classe \code{\link{EpEuroInd}} contenant les model points epargne euros.}
 
-\item{an}{un numeric represant l'annee de projection courante}
+\item{an}{un \code{numeric} representant l'annee de projection courante.}
 }
 \value{
-Une data.frame contenant :
-\describe{
-\item{\code{tx_tech_an} : }{un vecteur contenant les taux de technique de l'annee}
-\item{\code{tx_tech_an} : }{un vecteur contenant les taux de technique de l'annee sur base semestrielle}
-\item{\code{tx_an} : }{un vecteur contenant les taux de revalorisation minimum de l'annee}
-\item{\code{tx_se} : }{un vecteur contenant les taux de revalorisation minimum de l'annee exprimes en semestriel}
-}
+\code{tx_tech_an} : un vecteur contenant les taux de technique de l'annee
+
+\code{tx_tech_se} : un vecteur contenant les taux de technique de l'annee sur base semestrielle
+
+\code{tx_an} : un vecteur contenant les taux de revalorisation minimum de l'annee
+
+\code{x_se} : un vecteur contenant les taux de revalorisation minimum de l'annee exprimes en semestriel.
 }
 \description{
-\code{calc_tx_min} est une methode permettant de calculer le taux de revalorisation minimum sur
- une annee.
+\code{calc_tx_min} est une methode permettant de calculer les taux de revalorisation minimum
+  sur une periode. La revalorisation minimum est le maximum entre le taux technique et
+  le taux minimim garanti (TMG) du contrat.
+}
+\note{
+Pour les besoins des calculs a mi-annee, des taux semestriels sont produits.
 }
 \author{
 Prim'Act

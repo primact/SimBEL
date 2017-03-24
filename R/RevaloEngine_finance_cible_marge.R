@@ -10,7 +10,7 @@
 ##'
 ##' \code{finance_cible_ppb} est une methode permettant de
 ##'  determiner le financement de taux cibles par la provision pour participation aux benefices.
-##' @name base_prod_fin
+##' @name finance_cible_ppb
 ##' @docType methods
 ##' @param marge_fin est valeur \code{numeric} donnant le montant courant de la marge financiere de l'assureur.
 ##' @param marge_min est une valeur de type \code{numeric} correspondant

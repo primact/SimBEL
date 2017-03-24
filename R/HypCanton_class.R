@@ -1,14 +1,18 @@
-#--------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les declarateurs, constructeurs et verificateurs de la classe HypCanton
-#--------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           Declarateur
+#           Definition de la classe HypCanton
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Classe pour HypCanton
+##'  La classe \code{HypCanton}.
 ##'
+##' Une class de parametres pour les parametres generaux du canton.
 ##' @name HypCanton
-##'
+##' @slot tx_soc une valeur \code{numeric} correspondant au taux de prelevements social.
+##' @slot tx_import une valeur \code{numeric} correspondant au taux d'impot sur le resultat.
+##' @slot method_taux_cible un \code{character} correspond au nom de la methode de calcul du taux cible.
+##' @docType class
+##' @note Dans la version courante, la valeur de \code{method_taux_cible} doit etre parametree a "Meth1".
+##' @author Prim'Act
+##' @keywords classes
+##' @export
 setClass(Class = "HypCanton",
   representation = representation(
     tx_soc = "numeric",

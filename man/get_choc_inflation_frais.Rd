@@ -11,7 +11,7 @@ get_choc_inflation_frais(x, choc)
 \arguments{
 \item{x}{un objet de la classe \code{\link{ESG}}.}
 
-\item{choc}{une valeur \code{numeric} correspondant au coefficient de 
+\item{choc}{une valeur \code{numeric} correspondant au coefficient de
 choc a appliquer en additif au taux d'inflation.}
 }
 \value{
@@ -23,7 +23,7 @@ L'objet \code{x} mis a jour.
 }
 \note{
 L'inflation d'inflation compris dans l'ESG est suppose etre deja capitalise, i.e.
-\eqn{indice_inflation = (1 + tx_inflation)^annee}. Il ne s'agit pas du taux d'inflation.
+\eqn{indice_inflation = (1 + tx inflation)^{annee}}. Il ne s'agit pas du taux d'inflation.
 }
 \author{
 Prim'Act

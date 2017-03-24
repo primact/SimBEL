@@ -3,23 +3,17 @@
 \docType{class}
 \name{TauxPB}
 \alias{TauxPB}
-\title{La classe TauxPB}
+\title{La classe \code{TauxPB}.}
 \description{
-Classe pour pour Taux PB
+Une classe pour le stockage des parametres de taux de participation contractuelle par produit.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{mp}}{data frame contenant les paramètres des Taux PB}
+\item{\code{mp}}{un \code{data frame} contenant les parametres des taux de participation contractuelle par produit.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
-}
-\seealso{
-Mettre le lien vers les methodes de la classe
 }
 \keyword{classes}
 

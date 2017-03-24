@@ -9,16 +9,18 @@
 ##'
 ##' Classe pour le parametre ALM d'un canton.
 ##'
-##' @name Canton
+##' @name ParamAlmEngine
 ##' @slot ptf_reference est un objet de type \code{PortFin}, qui represente le portefeuille
 ##'  d'investissement de reference d'un canton.
-##' @slot alloc_cible
+##' @slot alloc_cible Vecteur de 4 elements rendant compte du pourcentage de l'actif composant respectivement les investissements: actions, immobiliers, obligataires et de tresorerie. 
+##' @slot seuil_realisation_PVL
 ##' @docType class
 ##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
+##' @seealso Methode principale : \code{\link{param_alm_engine_load}}
 ##' @keywords classes
 ##' @export
+##' @aliases ParamAlmEngine
 
 setClass(
   Class = "ParamAlmEngine",

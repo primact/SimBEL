@@ -4,26 +4,29 @@
 \name{get_rach_dyn}
 \alias{HypTech}
 \alias{get_rach_dyn}
-\title{Calcule la composante rachats dynamique}
+\title{Recuperer les taux de rachat dynamiques calcules.}
 \usage{
 get_rach_dyn(x, nom_table, tx_cible, tx_serv)
 }
 \arguments{
-\item{x}{un objet de la classe \code{HypTech}.}
+\item{x}{un objet de la classe \code{\link{HypTech}}.}
 
-\item{nom_table}{: nom de la table de parametres de rachats conjoncturels consideree}
+\item{nom_table}{un nom de jeu de paramatre de rachat dynamique.}
 
-\item{tx_cible}{: taux cible en numerique}
+\item{tx_cible}{est une valeur \code{numeric} correspondant taux de revalorisation cible.}
 
-\item{tx_serv}{: taux servi en numerique}
+\item{tx_serv}{est une valeur \code{numeric} correspondant taux de revalorisation servi.}
 }
 \value{
-la composante rachats dynamique en numerique
+Le taux de rachat dynamique.
 }
 \description{
-\code{get_rach_dyn} est une methode permettant de calculer la composante rachats dynamique.
+\code{get_rach_dyn} est une methode permettant d'executer le calcul des taux de rachat dynamique.
 }
 \author{
 Prim'Act
+}
+\seealso{
+Le calcul du taux de rachat dynamique \code{\link{calc_rach_dyn}}.
 }
 

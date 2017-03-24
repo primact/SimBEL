@@ -4,22 +4,22 @@
 \name{calc_qx}
 \alias{ParamTableMort}
 \alias{calc_qx}
-\title{Calcule le taux de mortalite}
+\title{Calcule le taux de deces.}
 \usage{
 calc_qx(table_mort, age, gen)
 }
 \arguments{
-\item{table_mort}{un objet de la classe \code{ParamTableMort} contenant les tables de mortalite.}
+\item{table_mort}{un objet de la classe \code{\link{ParamTableMort}} contenant la table de mortalite.}
 
-\item{age}{: en numerique}
+\item{age}{une valeur \code{numeric} correspondant a l'age.}
 
-\item{gen}{: generation en numerique}
+\item{gen}{une valeur \code{numeric} correspondant a la generation.}
 }
 \value{
-le taux de mortalite
+La valeur du taux de deces calcule.
 }
 \description{
-\code{calc_qx} est une methode permettant de calculer le taux de mortalite.
+\code{calc_qx} est une methode permettant de calculer le taux de deces.
 }
 \author{
 Prim'Act

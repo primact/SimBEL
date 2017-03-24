@@ -1,4 +1,23 @@
-# file_autres_reserves_address <- paste(x@address[["data"]][["passif"]], "autres_reserves.csv", sep = "/")
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#           Fonction de chargement des donnees des autres reserves
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+##' Methode permettant de charger la valeur initiale de la PSAP et de la PGG.
+##'
+##' \code{autres_reserves_load} est une methode permettant de charger les donnees associees a un
+##' objet de classe \code{\link{AutresReserves}}.
+##' @name autres_reserves_load
+##' @docType methods
+##' @param file_autres_reserves_address est un \code{character} contenant l'adresse exacte
+##' du fichier d'input utilisateur
+##' permettant de renseigner un objet \code{\link{AutresReserves}}.
+##' @return L'objet de la classe \code{\link{AutresReserves}} construit a partir des inputs renseignes par l'utilisateur.
+##' @author Prim'Act
+##' @seealso La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
+##'  pour renseigner l’input.
+##' @export
+##' @aliases AutresReserves
+##' @include AutresReserves-class.R
+##'
 setGeneric(name = "autres_reserves_load", def = function(file_autres_reserves_address){standardGeneric("autres_reserves_load")})
 setMethod(
     f = "autres_reserves_load",

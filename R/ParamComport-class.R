@@ -1,31 +1,32 @@
-#---------------------------------------------------------------------------------------------------------
-# Ce script est la definition de la classe ParamComport qui contient les donn?es sur parametres de comportement
-#---------------------------------------------------------------------------------------------------------
-# Suivi version
-# Version 1.0 du 10/02/2017. Fait par MT : initialisation
-#----------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Definition de la classe ParamComport
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-##' La classe ParamComport
+##' La classe de parametres de comportement \code{ParamComport}.
 ##'
-##' Classe pour pour les parametres de comportement
-##'
+##' Une classe pour les parametres de comportement.
 ##' @name ParamComport
-##' @slot mat_oblig
-##' @slot alloc_mar
-##' @slot w_n
-##' @slot marge_mar
-##' @slot ch_enc_mar
-##' @slot ind_ref_action
-##' @slot ind_ref_immo
+##' @slot mat_oblig une valeur \code{numeric} correspondant a la maturite du taux de rendement obligataire pris en
+##' reference sur le marche.
+##' @slot alloc_mar un vecteur \code{numeric} correspondant a l'allocation pris en reference sur le marche.
+##' Le format de cette liste est :
+##' \describe{
+##' \item{le taux de rendement obligataire}{}
+##' \item{le taux de rendement de l'indice action de reference}{}
+##' \item{le taux de rendement de l'indice immobilier de reference}{}
+##' \item{le taux de rendement de l'indice tresorerie de reference.}{}
+##' }
+##' @slot w_n une valeur \code{numeric} correspondant au poids accorde au rendement de l'annee courante par
+##' rapport a l'annee precedente.
+##' @slot marge_mar une valeur \code{numeric} correspondant a la marge financiere pris en reference sur le marche.
+##' @slot ch_enc_mar une valeur \code{numeric} correspondant au niveau de chargement sur encours
+##' pris en reference sur le marche.
+##' @slot ind_ref_action une valeur \code{numeric} correspondant au numero de l'indice action
+##' pris en reference sur le marche.
+##' @slot ind_ref_immo une valeur \code{numeric} correspondant au numero de l'indice immobilier
+##' pris en reference sur le marche.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
+##' @seealso Le calcul du taux cible \code{\link{calc_tx_cible_ref_marche}}.
 ##' @keywords classes
 ##' @export
 

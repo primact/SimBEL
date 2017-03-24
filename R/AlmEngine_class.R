@@ -1,5 +1,15 @@
 # Classe ALM Engine : classe vide contient uniquement des methodes ALM (regle achat vente)
-# L'attribut journal_achat_vente permet de conserver en mémoire tout au long de la projection les différentes operations d'achat vente effectuees
+# L'attribut journal_achat_vente permet de conserver en memoire tout au long de la projection les différentes operations d'achat vente effectuees
+##' La classe ALMEngine
+##'
+##' Classe ayant pour principal vocation de contenir des methodes de reallocation.
+##'
+##' @name AlmEngine
+##' @slot journal_achat_vente outil permettant de memoriser l'ensemble des operations d'achat-vente.
+##' @docType class
+##' @author Prim'Act
+##' @seealso La fonction de reallocation du Portefeuille \code{\link{reallocate}}
+
 setClass(Class = "AlmEngine",
          representation = representation(
            journal_achat_vente = "data.frame"
@@ -54,7 +64,7 @@ setMethod(
     }
     #Traitement du cas vide
     else
-    {.Object@journal_achat_vente  <- data.frame(integer(),character(), character(), integer(), integer(), double(),double(), double())
+    {.Object@journal_achat_vente  <- data.frame(integer(),character(), character(), integer(), integer(), numeric(),numeric(), numeric())
     colnames(.Object@journal_achat_vente) <- c("annee","operation","type_actif","num_mp","num_index","montant","nb_unit", "pmvr")
     }
     return(.Object)

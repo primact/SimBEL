@@ -18,4 +18,5 @@ Prim'Act
 \seealso{
 La lecture des flux d'une annee \code{\link{proj_annee_autres_passifs}}.
 }
+\keyword{classes}
 

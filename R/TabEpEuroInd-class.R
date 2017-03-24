@@ -1,22 +1,15 @@
-#----------------------------------------------------------
-# Ce script est la definition de la classe TabEpEuroInd dediee au stockage d'information au niveau model point
-#----------------------------------------------------------
-
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Definition de la classe TabEpEuroInd
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 
-##' La classe TabEpEuroInd
+##' La classe \code{TabEpEuroInd}.
 ##'
-##' Classe pour le stockage en memoire de variable de calcul au niveau du model points
+##' Une classe pour le stockage en memoire de variable de calcul au niveau du model point \code{\link{EpEuroInd}}.
 ##'
 ##' @name TabEpEuroInd
-##' @slot tab un objet \code{list} au format fige contenant l'ensemble des variables stockees
+##' @slot tab un objet \code{list} au format fige contenant l'ensemble des variables stockees.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
 ##' @keywords classes
 ##' @export
 setClass(

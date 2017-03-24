@@ -4,22 +4,30 @@
 \name{calc_tx_cible_ref_marche}
 \alias{ParamComport}
 \alias{calc_tx_cible_ref_marche}
-\title{Calcul des differents taux cible pour chaque model point de la classe EpEuroInd}
+\title{Calcule le taux de revalorisation cible.}
 \usage{
 calc_tx_cible_ref_marche(param_comport, list_rd, tx_cible_prec)
 }
 \arguments{
-\item{param_comport}{un objet de la classe \code{ParamComport}.}
+\item{param_comport}{un objet de la classe \code{\link{ParamComport}} contenant les parametres
+comportementaux.}
 
-\item{list_rd}{une liste qui comprend les taux de rendement de reference.}
+\item{list_rd}{une liste contenant les rendements de reference. Le format de cette liste est :
+\describe{
+\item{le taux de rendement obligataire}{}
+\item{le taux de rendement de l'indice action de reference}{}
+\item{le taux de rendement de l'indice immobilier de reference}{}
+\item{le taux de rendement de l'indice tresorerie de reference}{}
+}}
 
-\item{tx_cible_prec}{le taux cible individuel de l'annee precedente.}
+\item{tx_cible_prec}{une valeur \code{numeric} correspondant au taux cible de la periode precedente.}
 }
 \value{
-Le taux cible annuel.
+La valeur du taux cible.
 }
 \description{
-\code{calc_tx_cible_ref_marche} est une methode permettant de calculer un taux cible.
+\code{calc_tx_cible_ref_marche} est une methode permettant de calculer le taux de revalorisation cible
+en evaluant le taux de rendement des assureurs sur le marche.
 }
 \author{
 Prim'Act

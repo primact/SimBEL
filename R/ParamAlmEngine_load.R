@@ -1,4 +1,17 @@
-# Script permettant de charger la valeur initiale des ppb dans un objet de type Ppb
+
+##' Chargement des attributs d'un objet \code{ParamAlmEngine} a partir des donnees utilisateurs.
+##'
+##' \code{param_alm_engine_load} est la methode de chargement des attributs d'un objet ParamAlmEngine
+##' a partir des donnees de l'environnement utilisateur et d'un portefeuille financier de reference (charge par la fonction \code{\link{chargement_PortFin_ref}}.
+##' @name param_alm_engine_load
+##' @docType methods
+##' @param file_alm_address un \code{character} renvoyant .
+##' @param ptf_fin_ref un objet de la classe \code{PortFin} correspondant au portefeuille de reinvestissement.
+##' @return Pas de sortie.
+##' @author Prim'Act
+##' @export
+##' @aliases ParamAlmEngine
+##' @include ParamAlmEngine_class.R PortFin_class.R
 
 setGeneric(name = "param_alm_engine_load", def = function(file_alm_address, ptf_fin_ref){standardGeneric("param_alm_engine_load")})
 setMethod(

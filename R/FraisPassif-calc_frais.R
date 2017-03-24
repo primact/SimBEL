@@ -1,37 +1,31 @@
-#----------------------------------------------------------
-# Ce script comprend la methode calc_frais de la classe FraisPassif
-#----------------------------------------------------------
-# Suivi version
-# Version 1.0 du 09/02/2017. Fait par MT : initialisation
-#----------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           calc_frais
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Methode generique de calcul des frais
+##' Calcule des frais de passif.
 ##'
 ##' \code{calc_frais} est une methode generique permettant de calculer les frais sur prestations, sur primes
 ##' et sur encours.
 ##' @name calc_frais
 ##' @docType methods
-##' @param x objet de la classe \code{FraisPassif}.
-##' @param type un \code{character} desiqnant le type de frais applique.
+##' @param x objet de la classe \code{\link{FraisPassif}}.
+##' @param type un \code{character} designant le type de frais applique.
 ##' @param nom_prod est le nom de produit de type \code{character}.
 ##' @param nb correspond a un nombre de contrats, utilise comme assiette de frais fixe par contrat.
 ##' @param mt correspond a un montant, utilise comme assiette de frais variable.
 ##' @param coef_inf correspond au coefficient d'inflation applique.
-##' @details Le type du contrats prend pour valeur \code{prime} pour les frais sur primes, \code{prest} pour les frais
+##' @details Le type du contrat prend pour valeur \code{prime} pour les frais sur primes, \code{prest} pour les frais
 ##' sur prestations et \code{enc} pour les frais sur encours.
-#' @return Une liste contenant les montants de frais fixes et variables.
+##' @return Une liste contenant les montants de frais fixes et de frais variables.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases FraisPassif
+##' @include FraisPassif-class.R
 
 setGeneric(name = "calc_frais", def = function(x, type, nom_prod, nb, mt, coef_inf)
 {standardGeneric("calc_frais")})
 setMethod(
   f = "calc_frais",
-  signature = c(x = "FraisPassif", type = "character", nom_prod ="character", nb = "numeric", mt ="numeric", coef_inf ="numeric"),
+  signature = c(x = "FraisPassif", type = "character", nom_prod = "character", nb = "numeric", mt ="numeric", coef_inf ="numeric"),
   def = function(x, type, nom_prod, nb, mt, coef_inf){
 
 

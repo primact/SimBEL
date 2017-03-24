@@ -1,36 +1,44 @@
-#----------------------------------------------------------
-# Ce script comprend les methodes de la classe PortPassif
-
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           vieillissement_av_pb
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Vieillissement du portefeuille sur l'annee avant attribution
 ##' de participation aux benefices.
 ##'
-##' \code{viellissement_av_pb} est de vieillir du portefeuille sur l'annee avant attribution
-##' de participation aux benefices.
+##' \code{viellissement_av_pb} est une methode permettant de vieillir l'objet \code{\link{PortPassif}}
+##' sur l'annee avant attribution de participation aux benefices.
 ##' @name vieillissement_av_pb
 ##' @docType methods
-##' @param an l'annee de realisation des calcul.
-##' @param x un objet de la classe \code{PortPassif} contenant les produits du portefeuille.
-##' @param coef_inf est le coefficient d'inflation considere pour le traitement des frais.
-##' @param list_rd est une liste contenant les rendements des actifs de references.
-##' @param tx_soc le taux de charges sociales.
+##' @param an une valeur \code{numeric} correspondant a l'annee de projection.
+##' @param x un objet de la classe \code{\link{PortPassif}} contenant l'ensemble des produits de passifs.
+##' @param coef_inf une valeur \code{numeric} correspondant au coefficient d'inflation
+##'  considere pour le traitement des frais.
+##' @param list_rd une liste contenant les rendements de reference. Le format de cette liste est :
+##' \describe{
+##' \item{le taux de rendement obligataire}{}
+##' \item{le taux de rendement de l'indice action de reference}{}
+##' \item{le taux de rendement de l'indice immobilier de reference}{}
+##' \item{le taux de rendement de l'indice tresorerie de reference}{}
+##' }
+##' @param tx_soc une valeur \code{numeric} correspondant au taux de charges sociales.
 ##' @return Une liste comprenant  :
 ##' \describe{
 ##' \item{\code{ptf} : }{Le portefeuille \code{x} mis a jour.}
 ##' \item{\code{result_av_pb} : }{Une liste dont le premier element designe les noms des produits,
-##'  puis deux matrices de resultats aggreges : une pour les flux et une pour le stock.}
+##'  puis deux matrices de resultats aggreges : une pour les flux et une pour le stock. Le format de cette sortie
+##'  decoule de celui de la methode \code{\link{proj_annee_av_pb}}.}
 ##' \item{\code{result_autres_passifs} : }{un vecteur contenant les resultats des passifs non modelises.}
-##' \item{\code{var_psap} : }{La variation de PSAP sur l'annee.}
-##' \item{\code{var_pgg} : }{La variation de PGG sur l'annee.}
-##' \item{\code{flux_milieu} : }{Les flux de milieu d'annee entrant en tresorerie en milieu de periode.}
-##' \item{\code{flux_fin} : }{Les flux de milieu d'annee entrant en tresorerie en fin de periode.}
+##' \item{\code{var_psap} : }{la variation de PSAP sur l'annee.}
+##' \item{\code{var_pgg} : }{la variation de PGG sur l'annee.}
+##' \item{\code{flux_milieu} : }{les flux de milieu d'annee entrant en tresorerie en milieu de periode.}
+##' \item{\code{flux_fin} : }{les flux de fin d'annee entrant en tresorerie en fin de periode.}
 ##' }
 ##' @author Prim'Act
+##' @seealso La projection des passifs sur un an avant PB : \code{\link{proj_annee_av_pb}}.
+##' La projection des autres passifs : \code{\link{proj_annee_autres_passifs}}.
+##' La mise a jour des autres reserves : \code{\link{update_reserves}}.
 ##' @export
-##' @aliases EpEuroInd
+##' @aliases PortPassif
+##' @include PortPassif-class.R
 ##'
 setGeneric(name = "viellissement_av_pb", def = function(an, x, coef_inf, list_rd, tx_soc){
   standardGeneric("viellissement_av_pb")})

@@ -3,42 +3,40 @@
 \docType{class}
 \name{PortPassif}
 \alias{PortPassif}
-\title{La classe PortPassif}
+\title{La classe \code{PortPassif}.}
 \description{
-La classe PortPassif
+Une classe regroupant l'ensemble des donnees de passifs et les hypotheses correspondantes.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{eei}}{une liste d'objets de classe \code{EpEuroInd} contenant l'ensemble portefeuilles
-relatifs aux model points epargne en euros.}
+\item{\code{annee}}{une valeur entiere correspondant a l'annee de projection.}
 
-\item{\code{names_class_prod}}{un vecteur \code{character} indique les noms de classes de produits.}
+\item{\code{eei}}{une liste d'objets de la classe \code{\link{EpEuroInd}} contenant l'ensemble
+des produits de type epargne en euros.}
 
-\item{\code{ht}}{un objet de classe \code{HypTech}.}
+\item{\code{names_class_prod}}{un vecteur \code{character} indiquant les noms de classes de produits.}
 
-\item{\code{fp}}{un objet de classe \code{FraisPassif}.}
+\item{\code{ht}}{un objet de classe \code{\link{HypTech}} contenant les hypotheses techniques.}
 
-\item{\code{tx_pb}}{un objet de classe \code{Taux_PB}.}
+\item{\code{fp}}{un objet de classe \code{\link{FraisPassif}} contenant les hypotheses de frais de passif
+par produit.}
 
-\item{\code{autres_passifs}}{un objet de classe \code{AutresPassifs}.}
+\item{\code{tx_pb}}{un objet de classe \code{\link{TauxPB}} contenant les taux contractuel de participation
+aux benefices par produit.}
 
-\item{\code{autres_reserves}}{un objet de classe \code{AutresReserves}.}
+\item{\code{autres_passifs}}{un objet de classe \code{\link{AutresPassifs}}.}
 
-\item{\code{ere}}{une liste d'objets de classe EpRetrInd contenant l'ensemble portefeuilles relatifs aux model points epargne retraite en euros}
-
-\item{\code{erp}}{une liste d'objets de classe EpRetrPoint contenant l'ensemble portefeuilles relatifs aux model points epargne retraite en points}
-
-\item{\code{ren}}{une liste d'objets de classe Rente contenant l'ensemble portefeuilles relatifs aux model points rente en euros}
+\item{\code{autres_reserves}}{un objet de classe \code{\link{AutresReserves}}.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+La projection des produits sur l'annee avant attributiuon de participation
+aux benefices : \code{\link{proj_annee_av_pb}}.
+Le vieillissement des model points de passifs avant et apres attributiuon de participation
+aux benefices : \code{\link{vieillissement_av_pb}}, \code{\link{vieillissement_ap_pb}}.
 }
 \keyword{classes}
 

@@ -1,17 +1,15 @@
-##' Initialisation des scenarios de chocs d'un workspace.
+##' Initialisation des scenarios central et de chocs d'un workspace.
 ##'
 ##' \code{init_scenario} est la methode d'initialisation.
 ##' @name init_scenario
 ##' @docType methods
-##' @param x un objet de la classe \code{Initialisation}.
-##' @param alloc_cible
-##' @param seuil_realisation_PVL
-##' @param nb_simu
-##' @param nb_annee_proj
+##' @param x un objet de la classe \code{\link{Initialisation}}
 ##' @return Pas de sortie.
+##' @note Cette methode cree l'architecture, puis les objets \code{\link{Be}} correspondant a chacun des scenarios central et de chocs de la formule standard.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases Initialisation
+##' @include Initialisation_class.R
 
 
 setGeneric(name = "init_scenario", def = function(x){standardGeneric("init_scenario")})
@@ -65,45 +63,45 @@ setMethod(
                                                        header = TRUE)
                 # Chargement des passifs choques
                 autres_passifs_choc <- switch(EXPR = name_scenario,
-                                              "action_type1"      = canton_init@ptf_passif@autres_passifs,
-                                              "action_type2"      = canton_init@ptf_passif@autres_passifs,
-                                              "immo"        = canton_init@ptf_passif@autres_passifs,
-                                              "spread"      = canton_init@ptf_passif@autres_passifs,
-                                              "frais"       = autres_passif_load(
-                                                paste(x@address[["data"]][["autres_passifs_choc"]],
-                                                      input_autres_passifs_choc[which(input_autres_passifs_choc$choc_sousc == "frais"), "nom_table_csv"],
-                                                      sep = "/")),
+                                              "action_type1" = canton_init@ptf_passif@autres_passifs,
+                                              "action_type2" = canton_init@ptf_passif@autres_passifs,
+                                              "immo"         = canton_init@ptf_passif@autres_passifs,
+                                              "spread"       = canton_init@ptf_passif@autres_passifs,
+                                              "frais"        = autres_passif_load(
+                                                                    paste(x@address[["data"]][["autres_passifs_choc"]],
+                                                                    input_autres_passifs_choc[which(input_autres_passifs_choc$choc_sousc == "frais"), "nom_table_csv"],
+                                                                    sep = "/")),
                                               "mortalite"   = autres_passif_load(
-                                                paste(x@address[["data"]][["autres_passifs_choc"]],
-                                                      input_autres_passifs_choc[which(input_autres_passifs_choc$choc_sousc == "mortalite"), "nom_table_csv"],
-                                                      sep = "/")),
+                                                                    paste(x@address[["data"]][["autres_passifs_choc"]],
+                                                                    input_autres_passifs_choc[which(input_autres_passifs_choc$choc_sousc == "mortalite"), "nom_table_csv"],
+                                                                    sep = "/")),
                                               "longevite"   = autres_passif_load(
-                                                paste(x@address[["data"]][["autres_passifs_choc"]],
-                                                      input_autres_passifs_choc[which(input_autres_passifs_choc$choc_sousc == "longevite"), "nom_table_csv"],
-                                                      sep = "/")),
+                                                                    paste(x@address[["data"]][["autres_passifs_choc"]],
+                                                                        input_autres_passifs_choc[which(input_autres_passifs_choc$choc_sousc == "longevite"), "nom_table_csv"],
+                                                                        sep = "/")),
                                               "rachat_up"   = autres_passif_load(
-                                                paste(x@address[["data"]][["autres_passifs_choc"]],
-                                                      input_autres_passifs_choc[which(input_autres_passifs_choc$choc_sousc == "rachat_up"), "nom_table_csv"],
-                                                      sep = "/")),
+                                                                    paste(x@address[["data"]][["autres_passifs_choc"]],
+                                                                        input_autres_passifs_choc[which(input_autres_passifs_choc$choc_sousc == "rachat_up"), "nom_table_csv"],
+                                                                        sep = "/")),
                                               "rachat_down" = autres_passif_load(
-                                                paste(x@address[["data"]][["autres_passifs_choc"]],
-                                                      input_autres_passifs_choc[which(input_autres_passifs_choc$choc_sousc == "rachat_down"), "nom_table_csv"],
-                                                      sep = "/")),
+                                                                    paste(x@address[["data"]][["autres_passifs_choc"]],
+                                                                        input_autres_passifs_choc[which(input_autres_passifs_choc$choc_sousc == "rachat_down"), "nom_table_csv"],
+                                                                        sep = "/")),
                                               "central"     = canton_init@ptf_passif@autres_passifs)
 
 
                 # Transformation du canton apres choc
                 canton_init <- switch(EXPR = name_scenario,
-                                         "action_type1"      = do_choc_action_type1(table_choc, canton_init),
-                                         "action_type2"      = do_choc_action_type2(table_choc, canton_init),
-                                         "immo"        = do_choc_immo(table_choc, canton_init),
-                                         "spread"      = do_choc_spread(table_choc, canton_init),
-                                         "frais"       = do_choc_frais(table_choc, canton_init, autres_passifs_choc),
-                                         "mortalite"   = do_choc_mortalite(table_choc, canton_init, autres_passifs_choc),
-                                         "longevite"   = do_choc_longevite(table_choc, canton_init, autres_passifs_choc),
-                                         "rachat_up"   = do_choc_rachat_up(table_choc, canton_init, autres_passifs_choc),
-                                         "rachat_down" = do_choc_rachat_down(table_choc, canton_init, autres_passifs_choc),
-                                         "central"     = canton_init)
+                                         "action_type1" = do_choc_action_type1(table_choc, canton_init),
+                                         "action_type2" = do_choc_action_type2(table_choc, canton_init),
+                                         "immo"         = do_choc_immo(table_choc, canton_init),
+                                         "spread"       = do_choc_spread(table_choc, canton_init),
+                                         "frais"        = do_choc_frais(table_choc, canton_init, autres_passifs_choc),
+                                         "mortalite"    = do_choc_mortalite(table_choc, canton_init, autres_passifs_choc),
+                                         "longevite"    = do_choc_longevite(table_choc, canton_init, autres_passifs_choc),
+                                         "rachat_up"    = do_choc_rachat_up(table_choc, canton_init, autres_passifs_choc),
+                                         "rachat_down"  = do_choc_rachat_down(table_choc, canton_init, autres_passifs_choc),
+                                         "central"      = canton_init)
 
                 # Ecraser les zpsreads renseignes par l'utilisateur dans le PortFin et le PortFin ref
                 # Port fin

@@ -4,21 +4,55 @@
 \name{calc_revalo_pm}
 \alias{EpEuroInd}
 \alias{calc_revalo_pm}
-\title{Calcul la revalorisation pour des PM d'un model point epargne en euros.}
+\title{Calcule et applique la revalorisation pour des PM pour des contrats epargne en euros.}
 \usage{
 calc_revalo_pm(x, rev_net_alloue, tx_soc)
 }
 \arguments{
-\item{x}{un objet de la classe \code{EpEuroInd} contenant les model points epargne euros.}
+\item{x}{un objet de la classe \code{\link{EpEuroInd}} contenant les model points epargne euros.}
 
-\item{rev_net_alloue}{une valeur de type \code{numeric} correspondant au montant de revalorisation a allouer}
+\item{rev_net_alloue}{une valeur de type \code{numeric} correspondant au montant de revalorisation a allouer.}
 
-\item{tx_soc}{le taux de charges sociales}
+\item{tx_soc}{est une valeur \code{numeric} correspondant au taux de prelevement sociaux.}
+}
+\value{
+Une liste contenant :
+\describe{
+\item{\code{flux} : }{une liste comprenant les flux de l'annee}
+\item{\code{stock} : }{une liste comprenant les nombres de sorties}
+\item{\code{tx_rev_net} : }{un vecteur correspondant au taux de revalorisation net appliques
+ a chaque model point.}
+}
+
+Le format de la liste \code{flux} est :
+\describe{
+\item{\code{rev_stock_brut_ap_pb} : }{un vecteur contenant la revalorisation
+brute de l'annee appliquee au PM}
+\item{\code{rev_stock_nette_ap_pb} : }{un vecteur contenant la revalorisation
+nette de l'annee appliquee au PM. Elle peut etre negative pour des contrats a taux negatif.}
+\item{\code{enc_charg_stock_ap_pb} : }{un vecteur contenant les montants de chargement sur encours
+de l'annee calcules pour le stock de PM}
+\item{\code{soc_stock_ap_pb} : }{un vecteur contenant les prelevements sociaux de l'annee}
+}
+
+Le format de la liste \code{stock} est :
+s\describe{
+\item{\code{pm_fin_ap_pb : }}{un vecteur contenant le montant de PM en fin d'annee}
+}
 }
 \description{
 \code{calc_revalo_pm} est une methode permettant de calculer la revallorisation des PM sur une annee.
 }
+\details{
+Cette methode permet de calculer les montants de PM de fin d'annee avec une revalorisation
+minimale et une revalorisation additionnelle au titre de la participation aux benefices de l'annee.
+Les chargements sur encours sont egalement calcules et preleves.
+Cette methode permet de gerer les contrats a taux de revalorisation net negatif.
+}
 \author{
 Prim'Act
+}
+\seealso{
+Le calcul des PM avec revalorisation minimale uniquement \code{\link{calc_pm}}.
 }
 

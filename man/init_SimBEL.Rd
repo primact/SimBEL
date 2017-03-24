@@ -9,17 +9,16 @@
 init_SimBEL(x)
 }
 \arguments{
-\item{x}{un objet de la classe \code{Initialisation}.}
-
-\item{nb_simu}{nombre de simulation.}
-
-\item{nb_annee_proj}{nombre d'annee de projection.}
+\item{x}{un objet de la classe \code{\link{Initialisation}}.}
 }
 \value{
 Pas de sortie.
 }
 \description{
 \code{init_SimBEL} est la methode d'initialisation d'un workspace.
+}
+\note{
+Cette methode permet de creer l'objet \code{\link{Canton}} initial et de le sauvegarder dans le repertoire adequat de l'architecture.
 }
 \author{
 Prim'Act

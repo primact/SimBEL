@@ -9,10 +9,12 @@
 set_architecture(x)
 }
 \arguments{
-\item{x}{un objet de la classe \code{Initialisation}.}
+\item{x}{un objet de la classe \code{\link{Initialisation}}.}
 }
 \value{
-Objet mis a jour des chemins.
+Objet mis a jour de l'ensemble des chemins du workspace,
+ceux ci sont stockes sous forme de liste dans l'attribut \code{address} 
+de l'objet \code{\link{Initialisation}} renseigne en input.
 }
 \description{
 \code{set_architecture}.
