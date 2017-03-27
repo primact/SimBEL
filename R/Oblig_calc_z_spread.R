@@ -15,7 +15,7 @@
 ##' @name calc_z_spread
 ##' @docType methods
 ##' @param x objet de la classe Oblig (decrivant le portefeuile obligataire).
-##' @param yield_curve vecteur decrivant la courbe de taux sans risque retenue.)
+##' @param yield_curve vecteur decrivant la courbe de taux sans risque retenue.
 ##' @return Un vecteur dont chaque element correspond a la valeur du zero spread de l'obligation du portefeuille obligataire.
 ##' Ce vecteur a autant d'elements que le portefeuille obligataire a de lignes.
 ##' @author Prim'Act

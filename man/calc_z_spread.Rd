@@ -11,7 +11,7 @@ calc_z_spread(x, yield_curve)
 \arguments{
 \item{x}{objet de la classe Oblig (decrivant le portefeuile obligataire).}
 
-\item{yield_curve}{vecteur decrivant la courbe de taux sans risque retenue.)}
+\item{yield_curve}{vecteur decrivant la courbe de taux sans risque retenue.}
 }
 \value{
 Un vecteur dont chaque element correspond a la valeur du zero spread de l'obligation du portefeuille obligataire.

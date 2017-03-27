@@ -23,8 +23,8 @@ que l'assureur souhaite effectuer.}
   chacune d'entre elles.
 }
 \description{
-\code{do_calc_nb_sold_oblig} est une methode permettant de calculer pour chaque ligne d'un portefeuille
- obligataire d'un assureur le nombre d'unites a vendre afin de realiser un certain montant de vente obligataire.
+Cette methode permet de calculer pour chaque ligne d'un portefeuille
+obligataire d'un assureur le nombre d'unites a vendre afin de realiser un certain montant de vente obligataire.
 }
 \author{
 Prim'Act

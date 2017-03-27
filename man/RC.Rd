@@ -21,7 +21,7 @@ Classe pour la gestion de la reserve de capitalisation (RC).
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+Les methodes de calcul de la RC \code{\link{calc_RC}}, et de mises a jour des RC initiales et courantes \code{\link{do_update_RC_val_courante}}, \code{\link{do_update_RC_val_debut}}.
 }
 \keyword{classes}
 

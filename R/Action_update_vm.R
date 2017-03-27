@@ -3,12 +3,13 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           update_vm_action
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Mise a jour de chaque composante du portefeuille action suite a la vente de tout ou partie de ce portefeuille.
+##' Mise a jour de la valeur de marche de chaque composante d'un portefeuille action.
 ##'
-##' \code{update_vm_action} est une methode permettant de mettre a jour la duree de detention des composantes d'un portefeuille Action.
+##' \code{update_vm_action} est une methode permettant de mettre a jour la valeur de marche des composantes d'un portefeuille Action.
 ##' @name update_vm_action
 ##' @docType methods
 ##' @param x objet de la classe \code{Action} (decrivant le portefeuille action en detention).
+##' @param vm un vecteur de \code{numeric} ayant la meme longueur que le portefeuille action a de lignes et correspondant aux nouvelles valeurs de marche du portefeuille action.
 ##' @return L'objet \code{x} mis a jour du vieillissement de la duree de detention.
 ##' @author Prim'Act
 ##' @export

@@ -1,26 +1,22 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les fonctions permettant de calculer le financement de la PB contractuelle.
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           finance_cible_marge
+#           finance_cible_marge : methode permettant de calculer le financement de PB par la marge financiere de l'assureur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Evalue le financement d'un taux cible par la PPB.
+##' Evalue le financement d'une revalorisation au taux cible par la marge de l'assureur
 ##'
-##' \code{finance_cible_ppb} est une methode permettant de
-##'  determiner le financement de taux cibles par la provision pour participation aux benefices.
-##' @name finance_cible_ppb
+##' \code{finance_cible_marge} est une methode permettant de
+##'  determiner le financement d'une revalorisation au taux cible en comprimant la marge financiere
+##'  de l'assureur
+##' @name finance_cible_marge
 ##' @docType methods
-##' @param marge_fin est valeur \code{numeric} donnant le montant courant de la marge financiere de l'assureur.
-##' @param marge_min est une valeur de type \code{numeric} correspondant
+##' @param marge_fin une valeur \code{numeric} donnant le montant courant de la marge financiere de l'assureur.
+##' @param bes_cible un vecteur \code{numeric} correspondant au besoin de financement necessaire pour atteindre
+##' le taux cible part produit.
+##' @param rev_stock_nette un vecteur \code{numeric} comprenant par produit
+##'  le montant de revalorisation nette au titre de le PB atteint.
+##' @param marge_min est une valeur \code{numeric} correspondant
 ##'  au montant minimum de marge financiere souhaite par l'assureur.
-##' @param bes_cible est un vecteur de type \code{numeric} comprenant par produit
-##'  le besoin de financement aux taux cible.
-##' @param rev_stock_nette est un vecteur de type \code{numeric} comprenant par produit
-##'  le montant de revalorisation nette atteint.
-##' @return Une liste avec la valeur de la revalorisation nette servie par produit
-##'  et le montant de marge de l'assureur.
+##' @return \code{rev_stock_nette} la valeur de la revalorisation nette servie par produit apres reduction de marge.
+##' @return \code{marge_fin} le montant de marge de l'assureur apres reduction.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases RevaloEngine

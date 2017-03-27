@@ -1,11 +1,11 @@
-##' Initialisation des scenarios central et de chocs d'un workspace.
+##' Initialisation des scenarios : central et de chocs d'un workspace.
 ##'
 ##' \code{init_scenario} est la methode d'initialisation.
 ##' @name init_scenario
 ##' @docType methods
 ##' @param x un objet de la classe \code{\link{Initialisation}}
 ##' @return Pas de sortie.
-##' @note Cette methode cree l'architecture, puis les objets \code{\link{Be}} correspondant a chacun des scenarios central et de chocs de la formule standard.
+##' @note Cette methode cree l'architecture, puis les objets \code{\link{Be}} correspondant a chacun des scenarios : central et de chocs de la formule standard.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases Initialisation
@@ -19,7 +19,7 @@ setMethod(
     definition = function(x){
 
         # Message utilisateur
-        print("Initialisation des donnees et parametres pour chaque choc")
+        message("Initialisation des donnees et parametres pour chaque choc")
 
         # Creation des dossiers initiaux
         init_create_folder(x)
@@ -35,7 +35,7 @@ setMethod(
 
         for(name_scenario in scenario){
           # Message
-          print(paste("Chargement du choc : ", name_scenario, sep = ""))
+          message(paste("Chargement du choc : ", name_scenario, sep = ""))
 
             if (name_scenario != "taux_up" & name_scenario != "taux_down"){
                 # Chargement de la photo initiale
@@ -160,7 +160,7 @@ setMethod(
             }
         }
         # Output
-        return(print("Fin du chargement des chocs"))
+        return(message("Fin du chargement des chocs"))
 
     }
 )

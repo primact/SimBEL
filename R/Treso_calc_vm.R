@@ -17,8 +17,8 @@
 ##' @param x objet de la classe treso (decrivant le portefeuille de treso).
 ##' @param rdt vecteur decrivant le rendement de chacune des lignes treso du ptf.
 ##' Contient autant d'elements que le portefeuille a de lignes.
-##' @param flux_milieu vecteur decrivant les flux ( percus)entrants : positif, sortants : negatifs) en milieu d'annee, ventile selon chacune des lignes de cash.
-##' @param flux_fin vecteur decrivant les flux (entrants : positifs, sortants : negatifs) en fin d'annee, ventile selon chacune des lignes de cash.
+##' @param flux_milieu vecteur decrivant les flux ( percus)entrants : positif, sortants : negatifs) en milieu d'annee, ventiles selon chacune des lignes de cash.
+##' @param flux_fin vecteur decrivant les flux (entrants : positifs, sortants : negatifs) en fin d'annee, ventiles selon chacune des lignes de cash.
 ##' @return L'objet x dont les valeurs de marche ont ete mises a jour.
 ##' @author Prim'Act
 ##' @export

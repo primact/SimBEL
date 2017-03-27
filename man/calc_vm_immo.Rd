@@ -12,7 +12,7 @@ calc_vm_immo(x, rdt)
 \item{x}{objet de la classe \code{Immo} (decrivant le portefeuille d'immobilier).}
 
 \item{rdt}{vecteur de type \code{numeric} decrivant le rendement de chacune des lignes d'immobilier du portefeuille immobilier de l'assureur.
-Contient autant d'elements que le portefeuille a de lignes.}
+Contient autant d'elements que le portefeuille immobilier a de lignes.}
 }
 \value{
 L'objet \code{x} dont les valeurs de marche ont ete mises a jour.

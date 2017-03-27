@@ -4,28 +4,34 @@
 \name{chargement_choc}
 \alias{ChocSolvabilite2}
 \alias{chargement_choc}
-\title{Permet de charger dans un objet de la classe \code{ChocSolvabilite2} l'ensemble des parametres necessaires a la bonne application des chocs de marche et
-de souscription au sens de la formule standard de la directive Solvabilite 2.}
+\title{Permet de charger les parametres de choc de la formule standard.}
 \usage{
 chargement_choc(x, folder_chocs_address)
 }
 \arguments{
-\item{x}{objet de la classe \code{ChocSolvabilite2}.}
+\item{x}{objet de la classe \code{\link{ChocSolvabilite2}}.}
 
-\item{folder_choc_address}{est un \code{character}. Cette chaine de caractere est construite par la fonction \code{\link{set_architecture}} de la classe \code{\link{Initialisation}}, 
-elle contient l'adresse du dossier contenant les fichiers de parametres des chocs de la formule standard a appliquer renseignes par l'utilisateur.}
+\item{folder_choc_address}{est un \code{character}. Cette chaine de caractere est construite par la methode
+ \code{\link{set_architecture}} de la classe \code{\link{Initialisation}}.
+Elle contient l'adresse du dossier contenant les fichiers de parametres des chocs de la formule standard a appliquer.
+Ces derniers doivent etre renseignes par l'utilisateur.}
 }
 \value{
-\code{x} l'objet  de la classe \code{ChocSolvabilite2} dont les attributs \code{param_choc_mket} et \code{param_choc_sousc} ont ete mis a jour.
+\code{x} l'objet  de la classe \\code{\link{ChocSolvabilite2}} dont les attributs \code{param_choc_mket}
+ et \code{param_choc_sousc} ont ete mis a jour.
 }
 \description{
-\code{chargement_choc} est une methode permettant de charger les parametres des differents chocs de marche et de souscription, tels que renseignes par l'utilisateur.
+\code{chargement_choc} est une methode permettant de charger les parametres
+l'ensemble des parametres necessaires a la bonne application des chocs de marche et
+de souscription au sens de la formule standard de la directive Solvabilite 2,
+ tels que renseignes par l'utilisateur.
 }
 \author{
 Prim'Act
 }
 \seealso{
-La creation de l'architecture de chargement des donnees et parametres renseignes par l'utilisateur \code{\link{set_architecture}},
+La creation de l'architecture de chargement des donnees et parametres renseignes par l'utilisateur
+ \code{\link{set_architecture}},
 ainsi que les classes \code{\link{ParamChocMket}} et \code{\link{ParamChocSousc}}.
 }
 

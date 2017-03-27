@@ -1,9 +1,5 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les fonctions permettant de calculer la base de revalorisation du passif.
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           base_prod_fin
+#           base_prod_fin : Methode permettant de calculer la base de revalorisation du passif.
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Calcule la base de produits financiers attribuables.
 ##'
@@ -11,13 +7,15 @@
 ##'  pour la revalorisation des contrats.
 ##' @name base_prod_fin
 ##' @docType methods
-##' @param tra est un objet \code{numeric} donnant le taux de rendement de l'actif.
+##' @param tra est une valeur \code{numeric} donnant le taux de rendement de l'actif.
 ##' @param pm_moy est un vecteur \code{numeric} comprenant le montant de PM moyenne par produit.
-##' @param ppb est un objet de la classe \code{Ppb} qui renvoie l'etat courant de la PPB.
+##' @param ppb est un objet de la classe \code{\link{Ppb}} qui renvoie l'etat courant de la PPB.
 ##' @return La valeur de la base de produit financier par produit et au total pour le portefeuille.
 ##' @author Prim'Act
+##' @seealso \code{\link{Ppb}}.
 ##' @export
 ##' @aliases RevaloEngine
+##' @include Ppb_class.R
 
 setGeneric(name = "base_prod_fin", def = function(tra, pm_moy, ppb){standardGeneric("base_prod_fin")})
 setMethod(

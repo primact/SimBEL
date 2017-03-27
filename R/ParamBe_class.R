@@ -1,14 +1,16 @@
-#--------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les declarateurs, constructeurs et verificateurs de la classe ParamBe
-#--------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           Declarateur
+#           Definition de la classe ParamBe
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Classe pour ParamBe
+##' La classe \code{ParamBe}.
 ##'
+##' Une classe contenant le nombre d'annees de projection utilise
+##' pour le calcul du best estimate d'un assureur.
 ##' @name ParamBe
-##'
+##' @slot nb_annee un entier comprenant le nombre d'annees de projection.
+##' @docType class
+##' @author Prim'Act
+##' @keywords classes
+##' @export
 setClass(Class = "ParamBe",
   representation = representation(
     nb_annee = "integer"

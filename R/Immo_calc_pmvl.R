@@ -10,7 +10,7 @@
 ##' @docType methods
 ##' @param x objet de la classe \code{Immo} (decrivant le portefeuille d'immobilier).
 ##' @return Une liste composee de deux elements \code{(pvl, mvl)} correspondant respectivement 
-##' aux sommes des plus values latentes immobilieress et aux somme des moins values latentes immobilieres.
+##' aux sommes des plus values latentes immobilieres et aux sommes des moins values latentes immobilieres.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases Immo

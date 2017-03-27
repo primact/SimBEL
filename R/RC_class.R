@@ -15,7 +15,7 @@
 ##' @docType class
 ##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
+##' @seealso Les methodes de calcul de la RC \code{\link{calc_RC}}, et de mises a jour des RC initiales et courantes \code{\link{do_update_RC_val_courante}}, \code{\link{do_update_RC_val_debut}}.
 ##' @keywords classes
 ##' @export
 

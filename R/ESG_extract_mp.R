@@ -1,31 +1,25 @@
-#--------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les methodes permettant d'extraire une situation economique
-#--------------------------------------------------------------------------------------------------------------------
-# Suivi version
-# Version 1.0 du 24/01/2017. Fait par GK : initialisation
-#--------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           extract_ESG
+#           extract_ESG : methode permettant d'extraire une situation economique
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Cette methode construit l'objet de classe \code{ModelPoint_ESG} a partir d'un objet de la classe \code{ESG}. 
-##' Le ModelPoint ESG ainsi construit correspond a l'extraction de courbes de l'ESG pour une annee specifique et pour une simulation specifique.
+##' permet de construire et charger les trajectoires simulees par le Generateur de Scenarios Economiques de Prim'Act.
 ##'
-##' \code{extract_ESG} est une methode permettant de construire et charger les trajectoires simulees par le Generateur de
-##' Scenarios Economiques de Prim'Act. 
+##' \code{extract_ESG} construit l'objet de classe \code{\link{ModelPoint_ESG}} a partir d'un objet
+##'  de la classe \code{\link{ESG}}.
+##' Le \code{ModelPointESG} ainsi construit correspond a l'extraction de donnees de l'ESG
+##'  pour une annee specifique et pour une simulation specifique.
 ##' @name extract_ESG
 ##' @docType methods
-##' @param x est un objet de la classe \code{ESG}.
-##' @param num_trajectoire est une valeur de type \code{integer} correspondant a la trajectoire de simulation dont on souhaite obtenir les valeurs.
-##' @param annee est une valeur de type \code{integer} correspondant a l'annee d'interet pour le model point (possibilite de selectionner les annees 0 a nb_annee_proj).
-##' @return \code{x} l'objet de la classe \code{ModelPoint_ESG} construit.
+##' @param x un objet de la classe \code{\link{ESG}}.
+##' @param num_trajectoire une valeur de type \code{integer} correspondant a la trajectoire de simulation
+##'  dont on souhaite obtenir les valeurs.
+##' @param annee une valeur de type \code{integer} correspondant a l'annee d'interet pour le model point
+##'  (possibilite de selectionner les annees 0 a \code{nb_annee_proj}).
+##' @return \code{x} l'objet de la classe \code{\link{ModelPoint_ESG}} construit.
 ##' @author Prim'Act
 ##' @seealso La classe \code{\link{ModelPoint_ESG}}.
 ##' @export
 ##' @aliases ESG
-##' @include ESG_class.R
-
-
+##' @include ESG_class.R ModelPointESG_class.R
 setGeneric(name = "extract_ESG", def = function(x, num_trajectoire,annee){standardGeneric("extract_ESG")})
 setMethod(
   f = "extract_ESG",

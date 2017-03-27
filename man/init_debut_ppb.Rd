@@ -4,18 +4,19 @@
 \name{init_debut_ppb}
 \alias{Ppb}
 \alias{init_debut_ppb}
-\title{Re-initialise un objet Ppb en debut d'annee}
+\title{Re-initialise la PPB en debut d'annee.}
 \usage{
 init_debut_ppb(x)
 }
 \arguments{
-\item{x}{objet de la classe \code{Ppb}.}
+\item{x}{un objet de la classe \code{\link{Ppb}}.}
 }
 \value{
-L'objet x reinitialise.
+L'objet \code{x} reinitialise.
 }
 \description{
-\code{init_debut_ppb} est une methode permettant de re-initialiser les montants de dotation ou de reprise cumules sur l'annee et
+\code{init_debut_ppb} est une methode permettant de re-initialiser les montants de
+ dotation ou de reprise cumules sur l'annee et
 de re-initialiser le montant de PPB de debut de periode.
 }
 \author{

@@ -10,7 +10,7 @@
 ##' @param x est un objet de la classe Treso en debut d'annee
 ##' @param rdt est le rendement de la classe Treso au cours de l'annee (i.e. en fin d'annee)
 ##' @param flux_milieu est le flux du milieu de l'annee en cours (i.e. ulterieur a l'objet Treso renseigne)
-##' @return
+##' @return Le montant du revenu.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases Treso

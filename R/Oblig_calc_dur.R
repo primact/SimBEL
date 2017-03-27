@@ -8,13 +8,13 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           duration_sensi
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcul la duration de chaque composante d'un portefeuille obligataire.
+##' Calcule la duration de chaque composante d'un portefeuille obligataire.
 ##'
 ##' \code{duration_sensi} est une methode permettant de calculer la duration de chaque composante d'un portefeuille obligataire.
 ##' @name duration_sensi
 ##' @docType methods
 ##' @param x objet de la classe Oblig (decrivant le portefeuille obligataire).
-##' @return Un data frame compose de deux colonnes : la premiere est compose de la duration de chacune des obligations du portefeuille obligataire.
+##' @return Un data frame compose de deux colonnes : la premiere est composee de la duration de chacune des obligations du portefeuille obligataire.
 ##' La seconde est compose de la sensibilite de chacune des obligations du portefeuille obligataire.
 ##' Le dataframe de sortie a autant d'elements que le portefeuille obligataire a de lignes.
 ##' @author Prim'Act

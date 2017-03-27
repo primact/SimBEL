@@ -15,7 +15,7 @@
 ##' @docType methods
 ##' @param x objet de la classe PortFin.
 ##' @param mp_ESG objet de la classe ModelPointESG decrivant les conditions de l'annee n ( ainsi que l'annee n-1 pour les indices actions & immo).
-##' @return Un data frame composé de deux colonnes et autant de lignes que le portefeuille action a de lignes.
+##' @return Un data frame compose de deux colonnes et autant de lignes que le portefeuille action a de lignes.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases PortFin

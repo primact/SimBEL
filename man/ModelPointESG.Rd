@@ -3,27 +3,38 @@
 \docType{class}
 \name{ModelPointESG}
 \alias{ModelPointESG}
-\title{La classe ModelPointESG}
+\title{La classe \code{ModelPointESG}.}
 \description{
-Classe pour une extraction de l'ESG.
+Une classe pour une extraction de l'ES pour une annee et une simulation particuliere.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{annee}}{est une valeur \code{integer} correspondant a l'annee de projection.}
+\item{\code{annee}}{une valeur \code{integer} correspondant a l'annee de projection.}
 
-\item{\code{num_traj}}{est une valeur \code{integer} correspondant au numero de simulation de l'ESG.}
+\item{\code{num_traj}}{une valeur \code{integer} correspondant au numero de simulation de l'ESG.}
 
-\item{\code{yield_curve}}{Courbe des R(k, k+i) ou i va de 1 au \code{nb_annee_proj}.}
+\item{\code{indice_action}}{un \code{data.frame} contenant les valeurs prises par les indices actions pour l'annee et la
+simulation selectionnees.}
+
+\item{\code{indice_immo}}{un \code{data.frame} contenant les valeurs prises par les indices immobiliers pour l'annee et la
+simulation selectionnees.}
+
+\item{\code{indice_inflation}}{une valeur \code{numeric} correspondant a la valeur prise par l'indice inflation
+pour l'annee et la simulation selectionnees.}
+
+\item{\code{yield_curve}}{un vecteur \code{numeric} contenant la structure par terme des taux d'interets spots
+pour l'annee et la simulation selectionnees. La courbe representee correspond aux valeurs des
+R(k, k+i) ou i va de 1 au \code{nb_annee_proj}.}
+
+\item{\code{deflateur}}{une valeur \code{numeric} correspondant a la valeur prise par le deflateur stochastique
+pour l'annee et la simulation selectionnees.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+Les methodes de chargement d'un ESG \code{\link{chargement_ESG}} et d'extraction d'un model point \code{\link{extract_ESG}}.
 }
 \keyword{classes}
 

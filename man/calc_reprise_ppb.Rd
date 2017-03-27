@@ -9,16 +9,18 @@
 calc_reprise_ppb(x, montant)
 }
 \arguments{
-\item{x}{objet de la classe \code{Ppb}.}
+\item{x}{un objet de la classe \code{Ppb}.}
 
-\item{montant}{valeur de la reprise.}
+\item{montant}{la valeur \code{numeric} de la reprise.}
 }
 \value{
-Une liste comprenant l'objet mis a jour et le montnant de la reprise effectuee.
+\code{ppb} l'objet \code{x} mis a jour
+
+\code{reprise} le montnant de la reprise effectuee.
 }
 \description{
-\code{calc_reprise_ppb} est une methode permettant de reprendre sur la PPB. La reprise est effectuee si les limites de reprise
-de la PPB sur l'annee ne sont pas atteintes. La valeur de cette limite est mise a jour suite a la reprise
+\code{calc_reprise_ppb} est une methode permettant de reprendre sur la PPB.
+La reprise est effectuee si les limites de reprise de la PPB sur l'annee ne sont pas atteintes. La valeur de cette limite est mise a jour suite a la reprise
 }
 \author{
 Prim'Act

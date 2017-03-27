@@ -4,12 +4,14 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Permet a partir d'un canton initial de creer un canton choque action.
 ##'
-##' \code{do_choc_action_type2} est une methode permettant d'appliquer le choc action type 2 de la formule standard Solvabilite 2 a un canton.
+##' \code{do_choc_action_type2} est une  methode permettant d'appliquer le choc action type 2 de la formule
+##'  standard Solvabilite 2 a un canton.
 ##' @name do_choc_action_type2
 ##' @docType methods
-##' @param x objet de la classe \code{ChocSolvabilite2}.
-##' @param canton est un objet de la classe \code{canton}. Il correspond au canton non choque (i.e. central) de l'assureur.
-##' @return \code{canton} l'objet  de la classe \code{canton} correspondant au scenario choque action au sens de la formule standard Solvabilite 2.
+##' @param x objet de la classe \code{\link{ChocSolvabilite2}}.
+##' @param canton un objet de la classe \code{\link{Canton}}. Il correspond au canton non choque (i.e. central) de l'assureur.
+##' @return \code{canton} l'objet  de la classe \code{\link{Canton}} correspondant au scenario choque action 
+##' au sens de la formule standard Solvabilite 2.
 ##' @note Il est possible d'appliquer des chocs actions distincts a chaque action selon l'index.
 ##' Cette parametrisation est effectuee dans les fichiers d'inputs utilisateurs. 
 ##' @author Prim'Act

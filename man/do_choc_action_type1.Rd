@@ -9,12 +9,13 @@
 do_choc_action_type1(x, canton)
 }
 \arguments{
-\item{x}{objet de la classe \code{ChocSolvabilite2}.}
+\item{x}{objet de la classe \code{\link{ChocSolvabilite2}}.}
 
-\item{canton}{est un objet de la classe \code{canton}. Il correspond au canton non choque (i.e. central) de l'assureur.}
+\item{canton}{un objet de la classe \code{\link{Canton}}. Il correspond au canton non choque (i.e. central) de l'assureur.}
 }
 \value{
-\code{canton} l'objet  de la classe \code{canton} correspondant au scenario choque action au sens de la formule standard Solvabilite 2.
+\code{canton} l'objet  de la classe \code{\link{Canton}} correspondant au scenario choque action
+ au sens de la formule standard Solvabilite 2.
 }
 \description{
 \code{do_choc_action_type1} est une methode permettant d'appliquer le choc action type 1 de la formule standard Solvabilite 2 a un canton.

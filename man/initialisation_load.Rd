@@ -10,12 +10,14 @@ initialisation_load(x, file_lancement_address)
 }
 \arguments{
 \item{x}{un objet de la classe \code{\link{Initialisation}}.}
+
+\item{file_lancement_address}{nom complet (i.e. avec chemin d'acces et extension) du fichier contenant les parametres de lancement.}
 }
 \value{
 Pas de sortie.
 }
 \description{
-\code{initialisation_load} est la methode de chargement des attributs nb_simu et nb_annee_proj a partir des donnees de l'environnement utilisateur.
+\code{initialisation_load} est la methode de chargement des attributs \code{nb_simu} et \code{nb_annee_proj} a partir des donnees de l'environnement utilisateur.
 }
 \note{
 Cette methode permet de creer l'objet \code{\link{Canton}} initial et de le sauvegarder dans le repertoire adequat de l'architecture.

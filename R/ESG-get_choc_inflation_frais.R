@@ -1,9 +1,9 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Fonction permettant de choquer la table d'inflation de l'ESG
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Applique le choc depenses de la formule standard a l'inflation la table de simulation pour l'indice inflation
+##' Applique le choc frais de la formule standard a la table de simulation pour l'indice inflation.
 ##'
-##' \code{get_choc_inflation_frais} est une methode permettant d'appliquer pplique le choc depenses
+##' \code{get_choc_inflation_frais} est une methode permettant d'appliquer le choc frais
 ##'  de la formule standard a la table de simulation pour l'indice inflation.
 ##' @name get_choc_inflation_frais
 ##' @docType methods
@@ -12,7 +12,7 @@
 ##' choc a appliquer en additif au taux d'inflation.
 ##' @author Prim'Act
 ##' @return L'objet \code{x} mis a jour.
-##' @note L'inflation d'inflation compris dans l'ESG est suppose etre deja capitalise, i.e.
+##' @note L'inflation comprise dans l'ESG est suppose etre deja capitalise, i.e.
 ##' \eqn{indice_inflation = (1 + tx inflation)^{annee}}. Il ne s'agit pas du taux d'inflation.
 ##' @export
 ##' @aliases ESG

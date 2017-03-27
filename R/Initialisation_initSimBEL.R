@@ -20,7 +20,7 @@ setMethod(
         if(length(x@address) == 0) {stop("[Initialisation : init_SimBEL] : Veuillez faire tourner la fonction set_architecture sur l'objet Initialisation avant de lancer le processus d'initialisation. \n")}
 
         # Message
-        print("Chargement des donnees et parametres du canton initial")
+      message("Chargement des donnees et parametres du canton initial")
         # Actif
             # ESG et ModelPoint_ESG
             table_ESG   <- chargement_ESG(x@address[["param"]][["ESG"]], x@nb_simu, x@nb_annee_proj)
@@ -46,6 +46,6 @@ setMethod(
         save(canton_init, file = paste(x@address[["save_folder"]][["init"]], "canton_init.RData", sep = "/"))
 
         # Output
-        return(print("Fin du chargement des donnees du canton initial"))
+        return(message("Fin du chargement des donnees du canton initial"))
     }
 )

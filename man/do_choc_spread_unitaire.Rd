@@ -4,26 +4,30 @@
 \name{do_choc_spread_unitaire}
 \alias{ChocSolvabilite2}
 \alias{do_choc_spread_unitaire}
-\title{Permet a partir d'une table contenant les elements du choc de spread obligataire S2 et d'une ligne obligataire d'un element Oblig d'un portefeuille financier
-d'appliquer le choc de spread a cette ligne obligataire.}
+\title{Applique le choc spread de la formule standard Solvabilite 2 a une ligne obligataire.}
 \usage{
 do_choc_spread_unitaire(table_choc_spread, ligne_oblig)
 }
 \arguments{
-\item{table_choc_spread}{\code{data.frame} contenant la table des chocs de spreads.}
+\item{table_choc_spread}{un \code{data.frame} contenant la table de parametres avec les chocs de spreads.}
 
-\item{ligne_oblig}{est un \code{data.frame}. Il correspond a une ligne obligataire d'un portefeuille \code{Oblig} d'un assureur.}
+\item{ligne_oblig}{un \code{data.frame}. Il correspond a une ligne obligataire d'un portefeuille \code{\link{Oblig}}
+d'un assureur.}
 }
 \value{
-\code{vm_choquee} un \code{numeric}  correspondant a la valeur de marche de la ligne obligataire suite a l'application du choc de spread a cette ligne.
+\code{vm_choquee} une valeur \code{numeric} correspondant a la valeur de marche de la ligne obligataire
+ suite a l'application du choc de spread a cette ligne.
 }
 \description{
-\code{do_choc_spread_unitaire} est une methode permettant d'appliquer le choc spread de la formule standard Solvabilite 2 a une ligne obligataire.
+\code{do_choc_spread_unitaire} Permet a partir d'une table contenant les elements du choc de spread obligataire
+ Solvabilite 2 et d'une ligne obligataire d'un element \code{\link{Oblig}} d'un portefeuille financier
+ \code{\link{PortFin}}
+d'appliquer le choc de spread a cette ligne obligataire.
 }
 \author{
 Prim'Act
 }
 \seealso{
-La fonction d'application du choc de spread a un canton, faisant appel a cette fonction unitaire : \code{\link{do_choc_spread}}.
+La classe \code{\link{PortFin}}.
 }
 

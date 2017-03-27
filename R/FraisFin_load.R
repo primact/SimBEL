@@ -5,7 +5,7 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Methode permettant de charger la valeur initiale des frais financiers dans un objet de type FraisFin.
 ##'
-##' \code{frais_fin_load} est une methode permettant de calculer les frais financiers.
+##' \code{frais_fin_load} est une methode permettant de charger les frais financiers.
 ##' @name frais_fin_load
 ##' @docType methods
 ##' @param file_frais_fin_address est un \code{character} contenant l'adresse exacte du fichier d'input utilisateur permettant de renseigner les Frais financier.

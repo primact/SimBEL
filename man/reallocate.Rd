@@ -19,7 +19,7 @@ action, immobilier, obligataire et de tresorerie.}
 \value{
 \code{portFin} l'objet initial de la classe \code{\link{PortFin}} realloue a l'allocation cible.
 
-\code{pmvr} le montant total des pus ou moins values realisess.
+\code{pmvr} le montant total des plus ou moins values realisess.
 
 \code{pmvr_oblig} le montant des plus ou moins values obligataires realisees lors de la reallocation.
 

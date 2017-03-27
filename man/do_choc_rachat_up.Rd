@@ -9,18 +9,26 @@
 do_choc_rachat_up(x, canton, autres_passifs_choc)
 }
 \arguments{
-\item{x}{objet de la classe \code{ChocSolvabilite2}.}
+\item{x}{objet de la classe \code{\link{ChocSolvabilite2}}.}
 
-\item{canton}{est un objet de la classe \code{canton}. Il correspond au canton non choque (i.e. central) de l'assureur.}
+\item{canton}{est un objet de la classe \code{\link{Canton}}. Il correspond au canton non choque (i.e. central)
+de l'assureur.}
+
+\item{autres_passifs_choc}{est un objet de la classe \code{\link{AutresPassifs}}, il correspond au chargement
+des autres passifs choques en rachat a la hausse.
+Ces derniers ont ete renseignes par l'utilisateur en donnees.}
 }
 \value{
-\code{canton} l'objet  de la classe \code{canton} correspondant au scenario de choc a la hausse des taux de rachats au sens de la formule standard Solvabilite 2.
+\code{canton} l'objet  de la classe \code{\link{Canton}} correspondant au scenario de choc a la hausse
+ des taux de rachats au sens de la formule standard Solvabilite 2.
 }
 \description{
-\code{do_choc_rachat_up} est une methode permettant d'appliquer le choc a la hausse des taux de rachat de la formule standard Solvabilite 2 a un canton.
+\code{do_choc_rachat_up} est une methode permettant d'appliquer le choc a la hausse des taux de rachat
+ de la formule standard Solvabilite 2 a un canton.
 }
 \note{
-La parametrisation des chocs a la hausse des taux de rachat est effectuee dans les fichiers d'inputs utilisateurs.
+La parametrisation des chocs a la hausse des taux de rachat est effectuee dans les fichiers d'inputs
+ utilisateurs.
 }
 \author{
 Prim'Act

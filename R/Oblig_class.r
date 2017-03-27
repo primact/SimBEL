@@ -16,7 +16,6 @@
 ##' @docType class
 ##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
 ##' @export
 ##' @seealso Les operations d'achat vente obligations  \code{\link{buy_oblig}} et \code{\link{sell_oblig}}.
 

@@ -3,12 +3,13 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           update_vm_immo
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Mise a jour de chaque composante du portefeuille immobilier suite a la vente de tout ou partie de ce portefeuille.
+##' Mise a jour des valeurs de marche de chaque composante d'un portefeuille immobilier.
 ##'
-##' \code{update_vm_immo} est une methode permettant de mettre a jour la duree de detention des composantes d'un portefeuille immobilier.
+##' \code{update_vm_immo} est une methode permettant de mettre a jour les valeurs de marche des composantes d'un portefeuille immobilier.
 ##' @name update_vm_immo
 ##' @docType methods
 ##' @param x objet de la classe \code{Immo} (decrivant le portefeuille immobilier en detention).
+##' @param vm un vecteur de \code{numeric} ayant la meme longueur que le portefeuille immobilier a de lignes et correspondant aux nouvelles valeurs de marche du portefeuille immobilier.
 ##' @return L'objet \code{x} mis a jour du vieillissement de la duree de detention.
 ##' @author Prim'Act
 ##' @export

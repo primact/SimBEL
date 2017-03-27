@@ -1,25 +1,21 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les fonctions permettant de calculer le financement de la PB contractuelle.
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           calc_marge_fin
+#           calc_marge_fin : methode permettant de calculer la marge financiere de l'assureur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Calcule la marge financiere de l'assureur.
 ##'
 ##' \code{calc_marge_fin} est une methode permettant de
-##'  de calculer la marge financiere de l'assureur apres attribution de PB contractuelle.
+##'  de calculer la marge financiere de l'assureur apres attribution d'un certain niveau de revalorisation.
 ##' @name calc_marge_fin
 ##' @docType methods
 ##' @param base_fin est un vecteur de type \code{numeric} comprenant par produit la base de produits financiers.
 ##' @param rev_prest_nette est un vecteur de type \code{numeric} comprenant par produit
 ##' la revalorisation nette sur prestations.
 ##' @param rev_stock_nette est un vecteur de type \code{numeric} comprenant par produit
+##' la revalorisation nette sur stock.
 ##' @param contrib_tmg_prest est une valeur \code{numeric} comprenant par produit
-##' la contribution de la PPB ayu financement des TMG sur prestations.
+##' la contribution de la PPB au financement des TMG sur prestations.
 ##' @param contrib_tmg_stock est une valeur \code{numeric} comprenant par produit
-##' la contribution de la PPB ayu financement des TMG sur stock.
+##' la contribution de la PPB au financement des TMG sur stock.
 ##' @param contrib_ppb_tx_cible une valeur de type \code{numeric} comprenant par produit
 ##' la contribution de la PPB au financement au taux cible sur stock.
 ##' @return Le montant de la marge de l'assureur.

@@ -41,7 +41,7 @@ setMethod(
     # Boucle sur les elements de BE
     for(i in nom_be[- which(nom_be == "nom_produit")]){
       vec <- x@tab_be[[i]] # vecteur de be
-      names(vec) <- x@tab_be[["nom_produit"]] # Nom des produits en colonne
+      colnames(vec) <- x@tab_be[["nom_produit"]] # Nom des produits en colonne
 
       # Sauvegarde des resultats
       write.csv2(vec, file = paste(path, nom_run, "_", i, ".csv", sep = ""))

@@ -14,7 +14,8 @@
 ##' @return Le format de la liste renvoyee est :
 ##' \describe{
 ##' \item{\code{portFin} : }  {le portefeuille financier dont l'attribut \code{ptf_immo} a ete vieilli d'une annee.}
-##' \item{\code{loyer} : }{le montant de loyer percus en milieu d'annee suite au vieillissement du portefeuille immobilier. }
+##' \item{\code{loyer} : }{le montant de loyer percus en milieu d'annee suite au vieillissement du portefeuille immobilier.}
+##' }
 ##' @author Prim'Act
 ##' @export
 ##' @seealso La fonction de calcul des rendements des actifs \code{\link{calc_rdt}}.

@@ -25,6 +25,7 @@
 ##' La methode pour la recuperation des taux de rachat dynamique : \code{\link{get_rach_dyn}}.
 ##' @keywords classes
 ##' @export
+##' @include ParamTableMort-class.R ParamTableRach-class.R ParamComport-class.R ParamRachDyn-class.R
 setClass(
   Class = "HypTech",
   slots = c(tables_mort = "list",

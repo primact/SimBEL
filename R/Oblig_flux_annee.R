@@ -10,12 +10,12 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Calcul les flux percus dans l'annee du fait de la detention des obligations du portefeuille obligataire.
 ##'
-##' \code{calc_flux_annee} est une methode permettant de calculer les valeurs de nominal de l'ensemble des obligations
+##' \code{calc_flux_annee} est une methode permettant de calculer les valeurs nominales de l'ensemble des obligations
 ##' composant un portefeuille obligataire.
 ##' @name calc_flux_annee
 ##' @docType methods
 ##' @param x un objet de la classe Oblig.
-##' @return Une liste composée de deux vecteurs:
+##' @return Une liste composee de deux vecteurs:
 ##' \describe{
 ##' \item{\code{tombee_coupon} : }{Chaque element correspond aux tombees de coupon pour l'annee a venir. Ce vecteur a autant d'elements
 ##' que le portefeuille obligataire d'inputs a de lignes.}

@@ -9,21 +9,24 @@
 pb_contr(base_fin, tx_pb, rev_stock_brut, ch_enc_th, tx_enc_moy)
 }
 \arguments{
-\item{base_fin}{est un vecteur de type \code{numeric} comprenant par produit la base de produits financiers.}
+\item{base_fin}{un vecteur \code{numeric} comprenant par produit la base de produits financiers.}
 
-\item{tx_pb}{est un vecteur de type \code{numeric} comprenant par produit les taux de participation aux benefices contractuels.}
+\item{tx_pb}{un vecteur \code{numeric} comprenant par produit les taux de participation aux benefices contractuels.}
 
-\item{rev_stock_brut}{est un vecteur de type \code{numeric} comprenant par produit la revalorisation
+\item{rev_stock_brut}{un vecteur de type \code{numeric} comprenant par produit la revalorisation
 appliquee sur le stock au taux minimum.}
 
 \item{ch_enc_th}{est un vecteur de type \code{numeric} comprenant par produit le montant total
-des chargements sur encours appliques stock, revalorise au taux minimum.}
+des chargements sur encours appliques au stock et revalorises au taux minimum. Il s'agit ici des chargements
+qui pourraient theoriquement etre preleves.}
 
-\item{tx_enc_moy}{est un vecteur de type \code{numeric} comprenant par produit
+\item{tx_enc_moy}{un vecteur \code{numeric} comprenant par produit
 les taux de chargements sur encours moyens.}
 }
 \value{
-Une liste composee de deux vecteurs comprenant par produit les chargements sur encours appliques et la
+\code{ch_enc_ap_pb_contr} un vecteur comprenant par produit les chargements sur encours appliques
+
+\code{rev_stock_nette_contr} un vecteur comprenant par produit la
 revalorisation contractuelle nette.
 }
 \description{

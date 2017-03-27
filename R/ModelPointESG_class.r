@@ -1,26 +1,28 @@
-#--------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les declarateurs, constructeurs et verificateurs de la classe ModelPointESG
-#--------------------------------------------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Declarateur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' La classe ModelPointESG
+##' La classe \code{ModelPointESG}.
 ##'
-##' Classe pour une extraction de l'ESG.
+##' Une classe pour une extraction de l'ES pour une annee et une simulation particuliere.
 ##'
 ##' @name ModelPointESG
-##' @slot annee est une valeur \code{integer} correspondant a l'annee de projection.
-##' @slot num_traj est une valeur \code{integer} correspondant au numero de simulation de l'ESG.
-##' @slot indice_action
-##' @slot indice_immo
-##' @slot indice_inflation
-##' @slot yield_curve Courbe des R(k, k+i) ou i va de 1 au \code{nb_annee_proj}.
-##' @slot deflateur
+##' @slot annee une valeur \code{integer} correspondant a l'annee de projection.
+##' @slot num_traj une valeur \code{integer} correspondant au numero de simulation de l'ESG.
+##' @slot indice_action un \code{data.frame} contenant les valeurs prises par les indices actions pour l'annee et la
+##' simulation selectionnees.
+##' @slot indice_immo un \code{data.frame} contenant les valeurs prises par les indices immobiliers pour l'annee et la
+##' simulation selectionnees.
+##' @slot indice_inflation une valeur \code{numeric} correspondant a la valeur prise par l'indice inflation
+##'  pour l'annee et la simulation selectionnees.
+##' @slot yield_curve un vecteur \code{numeric} contenant la structure par terme des taux d'interets spots
+##' pour l'annee et la simulation selectionnees. La courbe representee correspond aux valeurs des
+##' R(k, k+i) ou i va de 1 au \code{nb_annee_proj}.
+##' @slot deflateur une valeur \code{numeric} correspondant a la valeur prise par le deflateur stochastique
+##'  pour l'annee et la simulation selectionnees.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
+##' @seealso Les methodes de chargement d'un ESG \code{\link{chargement_ESG}} et d'extraction d'un model point \code{\link{extract_ESG}}.
 ##' @keywords classes
 ##' @export
 ##' @aliases ModelPointESG

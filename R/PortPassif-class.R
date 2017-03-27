@@ -26,6 +26,7 @@
 ##' aux benefices : \code{\link{vieillissement_av_pb}}, \code{\link{vieillissement_ap_pb}}.
 ##' @keywords classes
 ##' @export
+##' @include HypTech-class.R FraisPassif-class.R TauxPB-class.R AutresPassifs-class.R AutresReserves-class.R EpEuroInd-class.R
 setClass(
   Class = "PortPassif",
   representation = representation(

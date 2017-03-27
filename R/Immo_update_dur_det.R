@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           update_dur_det_immo
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Mise a jour de chaque composante du portefeuille immobilier suite a la vente de tout ou partie de ce portefeuille.
+##' Mise a jour des durees de detention des composantes d'un portefeuille immobilier.
 ##'
 ##' \code{update_dur_det_immo} est une methode permettant de mettre a jour la duree de detention des composantes d'un portefeuille immobilier.
 ##' @name update_dur_det_immo

@@ -4,7 +4,7 @@
 \name{update_dur_det_immo}
 \alias{Immo}
 \alias{update_dur_det_immo}
-\title{Mise a jour de chaque composante du portefeuille immobilier suite a la vente de tout ou partie de ce portefeuille.}
+\title{Mise a jour des durees de detention des composantes d'un portefeuille immobilier.}
 \usage{
 update_dur_det_immo(x)
 }

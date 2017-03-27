@@ -19,8 +19,6 @@ Classe pour les actifs de type immobilier.
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
-
 Les operations d'achat vente immo  \code{\link{buy_immo}} et \code{\link{sell_immo}}.
 }
 

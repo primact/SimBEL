@@ -41,8 +41,4 @@ correspond au taux chargement sur encours moyens.}
 \code{calc_fin_proj} est une methode permettant de calculer au niveau du canton les resultats financier, technique,
 brut et net d'impot, ainsi que le flux de passifs soldant une projection.
 }
-\seealso{
-La classe \code{\link{EpEuroInd}} et ses methodes.
-La classe \code{\link{FraisPassif}} et ses methodes.
-}
 

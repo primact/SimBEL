@@ -1,27 +1,26 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les fonctions permettant de calculer le financement de la PB contractuelle.
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           finance_tmg
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcule la contribution de la PPB au financement des taux minimum garanti.
+##' Calcule la contribution de la PPB au financement des taux minimums garantis.
 ##'
 ##' \code{finance_tmg} est une methode permettant d'evaluer le contribution de la PPB
-##' au financement des taux minimum garanti sur prestations et sur stock.
+##' au financement des taux minimums garantis (TMG) sur prestations et sur stock.
 ##' @name finance_tmg
 ##' @docType methods
-##' @param bes_tmg_prest est un vecteur de type \code{numeric} comprenant
+##' @param bes_tmg_prest un vecteur \code{numeric} comprenant
 ##'  par produit le besoin de finance des TMG sur prestations.
-##'  @param bes_tmg_stock est un vecteur de type \code{numeric} comprenant
+##'  @param bes_tmg_stock un vecteur \code{numeric} comprenant
 ##'  par produit le besoin de finance des TMG sur le stock.
 ##' @param ppb est un objet de la classe \code{\link{Ppb}} qui renvoie l'etat courant de la PPB.
-##' @return Une liste comprenant la valeur de la contribution au financement des TMG sur prestations et sur stock.
-##' Cette liste comprend egalement la PPB mise a jour.
-##' @details Cette fonction priorise le financement des TMG prestations. Elle met a jour la PPB des reprises effectuees.
+##' @details Dans cette methode, il est considere que le PPB peut venir financer les TMG sur prestations et sur stock.
+##' Par convention, la PPB finance d'abord les TMG sur prestations, puis sur stock.
+##' @return \code{contrib_tmg_prest} la valeur de la contribution au financement des TMG sur prestations.
+##' @return \code{contrib_tmg_stock} la valeur de la contribution au financement des TMG sur stock.
+##' @return \code{ppb} l'objet \code{ppb} mis a jour.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases RevaloEngine
+##' @include Ppb_class.R
 
 
 setGeneric(name = "finance_tmg", def = function(bes_tmg_prest, bes_tmg_stock, ppb){standardGeneric("finance_tmg")})

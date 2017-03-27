@@ -15,6 +15,9 @@ proj_annee_autres_passifs(an, x, coef_inf)
 
 \item{coef_inf}{un \code{numeric} correpodant au coefficient d'inflation a appliquer sur les frais.}
 }
+\value{
+Un \code{data.frame} contenant les flux des passifs de l'annee.
+}
 \description{
 \code{proj_annee_autres_passifs} est une methode permettant de calculer les PM et les flux sur une annee pour
 des passif non modelises.

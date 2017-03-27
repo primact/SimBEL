@@ -4,7 +4,7 @@
 \name{sell_pvl_action}
 \alias{Action}
 \alias{sell_pvl_action}
-\title{Mise a jour de chaque composante du portefeuille action suite a la vente de tout ou partie de ce portefeuille.}
+\title{Mise a jour de chaque composante du portefeuille action suite a une realisation d'un montant de plus values latentes action.}
 \usage{
 sell_pvl_action(x, montant)
 }

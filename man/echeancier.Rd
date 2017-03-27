@@ -4,7 +4,7 @@
 \name{echeancier}
 \alias{Oblig}
 \alias{echeancier}
-\title{Calcul les flux d'un model point ou d'un ensemble de odels points obligataires.}
+\title{Calcule les flux d'un model point ou d'un ensemble de models points obligataires.}
 \usage{
 echeancier(coupon, maturite, zspread, nominal, yield)
 }

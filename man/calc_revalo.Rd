@@ -11,18 +11,28 @@ calc_revalo(x, passif_av_pb, tra, plac_moy_vnc, result_tech)
 \arguments{
 \item{x}{un objet de la classe \code{\link{Canton}}.}
 
-\item{passif_av_pb}{est une liste produit par la methode \code{viellissement_av_pb}
+\item{passif_av_pb}{est une liste produit par la methode \code{\link{viellissement_av_pb}}
 appliquee a un portefeuille de passif.}
 
 \item{tra}{est la valeur \code{numeric} du taux de rendement de l'actif.}
 
-\item{plac_moy_vnc}{est la valeur \code{numeric} moyenne des actifs.}
+\item{plac_moy_vnc}{est la valeur \code{numeric} moyenne des actifs en valeur nette comptable.}
 
-\item{result_tech}{est la valeur \code{numeric} du resultats techniques prise en compte de la PB.}
+\item{result_tech}{est la valeur \code{numeric} du resultat technique prise en compte avant distribution
+de la PB.}
 }
 \value{
-Une liste avec la valeur de la revalorisation additionelle nette servie par
- produit, la ppb mise a jour, la PPB mise a jour et le resultat technique avant PB.
+\code{add_rev_nette_stock} une liste avec la valeur de la revalorisation nette servie par
+ produit au titre de la participation aux benefices.
+
+\code{pmvl_liq} le montant de plus-values latentes en actions a realiser.
+
+\code{ppb} un objet \code{\link{Ppb}} correspondant a la PPB mise a jour.
+
+\code{tx_pb} un vecteur reprenant les taux de PB par produit renseigne dans l'objet \code{x}.
+
+\code{tx_enc_moy} un vecteur reprenant les taux de chargement sur encours theoriques moyens
+par produit.
 }
 \description{
 \code{calc_revalo} est une methode permettant de
@@ -30,5 +40,18 @@ Une liste avec la valeur de la revalorisation additionelle nette servie par
 }
 \author{
 Prim'Act
+}
+\seealso{
+Le calcul du TRA : \code{\link{calc_tra}}.
+Le vieillissemennt des passifs avant PB : \code{\link{viellissement_av_pb}}.
+Le calcul du resultat technique avant PB : \code{\link{calc_result_technique}}.
+Le calcul de la base de produits financiers : \code{\link{base_prod_fin}}.
+Le calcul de la PB contractuelle : \code{\link{pb_contr}}.
+Le financement des TMG par la PPB : \code{\link{finance_tmg}}.
+Le financement du taux cible par la PPB : \code{\link{finance_cible_ppb}}
+Le financement du taux cible par la realisation plus-values latentes actions : \code{\link{finance_cible_pmvl}}
+Le financement du taux cible par la compression de la marge de l'assureur : \code{\link{finance_cible_marge}}
+Le calcul de la marge de l'assureur : \code{\link{calc_marge_fin}}
+L'application de la contrainte legale de participation aux benefices : \code{\link{finance_contrainte_legale}}
 }
 

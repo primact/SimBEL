@@ -7,13 +7,12 @@
 ##' @name vieillissement_oblig_PortFin
 ##' @docType methods
 ##' @param x objet de la classe \code{PortFin}, correspondant au portefeuille financier de l'assureur avant l'etape de vieillissement de son atribut \code{ptf_oblig} de la classe \code{Oblig}.
-##' @param table_rdt est une \code{liste}, construite par la fonction \code{\link{calc_rdt}}.
-##' Cette table contient les tables d'evolution des cours et rendements sur l'annee consideree de chacune des classes d'actif.
-##' Les tables sont constuites a partir des extractions du Generateur de Scenario Economique de Prim'Act.
+##' @param new_mp_ESG est un objet de type \code{ModelPointESG}, correspondant aux conditions economiques de l'annee du vieillissement.
 ##' @return Le format de la liste renvoyee est :
 ##' \describe{
 ##' \item{\code{portFin} : }  {le portefeuille financier dont l'attribut \code{ptf_oblig} a ete vieilli d'une annee.}
-##' \item{\code{loyer} : }{le montant de loyer percus en milieu d'annee suite au vieillissement du portefeuille obligataire. }
+##' \item{\code{loyer} : }{le montant de loyer percus en milieu d'annee suite au vieillissement du portefeuille obligataire.}
+##' }
 ##' @author Prim'Act
 ##' @export
 ##' @seealso La fonction de calcul des rendements des actifs \code{\link{calc_rdt}}.

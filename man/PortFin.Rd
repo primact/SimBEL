@@ -10,19 +10,19 @@ Classe pour le portefeuille global d'actif
 \section{Slots}{
 
 \describe{
-\item{\code{ptf_action}}{est un objet de type \code{Action}, qui represente le portefeuille d'action d'un canton.}
+\item{\code{ptf_action}}{est un objet de type \code{\link{Action}}, qui represente le portefeuille d'action d'un canton.}
 
-\item{\code{ptf_immo}}{est un objet de type \code{Immo}, qui represente le portefeuille immobilier d'un canton.}
+\item{\code{ptf_immo}}{est un objet de type \code{\link{Immo}}, qui represente le portefeuille immobilier d'un canton.}
 
-\item{\code{ptf_oblig}}{est un objet de type \code{Oblig}, qui represente le portefeuille obligataire d'un canton.}
+\item{\code{ptf_oblig}}{est un objet de type \code{\link{Oblig}}, qui represente le portefeuille obligataire d'un canton.}
 
-\item{\code{ptf_treso}}{est un objet de type \code{Treso}, qui represente le portefeuille monetaire d'un canton.}
+\item{\code{ptf_treso}}{est un objet de type \code{\link{Treso}}, qui represente le portefeuille monetaire d'un canton.}
 
-\item{\code{pre}}{est un objet de type \code{PRE}, qui represente la PRE d'un canton.}
+\item{\code{pre}}{est un objet de type \code{\link{PRE}}, qui represente la PRE d'un canton.}
 
-\item{\code{rc}}{est un objet de type \code{RC}, qui represente la RC d'un canton.}
+\item{\code{rc}}{est un objet de type \code{\link{RC}}, qui represente la RC d'un canton.}
 
-\item{\code{frais_fin}}{est un objet de type \code{FraisFin}, qui represente les frais financiers d'un canton.}
+\item{\code{frais_fin}}{est un objet de type \code{\link{FraisFin}}, qui represente les frais financiers d'un canton.}
 
 \item{\code{pvl_action}}{est un \code{numeric}, qui correspond a la somme des plus values latentes des actifs Actions qui sont en situation de plus values latentes.}
 
@@ -36,7 +36,8 @@ Classe pour le portefeuille global d'actif
 
 \item{\code{mvl_oblig}}{est un \code{numeric}, qui correspond a la somme des moins values latentes des actifs Obligs qui sont en situation de moins values latentes.}
 
-\item{\code{vm_vnc_precedent}}{est une \code{liste} composee de deux elements : la vm_precedente et la vnc_precedente, correspondant respectivement a la valeur de marche
+\item{\code{vm_vnc_precedent}}{est une liste composee de deux elements : la \code{vm_precedente} et la
+ \code{vnc_precedente}, correspondant respectivement a la valeur de marche
 et a la valeur nette comptable en debut d'annee de l'objet PortFin.}
 }}
 \author{

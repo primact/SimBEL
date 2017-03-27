@@ -1,4 +1,19 @@
-# Script permettant de charger la valeur initiale des param revalo dans un objet de type ParamRevaloEngine
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#           Fonction de chargement des hyp des hypotheses de revalorisation
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+##' Chargement des attributs d'un objet \code{ParamRevaloEngine} a partir des donnees utilisateurs.
+##'
+##' \code{param_revalo_load} est la methode de chargement des attributs d'un objet \code{\link{ParamRevaloEngine}}
+##' a partir des donnees de l'environnement utilisateur.
+##' @name param_revalo_load
+##' @docType methods
+##' @param file_revalo_address un \code{character} contenant l'adresse exacte
+##' du fichier d'input utilisateur.
+##' @return L'objet de la classe \code{\link{ParamRevaloEngine}} construit a partir des inputs renseignes par l'utilisateur.
+##' @author Prim'Act
+##' @export
+##' @aliases ParamRevaloEngine
+##' @include ParamRevaloEngine_class.R PortFin_class.R
 
 setGeneric(name = "param_revalo_load", def = function(file_revalo_address){standardGeneric("param_revalo_load")})
 setMethod(

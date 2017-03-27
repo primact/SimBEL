@@ -11,6 +11,13 @@ update_mat_res(x)
 \arguments{
 \item{x}{objet de la classe Oblig (decrivant le portefeuille obligataire).}
 }
+\value{
+L'objet x dont
+\describe{
+\item{\code{mat_res} : }{est diminuee d'une unite (une unite correspond a un an)}
+\item{\code{dur_det} : }{est augmentee d'une unite (une unite correspond a un an)}
+}
+}
 \description{
 \code{update_mat_res} est une methode permettant de mettre a jour la maturite residuelle et la duree de detention
 de chaque composante d'un portefeuille obligataire.

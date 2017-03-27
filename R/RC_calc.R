@@ -10,8 +10,9 @@
 ##' @param pmr_oblig est un \code{numeric} correspondant au montant global annuel de plus ou moins values realisees sur des actifs obligataires.
 ##' @return Le format de la liste renvoyee est :
 ##' \describe{
-##' \item{\code{RC_courante} : }{ valeur de la RC courante initiale augmentee des plus ou moins values annuelles realisees }
-##' \item{\code{var_RC} : }     { variation de la RC courante}
+##' \item{\code{RC_courante} : }{ valeur de la RC courante initiale augmentee des plus ou moins values annuelles realisees}
+##' \item{\code{var_RC} : }{ variation de la RC courante.}
+##' }
 ##' @author Prim'Act
 ##' @export
 ##' @aliases RC

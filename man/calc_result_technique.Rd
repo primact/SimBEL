@@ -9,16 +9,22 @@
 calc_result_technique(passif_av_pb, var_pre)
 }
 \arguments{
-\item{passif_av_pb}{est une liste produit par la methode \code{viellissement_av_pb}
+\item{passif_av_pb}{est une liste produit par la methode \code{\link{viellissement_av_pb}}
 appliquee a un portefeuille de passif.}
 
 \item{var_pre}{est une valeur \code{numeric} correspondant a la variation de PRE.}
 }
 \value{
-Le resulat technique
+Le resultat technique.
 }
 \description{
 \code{calc_result_technique} est une methode permettant de calculer le resultat technique avant attribution de
 participation aux benefices.
+}
+\author{
+Prim'Act
+}
+\seealso{
+\code{\link{PRE}}, \code{\link{viellissement_av_pb}}.
 }
 

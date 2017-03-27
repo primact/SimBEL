@@ -4,7 +4,7 @@
 \name{get_choc_inflation_frais}
 \alias{ESG}
 \alias{get_choc_inflation_frais}
-\title{Applique le choc depenses de la formule standard a l'inflation la table de simulation pour l'indice inflation}
+\title{Applique le choc frais de la formule standard a la table de simulation pour l'indice inflation.}
 \usage{
 get_choc_inflation_frais(x, choc)
 }
@@ -18,11 +18,11 @@ choc a appliquer en additif au taux d'inflation.}
 L'objet \code{x} mis a jour.
 }
 \description{
-\code{get_choc_inflation_frais} est une methode permettant d'appliquer pplique le choc depenses
+\code{get_choc_inflation_frais} est une methode permettant d'appliquer le choc frais
  de la formule standard a la table de simulation pour l'indice inflation.
 }
 \note{
-L'inflation d'inflation compris dans l'ESG est suppose etre deja capitalise, i.e.
+L'inflation comprise dans l'ESG est suppose etre deja capitalise, i.e.
 \eqn{indice_inflation = (1 + tx inflation)^{annee}}. Il ne s'agit pas du taux d'inflation.
 }
 \author{

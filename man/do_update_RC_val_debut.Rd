@@ -4,20 +4,20 @@
 \name{do_update_RC_val_debut}
 \alias{RC}
 \alias{do_update_RC_val_debut}
-\title{Mise a jour de la valeur courante de RC}
+\title{Mise a jour de la valeur initiale de RC}
 \usage{
 do_update_RC_val_debut(x, val_debut)
 }
 \arguments{
 \item{x}{objet de la classe \code{RC} correspondant a la RC avant mise a jour.}
 
-\item{val_courante}{est un \code{numeric} correspondant au montant de RC calcule par la fonction \code{\link{calc_RC}}.}
+\item{val_debut}{est un \code{numeric} correspondant au montant de debut de periode de RC.}
 }
 \value{
 L'objet \code{RC} mis a jour de la nouvelle valeur de debut de \code{RC}
 }
 \description{
-\code{do_update_RC_val_debut} est une methode permettant de calculer le montant de RC.
+\code{do_update_RC_val_debut} est une methode permettant de mettre a jour le montant de debut de periode de RC.
 }
 \author{
 Prim'Act

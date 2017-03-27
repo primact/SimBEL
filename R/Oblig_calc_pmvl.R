@@ -10,7 +10,7 @@
 ##' @docType methods
 ##' @param x objet de la classe \code{Oblig} (decrivant le portefeuille d'obligations).
 ##' @return Une liste composee de deux elements \code{(pvl, mvl)} correspondant respectivement 
-##' aux sommes des plus values latentes obligations et aux somme des moins values latentes obligations.
+##' aux sommes des plus values latentes obligations et aux sommes des moins values latentes obligations.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases Oblig

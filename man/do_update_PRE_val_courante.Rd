@@ -4,7 +4,7 @@
 \name{do_update_PRE_val_courante}
 \alias{PRE}
 \alias{do_update_PRE_val_courante}
-\title{Mise a jour de la valeur courante de PRE}
+\title{Mise a jour de la valeur courante de PRE.}
 \usage{
 do_update_PRE_val_courante(x, val_courante)
 }

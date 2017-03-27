@@ -3,20 +3,19 @@
 \docType{class}
 \name{Ppb}
 \alias{Ppb}
-\title{La classe Ppb}
+\title{La classe \code{Ppb}.}
 \description{
 Classe pour la provision pour participation aux benefices (PPB)
 }
 \section{Slots}{
 
 \describe{
-\item{\code{valeur_ppb}}{est la valeur courante prise par la PPB.}
+\item{\code{valeur_ppb}}{est la valeur courante \code{numeric} prise par la PPB.}
 
-\item{\code{ppb_debut}}{est la valeur prise par la PPB en debut d'annee.}
+\item{\code{ppb_debut}}{est la valeur prise \code{numeric} par la PPB en debut d'annee.}
 
 \item{\code{seuil_rep}}{est une valeur \code{numeric} correspond a la proportion de PPB de debut d'annee
-que l'on peut reprendre sur une periode.
-sur la PPB sur une periode.}
+que l'on peut reprendre sur une periode.}
 
 \item{\code{seuil_dot}}{est une valeur \code{numeric} correspond a la montant maximal de dotation possible sur la PPB
 sur une periode, exprimee comme une fraction de la PPB de debut d'annee.}
@@ -25,14 +24,11 @@ sur une periode, exprimee comme une fraction de la PPB de debut d'annee.}
 
 \item{\code{compte_dot}}{est une valeur \code{numeric} qui totalise les montants de dotation effectuee sur une periode.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+La dotation et la reprise de PPB : \code{\link{calc_dotation_ppb}}, \code{\link{calc_reprise_ppb}}.
 }
 \keyword{classes}
 

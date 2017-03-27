@@ -7,7 +7,7 @@
 ##' \code{calc_frais_fin} est une methode permettant de calculer les frais financiers.
 ##' @name calc_frais_fin
 ##' @docType methods
-##' @param x est un objet de type \code{FraisFin} contenant les parametres de Frais financier associes a un canton.
+##' @param x est un objet de type \code{FraisFin} contenant les parametres des frais financiers associes a un canton.
 ##' @param vm_moy est un objet de type \code{numeric} correspondant a la valeur moyenne de l'actif en valeur
 ##' de marche.
 ##' @param coef_inflation est un objet de type \code{numeric} correspondant au coefficient d'inflation des frais.

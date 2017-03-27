@@ -15,8 +15,8 @@
 ##' @return Le format de la liste renvoyee est :
 ##' \describe{
 ##' \item{\code{ptf} : }{un vecteur contenant les flux de sortie en echeance de l'annee}
-##' \item{\code{revenu_fin} : }{}
-##' \item{\code{var_vnc_oblig} : }{}}
+##' \item{\code{revenu_fin} : }{les revenus realises au cours de la periode (coupons, tombees d'echeance, dividendes et loyers).}
+##' \item{\code{var_vnc_oblig} : }{la variation de valeur nette comptable obligataire.}}
 ##' @author Prim'Act
 ##' @export
 ##' @seealso La fonction de mise a jour specifique au portefeuille de reinvestissement \code{\link{update_PortFin_reference}}.

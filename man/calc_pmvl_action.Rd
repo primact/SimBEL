@@ -13,7 +13,7 @@ calc_pmvl_action(x)
 }
 \value{
 Une liste composee de deux elements \code{(pvl, mvl)} correspondant respectivement 
-aux sommes des plus values latentes actions et aux somme des moins values latentes action.
+aux sommes des plus values latentes actions et aux sommes des moins values latentes action.
 }
 \description{
 \code{calc_pmvl_action} est une methode permettant de calculer les valeurs de marche.

@@ -12,7 +12,7 @@
 ##' @param x un objet de la classe \code{AutresPassifs} contenant l'ensemble des donnees de passifs non modelises.
 ##' @param coef_inf un \code{numeric} correpodant au coefficient d'inflation a appliquer sur les frais.
 ##' @author Prim'Act
-##' @return Un \code{data.frame] contenant les flux des passifs de l'annee.
+##' @return Un \code{data.frame} contenant les flux des passifs de l'annee.
 ##' @export
 ##' @aliases AutresPassifs
 ##' @include AutresPassifs-class.R

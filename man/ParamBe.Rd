@@ -3,8 +3,18 @@
 \docType{class}
 \name{ParamBe}
 \alias{ParamBe}
-\title{Classe pour ParamBe}
+\title{La classe \code{ParamBe}.}
 \description{
-Classe pour ParamBe
+Une classe contenant le nombre d'annees de projection utilise
+pour le calcul du best estimate d'un assureur.
 }
+\section{Slots}{
+
+\describe{
+\item{\code{nb_annee}}{un entier comprenant le nombre d'annees de projection.}
+}}
+\author{
+Prim'Act
+}
+\keyword{classes}
 

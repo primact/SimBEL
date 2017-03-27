@@ -55,9 +55,6 @@ setMethod(
   signature = c(x = "Canton", annee_fin = "numeric", pre_on = "logical"),
   definition = function(x, annee_fin, pre_on){
 
-    # TO DO
-    # PPB sur la partie garantie
-
     #---------------------------------------------------------------
     # Etape 1 : Mise a jour des annees de projection
     #---------------------------------------------------------------
@@ -82,6 +79,20 @@ setMethod(
     passif_av_pb <- viellissement_av_pb(x@annee, x@ptf_passif, coef_inf, list_rd, x@hyp_canton@tx_soc)
     # Mise a jour des passifs
     x@ptf_passif <- passif_av_pb[["ptf"]]
+    
+    # Calcul de la PPB de premiere anneee attribuee au flux garanti
+    pm_deb <- passif_av_pb[["result_av_pb"]][["stock_agg"]][, "pm_deb"]
+    if(x@annee == 1){
+      # Gestion des divisions par 0
+      if(sum(pm_deb) != 0){
+        # Attribution au prorata de la PM
+        ppb_init_attrib <- x@ppb@ppb_debut * pm_deb / sum(pm_deb)
+      }else{ # Division par 0
+        ppb_init_attrib <- x@ppb@ppb_debut * 1 / length(pm_deb)
+        }
+    }else{
+      ppb_init_attrib <- rep(0, length(pm_deb))
+      }
 
     #---------------------------------------------------------------
     # Etape 4 : Gestion des actifs avant allocation
@@ -170,14 +181,15 @@ setMethod(
     if(sum(pm_moy) != 0){
       coef_alloc <- pm_moy / sum(pm_moy)
       # Les frais financiers sont mis a l'echelle des passifs et alloues
-      frais_fin_prod <- frais_fin * (sum(pm_moy) + x@ppb["ppb_debut"]) / plac_moy_vm * coef_alloc
+      frais_fin_prod <- frais_fin * (sum(pm_moy) + x@ppb["ppb_debut"]) / actif_realloc[["plac_moy_vnc"]] * coef_alloc
     }else{ # Division par 0
       frais_fin_prod <- rep(0, length(pm_moy))
     }
 
     # Frais financier associes au autres passifs
     frais_fin_hors_model <- frais_fin * ((passif_av_pb[["result_autres_passifs"]]$pm_fin +
-                                            passif_av_pb[["result_autres_passifs"]]$pm_deb ) / 2) / plac_moy_vm
+                                            passif_av_pb[["result_autres_passifs"]]$pm_deb ) / 2) /
+      actif_realloc[["plac_moy_vnc"]]
 
     #---------------------------------------------------------------
     # Etape 11 : Mise a jour des actifs
@@ -281,7 +293,7 @@ setMethod(
                           flux_produit[,"rach_charg"] +
                           flux_produit[,"soc_stock_ap_pb"] +
                         flux_fin_passif, hors_model$prestation),
-                      prestation_fdb = c(flux_produit[, "prest_fdb"], 0),
+                      prestation_fdb = c(flux_produit[, "prest_fdb"] - ppb_init_attrib, 0),
                       frais = c(flux_produit[,"frais_var_prime"] +
                                   flux_produit[,"frais_fixe_prime"] +
                                   flux_produit[,"frais_var_prest"] +

@@ -3,23 +3,18 @@
 \docType{class}
 \name{RevaloEngine}
 \alias{RevaloEngine}
-\title{La classe RevaloEngine}
+\title{La classe \code{RevaloEngine}.}
 \description{
-Classe comprenant les methodes pour l'application de la revalorisation des passifs
+Une classe comprenant les methodes pour l'application de la revalorisation des passifs.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{param_revalo}}{est objet de type \code{ParamRevalo} comprenant les parametres utilises pour la revalorisation des contrats.}
+\item{\code{param_revalo}}{est objet de type \code{\link{ParamRevalo}} comprenant
+les parametres utilises pour la revalorisation des contrats.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
-}
-\seealso{
-Mettre le lien vers les methodes de la classe
 }
 \keyword{classes}
 

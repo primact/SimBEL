@@ -15,6 +15,9 @@ revenu_treso(x, rdt, flux_milieu)
 
 \item{flux_milieu}{est le flux du milieu de l'annee en cours (i.e. ulterieur a l'objet Treso renseigne)}
 }
+\value{
+Le montant du revenu.
+}
 \description{
 \code{revenu_treso} est une methode permettant de calculer les valeurs de marche.
 }

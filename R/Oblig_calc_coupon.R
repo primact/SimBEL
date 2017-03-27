@@ -8,7 +8,7 @@
 ##' composant un portefeuille obligataire.
 ##' @name calc_coupon
 ##' @docType methods
-##' @param x un objet de la classe Oblig.
+##' @param x un objet de la classe Oblig, dont on souhaite calculer le coupon annuel de chacune de ses composantes.
 ##' @return Un vecteur dont chaque element correspond a la valeur du coupon de l'obligation consideree : tx_coupon * parite * nominal * nb_unit.
 ##' Le vecteur renvoye a autant d'elements que le portefeuille obligataire en input a de lignes.
 ##' @author Prim'Act

@@ -25,7 +25,7 @@
 ##' @param alloc_cible est un vecteur de type \code{numeric} constitue de 4 elements, il contient les proportions cibles d'allocations
 ##' action, immobilier, obligataire et de tresorerie.
 ##' @return \code{portFin} l'objet initial de la classe \code{\link{PortFin}} realloue a l'allocation cible.
-##' @return \code{pmvr} le montant total des pus ou moins values realisess.
+##' @return \code{pmvr} le montant total des plus ou moins values realisess.
 ##' @return \code{pmvr_oblig} le montant des plus ou moins values obligataires realisees lors de la reallocation.
 ##' @return \code{pmvr_action} le montant des plus ou moins values action realisees lors de l'etape de reallocation.
 ##' @return \code{pmvr_immo}  le montant des plus ou moins values immobilieres realisees lors de l'etape de reallocation.

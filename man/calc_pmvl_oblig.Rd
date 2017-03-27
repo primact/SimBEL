@@ -13,7 +13,7 @@ calc_pmvl_oblig(x)
 }
 \value{
 Une liste composee de deux elements \code{(pvl, mvl)} correspondant respectivement 
-aux sommes des plus values latentes obligations et aux somme des moins values latentes obligations.
+aux sommes des plus values latentes obligations et aux sommes des moins values latentes obligations.
 }
 \description{
 \code{calc_pmvl_oblig} est une methode permettant de calculer les valeurs de marche.

@@ -1,26 +1,37 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script execute les operations a effectuer les operations de calcul d'un BE pour une simulation.
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           run_be_simu
+#           run_be_simu : metheode executant les operations de calcul d'un BE pour une simulation.
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcul d'un BE par simulation
+##' Calcul d'un BE par une simulation.
 ##'
-##' \code{run_be_simu} est une methode intermediare permettant de calcul un best estimate
+##' \code{run_be_simu} est une methode permettant de calculer un best estimate
 ##' pour une simulation donnee.
 ##' @name run_be_simu
 ##' @docType methods
-##' @param x est un objet de type \code{Be}.
-##' @param i est un entier (\code{integer}) correspondant au numero de la simulation.
-##' @param pre_on est une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
+##' @param x un objet de type \code{Be}.
+##' @param i un entier (\code{integer}) correspondant au numero de la simulation.
+##' @param pre_on  une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
 ##' de PRE dans le resultat technique utilisee pour le calcul de la participation aux benefices reglementaires.
-##' @return Une liste contenant les noms de produits calcules, les flux par produits et par annee pour une simulation sous
-##' forme de matrice et les flux actualises par produits.
+##' @details Pour une simulation donnee, cette methode projette un \code{\link{Canton}} jusqu'au terme, parametre dans
+##' l'objet \code{x}.
+##' @return \code{nom_produit} un vecteur contenant le liste des noms de produits.
+##' @return \code{prime} une matrice contenant les flux de primes par produit.
+##' @return \code{prestation} une matrice contenant les flux de prestations par produit.
+##' @return \code{prestation_fdb} une matrice contenant les flux de prestations discretionnaires par produit.
+##' @return \code{frais} une matrice contenant les flux de frais par produit.
+##' @return \code{flux_be} une matrice contenant les flux de best estimate par produit.
+##' @return \code{prime_actu} une matrice contenant la valeur des primes actualisees par produit.
+##' @return \code{prestation_actu} une matrice contenant la valeur des prestations actualisees par produit.
+##' @return \code{prestation_fdb_actu} une matrice contenant la valeur des prestations
+##' discretionnaires actualisees par produit.
+##' @return \code{frais_actu} une matrice contenant la valeur des frais actualisees par produit.
+##' @return \code{be} une matrice contenant la valeur du best estimate par produit.
 ##' @author Prim'Act
+##' @seealso La methode de projection d'un \code{\link{Canton}} : \code{\link{proj_an}}.
+##' L'extraction d'une simulation de l'\code{\link{ESG}} :\code{\link{extract_ESG}}.
+##' La classe \code{\link{Be}}.
 ##' @export
 ##' @aliases Be
-##'
+##' @include Be_class.R
 setGeneric(name = "run_be_simu", def = function(x, i, pre_on){standardGeneric("run_be_simu")})
 setMethod(
   f = "run_be_simu",

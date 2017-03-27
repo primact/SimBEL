@@ -12,7 +12,7 @@ rc_load(file_RC_address)
 \item{file_RC_address}{est un \code{character} correspondant a l'adresse du fichier d'input renseignant les donnees de RC}
 }
 \value{
-Un objet de la classe \code{RC} charge a partir des donnees du fichier dont le nom est RCcise en input.
+Un objet de la classe \code{RC} charge a partir des donnees du fichier dont le nom est precise en input.
 }
 \description{
 \code{rc_load} est une methode permettant de charger la valeur de RC initiale dans un objet de type RC.

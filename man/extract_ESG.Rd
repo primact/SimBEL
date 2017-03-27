@@ -4,24 +4,27 @@
 \name{extract_ESG}
 \alias{ESG}
 \alias{extract_ESG}
-\title{Cette methode construit l'objet de classe \code{ModelPoint_ESG} a partir d'un objet de la classe \code{ESG}. 
-Le ModelPoint ESG ainsi construit correspond a l'extraction de courbes de l'ESG pour une annee specifique et pour une simulation specifique.}
+\title{permet de construire et charger les trajectoires simulees par le Generateur de Scenarios Economiques de Prim'Act.}
 \usage{
 extract_ESG(x, num_trajectoire, annee)
 }
 \arguments{
-\item{x}{est un objet de la classe \code{ESG}.}
+\item{x}{un objet de la classe \code{\link{ESG}}.}
 
-\item{num_trajectoire}{est une valeur de type \code{integer} correspondant a la trajectoire de simulation dont on souhaite obtenir les valeurs.}
+\item{num_trajectoire}{une valeur de type \code{integer} correspondant a la trajectoire de simulation
+dont on souhaite obtenir les valeurs.}
 
-\item{annee}{est une valeur de type \code{integer} correspondant a l'annee d'interet pour le model point (possibilite de selectionner les annees 0 a nb_annee_proj).}
+\item{annee}{une valeur de type \code{integer} correspondant a l'annee d'interet pour le model point
+(possibilite de selectionner les annees 0 a \code{nb_annee_proj}).}
 }
 \value{
-\code{x} l'objet de la classe \code{ModelPoint_ESG} construit.
+\code{x} l'objet de la classe \code{\link{ModelPoint_ESG}} construit.
 }
 \description{
-\code{extract_ESG} est une methode permettant de construire et charger les trajectoires simulees par le Generateur de
-Scenarios Economiques de Prim'Act.
+\code{extract_ESG} construit l'objet de classe \code{\link{ModelPoint_ESG}} a partir d'un objet
+ de la classe \code{\link{ESG}}.
+Le \code{ModelPointESG} ainsi construit correspond a l'extraction de donnees de l'ESG
+ pour une annee specifique et pour une simulation specifique.
 }
 \author{
 Prim'Act

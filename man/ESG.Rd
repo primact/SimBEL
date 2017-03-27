@@ -5,16 +5,35 @@
 \alias{ESG}
 \title{La classe ESG}
 \description{
-Classe pour les donnees globales d'actif
+Une classe de parametres contenant les tables de simulation, generees par une generateur de scenarions
+economique.
 }
-\section{Lien a creer}{
+\section{Slots}{
 
-}
+\describe{
+\item{\code{nb_simu}}{un entier (\code{integer}) correspondant au nombre de simulations.}
+
+\item{\code{ind_action}}{une liste contenant les differents indices actions utilises. Chaque element de la liste contient
+\code{nb_simu} simulations de l'indice.}
+
+\item{\code{ind_immo}}{une liste contenant les differents indices immobilier utilises. Chaque element de la liste contient
+\code{nb_simu} simulations de l'indice.}
+
+\item{\code{ind_inflation}}{une liste contenant l'indice inflation utilise. L'element de la liste contient
+\code{nb_simu} simulations de l'indice.}
+
+\item{\code{yield_curve}}{une liste contenant les courbes de taux simulees a chaque date de projection. Chaque element
+de la liste, correspondant a une annee de projection, contient \code{nb_simu} simulations de la courbe des taux.}
+
+\item{\code{deflateur}}{une liste contenant le deflateur stochastique a utiliser. L'element de la liste contient
+\code{nb_simu} simulations du deflateur.}
+}}
 \author{
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+Les methodes de chargement d'un ESG \code{\link{chargement_ESG}} et d'extraction d'un model point
+ESG \code{\link{extract_ESG}}.
 }
 \keyword{classes}
 

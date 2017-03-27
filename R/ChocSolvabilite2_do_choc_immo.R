@@ -1,16 +1,18 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           do_choc_immo
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Permet a partir d'un canton initial de creer un canton choque immobilier.
 ##'
-##' \code{do_choc_immo} est une methode permettant d'appliquer le choc immobilier de la formule standard Solvabilite 2 a un canton.
+##' \code{do_choc_immo} est une methode permettant d'appliquer le choc immobilier de la formule standard Solvabilite 2
+##'  a un canton.
 ##' @name do_choc_immo
 ##' @docType methods
-##' @param x objet de la classe \code{ChocSolvabilite2}.
-##' @param canton est un objet de la classe \code{canton}. Il correspond au canton non choque (i.e. central) de l'assureur.
-##' @return \code{canton} l'objet  de la classe \code{canton} correspondant au scenario choque immobilier au sens de la formule standard Solvabilite 2.
-##' @note Il est possible d'appliquer des chocs actions distincts a chaque ligne immobilier present en portefeuille selon l'index.
+##' @param x objet de la classe \code{\link{ChocSolvabilite2}}.
+##' @param canton est un objet de la classe \code{\link{Canton}}. Il correspond au canton non choque (i.e. central) 
+##' de l'assureur.
+##' @return \code{canton} l'objet  de la classe \code{\link{Canton}} correspondant au scenario choque immobilier au sens de la formule standard Solvabilite 2.
+##' @note Il est possible d'appliquer des chocs immobiliers distincts a chaque ligne immobilier present en portefeuille
+##'  selon l'index.
 ##' Cette parametrisation est effectuee dans les fichiers d'inputs utilisateurs. 
 ##' @author Prim'Act
 ##' @export

@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           do_update_PRE_val_courante
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Mise a jour de la valeur courante de PRE
+##' Mise a jour de la valeur courante de PRE.
 ##'
 ##' \code{do_update_PRE_val_courante} est une methode permettant de calculer le montant de PRE.
 ##' @name do_update_PRE_val_courante

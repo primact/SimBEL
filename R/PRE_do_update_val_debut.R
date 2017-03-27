@@ -1,13 +1,13 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           do_update_PRE_val_debut
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Mise a jour de la valeur courante de PRE
+##' Mise a jour de la valeur de debut de periode de la PRE
 ##'
-##' \code{do_update_PRE_val_debut} est une methode permettant de calculer le montant de PRE.
+##' \code{do_update_PRE_val_debut} est une methode permettant de mettre a jour le montant de debut de periode de PRE.
 ##' @name do_update_PRE_val_debut
 ##' @docType methods
 ##' @param x objet de la classe \code{PRE} correspondant a la PRE avant mise a jour.
-##' @param val_courante est un \code{numeric} correspondant au montant de PRE calcule par la fonction \code{\link{calc_PRE}}.
+##' @param val_debut est un \code{numeric} correspondant au montant de debut de periode de PRE.
 ##' @return L'objet \code{PRE} mis a jour de la nouvelle valeur de debut de \code{PRE}
 ##' @author Prim'Act
 ##' @export

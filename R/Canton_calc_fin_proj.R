@@ -23,8 +23,6 @@
 ##' @return \code{result_brut} le montant de resultat brut d'impot en fin de projection.
 ##' @return \code{result_net} le montant de resultat net d'impot en fin de projection.
 ##' @return \code{impot} le montant d'impot sur le resultat en fin de projection.
-##' @seealso La classe \code{\link{EpEuroInd}} et ses methodes.
-##' La classe \code{\link{FraisPassif}} et ses methodes.
 ##' @export
 ##' @aliases Canton
 ##' @include Canton_class.R
@@ -78,7 +76,7 @@ setMethod(
     revalo_fin_passif <- max(0, flux_fin_actif) * coef_alloc * coef_scale
 
     # Choix de modelisation : application des taux de PB contractuel et liquidation de la PPB
-    revalo_fin_passif <- revalo_fin_passif * tx_pb + x@ppb@valeur_ppb
+    revalo_fin_passif <- revalo_fin_passif * tx_pb + x@ppb@valeur_ppb * coef_alloc
     # Calcul du net de chargement sur encours
     revalo_fin_passif <- revalo_fin_passif * (1 - tx_enc_moy)
     result_tech <- result_tech - revalo_fin_passif
@@ -86,7 +84,7 @@ setMethod(
     # Calcul d'un flux de fin d'annee
     # Choix de modelisation : la PSAP residuelle est attribuee en totalite au passif modelise
     flux_fin_passif <- pm_fin_ap_pb +
-      revalo_fin_passif * (1 - x@hyp_canton@tx_soc) +
+      revalo_fin_passif +
       x@ptf_passif@autres_reserves@psap_valeur * coef_alloc
 
     # La reprise de PSAP n'a pas d'effet sur le resultat technique car elle est supposee

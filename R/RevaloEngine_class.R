@@ -1,20 +1,14 @@
-#--------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les declarateurs, constructeurs et verificateurs de la classe RevaloEngine
-#--------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           Declarateur
+#           Definition de la classe Canton
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' La classe RevaloEngine
+##' La classe \code{RevaloEngine}.
 ##'
-##' Classe comprenant les methodes pour l'application de la revalorisation des passifs
-##'
+##' Une classe comprenant les methodes pour l'application de la revalorisation des passifs.
 ##' @name RevaloEngine
-##' @slot param_revalo est objet de type \code{ParamRevalo} comprenant les parametres utilises pour la revalorisation des contrats.
+##' @slot param_revalo est objet de type \code{\link{ParamRevalo}} comprenant
+##'  les parametres utilises pour la revalorisation des contrats.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
 ##' @keywords classes
 setClass(
   Class = "RevaloEngine",

@@ -2,7 +2,7 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           sell_pvl_action
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Mise a jour de chaque composante du portefeuille action suite a la vente de tout ou partie de ce portefeuille.
+##' Mise a jour de chaque composante du portefeuille action suite a une realisation d'un montant de plus values latentes action.
 ##'
 ##' \code{sell_pvl_action} est une methode permettant de mettre a jour chaque composante d'un portefeuille action suite a la vente
 ##' de tout ou partie de ce portefeuille afin de realiser un montant de plus values latentes.

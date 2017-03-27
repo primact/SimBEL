@@ -15,7 +15,7 @@
 ##' @docType class
 ##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
+##' @seealso Les methodes de calcul de la PRE \code{\link{calc_PRE}}, et de mises a jour des PRE initiales et courantes \code{\link{do_update_PRE_val_courante}}, \code{\link{do_update_PRE_val_debut}}.
 ##' @keywords classes
 ##' @export
 

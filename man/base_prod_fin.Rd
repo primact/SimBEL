@@ -9,11 +9,11 @@
 base_prod_fin(tra, pm_moy, ppb)
 }
 \arguments{
-\item{tra}{est un objet \code{numeric} donnant le taux de rendement de l'actif.}
+\item{tra}{est une valeur \code{numeric} donnant le taux de rendement de l'actif.}
 
 \item{pm_moy}{est un vecteur \code{numeric} comprenant le montant de PM moyenne par produit.}
 
-\item{ppb}{est un objet de la classe \code{Ppb} qui renvoie l'etat courant de la PPB.}
+\item{ppb}{est un objet de la classe \code{\link{Ppb}} qui renvoie l'etat courant de la PPB.}
 }
 \value{
 La valeur de la base de produit financier par produit et au total pour le portefeuille.
@@ -24,5 +24,8 @@ La valeur de la base de produit financier par produit et au total pour le portef
 }
 \author{
 Prim'Act
+}
+\seealso{
+\code{\link{Ppb}}.
 }
 

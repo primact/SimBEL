@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Echeancier
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcul les flux d'un model point ou d'un ensemble de odels points obligataires.
+##' Calcule les flux d'un model point ou d'un ensemble de models points obligataires.
 ##'
 ##' \code{echeancier} est une methode permettant de calculer les flux jusqu'a maturite residuelle.
 ##' @name echeancier
@@ -39,17 +39,26 @@ setMethod(
                 if (length(yield)<m){ stop("[Oblig:echeancier] : La courbe de taux renseigne contient moins de maturite que la maturite residuelle des oblig\n")}
                 grid_flux <- grid_flux /(1 + yield[1:m] + zspread)^(1:m)
             }
-        }
-        else {
-            # Grille de versement des coupons
-            grid_indicatrice_coup <- t(mapply(function(x,y){c(rep(1,x),rep(0,y-x))}, maturite, m))
-            grid_coupon           <- matrix(coupon, nrow = n, ncol = m, byrow = F) * grid_indicatrice_coup
-            # Grille de versement des nominaux
-            grid_indicatrice_nom  <- t(mapply(function(x,y){if(x > 0) {return(c(rep(0,(x-1)),1,rep(0,(y-x))))}
-                if(x == 0){return(rep(0,y))}},
-                maturite,
-                m))
-            grid_nominal          <- matrix(nominal,nrow = n, ncol = m, byrow = F) * grid_indicatrice_nom
+        } else {
+            if(m>1){
+                # Grille de versement des coupons
+                grid_indicatrice_coup <- t(mapply(function(x,y){c(rep(1,x),rep(0,y-x))}, maturite, m))
+                grid_coupon           <- matrix(coupon, nrow = n, ncol = m, byrow = F) * grid_indicatrice_coup
+                # Grille de versement des nominaux
+                grid_indicatrice_nom  <- t(mapply(function(x,y){ if(x > 0) {return(c(rep(0,(x-1)),1,rep(0,(y-x))))}
+                                                                 if(x == 0){return(rep(0,y))}
+                                                                },maturite,m))
+                grid_nominal          <- matrix(nominal,nrow = n, ncol = m, byrow = F) * grid_indicatrice_nom
+            } else {
+                # Grille de versement des coupons
+                grid_indicatrice_coup <- t(mapply(function(x,y){c(rep(1,x),rep(0,y-x))}, maturite, 2))
+                grid_coupon           <- matrix(coupon, nrow = n, ncol = 2, byrow = F) * grid_indicatrice_coup
+                # Grille de versement des nominaux
+                grid_indicatrice_nom  <- t(mapply(function(x,y){ if(x > 0) {return(c(rep(0,(x-1)),1,rep(0,(y-x))))}
+                                                                 if(x == 0){return(rep(0,y))}
+                                                                },maturite,2))
+                grid_nominal          <- matrix(nominal,nrow = n, ncol = 2, byrow = F) * grid_indicatrice_nom
+            }
             # Grille de flux bruts
             grid_flux             <- grid_coupon + grid_nominal
 
@@ -57,7 +66,11 @@ setMethod(
             if(length(yield)>0){
                 # Autre cas warning!
                 if (length(yield) < m){ stop("[Oblig:echeancier] : La courbe de taux renseigne contient moins de maturite que la maturite residuelle des oblig\n")}
-                grid_actu   <- matrix((1 + yield[1:m] + rep(zspread, each = m))^-(1:m), nrow = n, ncol = m, byrow = T)
+                if (m>1){
+                    grid_actu   <- matrix((1 + yield[1:m] + rep(zspread, each = m))^-(1:m), nrow = n, ncol = m, byrow = T)
+                } else {
+                    grid_actu   <- matrix((1 + yield[1:2] + rep(zspread, each = 2))^-(1:2), nrow = n, ncol = 2, byrow = T)
+                }
                 grid_flux   <- (grid_coupon + grid_nominal) * grid_actu
             }
         }

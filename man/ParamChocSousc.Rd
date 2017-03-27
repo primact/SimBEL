@@ -3,23 +3,18 @@
 \docType{class}
 \name{ParamChocSousc}
 \alias{ParamChocSousc}
-\title{La classe ParamChocSousc}
+\title{La classe \code{ParamChocSousc}.}
 \description{
-Classe pour pour les parametres de comportement
+Une classe contenant les parametres des chocs souscription de la formule standard.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{mp}}{: model point contenant l'ensemble des parametres pour faire les differents chocs}
+\item{\code{mp}}{un \code{data.frame} contenant l'ensemble des parametres necessaires a l'application des
+chocs du module Souscription Vie.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
-}
-\seealso{
-Mettre le lien vers les methodes de la classe
 }
 \keyword{classes}
 

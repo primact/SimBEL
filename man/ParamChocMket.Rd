@@ -3,18 +3,23 @@
 \docType{class}
 \name{ParamChocMket}
 \alias{ParamChocMket}
-\title{La classe ESG}
+\title{La classe \code{ParamChocMket}.}
 \description{
-Classe pour les donnees globales d'actif
+Une classe contenant les parametres des chocs de marche de la formule standard.
 }
-\section{Lien a creer}{
+\section{Slots}{
 
-}
+\describe{
+\item{\code{table_choc_action_type1}}{un \code{data.frame} contenant les parametres du choc action type 1.}
+
+\item{\code{table_choc_action_type2}}{un \code{data.frame} contenant les parametres du choc action type 2.}
+
+\item{\code{table_choc_immo}}{un \code{data.frame} contenant les parametres du choc immobilier.}
+
+\item{\code{table_choc_spread}}{un \code{data.frame} contenant les parametres du choc de spread.}
+}}
 \author{
 Prim'Act
-}
-\seealso{
-Mettre le lien vers les methodes de la classe
 }
 \keyword{classes}
 

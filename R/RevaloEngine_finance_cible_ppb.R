@@ -1,28 +1,31 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les fonctions permettant de calculer le financement de la PB contractuelle.
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           finance_cible_ppb
+#           finance_cible_ppb : methode permettant de calculer le financement de PB par reprise de PPB.
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Evalue le financement d'un taux cible par la PPB.
+##' Evalue le financement d'une revalorisation au taux cible par une reprise de PPB.
 ##'
 ##' \code{finance_cible_ppb} est une methode permettant de
-##'  determiner le financement de taux cibles par la provision pour participation aux benefices.
+##'  determiner le financement d'une revalorisation au taux cible par la reprise de provision pour participation
+##'   aux benefices (PPB). Cette methode evalue egalement si une dotation est effectue.
 ##' @name finance_cible_ppb
 ##' @docType methods
-##' @param bes_cible est un vecteur de type \code{numeric} comprenant par produit le besoin de financement aux taux cible.
-##' @param rev_stock_nette est un vecteur de type \code{numeric} comprenant par produit le montant de revalorisation nette atteint.
-##' @param ppb est un objet de la classe \code{Ppb} qui renvoie l'etat courant de la PPB.
-##' @return Une liste avec la valeur de la revalorisation nette servie par produit, les montants de dotation
-##' et reprise sur PPB et la PPB mise à jour.
-##' @details Lorsque la revalorisation nette est superieure au besoin de financement des taux cibles, on sert le taux cible
-##' et on dote le reste a la PPB dans la limite du plafond de dotation annuel. A l'inverse, les taux cible sont finances par
-##' les compensations entre produits lorsque certains prevoient une revalorisation superieure au taux cible, et
+##' @param bes_cible un vecteur \code{numeric} correspondant au besoin de financement necessaire pour atteindre
+##' le taux cible par produit.
+##' @param rev_stock_nette un vecteur \code{numeric} comprenant par produit
+##'  le montant de revalorisation nette au titre de le PB atteint.
+##' @param ppb un objet de la classe \code{\link{Ppb}} qui renvoie l'etat courant de la PPB.
+##' @details Lorsque la revalorisation nette est superieure au besoin de financement des taux cibles,
+##' on sert le taux cible et on dote le reste a la PPB dans la limite du plafond de dotation annuel.
+##' A l'inverse, les taux cible sont finances par les compensations entre produits lorsque certains
+##' prevoient une revalorisation superieure au taux cible, puis
 ##' par une reprise sur PPB.
+##' @return \code{rev_stock_nette} la valeur de la revalorisation nette servie apres une eventuelle reprise de PPB.
+##' @return \code{dotation} le montant de dotation a la PPB.
+##' @return \code{reprise} le montant de reprise sur la PPB.
+##' @return \code{ppb} l'objet \code{ppb} mis a jour.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases RevaloEngine
+##' @include Ppb_class.R
 
 setGeneric(name = "finance_cible_ppb", def = function(bes_cible, rev_stock_nette, ppb){standardGeneric("finance_cible_ppb")})
 setMethod(

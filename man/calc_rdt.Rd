@@ -14,7 +14,7 @@ calc_rdt(x, mp_ESG)
 \item{mp_ESG}{objet de la classe ModelPointESG decrivant les conditions de l'annee n ( ainsi que l'annee n-1 pour les indices actions & immo).}
 }
 \value{
-Un data frame composé de deux colonnes et autant de lignes que le portefeuille action a de lignes.
+Un data frame compose de deux colonnes et autant de lignes que le portefeuille action a de lignes.
 }
 \description{
 \code{calc_rdt} est une methode permettant de calculer les rendements des portfeuilles Action et Immo d'un objet PortFin.

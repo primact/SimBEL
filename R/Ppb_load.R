@@ -1,5 +1,22 @@
-# Script permettant de charger la valeur initiale des ppb dans un objet de type Ppb
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#           Fonction de chargement des donnnes et des hypotheses de la PPB
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+##' Methode permettant de charger les valeurs des hypotheses et des donnees de PPB
+##'
+##' \code{ppb_load} est une methode permettant de charger les parametres associees a un
+##' objet de classe \code{\link{Ppb}}.
+##' @name ppb_load
+##' @docType methods
+##' @param file_ppb_address est un \code{character} contenant l'adresse exacte
+##' du fichier d'input utilisateur
+##' permettant de renseigner un objet \code{\link{Ppb}}.
+##' @return L'objet de la classe \code{\link{Ppb}} construit a partir des inputs renseignes par l'utilisateur.
+##' @author Prim'Act
+##' @seealso La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
+##'  pour renseigner l’input.
+##' @export
+##' @aliases HypCanton
+##' @include HypCanton_class.R
 setGeneric(name = "ppb_load", def = function(file_ppb_address){standardGeneric("ppb_load")})
 setMethod(
     f = "ppb_load",

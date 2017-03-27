@@ -15,7 +15,8 @@
 ##' @return Le format de la liste renvoyee est :
 ##' \describe{
 ##' \item{\code{portFin} : }  {le portefeuille financier dont l'attribut \code{ptf_action} a ete vieilli d'une annee.}
-##' \item{\code{dividende} : }{le montant de dividende percus en milieu d'annee suite au vieillissement du portefeuille action. }
+##' \item{\code{dividende} : }{le montant de dividende percus en milieu d'annee suite au vieillissement du portefeuille action.}
+##' }
 ##' @author Prim'Act
 ##' @export
 ##' @seealso La fonction de calcul des rendements des actifs \code{\link{calc_rdt}}.
@@ -29,10 +30,10 @@ setMethod(
     definition = function(x, table_rdt){
         # Verification input :
         if(nrow(x["ptf_action"]["ptf_action"]) > 0) {
-            
+
             # Calcul des dividendes
             dividende  <- sum(table_rdt[["rdt_action"]][["div"]])
-            
+
             # Mise a jour de la VM Action en fin d'annee
             x["ptf_action"] <- update_vm_action(x["ptf_action"], calc_vm_action(x["ptf_action"], table_rdt[["rdt_action"]][["rdt"]] ))
             # Mise a jour des durees de detention Action/Immo

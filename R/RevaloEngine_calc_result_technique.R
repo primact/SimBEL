@@ -1,10 +1,5 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend la fonction permettant de calculer le resultat technique
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           calc_result_technique
+#           calc_result_technique : methode permettant de calculer le resultat technique
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' calcule le resultat technique
 ##'
@@ -12,10 +7,12 @@
 ##' participation aux benefices.
 ##' @name calc_result_technique
 ##' @docType methods
-##' @param passif_av_pb est une liste produit par la methode \code{viellissement_av_pb}
+##' @param passif_av_pb est une liste produit par la methode \code{\link{viellissement_av_pb}}
 ##' appliquee a un portefeuille de passif.
 ##' @param var_pre est une valeur \code{numeric} correspondant a la variation de PRE.
-##' @return Le resulat technique
+##' @return Le resultat technique.
+##' @author Prim'Act
+##' @seealso \code{\link{PRE}}, \code{\link{viellissement_av_pb}}.
 ##' @export
 ##' @aliases RevaloEngine
 

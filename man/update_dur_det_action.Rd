@@ -4,7 +4,7 @@
 \name{update_dur_det_action}
 \alias{Action}
 \alias{update_dur_det_action}
-\title{Mise a jour de chaque composante du portefeuille action suite a la vente de tout ou partie de ce portefeuille.}
+\title{Mise a jour des durees de detention d'un portefeuille action.}
 \usage{
 update_dur_det_action(x)
 }

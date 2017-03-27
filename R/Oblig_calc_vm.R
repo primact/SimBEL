@@ -18,8 +18,8 @@
 ##' @name calc_vm_oblig
 ##' @docType methods
 ##' @param x objet de la classe \code{Oblig} (decrivant le portefeuille d'obligation).
-##' @param rdt vecteur de type \code{numeric} decrivant le rendement de chacune des lignes d'obligation du portefeuille obligation de l'assureur.
-##' Contient autant d'elements que le portefeuille a de lignes.
+##' @param yield_curve vecteur de type \code{numeric} contenant la courbe de taux 
+##' (cf. l'attribut \code{yield_curve} des objets de la classe \code{\link{ModelPointESG}}).
 ##' @return L'objet \code{x} dont les valeurs de marche ont ete mises a jour.
 ##' @author Prim'Act
 ##' @export

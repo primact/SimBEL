@@ -30,6 +30,7 @@
 ##' Le calcul des fins de projection : \code{\link{calc_fin_proj}}.
 ##' @keywords classes
 ##' @export
+##' @include PortFin_class.R PortPassif-class.R ModelPointESG_class.R Ppb_class.R HypCanton_class.R ParamAlmEngine_class.R ParamRevaloEngine_class.R
 setClass(
   Class = "Canton",
   representation = representation(

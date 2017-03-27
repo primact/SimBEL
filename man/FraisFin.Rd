@@ -13,7 +13,7 @@ Classe pour les parametres de frais financiers d'un assureur.
 \item{\code{tx_chargement}}{est une valeur \code{numeric} correspondant au taux de frais de gestion financiere.}
 
 \item{\code{indicatrice_inflation}}{est un objet de type \code{logical}, qui permet d'indiquer si une inflation
-doit etre applique.}
+doit etre appliquee.}
 }}
 \section{Lien a creer}{
 

@@ -4,45 +4,55 @@
 \name{finance_contrainte_legale}
 \alias{RevaloEngine}
 \alias{finance_contrainte_legale}
-\title{Applique la contrainte legale de participation aux benefices}
+\title{Applique la contrainte legale de participation aux benefices.}
 \usage{
 finance_contrainte_legale(base_fin, base_fin_etendu, result_tech, it_stock,
   rev_stock_nette, rev_prest_nette, dot_ppb, marge_fin, ppb, param_revalo)
 }
 \arguments{
-\item{base_fin}{est un vecteur de type \code{numeric} comprenant par produit la base de produits financiers.}
+\item{base_fin}{un vecteur \code{numeric} comprenant par produit la base de produits financiers.}
 
-\item{result_tech}{est une valeur de type \code{numeric} comprenant le resultat technique.}
+\item{result_tech}{une valeur \code{numeric} comprenant le resultat technique.}
 
-\item{it_stock}{est un vecteur de type \code{numeric} comprenant par produit les interets techniques affectes au stock.}
+\item{it_stock}{un vecteur \code{numeric} comprenant par produit les interets techniques affectes au stock.}
 
-\item{rev_stock_nette}{est un vecteur de type \code{numeric} comprenant par produit la revalorisaton nette
+\item{rev_stock_nette}{un vecteur de type \code{numeric} comprenant par produit la revalorisaton nette
 affectee au stock.}
 
-\item{rev_prest_nette}{est un vecteur de type \code{numeric} comprenant par produit a revalorisaton nette
+\item{rev_prest_nette}{un vecteur de type \code{numeric} comprenant par produit a revalorisaton nette
 affectee aux prestations.}
 
-\item{dot_ppb}{est une valeur de type \code{numeric} comprenant la dotation de PPB financant la revalorisation
-sur stock, hors TMG.}
+\item{dot_ppb}{une valeur \code{numeric} comprenant la dotation de PPB financant la revalorisation
+sur stock.}
 
-\item{marge_fin}{est une valeur de type \code{numeric} comprenant la marge financiere courante de l'assureur.}
+\item{marge_fin}{une valeur \code{numeric} comprenant la marge financiere courante de l'assureur.}
 
-\item{ppb}{est un objet de la classe \code{Ppb} qui renvoie l'etat courant de la PPB.}
+\item{ppb}{un objet de la classe \code{\link{Ppb}} qui renvoie l'etat courant de la PPB.}
 
-\item{param_revalo}{est un objet de la classe \code{ParamRevaloEngine}
+\item{param_revalo}{un objet de la classe \code{\link{ParamRevaloEngine}}.
 comprenant les parametres de revalorisation.}
 
-\item{base_fin_entendu}{est une valeur \code{numeric} comprenant la base totale de produits financiers,
-y compris passifs non modelises.}
+\item{base_fin_entendu}{une valeur \code{numeric} comprenant la base totale de produits financiers
+(somme des produits modelise et des  passifs non modelises).}
 }
 \value{
-Une liste avec la revalorisation nette affectee au stock
-la marge financiere de l'assureur apres prise en compte de la contrainte legale, la PPB et
-l'objet \code{param_revalo} qui comprend l'etat du solde de participation aux benefices reglementaire.
+\code{rev_stock_nette} la valeur de la revalorisation nette servie apres application de la contrainte legale.
+
+\code{marge_fin} le montant de marge de l'assureur apres reduction.
+
+\code{ppb} l'objet \code{ppb} mis a jour.
+
+\code{param_revalo} l'objet \code{param_revalo} mis a jour (solde de PB reglementaire negatif).
 }
 \description{
 \code{finance_contrainte_legale} est une methode permettant de calculer la contrainte legale
 de participation aux benefices et de l'appliquer si necessaire pour accroitre la revalorisation.
+}
+\details{
+Cette methode permet de calculer la contrainte de revalorisation imposee par la reglementation. Si cette
+contrainte est verifie alors rien n'est fait, hormis la mise a jour eventuelle du solde negatif de PB. Sinon, la
+revalorisation additionnelle est dote a la PPB, jusqu'au maximum de dotation possible, puis le relicat est alloue
+entre les produits. La revalorisation additionelle vient diminuer la marge financiere de l'assureur.
 }
 \author{
 Prim'Act

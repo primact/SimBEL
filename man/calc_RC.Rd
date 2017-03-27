@@ -13,6 +13,13 @@ calc_RC(x, pmvr_oblig)
 
 \item{pmr_oblig}{est un \code{numeric} correspondant au montant global annuel de plus ou moins values realisees sur des actifs obligataires.}
 }
+\value{
+Le format de la liste renvoyee est :
+\describe{
+\item{\code{RC_courante} : }{ valeur de la RC courante initiale augmentee des plus ou moins values annuelles realisees}
+\item{\code{var_RC} : }{ variation de la RC courante.}
+}
+}
 \description{
 \code{calc_RC} est une methode permettant de calculer le montant de RC.
 }

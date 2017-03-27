@@ -1,13 +1,13 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           do_update_RC_val_debut
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Mise a jour de la valeur courante de RC
+##' Mise a jour de la valeur initiale de RC
 ##'
-##' \code{do_update_RC_val_debut} est une methode permettant de calculer le montant de RC.
+##' \code{do_update_RC_val_debut} est une methode permettant de mettre a jour le montant de debut de periode de RC.
 ##' @name do_update_RC_val_debut
 ##' @docType methods
 ##' @param x objet de la classe \code{RC} correspondant a la RC avant mise a jour.
-##' @param val_courante est un \code{numeric} correspondant au montant de RC calcule par la fonction \code{\link{calc_RC}}.
+##' @param val_debut est un \code{numeric} correspondant au montant de debut de periode de RC.
 ##' @return L'objet \code{RC} mis a jour de la nouvelle valeur de debut de \code{RC}
 ##' @author Prim'Act
 ##' @export

@@ -20,7 +20,7 @@ L'objet de la classe \code{PortFin} renvoye correspond au portefeuille financier
 }
 \description{
 \code{update_PortFin_reference} est une methode permettant de calculer et mettre a jour un portefeuille financier
-suite a un vieillissement.
+de reinvestissement suite a un vieillissement.
 }
 \author{
 Prim'Act

@@ -7,7 +7,7 @@
 ##' @name update_treso
 ##' @docType methods
 ##' @param x objet de la classe \code{Treso}, correspondant a l'actif Tresorerie d'un assureur anterieur a integration d'un flux.
-##' @param flux est une \code{numeric} correspondant a un flux.
+##' @param flux est un \code{numeric} correspondant a un flux.
 ##' Si il est positif, le flux est entrant.
 ##' Si il est negatif, le flux est sortant.
 ##' @return L'objet \code{Treso} mis a jour du flux precise en input.

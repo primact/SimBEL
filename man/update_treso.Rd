@@ -11,7 +11,7 @@ update_treso(x, flux)
 \arguments{
 \item{x}{objet de la classe \code{Treso}, correspondant a l'actif Tresorerie d'un assureur anterieur a integration d'un flux.}
 
-\item{flux}{est une \code{numeric} correspondant a un flux.
+\item{flux}{est un \code{numeric} correspondant a un flux.
 Si il est positif, le flux est entrant.
 Si il est negatif, le flux est sortant.}
 }

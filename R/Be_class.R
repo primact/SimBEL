@@ -1,26 +1,27 @@
-#--------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les declarateurs, constructeurs et verificateurs de la classe Be
-#--------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           Declarateur
+#           Definition de la classe Be
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' La classe Be
+##' La classe \code{Be}.
 ##'
-##' Classe pour le BE d'un assureur
-##'
+##' Une classe pour le calcul du best estimate d'un assureur.
 ##' @name Be
-##' @slot param_be est un objet de type \code{ParamBe} qui regroupe les parametres de base du best estimate.
-##' @slot canton est un objet de type \code{Canton} correspond au canton en date initiale.
-##' @slot esg est un objet de type \code{ESG}.
-##' @slot tab_flux est une liste qui contient les flux moyens de best estimate.
-##' @slot tab_be est une liste qui contient la valeur du BE et de ses composantes.
+##' @slot param_be un objet \code{\link{ParamBe}} qui regroupe les parametres de base du calcul d'un best estimate.
+##' @slot canton un objet de type \code{\link{Canton}} correspond au canton parametre en date initiale.
+##' @slot esg un objet de type \code{\link{ESG}}.
+##' @slot tab_flux une liste qui contient les flux moyens de best estimate et de ses composantes.
+##' @slot tab_be est une liste qui contient la valeur du best estimate et de ses composantes.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
+##' @seealso Le calcul d'un best estimate : \code{\link{run_be}}.
+##' Le calcul d'une simulation de best estimate : \code{\link{run_be_simu}}.
+##' L'initialisation d'un best estimate dans les situations centrales et choquees : \code{\link{init_scenario}}.
+##' La sortie des resultats au format ".csv" : \code{\link{write_be_results}}.
+##' La classe \code{\link{Canton}}.
+##' La classe \code{\link{ESG}}.
+##' La classe \code{\link{ParamBe}}.
 ##' @keywords classes
 ##' @export
+##' @include Canton_class.R  ParamBe_class.R ESG_class.R
 setClass(
   Class = "Be",
   representation = representation(

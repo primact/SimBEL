@@ -15,6 +15,13 @@ vieillissement_immo_PortFin(x, table_rdt)
 Cette table contient les tables d'evolution des cours et rendements sur l'annee consideree de chacune des classes d'actif.
 Les tables sont constuites a partir des extractions du Generateur de Scenario Economique de Prim'Act.}
 }
+\value{
+Le format de la liste renvoyee est :
+\describe{
+\item{\code{portFin} : }  {le portefeuille financier dont l'attribut \code{ptf_immo} a ete vieilli d'une annee.}
+\item{\code{loyer} : }{le montant de loyer percus en milieu d'annee suite au vieillissement du portefeuille immobilier.}
+}
+}
 \description{
 \code{vieillissement_immo_PortFin} est une methode permettant de projeter la composante immobilier d'un portefeuille financier.
 }

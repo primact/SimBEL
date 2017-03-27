@@ -3,12 +3,18 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Permet a partir d'un canton initial de creer un canton choque frais.
 ##'
-##' \code{do_choc_frais} est une methode permettant d'appliquer le choc frais de la formule standard Solvabilite 2 a un canton.
+##' \code{do_choc_frais} est une methode permettant d'appliquer le choc frais de la formule standard Solvabilite 2
+##'  a un canton.
 ##' @name do_choc_frais
 ##' @docType methods
-##' @param x objet de la classe \code{ChocSolvabilite2}.
-##' @param canton est un objet de la classe \code{canton}. Il correspond au canton non choque (i.e. central) de l'assureur.
-##' @return \code{canton} l'objet  de la classe \code{canton} correspondant au scenario choque frais au sens de la formule standard Solvabilite 2.
+##' @param x objet de la classe \code{\link{ChocSolvabilite2}}.
+##' @param canton est un objet de la classe \code{\link{Canton}}. Il correspond au canton non choque (i.e. central)
+##'  de l'assureur.
+##' @param autres_passifs_choc est un objet de la classe \code{\link{AutresPassifs}}, il correspond au chargement
+##'  des autres passifs choques.
+##' Ces derniers ont ete renseignes par l'utilisateur en donnees.
+##' @return \code{canton} l'objet  de la classe \code{\link{Canton}} correspondant au scenario choque frais
+##'  au sens de la formule standard Solvabilite 2.
 ##' @note La parametrisation des chocs de frais est effectuee dans les fichiers d'inputs utilisateurs.
 ##' @author Prim'Act
 ##' @export
@@ -21,9 +27,6 @@ setMethod(
     signature = c("ChocSolvabilite2", "Canton", "AutresPassifs"),
     definition = function(x, canton, autres_passifs_choc){
 
-        #----------------------------------------------------------------------------------------------------------------------------------------------------
-        #           A ajouter l'inflation +1 % : GDK
-        #----------------------------------------------------------------------------------------------------------------------------------------------------
         # SOUS ENTENDU L OBJET Choc_Solvabilite2 contient un attribut param_choc_sousc qui est de la forme $mp$choc_frais_assiette
         tx_relatif_choc_frais <- as.numeric(x@param_choc_sousc@mp$choc_frais_assiette)
         ptf_passif <- canton@ptf_passif

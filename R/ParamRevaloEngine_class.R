@@ -1,14 +1,19 @@
-#--------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les declarateurs, constructeurs et verificateurs de la classe ParamRevaloEngine
-#--------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           Declarateur
+#           Definition de la classe ParamRevaloEngine
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Classe pour ParamRevaloEngine
-##'
+##'  La classe \code{ParamRevaloEngine}.
+##
+##' Une Classe pour les parametres utilises pour la gestion de la revalorisation.
 ##' @name ParamRevaloEngine
-##'
+##' @slot taux_pb_fi une valeur \code{numeric} correspondant au taux de participation applique au resultat financier.
+##' @slot taux_pb_tech une valeur \code{numeric} correspondant au taux de participation applique au resultat technique.
+##' @slot tx_marge_min une valeur \code{numeric} correspondant au taux de marge minimal auquel s'attend l'assureur.
+##' @slot solde_pb_regl une valeur \code{numeric} correspondant au solde deficitaire de participation aux
+##' benefices reglementaire. Cette valeur doit etre negative.
+##' @docType class
+##' @author Prim'Act
+##' @keywords classes
+##' @export
 setClass(Class = "ParamRevaloEngine",
   representation = representation(
     taux_pb_fi = "numeric",

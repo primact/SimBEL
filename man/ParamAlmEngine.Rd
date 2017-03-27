@@ -3,26 +3,24 @@
 \docType{class}
 \name{ParamAlmEngine}
 \alias{ParamAlmEngine}
-\title{La classe ParamAlmEngine}
+\title{La classe \code{ParamAlmEngine}.}
 \description{
-Classe pour le parametre ALM d'un canton.
+Une classe pour le parametre ALM d'un canton.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{ptf_reference}}{est un objet de type \code{PortFin}, qui represente le portefeuille
+\item{\code{ptf_reference}}{est un objet de type \code{\link{PortFin}}, qui represente le portefeuille
 d'investissement de reference d'un canton.}
 
-\item{\code{alloc_cible}}{Vecteur de 4 elements rendant compte du pourcentage de l'actif composant respectivement les investissements: actions, immobiliers, obligataires et de tresorerie.}
-}}
-\section{Lien a creer}{
+\item{\code{alloc_cible}}{un vecteur de 4 elements rendant compte du pourcentage
+de l'actif composant respectivement les investissements: actions, immobiliers, obligataires et de tresorerie.}
 
-}
+\item{\code{seuil_realisation_PVL}}{une valeur \code{numeric} correspondant au pourcentage de plus-values actions
+qui peut etre liquidee chaque annee pour atteindre l'objectif de revalorisation cible des passifs.}
+}}
 \author{
 Prim'Act
-}
-\seealso{
-Methode principale : \code{\link{param_alm_engine_load}}
 }
 \keyword{classes}
 

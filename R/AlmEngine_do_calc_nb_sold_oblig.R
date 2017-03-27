@@ -1,7 +1,10 @@
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#           do_calc_nb_sold_oblig
+#----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Calcule le nombre d'obligations a vendre.
 ##'
-##' \code{do_calc_nb_sold_oblig} est une methode permettant de calculer pour chaque ligne d'un portefeuille
-##'  obligataire d'un assureur le nombre d'unites a vendre afin de realiser un certain montant de vente obligataire.
+##' Cette methode permet de calculer pour chaque ligne d'un portefeuille
+##' obligataire d'un assureur le nombre d'unites a vendre afin de realiser un certain montant de vente obligataire.
 ##' @name do_calc_nb_sold_oblig
 ##' @docType methods
 ##' @param x objet de la classe \code{\link{Oblig}}, correspondant au portefeuille obligataire de l'assureur.

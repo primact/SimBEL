@@ -4,29 +4,34 @@
 \name{finance_cible_pmvl}
 \alias{RevaloEngine}
 \alias{finance_cible_pmvl}
-\title{Evalue le financement d'un taux cible par des cessions de plus-values latentes.}
+\title{Evalue le financement d'une revalorisation au taux cible par des cessions de plus-values latentes.}
 \usage{
 finance_cible_pmvl(bes_cible, rev_stock_nette, base_fin, seuil_pmvl, tx_pb)
 }
 \arguments{
-\item{bes_cible}{est un vecteur de type \code{numeric} comprenant par produit le besoin de financement aux taux cible.}
+\item{bes_cible}{un vecteur \code{numeric} correspondant au besoin de financement necessaire pour atteindre
+le taux cible part produit.}
 
-\item{rev_stock_nette}{est un vecteur de type \code{numeric} comprenant par produit le montant de revalorisation nette atteint.}
+\item{rev_stock_nette}{un vecteur \code{numeric} comprenant par produit
+le montant de revalorisation nette au titre de le PB atteint.}
 
-\item{base_fin}{est un vecteur de type \code{numeric} comprenant par produit la base de produits financiers.}
+\item{base_fin}{un vecteur \code{numeric} comprenant par produit la base de produits financiers.}
 
-\item{seuil_pmvl}{est une valeur \code{numeric} comprenant au montant de plus-values latentes qui peut etre liquidee. Ce montant
-doit etre exprime en tenant compte de l'abattement realise pour rapport les plus-values latentes de l'actiff general au passif.}
+\item{seuil_pmvl}{une valeur \code{numeric} correspondant au montant de plus-values latentes
+qui peut etre liquidee. Ce montant doit etre exprime en tenant compte de l'abattement (mise a l'echelle) realise
+ pour rapport aux plus-values latentes de l'actif general au passif.}
 
-\item{tx_pb}{est un vecteur de type \code{numeric} comprenant par produit les taux de particippation aux benefices contractuels.}
+\item{tx_pb}{un vecteur \code{numeric} comprenant par produit les taux de participation aux benefices contractuels.}
 }
 \value{
-Une liste avec la valeur de la revalorisation nette servie par produit et le montant de plus-values a liquider, ramene a
-la valeur du passif pour financer la revalorisation.
+\code{rev_stock_nette} la valeur de la revalorisation nette servie par produit apres cession.
+
+\code{pmvl_liq} le montant de plus-values a liquider, ramene a la valeur du passif, pour financer
+ la revalorisation.
 }
 \description{
 \code{finance_cible_pmvl} est une methode permettant de
- determiner le financement de taux cibles par des cessions de plus-values latentes.
+ determiner le financement d'une revalorisation au taux cible par une cession de plus-values latentes en actions.
 }
 \details{
 Lorsque la revalorisation nette est superieure au besoin de financement des taux cibles, on sert le taux cible

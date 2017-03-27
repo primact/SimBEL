@@ -1,27 +1,27 @@
-#--------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les declarateurs, constructeurs et verificateurs de la classe ESG
-#--------------------------------------------------------------------------------------------------------------------
-# Suivi version
-# Version 1.0 du 24/01/2017. Fait par GK : initialisation
-#--------------------------------------------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           Declarateur
+#           Definition de la classe ESG
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' La classe ESG
 ##'
-##' Classe pour les donnees globales d'actif
-##'
+##' Une classe de parametres contenant les tables de simulation, generees par une generateur de scenarions
+##' economique.
 ##' @name ESG
-##' @slot nb_simu
-##' @slot ind_action
-##' @slot ind_immo
-##' @slot ind_oblig
-##' @slot ind_treso
+##' @slot nb_simu un entier (\code{integer}) correspondant au nombre de simulations.
+##' @slot ind_action une liste contenant les differents indices actions utilises. Chaque element de la liste contient
+##' \code{nb_simu} simulations de l'indice.
+##' @slot ind_immo une liste contenant les differents indices immobilier utilises. Chaque element de la liste contient
+##' \code{nb_simu} simulations de l'indice.
+##' @slot ind_inflation une liste contenant l'indice inflation utilise. L'element de la liste contient
+##' \code{nb_simu} simulations de l'indice.
+##' @slot yield_curve une liste contenant les courbes de taux simulees a chaque date de projection. Chaque element
+##' de la liste, correspondant a une annee de projection, contient \code{nb_simu} simulations de la courbe des taux.
+##' @slot deflateur une liste contenant le deflateur stochastique a utiliser. L'element de la liste contient
+##' \code{nb_simu} simulations du deflateur.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
+##' @seealso Les methodes de chargement d'un ESG \code{\link{chargement_ESG}} et d'extraction d'un model point
+##' ESG \code{\link{extract_ESG}}.
 ##' @keywords classes
 ##' @export
 

@@ -9,7 +9,7 @@
 calc_frais_fin(x, vm_moy, coef_inflation)
 }
 \arguments{
-\item{x}{est un objet de type \code{FraisFin} contenant les parametres de Frais financier associes a un canton.}
+\item{x}{est un objet de type \code{FraisFin} contenant les parametres des frais financiers associes a un canton.}
 
 \item{vm_moy}{est un objet de type \code{numeric} correspondant a la valeur moyenne de l'actif en valeur
 de marche.}

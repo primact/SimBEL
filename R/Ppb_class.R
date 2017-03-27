@@ -1,28 +1,21 @@
-#--------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les declarateurs, constructeurs et verificateurs de la classe Ppb
-#--------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           Declarateur
+#           Definition de la classe Ppb
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' La classe Ppb
+##' La classe \code{Ppb}.
 ##'
 ##' Classe pour la provision pour participation aux benefices (PPB)
-##'
 ##' @name Ppb
-##' @slot valeur_ppb est la valeur courante prise par la PPB.
-##' @slot ppb_debut est la valeur prise par la PPB en debut d'annee.
+##' @slot valeur_ppb est la valeur courante \code{numeric} prise par la PPB.
+##' @slot ppb_debut est la valeur prise \code{numeric} par la PPB en debut d'annee.
 ##' @slot seuil_rep est une valeur \code{numeric} correspond a la proportion de PPB de debut d'annee
 ##' que l'on peut reprendre sur une periode.
-##' sur la PPB sur une periode.
 ##' @slot seuil_dot est une valeur \code{numeric} correspond a la montant maximal de dotation possible sur la PPB
 ##' sur une periode, exprimee comme une fraction de la PPB de debut d'annee.
 ##' @slot compte_rep est une valeur \code{numeric} qui totalise les montants de reprise effectuee sur une periode.
 ##' @slot compte_dot est une valeur \code{numeric} qui totalise les montants de dotation effectuee sur une periode.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Mettre le lien vers les methodes de la classe
+##' @seealso La dotation et la reprise de PPB : \code{\link{calc_dotation_ppb}}, \code{\link{calc_reprise_ppb}}.
 ##' @keywords classes
 ##' @export
 setClass(

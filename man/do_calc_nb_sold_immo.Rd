@@ -23,8 +23,8 @@ que l'assureur souhaite effectuer.}
   d'entre elles.
 }
 \description{
-\code{do_calc_nb_sold_immo} est une methode permettant de calculer pour chaque ligne d'un portefeuille
- immo d'un assureur le nombre d'unites a vendre afin de realiser un certain montant de vente immo.
+Cette methode permet de calculer pour chaque ligne d'un portefeuille
+immobilier d'un assureur le nombre d'unites a vendre afin de realiser un certain montant de vente immo.
 }
 \author{
 Prim'Act

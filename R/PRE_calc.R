@@ -7,12 +7,12 @@
 ##' @name calc_PRE
 ##' @docType methods
 ##' @param x objet de la classe \code{PRE}, necessaire pour connaitre le stock de PRE initial.
-##' @param pmvl_action_immo est un \code{numeric} correspondant au montant global de plus ou moins values latentes de actifs actions et immobiliers.
+##' @param pmvl_action_immo est un \code{numeric} correspondant au montant global de plus ou moins values latentes des actifs actions et immobiliers.
 ##' En cas de moins value latente, la PRE est abondee.
 ##' En cas de plus value latente, la PRE est integralement reprise.
 ##' @return Le format de la liste renvoyee est :
 ##' \describe{
-##' \item{\code{pre_courante} : }{ valeur de la pre calculee a partir des inputs transmis}
+##' \item{\code{pre_courante} : }{ valeur de la pre courante calculee a partir des inputs transmis}
 ##' \item{\code{var_pre} : }{ variation de la pre courante}
 ##' }
 ##' @author Prim'Act

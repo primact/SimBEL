@@ -9,7 +9,7 @@
 calc_coupon(x)
 }
 \arguments{
-\item{x}{un objet de la classe Oblig.}
+\item{x}{un objet de la classe Oblig, dont on souhaite calculer le coupon annuel de chacune de ses composantes.}
 }
 \value{
 Un vecteur dont chaque element correspond a la valeur du coupon de l'obligation consideree : tx_coupon * parite * nominal * nb_unit.

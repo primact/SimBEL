@@ -9,15 +9,16 @@
 param_alm_engine_load(file_alm_address, ptf_fin_ref)
 }
 \arguments{
-\item{file_alm_address}{un \code{character} renvoyant .}
+\item{file_alm_address}{un \code{character} contenant l'adresse exacte
+du fichier d'input utilisateur.}
 
-\item{ptf_fin_ref}{un objet de la classe \code{PortFin} correspondant au portefeuille de reinvestissement.}
+\item{ptf_fin_ref}{un objet de la classe \code{\link{PortFin}} correspondant au portefeuille de reinvestissement.}
 }
 \value{
-Pas de sortie.
+L'objet de la classe \code{\link{ParamAlmEngine}} construit a partir des inputs renseignes par l'utilisateur.
 }
 \description{
-\code{param_alm_engine_load} est la methode de chargement des attributs d'un objet ParamAlmEngine
+\code{param_alm_engine_load} est la methode de chargement des attributs d'un objet \code{\link{ParamAlmEngine}}
 a partir des donnees de l'environnement utilisateur et d'un portefeuille financier de reference (charge par la fonction \code{\link{chargement_PortFin_ref}}.
 }
 \author{

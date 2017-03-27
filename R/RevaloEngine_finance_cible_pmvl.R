@@ -1,24 +1,24 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les fonctions permettant de calculer le financement de la PB contractuelle.
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           finance_cible_pmvl
+#           finance_cible_pmvl : methode permettant de calculer le financement de PB par la realisation de PVL actions
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Evalue le financement d'un taux cible par des cessions de plus-values latentes.
+##' Evalue le financement d'une revalorisation au taux cible par des cessions de plus-values latentes.
 ##'
 ##' \code{finance_cible_pmvl} est une methode permettant de
-##'  determiner le financement de taux cibles par des cessions de plus-values latentes.
+##'  determiner le financement d'une revalorisation au taux cible par une cession de plus-values latentes en actions.
 ##' @name finance_cible_pmvl
 ##' @docType methods
-##' @param bes_cible est un vecteur de type \code{numeric} comprenant par produit le besoin de financement aux taux cible.
-##' @param rev_stock_nette est un vecteur de type \code{numeric} comprenant par produit le montant de revalorisation nette atteint.
-##' @param base_fin est un vecteur de type \code{numeric} comprenant par produit la base de produits financiers.
-##' @param seuil_pmvl est une valeur \code{numeric} comprenant au montant de plus-values latentes qui peut etre liquidee. Ce montant
-##' doit etre exprime en tenant compte de l'abattement realise pour rapport les plus-values latentes de l'actiff general au passif.
-##' @param tx_pb est un vecteur de type \code{numeric} comprenant par produit les taux de particippation aux benefices contractuels.
-##' @return Une liste avec la valeur de la revalorisation nette servie par produit et le montant de plus-values a liquider, ramene a
-##' la valeur du passif pour financer la revalorisation.
+##' @param bes_cible un vecteur \code{numeric} correspondant au besoin de financement necessaire pour atteindre
+##' le taux cible part produit.
+##' @param rev_stock_nette un vecteur \code{numeric} comprenant par produit
+##'  le montant de revalorisation nette au titre de le PB atteint.
+##' @param base_fin un vecteur \code{numeric} comprenant par produit la base de produits financiers.
+##' @param seuil_pmvl une valeur \code{numeric} correspondant au montant de plus-values latentes
+##'  qui peut etre liquidee. Ce montant doit etre exprime en tenant compte de l'abattement (mise a l'echelle) realise
+##'   pour rapport aux plus-values latentes de l'actif general au passif.
+##' @param tx_pb un vecteur \code{numeric} comprenant par produit les taux de participation aux benefices contractuels.
+##' @return \code{rev_stock_nette} la valeur de la revalorisation nette servie par produit apres cession.
+##' @return \code{pmvl_liq} le montant de plus-values a liquider, ramene a la valeur du passif, pour financer
+##'  la revalorisation.
 ##' @details Lorsque la revalorisation nette est superieure au besoin de financement des taux cibles, on sert le taux cible
 ##' et on partage le surplus. A l'inverse, les taux cible sont finances par
 ##' les compensations entre produits lorsque certains prevoient une revalorisation superieure au taux cible, et

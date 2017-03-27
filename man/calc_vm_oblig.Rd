@@ -11,8 +11,8 @@ calc_vm_oblig(x, yield_curve)
 \arguments{
 \item{x}{objet de la classe \code{Oblig} (decrivant le portefeuille d'obligation).}
 
-\item{rdt}{vecteur de type \code{numeric} decrivant le rendement de chacune des lignes d'obligation du portefeuille obligation de l'assureur.
-Contient autant d'elements que le portefeuille a de lignes.}
+\item{yield_curve}{vecteur de type \code{numeric} contenant la courbe de taux 
+(cf. l'attribut \code{yield_curve} des objets de la classe \code{\link{ModelPointESG}}).}
 }
 \value{
 L'objet \code{x} dont les valeurs de marche ont ete mises a jour.

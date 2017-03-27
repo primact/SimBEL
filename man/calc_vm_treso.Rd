@@ -14,9 +14,9 @@ calc_vm_treso(x, rdt, flux_milieu, flux_fin)
 \item{rdt}{vecteur decrivant le rendement de chacune des lignes treso du ptf.
 Contient autant d'elements que le portefeuille a de lignes.}
 
-\item{flux_milieu}{vecteur decrivant les flux ( percus)entrants : positif, sortants : negatifs) en milieu d'annee, ventile selon chacune des lignes de cash.}
+\item{flux_milieu}{vecteur decrivant les flux ( percus)entrants : positif, sortants : negatifs) en milieu d'annee, ventiles selon chacune des lignes de cash.}
 
-\item{flux_fin}{vecteur decrivant les flux (entrants : positifs, sortants : negatifs) en fin d'annee, ventile selon chacune des lignes de cash.}
+\item{flux_fin}{vecteur decrivant les flux (entrants : positifs, sortants : negatifs) en fin d'annee, ventiles selon chacune des lignes de cash.}
 }
 \value{
 L'objet x dont les valeurs de marche ont ete mises a jour.

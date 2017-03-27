@@ -5,22 +5,23 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Declarateur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' La classe ParamAlmEngine
+##' La classe \code{ParamAlmEngine}.
 ##'
-##' Classe pour le parametre ALM d'un canton.
+##' Une classe pour le parametre ALM d'un canton.
 ##'
 ##' @name ParamAlmEngine
-##' @slot ptf_reference est un objet de type \code{PortFin}, qui represente le portefeuille
+##' @slot ptf_reference est un objet de type \code{\link{PortFin}}, qui represente le portefeuille
 ##'  d'investissement de reference d'un canton.
-##' @slot alloc_cible Vecteur de 4 elements rendant compte du pourcentage de l'actif composant respectivement les investissements: actions, immobiliers, obligataires et de tresorerie. 
-##' @slot seuil_realisation_PVL
+##' @slot alloc_cible un vecteur de 4 elements rendant compte du pourcentage
+##'  de l'actif composant respectivement les investissements: actions, immobiliers, obligataires et de tresorerie.
+##' @slot seuil_realisation_PVL une valeur \code{numeric} correspondant au pourcentage de plus-values actions
+##' qui peut etre liquidee chaque annee pour atteindre l'objectif de revalorisation cible des passifs.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Methode principale : \code{\link{param_alm_engine_load}}
 ##' @keywords classes
 ##' @export
 ##' @aliases ParamAlmEngine
+##' @include PortFin_class.R
 
 setClass(
   Class = "ParamAlmEngine",

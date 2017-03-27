@@ -1,10 +1,5 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les fonctions permettant de calculer le financement de la PB contractuelle.
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           calc_revalo
+#           calc_revalo : Methode permettant d'appliquer la politique de revalorisation
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Applique la politique de revalorisation d'un canton.
 ##'
@@ -13,16 +8,34 @@
 ##' @name calc_revalo
 ##' @docType methods
 ##' @param x un objet de la classe \code{\link{Canton}}.
-##' @param passif_av_pb est une liste produit par la methode \code{viellissement_av_pb}
+##' @param passif_av_pb est une liste produit par la methode \code{\link{viellissement_av_pb}}
 ##' appliquee a un portefeuille de passif.
 ##' @param tra est la valeur \code{numeric} du taux de rendement de l'actif.
-##' @param plac_moy_vnc est la valeur \code{numeric} moyenne des actifs.
-##' @param result_tech est la valeur \code{numeric} du resultats techniques prise en compte de la PB.
-##' @return Une liste avec la valeur de la revalorisation additionelle nette servie par
-##'  produit, la ppb mise a jour, la PPB mise a jour et le resultat technique avant PB.
+##' @param plac_moy_vnc est la valeur \code{numeric} moyenne des actifs en valeur nette comptable.
+##' @param result_tech est la valeur \code{numeric} du resultat technique prise en compte avant distribution
+##' de la PB.
+##' @return \code{add_rev_nette_stock} une liste avec la valeur de la revalorisation nette servie par
+##'  produit au titre de la participation aux benefices.
+##' @return \code{pmvl_liq} le montant de plus-values latentes en actions a realiser.
+##' @return \code{ppb} un objet \code{\link{Ppb}} correspondant a la PPB mise a jour.
+##' @return \code{tx_pb} un vecteur reprenant les taux de PB par produit renseigne dans l'objet \code{x}.
+##' @return \code{tx_enc_moy} un vecteur reprenant les taux de chargement sur encours theoriques moyens
+##' par produit.
 ##' @author Prim'Act
+##' @seealso Le calcul du TRA : \code{\link{calc_tra}}.
+##' Le vieillissemennt des passifs avant PB : \code{\link{viellissement_av_pb}}.
+##' Le calcul du resultat technique avant PB : \code{\link{calc_result_technique}}.
+##' Le calcul de la base de produits financiers : \code{\link{base_prod_fin}}.
+##' Le calcul de la PB contractuelle : \code{\link{pb_contr}}.
+##' Le financement des TMG par la PPB : \code{\link{finance_tmg}}.
+##' Le financement du taux cible par la PPB : \code{\link{finance_cible_ppb}}
+##' Le financement du taux cible par la realisation plus-values latentes actions : \code{\link{finance_cible_pmvl}}
+##' Le financement du taux cible par la compression de la marge de l'assureur : \code{\link{finance_cible_marge}}
+##' Le calcul de la marge de l'assureur : \code{\link{calc_marge_fin}}
+##' L'application de la contrainte legale de participation aux benefices : \code{\link{finance_contrainte_legale}}
 ##' @export
 ##' @aliases RevaloEngine
+##' @include Canton_class.R
 
 setGeneric(name = "calc_revalo", def = function(x, passif_av_pb, tra, plac_moy_vnc, result_tech){
   standardGeneric("calc_revalo")})

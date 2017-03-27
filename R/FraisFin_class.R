@@ -14,7 +14,7 @@
 ##' @name FraisFin
 ##' @slot tx_chargement est une valeur \code{numeric} correspondant au taux de frais de gestion financiere.
 ##' @slot indicatrice_inflation est un objet de type \code{logical}, qui permet d'indiquer si une inflation
-##'  doit etre applique.
+##'  doit etre appliquee.
 ##' @docType class
 ##' @section Lien a creer
 ##' @author Prim'Act

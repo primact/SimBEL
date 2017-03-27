@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           update_dur_det_action
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Mise a jour de chaque composante du portefeuille action suite a la vente de tout ou partie de ce portefeuille.
+##' Mise a jour des durees de detention d'un portefeuille action.
 ##'
 ##' \code{update_dur_det_action} est une methode permettant de mettre a jour la duree de detention des composantes d'un portefeuille Action.
 ##' @name update_dur_det_action

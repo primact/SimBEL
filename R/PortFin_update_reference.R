@@ -5,7 +5,7 @@
 ##' Evalue et met a jour les objets constituants un PortFin_reference.
 ##'
 ##' \code{update_PortFin_reference} est une methode permettant de calculer et mettre a jour un portefeuille financier
-##' suite a un vieillissement.
+##' de reinvestissement suite a un vieillissement.
 ##' @name update_PortFin_reference
 ##' @docType methods
 ##' @param an \code{numeric} correspond a l'annee de projection du portefeuille financier de reinvestissement. 

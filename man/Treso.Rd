@@ -19,7 +19,10 @@ Classe pour les actifs de type Tresorerie
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+Les methodes de calcul des valeurs \code{\link{calc_vm_treso}}, 
+de calcul des revenus de la tresorerie \code{\link{revenu_treso}}, 
+de calcul de la revalorisation de la tresorerie \code{\link{revalo_treso}},
+de mise a jour de la tresorerie \code{\link{update_treso}}.
 }
 \keyword{classes}
 

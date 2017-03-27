@@ -13,7 +13,7 @@ calc_pmvl_immo(x)
 }
 \value{
 Une liste composee de deux elements \code{(pvl, mvl)} correspondant respectivement 
-aux sommes des plus values latentes immobilieress et aux somme des moins values latentes immobilieres.
+aux sommes des plus values latentes immobilieres et aux sommes des moins values latentes immobilieres.
 }
 \description{
 \code{calc_pmvl_immo} est une methode permettant de calculer les valeurs de marche.

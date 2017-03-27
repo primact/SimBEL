@@ -14,7 +14,7 @@ chargement_PortFin(folder_PortFin_address, mp_ESG)
 \item{mp_ESG}{est un objet de la classe \code{ModelPointESG}, qui fournit le resultat financier du porfeuille.}
 }
 \value{
-L'objet \code{PortFin} tel que precise par les donnees initiales et le sparametres renseignes par l'utilisateur.
+L'objet \code{PortFin} tel que precise par les donnees initiales et les parametres renseignes par l'utilisateur.
 }
 \description{
 \code{chargement_PortFin} est une methode permettant de creer un objet \code{PortFin} a partir des donnees renseignees par l'utilisateur.

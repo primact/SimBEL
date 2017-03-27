@@ -15,13 +15,14 @@ calc_marge_fin(base_fin, rev_prest_nette, rev_stock_nette, contrib_tmg_prest,
 \item{rev_prest_nette}{est un vecteur de type \code{numeric} comprenant par produit
 la revalorisation nette sur prestations.}
 
-\item{rev_stock_nette}{est un vecteur de type \code{numeric} comprenant par produit}
+\item{rev_stock_nette}{est un vecteur de type \code{numeric} comprenant par produit
+la revalorisation nette sur stock.}
 
 \item{contrib_tmg_prest}{est une valeur \code{numeric} comprenant par produit
-la contribution de la PPB ayu financement des TMG sur prestations.}
+la contribution de la PPB au financement des TMG sur prestations.}
 
 \item{contrib_tmg_stock}{est une valeur \code{numeric} comprenant par produit
-la contribution de la PPB ayu financement des TMG sur stock.}
+la contribution de la PPB au financement des TMG sur stock.}
 
 \item{contrib_ppb_tx_cible}{une valeur de type \code{numeric} comprenant par produit
 la contribution de la PPB au financement au taux cible sur stock.}
@@ -31,7 +32,7 @@ Le montant de la marge de l'assureur.
 }
 \description{
 \code{calc_marge_fin} est une methode permettant de
- de calculer la marge financiere de l'assureur apres attribution de PB contractuelle.
+ de calculer la marge financiere de l'assureur apres attribution d'un certain niveau de revalorisation.
 }
 \author{
 Prim'Act

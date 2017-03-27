@@ -1,7 +1,10 @@
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#           do_calc_nb_sold_immo
+#----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Calcule le nombre de titres immobilier a vendre.
 ##'
-##' \code{do_calc_nb_sold_immo} est une methode permettant de calculer pour chaque ligne d'un portefeuille
-##'  immo d'un assureur le nombre d'unites a vendre afin de realiser un certain montant de vente immo.
+##' Cette methode permet de calculer pour chaque ligne d'un portefeuille
+##' immobilier d'un assureur le nombre d'unites a vendre afin de realiser un certain montant de vente immo.
 ##' @name do_calc_nb_sold_immo
 ##' @docType methods
 ##' @param x objet de la classe \code{\link{Immo}}, correspondant au portefeuille immo de l'assureur.

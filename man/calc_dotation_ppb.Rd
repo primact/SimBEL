@@ -9,16 +9,18 @@
 calc_dotation_ppb(x, montant)
 }
 \arguments{
-\item{x}{objet de la classe \code{Ppb}.}
+\item{x}{objet de la classe \code{\link{Ppb}}.}
 
-\item{montant}{valeur de la dotation.}
+\item{montant}{une valeur \code{numeric} a doter.}
 }
 \value{
-Une liste comprenant l'objet mis a jour et le montnant de la dotation effectuee.
+\code{ppb} l'objet \code{x} mis a jour.
+
+\code{dotation} le montnant de la dotation effectuee.
 }
 \description{
-\code{calc_dotation_ppb} est une methode permettant de doter la PPB. La dotation est effectuee si les limites de dotation
-de la PPB sur l'annee ne sont pas atteintes. La valeur de cette limite est mise a jour suite a la dotation.
+\code{calc_dotation_ppb} est une methode permettant de doter la PPB. La dotation est effectuee si les
+limites de dotation de la PPB sur l'annee ne sont pas atteintes. La valeur de cette limite est mise a jour suite a la dotation.
 }
 \author{
 Prim'Act

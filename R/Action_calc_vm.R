@@ -16,7 +16,7 @@
 ##' @docType methods
 ##' @param x objet de la classe \code{Action} (decrivant le portefeuille d'action).
 ##' @param rdt vecteur de type \code{numeric} decrivant le rendement de chacune des actions du portefeuille action de l'assureur.
-##' Contient autant d'elements que le portefeuille a de lignes.
+##' Contient autant d'elements que le portefeuille action a de lignes.
 ##' @return L'objet \code{x} dont les valeurs de marche ont ete mises a jour.
 ##' @author Prim'Act
 ##' @export

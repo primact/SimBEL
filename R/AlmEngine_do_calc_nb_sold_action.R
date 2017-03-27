@@ -1,11 +1,14 @@
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#           do_calc_nb_sold_action
+#----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Calcule le nombre d'actions a vendre.
 ##'
-##' \code{do_calc_nb_sold_action} est une methode permettant de calculer pour chaque ligne d'un portefeuille
+##' Cette methode permet de calculer pour chaque ligne d'un portefeuille
 ##'  action d'un assureur le nombre d'unites a vendre afin de realiser un certain montant de vente en actions.
 ##' @name do_calc_nb_sold_action
 ##' @docType methods
 ##' @param x objet de la classe \code{\link{Action}}, correspondant au portefeuille action de l'assureur.
-##' @param montant_vente est un reel de type \code{numeric} correspondant a la vente totale de vm action que l'assureur souhaite effectuer.
+##' @param montant_vente est un reel de type \code{numeric} correspondant a un montant de vente (en valeur de marche) totale d'action que l'assureur souhaite effectuer.
 ##' @param method_vente est un element de type \code{character} correspondant a methode de vente
 ##'  retenue (seule la methode proportionnelle est implementee actuellement).
 ##' @return \code{data.frame} contenant deux colonnes \code{(num_mp, nb_sold)} correspondant

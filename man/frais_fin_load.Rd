@@ -15,7 +15,7 @@ frais_fin_load(file_frais_fin_address)
 L'objet de la classe \code{FraisFin} construit a partir des inputs renseignes par l'utilisateur.
 }
 \description{
-\code{frais_fin_load} est une methode permettant de calculer les frais financiers.
+\code{frais_fin_load} est une methode permettant de charger les frais financiers.
 }
 \author{
 Prim'Act

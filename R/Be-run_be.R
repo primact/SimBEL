@@ -1,23 +1,31 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script execute les operations de calcul d'un BE
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           run_be
+#           run_be : methode executant le calcul d'un BE
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcul d'un BE
+##' Calcul d'un BE.
 ##'
-##' \code{run_be} est une methode permettant de calcul un best estimate pour un canton.
+##' \code{run_be} est une methode permettant de calculer un best estimate pour un canton.
 ##' @name run_be
 ##' @docType methods
-##' @param x est un objet de type \code{Be}.
-##' @param pre_on est une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
+##' @param x un objet de type \code{\link{Be}}.
+##' @param pre_on  une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
 ##' de PRE dans le resultat technique utilisee pour le calcul de la participation aux benefices reglementaires.
-##' @return L'objet BE avec les tables de resultats mise a jour et la liste des simulations ignorees en
-##' cas d'erreur.
+##' @details Il s'agit de la methode principale du package \code{SimBEL}. Cette methode requiert le chargement
+##' d'un objet \code{\link{Be}} deja parametre et alimente en donnees. La methode \code{\link{init_scenario}}
+##' permet d'alimenter un objet \code{\link{Be}} dans la situation "centrale" de la formule standard et en situation
+##' de choc.
+##' @return \code{be} l'objet \code{x} mis a jour : l'attribut \code{tab_be} contient le best estimate et sa
+##' decomposition, l'attribut \code{tab_flux} contient les flux moyens du best estimate et ses
+##' composantes.
+##' @return \code{err_simu} un vecteur contenant la liste des simulations qui ont generes des erreurs et qui n'ont pu
+##' etre utilisees pour le calcul du best estimate.
 ##' @author Prim'Act
+##' @seealso Le calcul du best estimate pour une simulation : \code{\link{run_be_simu}}.
+##' L'initialisation d'un best estimate : \code{\link{init_scenario}}.
+##' La classe \code{\link{Be}}.
+##' La sortie des resultats au format ".csv" : \code{\link{write_be_results}}.
 ##' @export
 ##' @aliases Be
+##' @include Be_class.R
 ##'
 setGeneric(name = "run_be", def = function(x, pre_on){standardGeneric("run_be")})
 setMethod(

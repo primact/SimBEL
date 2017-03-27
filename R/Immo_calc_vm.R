@@ -16,7 +16,7 @@
 ##' @docType methods
 ##' @param x objet de la classe \code{Immo} (decrivant le portefeuille d'immobilier).
 ##' @param rdt vecteur de type \code{numeric} decrivant le rendement de chacune des lignes d'immobilier du portefeuille immobilier de l'assureur.
-##' Contient autant d'elements que le portefeuille a de lignes.
+##' Contient autant d'elements que le portefeuille immobilier a de lignes.
 ##' @return L'objet \code{x} dont les valeurs de marche ont ete mises a jour.
 ##' @author Prim'Act
 ##' @export

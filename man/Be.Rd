@@ -3,31 +3,34 @@
 \docType{class}
 \name{Be}
 \alias{Be}
-\title{La classe Be}
+\title{La classe \code{Be}.}
 \description{
-Classe pour le BE d'un assureur
+Une classe pour le calcul du best estimate d'un assureur.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{param_be}}{est un objet de type \code{ParamBe} qui regroupe les parametres de base du best estimate.}
+\item{\code{param_be}}{un objet \code{\link{ParamBe}} qui regroupe les parametres de base du calcul d'un best estimate.}
 
-\item{\code{canton}}{est un objet de type \code{Canton} correspond au canton en date initiale.}
+\item{\code{canton}}{un objet de type \code{\link{Canton}} correspond au canton parametre en date initiale.}
 
-\item{\code{esg}}{est un objet de type \code{ESG}.}
+\item{\code{esg}}{un objet de type \code{\link{ESG}}.}
 
-\item{\code{tab_flux}}{est une liste qui contient les flux moyens de best estimate.}
+\item{\code{tab_flux}}{une liste qui contient les flux moyens de best estimate et de ses composantes.}
 
-\item{\code{tab_be}}{est une liste qui contient la valeur du BE et de ses composantes.}
+\item{\code{tab_be}}{est une liste qui contient la valeur du best estimate et de ses composantes.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
 }
 \seealso{
-Mettre le lien vers les methodes de la classe
+Le calcul d'un best estimate : \code{\link{run_be}}.
+Le calcul d'une simulation de best estimate : \code{\link{run_be_simu}}.
+L'initialisation d'un best estimate dans les situations centrales et choquees : \code{\link{init_scenario}}.
+La sortie des resultats au format ".csv" : \code{\link{write_be_results}}.
+La classe \code{\link{Canton}}.
+La classe \code{\link{ESG}}.
+La classe \code{\link{ParamBe}}.
 }
 \keyword{classes}
 

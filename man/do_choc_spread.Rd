@@ -4,26 +4,33 @@
 \name{do_choc_spread}
 \alias{ChocSolvabilite2}
 \alias{do_choc_spread}
-\title{Permet a partir d'un canton initial de creer un canton choque action.}
+\title{Permet a partir d'un canton initial de creer un canton choque spread.}
 \usage{
 do_choc_spread(x, canton)
 }
 \arguments{
-\item{x}{objet de la classe \code{ChocSolvabilite2}.}
+\item{x}{objet de la classe \code{\link{ChocSolvabilite2}}.}
 
-\item{canton}{est un objet de la classe \code{canton}. Il correspond au canton non choque (i.e. central) de l'assureur.}
+\item{canton}{est un objet de la classe \code{\link{Canton}}. Il correspond au canton non choque (i.e. central)
+de l'assureur.}
 }
 \value{
-\code{canton} l'objet  de la classe \code{canton} correspondant au scenario choque spread au sens de la formule standard Solvabilite 2.
+\code{canton} l'objet  de la classe \code{\link{Canton}} correspondant au scenario choque
+ spread au sens de la formule standard Solvabilite 2.
 }
 \description{
-\code{do_choc_spread} est une methode permettant d'appliquer le choc spread de la formule standard Solvabilite 2 a un canton.
+\code{do_choc_spread} est une methode permettant d'appliquer le choc spread de la formule standard Solvabilite 2
+ a un canton. Cette methode s'applique uniquement aux obligations de type \code{corp}.
 }
 \note{
-Il est possible d'appliquer des chocs de spreads distincts a chaque ligne du portefeuille obligataire selon l'index de la ligne obligataire.
+Il est possible d'appliquer des chocs de spreads distincts a chaque ligne du portefeuille obligataire
+ selon le numero de rating et la duration de l'obligation.
 Cette parametrisation est effectuee dans les fichiers d'inputs utilisateurs.
 }
 \author{
 Prim'Act
+}
+\seealso{
+L'application du choc de spread a une ligne obligataire : \code{\link{do_choc_spread_unitaire}}.
 }
 

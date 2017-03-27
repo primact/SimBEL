@@ -1,7 +1,3 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les fonctions permettant de calculer le financement de la PB contractuelle.
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           pb_contr
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -10,19 +6,20 @@
 ##' \code{pb_contr} est une methode permettant de calculer la participation aux benefices contractuelle par produit.
 ##' @name pb_contr
 ##' @docType methods
-##' @param base_fin est un vecteur de type \code{numeric} comprenant par produit la base de produits financiers.
-##' @param tx_pb est un vecteur de type \code{numeric} comprenant par produit les taux de participation aux benefices contractuels.
-##' @param rev_stock_brut est un vecteur de type \code{numeric} comprenant par produit la revalorisation
+##' @param base_fin un vecteur \code{numeric} comprenant par produit la base de produits financiers.
+##' @param tx_pb un vecteur \code{numeric} comprenant par produit les taux de participation aux benefices contractuels.
+##' @param rev_stock_brut un vecteur de type \code{numeric} comprenant par produit la revalorisation
 ##' appliquee sur le stock au taux minimum.
 ##' @param ch_enc_th est un vecteur de type \code{numeric} comprenant par produit le montant total
-##'  des chargements sur encours appliques stock, revalorise au taux minimum.
-##' @param tx_enc_moy est un vecteur de type \code{numeric} comprenant par produit
+##'  des chargements sur encours appliques au stock et revalorises au taux minimum. Il s'agit ici des chargements
+##'  qui pourraient theoriquement etre preleves.
+##' @param tx_enc_moy un vecteur \code{numeric} comprenant par produit
 ##' les taux de chargements sur encours moyens.
-##' @return Une liste composee de deux vecteurs comprenant par produit les chargements sur encours appliques et la
-##' revalorisation contractuelle nette.
 ##' @details Le montant des chargements \code{ch_enc_th} est theorique et peut
 ##' conduire a l'application d'une revalorisation nette negative.
-##'
+##' @return \code{ch_enc_ap_pb_contr} un vecteur comprenant par produit les chargements sur encours appliques
+##' @return  \code{rev_stock_nette_contr} un vecteur comprenant par produit la
+##' revalorisation contractuelle nette.
 ##' @author Prim'Act
 ##' @export
 ##' @aliases RevaloEngine

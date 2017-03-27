@@ -4,20 +4,20 @@
 \name{do_update_PRE_val_debut}
 \alias{PRE}
 \alias{do_update_PRE_val_debut}
-\title{Mise a jour de la valeur courante de PRE}
+\title{Mise a jour de la valeur de debut de periode de la PRE}
 \usage{
 do_update_PRE_val_debut(x, val_debut)
 }
 \arguments{
 \item{x}{objet de la classe \code{PRE} correspondant a la PRE avant mise a jour.}
 
-\item{val_courante}{est un \code{numeric} correspondant au montant de PRE calcule par la fonction \code{\link{calc_PRE}}.}
+\item{val_debut}{est un \code{numeric} correspondant au montant de debut de periode de PRE.}
 }
 \value{
 L'objet \code{PRE} mis a jour de la nouvelle valeur de debut de \code{PRE}
 }
 \description{
-\code{do_update_PRE_val_debut} est une methode permettant de calculer le montant de PRE.
+\code{do_update_PRE_val_debut} est une methode permettant de mettre a jour le montant de debut de periode de PRE.
 }
 \author{
 Prim'Act

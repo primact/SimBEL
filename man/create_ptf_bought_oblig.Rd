@@ -21,7 +21,7 @@ que le portefeuille de reinvestissement obligataire a de lignes. Il correspond a
  precise du portefeuille de reinvestissement obligataire.
 }
 \description{
-\code{create_ptf_bought_oblig} est une methode permettant d'ajuster d'un coefficient les quantites
+Cette methode permet d'ajuster d'un coefficient les quantites
 d'obligations a acheter. Cette methode est utilisee pour l'achat de nouveaux titres obligataires.
 }
 \author{

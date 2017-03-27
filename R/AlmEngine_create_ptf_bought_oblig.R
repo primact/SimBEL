@@ -1,6 +1,9 @@
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#           create_ptf_bought_oblig
+#----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Ajuste les quantites d'obligations a acheter.
 ##'
-##' \code{create_ptf_bought_oblig} est une methode permettant d'ajuster d'un coefficient les quantites
+##' Cette methode permet d'ajuster d'un coefficient les quantites
 ##' d'obligations a acheter. Cette methode est utilisee pour l'achat de nouveaux titres obligataires.
 ##' @name create_ptf_bought_oblig
 ##' @docType methods

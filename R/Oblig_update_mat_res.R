@@ -13,8 +13,8 @@
 ##' @param x objet de la classe Oblig (decrivant le portefeuille obligataire).
 ##' @return L'objet x dont
 ##' \describe{
-##' \item{\code{mat_res : }{est diminuee d'une unite (une unite correspond a un an)}
-##' \item{\code{dur_det : }{est augmentee d'une unite (une unite correspond a un an)}
+##' \item{\code{mat_res} : }{est diminuee d'une unite (une unite correspond a un an)}
+##' \item{\code{dur_det} : }{est augmentee d'une unite (une unite correspond a un an)}
 ##' }
 ##' @author Prim'Act
 ##' @export

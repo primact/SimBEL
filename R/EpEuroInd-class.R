@@ -19,6 +19,7 @@
 ##' Le vieillissement des model points sur une periode : \code{\link{vieilli_mp}}.
 ##' @keywords classes
 ##' @export
+##' @include TabEpEuroInd-class.R
 setClass(
   Class = "EpEuroInd",
   slots = c(mp = "data.frame", tab = "TabEpEuroInd"),
