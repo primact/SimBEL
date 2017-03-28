@@ -14,7 +14,6 @@
 ##' @param var_pre est une valeur \code{numeric} correspondant a la variation de PRE.
 ##' @return Le resultat technique apres participation aux benefices.
 ##' @export
-##' @aliases Canton
 ##' @include Canton_class.R
 
 setGeneric(name = "calc_result_technique_ap_pb", def = function(passif_av_pb, passif_ap_pb, ppb, var_pre){

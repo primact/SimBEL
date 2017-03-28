@@ -11,7 +11,6 @@
 ##' @param gen une valeur \code{numeric} correspondant a la generation.
 ##' @return La valeur du taux de deces calcule.
 ##' @author Prim'Act
-##' @aliases ParamTableMort
 ##' @include ParamTableMort-class.R
 ##' @export
 

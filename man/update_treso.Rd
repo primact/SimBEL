@@ -2,21 +2,20 @@
 % Please edit documentation in R/Treso_update.R
 \docType{methods}
 \name{update_treso}
-\alias{Treso}
 \alias{update_treso}
-\title{Permet d'integrer un flux (entrant ou sortant) au compte de tresorerie d'un Portefeuille financier.}
+\title{Permet d'integrer un flux (entrant ou sortant) au compte de tresorerie d'un portefeuille financier.}
 \usage{
 update_treso(x, flux)
 }
 \arguments{
-\item{x}{objet de la classe \code{Treso}, correspondant a l'actif Tresorerie d'un assureur anterieur a integration d'un flux.}
+\item{x}{objet de la classe \code{\link{Treso}}, correspondant a l'actif Tresorerie d'un assureur anterieur a integration d'un flux.}
 
 \item{flux}{est un \code{numeric} correspondant a un flux.
-Si il est positif, le flux est entrant.
-Si il est negatif, le flux est sortant.}
+S'il est positif, le flux est entrant.
+S'il est negatif, le flux est sortant.}
 }
 \value{
-L'objet \code{Treso} mis a jour du flux precise en input.
+L'objet \code{x} mis a jour du flux precise en input.
 }
 \description{
 \code{update_treso} est une methode permettant d'integrer un flux au compte de tresorerie.

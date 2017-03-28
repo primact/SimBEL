@@ -2,21 +2,21 @@
 % Please edit documentation in R/Oblig_calc_pmvl.R
 \docType{methods}
 \name{calc_pmvl_oblig}
-\alias{Oblig}
 \alias{calc_pmvl_oblig}
-\title{Calcul les valeurs de marches de chaque composante du portefeuille d'obligations.}
+\title{Calcule les plus et moins-values obligataires.}
 \usage{
 calc_pmvl_oblig(x)
 }
 \arguments{
-\item{x}{objet de la classe \code{Oblig} (decrivant le portefeuille d'obligations).}
+\item{x}{objet de la classe \code{\link{Oblig}} (decrivant le portefeuille d'obligations).}
 }
 \value{
-Une liste composee de deux elements \code{(pvl, mvl)} correspondant respectivement 
-aux sommes des plus values latentes obligations et aux sommes des moins values latentes obligations.
+\code{pvl} correspondant a la somme des plus-values latentes obligataires.
+
+\code{mvl} correspondant a la somme des moins-values latentes obligataires.
 }
 \description{
-\code{calc_pmvl_oblig} est une methode permettant de calculer les valeurs de marche.
+\code{calc_pmvl_oblig} est une methode permettant de calculer les plus et moins-values du portefeuille obligataire.
 }
 \author{
 Prim'Act

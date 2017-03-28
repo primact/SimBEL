@@ -18,7 +18,6 @@
 ##' @author Prim'Act
 ##' @seealso La classe \code{\link{ModelPoint_ESG}}.
 ##' @export
-##' @aliases ESG
 ##' @include ESG_class.R ModelPointESG_class.R
 setGeneric(name = "extract_ESG", def = function(x, num_trajectoire,annee){standardGeneric("extract_ESG")})
 setMethod(
@@ -33,20 +32,24 @@ setMethod(
 
     # On parcourt la liste des differents indices action puis immobilier
     # Pour chaque indice, on retient la valeur correspondant a num_trajectoire, annee+1
-    S_action      <- unlist(lapply(1:length(x["ind_action"]),function(y){S_action[y] <- as.data.frame(x["ind_action"][y])[num_trajectoire, annee + 1]}))
-    S_immo        <- unlist(lapply(1:length(x["ind_immo"]),function(y){S_immo[y] <- as.data.frame(x["ind_immo"][y])[num_trajectoire, annee + 1]}))
+    S_action      <- sapply(1:length(x@ind_action), function(y){
+      S_action[y] <- .subset2(x@ind_action[[y]], annee + 1)[num_trajectoire]})
+    S_immo        <- sapply(1:length(x@ind_immo),  function(y){
+      S_immo[y] <- .subset2(x@ind_immo[[y]], annee + 1)[num_trajectoire]})
 
     if(annee > 0) {
-      S_prev_action <- unlist(lapply(1:length(x["ind_action"]),function(y){S_action[y] <- as.data.frame(x["ind_action"][y])[num_trajectoire, annee]}))
-      S_prev_immo   <- unlist(lapply(1:length(x["ind_immo"]),function(y){S_immo[y] <- as.data.frame(x["ind_immo"][y])[num_trajectoire, annee]}))
+      S_prev_action <- sapply(1:length(x@ind_action), function(y){
+        S_action[y] <- .subset2(x@ind_action[[y]], annee)[num_trajectoire]})
+      S_prev_immo   <- sapply(1:length(x@ind_immo), function(y){
+        S_immo[y] <- .subset2(x@ind_immo[[y]], annee)[num_trajectoire]})
     } else {
       S_prev_action <- S_action
       S_prev_immo   <- S_immo
     }
 
-    indice_inflation <- as.numeric(x["ind_inflation"][num_trajectoire, annee + 1])
-    yield_curve <- as.numeric(unlist(as.data.frame(x["yield_curve"][paste("annee", annee, sep = "")])[num_trajectoire,]))
-    deflateur   <- as.numeric(x["deflateur"][num_trajectoire, annee + 1])
+    indice_inflation <- .subset2(x@ind_inflation, annee + 1)[num_trajectoire]
+    yield_curve <- as.numeric(x@yield_curve[[paste("annee", annee, sep = "")]][num_trajectoire, ])
+    deflateur   <- .subset2(x@deflateur, annee + 1)[num_trajectoire]
 
     x <- new("ModelPointESG",
              annee        = annee,

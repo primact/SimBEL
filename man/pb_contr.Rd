@@ -2,7 +2,6 @@
 % Please edit documentation in R/RevaloEngine_pb_contr.R
 \docType{methods}
 \name{pb_contr}
-\alias{RevaloEngine}
 \alias{pb_contr}
 \title{Calcule la PB contractuelle.}
 \usage{

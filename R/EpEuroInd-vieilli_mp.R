@@ -16,7 +16,6 @@
 ##' @author Prim'Act
 ##' @seealso Calcul de la revalorisation des PM \code{\link{calc_revalo_pm}}.
 ##' @export
-##' @aliases EpEuroInd
 ##' @include EpEuroInd-class.R
 ##'
 setGeneric(name = "vieilli_mp", def = function(x, pm_fin_ap_pb, tx_revalo){standardGeneric("vieilli_mp")})

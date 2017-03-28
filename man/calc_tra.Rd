@@ -2,7 +2,6 @@
 % Please edit documentation in R/PortFin_calc_tra.R
 \docType{methods}
 \name{calc_tra}
-\alias{PortFin}
 \alias{calc_tra}
 \title{Calcul du taux de rendement financier}
 \usage{

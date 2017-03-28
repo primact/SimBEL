@@ -14,7 +14,6 @@
 ##' Cette parametrisation est effectuee dans les fichiers d'inputs utilisateurs.
 ##' @author Prim'Act
 ##' @export
-##' @aliases ChocSolvabilite2
 ##' @include ChocSolvabilite2_class.R Canton_class.R
 # Creer une fonction qui puisse appliquer le choc spread a un objet Oblig selon la maturite et le rating
 # table _choc_action est l'element d'un objet : ChocSolvabilite2@param_choc_mket$table_choc_action

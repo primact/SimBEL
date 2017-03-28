@@ -2,17 +2,16 @@
 % Please edit documentation in R/Oblig_calc_sur_dec.R
 \docType{methods}
 \name{calc_sur_dec}
-\alias{Oblig}
 \alias{calc_sur_dec}
-\title{Calcul les surcote/decote de chaque composante d'un portefeuille obligataire.}
+\title{Calcul les surcotes/decotes de chaque composante d'un portefeuille obligataire.}
 \usage{
 calc_sur_dec(x)
 }
 \arguments{
-\item{x}{objet de la classe Oblig (decrivant le portefeuille obligataire).}
+\item{x}{objet de la classe \code{\link{Oblig}} (decrivant le portefeuille obligataire).}
 }
 \value{
-Un data.frame compose de deux colonnes : 1 ere colonne : surcotes decotes ; 2de colonne : valeurs nettes comptables.
+Un vecteur contenant les surcotes decotes.
 }
 \description{
 \code{calc_sur_dec} est une methode permettant de calculer les surcotes/decotes de chaque composante d'un portefeuille obligataire.

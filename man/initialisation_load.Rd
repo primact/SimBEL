@@ -2,7 +2,6 @@
 % Please edit documentation in R/Initialisation_load.R
 \docType{methods}
 \name{initialisation_load}
-\alias{Initialisation}
 \alias{initialisation_load}
 \title{Chargement de certains attributs dans un objet \code{Initialisation}}
 \usage{

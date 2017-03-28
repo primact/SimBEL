@@ -24,7 +24,6 @@
 ##' @return \code{result_net} le montant de resultat net d'impot en fin de projection.
 ##' @return \code{impot} le montant d'impot sur le resultat en fin de projection.
 ##' @export
-##' @aliases Canton
 ##' @include Canton_class.R
 
 setGeneric(name = "calc_fin_proj", def = function(x, resultat_fin, result_tech, pm_fin_ap_pb, tx_pb, tx_enc_moy){

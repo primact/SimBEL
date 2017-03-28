@@ -14,7 +14,6 @@
 ##' @author Prim'Act
 ##' @seealso Le calcul du taux de deces \code{\link{calc_qx}}.
 ##' @export
-##' @aliases HypTech
 ##' @include HypTech-class.R
 setGeneric("get_qx_mort", function(x, nom_table, age, gen){standardGeneric("get_qx_mort")})
 setMethod(

@@ -22,7 +22,6 @@
 ##' revalorisation contractuelle nette.
 ##' @author Prim'Act
 ##' @export
-##' @aliases RevaloEngine
 
 setGeneric(name = "pb_contr", def = function(base_fin, tx_pb, rev_stock_brut, ch_enc_th,
                                              tx_enc_moy){standardGeneric("pb_contr")})

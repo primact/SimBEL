@@ -2,7 +2,6 @@
 % Please edit documentation in R/HypTech-get_rach_dyn.R
 \docType{methods}
 \name{get_rach_dyn}
-\alias{HypTech}
 \alias{get_rach_dyn}
 \title{Recuperer les taux de rachat dynamiques calcules.}
 \usage{

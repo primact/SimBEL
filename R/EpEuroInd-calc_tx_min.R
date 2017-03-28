@@ -18,7 +18,6 @@
 ##' @note Pour les besoins des calculs a mi-annee, des taux semestriels sont produits.
 ##' @author Prim'Act
 ##' @export
-##' @aliases EpEuroInd
 ##' @include EpEuroInd-class.R
 
 setGeneric(name = "calc_tx_min", def = function(x, an){standardGeneric("calc_tx_min")})

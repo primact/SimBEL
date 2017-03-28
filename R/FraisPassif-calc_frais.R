@@ -18,7 +18,6 @@
 ##' @return Une liste contenant les montants de frais fixes et de frais variables.
 ##' @author Prim'Act
 ##' @export
-##' @aliases FraisPassif
 ##' @include FraisPassif-class.R
 
 setGeneric(name = "calc_frais", def = function(x, type, nom_prod, nb, mt, coef_inf)

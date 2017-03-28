@@ -2,10 +2,9 @@
 #           Definition de la classe AutresPassifs
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 
-##' La classe \code{AutresPassifs}
+##' La classe \code{AutresPassifs}.
 ##'
 ##' Une classe pour la gestion des passifs hors modele.
-##'
 ##' @name AutresPassifs
 ##' @slot mp un objet \code{data.frame} au format fige contenant les flux des passifs hors modele.
 ##' @docType class

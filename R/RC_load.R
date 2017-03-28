@@ -7,10 +7,9 @@
 ##' @name rc_load
 ##' @docType methods
 ##' @param file_RC_address est un \code{character} correspondant a l'adresse du fichier d'input renseignant les donnees de RC
-##' @return Un objet de la classe \code{RC} charge a partir des donnees du fichier dont le nom est precise en input.
+##' @return Un objet de la classe \code{\link{RC}} charge a partir des donnees du fichier dont le nom est precise en input.
 ##' @author Prim'Act
 ##' @export
-##' @aliases RC
 ##' @include RC_class.R
 
 setGeneric(name = "rc_load", def = function(file_RC_address){standardGeneric("rc_load")})

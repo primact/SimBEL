@@ -24,7 +24,6 @@
 ##' @return \code{ppb} l'objet \code{ppb} mis a jour.
 ##' @author Prim'Act
 ##' @export
-##' @aliases RevaloEngine
 ##' @include Ppb_class.R
 
 setGeneric(name = "finance_cible_ppb", def = function(bes_cible, rev_stock_nette, ppb){standardGeneric("finance_cible_ppb")})

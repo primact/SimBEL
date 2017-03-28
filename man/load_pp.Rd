@@ -2,7 +2,6 @@
 % Please edit documentation in R/PortPassif-load.R
 \docType{methods}
 \name{load_pp}
-\alias{PortPassif}
 \alias{load_pp}
 \title{Methode permettant de charger et d'instancier un portfeuille de passif.}
 \usage{
@@ -24,6 +23,6 @@ Prim'Act
 }
 \seealso{
 La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
- pour renseigner l’input.
+ pour renseigner l'input.
 }
 

@@ -2,23 +2,22 @@
 % Please edit documentation in R/Immo_buy.R
 \docType{methods}
 \name{buy_immo}
-\alias{Immo}
 \alias{buy_immo}
-\title{Mise a jour de chaque composante d'un portefeuille immo suite a un achat d'un autre portefeuille immo.}
+\title{Mise a jour de chaque composante d'un portefeuille action suite a un achat d'un autre portefeuille immobilier.}
 \usage{
 buy_immo(x, ptf_bought)
 }
 \arguments{
-\item{x}{objet de la classe \code{Immo} (decrivant le portefeuille immo en detention).}
+\item{x}{objet de la classe \code{\link{Immo}} (decrivant le portefeuille immo en detention).}
 
-\item{ptf_bought}{objet de la classe \code{Immo} (decrivant le portefeuille immo achete).}
+\item{ptf_bought}{objet de la classe \code{\link{Immo}} (decrivant le portefeuille immo achete).}
 }
 \value{
 L'objet \code{x} complete des elements de \code{ptf_bought}.
 }
 \description{
-\code{buy_immo} est une methode permettant de mettre a jour le portefeuille immo suite a l'achat d'un autre portefeuille immo.
-de chaque composante d'un portefeuille immo.
+\code{buy_immo} est une methode permettant de mettre a jour le portefeuille action suite a l'achat d'un autre portefeuille immobilier.
+de chaque composante d'un portefeuille action.
 }
 \author{
 Prim'Act

@@ -15,10 +15,9 @@
 ##'  des sorties de l'ESG Prim'Act.
 ##' @details Les differentes adresses potentielles pour les differents ESG employes (central, hausse de taux, baisse de taux)
 ##' sont construites par la fonction \code{\link{set_architecture}} de la classe \code{\link{Initialisation}}.
-##' @return \code{x} l'objet de la classe \code{ESG} construit.
+##' @return \code{x} l'objet de la classe \code{\link{ESG}} construit.
 ##' @author Prim'Act
 ##' @export
-##' @aliases ESG
 ##' @include ESG_class.R
 
 setGeneric(name = "chargement_ESG", function(folder_ESG_address, nb_simu, nb_annee_proj){standardGeneric("chargement_ESG")})

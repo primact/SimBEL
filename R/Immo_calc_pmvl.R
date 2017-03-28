@@ -1,19 +1,16 @@
-#10/03/2017 Guillaume de Kervenoael
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           calc_pmvl_immo
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcul les valeurs de marches de chaque composante du portefeuille immobilier.
+##' Calcule les plus et moins-values immobilier.
 ##'
-##' \code{calc_pmvl_immo} est une methode permettant de calculer les valeurs de marche.
+##' \code{calc_pmvl_immo}  est une methode permettant de calculer les plus et moins-values du portefeuille immobilier.
 ##' @name calc_pmvl_immo
 ##' @docType methods
-##' @param x objet de la classe \code{Immo} (decrivant le portefeuille d'immobilier).
-##' @return Une liste composee de deux elements \code{(pvl, mvl)} correspondant respectivement 
-##' aux sommes des plus values latentes immobilieres et aux sommes des moins values latentes immobilieres.
+##' @param x objet de la classe \code{\link{Immo}} (decrivant le portefeuille d'immobilier).
+##' @return \code{pvl} correspondant a la somme des plus-values latentes immobilier.
+##' @return \code{mvl} correspondant a la somme des moins-values latentes immobilier.
 ##' @author Prim'Act
 ##' @export
-##' @aliases Immo
 ##' @include Immo_class.R
 
 setGeneric(name = "calc_pmvl_immo", def = function(x){standardGeneric("calc_pmvl_immo")})
@@ -21,8 +18,15 @@ setMethod(
     f = "calc_pmvl_immo",
     signature = "Immo",
     definition = function(x){
-        pvl <- sum((x["ptf_immo"][,"val_marche"] - x["ptf_immo"][,"val_nc"])*(x["ptf_immo"][,"val_marche"] > x["ptf_immo"][,"val_nc"]))
-        mvl <- sum((x["ptf_immo"][,"val_marche"] - x["ptf_immo"][,"val_nc"])*(x["ptf_immo"][,"val_marche"] < x["ptf_immo"][,"val_nc"]))
+        nom_table  <- names(x@ptf_immo)
+        val_marche <- which(nom_table == "val_marche")
+        val_nc     <- which(nom_table == "val_nc")
+
+        # Plus ou moins value latentes
+        pmvl <-.subset2(x@ptf_immo, val_marche) - .subset2(x@ptf_immo, val_nc)
+
+        pvl <- sum( pmvl * (pmvl > 0))
+        mvl <- sum( pmvl * (pmvl <= 0))
         return(list(pvl = pvl, mvl = mvl))
     }
 )

@@ -13,7 +13,6 @@
 ##' @author Prim'Act
 ##' @export
 ##' @seealso La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}} pour renseigner l'input.
-##' @aliases FraisFin
 ##' @include FraisFin_class.R
 setGeneric(name = "frais_fin_load", def = function(file_frais_fin_address){standardGeneric("frais_fin_load")})
 setMethod(

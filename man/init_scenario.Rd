@@ -2,14 +2,13 @@
 % Please edit documentation in R/Initialisation_init_scenario.R
 \docType{methods}
 \name{init_scenario}
-\alias{Initialisation}
 \alias{init_scenario}
 \title{Initialisation des scenarios : central et de chocs d'un workspace.}
 \usage{
 init_scenario(x)
 }
 \arguments{
-\item{x}{un objet de la classe \code{\link{Initialisation}}}
+\item{x}{un objet de la classe \code{\link{Initialisation}}.}
 }
 \value{
 Pas de sortie.

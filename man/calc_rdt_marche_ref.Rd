@@ -2,7 +2,6 @@
 % Please edit documentation in R/PortPassif-calc_rdt_marche_ref.R
 \docType{methods}
 \name{calc_rdt_marche_ref}
-\alias{PortPassif}
 \alias{calc_rdt_marche_ref}
 \title{Calcul du taux de rendement de reference au niveau du marche}
 \usage{

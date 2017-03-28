@@ -2,17 +2,16 @@
 % Please edit documentation in R/Oblig_yield_to_maturity.R
 \docType{methods}
 \name{yield_to_maturity}
-\alias{Oblig}
 \alias{yield_to_maturity}
-\title{Calcul les yield to maturity de chaque composante d'un portefeuille obligataire.}
+\title{Calcule les yield to maturity de chaque composante d'un portefeuille obligataire.}
 \usage{
 yield_to_maturity(x)
 }
 \arguments{
-\item{x}{objet de la classe Oblig (decrivant le portefeuile obligataire).}
+\item{x}{objet de la classe \code{\link{Oblig}} (decrivant le portefeuile obligataire).}
 }
 \value{
-Un vecteur dont chaque element correspond au yield to maturity de l'obligation correspondante du portefeuille obligataire.
+Un vecteur dont chaque element correspond au yield to maturity des obligations du portefeuille obligataire.
 Ce vecteur a autant d'elements que le portefeuille obligataire a de lignes.
 }
 \description{

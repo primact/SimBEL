@@ -2,19 +2,18 @@
 % Please edit documentation in R/RC_do_update_val_courante.R
 \docType{methods}
 \name{do_update_RC_val_courante}
-\alias{RC}
 \alias{do_update_RC_val_courante}
 \title{Mise a jour de la valeur courante de RC}
 \usage{
 do_update_RC_val_courante(x, val_courante)
 }
 \arguments{
-\item{x}{objet de la classe \code{RC}correspondant a la RC avant mise a jour.}
+\item{x}{objet de la classe \code{\link{RC}} correspondant a la RC avant mise a jour.}
 
 \item{val_courante}{est un \code{numeric} correspondant au montant de RC calcule par la fonction \code{\link{calc_RC}}.}
 }
 \value{
-L'objet \code{RC} mis a jour de la nouvelle valeur courante de \code{RC}
+L'objet \code{\link{RC}} mis a jour de la nouvelle valeur courante de \code{\link{RC}}.
 }
 \description{
 \code{do_update_RC_val_courante} est une methode permettant de calculer le montant de RC.

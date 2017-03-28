@@ -2,7 +2,6 @@
 % Please edit documentation in R/EpEuroInd-calc_tx_min.R
 \docType{methods}
 \name{calc_tx_min}
-\alias{EpEuroInd}
 \alias{calc_tx_min}
 \title{Calcul le taux de revalorisation contractuel minimum pour des contrats epargne en euros.}
 \usage{

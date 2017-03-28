@@ -2,7 +2,6 @@
 % Please edit documentation in R/AlmEngine_create_ptf_bought_action.R
 \docType{methods}
 \name{create_ptf_bought_action}
-\alias{AlmEngine}
 \alias{create_ptf_bought_action}
 \title{Ajuste les quantites d'actions a acheter.}
 \usage{

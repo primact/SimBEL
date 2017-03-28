@@ -6,7 +6,7 @@
 ##' \code{calc_PRE} est une methode permettant de calculer le montant de PRE.
 ##' @name calc_PRE
 ##' @docType methods
-##' @param x objet de la classe \code{PRE}, necessaire pour connaitre le stock de PRE initial.
+##' @param x objet de la classe \code{\link{PRE}}, necessaire pour connaitre le stock de PRE initial.
 ##' @param pmvl_action_immo est un \code{numeric} correspondant au montant global de plus ou moins values latentes des actifs actions et immobiliers.
 ##' En cas de moins value latente, la PRE est abondee.
 ##' En cas de plus value latente, la PRE est integralement reprise.
@@ -17,7 +17,6 @@
 ##' }
 ##' @author Prim'Act
 ##' @export
-##' @aliases PRE
 ##' @include PRE_class.R
 
 setGeneric(name = "calc_PRE", def = function(x, pmvl_action_immo){standardGeneric("calc_PRE")})

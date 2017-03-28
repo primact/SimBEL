@@ -3,24 +3,21 @@
 \docType{class}
 \name{Treso}
 \alias{Treso}
-\title{La classe Treso}
+\title{La classe \code{Treso}.}
 \description{
-Classe pour les actifs de type Tresorerie
+Une classe pour les actifs de type Tresorerie.
 }
 \section{Slots}{
 
 \describe{
 \item{\code{ptf_treso}}{est un dataframe, chaque ligne represente un actif de tresorerie du portefeuille de monetaire.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
 }
 \seealso{
-Les methodes de calcul des valeurs \code{\link{calc_vm_treso}}, 
-de calcul des revenus de la tresorerie \code{\link{revenu_treso}}, 
+Les methodes de calcul des valeurs \code{\link{calc_vm_treso}},
+de calcul des revenus de la tresorerie \code{\link{revenu_treso}},
 de calcul de la revalorisation de la tresorerie \code{\link{revalo_treso}},
 de mise a jour de la tresorerie \code{\link{update_treso}}.
 }

@@ -2,14 +2,13 @@
 % Please edit documentation in R/Oblig_calc_nominal.R
 \docType{methods}
 \name{calc_nominal}
-\alias{Oblig}
 \alias{calc_nominal}
-\title{Calcul le nominal des models points constituant le portefeuille obligataire.}
+\title{Calcule le nominal des obligations constituant le portefeuille obligataire.}
 \usage{
 calc_nominal(x)
 }
 \arguments{
-\item{x}{un objet de la classe Oblig.}
+\item{x}{un objet de la classe \code{\link{Oblig}}.}
 }
 \value{
 Un vecteur dont chaque element correspond a la valeur du nominal de l'obligation consideree : parite * nominal * nb_unit.

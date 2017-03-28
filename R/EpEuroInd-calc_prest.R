@@ -60,7 +60,6 @@
 ##' @author Prim'Act
 ##' @seealso \code{\link{calc_tx_sortie}}, \code{\link{calc_tx_min}}.
 ##' @export
-##' @aliases EpEuroInd
 ##' @include EpEuroInd-class.R
 ##'
 setGeneric(name = "calc_prest", def = function(x, tx_sortie, tx_min, an, method, tx_soc){standardGeneric("calc_prest")})

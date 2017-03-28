@@ -2,7 +2,6 @@
 % Please edit documentation in R/ParamAlmEngine_load.R
 \docType{methods}
 \name{param_alm_engine_load}
-\alias{ParamAlmEngine}
 \alias{param_alm_engine_load}
 \title{Chargement des attributs d'un objet \code{ParamAlmEngine} a partir des donnees utilisateurs.}
 \usage{

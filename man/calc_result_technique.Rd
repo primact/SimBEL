@@ -2,14 +2,13 @@
 % Please edit documentation in R/RevaloEngine_calc_result_technique.R
 \docType{methods}
 \name{calc_result_technique}
-\alias{RevaloEngine}
 \alias{calc_result_technique}
 \title{calcule le resultat technique}
 \usage{
 calc_result_technique(passif_av_pb, var_pre)
 }
 \arguments{
-\item{passif_av_pb}{est une liste produit par la methode \code{\link{viellissement_av_pb}}
+\item{passif_av_pb}{est une liste produite par la methode \code{\link{viellissement_av_pb}}
 appliquee a un portefeuille de passif.}
 
 \item{var_pre}{est une valeur \code{numeric} correspondant a la variation de PRE.}

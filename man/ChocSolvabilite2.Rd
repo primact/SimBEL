@@ -3,8 +3,7 @@
 \docType{class}
 \name{ChocSolvabilite2}
 \alias{ChocSolvabilite2}
-\title{La classe \code{ChocSolvabilite2} instancie les parametres de chocs Marche et Souscription
-de la formule standard de la directive Solvabilite 2.}
+\title{La classe \code{ChocSolvabilite2}.}
 \description{
 La classe \code{ChocSolvabilite2} permet de realiser les principaux des scenarios de choc initiaux
 au sens de la formule standard de la directive Solvabilite 2.

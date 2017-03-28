@@ -13,12 +13,11 @@
 ##' \code{revalo_treso} est une methode permettant de calculer les valeurs de marche.
 ##' @name revalo_treso
 ##' @docType methods
-##' @param S vecteur de valeur de chaque ligne du ptf en milieu d'annee N (date de calcul des flux).
-##' @param S_prev vecteur de valeur de chaque ligne du ptf en milieu d'annee N-1.
-##' @return Un vecteur ayant autant d elements que les vecteurs inputs. Chaque element correspondant au rendement annuel d'une lige de tresorerie.
+##' @param Rt valeur du taux zero coupon 1 an de l'annee.
+##' @param Rt_prev valeur du taux zero coupon 0 an de l'annee.
+##' @return Le taux de rendement.
 ##' @author Prim'Act
 ##' @export
-##' @aliases Treso
 ##' @include Treso_class.R
 
 # ATTENTION : Rt = R(t,t+1)

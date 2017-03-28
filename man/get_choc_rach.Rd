@@ -2,13 +2,15 @@
 % Please edit documentation in R/HypTech-get_choc_rach.R
 \docType{methods}
 \name{get_choc_rach}
-\alias{HypTech}
 \alias{get_choc_rach}
 \title{Applique les chocs de rachat de la formule standard.}
 \usage{
 get_choc_rach(x, type_choc_rach, choc, choc_lim)
 }
 \arguments{
+\item{x}{un objet de la classe \code{\link{HypTech}} contenant differentes
+lois de rachat partielles et totales.}
+
 \item{type_choc_rach}{est un character renseignant le type de choc a applique : \code{up}
 pour le choc a la hausse, et \code{down} pour le choc a la baisse.}
 
@@ -16,12 +18,9 @@ pour le choc a la hausse, et \code{down} pour le choc a la baisse.}
 
 \item{choc_lim}{une valeur \code{numeric} indiquant la limite haute pour le choc a la hausse,
 ou une limite basse pour le choc a baisse.}
-
-\item{ht}{un objet de la classe \code{\link{HypTech}} contenant differentes
-lois de rachat partielles et totales.}
 }
 \value{
-L'objet \code{ht} apres choc.
+L'objet \code{x} apres choc.
 }
 \description{
 \code{get_choc_rach} est une methode permettant d'appliquer a l'ensemble des lois de rachat

@@ -7,7 +7,7 @@
 ##' pour une simulation donnee.
 ##' @name run_be_simu
 ##' @docType methods
-##' @param x un objet de type \code{Be}.
+##' @param x un objet de type \code{\link{Be}}.
 ##' @param i un entier (\code{integer}) correspondant au numero de la simulation.
 ##' @param pre_on  une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
 ##' de PRE dans le resultat technique utilisee pour le calcul de la participation aux benefices reglementaires.
@@ -30,7 +30,6 @@
 ##' L'extraction d'une simulation de l'\code{\link{ESG}} :\code{\link{extract_ESG}}.
 ##' La classe \code{\link{Be}}.
 ##' @export
-##' @aliases Be
 ##' @include Be_class.R
 setGeneric(name = "run_be_simu", def = function(x, i, pre_on){standardGeneric("run_be_simu")})
 setMethod(

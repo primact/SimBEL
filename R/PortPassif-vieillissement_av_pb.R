@@ -37,7 +37,6 @@
 ##' La projection des autres passifs : \code{\link{proj_annee_autres_passifs}}.
 ##' La mise a jour des autres reserves : \code{\link{update_reserves}}.
 ##' @export
-##' @aliases PortPassif
 ##' @include PortPassif-class.R
 ##'
 setGeneric(name = "viellissement_av_pb", def = function(an, x, coef_inf, list_rd, tx_soc){
@@ -49,7 +48,7 @@ setMethod(
   def = function(an, x, coef_inf, list_rd, tx_soc){
 
     # Mise a jour de l'annee
-    x["annee"] <- as.integer(an)
+    x@annee <- as.integer(an)
     #---------------------------------------------------------------
     # Etape 1 : Evaluation des flux et de PM avant PB sur les produits
     #---------------------------------------------------------------

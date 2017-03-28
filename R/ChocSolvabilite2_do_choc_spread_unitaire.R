@@ -18,7 +18,6 @@
 ##' @author Prim'Act
 ##' @seealso La classe \code{\link{PortFin}}.
 ##' @export
-##' @aliases ChocSolvabilite2
 ##' @include ChocSolvabilite2_class.R
 
 

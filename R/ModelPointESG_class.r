@@ -4,7 +4,7 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' La classe \code{ModelPointESG}.
 ##'
-##' Une classe pour une extraction de l'ES pour une annee et une simulation particuliere.
+##' Une classe pour une extraction de l'ESG pour une annee et une simulation particuliere.
 ##'
 ##' @name ModelPointESG
 ##' @slot annee une valeur \code{integer} correspondant a l'annee de projection.
@@ -25,7 +25,6 @@
 ##' @seealso Les methodes de chargement d'un ESG \code{\link{chargement_ESG}} et d'extraction d'un model point \code{\link{extract_ESG}}.
 ##' @keywords classes
 ##' @export
-##' @aliases ModelPointESG
 
 setClass(
   Class =  "ModelPointESG",

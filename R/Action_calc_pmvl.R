@@ -1,19 +1,17 @@
-# GK 10/03/2017
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           calc_pmvl_action
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcul les valeurs de marches de chaque composante du portefeuille action.
+##' Calcule les plus et moins-values action.
 ##'
-##' \code{calc_pmvl_action} est une methode permettant de calculer les valeurs de marche.
+##' \code{calc_pmvl_action} est une methode permettant de calculer les plus et moins-values du portefeuille action.
 ##' @name calc_pmvl_action
 ##' @docType methods
-##' @param x objet de la classe \code{Action} (decrivant le portefeuille d'action).
-##' @return Une liste composee de deux elements \code{(pvl, mvl)} correspondant respectivement 
-##' aux sommes des plus values latentes actions et aux sommes des moins values latentes action.
+##' @param x objet de la classe \code{\link{Action}} (decrivant le portefeuille d'action).
+##' @return \code{pvl} correspondant a la somme des plus-values latentes actions.
+##' @return \code{mvl} correspondant a la somme des moins-values latentes actions.
 ##' @author Prim'Act
 ##' @export
-##' @aliases Action
 ##' @include Action_class.R
 
 setGeneric(name = "calc_pmvl_action", def = function(x){standardGeneric("calc_pmvl_action")})
@@ -21,8 +19,15 @@ setMethod(
     f = "calc_pmvl_action",
     signature = "Action",
     definition = function(x){
-        pvl <- sum((x["ptf_action"][,"val_marche"] - x["ptf_action"][,"val_nc"])*(x["ptf_action"][,"val_marche"] > x["ptf_action"][,"val_nc"]))
-        mvl <- sum((x["ptf_action"][,"val_marche"] - x["ptf_action"][,"val_nc"])*(x["ptf_action"][,"val_marche"] < x["ptf_action"][,"val_nc"]))
+        nom_table  <- names(x@ptf_action)
+        val_marche <- which(nom_table == "val_marche")
+        val_nc     <- which(nom_table == "val_nc")
+
+        # Plus ou moins value latentes
+        pmvl <-.subset2(x@ptf_action, val_marche) - .subset2(x@ptf_action, val_nc)
+
+        pvl <- sum( pmvl * (pmvl > 0))
+        mvl <- sum( pmvl * (pmvl <= 0))
         return(list(pvl = pvl, mvl = mvl))
     }
 )

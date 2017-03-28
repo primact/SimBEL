@@ -38,7 +38,6 @@
 ##' @author Prim'Act
 ##' @seealso Le calcul des PM avec revalorisation minimale uniquement \code{\link{calc_pm}}.
 ##' @export
-##' @aliases EpEuroInd
 ##' @include EpEuroInd-class.R
 ##'
 setGeneric(name = "calc_revalo_pm", def = function(x, rev_net_alloue, tx_soc)

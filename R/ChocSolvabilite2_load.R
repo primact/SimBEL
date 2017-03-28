@@ -21,7 +21,6 @@
 ##' @seealso La creation de l'architecture de chargement des donnees et parametres renseignes par l'utilisateur
 ##'  \code{\link{set_architecture}},
 ##' ainsi que les classes \code{\link{ParamChocMket}} et \code{\link{ParamChocSousc}}.
-##' @aliases ChocSolvabilite2
 ##' @include ChocSolvabilite2_class.R
 
 setGeneric(name = "chargement_choc", def = function(x, folder_chocs_address){standardGeneric("chargement_choc")})

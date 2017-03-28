@@ -27,8 +27,8 @@ Il est necessaire que l'attribut nb_annee_proj corresponde au nombre d'annee de 
 Prim'Act
 }
 \seealso{
-La mise en place de l'architecture de chargement des donnees et parametres renseignes par l'utilisateur \code{\link{set_architecture}}, 
-la creation et la sauvegarde du canton initial \code{\link{init_SimBEL}}, la creation de l'architecture des scenarios central, de marche et de souscription 
+La mise en place de l'architecture de chargement des donnees et parametres renseignes par l'utilisateur \code{\link{set_architecture}},
+la creation et la sauvegarde du canton initial \code{\link{init_SimBEL}}, la creation de l'architecture des scenarios central, de marche et de souscription
 de la formule standard ainsi que la creation des objets \code{\link{Be}} pour chacun de ces scenarios.
 }
 \keyword{classes}

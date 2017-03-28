@@ -2,7 +2,6 @@
 % Please edit documentation in R/EpEuroInd-calc_prest.R
 \docType{methods}
 \name{calc_prest}
-\alias{EpEuroInd}
 \alias{calc_prest}
 \title{Calcul les flux de prestations pour des contrats epargne en euros.}
 \usage{

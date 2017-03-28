@@ -2,7 +2,6 @@
 % Please edit documentation in R/RevaloEngine_finance_cible_marge.R
 \docType{methods}
 \name{finance_cible_marge}
-\alias{RevaloEngine}
 \alias{finance_cible_marge}
 \title{Evalue le financement d'une revalorisation au taux cible par la marge de l'assureur}
 \usage{

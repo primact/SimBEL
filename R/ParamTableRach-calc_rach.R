@@ -11,7 +11,6 @@
 ##' @param anc une valeur \code{numeric} correspondant a l'anciennete.
 ##' @return La valeur du taux de rachat calcule.
 ##' @author Prim'Act
-##' @aliases ParamTableRach
 ##' @include ParamTableRach-class.R
 ##' @export
 setGeneric("calc_rach",

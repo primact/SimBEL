@@ -19,7 +19,6 @@
 ##' @return \code{marge_fin} le montant de marge de l'assureur apres reduction.
 ##' @author Prim'Act
 ##' @export
-##' @aliases RevaloEngine
 
 setGeneric(name = "finance_cible_marge", def = function(marge_fin, bes_cible, rev_stock_nette, marge_min){
   standardGeneric("finance_cible_marge")})

@@ -2,14 +2,13 @@
 % Please edit documentation in R/Oblig_calc_dur.R
 \docType{methods}
 \name{duration_sensi}
-\alias{Oblig}
 \alias{duration_sensi}
 \title{Calcule la duration de chaque composante d'un portefeuille obligataire.}
 \usage{
 duration_sensi(x)
 }
 \arguments{
-\item{x}{objet de la classe Oblig (decrivant le portefeuille obligataire).}
+\item{x}{objet de la classe \code{\link{Oblig}} (decrivant le portefeuille obligataire).}
 }
 \value{
 Un data frame compose de deux colonnes : la premiere est composee de la duration de chacune des obligations du portefeuille obligataire.

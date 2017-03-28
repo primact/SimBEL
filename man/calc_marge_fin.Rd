@@ -2,7 +2,6 @@
 % Please edit documentation in R/RevaloEngine_calc_marge_fin.R
 \docType{methods}
 \name{calc_marge_fin}
-\alias{RevaloEngine}
 \alias{calc_marge_fin}
 \title{Calcule la marge financiere de l'assureur.}
 \usage{
@@ -25,13 +24,13 @@ la contribution de la PPB au financement des TMG sur prestations.}
 la contribution de la PPB au financement des TMG sur stock.}
 
 \item{contrib_ppb_tx_cible}{une valeur de type \code{numeric} comprenant par produit
-la contribution de la PPB au financement au taux cible sur stock.}
+la contribution de la PPB au financement du taux cible sur stock.}
 }
 \value{
 Le montant de la marge de l'assureur.
 }
 \description{
-\code{calc_marge_fin} est une methode permettant de
+\code{calc_marge_fin} est une methode permettant
  de calculer la marge financiere de l'assureur apres attribution d'un certain niveau de revalorisation.
 }
 \author{

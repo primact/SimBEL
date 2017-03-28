@@ -2,7 +2,6 @@
 % Please edit documentation in R/RevaloEngine_finance_contrainte_legale.R
 \docType{methods}
 \name{finance_contrainte_legale}
-\alias{RevaloEngine}
 \alias{finance_contrainte_legale}
 \title{Applique la contrainte legale de participation aux benefices.}
 \usage{

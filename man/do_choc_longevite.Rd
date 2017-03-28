@@ -2,7 +2,6 @@
 % Please edit documentation in R/ChocSolvabilite2_do_choc_longevite.R
 \docType{methods}
 \name{do_choc_longevite}
-\alias{ChocSolvabilite2}
 \alias{do_choc_longevite}
 \title{Permet a partir d'un canton initial de creer un canton choque longevite.}
 \usage{

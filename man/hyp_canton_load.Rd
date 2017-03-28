@@ -2,7 +2,6 @@
 % Please edit documentation in R/HypCanton_load.R
 \docType{methods}
 \name{hyp_canton_load}
-\alias{HypCanton}
 \alias{hyp_canton_load}
 \title{Methode permettant de charger la valeur initiale des hypotheses du canton.}
 \usage{

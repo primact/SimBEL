@@ -3,23 +3,21 @@
 \docType{class}
 \name{Action}
 \alias{Action}
-\title{La classe Action}
+\title{La classe \code{Action}.}
 \description{
-Classe pour les actifs de type Action
+Classe pour les actifs de type Action.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{ptf_action}}{est un dataframe, chaque ligne represente un actif action du portefeuille d'action.}
+\item{\code{ptf_action}}{est un \code{data.frame}, chaque ligne represente un actif action du portefeuille d'action.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
 }
 \seealso{
-Les operations d'achat vente action  \code{\link{buy_action}},
+Les operations d'achat-vente action  \code{\link{buy_action}},
 \code{\link{sell_action}} et \code{\link{sell_pvl_action}}.
 }
+\keyword{classes}
 

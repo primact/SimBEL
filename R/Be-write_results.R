@@ -13,10 +13,9 @@
 ##' @docType methods
 ##' @param nom_run est un objet de type \code{character} utilise pour nommer le fichier de resultats.
 ##' @param path est un objet de type \code{character} utilise pour indiquer le chemin d'enregistrement des resultats.
-##' @param x est un objet de type \code{Be}.
+##' @param x est un objet de type \code{\link{Be}}.
 ##' @author Prim'Act
 ##' @export
-##' @aliases Be
 ##' @include Be_class.R
 ##'
 setGeneric(name = "write_be_results", def = function(nom_run, path, x){standardGeneric("write_be_results")})

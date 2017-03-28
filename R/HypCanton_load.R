@@ -15,7 +15,6 @@
 ##' @seealso La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
 ##'  pour renseigner l’input.
 ##' @export
-##' @aliases HypCanton
 ##' @include HypCanton_class.R
 setGeneric(name = "hyp_canton_load", def = function(file_hyp_canton_address){standardGeneric("hyp_canton_load")})
 setMethod(

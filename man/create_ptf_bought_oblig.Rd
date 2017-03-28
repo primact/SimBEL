@@ -2,7 +2,6 @@
 % Please edit documentation in R/AlmEngine_create_ptf_bought_oblig.R
 \docType{methods}
 \name{create_ptf_bought_oblig}
-\alias{AlmEngine}
 \alias{create_ptf_bought_oblig}
 \title{Ajuste les quantites d'obligations a acheter.}
 \usage{

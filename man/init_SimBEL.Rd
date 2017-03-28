@@ -2,7 +2,6 @@
 % Please edit documentation in R/Initialisation_initSimBEL.R
 \docType{methods}
 \name{init_SimBEL}
-\alias{Initialisation}
 \alias{init_SimBEL}
 \title{Initialisation d'un workspace.}
 \usage{

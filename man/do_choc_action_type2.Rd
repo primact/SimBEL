@@ -2,7 +2,6 @@
 % Please edit documentation in R/ChocSolvabilite2_do_choc_action_type2.R
 \docType{methods}
 \name{do_choc_action_type2}
-\alias{ChocSolvabilite2}
 \alias{do_choc_action_type2}
 \title{Permet a partir d'un canton initial de creer un canton choque action.}
 \usage{
@@ -14,7 +13,7 @@ do_choc_action_type2(x, canton)
 \item{canton}{un objet de la classe \code{\link{Canton}}. Il correspond au canton non choque (i.e. central) de l'assureur.}
 }
 \value{
-\code{canton} l'objet  de la classe \code{\link{Canton}} correspondant au scenario choque action 
+\code{canton} l'objet  de la classe \code{\link{Canton}} correspondant au scenario choque action
 au sens de la formule standard Solvabilite 2.
 }
 \description{

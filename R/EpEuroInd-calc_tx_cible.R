@@ -22,7 +22,6 @@
 ##' @author Prim'Act
 ##' @seealso La recuperation des taux cibles calcules : \code{\link{get_comport}}.
 ##' @export
-##' @aliases EpEuroInd
 ##' @include EpEuroInd-class.R HypTech-class.R
 
 setGeneric(name = "calc_tx_cible",

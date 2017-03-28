@@ -15,7 +15,6 @@
 ##' @seealso La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
 ##'  pour renseigner l’input.
 ##' @export
-##' @aliases AutresReserves
 ##' @include AutresReserves-class.R
 ##'
 setGeneric(name = "autres_reserves_load", def = function(file_autres_reserves_address){standardGeneric("autres_reserves_load")})

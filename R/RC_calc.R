@@ -1,12 +1,12 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           calc_RC
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcul de la RC.
+##' Calcule de la RC.
 ##'
-##' \code{calc_RC} est une methode permettant de calculer le montant de RC.
+##' \code{calc_RC} est une methode permettant de calculer le montant de Reserve de Capitalisation.
 ##' @name calc_RC
 ##' @docType methods
-##' @param x objet de la classe \code{RC}, necessaire pour connaitre le stock de RC initial.
+##' @param x objet de la classe \code{\link{RC}}, necessaire pour connaitre le stock de RC initial.
 ##' @param pmr_oblig est un \code{numeric} correspondant au montant global annuel de plus ou moins values realisees sur des actifs obligataires.
 ##' @return Le format de la liste renvoyee est :
 ##' \describe{
@@ -15,7 +15,6 @@
 ##' }
 ##' @author Prim'Act
 ##' @export
-##' @aliases RC
 ##' @include RC_class.R
 
 setGeneric(name = "calc_RC", def = function(x, pmvr_oblig){standardGeneric("calc_RC")})

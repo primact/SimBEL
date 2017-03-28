@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Calcule la marge financiere de l'assureur.
 ##'
-##' \code{calc_marge_fin} est une methode permettant de
+##' \code{calc_marge_fin} est une methode permettant
 ##'  de calculer la marge financiere de l'assureur apres attribution d'un certain niveau de revalorisation.
 ##' @name calc_marge_fin
 ##' @docType methods
@@ -17,11 +17,10 @@
 ##' @param contrib_tmg_stock est une valeur \code{numeric} comprenant par produit
 ##' la contribution de la PPB au financement des TMG sur stock.
 ##' @param contrib_ppb_tx_cible une valeur de type \code{numeric} comprenant par produit
-##' la contribution de la PPB au financement au taux cible sur stock.
+##' la contribution de la PPB au financement du taux cible sur stock.
 ##' @return Le montant de la marge de l'assureur.
 ##' @author Prim'Act
 ##' @export
-##' @aliases RevaloEngine
 
 setGeneric(name = "calc_marge_fin", def = function(base_fin,
                                                    rev_prest_nette, rev_stock_nette,

@@ -2,7 +2,6 @@
 % Please edit documentation in R/ChocSolvabilite2_do_choc_immo.R
 \docType{methods}
 \name{do_choc_immo}
-\alias{ChocSolvabilite2}
 \alias{do_choc_immo}
 \title{Permet a partir d'un canton initial de creer un canton choque immobilier.}
 \usage{
@@ -11,7 +10,7 @@ do_choc_immo(x, canton)
 \arguments{
 \item{x}{objet de la classe \code{\link{ChocSolvabilite2}}.}
 
-\item{canton}{est un objet de la classe \code{\link{Canton}}. Il correspond au canton non choque (i.e. central) 
+\item{canton}{est un objet de la classe \code{\link{Canton}}. Il correspond au canton non choque (i.e. central)
 de l'assureur.}
 }
 \value{

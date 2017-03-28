@@ -17,7 +17,6 @@
 ##' @note La parametrisation des chocs de longevite est effectuee dans les fichiers d'inputs utilisateurs.
 ##' @author Prim'Act
 ##' @export
-##' @aliases ChocSolvabilite2
 ##' @include ChocSolvabilite2_class.R Canton_class.R AutresPassifs-class.R
 
 setGeneric(name = "do_choc_longevite", def = function(x, canton, autres_passifs_choc){standardGeneric("do_choc_longevite")})

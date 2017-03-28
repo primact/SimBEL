@@ -2,7 +2,6 @@
 % Please edit documentation in R/Ppb_load.R
 \docType{methods}
 \name{ppb_load}
-\alias{HypCanton}
 \alias{ppb_load}
 \title{Methode permettant de charger les valeurs des hypotheses et des donnees de PPB}
 \usage{

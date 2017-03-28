@@ -2,7 +2,6 @@
 % Please edit documentation in R/AutresReserves-init_debut_pgg_psap.R
 \docType{methods}
 \name{init_debut_pgg_psap}
-\alias{AutresReserves}
 \alias{init_debut_pgg_psap}
 \title{Re-initialise un objet \code{AutresReserves} en debut d'annee.}
 \usage{

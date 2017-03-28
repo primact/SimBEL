@@ -2,21 +2,21 @@
 % Please edit documentation in R/Immo_calc_pmvl.R
 \docType{methods}
 \name{calc_pmvl_immo}
-\alias{Immo}
 \alias{calc_pmvl_immo}
-\title{Calcul les valeurs de marches de chaque composante du portefeuille immobilier.}
+\title{Calcule les plus et moins-values immobilier.}
 \usage{
 calc_pmvl_immo(x)
 }
 \arguments{
-\item{x}{objet de la classe \code{Immo} (decrivant le portefeuille d'immobilier).}
+\item{x}{objet de la classe \code{\link{Immo}} (decrivant le portefeuille d'immobilier).}
 }
 \value{
-Une liste composee de deux elements \code{(pvl, mvl)} correspondant respectivement 
-aux sommes des plus values latentes immobilieres et aux sommes des moins values latentes immobilieres.
+\code{pvl} correspondant a la somme des plus-values latentes immobilier.
+
+\code{mvl} correspondant a la somme des moins-values latentes immobilier.
 }
 \description{
-\code{calc_pmvl_immo} est une methode permettant de calculer les valeurs de marche.
+\code{calc_pmvl_immo}  est une methode permettant de calculer les plus et moins-values du portefeuille immobilier.
 }
 \author{
 Prim'Act

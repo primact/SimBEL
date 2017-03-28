@@ -2,7 +2,6 @@
 % Please edit documentation in R/ChocSolvabilite2_do_choc_spread_unitaire.R
 \docType{methods}
 \name{do_choc_spread_unitaire}
-\alias{ChocSolvabilite2}
 \alias{do_choc_spread_unitaire}
 \title{Applique le choc spread de la formule standard Solvabilite 2 a une ligne obligataire.}
 \usage{

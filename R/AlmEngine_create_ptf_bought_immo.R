@@ -17,7 +17,6 @@
 ##' @author Prim'Act
 ##' @seealso La classe \code{\link{Immo}}.
 ##' @export
-##' @aliases AlmEngine
 ##' @include AlmEngine_class.R Immo_class.R
 
 setGeneric(name = "create_ptf_bought_immo", def = function(x, coefficient){standardGeneric("create_ptf_bought_immo")})
@@ -26,10 +25,19 @@ setMethod(
     signature = c(x = "Immo", coefficient = "numeric"),
     definition = function(x, coefficient){
         if (length(coefficient) != nrow(x@ptf_immo)){stop("[Immo : create_ptf_bought_immo] : Les inputs sont de dimensions distinctes \n")}
-        x@ptf_immo$val_marche <- coefficient * x@ptf_immo$val_marche
-        x@ptf_immo$val_nc     <- coefficient * x@ptf_immo$val_nc
-        x@ptf_immo$val_achat  <- coefficient * x@ptf_immo$val_achat
-        x@ptf_immo$nb_unit    <- coefficient * x@ptf_immo$nb_unit
+
+        nom_table <- names(x@ptf_immo)
+        val_marche <- which(nom_table == "val_marche")
+        val_nc     <- which(nom_table == "val_nc")
+        val_achat  <- which(nom_table == "val_achat")
+        nb_unit    <- which(nom_table == "nb_unit")
+
+
+        x@ptf_immo$val_marche <- coefficient * .subset2(x@ptf_immo, val_marche)
+        x@ptf_immo$val_nc     <- coefficient * .subset2(x@ptf_immo, val_nc)
+        x@ptf_immo$val_achat  <- coefficient * .subset2(x@ptf_immo, val_achat)
+        x@ptf_immo$nb_unit    <- coefficient * .subset2(x@ptf_immo, nb_unit)
+
         return(x)
     }
 )

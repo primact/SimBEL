@@ -14,7 +14,6 @@
 ##' @author Prim'Act
 ##' @return Un \code{data.frame} contenant les flux des passifs de l'annee.
 ##' @export
-##' @aliases AutresPassifs
 ##' @include AutresPassifs-class.R
 ##'
 setGeneric(name = "proj_annee_autres_passifs", def = function(an, x, coef_inf)

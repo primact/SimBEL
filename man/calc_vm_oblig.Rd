@@ -2,23 +2,22 @@
 % Please edit documentation in R/Oblig_calc_vm.R
 \docType{methods}
 \name{calc_vm_oblig}
-\alias{Oblig}
 \alias{calc_vm_oblig}
-\title{Calcul les valeurs de marches de chaque composante du portefeuille obligation.}
+\title{Calcul les valeurs de marches de chaque composante du portefeuille obligataires.}
 \usage{
 calc_vm_oblig(x, yield_curve)
 }
 \arguments{
-\item{x}{objet de la classe \code{Oblig} (decrivant le portefeuille d'obligation).}
+\item{x}{un objet de la classe \code{\link{Oblig}} (decrivant le portefeuille d'obligation).}
 
-\item{yield_curve}{vecteur de type \code{numeric} contenant la courbe de taux 
-(cf. l'attribut \code{yield_curve} des objets de la classe \code{\link{ModelPointESG}}).}
+\item{yield_curve}{un vecteur de type \code{numeric} contenant la courbe de taux
+(l'attribut \code{yield_curve} des objets de la classe \code{\link{ModelPointESG}}).}
 }
 \value{
 L'objet \code{x} dont les valeurs de marche ont ete mises a jour.
 }
 \description{
-\code{calc_vm_oblig} est une methode permettant de calculer les valeurs de marche.
+\code{calc_vm_oblig} est une methode permettant de calculer les valeurs de marche du portefeuille obligataires.
 }
 \author{
 Prim'Act

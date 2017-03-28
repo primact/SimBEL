@@ -34,7 +34,6 @@
 ##' Le calcul de la marge de l'assureur : \code{\link{calc_marge_fin}}
 ##' L'application de la contrainte legale de participation aux benefices : \code{\link{finance_contrainte_legale}}
 ##' @export
-##' @aliases RevaloEngine
 ##' @include Canton_class.R
 
 setGeneric(name = "calc_revalo", def = function(x, passif_av_pb, tra, plac_moy_vnc, result_tech){

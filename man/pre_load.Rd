@@ -2,7 +2,6 @@
 % Please edit documentation in R/PRE_load.R
 \docType{methods}
 \name{pre_load}
-\alias{PRE}
 \alias{pre_load}
 \title{Chargement de la valeur initiale de la PRE}
 \usage{
@@ -12,7 +11,7 @@ pre_load(file_PRE_address)
 \item{file_PRE_address}{est un \code{character} correspondant a l'adresse du fichier d'input renseignant les donnees de PRE}
 }
 \value{
-Un objet de la classe \code{PRE} charge a partir des donnees du fichier dont le nom est precise en input.
+Un objet de la classe \code{\link{PRE}} charge a partir des donnees du fichier dont le nom est precise en input.
 }
 \description{
 \code{pre_load} est une methode permettant de charger la valeur de PRE initiale dans un objet de type PRE.

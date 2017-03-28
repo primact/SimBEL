@@ -3,7 +3,7 @@
 \docType{class}
 \name{AutresPassifs}
 \alias{AutresPassifs}
-\title{La classe \code{AutresPassifs}}
+\title{La classe \code{AutresPassifs}.}
 \description{
 Une classe pour la gestion des passifs hors modele.
 }

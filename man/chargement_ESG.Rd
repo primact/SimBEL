@@ -2,7 +2,6 @@
 % Please edit documentation in R/ESG_chargement.R
 \docType{methods}
 \name{chargement_ESG}
-\alias{ESG}
 \alias{chargement_ESG}
 \title{Cette methode charge les tables de simulations d'un ESG.}
 \usage{
@@ -19,7 +18,7 @@ simulees par l'ESG Prim'Act.}
 des sorties de l'ESG Prim'Act.}
 }
 \value{
-\code{x} l'objet de la classe \code{ESG} construit.
+\code{x} l'objet de la classe \code{\link{ESG}} construit.
 }
 \description{
 \code{chargement_ESG} est une methode permettant de charger les trajectoires simulees par le generateur de

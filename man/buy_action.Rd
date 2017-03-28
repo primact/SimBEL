@@ -2,16 +2,15 @@
 % Please edit documentation in R/Action_buy.R
 \docType{methods}
 \name{buy_action}
-\alias{Action}
 \alias{buy_action}
 \title{Mise a jour de chaque composante d'un portefeuille action suite a un achat d'un autre portefeuille action.}
 \usage{
 buy_action(x, ptf_bought)
 }
 \arguments{
-\item{x}{objet de la classe \code{Action} (decrivant le portefeuille action en detention).}
+\item{x}{objet de la classe \code{\link{Action}} (decrivant le portefeuille action en detention).}
 
-\item{ptf_bought}{objet de la classe \code{Action} (decrivant le portefeuille action achete).}
+\item{ptf_bought}{objet de la classe \code{\link{Action}} (decrivant le portefeuille action achete).}
 }
 \value{
 L'objet \code{x} complete des elements de \code{ptf_bought}.

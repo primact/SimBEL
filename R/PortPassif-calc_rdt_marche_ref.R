@@ -13,7 +13,6 @@
 ##' @return Une liste contenant les rendements de reference du marche.
 ##' @author Prim'Act
 ##' @export
-##' @aliases PortPassif
 
 setGeneric(name = "calc_rdt_marche_ref", def = function(x, mp_esg){
   standardGeneric("calc_rdt_marche_ref")})

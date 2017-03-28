@@ -2,7 +2,6 @@
 % Please edit documentation in R/Canton_proj_an.R
 \docType{methods}
 \name{proj_an}
-\alias{Canton}
 \alias{proj_an}
 \title{Projette un canton sur une periode.}
 \usage{
@@ -44,7 +43,7 @@ les flux de best estimate des passifs et fait vieillir d'une annee les elements 
 }
 \details{
 Cette methode est la procedure central du package \code{SimBEL} puisqu'elle cohorde les interactions entre
-les actifs et les passifs, declenche l'algorithme de revalorisation, calcule le resultat comptable et evalue les 
+les actifs et les passifs, declenche l'algorithme de revalorisation, calcule le resultat comptable et evalue les
 flux de best estimate.
 }
 \author{
@@ -61,7 +60,7 @@ Le calcul du resultat technique : \code{\link{calc_result_technique}}, \code{\li
 Le calcul du resultat financier et du TRA : \code{\link{calc_resultat_fin}}, \code{\link{calc_tra}}.
 L'application de l'algorithme d'attribution de la participation aux benefices : \code{\link{calc_revalo}}.
 Le viellissement du portefeuille de passif apres PB : \code{\link{viellissement_ap_pb}}.
-Les autres methodes de vieillissement des actifs et de passifs: \code{\link{sell_pvl_action}}, 
+Les autres methodes de vieillissement des actifs et de passifs: \code{\link{sell_pvl_action}},
 \code{\link{do_update_pmvl}}, \code{\link{do_update_PRE_val_courante}},
 \code{\link{do_update_vm_vnc_precedent}}, \code{\link{init_debut_ppb}}, \code{\link{do_update_RC_val_debut}},
 \code{\link{do_update_PRE_val_debut}}, \code{\link{init_debut_pgg_psap}}.

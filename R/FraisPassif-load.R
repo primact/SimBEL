@@ -14,7 +14,6 @@
 ##' @seealso La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
 ##'  pour renseigner l’input.
 ##' @export
-##' @aliases FraisPassif
 ##' @include FraisPassif-class.R
 ##'
 setGeneric(name = "frais_passif_load", def = function(file_frais_passif_address){standardGeneric("frais_passif_load")})

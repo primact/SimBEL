@@ -2,8 +2,7 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Declarateur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' La classe \code{ChocSolvabilite2} instancie les parametres de chocs Marche et Souscription
-##' de la formule standard de la directive Solvabilite 2.
+##' La classe \code{ChocSolvabilite2}.
 ##'
 ##' La classe \code{ChocSolvabilite2} permet de realiser les principaux des scenarios de choc initiaux
 ##' au sens de la formule standard de la directive Solvabilite 2.

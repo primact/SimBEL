@@ -2,7 +2,6 @@
 % Please edit documentation in R/ParamTableMort-calc_qx.R
 \docType{methods}
 \name{calc_qx}
-\alias{ParamTableMort}
 \alias{calc_qx}
 \title{Calcule le taux de deces.}
 \usage{

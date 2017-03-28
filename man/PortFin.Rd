@@ -3,9 +3,9 @@
 \docType{class}
 \name{PortFin}
 \alias{PortFin}
-\title{La classe PortFin}
+\title{La classe \code{PortFin}.}
 \description{
-Classe pour le portefeuille global d'actif
+Une Classe pour le portefeuille financier.
 }
 \section{Slots}{
 
@@ -42,6 +42,14 @@ et a la valeur nette comptable en debut d'annee de l'objet PortFin.}
 }}
 \author{
 Prim'Act
+}
+\seealso{
+Le calcul des rendements : \code{\link{calc_rdt}}.
+Le calcul des plus ou moins-values latentes : \code{\link{calc_pmvl}}.
+Le chargement des donneees initiales : \code{\link{chargement_PortFin}}, \code{\link{chargement_PortFin_reference}}.
+Les methodes de mise a jour : \code{\link{update_PortFin}}, \code{\link{update_PortFin_reference}}, \code{\link{do_update_pmvl}},
+\code{\link{do_update_vm_vnc_precedent}}.
+L'allocation d'actifs : \code{\link{print_alloc}}.
 }
 \keyword{classes}
 

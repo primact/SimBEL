@@ -2,7 +2,6 @@
 % Please edit documentation in R/Be-write_results.R
 \docType{methods}
 \name{write_be_results}
-\alias{Be}
 \alias{write_be_results}
 \title{Enregistre les resultats d'une evaluation best estimate}
 \usage{
@@ -13,7 +12,7 @@ write_be_results(nom_run, path, x)
 
 \item{path}{est un objet de type \code{character} utilise pour indiquer le chemin d'enregistrement des resultats.}
 
-\item{x}{est un objet de type \code{Be}.}
+\item{x}{est un objet de type \code{\link{Be}}.}
 }
 \description{
 \code{write_be_results} est une methode permettant d'enregistrer en \code{.cvs} les resultats

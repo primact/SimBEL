@@ -2,19 +2,18 @@
 % Please edit documentation in R/PRE_do_update_val_debut.R
 \docType{methods}
 \name{do_update_PRE_val_debut}
-\alias{PRE}
 \alias{do_update_PRE_val_debut}
 \title{Mise a jour de la valeur de debut de periode de la PRE}
 \usage{
 do_update_PRE_val_debut(x, val_debut)
 }
 \arguments{
-\item{x}{objet de la classe \code{PRE} correspondant a la PRE avant mise a jour.}
+\item{x}{objet de la classe \code{\link{PRE}} correspondant a la PRE avant mise a jour.}
 
 \item{val_debut}{est un \code{numeric} correspondant au montant de debut de periode de PRE.}
 }
 \value{
-L'objet \code{PRE} mis a jour de la nouvelle valeur de debut de \code{PRE}
+L'objet \code{\link{PRE}} mis a jour de la nouvelle valeur de debut de \code{\link{PRE}}
 }
 \description{
 \code{do_update_PRE_val_debut} est une methode permettant de mettre a jour le montant de debut de periode de PRE.
@@ -23,6 +22,6 @@ L'objet \code{PRE} mis a jour de la nouvelle valeur de debut de \code{PRE}
 Prim'Act
 }
 \seealso{
-La methode de calcul de la PRE \code{\link{calc_PRE}}
+La methode de calcul de la PRE \code{\link{calc_PRE}}.
 }
 

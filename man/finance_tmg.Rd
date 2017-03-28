@@ -2,7 +2,6 @@
 % Please edit documentation in R/RevaloEngine_finance_tmg.R
 \docType{methods}
 \name{finance_tmg}
-\alias{RevaloEngine}
 \alias{finance_tmg}
 \title{Calcule la contribution de la PPB au financement des taux minimums garantis.}
 \usage{

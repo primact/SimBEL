@@ -7,11 +7,10 @@
 ##' \code{do_choc_taux} est une methode permettant d'appliquer le choc de taux de la formule standard Solvabilite 2 a un canton.
 ##' @name do_choc_taux
 ##' @docType methods
-##' @param canton un objet de la classe \code{Canton}, correspondant au canton auquel on souhaite appliquer le choc de taux.
-##' @return canton l'objet de la classe \code{Canton}, mis a jour du choc de taux. 
+##' @param canton un objet de la classe \code{\link{Canton}}, correspondant au canton auquel on souhaite appliquer le choc de taux.
+##' @return canton l'objet de la classe \code{\link{Canton}}, mis a jour du choc de taux.
 ##' @author Prim'Act
 ##' @export
-##' @aliases ChocSolvabilite2
 ##' @include ChocSolvabilite2_class.R Canton_class.R
 
 
@@ -32,15 +31,15 @@ setMethod(
                                                                                        canton@mp_esg@yield_curve)
         canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig$val_nc    <- canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig$val_marche
         canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig$val_achat <- canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig$val_marche
-        
+
         # Mise a jour des PMVL Action/Immo/Oblig
         canton@ptf_fin <- do_update_pmvl(canton@ptf_fin)
-        
+
         # Convention : on ne remet pas a jour la valeur de la PRE
-        
+
         # Mise a jour des montant totaux de VM et de VNC des actifs
         canton@ptf_fin <- do_update_vm_vnc_precedent(canton@ptf_fin)
-        
+
         return(canton)
     }
 )

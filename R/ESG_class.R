@@ -2,7 +2,7 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Definition de la classe ESG
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' La classe ESG
+##' La classe \code{ESG}.
 ##'
 ##' Une classe de parametres contenant les tables de simulation, generees par une generateur de scenarions
 ##' economique.

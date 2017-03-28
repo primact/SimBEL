@@ -14,15 +14,15 @@ Classe pour la provision pour participation aux benefices (PPB)
 
 \item{\code{ppb_debut}}{est la valeur prise \code{numeric} par la PPB en debut d'annee.}
 
-\item{\code{seuil_rep}}{est une valeur \code{numeric} correspond a la proportion de PPB de debut d'annee
+\item{\code{seuil_rep}}{est une valeur \code{numeric} correspondant a la proportion de PPB de debut d'annee
 que l'on peut reprendre sur une periode.}
 
-\item{\code{seuil_dot}}{est une valeur \code{numeric} correspond a la montant maximal de dotation possible sur la PPB
+\item{\code{seuil_dot}}{est une valeur \code{numeric} correspondant au montant maximal de dotation possible sur la PPB
 sur une periode, exprimee comme une fraction de la PPB de debut d'annee.}
 
-\item{\code{compte_rep}}{est une valeur \code{numeric} qui totalise les montants de reprise effectuee sur une periode.}
+\item{\code{compte_rep}}{est une valeur \code{numeric} qui totalise les montants de reprises effectuees sur une periode.}
 
-\item{\code{compte_dot}}{est une valeur \code{numeric} qui totalise les montants de dotation effectuee sur une periode.}
+\item{\code{compte_dot}}{est une valeur \code{numeric} qui totalise les montants de dotations effectuees sur une periode.}
 }}
 \author{
 Prim'Act

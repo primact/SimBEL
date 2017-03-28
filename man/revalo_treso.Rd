@@ -2,19 +2,18 @@
 % Please edit documentation in R/Treso_revalo.R
 \docType{methods}
 \name{revalo_treso}
-\alias{Treso}
 \alias{revalo_treso}
 \title{Calcul les valeurs de marches de chaque composante du portefeuille treso.}
 \usage{
 revalo_treso(Rt, Rt_prev)
 }
 \arguments{
-\item{S}{vecteur de valeur de chaque ligne du ptf en milieu d'annee N (date de calcul des flux).}
+\item{Rt}{valeur du taux zero coupon 1 an de l'annee.}
 
-\item{S_prev}{vecteur de valeur de chaque ligne du ptf en milieu d'annee N-1.}
+\item{Rt_prev}{valeur du taux zero coupon 0 an de l'annee.}
 }
 \value{
-Un vecteur ayant autant d elements que les vecteurs inputs. Chaque element correspondant au rendement annuel d'une lige de tresorerie.
+Le taux de rendement.
 }
 \description{
 \code{revalo_treso} est une methode permettant de calculer les valeurs de marche.

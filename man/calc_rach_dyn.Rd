@@ -2,7 +2,6 @@
 % Please edit documentation in R/ParamRachDyn-calc_rach_dyn.R
 \docType{methods}
 \name{calc_rach_dyn}
-\alias{ParamRachDyn}
 \alias{calc_rach_dyn}
 \title{Calcule la composante rachats dynamique.}
 \usage{

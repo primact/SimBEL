@@ -11,7 +11,6 @@
 #' @return L'objet x reinitialise.
 ##' @author Prim'Act
 ##' @export
-##' @aliases AutresReserves
 ##' @include AutresReserves-class.R
 
 setGeneric(name = "init_debut_pgg_psap", def = function(x){standardGeneric("init_debut_pgg_psap")})

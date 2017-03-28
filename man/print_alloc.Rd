@@ -2,17 +2,16 @@
 % Please edit documentation in R/PortFin_print_alloc.R
 \docType{methods}
 \name{print_alloc}
-\alias{PortFin}
 \alias{print_alloc}
-\title{Calcul le poids de chaque composante du portefeuille action.}
+\title{Calcul le poids de chaque composante du portefeuille.}
 \usage{
 print_alloc(x)
 }
 \arguments{
-\item{x}{objet de la classe PortFin.}
+\item{x}{objet de la classe \code{\link{PortFin}}.}
 }
 \value{
-Un data frame compose de quatre colonnes et cinq lignes.
+Un \code{data.frame} compose de quatre colonnes et cinq lignes.
 La colonne \describe{
 \item{\code{alloc_valeur} : }{decrit le montant alloue en valeur de marche par poche d'actif.}
 \item{\code{alloc_proportion} : }{decrit la proportion allouee en valeur de marche par poche d'actif.}

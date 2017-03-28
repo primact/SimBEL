@@ -2,7 +2,6 @@
 % Please edit documentation in R/ChocSolvabilite2_do_choc_action_type1.R
 \docType{methods}
 \name{do_choc_action_type1}
-\alias{ChocSolvabilite2}
 \alias{do_choc_action_type1}
 \title{Permet a partir d'un canton initial de creer un canton choque action.}
 \usage{

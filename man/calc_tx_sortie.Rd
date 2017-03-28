@@ -2,7 +2,6 @@
 % Please edit documentation in R/EpEuroInd-calc_tx_sortie.R
 \docType{methods}
 \name{calc_tx_sortie}
-\alias{EpEuroInd}
 \alias{calc_tx_sortie}
 \title{Calcul des taux de sortie pour des contrats epargne en euros.}
 \usage{

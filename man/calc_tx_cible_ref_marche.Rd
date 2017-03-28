@@ -2,7 +2,6 @@
 % Please edit documentation in R/ParamComport-calc_tx_cible.R
 \docType{methods}
 \name{calc_tx_cible_ref_marche}
-\alias{ParamComport}
 \alias{calc_tx_cible_ref_marche}
 \title{Calcule le taux de revalorisation cible.}
 \usage{

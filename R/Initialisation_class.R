@@ -1,7 +1,3 @@
-#--------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les declarateurs, constructeurs et verificateurs de la classe Initialisation
-#--------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Declarateur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -19,8 +15,8 @@
 ##' @note Il est necessaire que l'attribut nb_annee_proj corresponde au nombre d'annee de projection des donnees de l'ESG Prim'Act.
 ##' @docType class
 ##' @author Prim'Act
-##' @seealso La mise en place de l'architecture de chargement des donnees et parametres renseignes par l'utilisateur \code{\link{set_architecture}}, 
-##' la creation et la sauvegarde du canton initial \code{\link{init_SimBEL}}, la creation de l'architecture des scenarios central, de marche et de souscription 
+##' @seealso La mise en place de l'architecture de chargement des donnees et parametres renseignes par l'utilisateur \code{\link{set_architecture}},
+##' la creation et la sauvegarde du canton initial \code{\link{init_SimBEL}}, la creation de l'architecture des scenarios central, de marche et de souscription
 ##' de la formule standard ainsi que la creation des objets \code{\link{Be}} pour chacun de ces scenarios.
 ##' @keywords classes
 ##' @export

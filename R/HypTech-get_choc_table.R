@@ -7,13 +7,12 @@
 ##' d'un objet \code{\link{HypTech}} les chocs de mortalite ou de longevite de la formule standard.
 ##' @name get_choc_table
 ##' @docType methods
-##' @param ht un objet de la classe \code{\link{HypTech}} contenant differentes tables de
+##' @param x un objet de la classe \code{\link{HypTech}} contenant differentes tables de
 ##' mortalite.
 ##' @param choc une valeur \code{numeric} indiquant le taux de choc.
-##' @return L'objet \code{ht} apres choc.
+##' @return L'objet \code{x} apres choc.
 ##' @author Prim'Act
 ##' @export
-##' @aliases HypTech
 ##' @include HypTech-class.R
 setGeneric("get_choc_table", function(x, choc){standardGeneric("get_choc_table")})
 setMethod(

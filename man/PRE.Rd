@@ -3,9 +3,9 @@
 \docType{class}
 \name{PRE}
 \alias{PRE}
-\title{La classe PRE}
+\title{La classe \code{PRE}.}
 \description{
-Classe pour la gestion de la provision pour risque d'exigibilite (PRE).
+Une classe pour la gestion de la provision pour risque d'exigibilite (PRE).
 }
 \section{Slots}{
 
@@ -14,9 +14,6 @@ Classe pour la gestion de la provision pour risque d'exigibilite (PRE).
 
 \item{\code{val_courante}}{est une valeur \code{numeric} correspondant a la valeur courante de la PRE.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
 }

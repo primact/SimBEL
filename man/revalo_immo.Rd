@@ -2,26 +2,26 @@
 % Please edit documentation in R/Immo_revalo.R
 \docType{methods}
 \name{revalo_immo}
-\alias{Immo}
 \alias{revalo_immo}
-\title{Calcul les valeurs de marches de chaque composante du portefeuille immobilier.}
+\title{Revalorise les valeurs de marche du portefeuille immobilier.}
 \usage{
 revalo_immo(x, S, S_prev)
 }
 \arguments{
-\item{x}{objet de la classe \code{Immo} (decrivant le portefeuille d'immobilier).}
+\item{x}{un objet de la classe \code{\link{Immo}} (decrivant le portefeuille d'immobilier).}
 
-\item{S}{vecteur \code{numeric} de valeur de chaque stock du ptf en milieu d'annee N (date de versement des dividendes)}
+\item{S}{un vecteur \code{numeric} correspondant a la valeur des indices immobiliers}
 
-\item{S_prev}{vecteur \code{numeric}  de valeur de chaque stock du ptf en milieu d'annee N-1.}
+\item{S_prev}{un vecteur \code{numeric}  correspondant a la valeur des indices immobiliers a la periode precedente.}
 }
 \value{
 Un data frame compose de deux colonnes et autant de lignes que le portefeuille immobilier a de lignes.
 La premiere colonne decrit de le rendement annuel de chacune des lignes d'immobilier composants le portefeuille immobilier.
-La seconde colonne decrit les dividendes annuelles percues au titre de chacune des lignes d'immobilier composants le portefeuille immobilier.
+La seconde colonne decrit les loyers annuelles percues au titre de chacune des lignes d'immobilier composants le portefeuille immobilier.
 }
 \description{
-\code{revalo_immo} est une methode permettant de calculer les valeurs de marche.
+\code{revalo_immo} est une methode permettant de revaloriser et de calculer les loyers
+du portefeuille immobilier sur une periode.
 }
 \author{
 Prim'Act

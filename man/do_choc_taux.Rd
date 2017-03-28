@@ -2,17 +2,16 @@
 % Please edit documentation in R/ChocSolvabilite2_do_choc_taux.R
 \docType{methods}
 \name{do_choc_taux}
-\alias{ChocSolvabilite2}
 \alias{do_choc_taux}
 \title{Methode permettant d'appliquer le choc de taux a un Canton.}
 \usage{
 do_choc_taux(canton)
 }
 \arguments{
-\item{canton}{un objet de la classe \code{Canton}, correspondant au canton auquel on souhaite appliquer le choc de taux.}
+\item{canton}{un objet de la classe \code{\link{Canton}}, correspondant au canton auquel on souhaite appliquer le choc de taux.}
 }
 \value{
-canton l'objet de la classe \code{Canton}, mis a jour du choc de taux.
+canton l'objet de la classe \code{\link{Canton}}, mis a jour du choc de taux.
 }
 \description{
 \code{do_choc_taux} est une methode permettant d'appliquer le choc de taux de la formule standard Solvabilite 2 a un canton.

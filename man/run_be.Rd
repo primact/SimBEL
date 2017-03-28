@@ -2,7 +2,6 @@
 % Please edit documentation in R/Be-run_be.R
 \docType{methods}
 \name{run_be}
-\alias{Be}
 \alias{run_be}
 \title{Calcul d'un BE.}
 \usage{

@@ -2,33 +2,35 @@
 % Please edit documentation in R/Oblig_echeancier.R
 \docType{methods}
 \name{echeancier}
-\alias{Oblig}
 \alias{echeancier}
-\title{Calcule les flux d'un model point ou d'un ensemble de models points obligataires.}
+\title{Calcule les flux obligataires.}
 \usage{
 echeancier(coupon, maturite, zspread, nominal, yield)
 }
 \arguments{
-\item{coupon}{vecteur contenant les taux de coupons}
+\item{coupon}{un vecteur contenant les taux de coupons de chaque obligation.}
 
-\item{maturite}{vecteur d'entiers contenant les maturites residuelles}
+\item{maturite}{un vecteur d'entiers contenant les maturites residuelles de chaque obligation.}
 
-\item{zspread}{vecteur contenant les zero-spreads}
+\item{zspread}{un vecteur contenant les zero-spreadsde chaque obligation.}
 
-\item{nominal}{vecteur contenant les valeurs nominales de chaque obligation}
+\item{nominal}{un vecteur contenant les valeurs nominales de chaque obligation.}
 
-\item{yield}{vecteur contenant la courbe de taux consideree (peut-etre vide)}
+\item{yield}{un vecteur contenant la courbe de taux consideree (peut-etre vide).}
 }
 \value{
 Une matrice contenant :
 \describe{
 \item{\code{grid_flux} : }{la matrice d'ecoulement des flux. Cette matrice a autant de colonnes
-que le max du vecteur de maturite residuelle, et autant de lignes que les vecteurs d'input \code{coupon,maturite,zspread,nominal}.
-Chaque ligne decrit les flux annuels a venir pour l'actif obligataire de caracteristique renseigne en input.}
+que le max du vecteur de maturite residuelle, et autant de lignes que les vecteurs d'input
+\code{coupon, maturite, zspread, nominal}.
+Chaque ligne decrit les flux annuels a venir pour l'actif obligataire dont les caracteristiques sont
+renseignees en input.}
 }
 }
 \description{
-\code{echeancier} est une methode permettant de calculer les flux jusqu'a maturite residuelle.
+\code{echeancier} est une methode permettant de calculer les flux jusqu'a maturite residuelle d'un model point ou
+d'un ensemble de model points obligataires.
 }
 \author{
 Prim'Act

@@ -2,7 +2,6 @@
 % Please edit documentation in R/Initialisation_create_folder.R
 \docType{methods}
 \name{init_create_folder}
-\alias{Initialisation}
 \alias{init_create_folder}
 \title{Creation de l'architecture de sauvegarde des scenarios et executions du code a partir de la racine renseignee.}
 \usage{

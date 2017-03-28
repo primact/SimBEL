@@ -2,7 +2,6 @@
 % Please edit documentation in R/AutresPassifs-load.R
 \docType{methods}
 \name{autres_passif_load}
-\alias{AutresPassifs}
 \alias{autres_passif_load}
 \title{Methode permettant de charger la valeur initiale des autres passifs.}
 \usage{

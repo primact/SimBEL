@@ -1,21 +1,21 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Suivi version
-# Version 1.0 du 26/01/2017. Fait par GK : initialisation
+# update_PortFin_reference
 #--------------------------------------------------------------------------------------------------------------------
 ##' Evalue et met a jour les objets constituants un PortFin_reference.
 ##'
 ##' \code{update_PortFin_reference} est une methode permettant de calculer et mettre a jour un portefeuille financier
-##' de reinvestissement suite a un vieillissement.
+##' de reinvestissement pour le faire vieillir d'une annee.
 ##' @name update_PortFin_reference
 ##' @docType methods
-##' @param an \code{numeric} correspond a l'annee de projection du portefeuille financier de reinvestissement. 
-##' @param x objet de la classe \code{PortFin}, correspondant au portefeuille financier de reinvestissement avant l'etape de vieillissement.
-##' @param mp_ESG est un objet de la classe \code{ModelPointESG}, decrivant les conditions economiques permettant d'effectuer le vieillissement du portefeuille financier de reinvestissement.
-##' @return L'objet de la classe \code{PortFin} renvoye correspond au portefeuille financier de reinvesitssement veilli d'une annee.
+##' @param an \code{numeric} correspond a l'annee de projection du portefeuille financier de reinvestissement.
+##' @param x objet de la classe \code{\link{PortFin}}, correspondant au portefeuille financier de
+##' reinvestissement avant l'etape de vieillissement.
+##' @param mp_ESG est un objet de la classe \code{\link{ModelPointESG}}, decrivant les conditions
+##' economiques permettant d'effectuer le vieillissement du portefeuille financier de reinvestissement.
+##' @return L'objet \code{x} renvoye correspond au portefeuille financier de reinvesitssement veilli d'une annee.
 ##' @author Prim'Act
 ##' @export
 ##' @seealso La fonction de mise a jour specifique au portefeuille \code{\link{update_PortFin}}.
-##' @aliases PortFin
 ##' @include PortFin_class.R ModelPointESG_class.R
 
 
@@ -30,7 +30,7 @@ setMethod(
         x@annee <- as.integer(an)
         # Update Action
 
-        table_rdt[["rdt_action"]][["rdt"]]
+        # table_rdt[["rdt_action"]][["rdt"]]
             # VM
             x@ptf_action@ptf_action$val_marche  <- calc_vm_action(x@ptf_action, table_rdt[["rdt_action"]]$rdt)
             # VNC

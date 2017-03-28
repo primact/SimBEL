@@ -1,15 +1,14 @@
-##' Chargement de certains attributs dans un objet \code{Initialisation}  
+##' Chargement de certains attributs dans un objet \code{Initialisation}
 ##'
 ##' \code{initialisation_load} est la methode de chargement des attributs \code{nb_simu} et \code{nb_annee_proj} a partir des donnees de l'environnement utilisateur.
 ##' @name initialisation_load
 ##' @docType methods
 ##' @param x un objet de la classe \code{\link{Initialisation}}.
-##' @param file_lancement_address nom complet (i.e. avec chemin d'acces et extension) du fichier contenant les parametres de lancement. 
+##' @param file_lancement_address nom complet (i.e. avec chemin d'acces et extension) du fichier contenant les parametres de lancement.
 ##' @return Pas de sortie.
 ##' @note  Cette methode permet de creer l'objet \code{\link{Canton}} initial et de le sauvegarder dans le repertoire adequat de l'architecture.
 ##' @author Prim'Act
 ##' @export
-##' @aliases Initialisation
 ##' @include Initialisation_class.R
 
 

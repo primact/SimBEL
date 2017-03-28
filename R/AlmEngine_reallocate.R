@@ -1,16 +1,3 @@
-# Script contenant la methode d'achat vente
-
-# Fonctionnement du porefeuille de reference
-#   - Le ptf de reference est un PTF Fin dont seul les attributs Action/Immo/Oblig sont renseignes
-#   - Chacun de ces sous portefeuilles est compose de plusieurs elements
-#       - La valeur de marche du portefeuille de reference est la quantite que l'on utilise (pour chaque ligne de chacun de ces sous portefeuille elle evolue chaque annee)
-#       - Le nb d'unite de chacune de ces lignes est initialement determine de telle sorte a respecter ...
-#          ... le rapport allocation/valeur d'achat initial tel que renseigne par l'utilisateur dans les fichiers d'input Ptf_ref
-#     => Si l'assureur doit ajuster son portefeuille action de +50Ke et qu'a cette date le portefeuille action de reference vaut 25Ke il achetera le ptf action de reference (dont les unites et valeurs auront ete multipliees par 2)
-#
-# Le reinvestissement au sein des differentes lignes du portefeuille est pour l'instant effectue proportionnellement a celle decrite dans le portefeuille de reference. Cette vision est statique en termes de nb_unit et evolue seulement en VM (grosse limite ?)
-# L'allocation cible est determinee par le poids respectifs des VM de chacun des ptfs
-
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Fonction reallocate
@@ -25,7 +12,7 @@
 ##' @param alloc_cible est un vecteur de type \code{numeric} constitue de 4 elements, il contient les proportions cibles d'allocations
 ##' action, immobilier, obligataire et de tresorerie.
 ##' @return \code{portFin} l'objet initial de la classe \code{\link{PortFin}} realloue a l'allocation cible.
-##' @return \code{pmvr} le montant total des plus ou moins values realisess.
+##' @return \code{pmvr} le montant total des plus ou moins values realisees.
 ##' @return \code{pmvr_oblig} le montant des plus ou moins values obligataires realisees lors de la reallocation.
 ##' @return \code{pmvr_action} le montant des plus ou moins values action realisees lors de l'etape de reallocation.
 ##' @return \code{pmvr_immo}  le montant des plus ou moins values immobilieres realisees lors de l'etape de reallocation.
@@ -37,7 +24,6 @@
 ##' @author Prim'Act
 ##' @seealso La classe \code{\link{PortFin}}.
 ##' @export
-##' @aliases AlmEngine
 ##' @include AlmEngine_class.R PortFin_class.R
 
 setGeneric(name = "reallocate", def = function(x, ptf_reference, alloc_cible){standardGeneric("reallocate")})

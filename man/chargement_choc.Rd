@@ -2,7 +2,6 @@
 % Please edit documentation in R/ChocSolvabilite2_load.R
 \docType{methods}
 \name{chargement_choc}
-\alias{ChocSolvabilite2}
 \alias{chargement_choc}
 \title{Permet de charger les parametres de choc de la formule standard.}
 \usage{

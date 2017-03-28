@@ -2,7 +2,6 @@
 % Please edit documentation in R/HypTech-get_comport.R
 \docType{methods}
 \name{get_comport}
-\alias{HypTech}
 \alias{get_comport}
 \title{Recuperer les taux de revalorisation cible calcules.}
 \usage{

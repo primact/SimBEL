@@ -7,12 +7,12 @@
 ##' @name Ppb
 ##' @slot valeur_ppb est la valeur courante \code{numeric} prise par la PPB.
 ##' @slot ppb_debut est la valeur prise \code{numeric} par la PPB en debut d'annee.
-##' @slot seuil_rep est une valeur \code{numeric} correspond a la proportion de PPB de debut d'annee
+##' @slot seuil_rep est une valeur \code{numeric} correspondant a la proportion de PPB de debut d'annee
 ##' que l'on peut reprendre sur une periode.
-##' @slot seuil_dot est une valeur \code{numeric} correspond a la montant maximal de dotation possible sur la PPB
+##' @slot seuil_dot est une valeur \code{numeric} correspondant au montant maximal de dotation possible sur la PPB
 ##' sur une periode, exprimee comme une fraction de la PPB de debut d'annee.
-##' @slot compte_rep est une valeur \code{numeric} qui totalise les montants de reprise effectuee sur une periode.
-##' @slot compte_dot est une valeur \code{numeric} qui totalise les montants de dotation effectuee sur une periode.
+##' @slot compte_rep est une valeur \code{numeric} qui totalise les montants de reprises effectuees sur une periode.
+##' @slot compte_dot est une valeur \code{numeric} qui totalise les montants de dotations effectuees sur une periode.
 ##' @docType class
 ##' @author Prim'Act
 ##' @seealso La dotation et la reprise de PPB : \code{\link{calc_dotation_ppb}}, \code{\link{calc_reprise_ppb}}.

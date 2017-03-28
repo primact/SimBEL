@@ -1,25 +1,18 @@
-#--------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les declarateurs, constructeurs et verificateurs de la classe Treso
-#--------------------------------------------------------------------------------------------------------------------
-# Suivi version
-# Version 1.0 du 24/01/2017. Fait par GK : initialisation
-#--------------------------------------------------------------------------------------------------------------------
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Declarateur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' La classe Treso
+##' La classe \code{Treso}.
 ##'
-##' Classe pour les actifs de type Tresorerie
+##' Une classe pour les actifs de type Tresorerie.
 ##'
 ##' @name Treso
 ##' @slot ptf_treso est un dataframe, chaque ligne represente un actif de tresorerie du portefeuille de monetaire.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Les methodes de calcul des valeurs \code{\link{calc_vm_treso}}, 
-##' de calcul des revenus de la tresorerie \code{\link{revenu_treso}}, 
+##' @seealso Les methodes de calcul des valeurs \code{\link{calc_vm_treso}},
+##' de calcul des revenus de la tresorerie \code{\link{revenu_treso}},
 ##' de calcul de la revalorisation de la tresorerie \code{\link{revalo_treso}},
 ##' de mise a jour de la tresorerie \code{\link{update_treso}}.
 ##' @keywords classes

@@ -5,15 +5,14 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Declarateur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' La classe PRE
+##' La classe \code{PRE}.
 ##'
-##' Classe pour la gestion de la provision pour risque d'exigibilite (PRE).
+##' Une classe pour la gestion de la provision pour risque d'exigibilite (PRE).
 ##'
 ##' @name PRE
 ##' @slot val_debut est une valeur \code{numeric} correspondant a la valeur de la PRE en debut d'annee.
 ##' @slot val_courante est une valeur \code{numeric} correspondant a la valeur courante de la PRE.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
 ##' @seealso Les methodes de calcul de la PRE \code{\link{calc_PRE}}, et de mises a jour des PRE initiales et courantes \code{\link{do_update_PRE_val_courante}}, \code{\link{do_update_PRE_val_debut}}.
 ##' @keywords classes

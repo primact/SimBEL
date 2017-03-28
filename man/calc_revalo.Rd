@@ -2,7 +2,6 @@
 % Please edit documentation in R/RevaloEngine_calc_revalo.R
 \docType{methods}
 \name{calc_revalo}
-\alias{RevaloEngine}
 \alias{calc_revalo}
 \title{Applique la politique de revalorisation d'un canton.}
 \usage{

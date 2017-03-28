@@ -1,7 +1,7 @@
 Package: SimBEL
 Type: Package
 Title: Un package de calcul du best estimate epargne sous Solvabilite 2.
-Version: 0.3.1
+Version: 1.0.0
 Description: Un modele de simulation Monte-Carlo s'appuyant sur une projection
     d'un canton (actif et passif) permettant l'evaluation des provisions best
     estimate d'un contrat d'epargne francais en euros. Plusieurs chocs de la formule
@@ -157,12 +157,12 @@ Collate:
     'Oblig_internal.R'
     'Oblig_sell.R'
     'Oblig_update_cc.R'
-    'Oblig_update_dur.r'
+    'Oblig_update_dur.R'
     'Oblig_update_mat_res.R'
-    'Oblig_update_sd.r'
-    'Oblig_update_vm.r'
-    'Oblig_update_vnc.r'
-    'Oblig_update_zsp.r'
+    'Oblig_update_sd.R'
+    'Oblig_update_vm.R'
+    'Oblig_update_vnc.R'
+    'Oblig_update_zsp.R'
     'Oblig_yield_to_maturity.R'
     'PRE_calc.R'
     'PRE_do_update_val_courante.R'

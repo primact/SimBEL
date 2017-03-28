@@ -2,20 +2,20 @@
 % Please edit documentation in R/PortFin_calc_pmvl.R
 \docType{methods}
 \name{calc_pmvl}
-\alias{PortFin}
 \alias{calc_pmvl}
-\title{Mets a jour les sous totaux de d'actions et immobilier en plus ou moins value latente.}
+\title{Mets a jour les valeurs des plus ou moins-values actions et immobilier.}
 \usage{
 calc_pmvl(x)
 }
 \arguments{
-\item{x}{objet de la classe PortFin.}
+\item{x}{objet de la classe \code{\link{PortFin}}.}
 }
 \value{
-L'objet PortFin dont la somme des composantes en PVL et en MVL a ete mise a jour
+L'objet \code{x} dont les attributs en PVL et en MVL a ete mise a jour.
 }
 \description{
-\code{calc_pmvl} est une methode permettant de calculer les valeurs de marche.
+\code{calc_pmvl} est une methode permettant de calculer les valeurs des plus ou moins values
+latentes sur actions et immobilier. Met a jour la valeur des attributs d'un objet \code{\link{PortFin}}.
 }
 \author{
 Prim'Act

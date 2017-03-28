@@ -25,7 +25,6 @@
 ##' par une liquidation de plus-values latentes.
 ##' @author Prim'Act
 ##' @export
-##' @aliases RevaloEngine
 
 setGeneric(name = "finance_cible_pmvl", def = function(bes_cible, rev_stock_nette, base_fin, seuil_pmvl, tx_pb){
   standardGeneric("finance_cible_pmvl")})

@@ -2,18 +2,17 @@
 % Please edit documentation in R/Action_revalo.R
 \docType{methods}
 \name{revalo_action}
-\alias{Action}
 \alias{revalo_action}
-\title{Calcul les valeurs de marches de chaque composante du portefeuille action.}
+\title{Revalorise les valeurs de marche du portefeuille action.}
 \usage{
 revalo_action(x, S, S_prev)
 }
 \arguments{
-\item{x}{objet de la classe \code{Action} (decrivant le portefeuille d'action).}
+\item{x}{un objet de la classe \code{\link{Action}} (decrivant le portefeuille d'action).}
 
-\item{S}{vecteur \code{numeric} de valeur de chaque stock du ptf en milieu d'annee N (date de versement des dividendes)}
+\item{S}{un vecteur \code{numeric} correspondant a la valeur des indices actions}
 
-\item{S_prev}{vecteur \code{numeric}  de valeur de chaque stock du ptf en milieu d'annee N-1.}
+\item{S_prev}{un vecteur \code{numeric}  correspondant a la valeur des indices actions a la periode precedente.}
 }
 \value{
 Un data frame compose de deux colonnes et autant de lignes que le portefeuille action a de lignes.
@@ -21,7 +20,8 @@ La premiere colonne decrit de le rendement annuel de chacune des actions composa
 La seconde colonne decrit les dividendes annuelles percues au titre de chacune des actions composants le portefeuille action.
 }
 \description{
-\code{revalo_action} est une methode permettant de calculer les valeurs de marche.
+\code{revalo_action} est une methode permettant de revaloriser et de calculer les dividendes
+du portefeuille action sur une periode.
 }
 \author{
 Prim'Act

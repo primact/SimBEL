@@ -2,14 +2,13 @@
 % Please edit documentation in R/AutresReserves-update_reserves.R
 \docType{methods}
 \name{update_reserves}
-\alias{AutresReserves}
 \alias{update_reserves}
 \title{Evalue et met a jour la valeur des autres reserves.}
 \usage{
 update_reserves(x, prest_ep, prest_autres, pm_ep, pm_autres)
 }
 \arguments{
-\item{x}{objet de la classe \code{AutresReserves}.}
+\item{x}{objet de la classe \code{\link{AutresReserves}}.}
 
 \item{prest_ep}{est une valeur \code{numeric} correspondant a la somme des prestations nettes de chargement et
 de charges sociales sur epargne.}
@@ -24,7 +23,7 @@ de charges sociales sur epargne.}
 de charges sociales sur autres passifs.}
 }
 \value{
-\code{x} l'objet  \code{AutresReserves} mis a jour.
+\code{x} l'objet\code{\link{AutresReserves}} mis a jour.
 
 \code{var_psap} une valeur \code{numeric} correspondant a la variation de PSAP.
 

@@ -2,22 +2,22 @@
 % Please edit documentation in R/Oblig_update_cc.R
 \docType{methods}
 \name{update_cc_oblig}
-\alias{Oblig}
 \alias{update_cc_oblig}
 \title{Mise a jour des coupons courus d'un portefeuille obligataire.}
 \usage{
 update_cc_oblig(x, coupon)
 }
 \arguments{
-\item{x}{objet de la classe \code{Oblig} (decrivant le portefeuille obligataire en detention).}
+\item{x}{objet de la classe \code{\link{Oblig}} (decrivant le portefeuille obligataire en detention).}
 
-\item{coupon}{un vecteur de \code{numeric} a assigner a l'objet \code{Obligation}.}
+\item{coupon}{un vecteur de \code{numeric} a assigner a l'objet \code{\link{Oblig}}.}
 }
 \value{
 L'objet \code{x} dont les coupons courus ont ete mis a jour
 }
 \description{
-\code{update_cc_oblig} est une methode permettant de mettre a jour les coupons courus des composantes d'un portefeuille obligataire.
+\code{update_cc_oblig} est une methode permettant de mettre a jour les coupons courus
+ des composantes d'un portefeuille obligataire.
 }
 \author{
 Prim'Act

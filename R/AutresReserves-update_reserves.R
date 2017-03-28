@@ -7,7 +7,7 @@
 ##' PSAP et les met a jour.
 ##' @name update_reserves
 ##' @docType methods
-##' @param x objet de la classe \code{AutresReserves}.
+##' @param x objet de la classe \code{\link{AutresReserves}}.
 ##' @param prest_ep est une valeur \code{numeric} correspondant a la somme des prestations nettes de chargement et
 ##' de charges sociales sur epargne.
 ##' @param prest_autres est une valeur \code{numeric} correspondant a la somme des prestations nettes
@@ -16,13 +16,12 @@
 ##' de charges sociales sur epargne.
 ##' @param pm_autres est une valeur \code{numeric} correspondant a la somme des PM nettes de chargement et
 ##' de charges sociales sur autres passifs.
-##' @return \code{x} l'objet  \code{AutresReserves} mis a jour.
+##' @return \code{x} l'objet\code{\link{AutresReserves}} mis a jour.
 ##' @return \code{var_psap} une valeur \code{numeric} correspondant a la variation de PSAP.
 ##' @return \code{var_gg} une valeur \code{numeric} correspondant a la variation de PGG.
 ##' @note Il s'agit d'une methode simplifiee.
 ##' @author Prim'Act
 ##' @export
-##' @aliases AutresReserves
 ##' @include AutresReserves-class.R
 
 setGeneric(name = "update_reserves", def = function(x, prest_ep, prest_autres, pm_ep, pm_autres){

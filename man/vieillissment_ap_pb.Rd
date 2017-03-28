@@ -2,7 +2,6 @@
 % Please edit documentation in R/PortPassif-vieillissement_ap_pb.R
 \docType{methods}
 \name{vieillissment_ap_pb}
-\alias{PortPassif}
 \alias{vieillissment_ap_pb}
 \title{Vieillissement du portefeuille sur l'annee apres attribution
 de participation aux benefices.}

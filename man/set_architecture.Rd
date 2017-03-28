@@ -2,7 +2,6 @@
 % Please edit documentation in R/Initialisation_set_architecture.R
 \docType{methods}
 \name{set_architecture}
-\alias{Initialisation}
 \alias{set_architecture}
 \title{Definition de l'architecture d'un workspace.}
 \usage{
@@ -13,7 +12,7 @@ set_architecture(x)
 }
 \value{
 Objet mis a jour de l'ensemble des chemins du workspace,
-ceux ci sont stockes sous forme de liste dans l'attribut \code{address} 
+ceux ci sont stockes sous forme de liste dans l'attribut \code{address}
 de l'objet \code{\link{Initialisation}} renseigne en input.
 }
 \description{

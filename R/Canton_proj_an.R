@@ -16,7 +16,7 @@
 ##' @param pre_on est une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
 ##' de PRE dans le resultat technique, utilisee pour le calcul de la participation aux benefices reglementaires.
 ##' @details Cette methode est la procedure central du package \code{SimBEL} puisqu'elle cohorde les interactions entre
-##' les actifs et les passifs, declenche l'algorithme de revalorisation, calcule le resultat comptable et evalue les 
+##' les actifs et les passifs, declenche l'algorithme de revalorisation, calcule le resultat comptable et evalue les
 ##' flux de best estimate.
 ##' @return \code{canton} l'objet  \code{x} vieilli d'une annee.
 ##' @return \code{annee} l'annee de projection.
@@ -40,13 +40,12 @@
 ##' Le calcul du resultat financier et du TRA : \code{\link{calc_resultat_fin}}, \code{\link{calc_tra}}.
 ##' L'application de l'algorithme d'attribution de la participation aux benefices : \code{\link{calc_revalo}}.
 ##' Le viellissement du portefeuille de passif apres PB : \code{\link{viellissement_ap_pb}}.
-##' Les autres methodes de vieillissement des actifs et de passifs: \code{\link{sell_pvl_action}}, 
+##' Les autres methodes de vieillissement des actifs et de passifs: \code{\link{sell_pvl_action}},
 ##' \code{\link{do_update_pmvl}}, \code{\link{do_update_PRE_val_courante}},
 ##' \code{\link{do_update_vm_vnc_precedent}}, \code{\link{init_debut_ppb}}, \code{\link{do_update_RC_val_debut}},
 ##' \code{\link{do_update_PRE_val_debut}}, \code{\link{init_debut_pgg_psap}}.
 ##' Le calcul des fins de projection : \code{\link{calc_fin_proj}}.
 ##' @export
-##' @aliases Canton
 ##' @include Canton_class.R
 ##'
 setGeneric(name = "proj_an", def = function(x, annee_fin, pre_on){standardGeneric("proj_an")})
@@ -79,7 +78,7 @@ setMethod(
     passif_av_pb <- viellissement_av_pb(x@annee, x@ptf_passif, coef_inf, list_rd, x@hyp_canton@tx_soc)
     # Mise a jour des passifs
     x@ptf_passif <- passif_av_pb[["ptf"]]
-    
+
     # Calcul de la PPB de premiere anneee attribuee au flux garanti
     pm_deb <- passif_av_pb[["result_av_pb"]][["stock_agg"]][, "pm_deb"]
     if(x@annee == 1){
@@ -198,7 +197,7 @@ setMethod(
     # Realisation des eventuelles ventes de PVL actions realisees a l etape 9
     # mise a jour des actions.
     x@ptf_fin@ptf_action <- sell_pvl_action(x@ptf_fin@ptf_action, result_revalo[["pmvl_liq"]])[["action"]]
-    
+
     # Mise a jour des PMVL Action/Immo/Oblig
     x@ptf_fin <- do_update_pmvl(x@ptf_fin)
 
@@ -233,7 +232,7 @@ setMethod(
     x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso , - sum(passif_ap_pb[["flux_agg"]][,"soc_stock_ap_pb"]))
     # Mise a jour des montant totaux de VM et de VNC des actifs
     x@ptf_fin <- do_update_vm_vnc_precedent(x@ptf_fin)
-    
+
     # PPB
     x@ppb <- init_debut_ppb(x@ppb)
 

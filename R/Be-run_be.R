@@ -24,7 +24,6 @@
 ##' La classe \code{\link{Be}}.
 ##' La sortie des resultats au format ".csv" : \code{\link{write_be_results}}.
 ##' @export
-##' @aliases Be
 ##' @include Be_class.R
 ##'
 setGeneric(name = "run_be", def = function(x, pre_on){standardGeneric("run_be")})

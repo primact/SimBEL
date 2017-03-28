@@ -19,7 +19,6 @@
 ##' @return \code{ppb} l'objet \code{ppb} mis a jour.
 ##' @author Prim'Act
 ##' @export
-##' @aliases RevaloEngine
 ##' @include Ppb_class.R
 
 

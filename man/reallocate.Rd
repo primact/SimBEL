@@ -2,7 +2,6 @@
 % Please edit documentation in R/AlmEngine_reallocate.R
 \docType{methods}
 \name{reallocate}
-\alias{AlmEngine}
 \alias{reallocate}
 \title{Realise les operations d'achats ventes}
 \usage{
@@ -19,7 +18,7 @@ action, immobilier, obligataire et de tresorerie.}
 \value{
 \code{portFin} l'objet initial de la classe \code{\link{PortFin}} realloue a l'allocation cible.
 
-\code{pmvr} le montant total des plus ou moins values realisess.
+\code{pmvr} le montant total des plus ou moins values realisees.
 
 \code{pmvr_oblig} le montant des plus ou moins values obligataires realisees lors de la reallocation.
 

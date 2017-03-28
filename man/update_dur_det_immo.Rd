@@ -2,14 +2,13 @@
 % Please edit documentation in R/Immo_update_dur_det.R
 \docType{methods}
 \name{update_dur_det_immo}
-\alias{Immo}
 \alias{update_dur_det_immo}
-\title{Mise a jour des durees de detention des composantes d'un portefeuille immobilier.}
+\title{Mise a jour des durees de detention d'un portefeuille immobilier.}
 \usage{
 update_dur_det_immo(x)
 }
 \arguments{
-\item{x}{objet de la classe \code{Immo} (decrivant le portefeuille immo en detention).}
+\item{x}{objet de la classe \code{\link{Immo}} (decrivant le portefeuille immo en detention).}
 }
 \value{
 L'objet \code{x} mis a jour du vieillissement de la duree de detention.

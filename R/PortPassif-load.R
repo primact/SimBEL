@@ -12,9 +12,8 @@
 ##' @return L'objet de la classe \code{\link{PortPassif}} construit a partir des inputs renseignes par l'utilisateur.
 ##' @author Prim'Act
 ##' @seealso La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
-##'  pour renseigner l’input.
+##'  pour renseigner l'input.
 ##' @export
-##' @aliases PortPassif
 ##' @include PortPassif-class.R
 ##'
 

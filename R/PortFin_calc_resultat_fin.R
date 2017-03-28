@@ -1,13 +1,9 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend la fonction qui calcule le resultat financier du portefeuille financier
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           resultat_fin
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcul de resultat financier
+##' Calcule le resultat financier.
 ##'
-##' \code{calc_resultat_fin} est une methode permettant de calculer le resultat financier du portfeuille.
+##' \code{calc_resultat_fin} est une methode permettant de calculer le resultat financier du portefeuille.
 ##' @name resultat_fin
 ##' @docType methods
 ##' @param revenu est un objet de type \code{numeric}, qui fournit les revenus du portefeuille financier.
@@ -17,7 +13,6 @@
 ##' @return La valeur du result financier.
 ##' @author Prim'Act
 ##' @export
-##' @aliases PortFin
 ##' @include PortFin_class.R
 
 setGeneric(name = "calc_resultat_fin", def = function(revenu, produit, frais_fin, var_rc){standardGeneric("calc_resultat_fin")})

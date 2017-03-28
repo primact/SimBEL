@@ -2,7 +2,6 @@
 % Please edit documentation in R/AutresReserves-load.R
 \docType{methods}
 \name{autres_reserves_load}
-\alias{AutresReserves}
 \alias{autres_reserves_load}
 \title{Methode permettant de charger la valeur initiale de la PSAP et de la PGG.}
 \usage{

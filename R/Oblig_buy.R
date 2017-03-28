@@ -7,12 +7,11 @@
 ##' de chaque composante d'un portefeuille obligataire.
 ##' @name buy_oblig
 ##' @docType methods
-##' @param x objet de la classe \code{Oblig} (decrivant le portefeuille obligataire en detention).
-##' @param ptf_bought objet de la classe \code{Oblig} (decrivant le portefeuille obligataire achete).
+##' @param x objet de la classe \code{\link{Oblig}} (decrivant le portefeuille obligataire en detention).
+##' @param ptf_bought objet de la classe \code{\link{Oblig}} (decrivant le portefeuille obligataire achete).
 ##' @return L'objet \code{x} complete des elements de \code{ptf_bought}.
 ##' @author Prim'Act
 ##' @export
-##' @aliases Oblig
 ##' @include Oblig_class.R
 
 
@@ -21,17 +20,20 @@ setMethod(
     f = "buy_oblig",
     signature = c(x = "Oblig", ptf_bought = "Oblig"),
     definition = function(x, ptf_bought){
+        nom_table <- names(x@ptf_oblig)
+        num_mp <- which(nom_table == "num_mp")
+
         n_init   <- 0
-        if(nrow(x["ptf_oblig"])>0) {n_init <- max(x["ptf_oblig"][,"num_mp"])}
-        n_bought <- nrow(ptf_bought["ptf_oblig"])
-        
+        if(nrow(x@ptf_oblig)>0) {n_init <- max(.subset2(x@ptf_oblig, num_mp))}
+        n_bought <- nrow(ptf_bought@ptf_oblig)
+
         if(n_bought == 0) {stop("[Oblig : buy_oblig] : Tentative d'achat d'un portefeuille vide\n")}
-        
-        ptf_bought["ptf_oblig"][,"num_mp"] <- c((n_init+1):(n_init+n_bought))
+
+        ptf_bought@ptf_oblig$num_mp <- c((n_init + 1):(n_init + n_bought))
         # Mise a jour de la surcote decote du portefeuille achete en date d'achat
         ptf_bought <- update_sd_oblig(ptf_bought, calc_sur_dec(ptf_bought))
-        x["ptf_oblig"] <- rbind(x["ptf_oblig"], ptf_bought["ptf_oblig"])
-        
+        x@ptf_oblig <- rbind(x@ptf_oblig, ptf_bought@ptf_oblig)
+
         return(x)
     }
 )

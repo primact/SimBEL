@@ -3,7 +3,7 @@
 \docType{class}
 \name{ESG}
 \alias{ESG}
-\title{La classe ESG}
+\title{La classe \code{ESG}.}
 \description{
 Une classe de parametres contenant les tables de simulation, generees par une generateur de scenarions
 economique.

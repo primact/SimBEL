@@ -20,7 +20,6 @@
 ##' @author Prim'Act
 ##' @keywords classes
 ##' @export
-##' @aliases ParamAlmEngine
 ##' @include PortFin_class.R
 
 setClass(

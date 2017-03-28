@@ -9,15 +9,14 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Charge le PortFin a partir des donnees renseignees par l'utilisateur.
 ##'
-##' \code{chargement_PortFin} est une methode permettant de creer un objet \code{PortFin} a partir des donnees renseignees par l'utilisateur.
+##' \code{chargement_PortFin} est une methode permettant de creer un objet \code{\link{PortFin}} a partir des donnees renseignees par l'utilisateur.
 ##' @name chargement_PortFin
 ##' @docType methods
 ##' @param folder_PortFin_address est un chemin de type \code{character}, cf la methode \code{\link{set_architecture}}
-##' @param mp_ESG est un objet de la classe \code{ModelPointESG}, qui fournit le resultat financier du porfeuille.
-##' @return L'objet \code{PortFin} tel que precise par les donnees initiales et les parametres renseignes par l'utilisateur.
+##' @param mp_ESG est un objet de la classe \code{\link{ModelPointESG}}, qui fournit le resultat financier du porfeuille.
+##' @return L'objet \code{\link{PortFin}} tel que precise par les donnees initiales et les parametres renseignes par l'utilisateur.
 ##' @author Prim'Act
 ##' @export
-##' @aliases PortFin
 ##' @include PortFin_class.R ModelPointESG_class.R
 
 setGeneric(name = "chargement_PortFin",function(folder_PortFin_address, mp_ESG){standardGeneric("chargement_PortFin")})

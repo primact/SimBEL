@@ -14,7 +14,6 @@
 ##' @author Prim'Act
 ##' @seealso Le calcul du taux de rachat dynamique \code{\link{calc_rach_dyn}}.
 ##' @export
-##' @aliases HypTech
 ##' @include HypTech-class.R
 setGeneric("get_rach_dyn", function(x, nom_table,tx_cible,tx_serv){standardGeneric("get_rach_dyn")})
 setMethod(

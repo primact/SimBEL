@@ -2,7 +2,6 @@
 % Please edit documentation in R/RevaloEngine_finance_cible_pmvl.R
 \docType{methods}
 \name{finance_cible_pmvl}
-\alias{RevaloEngine}
 \alias{finance_cible_pmvl}
 \title{Evalue le financement d'une revalorisation au taux cible par des cessions de plus-values latentes.}
 \usage{

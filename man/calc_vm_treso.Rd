@@ -2,24 +2,23 @@
 % Please edit documentation in R/Treso_calc_vm.R
 \docType{methods}
 \name{calc_vm_treso}
-\alias{Treso}
 \alias{calc_vm_treso}
-\title{Calcul les valeurs de marches de chaque composante du portefeuille treso.}
+\title{Calcule les valeurs de marches de chaque composante du portefeuille treso.}
 \usage{
 calc_vm_treso(x, rdt, flux_milieu, flux_fin)
 }
 \arguments{
-\item{x}{objet de la classe treso (decrivant le portefeuille de treso).}
+\item{x}{objet de la classe \code{\link{Treso}} (decrivant le portefeuille de treso).}
 
-\item{rdt}{vecteur decrivant le rendement de chacune des lignes treso du ptf.
+\item{rdt}{vecteur decrivant le rendement de chacune des lignes treso du portefeuille.
 Contient autant d'elements que le portefeuille a de lignes.}
 
-\item{flux_milieu}{vecteur decrivant les flux ( percus)entrants : positif, sortants : negatifs) en milieu d'annee, ventiles selon chacune des lignes de cash.}
+\item{flux_milieu}{vecteur decrivant les flux de milieu d'annee (positif =entrants,  negatifs = sortants).}
 
-\item{flux_fin}{vecteur decrivant les flux (entrants : positifs, sortants : negatifs) en fin d'annee, ventiles selon chacune des lignes de cash.}
+\item{flux_fin}{vecteur decrivant les flux de fin d'annee (positif =entrants,  negatifs = sortants).}
 }
 \value{
-L'objet x dont les valeurs de marche ont ete mises a jour.
+L'objet \code{x} dont les valeurs de marche ont ete mises a jour.
 }
 \description{
 \code{calc_vm_treso} est une methode permettant de calculer les valeurs de marche de chaque ligne du portefeuille treso.

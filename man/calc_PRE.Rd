@@ -2,14 +2,13 @@
 % Please edit documentation in R/PRE_calc.R
 \docType{methods}
 \name{calc_PRE}
-\alias{PRE}
 \alias{calc_PRE}
 \title{Calcul de la PRE.}
 \usage{
 calc_PRE(x, pmvl_action_immo)
 }
 \arguments{
-\item{x}{objet de la classe \code{PRE}, necessaire pour connaitre le stock de PRE initial.}
+\item{x}{objet de la classe \code{\link{PRE}}, necessaire pour connaitre le stock de PRE initial.}
 
 \item{pmvl_action_immo}{est un \code{numeric} correspondant au montant global de plus ou moins values latentes des actifs actions et immobiliers.
 En cas de moins value latente, la PRE est abondee.

@@ -2,14 +2,13 @@
 % Please edit documentation in R/Action_update_dur_det.R
 \docType{methods}
 \name{update_dur_det_action}
-\alias{Action}
 \alias{update_dur_det_action}
 \title{Mise a jour des durees de detention d'un portefeuille action.}
 \usage{
 update_dur_det_action(x)
 }
 \arguments{
-\item{x}{objet de la classe \code{Action} (decrivant le portefeuille action en detention).}
+\item{x}{objet de la classe \code{\link{Action}} (decrivant le portefeuille action en detention).}
 }
 \value{
 L'objet \code{x} mis a jour du vieillissement de la duree de detention.

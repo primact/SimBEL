@@ -2,22 +2,29 @@
 % Please edit documentation in R/PortFin_calc_rdt.R
 \docType{methods}
 \name{calc_rdt}
-\alias{PortFin}
 \alias{calc_rdt}
-\title{Calcul les rendements de chacune des composante des sous-portefeuilles action et immobilier du portefeuille PortFin.}
+\title{Calcule les rendements action, immobilier et de la tresorerie.}
 \usage{
 calc_rdt(x, mp_ESG)
 }
 \arguments{
-\item{x}{objet de la classe PortFin.}
+\item{x}{objet de la classe \code{\link{PortFin}}.}
 
-\item{mp_ESG}{objet de la classe ModelPointESG decrivant les conditions de l'annee n ( ainsi que l'annee n-1 pour les indices actions & immo).}
+\item{mp_ESG}{objet de la classe \code{\link{ModelPointESG}} decrivant les conditions de l'annee n
+(ainsi que l'annee (n-1) pour les indices Actions et Immobilier).}
 }
 \value{
-Un data frame compose de deux colonnes et autant de lignes que le portefeuille action a de lignes.
+\code{rdt_action} un \code{data.frame} compose de deux colonnes et autant de lignes que le
+portefeuille Action.
+
+\code{rdt_immo} un \code{data.frame} compose de deux colonnes et autant de lignes que le
+portefeuille Immobilier.
+
+\code{rdt_treso} une valeur \code{numeric} correspondant au taux de rendement de la tresorerie..
 }
 \description{
-\code{calc_rdt} est une methode permettant de calculer les rendements des portfeuilles Action et Immo d'un objet PortFin.
+\code{calc_rdt} est une methode permettant de calculer les rendements des portfeuilles \code{\link{Action}} et
+\code{\link{Immo}} d'un objet \code{\link{PortFin}}. Le rendement de la \code{\link{Treso}} est egalement fourni.
 }
 \author{
 Prim'Act

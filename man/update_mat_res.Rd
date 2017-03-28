@@ -2,17 +2,16 @@
 % Please edit documentation in R/Oblig_update_mat_res.R
 \docType{methods}
 \name{update_mat_res}
-\alias{Oblig}
 \alias{update_mat_res}
 \title{Mise a jour de la maturite residuelle et de la duree de detention de chaque composante d'un portefeuille obligataire.}
 \usage{
 update_mat_res(x)
 }
 \arguments{
-\item{x}{objet de la classe Oblig (decrivant le portefeuille obligataire).}
+\item{x}{objet de la classe \code{\link{Oblig}} (decrivant le portefeuille obligataire).}
 }
 \value{
-L'objet x dont
+L'objet \code{x} dont
 \describe{
 \item{\code{mat_res} : }{est diminuee d'une unite (une unite correspond a un an)}
 \item{\code{dur_det} : }{est augmentee d'une unite (une unite correspond a un an)}

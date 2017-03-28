@@ -5,7 +5,7 @@
 \alias{ModelPointESG}
 \title{La classe \code{ModelPointESG}.}
 \description{
-Une classe pour une extraction de l'ES pour une annee et une simulation particuliere.
+Une classe pour une extraction de l'ESG pour une annee et une simulation particuliere.
 }
 \section{Slots}{
 

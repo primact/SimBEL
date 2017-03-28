@@ -2,7 +2,6 @@
 % Please edit documentation in R/RevaloEngine_base_prod_fin.R
 \docType{methods}
 \name{base_prod_fin}
-\alias{RevaloEngine}
 \alias{base_prod_fin}
 \title{Calcule la base de produits financiers attribuables.}
 \usage{

@@ -2,7 +2,6 @@
 % Please edit documentation in R/FraisPassif-calc_frais.R
 \docType{methods}
 \name{calc_frais}
-\alias{FraisPassif}
 \alias{calc_frais}
 \title{Calcule des frais de passif.}
 \usage{

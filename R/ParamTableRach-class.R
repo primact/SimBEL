@@ -4,12 +4,12 @@
 ##' La classe de parametres pour les table de rachat \code{ParamTableRach}.
 ##'
 ##' Une classe de parametres pour les tables de rachat.
-##' @name ParamTableMort
+##' @name ParamTableRach
 ##' @slot age_min un entier correspondant a l'age minimal de la table.
 ##' @slot age_max un entier correspondant a l'age maximal de la table.
 ##' @slot anc_min un entier correspondant a la premiere anciennete de la table.
 ##' @slot anc_max un entier correspondant a la derniere anciennete de la table.
-##' @slot table un \code{data frame} contenant la table de rachat.
+##' @slot table un \code{data.frame} contenant la table de rachat.
 ##' @details  Une table de rachat peut etre une table de rachat partiel ou une table de rachat total.
 ##' Pour une table de rachat partiel, les taux de rachat sont exprimes en pourcentage de l'encours.
 ##' Pour une table de rachat total, les taux de rachat sont exprimes en pourcentage du nombre de contrats.

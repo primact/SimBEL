@@ -12,7 +12,6 @@
 ##' @return L'objet de la classe \code{\link{ParamRevaloEngine}} construit a partir des inputs renseignes par l'utilisateur.
 ##' @author Prim'Act
 ##' @export
-##' @aliases ParamRevaloEngine
 ##' @include ParamRevaloEngine_class.R PortFin_class.R
 
 setGeneric(name = "param_revalo_load", def = function(file_revalo_address){standardGeneric("param_revalo_load")})

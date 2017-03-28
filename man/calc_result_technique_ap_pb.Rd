@@ -2,7 +2,6 @@
 % Please edit documentation in R/Canton_calc_result_technique_ap_pb.R
 \docType{methods}
 \name{calc_result_technique_ap_pb}
-\alias{Canton}
 \alias{calc_result_technique_ap_pb}
 \title{calcule le resultat technique apres prise en compte de la participation aux benefices.}
 \usage{

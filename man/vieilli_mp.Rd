@@ -2,7 +2,6 @@
 % Please edit documentation in R/EpEuroInd-vieilli_mp.R
 \docType{methods}
 \name{vieilli_mp}
-\alias{EpEuroInd}
 \alias{vieilli_mp}
 \title{Veillissement d'un an des contrats epargne en euros.}
 \usage{

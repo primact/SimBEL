@@ -2,7 +2,6 @@
 % Please edit documentation in R/PortPassif-proj_annee_av_pb.R
 \docType{methods}
 \name{proj_annee_av_pb}
-\alias{PortPassif}
 \alias{proj_annee_av_pb}
 \title{Calcule les flux et les PM des produits modelises}
 \usage{

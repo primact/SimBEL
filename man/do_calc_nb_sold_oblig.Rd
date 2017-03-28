@@ -2,7 +2,6 @@
 % Please edit documentation in R/AlmEngine_do_calc_nb_sold_oblig.R
 \docType{methods}
 \name{do_calc_nb_sold_oblig}
-\alias{AlmEngine}
 \alias{do_calc_nb_sold_oblig}
 \title{Calcule le nombre d'obligations a vendre.}
 \usage{

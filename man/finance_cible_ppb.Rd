@@ -2,7 +2,6 @@
 % Please edit documentation in R/RevaloEngine_finance_cible_ppb.R
 \docType{methods}
 \name{finance_cible_ppb}
-\alias{RevaloEngine}
 \alias{finance_cible_ppb}
 \title{Evalue le financement d'une revalorisation au taux cible par une reprise de PPB.}
 \usage{

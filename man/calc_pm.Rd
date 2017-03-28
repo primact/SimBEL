@@ -2,7 +2,6 @@
 % Please edit documentation in R/EpEuroInd-calc_pm.R
 \docType{methods}
 \name{calc_pm}
-\alias{EpEuroInd}
 \alias{calc_pm}
 \title{Calcul les PM pour des contrats epargne en euros.}
 \usage{

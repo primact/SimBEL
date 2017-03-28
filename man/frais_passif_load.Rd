@@ -2,7 +2,6 @@
 % Please edit documentation in R/FraisPassif-load.R
 \docType{methods}
 \name{frais_passif_load}
-\alias{FraisPassif}
 \alias{frais_passif_load}
 \title{Methode permettant de charger la valeur des frais de passif.}
 \usage{

@@ -2,7 +2,6 @@
 % Please edit documentation in R/Ppb_dotation_reprise.R
 \docType{methods}
 \name{calc_dotation_ppb}
-\alias{Ppb}
 \alias{calc_dotation_ppb}
 \title{Dote la valeur de la PPB}
 \usage{

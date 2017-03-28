@@ -14,7 +14,6 @@
 ##' les montants de primes nettes \code{pri_net} et les chargemenets sur primes \code{pri_chgt}.
 ##' @author Prim'Act
 ##' @export
-##' @aliases EpEuroInd
 ##' @include EpEuroInd-class.R
 ##'
 setGeneric(name = "calc_primes", def = function(x){standardGeneric("calc_primes")})

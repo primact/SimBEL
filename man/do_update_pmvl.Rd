@@ -2,22 +2,27 @@
 % Please edit documentation in R/PortFin_do_update_pmvl.R
 \docType{methods}
 \name{do_update_pmvl}
-\alias{PortFin}
 \alias{do_update_pmvl}
-\title{Met a jour l'ensemble des attributs pvl et pml d'un objet PortFin}
+\title{Met a jour l'ensemble des attributs pvl et pml d'un portefeuille financier.}
 \usage{
 do_update_pmvl(x)
 }
 \arguments{
-\item{x}{est un objet de la classe \code{PortFin},}
+\item{x}{est un objet de la classe \code{\link{PortFin}},}
 }
 \value{
-L'objet \code{x} de la classe \code{PortFin} dont les plus values et moins values ont ete recalculees avec les elements du \code{PortFin} renseigne en input.
+L'objet \code{x} de la classe \code{\link{PortFin}} dont les plus-values et moins-values
+latentes ont ete recalculees avec les elements du \code{\link{PortFin}} renseigne en input.
 }
 \description{
-\code{do_update_pmvl} est une methode permettant de calculer le taux de rendement financier du portefeuille.
+\code{do_update_pmvl} est une methode permettant de mettre a jour les moins de plus ou moins-values
+latentes d'un objet \code{\link{PortFin}}.
 }
 \author{
 Prim'Act
+}
+\seealso{
+Les methodes de calcul des plus ou moins-values latentes : \code{\link{calc_pmvl_action}},
+\code{\link{calc_pmvl_immo}}, \code{\link{calc_pmvl_oblig}}.
 }
 

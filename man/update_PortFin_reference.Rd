@@ -2,7 +2,6 @@
 % Please edit documentation in R/PortFin_update_reference.R
 \docType{methods}
 \name{update_PortFin_reference}
-\alias{PortFin}
 \alias{update_PortFin_reference}
 \title{Evalue et met a jour les objets constituants un PortFin_reference.}
 \usage{
@@ -11,16 +10,18 @@ update_PortFin_reference(an, x, mp_ESG)
 \arguments{
 \item{an}{\code{numeric} correspond a l'annee de projection du portefeuille financier de reinvestissement.}
 
-\item{x}{objet de la classe \code{PortFin}, correspondant au portefeuille financier de reinvestissement avant l'etape de vieillissement.}
+\item{x}{objet de la classe \code{\link{PortFin}}, correspondant au portefeuille financier de
+reinvestissement avant l'etape de vieillissement.}
 
-\item{mp_ESG}{est un objet de la classe \code{ModelPointESG}, decrivant les conditions economiques permettant d'effectuer le vieillissement du portefeuille financier de reinvestissement.}
+\item{mp_ESG}{est un objet de la classe \code{\link{ModelPointESG}}, decrivant les conditions
+economiques permettant d'effectuer le vieillissement du portefeuille financier de reinvestissement.}
 }
 \value{
-L'objet de la classe \code{PortFin} renvoye correspond au portefeuille financier de reinvesitssement veilli d'une annee.
+L'objet \code{x} renvoye correspond au portefeuille financier de reinvesitssement veilli d'une annee.
 }
 \description{
 \code{update_PortFin_reference} est une methode permettant de calculer et mettre a jour un portefeuille financier
-de reinvestissement suite a un vieillissement.
+de reinvestissement pour le faire vieillir d'une annee.
 }
 \author{
 Prim'Act

@@ -2,7 +2,6 @@
 % Please edit documentation in R/PortFin_chargement.R
 \docType{methods}
 \name{chargement_PortFin}
-\alias{PortFin}
 \alias{chargement_PortFin}
 \title{Charge le PortFin a partir des donnees renseignees par l'utilisateur.}
 \usage{
@@ -11,13 +10,13 @@ chargement_PortFin(folder_PortFin_address, mp_ESG)
 \arguments{
 \item{folder_PortFin_address}{est un chemin de type \code{character}, cf la methode \code{\link{set_architecture}}}
 
-\item{mp_ESG}{est un objet de la classe \code{ModelPointESG}, qui fournit le resultat financier du porfeuille.}
+\item{mp_ESG}{est un objet de la classe \code{\link{ModelPointESG}}, qui fournit le resultat financier du porfeuille.}
 }
 \value{
-L'objet \code{PortFin} tel que precise par les donnees initiales et les parametres renseignes par l'utilisateur.
+L'objet \code{\link{PortFin}} tel que precise par les donnees initiales et les parametres renseignes par l'utilisateur.
 }
 \description{
-\code{chargement_PortFin} est une methode permettant de creer un objet \code{PortFin} a partir des donnees renseignees par l'utilisateur.
+\code{chargement_PortFin} est une methode permettant de creer un objet \code{\link{PortFin}} a partir des donnees renseignees par l'utilisateur.
 }
 \author{
 Prim'Act

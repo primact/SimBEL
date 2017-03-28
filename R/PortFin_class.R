@@ -1,16 +1,10 @@
-#--------------------------------------------------------------------------------------------------------------------
-# Ce script comprend les declarateurs, constructeurs et verificateurs de la classe PortFin
-#--------------------------------------------------------------------------------------------------------------------
-# Suivi version
-# Version 1.0 du 24/01/2017. Fait par GK : initialisation
-#--------------------------------------------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Declarateur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' La classe PortFin
+##' La classe \code{PortFin}.
 ##'
-##' Classe pour le portefeuille global d'actif
+##' Une Classe pour le portefeuille financier.
 ##'
 ##' @name PortFin
 ##' @slot ptf_action est un objet de type \code{\link{Action}}, qui represente le portefeuille d'action d'un canton.
@@ -31,6 +25,12 @@
 ##' et a la valeur nette comptable en debut d'annee de l'objet PortFin.
 ##' @docType class
 ##' @author Prim'Act
+##' @seealso Le calcul des rendements : \code{\link{calc_rdt}}.
+##' Le calcul des plus ou moins-values latentes : \code{\link{calc_pmvl}}.
+##' Le chargement des donneees initiales : \code{\link{chargement_PortFin}}, \code{\link{chargement_PortFin_reference}}.
+##' Les methodes de mise a jour : \code{\link{update_PortFin}}, \code{\link{update_PortFin_reference}}, \code{\link{do_update_pmvl}},
+##' \code{\link{do_update_vm_vnc_precedent}}.
+##' L'allocation d'actifs : \code{\link{print_alloc}}.
 ##' @keywords classes
 ##' @export
 ##' @include Action_class.R Immo_class.R FraisFin_class.R Oblig_class.R PRE_class.R RC_class.R Treso_class.R

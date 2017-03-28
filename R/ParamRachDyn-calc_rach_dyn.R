@@ -12,7 +12,6 @@
 ##' @param tx_serv une valeur \code{numeric} correspondant au taux de revalorisation servi.
 ##' @return La valeur du taux rachat.
 ##' @author Prim'Act
-##' @aliases ParamRachDyn
 ##' @include ParamRachDyn-class.R
 ##' @export
 

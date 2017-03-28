@@ -21,4 +21,5 @@ Prim'Act
 \seealso{
 Les operations d'achat vente obligations  \code{\link{buy_oblig}} et \code{\link{sell_oblig}}.
 }
+\keyword{classes}
 

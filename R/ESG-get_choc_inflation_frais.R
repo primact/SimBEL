@@ -15,7 +15,6 @@
 ##' @note L'inflation comprise dans l'ESG est suppose etre deja capitalise, i.e.
 ##' \eqn{indice_inflation = (1 + tx inflation)^{annee}}. Il ne s'agit pas du taux d'inflation.
 ##' @export
-##' @aliases ESG
 ##' @include ESG_class.R
 ##'
 setGeneric(name = "get_choc_inflation_frais", def = function(x, choc)

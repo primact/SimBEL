@@ -2,7 +2,6 @@
 % Please edit documentation in R/AutresPassifs-proj_annee.R
 \docType{methods}
 \name{proj_annee_autres_passifs}
-\alias{AutresPassifs}
 \alias{proj_annee_autres_passifs}
 \title{Extrait les flux et les PM des produits non modelises}
 \usage{

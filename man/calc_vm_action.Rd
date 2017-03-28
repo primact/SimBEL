@@ -2,23 +2,23 @@
 % Please edit documentation in R/Action_calc_vm.R
 \docType{methods}
 \name{calc_vm_action}
-\alias{Action}
 \alias{calc_vm_action}
-\title{Calcul les valeurs de marches de chaque composante du portefeuille action.}
+\title{Calcule les valeurs de marches du portefeuille action.}
 \usage{
 calc_vm_action(x, rdt)
 }
 \arguments{
-\item{x}{objet de la classe \code{Action} (decrivant le portefeuille d'action).}
+\item{x}{objet de la classe \code{\link{Action}} (decrivant le portefeuille d'action).}
 
-\item{rdt}{vecteur de type \code{numeric} decrivant le rendement de chacune des actions du portefeuille action de l'assureur.
+\item{rdt}{vecteur de type \code{numeric} decrivant le rendement de chacune des lignes du portefeuille action
+ de l'assureur.
 Contient autant d'elements que le portefeuille action a de lignes.}
 }
 \value{
 L'objet \code{x} dont les valeurs de marche ont ete mises a jour.
 }
 \description{
-\code{calc_vm_action} est une methode permettant de calculer les valeurs de marche.
+\code{calc_vm_action} est une methode permettant de calculer les valeurs de marche du portefeuille action.
 }
 \author{
 Prim'Act

@@ -18,7 +18,6 @@
 ##' @author Prim'Act
 ##' @seealso La classe \code{\link{Immo}}.
 ##' @export
-##' @aliases AlmEngine
 ##' @include AlmEngine_class.R Immo_class.R
 
 setGeneric(name = "do_calc_nb_sold_immo", def = function(x, montant_vente, method_vente){standardGeneric("do_calc_nb_sold_immo")})
@@ -26,12 +25,19 @@ setMethod(
     f = "do_calc_nb_sold_immo",
     signature = c(x = "Immo", montant_vente = "numeric", method_vente = "character"),
     definition = function(x, montant_vente, method_vente){
-        if(method_vente == "proportionnelle"){
-            alloc         <- x@ptf_immo$val_marche / sum(x@ptf_immo$val_marche)
-            montant_vente <- montant_vente * alloc
-            vm_unitaire   <- x@ptf_immo$val_marche / x@ptf_immo$nb_unit
 
-            num_mp  <- x@ptf_immo$num_mp
+        nom_table <- names(x@ptf_immo)
+        val_marche <- which(nom_table == "val_marche")
+        num_mp     <- which(nom_table == "num_mp")
+        nb_unit    <- which(nom_table == "nb_unit")
+
+
+        if(method_vente == "proportionnelle"){
+            alloc         <- .subset2(x@ptf_immo, val_marche) / sum(.subset2(x@ptf_immo, val_marche))
+            montant_vente <- montant_vente * alloc
+            vm_unitaire   <- .subset2(x@ptf_immo, val_marche) / .subset2(x@ptf_immo, nb_unit)
+
+            num_mp  <- .subset2(x@ptf_immo, num_mp)
             nb_sold <- montant_vente / vm_unitaire
         }
         return(data.frame(num_mp = num_mp, nb_sold = nb_sold))

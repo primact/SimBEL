@@ -2,19 +2,18 @@
 % Please edit documentation in R/Immo_update_vm.R
 \docType{methods}
 \name{update_vm_immo}
-\alias{Immo}
 \alias{update_vm_immo}
-\title{Mise a jour des valeurs de marche de chaque composante d'un portefeuille immobilier.}
+\title{Mise a jour des valeurs de marche d'un portefeuille immobilier.}
 \usage{
 update_vm_immo(x, vm)
 }
 \arguments{
-\item{x}{objet de la classe \code{Immo} (decrivant le portefeuille immobilier en detention).}
+\item{x}{objet de la classe \code{\link{Immo}} (decrivant le portefeuille immobilier en detention).}
 
 \item{vm}{un vecteur de \code{numeric} ayant la meme longueur que le portefeuille immobilier a de lignes et correspondant aux nouvelles valeurs de marche du portefeuille immobilier.}
 }
 \value{
-L'objet \code{x} mis a jour du vieillissement de la duree de detention.
+L'objet \code{x} mis a jour.
 }
 \description{
 \code{update_vm_immo} est une methode permettant de mettre a jour les valeurs de marche des composantes d'un portefeuille immobilier.

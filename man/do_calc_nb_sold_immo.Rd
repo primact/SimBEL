@@ -2,7 +2,6 @@
 % Please edit documentation in R/AlmEngine_do_calc_nb_sold_immo.R
 \docType{methods}
 \name{do_calc_nb_sold_immo}
-\alias{AlmEngine}
 \alias{do_calc_nb_sold_immo}
 \title{Calcule le nombre de titres immobilier a vendre.}
 \usage{

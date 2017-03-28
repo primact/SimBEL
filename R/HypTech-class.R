@@ -11,11 +11,11 @@
 ##' @slot tables_rach une liste contenant des tables de rachat (structurel) au format \code{\link{ParamTableRach}}.
 ##' @slot param_rach_dyn une liste contenant des parametres de rachat dynamique
 ##' au format \code{\link{ParamRachDyn}}.
-##' @slot param_comport une liste contenant des des parametres comportementaux au format \code{\link{ParamComport}}.
+##' @slot param_comport une liste contenant des parametres comportementaux au format \code{\link{ParamComport}}.
 ##' @docType class
-##' @details Chaque elements de ces liste doit avoir prealablement ete nomme.
+##' @details Chaque element de ces listes doit avoir ete prealablement nomme.
 ##' @author Prim'Act
-##' @seealso Les classes de parametres contenues \code{\link{ParamTableMort}}, \code{\link{ParamTableRach}},
+##' @seealso Les classes de parametres contenues : \code{\link{ParamTableMort}}, \code{\link{ParamTableRach}},
 ##' \code{\link{ParamRachDyn}}, \code{\link{ParamComport}}.
 ##' La methode pour l'application des chocs de mortalite et de longevite : \code{\link{get_choc_table}}.
 ##' La methode pour l'application des chocs de rachat haut et bas : \code{\link{get_choc_rach}}.

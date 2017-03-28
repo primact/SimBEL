@@ -20,7 +20,6 @@
 ##' @seealso L'attribution de la revalorisation par model point : \code{\link{calc_revalo_pm}}
 ##' Le viellissement des model points : \code{\link{vieilli_mp}}.
 ##' @export
-##' @aliases PortPassif
 ##' @include PortPassif-class.R
 ##'
 

@@ -2,9 +2,8 @@
 % Please edit documentation in R/PortFin_calc_resultat_fin.R
 \docType{methods}
 \name{resultat_fin}
-\alias{PortFin}
 \alias{resultat_fin}
-\title{Calcul de resultat financier}
+\title{Calcule le resultat financier.}
 \usage{
 calc_resultat_fin(revenu, produit, frais_fin, var_rc)
 }
@@ -21,7 +20,7 @@ calc_resultat_fin(revenu, produit, frais_fin, var_rc)
 La valeur du result financier.
 }
 \description{
-\code{calc_resultat_fin} est une methode permettant de calculer le resultat financier du portfeuille.
+\code{calc_resultat_fin} est une methode permettant de calculer le resultat financier du portefeuille.
 }
 \author{
 Prim'Act

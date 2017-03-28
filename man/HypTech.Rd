@@ -10,7 +10,7 @@ les parametres comportementaux qui permettent
 de calculer les attentes en matiere de taux de revalorisation cible.
 }
 \details{
-Chaque elements de ces liste doit avoir prealablement ete nomme.
+Chaque element de ces listes doit avoir ete prealablement nomme.
 }
 \section{Slots}{
 
@@ -22,13 +22,13 @@ Chaque elements de ces liste doit avoir prealablement ete nomme.
 \item{\code{param_rach_dyn}}{une liste contenant des parametres de rachat dynamique
 au format \code{\link{ParamRachDyn}}.}
 
-\item{\code{param_comport}}{une liste contenant des des parametres comportementaux au format \code{\link{ParamComport}}.}
+\item{\code{param_comport}}{une liste contenant des parametres comportementaux au format \code{\link{ParamComport}}.}
 }}
 \author{
 Prim'Act
 }
 \seealso{
-Les classes de parametres contenues \code{\link{ParamTableMort}}, \code{\link{ParamTableRach}},
+Les classes de parametres contenues : \code{\link{ParamTableMort}}, \code{\link{ParamTableRach}},
 \code{\link{ParamRachDyn}}, \code{\link{ParamComport}}.
 La methode pour l'application des chocs de mortalite et de longevite : \code{\link{get_choc_table}}.
 La methode pour l'application des chocs de rachat haut et bas : \code{\link{get_choc_rach}}.

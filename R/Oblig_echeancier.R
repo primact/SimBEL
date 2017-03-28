@@ -1,25 +1,27 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Echeancier
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcule les flux d'un model point ou d'un ensemble de models points obligataires.
+##' Calcule les flux obligataires.
 ##'
-##' \code{echeancier} est une methode permettant de calculer les flux jusqu'a maturite residuelle.
+##' \code{echeancier} est une methode permettant de calculer les flux jusqu'a maturite residuelle d'un model point ou
+##' d'un ensemble de model points obligataires.
 ##' @name echeancier
 ##' @docType methods
-##' @param coupon vecteur contenant les taux de coupons
-##' @param maturite vecteur d'entiers contenant les maturites residuelles
-##' @param zspread vecteur contenant les zero-spreads
-##' @param nominal vecteur contenant les valeurs nominales de chaque obligation
-##' @param yield vecteur contenant la courbe de taux consideree (peut-etre vide)
+##' @param coupon un vecteur contenant les taux de coupons de chaque obligation.
+##' @param maturite un vecteur d'entiers contenant les maturites residuelles de chaque obligation.
+##' @param zspread un vecteur contenant les zero-spreadsde chaque obligation.
+##' @param nominal un vecteur contenant les valeurs nominales de chaque obligation.
+##' @param yield un vecteur contenant la courbe de taux consideree (peut-etre vide).
 ##' @return Une matrice contenant :
 ##' \describe{
 ##' \item{\code{grid_flux} : }{la matrice d'ecoulement des flux. Cette matrice a autant de colonnes
-##' que le max du vecteur de maturite residuelle, et autant de lignes que les vecteurs d'input \code{coupon,maturite,zspread,nominal}.
-##' Chaque ligne decrit les flux annuels a venir pour l'actif obligataire de caracteristique renseigne en input.}
+##' que le max du vecteur de maturite residuelle, et autant de lignes que les vecteurs d'input
+##' \code{coupon, maturite, zspread, nominal}.
+##' Chaque ligne decrit les flux annuels a venir pour l'actif obligataire dont les caracteristiques sont
+##' renseignees en input.}
 ##' }
 ##' @author Prim'Act
 ##' @export
-##' @aliases Oblig
 ##' @include Oblig_class.R
 
 setGeneric(name = "echeancier", def = function(coupon,maturite,zspread,nominal,yield){standardGeneric("echeancier")})
@@ -36,11 +38,11 @@ setMethod(
             # Si une courbe de taux non nulle est renseignee : on renvoi les flux actualises, sinon on renvoi les flux bruts
             if(length(yield) > 0){
                 # Autre cas warning!
-                if (length(yield)<m){ stop("[Oblig:echeancier] : La courbe de taux renseigne contient moins de maturite que la maturite residuelle des oblig\n")}
+                if (length(yield) < m){ stop("[Oblig:echeancier] : La courbe de taux renseigne contient moins de maturite que la maturite residuelle des oblig\n")}
                 grid_flux <- grid_flux /(1 + yield[1:m] + zspread)^(1:m)
             }
         } else {
-            if(m>1){
+            if(m > 1){
                 # Grille de versement des coupons
                 grid_indicatrice_coup <- t(mapply(function(x,y){c(rep(1,x),rep(0,y-x))}, maturite, m))
                 grid_coupon           <- matrix(coupon, nrow = n, ncol = m, byrow = F) * grid_indicatrice_coup

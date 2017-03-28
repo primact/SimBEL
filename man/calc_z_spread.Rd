@@ -2,14 +2,13 @@
 % Please edit documentation in R/Oblig_calc_z_spread.R
 \docType{methods}
 \name{calc_z_spread}
-\alias{Oblig}
 \alias{calc_z_spread}
 \title{Calcul les zeros spreads de chaque composante d'un portefeuille obligataire.}
 \usage{
 calc_z_spread(x, yield_curve)
 }
 \arguments{
-\item{x}{objet de la classe Oblig (decrivant le portefeuile obligataire).}
+\item{x}{objet de la classe \code{\link{Oblig}} (decrivant le portefeuile obligataire).}
 
 \item{yield_curve}{vecteur decrivant la courbe de taux sans risque retenue.}
 }

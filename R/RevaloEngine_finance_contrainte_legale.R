@@ -32,7 +32,6 @@
 ##' @return \code{param_revalo} l'objet \code{param_revalo} mis a jour (solde de PB reglementaire negatif).
 ##' @author Prim'Act
 ##' @export
-##' @aliases RevaloEngine
 ##' @include Ppb_class.R ParamRevaloEngine_class.R
 
 setGeneric(name = "finance_contrainte_legale", def = function(base_fin, base_fin_etendu, result_tech, it_stock,

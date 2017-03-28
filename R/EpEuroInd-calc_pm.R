@@ -63,7 +63,6 @@
 ##' @seealso \code{\link{calc_primes}}, \code{\link{calc_prest}}, \code{\link{calc_tx_cible}},
 ##' \code{\link{calc_tx_min}}.
 ##' @export
-##' @aliases EpEuroInd
 ##' @include EpEuroInd-class.R
 ##'
 setGeneric(name = "calc_pm", def = function(x, tab_prime, tab_prest, tx_cible, tx_min, an, method, tx_soc){standardGeneric("calc_pm")})

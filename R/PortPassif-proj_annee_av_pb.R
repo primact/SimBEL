@@ -29,7 +29,6 @@
 ##' @seealso La classe \code{\link{EpEuroInd}} et ses methodes.
 ##' La classe \code{\link{FraisPassif}} et ses methodes.
 ##' @export
-##' @aliases PortPassif
 ##' @include PortPassif-class.R
 ##'
 

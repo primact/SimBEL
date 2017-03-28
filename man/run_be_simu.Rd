@@ -2,14 +2,13 @@
 % Please edit documentation in R/Be-run_be_simu.R
 \docType{methods}
 \name{run_be_simu}
-\alias{Be}
 \alias{run_be_simu}
 \title{Calcul d'un BE par une simulation.}
 \usage{
 run_be_simu(x, i, pre_on)
 }
 \arguments{
-\item{x}{un objet de type \code{Be}.}
+\item{x}{un objet de type \code{\link{Be}}.}
 
 \item{i}{un entier (\code{integer}) correspondant au numero de la simulation.}
 

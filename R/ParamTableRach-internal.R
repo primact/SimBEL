@@ -1,9 +1,3 @@
-#----------------------------------------------------------
-# Ce script comprend les methodes internes de la classe ParamTableRach
-#----------------------------------------------------------
-# Suivi version
-# Version 1.0 du 23/01/2017. Fait par MT : initialisation
-#----------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Fonction d'initialisation de ParamTableRach
@@ -15,14 +9,14 @@ setMethod(
   f = "initialize",
   signature = "ParamTableRach",
   definition = function(.Object, df){
-    if(!missing(df) ){ 
+    if(!missing(df) ){
       .Object@table <- df
       .Object@age_min <- as.integer(min(df["age"]))
       .Object@age_max <- as.integer(max(df["age"]))
       .Object@anc_min <- as.integer(min(df["anc"]))
-      .Object@anc_max <- as.integer(max(df["anc"]))  
+      .Object@anc_max <- as.integer(max(df["anc"]))
       validObject(.Object)
-    }else 
+    }else
     {stop("[ParamTableRach] : Veuillez renseigner l'ensemble des parametres pour l'initalisation")}
     return(.Object)
   }

@@ -2,7 +2,6 @@
 % Please edit documentation in R/ChocSolvabilite2_do_choc_rachat_down.R
 \docType{methods}
 \name{do_choc_rachat_down}
-\alias{ChocSolvabilite2}
 \alias{do_choc_rachat_down}
 \title{Permet a partir d'un canton initial de creer un canton dont les taux de rachat sont choques a la baisse.}
 \usage{

@@ -2,7 +2,6 @@
 % Please edit documentation in R/HypTech-get_qx_mort.R
 \docType{methods}
 \name{get_qx_mort}
-\alias{HypTech}
 \alias{get_qx_mort}
 \title{Recuperer les taux de deces calcules.}
 \usage{

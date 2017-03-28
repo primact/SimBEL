@@ -24,7 +24,6 @@
 ##' La recuperation des taux de rachat dynamique : \code{\link{get_rach_dyn}}.
 ##' La recuperation des taux de deces : \code{\link{get_qx_mort}}.
 ##' @export
-##' @aliases EpEuroInd
 ##' @include EpEuroInd-class.R HypTech-class.R
 
 setGeneric(name = "calc_tx_sortie", def = function(x, ht){standardGeneric("calc_tx_sortie")})

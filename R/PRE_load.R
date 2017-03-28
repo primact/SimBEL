@@ -7,10 +7,9 @@
 ##' @name pre_load
 ##' @docType methods
 ##' @param file_PRE_address est un \code{character} correspondant a l'adresse du fichier d'input renseignant les donnees de PRE
-##' @return Un objet de la classe \code{PRE} charge a partir des donnees du fichier dont le nom est precise en input.
+##' @return Un objet de la classe \code{\link{PRE}} charge a partir des donnees du fichier dont le nom est precise en input.
 ##' @author Prim'Act
 ##' @export
-##' @aliases PRE
 ##' @include PRE_class.R
 
 setGeneric(name = "pre_load", def = function(file_PRE_address){standardGeneric("pre_load")})

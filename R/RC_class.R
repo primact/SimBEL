@@ -5,17 +5,17 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Declarateur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' La classe RC
+##' La classe \code{RC}.
 ##'
-##' Classe pour la gestion de la reserve de capitalisation (RC).
+##' Une classe pour la gestion de la reserve de capitalisation (RC).
 ##'
 ##' @name RC
 ##' @slot val_debut est une valeur \code{numeric} correspondant a la valeur de la RC en debut d'annee.
 ##' @slot val_courante est une valeur \code{numeric} correspondant a la valeur courante de la RC.
 ##' @docType class
-##' @section Lien a creer
 ##' @author Prim'Act
-##' @seealso Les methodes de calcul de la RC \code{\link{calc_RC}}, et de mises a jour des RC initiales et courantes \code{\link{do_update_RC_val_courante}}, \code{\link{do_update_RC_val_debut}}.
+##' @seealso Les methodes de calcul de la RC \code{\link{calc_RC}},
+##' et de mises a jour des RC initiales et courantes \code{\link{do_update_RC_val_courante}}, \code{\link{do_update_RC_val_debut}}.
 ##' @keywords classes
 ##' @export
 
@@ -45,7 +45,7 @@ setMethod(
     f = "initialize",
     signature = "RC",
     definition = function(.Object, val_debut = numeric(), val_courante = numeric()){
-        
+
     if( !missing(val_debut) & !missing(val_courante)){
         # Traitement du cas ou tous les elements sont renseignes
         .Object@val_debut    <- val_debut

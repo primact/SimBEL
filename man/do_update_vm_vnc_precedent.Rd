@@ -2,23 +2,27 @@
 % Please edit documentation in R/PortFin_do_update_vm_vnc_precedent.R
 \docType{methods}
 \name{do_update_vm_vnc_precedent}
-\alias{PortFin}
 \alias{do_update_vm_vnc_precedent}
-\title{Evalue et met a jour les objets constituants un PortFin.}
+\title{Evalue et met a jour l'attribut \code{vm_vnc_precedent} d'un portefeuille financier.}
 \usage{
 do_update_vm_vnc_precedent(x)
 }
 \arguments{
-\item{x}{objet de la classe \code{PortFin}, correspondant au portefeuille financier de l'assureur avant mise a jour de l'attribut vm_vnc_precedent.}
+\item{x}{objet de la classe \code{\link{PortFin}}, correspondant au portefeuille financier de l'assureur
+avant mise a jour de l'attribut \code{vm_vnc_precedent}.}
 }
 \value{
-L'objet de la classe \code{PortFin} renvoye correspond au portefeuille financier de l'assureur dont l'attribut vm_vnc_precedent a ete mis a jour.
+L'objet \code{x} de la classe \code{\link{PortFin}} renvoye correspond au portefeuille financier
+de l'assureur dont l'attribut \code{vm_vnc_precedent} a ete mis a jour.
 }
 \description{
-\code{do_update_vm_vnc_precedent} est une methode permettant de calculer et mettre a jour un portefeuille financier
-suite a un vieillissement.
+\code{do_update_vm_vnc_precedent} est une methode permettant de calculer et mettre a jour l'attribut \code{vm_vnc_precedent}
+d'un portefeuille financier.
 }
 \author{
 Prim'Act
+}
+\seealso{
+\code{\link{print_alloc}}.
 }
 

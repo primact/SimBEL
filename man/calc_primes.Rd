@@ -2,7 +2,6 @@
 % Please edit documentation in R/EpEuroInd-calc_primes.R
 \docType{methods}
 \name{calc_primes}
-\alias{EpEuroInd}
 \alias{calc_primes}
 \title{Calcul les flux de primes pour des contrats epargne en euros.}
 \usage{

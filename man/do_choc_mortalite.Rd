@@ -2,7 +2,6 @@
 % Please edit documentation in R/ChocSolvabilite2_do_choc_mortalite.R
 \docType{methods}
 \name{do_choc_mortalite}
-\alias{ChocSolvabilite2}
 \alias{do_choc_mortalite}
 \title{Permet a partir d'un canton initial de creer un canton choque mortalite.}
 \usage{

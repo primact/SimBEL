@@ -1,19 +1,16 @@
-#10/03/2017 Guillaume de Kervenoael
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           calc_pmvl_oblig
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-##' Calcul les valeurs de marches de chaque composante du portefeuille d'obligations.
+##' Calcule les plus et moins-values obligataires.
 ##'
-##' \code{calc_pmvl_oblig} est une methode permettant de calculer les valeurs de marche.
+##' \code{calc_pmvl_oblig} est une methode permettant de calculer les plus et moins-values du portefeuille obligataire.
 ##' @name calc_pmvl_oblig
 ##' @docType methods
-##' @param x objet de la classe \code{Oblig} (decrivant le portefeuille d'obligations).
-##' @return Une liste composee de deux elements \code{(pvl, mvl)} correspondant respectivement 
-##' aux sommes des plus values latentes obligations et aux sommes des moins values latentes obligations.
+##' @param x objet de la classe \code{\link{Oblig}} (decrivant le portefeuille d'obligations).
+##' @return \code{pvl} correspondant a la somme des plus-values latentes obligataires.
+##' @return \code{mvl} correspondant a la somme des moins-values latentes obligataires.
 ##' @author Prim'Act
 ##' @export
-##' @aliases Oblig
 ##' @include Oblig_class.R
 
 setGeneric(name = "calc_pmvl_oblig", def = function(x){standardGeneric("calc_pmvl_oblig")})
@@ -21,8 +18,15 @@ setMethod(
     f = "calc_pmvl_oblig",
     signature = "Oblig",
     definition = function(x){
-        pvl <- sum((x["ptf_oblig"][,"val_marche"] - x["ptf_oblig"][,"val_nc"])*(x["ptf_oblig"][,"val_marche"] > x["ptf_oblig"][,"val_nc"]))
-        mvl <- sum((x["ptf_oblig"][,"val_marche"] - x["ptf_oblig"][,"val_nc"])*(x["ptf_oblig"][,"val_marche"] < x["ptf_oblig"][,"val_nc"]))
+        nom_table  <- names(x@ptf_oblig)
+        val_marche <- which(nom_table == "val_marche")
+        val_nc     <- which(nom_table == "val_nc")
+
+        # Plus ou moins value latentes
+        pmvl <-.subset2(x@ptf_oblig, val_marche) - .subset2(x@ptf_oblig, val_nc)
+
+        pvl <- sum( pmvl * (pmvl > 0))
+        mvl <- sum( pmvl * (pmvl <= 0))
         return(list(pvl = pvl, mvl = mvl))
     }
 )

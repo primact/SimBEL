@@ -2,7 +2,6 @@
 % Please edit documentation in R/Ppb_init_debut.R
 \docType{methods}
 \name{init_debut_ppb}
-\alias{Ppb}
 \alias{init_debut_ppb}
 \title{Re-initialise la PPB en debut d'annee.}
 \usage{

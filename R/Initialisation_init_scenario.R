@@ -3,12 +3,11 @@
 ##' \code{init_scenario} est la methode d'initialisation.
 ##' @name init_scenario
 ##' @docType methods
-##' @param x un objet de la classe \code{\link{Initialisation}}
+##' @param x un objet de la classe \code{\link{Initialisation}}.
 ##' @return Pas de sortie.
 ##' @note Cette methode cree l'architecture, puis les objets \code{\link{Be}} correspondant a chacun des scenarios : central et de chocs de la formule standard.
 ##' @author Prim'Act
 ##' @export
-##' @aliases Initialisation
 ##' @include Initialisation_class.R
 
 

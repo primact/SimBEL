@@ -12,7 +12,6 @@
 #' @return L'objet \code{x} reinitialise.
 ##' @author Prim'Act
 ##' @export
-##' @aliases Ppb
 ##' @include Ppb_class.R
 
 setGeneric(name = "init_debut_ppb", def = function(x){standardGeneric("init_debut_ppb")})

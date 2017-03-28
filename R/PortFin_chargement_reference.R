@@ -11,12 +11,11 @@
 ##' @name chargement_PortFin_reference
 ##' @docType methods
 ##' @param folder_PortFin_reference_address est un chemin de type \code{character}, cf la methode \code{\link{set_architecture}}
-##' @param mp_ESG est un objet de la classe \code{ModelPointESG}, qui fournit le resultat financier du porfeuille.
-##' @return L'objet \code{PortFin} correspondant au portefeuille financier de reinvestissement
+##' @param mp_ESG est un objet de la classe \code{\link{ModelPointESG}}, qui fournit le resultat financier du porfeuille.
+##' @return L'objet \code{\link{PortFin}} correspondant au portefeuille financier de reinvestissement
 ##' tel que precise par les donnees initiales et les parametres renseignes par l'utilisateur.
 ##' @author Prim'Act
 ##' @export
-##' @aliases PortFin
 ##' @include PortFin_class.R ModelPointESG_class.R
 
 

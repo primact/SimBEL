@@ -2,14 +2,13 @@
 % Please edit documentation in R/RC_calc.R
 \docType{methods}
 \name{calc_RC}
-\alias{RC}
 \alias{calc_RC}
-\title{Calcul de la RC.}
+\title{Calcule de la RC.}
 \usage{
 calc_RC(x, pmvr_oblig)
 }
 \arguments{
-\item{x}{objet de la classe \code{RC}, necessaire pour connaitre le stock de RC initial.}
+\item{x}{objet de la classe \code{\link{RC}}, necessaire pour connaitre le stock de RC initial.}
 
 \item{pmr_oblig}{est un \code{numeric} correspondant au montant global annuel de plus ou moins values realisees sur des actifs obligataires.}
 }
@@ -21,7 +20,7 @@ Le format de la liste renvoyee est :
 }
 }
 \description{
-\code{calc_RC} est une methode permettant de calculer le montant de RC.
+\code{calc_RC} est une methode permettant de calculer le montant de Reserve de Capitalisation.
 }
 \author{
 Prim'Act

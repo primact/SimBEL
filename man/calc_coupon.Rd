@@ -2,17 +2,18 @@
 % Please edit documentation in R/Oblig_calc_coupon.R
 \docType{methods}
 \name{calc_coupon}
-\alias{Oblig}
 \alias{calc_coupon}
-\title{Calcul le coupon des models points constituant le portefeuille obligataire.}
+\title{Calcule les coupons d'un portefeuille obligataire.}
 \usage{
 calc_coupon(x)
 }
 \arguments{
-\item{x}{un objet de la classe Oblig, dont on souhaite calculer le coupon annuel de chacune de ses composantes.}
+\item{x}{un objet de la classe \code{\link{Oblig}}, dont on souhaite calculer le coupon
+annuel pour chacune de ses composantes.}
 }
 \value{
-Un vecteur dont chaque element correspond a la valeur du coupon de l'obligation consideree : tx_coupon * parite * nominal * nb_unit.
+un vecteur dont chaque element correspond a la valeur du coupon de l'obligation consideree
+ , i.e tx_coupon * parite * nominal * nb_unit.
 Le vecteur renvoye a autant d'elements que le portefeuille obligataire en input a de lignes.
 }
 \description{

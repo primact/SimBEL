@@ -18,7 +18,6 @@
 ##' @author Prim'Act
 ##' @seealso L'application du choc de spread a une ligne obligataire : \code{\link{do_choc_spread_unitaire}}.
 ##' @export
-##' @aliases ChocSolvabilite2
 ##' @include ChocSolvabilite2_class.R Canton_class.R
 
 setGeneric(name = "do_choc_spread", def = function(x, canton){standardGeneric("do_choc_spread")})

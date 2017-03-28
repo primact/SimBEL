@@ -2,7 +2,6 @@
 % Please edit documentation in R/EpEuroInd-calc_tx_cible.R
 \docType{methods}
 \name{calc_tx_cible}
-\alias{EpEuroInd}
 \alias{calc_tx_cible}
 \title{Calcul du taux cible pour des contrats epargne en euros.}
 \usage{

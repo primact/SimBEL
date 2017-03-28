@@ -15,7 +15,6 @@
 ##' @seealso La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
 ##'  pour renseigner l’input.
 ##' @export
-##' @aliases AutresPassifs
 ##' @include AutresPassifs-class.R
 
 setGeneric(name = "autres_passif_load", def = function(file_autres_passif_address){standardGeneric("autres_passif_load")})

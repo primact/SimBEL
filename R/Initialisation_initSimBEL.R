@@ -8,7 +8,6 @@
 ##' @note  Cette methode permet de creer l'objet \code{\link{Canton}} initial et de le sauvegarder dans le repertoire adequat de l'architecture.
 ##' @author Prim'Act
 ##' @export
-##' @aliases Initialisation
 ##' @include Initialisation_class.R
 
 setGeneric(name = "init_SimBEL", def = function(x){standardGeneric("init_SimBEL")})

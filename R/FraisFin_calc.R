@@ -14,7 +14,6 @@
 ##' @return La valeur des frais financiers : un reel de type \code{numeric}.
 ##' @author Prim'Act
 ##' @export
-##' @aliases FraisFin
 ##' @include FraisFin_class.R
 
 setGeneric(name = "calc_frais_fin", def = function(x, vm_moy, coef_inflation){standardGeneric("calc_frais_fin")})

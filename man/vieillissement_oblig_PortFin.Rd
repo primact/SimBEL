@@ -2,23 +2,22 @@
 % Please edit documentation in R/PortFin_vieillissement_oblig.R
 \docType{methods}
 \name{vieillissement_oblig_PortFin}
-\alias{PortFin}
 \alias{vieillissement_oblig_PortFin}
-\title{Effectue le vieillissement/la projection du portefeuille obligataire d'un portefeuille financier.}
+\title{Effectue le vieillissement du portefeuille obligataire d'un portefeuille financier.}
 \usage{
 vieillissement_oblig_PortFin(x, new_mp_ESG)
 }
 \arguments{
-\item{x}{objet de la classe \code{PortFin}, correspondant au portefeuille financier de l'assureur avant l'etape de vieillissement de son atribut \code{ptf_oblig} de la classe \code{Oblig}.}
+\item{x}{objet de la classe \code{\link{PortFin}}, correspondant au portefeuille financier
+de l'assureur avant l'etape de vieillissement.}
 
-\item{new_mp_ESG}{est un objet de type \code{ModelPointESG}, correspondant aux conditions economiques de l'annee du vieillissement.}
+\item{new_mp_ESG}{est un objet de type \code{\link{ModelPointESG}}, correspondant aux conditions
+economiques de l'annee du vieillissement.}
 }
 \value{
-Le format de la liste renvoyee est :
-\describe{
-\item{\code{portFin} : }  {le portefeuille financier dont l'attribut \code{ptf_oblig} a ete vieilli d'une annee.}
-\item{\code{loyer} : }{le montant de loyer percus en milieu d'annee suite au vieillissement du portefeuille obligataire.}
-}
+\code{portFin} le portefeuille financier dont l'attribut \code{ptf_oblig} a ete vieilli d'une annee.
+
+\code{loyer} le montant de loyer percus en milieu d'annee suite au vieillissement du portefeuille obligataire.
 }
 \description{
 \code{vieillissement_oblig_PortFin} est une methode permettant de projeter la composante obligataire d'un portefeuille financier.

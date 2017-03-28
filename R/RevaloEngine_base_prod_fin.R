@@ -14,7 +14,6 @@
 ##' @author Prim'Act
 ##' @seealso \code{\link{Ppb}}.
 ##' @export
-##' @aliases RevaloEngine
 ##' @include Ppb_class.R
 
 setGeneric(name = "base_prod_fin", def = function(tra, pm_moy, ppb){standardGeneric("base_prod_fin")})

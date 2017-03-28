@@ -2,7 +2,6 @@
 % Please edit documentation in R/ParamRevaloEngine_load.R
 \docType{methods}
 \name{param_revalo_load}
-\alias{ParamRevaloEngine}
 \alias{param_revalo_load}
 \title{Chargement des attributs d'un objet \code{ParamRevaloEngine} a partir des donnees utilisateurs.}
 \usage{

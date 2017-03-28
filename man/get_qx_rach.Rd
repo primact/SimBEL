@@ -2,7 +2,6 @@
 % Please edit documentation in R/HypTech-get_qx_rach.R
 \docType{methods}
 \name{get_qx_rach}
-\alias{HypTech}
 \alias{get_qx_rach}
 \title{Recuperer les taux de rachat calcules.}
 \usage{

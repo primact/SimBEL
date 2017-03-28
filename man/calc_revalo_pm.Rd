@@ -2,7 +2,6 @@
 % Please edit documentation in R/EpEuroInd-calc_revalo_pm.R
 \docType{methods}
 \name{calc_revalo_pm}
-\alias{EpEuroInd}
 \alias{calc_revalo_pm}
 \title{Calcule et applique la revalorisation pour des PM pour des contrats epargne en euros.}
 \usage{

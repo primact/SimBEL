@@ -2,7 +2,6 @@
 % Please edit documentation in R/AlmEngine_create_ptf_bought_immo.R
 \docType{methods}
 \name{create_ptf_bought_immo}
-\alias{AlmEngine}
 \alias{create_ptf_bought_immo}
 \title{Ajuste les quantites d'immobilier a acheter.}
 \usage{

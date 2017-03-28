@@ -2,7 +2,6 @@
 % Please edit documentation in R/AlmEngine_do_calc_nb_sold_action.R
 \docType{methods}
 \name{do_calc_nb_sold_action}
-\alias{AlmEngine}
 \alias{do_calc_nb_sold_action}
 \title{Calcule le nombre d'actions a vendre.}
 \usage{

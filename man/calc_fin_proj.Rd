@@ -2,7 +2,6 @@
 % Please edit documentation in R/Canton_calc_fin_proj.R
 \docType{methods}
 \name{calc_fin_proj}
-\alias{Canton}
 \alias{calc_fin_proj}
 \title{calcule le flux et les resultats ajustes en fin de projection.}
 \usage{

@@ -1,9 +1,3 @@
-#----------------------------------------------------------
-# Ce script comprend les methodes internes de la classe ParamTableMort
-#----------------------------------------------------------
-# Suivi version
-# Version 1.0 du 23/01/2017. Fait par MT : initialisation
-#----------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Fonction d'initialisation de ParamTableMort
@@ -22,7 +16,7 @@ setMethod(
       .Object@gen_min <- as.integer(min(df["gen"]))
       .Object@gen_max <- as.integer(max(df["gen"]))
       validObject(.Object)
-    } else 
+    } else
     {stop("[ParamTableMort] : Veuillez renseigner l'ensemble des parametres pour l'initalisation")}
     return(.Object)
   }

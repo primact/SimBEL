@@ -2,7 +2,6 @@
 % Please edit documentation in R/PortFin_update.R
 \docType{methods}
 \name{update_PortFin}
-\alias{PortFin}
 \alias{update_PortFin}
 \title{Evalue et met a jour les objets constituants un PortFin.}
 \usage{
@@ -11,29 +10,35 @@ update_PortFin(an, x, new_mp_ESG, flux_milieu, flux_fin)
 \arguments{
 \item{an}{\code{numeric} correspond a l'annee de projection du portefeuille financier.}
 
-\item{x}{objet de la classe \code{PortFin}, correspondant au portefeuille financier de l'assureur avant l'etape de vieillissement.}
+\item{x}{objet de la classe \code{\link{PortFin}}, correspondant au portefeuille financier de l'assureur
+avant l'etape de vieillissement.}
 
-\item{new_mp_ESG}{est un objet de la classe \code{ModelPointESG}, decrivant les conditions economiques permettant d'effectuer le vieillissement du portefeuille financier.}
+\item{new_mp_ESG}{est un objet de la classe \code{\link{ModelPointESG}}, decrivant les conditions
+economiques permettant d'effectuer le vieillissement du portefeuille financier.}
 
 \item{flux_milieu}{est une valeur \code{numeric} correspondant a la somme des flux percus en milieu d'annee (coupons des obligations, loyers immobiliers, dividendes des actions, revenus de la tresorerie).}
 
 \item{flux_fin}{est une valeur \code{numeric}  correspondant a la somme des flux percus en fin d'annee (tombee d'echeance d'obligation).}
 }
 \value{
-Le format de la liste renvoyee est :
-\describe{
-\item{\code{ptf} : }{un vecteur contenant les flux de sortie en echeance de l'annee}
-\item{\code{revenu_fin} : }{les revenus realises au cours de la periode (coupons, tombees d'echeance, dividendes et loyers).}
-\item{\code{var_vnc_oblig} : }{la variation de valeur nette comptable obligataire.}}
+\code{ptf} un vecteur contenant les flux de sortie en echeance de l'annee
+
+\code{revenu_fin} les revenus realises au cours de la periode (coupons, tombees d'echeance, dividendes et loyers).
+
+\code{var_vnc_oblig} la variation de valeur nette comptable obligataire.
 }
 \description{
 \code{update_PortFin} est une methode permettant de calculer et mettre a jour un portefeuille financier
-suite a un vieillissement.
+pour le faire vieillir d'une annee.
 }
 \author{
 Prim'Act
 }
 \seealso{
-La fonction de mise a jour specifique au portefeuille de reinvestissement \code{\link{update_PortFin_reference}}.
+Le vieillissement des classes d'actifs : \code{\link{vieillissement_action_PortFin}},
+\code{\link{vieillissement_immo_PortFin}}, \code{\link{vieillissement_oblig_PortFin}},
+\code{\link{vieillissement_treso_PortFin}}.
+Le calcul des rendements : \code{\link{calc_rdt}}.
+La methode de mise a jour specifique au portefeuille de reinvestissement \code{\link{update_PortFin_reference}}.
 }
 

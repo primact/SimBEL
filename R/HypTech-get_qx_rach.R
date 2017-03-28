@@ -17,7 +17,6 @@
 ##' @author Prim'Act
 ##' @seealso Le calcul du taux de rachat \code{\link{calc_rach}}.
 ##' @export
-##' @aliases HypTech
 ##' @include HypTech-class.R
 setGeneric("get_qx_rach", function(x, nom_table, age, anc){standardGeneric("get_qx_rach")})
 setMethod(

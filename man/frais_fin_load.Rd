@@ -2,7 +2,6 @@
 % Please edit documentation in R/FraisFin_load.R
 \docType{methods}
 \name{frais_fin_load}
-\alias{FraisFin}
 \alias{frais_fin_load}
 \title{Methode permettant de charger la valeur initiale des frais financiers dans un objet de type FraisFin.}
 \usage{

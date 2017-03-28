@@ -12,7 +12,6 @@
 ##' @return En cas de bonne execution (i.e. l'ensemble des dossiers est cree ou ecrase) la methode renvoie un \code{logical}.
 ##' @author Prim'Act
 ##' @export
-##' @aliases Initialisation
 ##' @include Initialisation_class.R
 
 setGeneric(name = "init_create_folder", def = function(x){standardGeneric("init_create_folder")})
@@ -24,13 +23,12 @@ setMethod(
         # Si les dossiers existent, on les ecrasent et on les recreent
         # Sinon on les creent
         if (dir.exists(paste(racine@root_address, "internal_ws/data/scenario", sep = "/")) == F) { stop("[Initialisation : init_create_folder] L'architecture du dossier internal_ws requiert l'existence d'un dossier data/scenario.")}
-        lapply(names(x@address[["save_folder"]][names(x@address[["save_folder"]]) != "init"]), 
-               function(y){ 
-                    path <- x@address[["save_folder"]][[y]]                           
+        lapply(names(x@address[["save_folder"]][names(x@address[["save_folder"]]) != "init"]),
+               function(y){
+                    path <- x@address[["save_folder"]][[y]]
                     if (dir.exists(path) == F) { dir.create(path) } else { unlink(paste(path, "/*", sep = "")) }})
         return(message("[Initialisation : init_create_folder] : Creation de l'architecture des scenario Solvabilite 2 reussie."))
     }
-    
+
 )
-     
-     
+

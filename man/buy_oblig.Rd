@@ -2,16 +2,15 @@
 % Please edit documentation in R/Oblig_buy.R
 \docType{methods}
 \name{buy_oblig}
-\alias{Oblig}
 \alias{buy_oblig}
 \title{Mise a jour de chaque composante d'un portefeuille obligataire suite a un achat d'un autre portefeuille obligataire.}
 \usage{
 buy_oblig(x, ptf_bought)
 }
 \arguments{
-\item{x}{objet de la classe \code{Oblig} (decrivant le portefeuille obligataire en detention).}
+\item{x}{objet de la classe \code{\link{Oblig}} (decrivant le portefeuille obligataire en detention).}
 
-\item{ptf_bought}{objet de la classe \code{Oblig} (decrivant le portefeuille obligataire achete).}
+\item{ptf_bought}{objet de la classe \code{\link{Oblig}} (decrivant le portefeuille obligataire achete).}
 }
 \value{
 L'objet \code{x} complete des elements de \code{ptf_bought}.

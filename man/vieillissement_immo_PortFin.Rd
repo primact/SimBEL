@@ -2,25 +2,23 @@
 % Please edit documentation in R/PortFin_vieillissement_immo.R
 \docType{methods}
 \name{vieillissement_immo_PortFin}
-\alias{PortFin}
 \alias{vieillissement_immo_PortFin}
-\title{Effectue le vieillissement/la projection du portefeuille immo d'un portefeuille financier.}
+\title{Effectue le vieillissement du portefeuille immo d'un portefeuille financier.}
 \usage{
 vieillissement_immo_PortFin(x, table_rdt)
 }
 \arguments{
-\item{x}{objet de la classe \code{PortFin}, correspondant au portefeuille financier de l'assureur avant l'etape de vieillissement de son atribut \code{ptf_immo} de la classe \code{Immo}.}
+\item{x}{objet de la classe \code{\link{PortFin}}, correspondant au portefeuille financier
+de l'assureur avant l'etape de vieillissement.}
 
-\item{table_rdt}{est une \code{liste}, construite par la fonction \code{\link{calc_rdt}}.
+\item{table_rdt}{est une liste, construite par la fonction \code{\link{calc_rdt}}.
 Cette table contient les tables d'evolution des cours et rendements sur l'annee consideree de chacune des classes d'actif.
 Les tables sont constuites a partir des extractions du Generateur de Scenario Economique de Prim'Act.}
 }
 \value{
-Le format de la liste renvoyee est :
-\describe{
-\item{\code{portFin} : }  {le portefeuille financier dont l'attribut \code{ptf_immo} a ete vieilli d'une annee.}
-\item{\code{loyer} : }{le montant de loyer percus en milieu d'annee suite au vieillissement du portefeuille immobilier.}
-}
+code{portFin} le portefeuille financier dont l'attribut \code{ptf_immo} a ete vieilli d'une annee.
+
+\code{loyer} le montant de loyer percus en milieu d'annee suite au vieillissement du portefeuille immobilier.
 }
 \description{
 \code{vieillissement_immo_PortFin} est une methode permettant de projeter la composante immobilier d'un portefeuille financier.

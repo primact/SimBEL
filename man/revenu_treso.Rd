@@ -2,24 +2,23 @@
 % Please edit documentation in R/Treso_revenu.R
 \docType{methods}
 \name{revenu_treso}
-\alias{Treso}
 \alias{revenu_treso}
-\title{Calcul le revenu tresorerie.}
+\title{Calcule le revenu tresorerie.}
 \usage{
 revenu_treso(x, rdt, flux_milieu)
 }
 \arguments{
-\item{x}{est un objet de la classe Treso en debut d'annee}
+\item{x}{est un objet de la classe \code{\link{Treso}} en debut d'annee.}
 
-\item{rdt}{est le rendement de la classe Treso au cours de l'annee (i.e. en fin d'annee)}
+\item{rdt}{est le rendement de la classe \code{\link{Treso}} au cours de l'annee (i.e. en fin d'annee)}
 
-\item{flux_milieu}{est le flux du milieu de l'annee en cours (i.e. ulterieur a l'objet Treso renseigne)}
+\item{flux_milieu}{est le flux du milieu de l'annee en cours.}
 }
 \value{
 Le montant du revenu.
 }
 \description{
-\code{revenu_treso} est une methode permettant de calculer les valeurs de marche.
+\code{revenu_treso} est une methode permettant de calculer le revenu de la tresorerie.
 }
 \author{
 Prim'Act

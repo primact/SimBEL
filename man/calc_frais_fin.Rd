@@ -2,7 +2,6 @@
 % Please edit documentation in R/FraisFin_calc.R
 \docType{methods}
 \name{calc_frais_fin}
-\alias{FraisFin}
 \alias{calc_frais_fin}
 \title{Calcul des frais financier.}
 \usage{

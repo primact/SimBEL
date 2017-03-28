@@ -2,23 +2,27 @@
 % Please edit documentation in R/Action_sell_pvl.R
 \docType{methods}
 \name{sell_pvl_action}
-\alias{Action}
 \alias{sell_pvl_action}
-\title{Mise a jour de chaque composante du portefeuille action suite a une realisation d'un montant de plus values latentes action.}
+\title{Mise a jour du portefeuille action suite a une realisation de plus-values latentes action.}
 \usage{
 sell_pvl_action(x, montant)
 }
 \arguments{
-\item{x}{objet de la classe \code{Action} (decrivant le portefeuille action en detention).}
+\item{x}{un objet de la classe \code{\link{Action}} (decrivant le portefeuille action en detention).}
 
-\item{montant}{reel de type \code{numeric} contient le montant de plus value latente que l'on souhaite realiser.}
+\item{montant}{un montant \code{numeric} de plus-values latentes que l'on souhaite realiser.}
 }
 \value{
-L'objet \code{x} mis a jour de l'operation de vente (suppression des lignes vendues) et pmvr le montant de plus value realisees.
+\code{action} l'objet \code{x} mis a jour de l'operation de vente (suppression des lignes vendues).
+
+\code{pmvr} le montant des plus ou moins-values realisees.
 }
 \description{
-\code{sell_pvl_action} est une methode permettant de mettre a jour chaque composante d'un portefeuille action suite a la vente
-de tout ou partie de ce portefeuille afin de realiser un montant de plus values latentes.
+\code{sell_pvl_action} est une methode permettant de mettre a jour chaque composante d'un portefeuille action
+ suite a la vente de tout ou partie de ce portefeuille afin de realiser un montant de plus-values latentes.
+}
+\note{
+Les cessions sont realisees au prorata des plus-values latentes actions.
 }
 \author{
 Prim'Act

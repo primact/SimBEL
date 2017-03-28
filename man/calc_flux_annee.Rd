@@ -2,27 +2,24 @@
 % Please edit documentation in R/Oblig_flux_annee.R
 \docType{methods}
 \name{calc_flux_annee}
-\alias{Oblig}
 \alias{calc_flux_annee}
-\title{Calcul les flux percus dans l'annee du fait de la detention des obligations du portefeuille obligataire.}
+\title{Calcule les flux percus dans l'annee du portefeuille obligataire.}
 \usage{
 calc_flux_annee(x)
 }
 \arguments{
-\item{x}{un objet de la classe Oblig.}
+\item{x}{un objet de la classe \code{\link{Oblig}}.}
 }
 \value{
-Une liste composee de deux vecteurs:
-\describe{
-\item{\code{tombee_coupon} : }{Chaque element correspond aux tombees de coupon pour l'annee a venir. Ce vecteur a autant d'elements
-que le portefeuille obligataire d'inputs a de lignes.}
-\item{\code{tombee_echeance} : }{Chaque element correspond aux tombees d echeances pour l'annee a venir. Ce vecteur a autant d'elements
-que le portefeuille obligataire d'inputs a de lignes.}
-}
+\code{tombee_coupon} un vecteur correspondant aux tombees de coupon dans l'annee. Ce vecteur a autant d'elements
+que le portefeuille obligataire d'inputs a de lignes.
+
+\code{tombee_echeance} un vecteur correspondant aux tombees d echeances dans l'annee. Ce vecteur a autant d'elements
+que le portefeuille obligataire d'inputs a de lignes.
 }
 \description{
-\code{calc_flux_annee} est une methode permettant de calculer les valeurs nominales de l'ensemble des obligations
-composant un portefeuille obligataire.
+\code{calc_flux_annee} est une methode permettant de calculer les tombees de coupons et les echeances
+ l'ensemble des obligations composant un portefeuille obligataire.
 }
 \author{
 Prim'Act

@@ -2,7 +2,6 @@
 % Please edit documentation in R/ESG-get_choc_inflation_frais.R
 \docType{methods}
 \name{get_choc_inflation_frais}
-\alias{ESG}
 \alias{get_choc_inflation_frais}
 \title{Applique le choc frais de la formule standard a la table de simulation pour l'indice inflation.}
 \usage{

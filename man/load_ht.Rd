@@ -2,7 +2,6 @@
 % Please edit documentation in R/HypTech-load.R
 \docType{methods}
 \name{load_ht}
-\alias{HypTech}
 \alias{load_ht}
 \title{Methode permettant de charger la valeur des parametres techniques.}
 \usage{
@@ -24,6 +23,6 @@ Prim'Act
 }
 \seealso{
 La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
- pour renseigner l’input.
+ pour renseigner l'input.
 }
 

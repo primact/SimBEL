@@ -20,7 +20,6 @@
 ##' @author Prim'Act
 ##' @seealso Le calcul du taux cible \code{\link{calc_tx_cible_ref_marche}}.
 ##' @export
-##' @aliases HypTech
 ##' @include HypTech-class.R
 setGeneric("get_comport", function(x, nom_table, list_rd, tx_cible_prec){standardGeneric("get_comport")})
 setMethod(

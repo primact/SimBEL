@@ -2,7 +2,6 @@
 % Please edit documentation in R/ESG_extract_mp.R
 \docType{methods}
 \name{extract_ESG}
-\alias{ESG}
 \alias{extract_ESG}
 \title{permet de construire et charger les trajectoires simulees par le Generateur de Scenarios Economiques de Prim'Act.}
 \usage{

@@ -17,7 +17,6 @@
 ##' @return \code{dotation} le montnant de la dotation effectuee.
 ##' @author Prim'Act
 ##' @export
-##' @aliases Ppb
 ##' @include Ppb_class.R
 
 setGeneric(name = "calc_dotation_ppb", def = function(x, montant){standardGeneric("calc_dotation_ppb")})

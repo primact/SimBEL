@@ -2,7 +2,6 @@
 % Please edit documentation in R/ParamTableRach-calc_rach.R
 \docType{methods}
 \name{calc_rach}
-\alias{ParamTableRach}
 \alias{calc_rach}
 \title{Calcule le taux de rachat.}
 \usage{

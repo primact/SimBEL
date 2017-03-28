@@ -21,4 +21,5 @@ Prim'Act
 \seealso{
 Les operations d'achat vente immo  \code{\link{buy_immo}} et \code{\link{sell_immo}}.
 }
+\keyword{classes}
 

@@ -20,7 +20,6 @@
 ##' @return La valeur du taux cible.
 ##' @author Prim'Act
 ##' @export
-##' @aliases ParamComport
 ##' @include ParamComport-class.R
 
 setGeneric(name = "calc_tx_cible_ref_marche",

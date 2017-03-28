@@ -3,9 +3,9 @@
 \docType{class}
 \name{RC}
 \alias{RC}
-\title{La classe RC}
+\title{La classe \code{RC}.}
 \description{
-Classe pour la gestion de la reserve de capitalisation (RC).
+Une classe pour la gestion de la reserve de capitalisation (RC).
 }
 \section{Slots}{
 
@@ -14,14 +14,12 @@ Classe pour la gestion de la reserve de capitalisation (RC).
 
 \item{\code{val_courante}}{est une valeur \code{numeric} correspondant a la valeur courante de la RC.}
 }}
-\section{Lien a creer}{
-
-}
 \author{
 Prim'Act
 }
 \seealso{
-Les methodes de calcul de la RC \code{\link{calc_RC}}, et de mises a jour des RC initiales et courantes \code{\link{do_update_RC_val_courante}}, \code{\link{do_update_RC_val_debut}}.
+Les methodes de calcul de la RC \code{\link{calc_RC}},
+et de mises a jour des RC initiales et courantes \code{\link{do_update_RC_val_courante}}, \code{\link{do_update_RC_val_debut}}.
 }
 \keyword{classes}
 

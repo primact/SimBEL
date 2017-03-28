@@ -2,21 +2,21 @@
 % Please edit documentation in R/Action_calc_pmvl.R
 \docType{methods}
 \name{calc_pmvl_action}
-\alias{Action}
 \alias{calc_pmvl_action}
-\title{Calcul les valeurs de marches de chaque composante du portefeuille action.}
+\title{Calcule les plus et moins-values action.}
 \usage{
 calc_pmvl_action(x)
 }
 \arguments{
-\item{x}{objet de la classe \code{Action} (decrivant le portefeuille d'action).}
+\item{x}{objet de la classe \code{\link{Action}} (decrivant le portefeuille d'action).}
 }
 \value{
-Une liste composee de deux elements \code{(pvl, mvl)} correspondant respectivement 
-aux sommes des plus values latentes actions et aux sommes des moins values latentes action.
+\code{pvl} correspondant a la somme des plus-values latentes actions.
+
+\code{mvl} correspondant a la somme des moins-values latentes actions.
 }
 \description{
-\code{calc_pmvl_action} est une methode permettant de calculer les valeurs de marche.
+\code{calc_pmvl_action} est une methode permettant de calculer les plus et moins-values du portefeuille action.
 }
 \author{
 Prim'Act

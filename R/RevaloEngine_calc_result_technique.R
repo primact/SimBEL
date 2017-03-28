@@ -7,14 +7,13 @@
 ##' participation aux benefices.
 ##' @name calc_result_technique
 ##' @docType methods
-##' @param passif_av_pb est une liste produit par la methode \code{\link{viellissement_av_pb}}
+##' @param passif_av_pb est une liste produite par la methode \code{\link{viellissement_av_pb}}
 ##' appliquee a un portefeuille de passif.
 ##' @param var_pre est une valeur \code{numeric} correspondant a la variation de PRE.
 ##' @return Le resultat technique.
 ##' @author Prim'Act
 ##' @seealso \code{\link{PRE}}, \code{\link{viellissement_av_pb}}.
 ##' @export
-##' @aliases RevaloEngine
 
 setGeneric(name = "calc_result_technique", def = function(passif_av_pb, var_pre){
   standardGeneric("calc_result_technique")})

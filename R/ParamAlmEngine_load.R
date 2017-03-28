@@ -13,7 +13,6 @@
 ##' @return L'objet de la classe \code{\link{ParamAlmEngine}} construit a partir des inputs renseignes par l'utilisateur.
 ##' @author Prim'Act
 ##' @export
-##' @aliases ParamAlmEngine
 ##' @include ParamAlmEngine_class.R PortFin_class.R
 
 setGeneric(name = "param_alm_engine_load", def = function(file_alm_address, ptf_fin_ref){standardGeneric("param_alm_engine_load")})

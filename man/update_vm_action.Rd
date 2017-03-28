@@ -2,19 +2,19 @@
 % Please edit documentation in R/Action_update_vm.R
 \docType{methods}
 \name{update_vm_action}
-\alias{Action}
 \alias{update_vm_action}
-\title{Mise a jour de la valeur de marche de chaque composante d'un portefeuille action.}
+\title{Mise a jour de valeurs de marche d'un portefeuille action.}
 \usage{
 update_vm_action(x, vm)
 }
 \arguments{
-\item{x}{objet de la classe \code{Action} (decrivant le portefeuille action en detention).}
+\item{x}{objet de la classe \code{\link{Action}} (decrivant le portefeuille action en detention).}
 
-\item{vm}{un vecteur de \code{numeric} ayant la meme longueur que le portefeuille action a de lignes et correspondant aux nouvelles valeurs de marche du portefeuille action.}
+\item{vm}{un vecteur de \code{numeric} ayant la meme longueur que le portefeuille action a de lignes
+et correspondant aux nouvelles valeurs de marche du portefeuille action.}
 }
 \value{
-L'objet \code{x} mis a jour du vieillissement de la duree de detention.
+L'objet \code{x} mis a jour.
 }
 \description{
 \code{update_vm_action} est une methode permettant de mettre a jour la valeur de marche des composantes d'un portefeuille Action.
