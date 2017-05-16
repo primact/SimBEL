@@ -22,7 +22,6 @@ setMethod(
                                num_prod = integer(),
                                age = integer(),
                                gen = integer(),
-                               sexe = factor(),
                                num_tab_mort = factor(),
                                chgt_enc = numeric(),
                                ind_chgt_enc_pos = logical(),

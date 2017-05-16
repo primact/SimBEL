@@ -42,7 +42,7 @@ setMethod(
           if (lx_anc == 0 || lx_anc_central == 0) {
             df_mort[df_mort$gen == gen & df_mort$age == age, "lx"] <- 0
           }else{
-            qx_choc <- min((calc_qx(param_mort, age - 1, gen) * (1 + choc)), 1)
+            qx_choc <- min((calc_qx(param_mort, age - as.integer(1), gen) * (1 + choc)), 1)
             df_mort[df_mort$gen == gen & df_mort$age == age, "lx"] <- lx_anc * (1 - qx_choc)
           }
         }

@@ -7,8 +7,8 @@
 ##' @name calc_rach
 ##' @docType methods
 ##' @param table_rach un objet de la classe \code{\link{ParamTableRach}} contenant la table de rachat.
-##' @param age une valeur \code{numeric} correspondant a l'age.
-##' @param anc une valeur \code{numeric} correspondant a l'anciennete.
+##' @param age une valeur \code{integer} correspondant a l'age.
+##' @param anc une valeur \code{integer} correspondant a l'anciennete.
 ##' @return La valeur du taux de rachat calcule.
 ##' @author Prim'Act
 ##' @include ParamTableRach-class.R
@@ -17,7 +17,7 @@ setGeneric("calc_rach",
            function(table_rach, age, anc){standardGeneric("calc_rach")})
 setMethod(
   f = "calc_rach",
-  signature = c(table_rach = "ParamTableRach", age = "numeric", anc = "numeric"),
+  signature = c(table_rach = "ParamTableRach", age = "integer", anc = "integer"),
   def = function(table_rach, age, anc){
     # Ajout de test sur le format
     if(age < table_rach@age_min){

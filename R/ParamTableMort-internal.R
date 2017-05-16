@@ -9,7 +9,7 @@ setMethod(
   f = "initialize",
   signature = "ParamTableMort",
   definition = function(.Object,df){
-    if(!missing(df)){
+    if(! missing(df)){
       .Object@table <- df
       .Object@age_min <- as.integer(min(df["age"]))
       .Object@age_max <- as.integer(max(df["age"]))
