@@ -11,9 +11,7 @@
 ##' @param new_mp_ESG est un objet de type \code{\link{ModelPointESG}}, correspondant aux conditions
 ##' economiques de l'annee du vieillissement.
 ##' @return \code{portFin} le portefeuille financier dont l'attribut \code{ptf_oblig} a ete vieilli d'une annee.
-##' @return \code{coupon} le montant des coupons percus en milieu d'annee suite au vieillissement du portefeuille obligataire.
-##' @return \code{echeance} le montant des echeance percus en fin d'annee suite au vieillissement du portefeuille obligataire.
-##' @return \code{var_vnc_oblig} la variation de VNC constatee sur les titres non arrives en echeance.
+##' @return \code{loyer} le montant de loyer percus en milieu d'annee suite au vieillissement du portefeuille obligataire.
 ##' @author Prim'Act
 ##' @export
 ##' @seealso La fonction de calcul des rendements des actifs \code{\link{calc_rdt}}.
@@ -50,8 +48,7 @@ setMethod(
             if( nrow(x@ptf_oblig@ptf_oblig) > 0)  vnc_fin       <- sum(x@ptf_oblig@ptf_oblig$val_nc)
             if( nrow(x@ptf_oblig@ptf_oblig) == 0) vnc_fin <- 0
 
-            # Variation hors remboursements
-            var_vnc_oblig <- vnc_fin - vnc_debut + echeance
+            var_vnc_oblig <- vnc_fin - vnc_debut
 
             # Renvoi le portfeuille financier dont les lignes obligataires sont a jour, et les echeances (remboursement obligataire) a venir en fin d'annee
             return(list(portFin = x, coupon = coupon, echeance = echeance, var_vnc_oblig = var_vnc_oblig))
