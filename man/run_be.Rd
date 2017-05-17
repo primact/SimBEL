@@ -5,13 +5,18 @@
 \alias{run_be}
 \title{Calcul d'un BE.}
 \usage{
-run_be(x, pre_on)
+run_be(x, pre_on, parallel, nb_coeur = 0L)
 }
 \arguments{
 \item{x}{un objet de type \code{\link{Be}}.}
 
 \item{pre_on}{une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
 de PRE dans le resultat technique utilisee pour le calcul de la participation aux benefices reglementaires.}
+
+\item{parallel}{une valeur \code{logical} qui indique si les calculs seront parallelises.}
+
+\item{nb_coeur}{une valeur \code{integer} qui indique le nombre de coeurs utilises dans le cas ou les calculs sont 
+parallelises. Par defaut cette valeur est egale a 0.}
 }
 \value{
 \code{be} l'objet \code{x} mis a jour : l'attribut \code{tab_be} contient le best estimate et sa
