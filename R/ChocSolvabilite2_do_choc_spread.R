@@ -30,10 +30,13 @@ setMethod(
         # Verification des inputs
         if(nrow(canton@ptf_fin@ptf_oblig@ptf_oblig) == 0) {stop("[choc Mket : Spread] : tentative de calcul du choc spread avec un objet Oblig vide impossible. \n")}
         temp <- canton@ptf_fin@ptf_oblig@ptf_oblig
-
+        # temp <- canton@ptf_fin@ptf_oblig@ptf_oblig[canton@ptf_fin@ptf_oblig@ptf_oblig$type == "corp", ]
+        type_num     <- which(names(canton@ptf_fin@ptf_oblig@ptf_oblig) == "type")
+        row_corp <- which(.subset2(canton@ptf_fin@ptf_oblig@ptf_oblig, type_num) == "corp")
+        
         # Methode bourrine
         table_choc_spread <- x@param_choc_mket@table_choc_spread
-        temp$val_marche <- unlist(lapply(1:nrow(temp), function(x){do_choc_spread_unitaire(table_choc_spread, temp[x,])}))
+        temp[row_corp,]$val_marche <- unlist(lapply(row_corp, function(x){do_choc_spread_unitaire(table_choc_spread, temp[x,])}))
         canton@ptf_fin@ptf_oblig <- new("Oblig", temp)
 
         # Mise a jour des PMVL Action/Immo/Oblig

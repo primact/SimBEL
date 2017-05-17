@@ -38,7 +38,7 @@ setMethod(
 
 
     # Remise sous forme d'indice
-    index <- sapply(1:ncol(x@ind_inflation), function(i){
+    index <- sapply(1:nrow(x@ind_inflation), function(i){
       (1 + tx_inflation[, i]) ^ (annees)})
 
     # Remise au format data.frame
