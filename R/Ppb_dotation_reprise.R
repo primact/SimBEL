@@ -21,24 +21,26 @@
 
 setGeneric(name = "calc_dotation_ppb", def = function(x, montant){standardGeneric("calc_dotation_ppb")})
 setMethod(
-  f = "calc_dotation_ppb",
-  signature = c(x = "Ppb", montant = "numeric"),
-  definition = function(x, montant){
+    f = "calc_dotation_ppb",
+    signature = c(x = "Ppb", montant = "numeric"),
+    definition = function(x, montant){
 
-    # Limite de dotation courante
-    limit <- max(x@seuil_dot * x@ppb_debut -  x@compte_dot, 0)
+        # Limite de dotation courante
+        limit <- max(x@seuil_dot * x@ppb_debut -  x@compte_dot, 0)
 
-    # Montant dote
-    dot <- min(limit, montant)
+        # Montant dote
+        dot <- min(limit, montant)
 
-    # Application de la dotation
-    x@valeur_ppb <- x@valeur_ppb + dot
+        # Application de la dotation
+        x@valeur_ppb <- x@valeur_ppb + dot
 
-    # Mise a jour du montant dote
-    x@compte_dot <- x@compte_dot + dot
+        # Mise a jour du montant dote
+        x@compte_dot <- x@compte_dot + dot
 
-    return(list(ppb = x, dotation = dot))
-  }
+        # Output
+        return(list(ppb = x,
+                    dotation = dot))
+    }
 )
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -56,28 +58,47 @@ setMethod(
 ##' @return \code{reprise} le montnant de la reprise effectuee.
 ##' @author Prim'Act
 ##' @export
-##' @aliases Ppb
 ##' @include Ppb_class.R
 
 setGeneric(name = "calc_reprise_ppb", def = function(x, montant){standardGeneric("calc_reprise_ppb")})
 setMethod(
-  f = "calc_reprise_ppb",
-  signature = c(x = "Ppb", montant = "numeric"),
-  definition = function(x, montant){
+    f = "calc_reprise_ppb",
+    signature = c(x = "Ppb", montant = "numeric"),
+    definition = function(x, montant){
 
-    # Limite de reprise courante
-    limit <- max(x@seuil_rep * x@ppb_debut -  x@compte_rep, 0)
+        # Limite de reprise courante
+        limit <- max(x@seuil_rep * x@ppb_debut -  x@compte_rep, 0)
 
-    # Montant repris
-    rep <- min(limit, montant, x@valeur_ppb)
+        # Montant repris
+        rep <- min(limit, montant, x@valeur_ppb)
 
-    # Application de la reprise
-    x@valeur_ppb <- x@valeur_ppb - rep
+        # Application de la reprise
+        reste <- rep # Reste de PPB a attribue
+        i <- length(x@hist_ppb) # Indice sur l'annee
 
-    # Mise a jour du montant repris
-    x@compte_rep <- x@compte_rep + rep
+        while(! (reste == 0 | i == 0)) {
+            # Si en l'annee i, la PPB > reste :
+            if (x@hist_ppb[i] < reste) {
+                reste <- reste - x@hist_ppb[i]
+                x@hist_ppb[i] <- 0
 
-    return(list(ppb = x, reprise = rep))
-  }
+            } else { # Si en l'annee i, la PPB < reste :
+                x@hist_ppb[i] <- x@hist_ppb[i] - reste
+                reste <- 0
+            }
+
+            i <- i - 1L
+        }
+
+        # Mise a jour de la somme
+        x@valeur_ppb <- x@valeur_ppb - rep
+
+        # Mise a jour du montant repris
+        x@compte_rep <- x@compte_rep + rep
+
+        # Output
+        return(list(ppb = x,
+                    reprise = rep))
+    }
 )
 
