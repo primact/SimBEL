@@ -7,7 +7,8 @@ Description: Un modele de simulation Monte-Carlo s'appuyant sur une projection
     estimate d'un contrat d'epargne francais en euros. Plusieurs chocs de la formule
     standard peuvent etre effectues.
 Author: Prim'Act
-URL: http://primact.fr
+URL: http://github.com/gquibert/SimBEL
+BugReports: http://github.com/qguibert/SimBEL/issues
 Maintainer: Quentin Guibert <quentin.guibert@primact.fr>
 Depends:
     R (>= 3.3.1)
