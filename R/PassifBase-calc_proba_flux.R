@@ -9,11 +9,8 @@
 ##' @name calc_proba_flux
 ##' @docType methods
 ##' @param x un objet de la classe \code{\link{EpEuroInd}} ou de la classe \code{\link{RetraiteEuroRest}} contenant les model points epargne euros.
-##' @param y une liste contenant le parametre.
-##' \describe{
-##' \item{\code{ht} : }{un objet de la classe \code{\link{HypTech}} contenant differentes tables de mortalite et differentes
-##' lois de rachat.}
-##' }
+##' @param ht un objet de la classe \code{\link{HypTech}} contenant differentes tables de mortalite et differentes lois de rachat.
+##'
 ##' @return Une matrice contenant pour chaque model points en ligne :
 ##' \describe{
 ##' \item{\code{qx_rach_tot} : }{un vecteur contenant les taux de rachats totaux}
@@ -30,84 +27,87 @@
 ##' @include EpEuroInd-class.R HypTech-class.R RetraiteEuroRest_class.R
 
 #--------------------------------------------------------
-setGeneric(name = "calc_proba_flux", def = function(x, y){standardGeneric("calc_proba_flux")})
+setGeneric(name = "calc_proba_flux", def = function(x, ht){standardGeneric("calc_proba_flux")})
 # Epargne
 # y = list(ht)
 # Retraite
-# y = list()
+# y = list(ht)
 #--------------------------------------------------------
 
 setMethod(
-  f = "calc_proba_flux",
-  signature = c(x = "EpEuroInd", y = "list"),
-  def = function(x, y){
-    # Verification inputs
-    if (length(y) != 1)                        {stop("[EpEuroInd : calc_proba_flux] : L'input y doit correspondre a une liste de longueur 1. \n")}
-    if (sum(names(y) == c("ht")) != length(y)) {stop("[EpEuroInd : calc_proba_flux] : L'input y doit correspondre a une liste de longueur 1 de nom ht . \n")}
-    if (class(y[["ht"]]) != "HypTech")         {stop("[EpEuroInd : calc_proba_flux] : L'input y doit correspondre a une liste de longueur 1, de nom ht, dont le type est HYpTech. \n")}
-    ht = y [["ht"]]
+    f = "calc_proba_flux",
+    signature = c(x = "EpEuroInd", ht = "HypTech"),
+    def = function(x, ht){
 
-    epi_mp <- x@mp
+        # ModelPoint
+        epi_mp <- x@mp
 
-    # Nombre de lignes
-    nb_mp <- nrow(x@mp)
+        # Nombre de lignes
+        nb_mp <- nrow(epi_mp)
 
-    # Gestion des noms de colonnes du data.frame de donnnees
-    nom_epi <- names(epi_mp)
-    num_rach_tot <- which(nom_epi == "num_rach_tot")
-    age <- which(nom_epi == "age")
-    anc <- which(nom_epi == "anc")
+        # Gestion des noms de colonnes du data.frame de donnnees
+        nom_epi <- names(epi_mp)
+        age <- which(nom_epi == "age")
+        anc <- which(nom_epi == "anc")
+        gen <- which(nom_epi == "gen")
+        tx_cible_prec    <- which(nom_epi == "tx_cible_prec")
+        tx_revalo_prec   <- which(nom_epi == "tx_revalo_prec")
+        num_rach_dyn_tot <- which(nom_epi == "num_rach_dyn_tot")
+        num_tab_mort     <- which(nom_epi == "num_tab_mort")
+        num_rach_part    <- which(nom_epi == "num_rach_part")
+        num_rach_tot     <- which(nom_epi == "num_rach_tot")
 
-    num_rach_dyn_tot <- which(nom_epi == "num_rach_dyn_tot")
-    tx_cible_prec <- which(nom_epi == "tx_cible_prec")
-    tx_revalo_prec <- which(nom_epi == "tx_revalo_prec")
 
-    num_tab_mort <- which(nom_epi == "num_tab_mort")
-    gen <- which(nom_epi == "gen")
+        # Donnees des MPs
+        age <- .subset2(epi_mp, age)
+        anc <- .subset2(epi_mp, anc)
+        gen <- .subset2(epi_mp, gen)
+        tab_mort  <- .subset2(epi_mp, num_tab_mort)
+        rach_tot  <- .subset2(epi_mp, num_rach_tot)
+        rach_part <- .subset2(epi_mp, num_rach_part)
 
-    num_rach_part <- which(nom_epi == "num_rach_part")
+        # Tables
+        tab_mort_unique  <- levels(tab_mort)
+        rach_tot_unique  <- levels(rach_tot)
+        rach_part_unique <- levels(rach_part)
 
-    num_rach_dyn_part <- which(nom_epi == "num_rach_dyn_part")
+        # Initialisation des vecteurs
+        qx_dc        <- vector("numeric", length = nb_mp)
+        qx_rach_tot  <- vector("numeric", length = nb_mp)
+        qx_rach_part <- vector("numeric", length = nb_mp)
 
-    # Fonction d'extraction des taux de sortie
-    calc_proba_flux_mp <- function(i) {
+        # Calcul des qx_rach_tot
+        for (tab in tab_mort_unique) {
+            row <- which(tab_mort == tab)
+            qx_dc[row] <- get_qx_mort(ht, tab, age[row], gen[row])
+        }
 
-      #Age du model point i
-      age_i <- .subset2(epi_mp, age)[i]
-      anc_i <- .subset2(epi_mp, anc)[i]
-      tx_cible_prec_i <- .subset2(epi_mp, tx_cible_prec)[i]
-      tx_revalo_prec_i <- .subset2(epi_mp, tx_revalo_prec)[i]
+        # Calcul des qx_dc
+        for (tab in rach_tot_unique) {
+            row <- which(rach_tot == tab)
+            qx_rach_tot[row] <- get_qx_rach(ht, tab, age[row], anc[row])
+        }
 
-      return(
-      c(qx_rach_tot = get_qx_rach(ht, as.character(.subset2(epi_mp, num_rach_tot)[i]), age_i, anc_i),
-        qx_rach_tot_dyn = get_rach_dyn(ht, as.character(.subset2(epi_mp, num_rach_dyn_tot)[i]), tx_cible_prec_i, tx_revalo_prec_i),
+        # Calcul des qx_dc
+        for (tab in rach_part_unique) {
+            row <- which(rach_part == tab)
+            qx_rach_part[row] <- get_qx_rach(ht, tab, age[row], anc[row])
+        }
 
-        qx_dc = get_qx_mort(ht, as.character(.subset2(epi_mp, num_tab_mort)[i]), age_i, .subset2(epi_mp, gen)[i]),
-
-        qx_rach_part = get_qx_rach(ht, as.character(.subset2(epi_mp, num_rach_part)[i]), age_i, anc_i),
-
-        qx_rach_part_dyn = get_rach_dyn(ht, as.character(.subset2(epi_mp, num_rach_dyn_part)[i]),
-                                        tx_cible_prec_i, tx_revalo_prec_i))
-    )}
-
-    return(t(sapply(1:nb_mp, calc_proba_flux_mp)))
-  }
+        # Output
+        return(list(qx_rach_tot = qx_rach_tot,
+                    qx_dc = qx_dc,
+                    qx_rach_part = qx_rach_part))
+    }
 )
 
 #-----------------------------------------------------------
 setMethod(
     f = "calc_proba_flux",
-    signature = c(x = "RetraiteEuroRest", y = "list"),
-    def = function(x, y){
-        # Verification inputs
-        if (length(y) != 1)                        {
-          stop("[RetraiteEuroRest : calc_proba_flux] : L'input y doit correspondre a une liste de longueur 1. \n")}
-        if (sum(names(y) == c("ht")) != length(y)) {
-          stop("[RetraiteEuroRest : calc_proba_flux] : L'input y doit correspondre a une liste de longueur 1 de nom ht . \n")}
-        if (class(y[["ht"]]) != "HypTech")         {
-          stop("[RetraiteEuroRest : calc_proba_flux] : L'input y doit correspondre a une liste de longueur 1, de nom ht, dont le type est HYpTech. \n")}
-        ht = y [["ht"]]
+    signature = c(x = "RetraiteEuroRest", ht = "HypTech"),
+    def = function(x, ht){
 
+        # Model Point
         epi_mp <- x@mp
 
         # Nombre de lignes
@@ -126,27 +126,75 @@ setMethod(
         num_statut       <- which(nom_epi == "statut_rvs")
         num_tx_rvs       <- which(nom_epi == "tx_rvs")
 
+        # Extraction des donnees
+        tab_mort     <- .subset2(epi_mp, num_tab_mort)
+        tab_mort_rvs <- .subset2(epi_mp, num_tab_mort_rvs)
+        age          <- .subset2(epi_mp, num_age)
+        age_rvs      <- .subset2(epi_mp, num_age_rvs)
+        gen          <- .subset2(epi_mp, num_gen)
+        gen_rvs      <- .subset2(epi_mp, num_gen_rvs)
+        statut       <- .subset2(epi_mp, num_statut)
+        tx_rvs       <- .subset2(epi_mp, num_tx_rvs)
 
-        # Fonction d'extraction des taux de sortie
-        calc_proba_flux_mp <- function(i) {
+        # Tables
+        tab_mort_unique     <- levels(tab_mort)
+        tab_mort_rvs_unique <- levels(tab_mort_rvs)
+        bool_tab <- vector(mode = "logical", length = nlevels(tab_mort_rvs))
+        names(bool_tab) <- tab_mort_rvs_unique
 
-            #Age du model point i
-            tab_mort_i     <- as.character(.subset2(epi_mp, num_tab_mort)[i])
-            tab_mort_rvs_i <- as.character(.subset2(epi_mp, num_tab_mort_rvs)[i])
-            age_i          <- .subset2(epi_mp, num_age)[i]
-            age_rvs_i      <- .subset2(epi_mp, num_age_rvs)[i]
-            gen_i          <- .subset2(epi_mp, num_gen)[i]
-            gen_rvs_i      <- .subset2(epi_mp, num_gen_rvs)[i]
-            statut_i       <- .subset2(epi_mp, num_statut)[i]
-            tx_rvs_i       <- .subset2(epi_mp, num_tx_rvs)[i]
+        # Initialisation des vecteurs
+        proba_sortie_retraite <- vector("numeric", length = nb_mp)
+        proba_survie_un_an    <- vector("numeric", length = nb_mp)
 
-            return(
-                c(proba_sortie_retraite = get_proba_sortie_retraite(ht, tab_mort_i, age_i, gen_i, statut_i, tab_mort_rvs_i, age_rvs_i, gen_rvs_i),
-                  proba_survie_un_an    = get_proba_paye_retraite(ht, tab_mort_i, age_i, gen_i, statut_i, tx_rvs_i, tab_mort_rvs_i, age_rvs_i, gen_rvs_i))
-                )
+
+        # Calcul des probas
+        for(tab in tab_mort_unique) {
+
+            ## Statut = 1 (Pas de reversataire)
+            # Ligne de donnees
+            row <- which((tab_mort == tab) & (statut == 1L))
+
+            # Calcul des probas
+            qx_a <- get_qx_mort(ht, tab, age[row], gen[row])
+            proba_sortie_retraite[row] <- qx_a
+            proba_survie_un_an[row] <- 1 - qx_a
+
+
+            for(tab_rvs in tab_mort_rvs_unique) {
+
+                ## Statut = 2 (Assure + reversataire)
+                # Lignes de donnees
+                row <- which((tab_mort == tab) & (tab_mort_rvs == tab_rvs) & (statut == 2L))
+
+                # Calcul des probas
+                qx_a <- get_qx_mort(ht, tab, age[row], gen[row])
+                qx_r <- get_qx_mort(ht, tab_rvs, age_rvs[row], gen_rvs[row])
+                proba_sortie_retraite[row] <- qx_a * qx_r
+                proba_survie_un_an[row] <- (1 - qx_a) + tx_rvs[row] * qx_a * (1 - qx_r)
+
+
+
+                ## Statut = 3 (Que reversataire)
+                if (! bool_tab[tab_rvs]) {
+
+                    # Lignes de donnees
+                    row <- which((tab_mort_rvs == tab_rvs) & (statut == 3L))
+
+                    # Calcul des probas
+                    qx_r <- get_qx_mort(ht, tab_rvs, age_rvs[row], gen_rvs[row])
+                    proba_sortie_retraite[row] <- qx_r
+                    proba_survie_un_an[row] <- tx_rvs[row] * (1 - qx_r)
+
+                    # Modification du tableau de booleen
+                    bool_tab[tab_rvs] <- TRUE
+                }
+
+            }
         }
 
 
-        return(t(sapply(1:nb_mp, calc_proba_flux_mp)))
+        # Output
+        return(list(proba_sortie_retraite = proba_sortie_retraite,
+                    proba_survie_un_an = proba_survie_un_an))
     }
 )

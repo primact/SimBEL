@@ -14,7 +14,7 @@
 setGeneric(name = "init_scenario", def = function(x){standardGeneric("init_scenario")})
 setMethod(
     f = "init_scenario",
-    signature = "Initialisation",
+    signature = c(x = "Initialisation"),
     definition = function(x){
 
         # Message utilisateur
@@ -24,7 +24,7 @@ setMethod(
         init_create_folder(x)
 
         # a mettre sous forme de lecture d'un fichier csv
-        table_choc <- chargement_choc(new("ChocSolvabilite2"), racine@address[["param"]][["chocs"]])
+        table_choc <- chargement_choc(new("ChocSolvabilite2"), x@address[["param"]][["chocs"]])
         scenario = c("central", "frais",
                      "mortalite", "longevite",
                      "rachat_up", "rachat_down",
@@ -50,7 +50,7 @@ setMethod(
                 }
 
                 # Mise a jour du Model Point d'ESG du canton init en accord avec le scenario :
-                canton_init@mp_esg <- extract_ESG(table_ESG, x@nb_simu, as.integer(0))
+                canton_init@mp_esg <- extract_ESG(table_ESG, x@nb_simu, 0L)
 
                 Ptf_Fin_ref <- chargement_PortFin_reference(x@address[["data"]][["ptf_reference"]], canton_init@mp_esg)
                 canton_init@param_alm <- param_alm_engine_load(paste(x@address[["param"]][["alm"]], "param_alm.csv", sep = "/"), Ptf_Fin_ref)
@@ -116,8 +116,6 @@ setMethod(
                 best_estimate@canton    <- canton_init
                 best_estimate@esg       <- table_ESG
 
-                # Sauvegarde
-                save(best_estimate, file = paste(x@address[["save_folder"]][[name_scenario]], "best_estimate.RData", sep = "/"))
             } else {
                 # Chargement de la situation initiale
                 canton_init <- get(load(paste(x@address[["save_folder"]][["init"]], "canton_init.RData", sep = "/")))
@@ -125,7 +123,7 @@ setMethod(
                 # Chargement de l'ESG concerne :
                 table_ESG   <- chargement_ESG(x@address[["param"]][["ESG"]], x@nb_simu, x@nb_annee_proj)
                 # Mise a jour du Model Point d'ESG du canton init en accord avec le scenario : necessaire que pour le taux
-                canton_init@mp_esg <- extract_ESG(table_ESG, x@nb_simu, as.integer(0))
+                canton_init@mp_esg <- extract_ESG(table_ESG, x@nb_simu, 0L)
 
                 Ptf_Fin_ref <- chargement_PortFin_reference(x@address[["data"]][["ptf_reference"]], canton_init@mp_esg)
                 canton_init@param_alm <- param_alm_engine_load(paste(x@address[["param"]][["alm"]], "param_alm.csv", sep = "/"), Ptf_Fin_ref)
@@ -145,18 +143,38 @@ setMethod(
                                       "taux_up"   = chargement_ESG(x@address[["param"]][["ESG_up"]], x@nb_simu, x@nb_annee_proj),
                                       "taux_down" = chargement_ESG(x@address[["param"]][["ESG_down"]], x@nb_simu, x@nb_annee_proj))
                 # Mise a jour du Model Point d'ESG du canton init en accord avec le scenario :
-                canton_init@mp_esg <- extract_ESG(table_ESG, x@nb_simu, as.integer(0))
+                canton_init@mp_esg <- extract_ESG(table_ESG, x@nb_simu, 0L)
 
                 # creation du nouvel objet best estimate en situation de choc
                 best_estimate           <- new("Be")
                 best_estimate@param_be  <- new("ParamBe", x@nb_annee_proj)
                 best_estimate@esg       <- table_ESG
                 best_estimate@canton    <- do_choc_taux(canton_init)
-
-
-                # Sauvegarde
-                save(best_estimate, file = paste(x@address[["save_folder"]][[name_scenario]], "best_estimate.RData", sep = "/"))
             }
+
+
+            # Calcul du BE sur 1 simulation pour initialiser le tableau des probas
+            res_be_simu <- NULL ; i <- 1L
+            while(is.null(res_be_simu)) {
+                res_be_simu <- run_be_simu(best_estimate, i, FALSE)[["canton"]]
+                i <- i + 1L
+            }
+
+            # Mise a jour des tableau de probabilites
+            for(name_tab in best_estimate@canton@ptf_passif@names_class_prod) {
+
+                for(name_product in names(best_estimate@canton@ptf_passif[name_tab]))
+                    best_estimate@canton@ptf_passif[name_tab][[name_product]]@tab_proba <- res_be_simu@ptf_passif[name_tab][[name_product]]@tab_proba
+
+            }
+
+            # Mise a jour du booleen de calcul des probas
+            best_estimate@canton@ptf_passif@calc_proba <- FALSE
+
+            # Sauvegarde
+            save(best_estimate, file = paste(x@address[["save_folder"]][[name_scenario]], "best_estimate.RData", sep = "/"))
+
+
         }
         # Output
         return(message("Fin du chargement des chocs"))

@@ -9,14 +9,16 @@
 setMethod(
     f = "initialize",
     signature = "RetraiteEuroRest",
-    definition = function(.Object, mp, tab){
+    definition = function(.Object, mp, tab, tab_proba){
         if( !missing(mp) & !missing(tab)){
-            .Object@mp <- mp
-            .Object@tab <- tab
+            .Object@mp        <- mp
+            .Object@tab       <- tab
+            .Object@tab_proba <- tab_proba
             validObject(.Object)
         } else {
             #Traitement du cas vide
             .Object@tab <- new("TabRetEuroRest")
+            .Object@tab_proba <- new("TabProbaRetEuroRest")
             .Object@mp <- data.frame(num_mp           = integer(),
                                      num_canton       = integer(),
                                      num_prod         = integer(),
@@ -54,6 +56,7 @@ setMethod(
         switch(EXPR = i,
                "mp" = {return(x@mp)},
                "tab" = {return(x@tab)},
+               "tab_proba" = {return(x@tab_proba)},
                stop("Cet attribut n'existe pas!")
         )
     }
@@ -67,9 +70,10 @@ setReplaceMethod(
         switch(EXPR = i,
                "mp"  = {x@mp <- value},
                "tab" = {x@tab <- value},
+               "tab_proba" = {x@tab_proba <- value},
                stop("Cet attribut n'existe pas!")
         )
-        validObject(x)
+        # validObject(x)
         return(x)
     }
 )

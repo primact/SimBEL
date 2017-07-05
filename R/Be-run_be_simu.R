@@ -13,18 +13,22 @@
 ##' de PRE dans le resultat technique utilisee pour le calcul de la participation aux benefices reglementaires.
 ##' @details Pour une simulation donnee, cette methode projette un \code{\link{Canton}} jusqu'au terme, parametre dans
 ##' l'objet \code{x}.
-##' @return \code{nom_produit} un vecteur contenant le liste des noms de produits.
-##' @return \code{prime} une matrice contenant les flux de primes par produit.
-##' @return \code{prestation} une matrice contenant les flux de prestations par produit.
-##' @return \code{prestation_fdb} une matrice contenant les flux de prestations discretionnaires par produit.
-##' @return \code{frais} une matrice contenant les flux de frais par produit.
-##' @return \code{flux_be} une matrice contenant les flux de best estimate par produit.
-##' @return \code{prime_actu} une matrice contenant la valeur des primes actualisees par produit.
-##' @return \code{prestation_actu} une matrice contenant la valeur des prestations actualisees par produit.
-##' @return \code{prestation_fdb_actu} une matrice contenant la valeur des prestations
-##' discretionnaires actualisees par produit.
-##' @return \code{frais_actu} une matrice contenant la valeur des frais actualisees par produit.
-##' @return \code{be} une matrice contenant la valeur du best estimate par produit.
+##' @return resultats une liste dont le format est le suivant :
+##' \describe{
+##' \item{\code{nom_produit} : }{un vecteur contenant le liste des noms de produits..}
+##' \item{\code{prime} : }{une matrice contenant les flux de primes par produit.}
+##' \item{\code{prestation} : }{une matrice contenant les flux de prestations par produit.}
+##' \item{\code{prestation_fdb} : }{une matrice contenant les flux de prestations discretionnaires par produit.}
+##' \item{\code{frais} : }{une matrice contenant les flux de frais par produit.}
+##' \item{\code{flux_be} : }{une matrice contenant les flux de best estimate par produit.}
+##' \item{\code{prime_actu} : }{une matrice contenant la valeur des primes actualisees par produit.}
+##' \item{\code{prestation_actu} : }{une matrice contenant la valeur des prestations actualisees par produit.}
+##' \item{\code{prestation_fdb_actu} : }{une matrice contenant la valeur des prestations
+##' discretionnaires actualisees par produit.}
+##' \item{\code{frais_actu} : }{une matrice contenant la valeur des frais actualisees par produit.}
+##' \item{\code{be} : }{une matrice contenant la valeur du best estimate par produit.}
+##' }
+##' @return canton un objet de type \code{\link{Canton}}.
 ##' @author Prim'Act
 ##' @seealso La methode de projection d'un \code{\link{Canton}} : \code{\link{proj_an}}.
 ##' L'extraction d'une simulation de l'\code{\link{ESG}} :\code{\link{extract_ESG}}.
@@ -33,88 +37,93 @@
 ##' @include Be_class.R
 setGeneric(name = "run_be_simu", def = function(x, i, pre_on){standardGeneric("run_be_simu")})
 setMethod(
-  f = "run_be_simu",
-  signature = c(x = "Be", i = "integer", pre_on = "logical"),
-  definition = function(x, i, pre_on){
+    f = "run_be_simu",
+    signature = c(x = "Be", i = "integer", pre_on = "logical"),
+    definition = function(x, i, pre_on){
 
-    # Controle
-    if(i < 0 | i > x@esg@nb_simu){
-      stop("[Be-run_be_simu] : le numero de simulation est incorrect. \n")
-    }
+        # Controle
+        if(i < 0L | i > x@esg@nb_simu)
+            stop("[Be-run_be_simu] : le numero de simulation est incorrect. \n")
 
-    # Initilisation des listes de stockage de resultats
-    prime <- vector("list", x@param_be@nb_annee)
-    prestation <- prime
-    prestation_fdb <- prime
-    frais <- prime
-    deflateur <- NULL
 
-    # Canton en date initial
-    canton <- x@canton
+        # Initilisation des listes de stockage de resultats
+        prime <- vector("list", x@param_be@nb_annee)
+        prestation <- prime
+        prestation_fdb <- prime
+        frais <- prime
+        deflateur <- NULL
 
-    # Boucle sur les annees de projection
-    for(an in 1:x@param_be@nb_annee){
+        # Canton en date initial
+        canton <- x@canton
 
-      # Extraction du model point ESG
-      mp_esg <- extract_ESG(x@esg, i, an)
-      deflateur <- c(deflateur, mp_esg@deflateur)
-      canton@mp_esg <- mp_esg
+        # Boucle sur les annees de projection
+        for(an in 1L:x@param_be@nb_annee){
 
-      # Projection d'un canton sur une annee
-      result_proj_an <- proj_an(canton, x@param_be@nb_annee, pre_on)
+            # Extraction du model point ESG
+            mp_esg <- extract_ESG(x@esg, i, an)
+            deflateur <- c(deflateur, mp_esg@deflateur)
+            canton@mp_esg <- mp_esg
 
-      # Gestion des simulation pour lesquel l'actif devient negatif
-      # On retourne le numero de simulation
-      if(is.logical(result_proj_an)){
-        if(! result_proj_an){
-          return(list(erreur = i))
+            # Projection d'un canton sur une annee
+            result_proj_an <- proj_an(canton, x@param_be@nb_annee, pre_on)
+
+            # Gestion des simulation pour lesquel l'actif devient negatif
+            # On retourne le numero de simulation
+            if(is.logical(result_proj_an)){
+                if(! result_proj_an){
+                    return(list(erreur = i))
+                }
+            }
+
+            # Mise a jour du canton
+            canton <- result_proj_an[["canton"]]
+
+            # Mise a jour des resultats
+            output_be <- result_proj_an[["output_be"]]
+            prime[[an]] <- output_be[["prime"]]
+            prestation[[an]] <- output_be[["prestation"]]
+            prestation_fdb[[an]] <- output_be[["prestation_fdb"]]
+            frais[[an]] <- output_be[["frais"]]
         }
-      }
 
-      # Mise a jour du canton
-      canton <- result_proj_an[["canton"]]
+        # Mise a jour du booleen de calcul des probas
+        if(x@canton@ptf_passif@calc_proba)
+            x@canton@ptf_passif@calc_proba <- FALSE
 
-      # Mise a jour des resultats
-      output_be <- result_proj_an[["output_be"]]
-      prime[[an]] <- output_be[["prime"]]
-      prestation[[an]] <- output_be[["prestation"]]
-      prestation_fdb[[an]] <- output_be[["prestation_fdb"]]
-      frais[[an]] <- output_be[["frais"]]
-      }
+        # Mise sous forme de matrice
+        prime <- do.call("rbind", prime)
+        prestation <- do.call("rbind", prestation)
+        prestation_fdb <- do.call("rbind", prestation_fdb)
+        frais <- do.call("rbind", frais)
+        flux_be <- prestation + frais - prime
 
-    # Mise sous forme de matrice
-    prime <- do.call("rbind", prime)
-    prestation <- do.call("rbind", prestation)
-    prestation_fdb <- do.call("rbind", prestation_fdb)
-    frais <- do.call("rbind", frais)
-    flux_be <- prestation + frais - prime
+        # Suppression des noms parasites de colonnes de matrice
+        colnames(prime) <- NULL
+        colnames(prestation) <- NULL
+        colnames(prestation_fdb) <- NULL
+        colnames(frais) <- NULL
+        colnames(flux_be) <- NULL
 
-    # Suppression des noms parasites de colonnes de matrice
-    colnames(prime) <- NULL
-    colnames(prestation) <- NULL
-    colnames(prestation_fdb) <- NULL
-    colnames(frais) <- NULL
-    colnames(flux_be) <- NULL
+        # Actualisation
+        prime_actu <- deflateur %*% prime
+        prestation_actu <- deflateur %*% prestation
+        prestation_fdb_actu <- deflateur %*% prestation_fdb
+        frais_actu <- deflateur %*% frais
+        be <- prestation_actu + frais_actu - prime_actu
 
-    # Actualisation
-    prime_actu <- deflateur %*% prime
-    prestation_actu <- deflateur %*% prestation
-    prestation_fdb_actu <- deflateur %*% prestation_fdb
-    frais_actu <- deflateur %*% frais
-    be <- prestation_actu + frais_actu - prime_actu
-
-    # Output
-    return(list(nom_produit = result_proj_an[["nom_produit"]],
-                prime = prime,
-                prestation = prestation,
-                prestation_fdb = prestation_fdb,
-                frais = frais,
-                flux_be = flux_be,
-                prime_actu = prime_actu,
-                prestation_actu = prestation_actu,
-                prestation_fdb_actu = prestation_fdb_actu,
-                frais_actu = frais_actu,
-                be = be))
-  }
+        # Output
+        return(list(resultats = list(nom_produit = result_proj_an[["nom_produit"]],
+                                     prime = prime,
+                                     prestation = prestation,
+                                     prestation_fdb = prestation_fdb,
+                                     frais = frais,
+                                     flux_be = flux_be,
+                                     prime_actu = prime_actu,
+                                     prestation_actu = prestation_actu,
+                                     prestation_fdb_actu = prestation_fdb_actu,
+                                     frais_actu = frais_actu,
+                                     be = be),
+                    canton = canton))
+    }
 )
 
