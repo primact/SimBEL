@@ -3,9 +3,10 @@
 \docType{methods}
 \name{finance_cible_ppb}
 \alias{finance_cible_ppb}
-\title{Evalue le financement d'une revalorisation au taux cible par une reprise de PPB.}
+\title{Evalue le financement d'une revalorisation au taux cible par une reprise de PPB. Cette methode permet aussi de redistribuer
+la PPB stockee 8 annees auparavant.}
 \usage{
-finance_cible_ppb(bes_cible, rev_stock_nette, ppb)
+finance_cible_ppb(bes_cible, rev_stock_nette, ppb, ppb8_ind)
 }
 \arguments{
 \item{bes_cible}{un vecteur \code{numeric} correspondant au besoin de financement necessaire pour atteindre
@@ -15,6 +16,8 @@ le taux cible par produit.}
 le montant de revalorisation nette au titre de le PB atteint.}
 
 \item{ppb}{un objet de la classe \code{\link{Ppb}} qui renvoie l'etat courant de la PPB.}
+
+\item{ppb8_ind}{une valeur \code{numeric} correspondant ? la ppb de l'annee t-8.}
 }
 \value{
 \code{rev_stock_nette} la valeur de la revalorisation nette servie apres une eventuelle reprise de PPB.
@@ -28,7 +31,7 @@ le montant de revalorisation nette au titre de le PB atteint.}
 \description{
 \code{finance_cible_ppb} est une methode permettant de
  determiner le financement d'une revalorisation au taux cible par la reprise de provision pour participation
-  aux benefices (PPB). Cette methode evalue egalement si une dotation est effectue.
+  aux benefices (PPB). Cette methode evalue egalement si une dotation est effectuee.
 }
 \details{
 Lorsque la revalorisation nette est superieure au besoin de financement des taux cibles,

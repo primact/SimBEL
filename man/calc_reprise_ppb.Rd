@@ -3,7 +3,6 @@
 \docType{methods}
 \name{calc_reprise_ppb}
 \alias{calc_reprise_ppb}
-\alias{Ppb}
 \title{Reprend sur la valeur de la PPB}
 \usage{
 calc_reprise_ppb(x, montant)

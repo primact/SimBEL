@@ -21,7 +21,7 @@ objet de classe \code{\link{Ppb}}.
 }
 \seealso{
 La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
- pour renseigner l’input.
+ pour renseigner l'input.
 }
 \author{
 Prim'Act

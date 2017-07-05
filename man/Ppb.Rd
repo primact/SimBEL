@@ -10,6 +10,8 @@ Classe pour la provision pour participation aux benefices (PPB)
 \section{Slots}{
 
 \describe{
+\item{\code{hist_ppb}}{est le vecteur contenant les valeurs courantes \code{numeric} prise par la PPB sur les huit dernieres annees.}
+
 \item{\code{valeur_ppb}}{est la valeur courante \code{numeric} prise par la PPB.}
 
 \item{\code{ppb_debut}}{est la valeur prise \code{numeric} par la PPB en debut d'annee.}
