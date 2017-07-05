@@ -3,6 +3,7 @@
 \docType{methods}
 \name{vieillissment_ap_pb}
 \alias{vieillissment_ap_pb}
+\alias{PortPassif}
 \title{Vieillissement du portefeuille sur l'annee apres attribution
 de participation aux benefices.}
 \usage{

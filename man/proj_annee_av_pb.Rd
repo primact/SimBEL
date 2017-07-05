@@ -3,12 +3,13 @@
 \docType{methods}
 \name{proj_annee_av_pb}
 \alias{proj_annee_av_pb}
+\alias{PortPassif}
 \title{Calcule les flux et les PM des produits modelises}
 \usage{
 proj_annee_av_pb(an, x, tx_soc, coef_inf, list_rd)
 }
 \arguments{
-\item{an}{une valeur \code{numeric} correspondant a l'annee de projection.}
+\item{an}{une valeur \code{integer} correspondant a l'annee de projection.}
 
 \item{x}{un objet de la classe \code{\link{PortPassif}} contenant l'ensemble des produits de passifs.}
 

@@ -10,7 +10,7 @@ proj_an(x, annee_fin, pre_on)
 \arguments{
 \item{x}{est un objet de type \code{\link{Canton}}.}
 
-\item{annee_fin}{est une valeur \code{numeric} correpondant a l'annee de fin de projection.}
+\item{annee_fin}{est une valeur \code{integer} correpondant a l'annee de fin de projection.}
 
 \item{pre_on}{est une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
 de PRE dans le resultat technique, utilisee pour le calcul de la participation aux benefices reglementaires.}
