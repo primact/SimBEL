@@ -18,38 +18,46 @@
 ##' @export
 ##' @include HypTech-class.R
 
-setGeneric("get_choc_rach", function(x, type_choc_rach, choc, choc_lim){standardGeneric("get_choc_rach")})
+setGeneric("get_choc_rach", function(x, type_choc_rach, choc, choc_lim) {standardGeneric("get_choc_rach")})
 setMethod(
-  f = "get_choc_rach",
-  signature = c(x = "HypTech", type_choc_rach = "character", choc = "numeric", choc_lim = "numeric"),
-  def = function(x, type_choc_rach, choc, choc_lim){
-
-    tables <- x@tables_rach
-    nom_tables <- names(tables)
-    nb_tables <- length(tables)
-
-    for(i in 1: nb_tables){
-      param_rach <- tables[[nom_tables[i]]]
-      df_rach <- param_rach@table
-      ancmin <- param_rach@anc_min
-      ancmax <- param_rach@anc_max
-      agemin <- param_rach@age_min
-      agemax <- param_rach@age_max
-
-      for (anc in ancmin : ancmax)
-      {
-        for(age in agemin : agemax){
-
-          if (type_choc_rach == "up"){qx_choc   <- min((calc_rach(param_rach, age,anc) * (1 + choc)), choc_lim)}
-          if (type_choc_rach == "down"){qx_choc <- max(calc_rach(param_rach, age,anc) * (1 + choc),
-                                                    calc_rach(param_rach, age, anc) + choc_lim)}
-
-          df_rach[df_rach$anc == anc & df_rach$age == age, "taux_rachat"] <- qx_choc
+    f = "get_choc_rach",
+    signature = c(x = "HypTech", type_choc_rach = "character", choc = "numeric", choc_lim = "numeric"),
+    def = function(x, type_choc_rach, choc, choc_lim){
+        
+        # Recuperation de donnees
+        tables      <- x@tables_rach
+        nom_tables  <- names(tables)
+        nb_tables   <- length(tables)
+        
+        # Passage de chacune des tables
+        for(i in 1:nb_tables){
+            
+            # Extraction de donnees
+            param_rach <- tables[[nom_tables[i]]]
+            df_rach <- param_rach@table
+            ancmin <- param_rach@anc_min
+            ancmax <- param_rach@anc_max
+            agemin <- param_rach@age_min
+            agemax <- param_rach@age_max
+            
+            # Passage de chacune des lignes
+            for (anc in ancmin : ancmax) {
+                for(age in agemin : agemax){
+                    
+                    # Calcul du nouveau qx
+                    if (type_choc_rach == "up")     qx_choc <- min((calc_rach(param_rach, age,anc) * (1 + choc)), choc_lim)
+                    if (type_choc_rach == "down")   qx_choc <- max(calc_rach(param_rach, age,anc) * (1 + choc),
+                                                                   calc_rach(param_rach, age, anc) + choc_lim)
+                    
+                    # Mise a jour du qx
+                    df_rach[df_rach$anc == anc & df_rach$age == age, "taux_rachat"] <- qx_choc
+                }
+            }
+            
+            # Mise a jour de la table
+            x@tables_rach[[nom_tables[i]]]@table <- df_rach
         }
-      }
-
-      x@tables_rach[[nom_tables[i]]]@table <-  df_rach
+        
+        return (x)
     }
-
-    return (x)}
 )

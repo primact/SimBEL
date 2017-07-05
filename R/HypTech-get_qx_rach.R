@@ -23,12 +23,12 @@ setMethod(
     f = "get_qx_rach",
     signature = c(x = "HypTech",  nom_table = "character", age = "integer", anc = "integer"),
     def = function(x, nom_table, age, anc){
-
+        
         # Ajout d un test de presence du nom
-        if (! nom_table %in% names(x@tables_rach)) {
-            stop("[Hyptech : get_qx_rach] Nom de table de rachat non trouve")
-        } else {
-            return(calc_rach(x@tables_rach[[nom_table]],age,anc))
-        }
+        if (! nom_table %in% names(x@tables_rach)) stop("[Hyptech : get_qx_rach] Nom de table de rachat non trouve")
+        
+        # Calcul du taux de rachat
+        return(calc_rach(x@tables_rach[[nom_table]],age,anc))
+        
     }
 )

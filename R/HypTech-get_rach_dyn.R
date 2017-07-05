@@ -17,14 +17,16 @@
 ##' @include HypTech-class.R
 setGeneric("get_rach_dyn", function(x, nom_table,tx_cible,tx_serv){standardGeneric("get_rach_dyn")})
 setMethod(
-  f = "get_rach_dyn",
-  signature = c(x = "HypTech",  nom_table = "character", tx_cible = "numeric", tx_serv = "numeric"),
-  def = function(x, nom_table, tx_cible, tx_serv){
-
-    # Ajout d un test de presence du nom
-    if (! nom_table %in% names(x@param_rach_dyn)){"tables de parametres de rachats dynamique non trouve"}
-    else{return(calc_rach_dyn(x@param_rach_dyn[[nom_table]], tx_cible, tx_serv))}
-  }
+    f = "get_rach_dyn",
+    signature = c(x = "HypTech",  nom_table = "character", tx_cible = "numeric", tx_serv = "numeric"),
+    def = function(x, nom_table, tx_cible, tx_serv){
+        
+        # Ajout d un test de presence du nom
+        if (! nom_table %in% names(x@param_rach_dyn)) stop("[HypTech : get_rach_dyn] : Table de parametres de rachats dynamique non trouve")
+        
+        # Output : calcul des taux de rachats dynamiques (C++)
+        return(calc_rach_dyn(as.numeric(x@param_rach_dyn[[nom_table]]@vec_param), tx_cible, tx_serv))
+    }
 )
 
 

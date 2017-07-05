@@ -17,23 +17,23 @@ setClass(
   validity = function (object){
     # liste permettant de stocker les erreurs de chargement
     retval <- NULL
-    nb_col_attentu <- 6
+    nb_col_attentu <- 6L
 
     #Verification du nombre de colonnes
-    if(dim(object@vec_param)[2]!=nb_col_attentu) {retval <- c(retval, "[ParamRachDyn] : Nombre d'attributs incorrect /n")}
+    if(dim(object@vec_param)[2L]!=nb_col_attentu) retval <- c(retval, "[ParamRachDyn] : Nombre d'attributs incorrect /n")
 
     # Verification du type des colonnes
-    if (!is.double(object@vec_param[,1]))   {retval <- c(retval, "[ParamRachDyn] : alpha n'est pas entier/n")}
-    if (!is.double(object@vec_param[,2]))  {retval <- c(retval, "[ParamRachDyn] : beta n'est pas entier/n")}
-    if (!is.double(object@vec_param[,3]))   {retval <- c(retval, "[ParamRachDyn] : gamma n'est pas entier/n")}
-    if (!is.double(object@vec_param[,4]))   {retval <- c(retval, "[ParamRachDyn] : delta n'est pas entier/n")}
-    if (!is.double(object@vec_param[,5]))  {retval <- c(retval, "[ParamRachDyn] : RCMIN n'est pas entier/n")}
-    if (!is.double(object@vec_param[,6]))  {retval <- c(retval, "[ParamRachDyn] : RCMAX n'est pas factor/n")}
+    if (!is.double(object@vec_param[,1L]))  retval <- c(retval, "[ParamRachDyn] : alpha n'est pas entier/n")
+    if (!is.double(object@vec_param[,2L]))  retval <- c(retval, "[ParamRachDyn] : beta n'est pas entier/n")
+    if (!is.double(object@vec_param[,3L]))  retval <- c(retval, "[ParamRachDyn] : gamma n'est pas entier/n")
+    if (!is.double(object@vec_param[,4L]))  retval <- c(retval, "[ParamRachDyn] : delta n'est pas entier/n")
+    if (!is.double(object@vec_param[,5L]))  retval <- c(retval, "[ParamRachDyn] : RCMIN n'est pas entier/n")
+    if (!is.double(object@vec_param[,6L]))  retval <- c(retval, "[ParamRachDyn] : RCMAX n'est pas factor/n")
 
-    if (object@vec_param[,6]<=object@vec_param[,5]) {retval <- c(retval, "[ParamRachDyn] : RCMIN doit etre inferieure a RCMX/n")}
+    if (object@vec_param[,6L] <= object@vec_param[,5L]) retval <- c(retval, "[ParamRachDyn] : RCMIN doit etre inferieure a RCMAX/n")
 
     # Verification du nom des colonnes
-    if(sum(colnames(object@vec_param) == c("alpha","beta","gamma","delta","RCMIN","RCMAX")) != 6)
+    if(sum(colnames(object@vec_param) == c("alpha", "beta", "gamma", "delta", "RCMIN", "RCMAX")) != nb_col_attentu)
     {retval <- c(retval, "[ParamRachDyn] : Noms de colonne incorrect/n")}
 
     if (is.null(retval)) return (TRUE)
