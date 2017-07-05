@@ -42,8 +42,16 @@ setMethod(
 
     }
     names(list_epeuroind) <- input_epeuroind[,"nom_table_R"]
-
-
+    
+    input_retraiteeurorest <- read.csv2(paste(x@address[["data"]][["passif"]],"empl_tables_reteurorest.csv",sep="/"),header = TRUE)
+    list_retraiteeurorest <- list()
+    for (i in 1:nrow(input_retraiteeurorest["nom_table_R"]))
+    {
+        temp_csv <- read.csv2(paste(x@address[["data"]][["passif"]],input_retraiteeurorest[i,"nom_table_csv"],sep="/"),header = TRUE)
+        list_retraiteeurorest[[i]] <- new(Class ="RetraiteEuroRest",temp_csv,new("TabRetEuroRest"))
+        
+    }
+    names(list_retraiteeurorest) <- input_retraiteeurorest[,"nom_table_R"]
     # Chargement  autres passifs
     autres_passifs <- autres_passif_load(paste(x@address[["data"]][["passif"]], "autres_passifs.csv", sep = "/"))
 
@@ -53,6 +61,6 @@ setMethod(
 
 
     # instanciation de la classe PortPassif
-    return(new(Class="PortPassif",as.integer(0), list_epeuroind, names_class_prod=c("eei"), load_ht(x), frais_passif, taux_pb, autres_passifs, autres_reserves))
+    return(new(Class="PortPassif",as.integer(0), list_epeuroind, list_retraiteeurorest, names_class_prod=c("eei", "rer"), load_ht(x), frais_passif, taux_pb, autres_passifs, autres_reserves))
   }
 )

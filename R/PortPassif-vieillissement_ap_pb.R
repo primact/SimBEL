@@ -20,6 +20,7 @@
 ##' @seealso L'attribution de la revalorisation par model point : \code{\link{calc_revalo_pm}}
 ##' Le viellissement des model points : \code{\link{vieilli_mp}}.
 ##' @export
+##' @aliases PortPassif
 ##' @include PortPassif-class.R
 ##'
 
@@ -56,12 +57,29 @@ setMethod(
         # Nom du produit
         nom_prod <- noms_prodi[j]
 
-        # Calcul de la revalorisation par produit
-        revalo_prod <- calc_revalo_pm(list_prodi[[j]], rev_nette_alloue[k], tx_soc)
+        
+        # Calcul de la revalorisation par produit et vieilissment des passifs avec mise a jour
+        if (class(list_prodi[[j]]) == "EpEuroInd") {
+            
+            # Calcul de la revalorisation par produit
+            revalo_prod <- calc_revalo_pm(x = list_prodi[[j]], y = list(rev_net_alloue = rev_nette_alloue[k], tx_soc = tx_soc))
+            # Vieilli les passifs et mise a jour
+            list_prodi[[j]] <- vieilli_mp(x = list_prodi[[j]], y = list(pm_fin_ap_pb = revalo_prod[["stock"]][["pm_fin_ap_pb"]],
+                                                              tx_revalo    = revalo_prod[["tx_rev_net"]]))
+            
+        }
+        else if (class(list_prodi[[j]]) == "RetraiteEuroRest"){
+            
+            # Calcul de la revalorisation par produit
+            revalo_prod <- calc_revalo_pm(x = list_prodi[[j]], y = list(rev_net_alloue = rev_nette_alloue[k]))
+            # Vieilli les passifs et mise a jour
+            list_prodi[[j]] <- vieilli_mp(x = list_prodi[[j]], y = list(pm_fin_ap_pb = revalo_prod[["stock"]][["pm_fin_ap_pb"]], tx_rev_net = revalo_prod[["tx_rev_net"]]))
 
-        # Vieilli les passifs et mise a jour
-        list_prodi[[j]] <- vieilli_mp(list_prodi[[j]], revalo_prod[["stock"]][["pm_fin_ap_pb"]],
-                                      revalo_prod[["tx_rev_net"]])
+        } else {
+            stop("[PortPassif : vieillissement_ap_pb] : La liste list_prodi comporte au moins un element non instancie.")
+        }
+
+        
         # Alimentation des listes de stock et de flux, puis et aggregation
         list_res_flux_agg[[k]] <- lapply(revalo_prod[["flux"]], sum)
         list_res_stock_agg[[k]] <- lapply(revalo_prod[["stock"]], sum)

@@ -13,6 +13,7 @@ setMethod(
   definition = function(.Object,
                         annee = integer(),
                         eei = list(),
+                        rer = list(),
                         names_class_prod = character(),
                         ht = new("HypTech"),
                         fp = new("FraisPassif"),
@@ -24,6 +25,7 @@ setMethod(
        ! missing(autres_passifs) & ! missing(autres_reserves)){
       .Object@annee <- annee
       .Object@eei   <- eei
+      .Object@rer   <- rer
       .Object@names_class_prod <- names_class_prod
       .Object@ht   <- ht
       .Object@fp  <- fp
@@ -35,6 +37,7 @@ setMethod(
       #Traitement du cas vide
       .Object@annee      <- as.integer(0)
       .Object@eei <- list(eei_1 = new("EpEuroInd"))
+      .Object@rer <- list(rer_1 = new("RetraiteEuroRest"))
       .Object@names_class_prod <- character()
       .Object@ht <- new("HypTech")
       .Object@fp <- new("FraisPassif")
@@ -58,6 +61,7 @@ setMethod(
     switch(EXPR = i,
            "annee" = {return(x@annee)},
            "eei" = {return(x@eei)},
+           "rer" = {return(x@rer)},
            "names_class_prod" = {return(x@names_class_prod)},
            "ht" = {return(x@ht)},
            "fp" = {return(x@fp)},
@@ -78,6 +82,7 @@ setReplaceMethod(
     switch(EXPR = i,
            "annee" = {x@annee <- value},
            "eei" = {x@eei <- value},
+           "rer" = {x@rer <- value},
            "names_class_prod" = {x@names_class_prod <- value},
            "ht" = {x@ht <- value},
            "fp" = {x@fp <- value},

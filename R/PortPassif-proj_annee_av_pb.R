@@ -7,7 +7,7 @@
 ##' Cette methode calcule egalement les frais sur flux et sur primes.
 ##' @name proj_annee_av_pb
 ##' @docType methods
-##' @param an une valeur \code{numeric} correspondant a l'annee de projection.
+##' @param an une valeur \code{integer} correspondant a l'annee de projection.
 ##' @param x un objet de la classe \code{\link{PortPassif}} contenant l'ensemble des produits de passifs.
 ##' @param tx_soc une valeur \code{numeric} correspondant au taux de charges sociales.
 ##' @param coef_inf une valeur \code{numeric} correspondant au coefficient d'inflation
@@ -29,14 +29,14 @@
 ##' @seealso La classe \code{\link{EpEuroInd}} et ses methodes.
 ##' La classe \code{\link{FraisPassif}} et ses methodes.
 ##' @export
+##' @aliases PortPassif
 ##' @include PortPassif-class.R
 ##'
 
-setGeneric(name = "proj_annee_av_pb", def = function(an, x, tx_soc, coef_inf, list_rd)
-{standardGeneric("proj_annee_av_pb")})
+setGeneric(name = "proj_annee_av_pb", def = function(an, x, tx_soc, coef_inf, list_rd){standardGeneric("proj_annee_av_pb")})
 setMethod(
   f = "proj_annee_av_pb",
-  signature = c(an = "numeric", x = "PortPassif",
+  signature = c(an = "integer", x = "PortPassif",
                 tx_soc = "numeric", coef_inf = "numeric", list_rd = "list"),
   def = function(an, x,
                  tx_soc, coef_inf, list_rd){
@@ -52,89 +52,130 @@ setMethod(
 
     # Boucle sur les types de produits
     k <- 0 # Compteur de boucle
-    for(i in 1:nb_type)
-    {
-      # Liste des produits
-      ncpi <- x@names_class_prod[i] # Nom du type i
-      list_prodi <- x[ncpi] # Liste de produits pour le type i
-      longi <- length(list_prodi) # Nombre de produits
-      noms_prodi <- names(list_prodi)
+    for(i in 1:nb_type) {
 
-      # Boucle sur les produits de type i
-      for(j in 1:longi){
-        k <- k + 1 # Compteur pour les listes de stockage
-        # Nom du produit
-        nom_prod <- noms_prodi[j]
+        # Liste des produits
+        ncpi <- x@names_class_prod[i] # Nom du type i
+        list_prodi <- x[ncpi] # Liste de produits pour le type i
+        longi <- length(list_prodi) # Nombre de produits
+        noms_prodi <- names(list_prodi)
 
-        # Calcul des primes du produits par model points
-        prime <- calc_primes(list_prodi[[j]])
+        # Boucle sur les produits de type i
+        for(j in 1:longi){
+            k <- k + 1 # Compteur pour les listes de stockage
+            # Nom du produit
+            nom_prod <- noms_prodi[j]
 
-        # Calcul du taux minimum
-        tx_min <-  calc_tx_min(list_prodi[[j]], an)
+            if ( class(list_prodi[[j]]) == "EpEuroInd" ) {
+                # Calcul des primes du produits par model points
+                prime <- calc_primes(list_prodi[[j]])
 
-        # Calcul des taux de sortie
-        tx_sortie <- calc_tx_sortie(list_prodi[[j]], x@ht)
+                # Calcul du taux minimum
+                tx_min <-  calc_tx_min(list_prodi[[j]], list(an = an))
 
-        # Calcul des prestations du produits par model points
-        prest <- calc_prest(list_prodi[[j]], tx_sortie, tx_min, an, method = "normal", tx_soc)
-        prest_gar <- calc_prest(list_prodi[[j]], tx_sortie, tx_min, an, method = "gar", tx_soc)
+                # Calcul des probabilites portant sur les flux
+                proba_flux <- calc_proba_flux(list_prodi[[j]], list(ht = x@ht))
 
-        # Calcul des taux cible
-        tx_cible <- calc_tx_cible(list_prodi[[j]], x@ht, list_rd)
+                # Calcul des prestations du produits par model points
+                prest <- calc_prest(list_prodi[[j]], list(proba_flux = proba_flux, tx_min = tx_min, an = an , method = "normal", tx_soc = tx_soc))
+                prest_gar <- calc_prest(list_prodi[[j]], list(proba_flux = proba_flux, tx_min = tx_min, an = an, method = "gar", tx_soc = tx_soc))
 
-        # Calcul des PM avant revalorisation par model points
-        pm <- calc_pm(list_prodi[[j]],prime[["flux"]], prest[["flux"]], tx_cible, tx_min, an, method = "normal", tx_soc)
-        pm_gar <- calc_pm(list_prodi[[j]],prime[["flux"]], prest_gar[["flux"]], tx_cible, tx_min, an, method = "gar", tx_soc)
+                # Calcul des taux cible
+                tx_cible <- calc_tx_cible(list_prodi[[j]], list(ht = x@ht, list_rd = list_rd))
 
-        # Mise a jour du tableau de sauvegarde
-        list_prodi[[j]]@tab["tab"][["num_mp"]] <- list_prodi[[j]]@mp$num_mp
-        list_prodi[[j]]@tab["tab"][["pri_net"]] <- prime[["flux"]][["pri_net"]]
-        list_prodi[[j]]@tab["tab"][["prest"]] <- prest[["flux"]][["prest"]]
-        list_prodi[[j]]@tab["tab"][["pm_deb"]] <- pm[["stock"]][["pm_deb"]]
-        list_prodi[[j]]@tab["tab"][["pm_fin"]] <- pm[["stock"]][["pm_fin"]]
-        list_prodi[[j]]@tab["tab"][["enc_charg_base_th"]] <- pm[["flux"]][["enc_charg_base_th"]]
-        list_prodi[[j]]@tab["tab"][["enc_charg_rmin_th"]] <- pm[["flux"]][["enc_charg_rmin_th"]]
-        list_prodi[[j]]@tab["tab"][["rev_stock_brut"]] <- pm[["flux"]][["rev_stock_brut"]]
-        list_prodi[[j]]@tab["tab"][["bes_tx_cible"]] <- pm[["flux"]][["bes_tx_cible"]]
-        list_prodi[[j]]@tab["tab"][["nb_contr"]] <- prest[["stock"]][["nb_contr_fin"]]
-        list_prodi[[j]]@tab["tab"][["tx_cible"]] <- tx_cible[["tx_cible_an"]]
-        list_prodi[[j]]@tab["tab"][["pm_gar"]] <- pm_gar[["stock"]][["pm_fin"]]
+                # Calcul des PM avant revalorisation par model points
+                pm <- calc_pm(list_prodi[[j]],list(tab_prime = prime[["flux"]] , tab_prest = prest[["flux"]], tx_cible = tx_cible, tx_min = tx_min, an = an, method = "normal", tx_soc = tx_soc))
+                pm_gar <- calc_pm(list_prodi[[j]],list(tab_prime = prime[["flux"]], tab_prest = prest_gar[["flux"]], tx_cible = tx_cible, tx_min = tx_min, an = an, method = "gar", tx_soc = tx_soc))
 
-        # Alimentation des listes de stock et de flux, puis et aggregation
-        list_res_flux_agg[[k]] <- lapply(c(prime[["flux"]], prest[["flux"]], pm[["flux"]]), sum)
-        list_res_stock_agg[[k]] <- lapply(c(prime[["stock"]], prest[["stock"]], pm[["stock"]]), sum)
+                # Mise a jour du tableau de sauvegarde
+                list_prodi[[j]]@tab["tab"][["num_mp"]] <- list_prodi[[j]]@mp$num_mp
+                list_prodi[[j]]@tab["tab"][["pri_net"]] <- prime[["flux"]][["pri_net"]]
+                list_prodi[[j]]@tab["tab"][["prest"]] <- prest[["flux"]][["prest"]]
+                list_prodi[[j]]@tab["tab"][["pm_deb"]] <- pm[["stock"]][["pm_deb"]]
+                list_prodi[[j]]@tab["tab"][["pm_fin"]] <- pm[["stock"]][["pm_fin"]]
+                list_prodi[[j]]@tab["tab"][["enc_charg_base_th"]] <- pm[["flux"]][["enc_charg_base_th"]]
+                list_prodi[[j]]@tab["tab"][["enc_charg_rmin_th"]] <- pm[["flux"]][["enc_charg_rmin_th"]]
+                list_prodi[[j]]@tab["tab"][["rev_stock_brut"]] <- pm[["flux"]][["rev_stock_brut"]]
+                list_prodi[[j]]@tab["tab"][["bes_tx_cible"]] <- pm[["flux"]][["bes_tx_cible"]]
+                list_prodi[[j]]@tab["tab"][["nb_contr"]] <- prest[["stock"]][["nb_contr_fin"]]
+                list_prodi[[j]]@tab["tab"][["tx_cible"]] <- tx_cible[["tx_cible_an"]]
+                list_prodi[[j]]@tab["tab"][["pm_gar"]] <- pm_gar[["stock"]][["pm_fin"]]
 
-        # Prestations fdb
-        prest_fdb <- sum(prest[["flux"]][["prest"]]) + sum(prest[["flux"]][["rev_prest_nette"]]) -
-          (sum(prest_gar[["flux"]][["prest"]]) + sum(prest_gar[["flux"]][["rev_prest_nette"]]))
+            } else if (class(list_prodi[[j]]) == "RetraiteEuroRest") {
+                # Calcul des primes
+                prime <- calc_primes(list_prodi[[j]])
 
-        # Ajout de la FDB
-        list_res_flux_agg[[k]] <- c(list_res_flux_agg[[k]], prest_fdb = prest_fdb)
+                # Calcul des probabilites portant sur les flux
+                proba_flux <- calc_proba_flux(list_prodi[[j]], list(ht = x@ht))
+
+                # Calcul des prestations
+                prest <- calc_prest(list_prodi[[j]], list(ht = x@ht, proba_flux = proba_flux, method = "normal"))
+                prest_gar <- calc_prest(list_prodi[[j]], list(ht = x@ht, proba_flux = proba_flux, method = "gar"))
+
+                # Calcul des taux cible
+                tx_cible <- calc_tx_cible(list_prodi[[j]], list(ht = x@ht, list_rd = list_rd))
+
+                # viellissement de 1 an
+                list_prodi[[j]]@mp$age      <- list_prodi[[j]]@mp$age + 1L
+                list_prodi[[j]]@mp$age_rvs  <- list_prodi[[j]]@mp$age_rvs + 1L
+                list_prodi[[j]]@mp$nb_contr <- prest[["stock"]][["nb_contr_fin"]]
+
+                # Calcul des coefficients actuariels
+                coef_rente <- get_coef_rente(list_prodi[[j]], x@ht)
+
+                # Calcul des PM avant revalorisation
+                pm <- calc_pm(list_prodi[[j]], list(ht = x@ht, tx_cible = tx_cible, coef_rente = coef_rente, method = "normal"))
+                pm_gar <- calc_pm(list_prodi[[j]], list(ht = x@ht, tx_cible = tx_cible, coef_rente = coef_rente, method = "gar"))
+
+                # Mise a jour du tableau de sauvegarde
+                list_prodi[[j]]@tab["tab"][["num_mp"]] <- list_prodi[[j]]@mp$num_mp
+                list_prodi[[j]]@tab["tab"][["prest"]] <- prest[["flux"]][["prest"]]
+                list_prodi[[j]]@tab["tab"][["pm_deb"]] <- pm[["stock"]][["pm_deb"]]
+                list_prodi[[j]]@tab["tab"][["pm_fin"]] <- pm[["stock"]][["pm_fin"]]
+                list_prodi[[j]]@tab["tab"][["bes_tx_cible"]] <- pm[["flux"]][["bes_tx_cible"]]
+                list_prodi[[j]]@tab["tab"][["nb_contr"]] <- prest[["stock"]][["nb_contr_fin"]]
+                list_prodi[[j]]@tab["tab"][["tx_cible"]] <- tx_cible[["tx_cible_an"]]
+                list_prodi[[j]]@tab["tab"][["pm_gar"]] <- pm_gar[["stock"]][["pm_fin"]]
+
+            } else {
+                stop("[PortPassif : proj_annee_av_pb] : La liste list_prodi comporte au moins un element non instancie. \n")
+            }
 
 
-        # Calcul des frais sur primes
-        frais_primes <- calc_frais(x@fp, "prime", nom_prod, list_res_stock_agg[[k]][["nb_vers"]],
-                                      list_res_flux_agg[[k]][["pri_brut"]], coef_inf)
+            # Alimentation des listes de stock et de flux, puis et aggregation
+            list_res_flux_agg[[k]] <- lapply(c(prime[["flux"]], prest[["flux"]], pm[["flux"]]), sum)
+            list_res_stock_agg[[k]] <- lapply(c(prime[["stock"]], prest[["stock"]], pm[["stock"]]), sum)
 
-        # Calcul des frais sur prestations
-        frais_prest <- calc_frais(x@fp, "prest", nom_prod, list_res_stock_agg[[k]][["nb_sortie"]],
-                                    list_res_flux_agg[[k]][["prest"]], coef_inf)
+            # Prestations fdb
+            prest_fdb <- sum(prest[["flux"]][["prest"]]) + sum(prest[["flux"]][["rev_prest_nette"]]) -
+              (sum(prest_gar[["flux"]][["prest"]]) + sum(prest_gar[["flux"]][["rev_prest_nette"]]))
 
-        # Calcul des frais sur encours
-        frais_enc <- calc_frais(x@fp, "enc", nom_prod, list_res_stock_agg[[k]][["nb_contr_moy"]],
-                                   list_res_stock_agg[[k]][["pm_moy"]], coef_inf)
+            # Ajout de la FDB
+            list_res_flux_agg[[k]] <- c(list_res_flux_agg[[k]], prest_fdb = prest_fdb)
 
-        # Ajout des frais au flux
-        list_res_flux_agg[[k]] <- c(list_res_flux_agg[[k]], frais_primes, frais_prest, frais_enc)
+            # Calcul des frais sur primes
+            frais_primes <- calc_frais(x@fp, "prime", nom_prod, nb = list_res_stock_agg[[k]][["nb_vers"]],
+                                       mt =list_res_flux_agg[[k]][["pri_brut"]], coef_inf)
+
+            # Calcul des frais sur prestations
+            frais_prest <- calc_frais(x@fp, "prest", nom_prod, nb = list_res_stock_agg[[k]][["nb_sortie"]],
+                                      mt =list_res_flux_agg[[k]][["prest"]], coef_inf)
+
+            # Calcul des frais sur encours
+            frais_enc <- calc_frais(x@fp, "enc", nom_prod, nb = list_res_stock_agg[[k]][["nb_contr_moy"]],
+                                    mt =list_res_stock_agg[[k]][["pm_moy"]], coef_inf)
+
+            # Ajout des frais au flux
+            list_res_flux_agg[[k]] <- c(list_res_flux_agg[[k]], frais_primes, frais_prest, frais_enc)
 
 
-        # Nom des elements de la liste
-        names(list_res_flux_agg)[k] <- nom_prod
-        names(list_res_stock_agg)[k] <- nom_prod
-        index <- c(index, nom_prod) # enregistrement des noms de produits
-      }
-      # Re-affectation des resultats a chaque objet
-      x[ncpi] <- list_prodi
+            # Nom des elements de la liste
+            names(list_res_flux_agg)[k] <- nom_prod
+            names(list_res_stock_agg)[k] <- nom_prod
+            index <- c(index, nom_prod) # enregistrement des noms de produits
+        }
+        # Re-affectation des resultats a chaque objet
+        x[ncpi] <- list_prodi
     }
 
     # Mise au format matrice des listes de flug_agg et stock_agg

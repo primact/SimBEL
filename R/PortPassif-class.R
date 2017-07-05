@@ -32,6 +32,7 @@ setClass(
   representation = representation(
     annee = "integer",
     eei = "list",
+    rer = "list",  # retraite euro restitution
     names_class_prod = "character",
     ht = "HypTech",
     fp = "FraisPassif",
@@ -67,6 +68,10 @@ setClass(
         retval <- c(retval, paste("[PortPassif] : l element ", i, " de 'eei' est non valide \n", sep = ""))}
     }
 
+    for(i in 1:length(object@rer)){
+        if(!validObject(object@rer[[i]])){
+            retval <- c(retval, paste("[PortPassif] : l element ", i, " de 'rer' est non valide \n", sep = ""))}
+    }
     # Resultats du controle
     if (is.null(retval)){
       return (TRUE)
