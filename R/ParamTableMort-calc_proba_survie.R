@@ -21,46 +21,47 @@ setMethod(
     def = function(table_mort, age, gen, n_periodes){
 
         # Ajout de test sur le format
-        if(age < table_mort@age_min){
+        if(age < table_mort@age_min)
             stop("L'age doit etre superieur a l'age minimum de la table")
-        }
+
         # Age applique
-        age_app <- min(age, table_mort@age_max - 1)
+        age_app <- min(age, table_mort@age_max - 1L)
 
         # Generation applique
         gen_app <- max(min(gen, table_mort@gen_max), table_mort@gen_min)
 
 
         # Gestion des noms de colonnes du data.frame de donnnees
-        nom_table <- names(table_mort@table)
-        age_name  <- which(nom_table == "age")
-        gen_name  <- which(nom_table == "gen")
+        table <- table_mort@table
+        nom_table <- names(table)
+        age_tab <- .subset2(table, which(nom_table == "age"))
+        gen_tab <- .subset2(table, which(nom_table == "gen"))
+        lx <- .subset2(table, which(nom_table == "lx"))
+
 
         # Numero de ligne pour les Lx et Lx+1
-        index_denominateur <- which(.subset2(table_mort@table, gen_name) == gen_app &
-                                    .subset2(table_mort@table, age_name) == age_app)
-        index_numerateur   <- which(.subset2(table_mort@table, gen_name) == gen_app &
-                                    .subset2(table_mort@table, age_name) == age_app + 1)
-        
-        index_max <- which(.subset2(table_mort@table, gen_name) == gen_app &
-                             .subset2(table_mort@table, age_name) == table_mort@age_max)
-
+        index_denominateur <- which(gen_tab == gen_app & age_tab == age_app)
+        index_numerateur   <- which(gen_tab == gen_app & age_tab == age_app + 1L)
+        index_max <- which(gen_tab == gen_app & age_tab == table_mort@age_max)
         index_numerateur <- index_numerateur : index_max
 
-        # Calcul des probabilites de deces
-        numerateur   <- .subset2(table_mort@table, 3)[index_numerateur]
-        denominateur <- .subset2(table_mort@table, 3)[index_denominateur]
-        if(length(numerateur) >= n_periodes){
-            numerateur <- numerateur[1:n_periodes]
-        } else {
-            numerateur <- c(numerateur, rep(0, n_periodes - length(numerateur)))
-        }
 
-        if(denominateur == 0){
-            return(rep(0, n_periodes))
-        }else{
-            return(numerateur / denominateur)
-        }
+        # Calcul des probabilites de deces
+        numerateur   <- lx[index_numerateur]
+        denominateur <- lx[index_denominateur]
+        if(length(numerateur) >= n_periodes)
+            numerateur <- numerateur[1:n_periodes]
+        else
+            numerateur <- c(numerateur, rep(0, n_periodes - length(numerateur)))
+
+
+        if(denominateur == 0)
+            proba <- rep(0, n_periodes)
+        else
+            proba <- numerateur / denominateur
+
+        # Output
+        return(proba)
     }
 )
 

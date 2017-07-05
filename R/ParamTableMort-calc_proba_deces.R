@@ -21,8 +21,10 @@ setMethod(
     signature = c(table_mort = "ParamTableMort", age = "integer", gen = "integer", n_periodes = "integer"),
     def = function(table_mort, age, gen, n_periodes){
 
+        # Calcul du vecteur de probas
         vecteur_deces <- 1 - calc_proba_survie(table_mort, age, gen, n_periodes)
 
+        # Output
         return(vecteur_deces)
     }
 )

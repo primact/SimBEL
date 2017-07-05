@@ -20,12 +20,12 @@ setMethod(
     f = "get_qx_mort",
     signature = c(x = "HypTech",  nom_table = "character", age = "integer", gen = "integer"),
     def = function(x, nom_table, age, gen){
-
+        
         # Ajout d un test de presence du nom
-        if (! nom_table %in% names(x@tables_mort)) {
-            stop("[Hyptech : get_qx_mort] Nom de table de mortalite non trouve")
-        } else {
-            return(calc_qx(x@tables_mort[[nom_table]],age,gen))
-        }
+        if (! nom_table %in% names(x@tables_mort)) stop("[Hyptech : get_qx_mort] Nom de table de mortalite non trouve")
+        
+        
+        return(calc_qx(x@tables_mort[[nom_table]],age,gen))
+        
     }
 )
