@@ -10,6 +10,7 @@
 ##' @name calc_tx_min
 ##' @docType methods
 ##' @param x un objet de la classe \code{\link{EpEuroInd}} contenant les model points epargne euros.
+##' @param y une liste contenant les parametres.
 ##' @param an un \code{numeric} representant l'annee de projection courante.
 ##' @return \code{tx_tech_an} : un vecteur contenant les taux de technique de l'annee
 ##' @return \code{tx_tech_se} : un vecteur contenant les taux de technique de l'annee sur base semestrielle
@@ -18,15 +19,26 @@
 ##' @note Pour les besoins des calculs a mi-annee, des taux semestriels sont produits.
 ##' @author Prim'Act
 ##' @export
-##' @include EpEuroInd-class.R
+##' @aliases EpEuroInd
+##' @include EpEuroInd-class.R RetraiteEuroRest_class.R
 
-setGeneric(name = "calc_tx_min", def = function(x, an){standardGeneric("calc_tx_min")})
+#--------------------------------------------------------
+setGeneric(name = "calc_tx_min", def = function(x, y){standardGeneric("calc_tx_min")})
+# Epargne
+# y = list(an)
+# Retraite
+# y = list()
 #--------------------------------------------------------
 
 setMethod(
   f = "calc_tx_min",
-  signature = c(x = "EpEuroInd", an ="numeric"),
-  def = function(x, an){
+  signature = c(x = "EpEuroInd", y ="list"),
+  def = function(x, y){
+    # Verification inputs
+    if (length(y) != 1)                        {stop("[EpEuroInd : calc_tx_min] : L'input y doit correspondre a une liste de longueur 1. \n")}
+    if (sum(names(y) == c("an")) != length(y)) {stop("[EpEuroInd : calc_tx_min] : L'input y doit correspondre a une liste de longueur 1 de nom : an. \n")}
+    if (! is.numeric(y[["an"]]))               {stop("[EpEuroInd : calc_tx_min] : L'input y doit correspondre a une liste de longueur 1, de nom : an, dont le type est : numeric. \n")}
+    an <- y[["an"]]
 
     nb_mp <- nrow(x@mp)
     # Calcul des indicatrice de versement du taux technique et du tmg
@@ -51,4 +63,30 @@ setMethod(
       tx_se = tx_min_se))
 
   }
+)
+
+#--------------------------------------------------------
+setMethod(
+    f = "calc_tx_min",
+    signature = c(x = "RetraiteEuroRest", y ="list"),
+    def = function(x, y){
+
+        nb_mp <- nrow(x@mp)
+
+        # calcul du taux technique
+        tx_tech    <- rep(0,nb_mp)
+        tx_tech_se <- rep(0,nb_mp)
+
+        # Calcul du taux minimum
+        tx_min    <- rep(0,nb_mp)
+        tx_min_se <- rep(0,nb_mp)
+
+        # Output
+        return(list(
+            tx_tech_an = tx_tech,
+            tx_tech_se = tx_tech_se,
+            tx_an = tx_min,
+            tx_se = tx_min_se))
+
+    }
 )
