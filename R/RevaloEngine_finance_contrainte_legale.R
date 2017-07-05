@@ -37,86 +37,86 @@
 setGeneric(name = "finance_contrainte_legale", def = function(base_fin, base_fin_etendu, result_tech, it_stock,
                                                               rev_stock_nette, rev_prest_nette, dot_ppb, marge_fin,
                                                               ppb, param_revalo){
-  standardGeneric("finance_contrainte_legale")})
+    standardGeneric("finance_contrainte_legale")})
 
 setMethod(
-  f = "finance_contrainte_legale",
-  signature = c(base_fin = "numeric", base_fin_etendu = "numeric", result_tech = "numeric", it_stock = "numeric",
-               rev_stock_nette = "numeric", rev_prest_nette = "numeric", dot_ppb = "numeric", marge_fin = "numeric",
-               ppb = "Ppb", param_revalo = "ParamRevaloEngine"),
-  definition = function(base_fin, base_fin_etendu, result_tech, it_stock,
-                        rev_stock_nette, rev_prest_nette, dot_ppb, marge_fin, ppb,
-                        param_revalo){
+    f = "finance_contrainte_legale",
+    signature = c(base_fin = "numeric", base_fin_etendu = "numeric", result_tech = "numeric", it_stock = "numeric",
+                  rev_stock_nette = "numeric", rev_prest_nette = "numeric", dot_ppb = "numeric", marge_fin = "numeric",
+                  ppb = "Ppb", param_revalo = "ParamRevaloEngine"),
+    definition = function(base_fin, base_fin_etendu, result_tech, it_stock,
+                          rev_stock_nette, rev_prest_nette, dot_ppb, marge_fin,
+                          ppb, param_revalo){
 
 
 
-    # Controle
-    if(length(base_fin) != length(it_stock) | length(rev_prest_nette) != length(it_stock) |
-       length(rev_stock_nette) != length(it_stock)){
-      stop("[RevaloEngine-finance_contrainte_legale] : les vecteurs en entree ne sont pas de meme longueur.")
-    }
+        # Controle
+        if(length(base_fin) != length(it_stock) | length(rev_prest_nette) != length(it_stock) |
+           length(rev_stock_nette) != length(it_stock)){
+            stop("[RevaloEngine-finance_contrainte_legale] : les vecteurs en entree ne sont pas de meme longueur.")
+        }
 
-    if(length(base_fin_etendu) > 1  | length(result_tech) > 1 | length(dot_ppb) > 1 |
-       length(marge_fin) > 1){
-      stop("[finance_contrainte_legale] : les vecteurs correspondant a l'assiette financiere
-           etendue, au resultat technique, a la dotation de PPB
-          et a la marge financiere d'assureur doivent etre de taille 1.")
-    }
+        if(length(base_fin_etendu) > 1  | length(result_tech) > 1 | length(dot_ppb) > 1 |
+           length(marge_fin) > 1){
+            stop("[finance_contrainte_legale] : les vecteurs correspondant a l'assiette financiere
+                 etendue, au resultat technique, a la dotation de PPB
+                 et a la marge financiere d'assureur doivent etre de taille 1.")
+        }
 
 
-    # Calcul de la revalorisation legale
-    ind_result_tech <- (result_tech > 0)
-    solde_pb <- param_revalo@taux_pb_fi * base_fin_etendu  +
-      param_revalo@taux_pb_tech * result_tech * ind_result_tech +
-      result_tech * (1 - ind_result_tech) - sum(it_stock)
-    # Report du solde negatif
-    solde_pb <- solde_pb + param_revalo@solde_pb_regl
+        # Calcul de la revalorisation legale
+        ind_result_tech <- (result_tech > 0)
+        solde_pb <- param_revalo@taux_pb_fi * base_fin_etendu  +
+            param_revalo@taux_pb_tech * result_tech * ind_result_tech +
+            result_tech * (1 - ind_result_tech) - sum(it_stock)
+        # Report du solde negatif
+        solde_pb <- solde_pb + param_revalo@solde_pb_regl
 
-    # Mise a jour du solde de PB minimale
-    if(solde_pb < 0){
-      param_revalo@solde_pb_regl <- solde_pb
-    } else{
-      param_revalo@solde_pb_regl <- 0
-    }
+        # Mise a jour du solde de PB minimale
+        if(solde_pb < 0){
+            param_revalo@solde_pb_regl <- solde_pb
+        } else{
+            param_revalo@solde_pb_regl <- 0
+        }
 
-    # Calcul de la revalorisation legale
-    rev_reg <- max (0, solde_pb)
+        # Calcul de la revalorisation legale
+        rev_reg <- max (0, solde_pb)
 
-    # Montant de PB deja distribue
-    tot_rev_assure <- sum(rev_stock_nette + rev_prest_nette) + dot_ppb
+        # Montant de PB deja distribuee
+        tot_rev_assure <- sum(rev_stock_nette + rev_prest_nette) + dot_ppb
 
-    # Reprise additionnelle
-    suppl <- max(0,(rev_reg - tot_rev_assure))
+        # Reprise additionnelle
+        suppl <- max(0,(rev_reg - tot_rev_assure))
 
-    # Marge financier finale
-    marge_fin <- marge_fin - suppl
+        # Marge financier finale
+        marge_fin <- marge_fin - suppl
 
-    # Dotation
-    op_pbb <- calc_dotation_ppb(ppb, suppl)
+        # Dotation
+        op_pbb <- calc_dotation_ppb(ppb, suppl)
 
-    # Mise a jour de la PPB
-    ppb <- op_pbb[["ppb"]]
-    dotation <- op_pbb[["dotation"]]
+        # Mise a jour de la PPB
+        ppb <- op_pbb[["ppb"]]
+        dotation <- op_pbb[["dotation"]]
 
-    # Revalorisation residuelle du stock
-    add_rev_regl <- max(0, suppl - dotation)
+        # Revalorisation residuelle du stock
+        add_rev_regl <- max(0, suppl - dotation)
 
-    # Calcul de la revalorisation du stock nette apres prise en compte de la contrainte legale
-    # L'attribution s'effectue uniquement sur les produits modelises.
-    if(sum(base_fin) != 0){
-      rev_stock_nette_regl <- rev_stock_nette + add_rev_regl * base_fin / sum(base_fin)
-    } else{ # Repartition au prorara si la base financiere est nulle
-      nb_prod <- length(base_fin)
-      rev_stock_nette_regl <- rev_stock_nette + add_rev_regl * 1 / nb_prod
+        # Calcul de la revalorisation du stock nette apres prise en compte de la contrainte legale
+        # L'attribution s'effectue uniquement sur les produits modelises.
+        if(sum(base_fin) != 0){
+            rev_stock_nette_regl <- rev_stock_nette + add_rev_regl * base_fin / sum(base_fin)
+        } else{ # Repartition au prorata si la base financiere est nulle
+            nb_prod <- length(base_fin)
+            rev_stock_nette_regl <- rev_stock_nette + add_rev_regl * 1 / nb_prod
 
-    }
+        }
 
-    # Output
-    return(list(rev_stock_nette = rev_stock_nette_regl,
-                marge_fin = marge_fin,
-                ppb = ppb,
-                param_revalo = param_revalo))
-    }
+        # Output
+        return(list(rev_stock_nette = rev_stock_nette_regl,
+                    marge_fin = marge_fin,
+                    ppb = ppb,
+                    param_revalo = param_revalo))
+        }
 )
 
 
