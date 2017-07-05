@@ -35,15 +35,10 @@ setMethod(
     definition = function(bes_cible, rev_stock_nette, ppb, ppb8_ind){
 
         # Controle
-        if(prod(bes_cible < 0)){
-            stop("[RevaloEngine-finance_cible_ppb] : les besoins de financements par produit doivent etre positifs.")
-        }
-        if(length(bes_cible) != length(rev_stock_nette)){
-            stop("[RevaloEngine-finance_cible_ppb] : les vecteurs en entree ne sont pas de meme longueur.")
-        }
-        if(length(ppb8_ind) != length(rev_stock_nette)){
-            stop("[RevaloEngine-finance_cible_ppb] : les vecteurs en entree ne sont pas de meme longueur.")
-        }
+        if(! all(bes_cible >= 0)) stop("[RevaloEngine-finance_cible_ppb] : les besoins de financements par produit doivent etre positifs.")
+        if(length(bes_cible) != length(rev_stock_nette)) stop("[RevaloEngine-finance_cible_ppb] : les vecteurs en entree ne sont pas de meme longueur.")
+        if(length(ppb8_ind) != length(rev_stock_nette)) stop("[RevaloEngine-finance_cible_ppb] : les vecteurs en entree ne sont pas de meme longueur.")
+
 
         # Total de PPB8ans ? attribuer
         ppb_8 <- sum(ppb8_ind)

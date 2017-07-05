@@ -12,7 +12,7 @@
 ##' @name proj_an
 ##' @docType methods
 ##' @param x est un objet de type \code{\link{Canton}}.
-##' @param annee_fin est une valeur \code{numeric} correpondant a l'annee de fin de projection.
+##' @param annee_fin est une valeur \code{integer} correpondant a l'annee de fin de projection.
 ##' @param pre_on est une valeur \code{logical} qui lorsqu'elle vaut \code{TRUE} prend en compte la variation
 ##' de PRE dans le resultat technique, utilisee pour le calcul de la participation aux benefices reglementaires.
 ##' @details Cette methode est la procedure central du package \code{SimBEL} puisqu'elle cohorde les interactions entre
@@ -51,13 +51,13 @@
 setGeneric(name = "proj_an", def = function(x, annee_fin, pre_on){standardGeneric("proj_an")})
 setMethod(
     f = "proj_an",
-    signature = c(x = "Canton", annee_fin = "numeric", pre_on = "logical"),
+    signature = c(x = "Canton", annee_fin = "integer", pre_on = "logical"),
     definition = function(x, annee_fin, pre_on){
 
         #---------------------------------------------------------------
         # Etape 1 : Mise a jour des annees de projection
         #---------------------------------------------------------------
-        x@annee <- x@annee + as.integer(1)
+        x@annee <- x@annee + 1L
 
         #---------------------------------------------------------------
         # Etape 2 : variables economiques utilisees au passif
@@ -68,8 +68,7 @@ setMethod(
         coef_inf <- x@mp_esg@indice_inflation
 
         # liste des rendements
-        list_rd <- calc_rdt_marche_ref(x@ptf_passif@ht@param_comport[[x@hyp_canton@method_taux_cible]],
-                                       x@mp_esg)
+        list_rd <- calc_rdt_marche_ref(x@ptf_passif@ht@param_comport[[x@hyp_canton@method_taux_cible]], x@mp_esg)
 
         #---------------------------------------------------------------
         # Etape 3 : Gestion des passifs avant participation aux benefices
@@ -81,15 +80,17 @@ setMethod(
 
         # Calcul de la PPB de premiere anneee attribuee au flux garanti
         pm_deb <- passif_av_pb[["result_av_pb"]][["stock_agg"]][, "pm_deb"]
-        if(x@annee == 1){
+        if(x@annee == 1L){
+            # Somme des PM
+            sum_pm_deb <- sum(pm_deb)
+
             # Gestion des divisions par 0
-            if(sum(pm_deb) != 0){
-                # Attribution au prorata de la PM
-                ppb_init_attrib <- sum(x@ppb@ppb_debut) * pm_deb / sum(pm_deb)
-            }else{ # Division par 0
-                ppb_init_attrib <- sum(x@ppb@ppb_debut) * 1 / length(pm_deb)
-            }
-        }else{
+            if(sum_pm_deb != 0) # Attribution au prorata de la PM
+                ppb_init_attrib <- x@ppb@ppb_debut * pm_deb / sum_pm_deb
+            else # Division par 0
+                ppb_init_attrib <- x@ppb@ppb_debut * 1 / length(pm_deb)
+
+        } else {
             ppb_init_attrib <- rep(0, length(pm_deb))
         }
 
@@ -102,8 +103,6 @@ setMethod(
         # Extraction des revenus financiers et de la variation de VNC obligataires
         revenu_fin <- actif_vieil[["revenu_fin"]]
         var_vnc_oblig <- actif_vieil[["var_vnc_oblig"]]
-        # Libere de la memoire
-        rm(actif_vieil)
 
         # Mise a jour du portfeuille de reference
         x@param_alm@ptf_reference <- update_PortFin_reference(x@annee, x@param_alm@ptf_reference, x@mp_esg)
@@ -130,7 +129,7 @@ setMethod(
         # Gestion de l'anomalie : valeur de marche des actifs negatives
         if(.subset2(print_alloc(x@ptf_fin), 1)[5] < 0){
             warning(paste("Attention, la valeur de marche des actifs est negative pour
-                          la simulation ", x@mp_esg@num_traj, " en annee ", x@annee,".", sep = ""))
+                    la simulation ", x@mp_esg@num_traj, " en annee ", x@annee,".", sep = ""))
 
             # Dans le cas d'un actif negatif, la simulation est arretee.
             return(FALSE)
@@ -177,17 +176,18 @@ setMethod(
 
         # Allocation des frais financiers par produit
         pm_moy <- passif_av_pb[["result_av_pb"]][["stock_agg"]][, "pm_moy"]
-        if(sum(pm_moy) != 0){
-            coef_alloc <- pm_moy / sum(pm_moy)
+        sum_pm_moy <- sum(pm_moy)
+        if(sum_pm_moy != 0) {
+            coef_alloc <- pm_moy / sum_pm_moy
             # Les frais financiers sont mis a l'echelle des passifs et alloues
-            frais_fin_prod <- frais_fin * (sum(pm_moy) + sum(x@ppb["ppb_debut"])) / actif_realloc[["plac_moy_vnc"]] * coef_alloc
-        }else{ # Division par 0
+            frais_fin_prod <- frais_fin * (sum_pm_moy + x@ppb["ppb_debut"]) / actif_realloc[["plac_moy_vnc"]] * coef_alloc
+        } else { # Division par 0
             frais_fin_prod <- rep(0, length(pm_moy))
         }
 
         # Frais financier associes au autres passifs
-        frais_fin_hors_model <- frais_fin * ((passif_av_pb[["result_autres_passifs"]]$pm_fin +
-                                                  passif_av_pb[["result_autres_passifs"]]$pm_deb ) / 2) /
+        result_autres_passifs <- passif_av_pb[["result_autres_passifs"]]
+        frais_fin_hors_model <- frais_fin * ((result_autres_passifs$pm_fin + result_autres_passifs$pm_deb ) / 2) /
             actif_realloc[["plac_moy_vnc"]]
 
         #---------------------------------------------------------------
@@ -262,7 +262,7 @@ setMethod(
             result_net <- fin_proj[["result_net"]]
             impot <- fin_proj[["impot"]]
 
-        } else{ # Sinon le flux de fin est nul
+        } else { # Sinon le flux de fin est nul
             flux_fin_passif = rep(0, length(passif_av_pb[["nom_produit"]]))
         }
 
@@ -302,7 +302,7 @@ setMethod(
                                         flux_produit[,"frais_fin"], hors_model$frais + frais_fin_hors_model))
 
         # validation de l'objet
-        validObject(x)
+        # validObject(x)
 
         # Output
         return(list(canton = x,
