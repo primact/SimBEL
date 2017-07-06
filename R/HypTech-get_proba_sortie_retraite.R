@@ -18,7 +18,7 @@
 ##' @param gen_2 la valeur \code{integer} de la generation de la tete secondaire.
 ##' @return La probabilite de fin de contrat calculee.
 ##' @author Prim'Act
-##' @seealso Le calcul des taux de deces \code{\link{calc_qx}}.
+##' @seealso Recuperer le taux de deces \code{\link{get_qx_mort}}.
 ##' @export
 ##' @include HypTech-class.R
 ##'
@@ -27,22 +27,26 @@ setMethod(
     f = "get_proba_sortie_retraite",
     signature = c(x = "HypTech",  nom_table_1 = "character", age_1 = "integer", gen_1 = "integer", statut = "integer",
                   nom_table_2 = "character", age_2 = "integer", gen_2 = "integer"),
-    def = function(x, nom_table_1, age_1, gen_1, statut,
-                   nom_table_2, age_2, gen_2){
+    def = function(x, nom_table_1, age_1, gen_1, statut, nom_table_2, age_2, gen_2){
 
         # Ajout d un test de presence du nom
-        if (! nom_table_1 %in% names(x@tables_mort) | ! nom_table_2 %in% names(x@tables_mort)) {
+        if (! nom_table_1 %in% names(x@tables_mort) | ! nom_table_2 %in% names(x@tables_mort))
             stop("[HypTech : get_proba_sortie_retraite] Nom de table de mortalite non trouve")
-        } else {
-            if (statut == 1) { # Cas avec une seule tete
-                return(calc_qx(x@tables_mort[[nom_table_1]], age_1, gen_1))
-            } else if (statut == 2) { # Cas avec deux tetes
-                return(calc_qx(x@tables_mort[[nom_table_1]], age_1, gen_1) * calc_qx(x@tables_mort[[nom_table_2]], age_2, gen_2))
-            } else if(statut == 3) { # Cas du reversataire seul
-                return(calc_qx(x@tables_mort[[nom_table_2]], age_2, gen_2))
-            } else {
-                stop("[HypTech : get_proba_sortie_retraite] La variable 'statut' peut ne peut prendre que les valeurs 1 (pas de reversataire), 2 (tete principale et reversataire vivants) ou 3 (seule la tete reversataire est vivante)")
-            }
-        }
+
+
+        # Calcul de la proba en fonction du statut
+        if (statut == 1L) # Cas avec une seule tete
+            return(get_qx_mort(x, nom_table_1, age_1, gen_1))
+
+        else if (statut == 2L) # Cas avec deux tetes
+            return(get_qx_mort(x, nom_table_1, age_1, gen_1) * get_qx_mort(x, nom_table_2, age_2, gen_2))
+
+        else if(statut == 3L) # Cas du reversataire seul
+            return(get_qx_mort(x, nom_table_2, age_2, gen_2))
+
+        else
+            stop("[HypTech : get_proba_sortie_retraite] La variable statut peut prendre les valeurs 1 (pas de reversataire),
+                 2 (tete principale et reversataire vivants) ou 3 (seule la tete reversataire est vivante)")
+
     }
 )
