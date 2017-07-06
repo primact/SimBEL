@@ -3,7 +3,6 @@
 \docType{methods}
 \name{proj_annee_av_pb}
 \alias{proj_annee_av_pb}
-\alias{PortPassif}
 \title{Calcule les flux et les PM des produits modelises}
 \usage{
 proj_annee_av_pb(an, x, tx_soc, coef_inf, list_rd)
@@ -18,7 +17,7 @@ proj_annee_av_pb(an, x, tx_soc, coef_inf, list_rd)
 \item{coef_inf}{une valeur \code{numeric} correspondant au coefficient d'inflation
 considere pour le traitement des frais.}
 
-\item{list_rd}{une liste contenant les rendements de reference. Le format de cette liste est :
+\item{list_rd}{un vecteur contenant les rendements de reference. Le format de cette liste est :
 \describe{
 \item{le taux de rendement obligataire}{}
 \item{le taux de rendement de l'indice action de reference}{}

@@ -5,34 +5,31 @@
 \alias{calc_pm}
 \title{Calcul les PM pour des contrats epargne en euros et les contrats de retraite euro en phases de restitution.}
 \usage{
-calc_pm(x, y)
+calc_pm(x, method, an, tx_cible, y)
 }
 \arguments{
 \item{x}{un objet de la classe \code{\link{EpEuroInd}} ou de la classe \code{\link{RetraiteEuroRest}} contenant les model points epargne euros ou retraite euro en phases de restitution.}
 
-\item{y}{une liste contenant des parametres distincts selon l'objet initialement renseigne :
+\item{method}{un \code{character} prenant pour valeur \code{normal} pour le calcul des flux avec application de la revalorisation au titre de
+la participation aux benefices, et la valeur \code{gar} pour le calcul avec uniquement les flux garanti (calcul de la FDB).}
+
+\item{an}{une valeur \code{integer} correspondant a l'annee du calcul des prestations.}
+
+\item{tx_cible}{une liste conteant les taux cibles annuel et semestriel par model points.
+Le format de cette liste correspond a la sortie de la methode \code{\link{calc_tx_cible}}}
+
+\item{y}{une liste a remplir uniquement si \code{x} est de type \code{\link{EpEuroInd}} contenant les parametres :
 \describe{
 \item{\code{tab_prime} : }{une liste contenant les flux de primes pour chaque ligne de model points.
 Le format de cette liste correspond a la sortie \code{flux} de la methode \code{\link{calc_primes}}.
 A remplir uniquement si l'objet \code{x} est de type \code{\link{EpEuroInd}}.}
 \item{\code{tab_prest} : }{une liste contenant le taux de revalorisation minimum associes a chaque ligne de model points.
 Le format de cette liste correspond a la sortie \code{flux} de la methode \code{\link{calc_prest}}.
-A remplir uniquement si \code{x} est de type \link{\code{EpEuroInd}}.}
-\item{\code{tx_cible} : }{une liste conteant les taux cible annuel et semestriel par model points.
-Le format de cette liste correspond a la sortie de la methode \code{\link{calc_tx_cible}}.}
+A remplir uniquement si \code{x} est de type \code{\link{EpEuroInd}}.}
 \item{\code{tx_min} : }{une liste contenant le taux de revalorisation minimum associes a chaque ligne de model points.
  Le format de cette liste correspond a la sortie de la methode \code{\link{calc_tx_min}}.
- A remplir uniquement si \code{x} est de type \link{\code{EpEuroInd}}.}
-\item{\code{an} : } {une valeur \code{numeric} represantant l'annee de projection courante.
-A remplir uniquement si \code{x} est de type \link{\code{EpEuroInd}}.}
-\item{\code{method} : }{un \code{character} prenant pour valeur \code{normal} pour le calcul :
-des flux avec application de la revalorisation au titre de la participation aux benefices, et
-la valeur \code{gar} pour le calcul avec uniquement les flux garanti (calcul de la FDB).}
-\item{\code{tx_soc} : }{est une valeur \code{numeric} correspondant au taux de prelevements sociaux \link{\code{EpEuroInd}}.}
-\item{\code{ht} : }{un objet de type \code{\link{HypTech}} caracterisant les parametres de mortalite necessaire
- a la determination du montant de PM. A remplir uniquement si \code{x} est de type \link{\code{RetraiteEuroRest}}.}
-\item{\code{coef_rente} : }{un vecteur de type \code{numeric} correspondant aux coefficients actuariels.
-A remplir uniquement si \code{x} est de type \link{\code{RetraiteEuroRest}}.}
+ A remplir uniquement si \code{x} est de type \code{\link{EpEuroInd}}.}
+\item{\code{tx_soc} : }{est une valeur \code{numeric} correspondant au taux de prelevements sociaux \code{\link{EpEuroInd}}.}
 }}
 }
 \value{

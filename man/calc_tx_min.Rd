@@ -3,15 +3,12 @@
 \docType{methods}
 \name{calc_tx_min}
 \alias{calc_tx_min}
-\alias{EpEuroInd}
 \title{Calcul le taux de revalorisation contractuel minimum pour des contrats epargne en euros.}
 \usage{
-calc_tx_min(x, y)
+calc_tx_min(x, an)
 }
 \arguments{
 \item{x}{un objet de la classe \code{\link{EpEuroInd}} contenant les model points epargne euros.}
-
-\item{y}{une liste contenant les parametres.}
 
 \item{an}{un \code{numeric} representant l'annee de projection courante.}
 }

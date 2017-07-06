@@ -3,7 +3,6 @@
 \docType{methods}
 \name{calc_tx_cible}
 \alias{calc_tx_cible}
-\alias{EpEuroInd}
 \title{Calcul du taux cible pour des contrats epargne en euros et de retraite en phase de restitution.}
 \usage{
 calc_tx_cible(x, y)
@@ -13,7 +12,7 @@ calc_tx_cible(x, y)
 
 \item{y}{une liste contenant les parametres.
 \describe{
-\item{\code{list_rd} : } {est liste contenant les rendements de reference.}
+\item{\code{list_rd} : }{est un vecteur contenant les rendements de reference.}
 \item{\code{ht} : }{est un objet de la classe \code{\link{HypTech}}.}
 }
 Le format de \code{list_rd} est :

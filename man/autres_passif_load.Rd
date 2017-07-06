@@ -9,8 +9,7 @@ autres_passif_load(file_autres_passif_address)
 }
 \arguments{
 \item{file_autres_passif_address}{est un \code{character} contenant l'adresse exacte
-du fichier d'input utilisateur
-permettant de renseigner un objet \code{\link{AutresPassifs}}.}
+du fichier d'input utilisateur permettant de renseigner un objet \code{\link{AutresPassifs}}.}
 }
 \value{
 L'objet de la classe \code{\link{AutresPassifs}} construit a partir des inputs renseignes par l'utilisateur.

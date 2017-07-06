@@ -36,7 +36,7 @@ La probabilite de payer un flux de rente, ponderee du taux de reversion si le st
 en tenant compte de la possible reversion.
 }
 \seealso{
-Le calcul du taux de deces \code{\link{calc_qx}}.
+Recuperer le taux de deces \code{\link{get_qx_mort}}.
 }
 \author{
 Prim'Act

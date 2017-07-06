@@ -10,7 +10,7 @@ calc_RC(x, pmvr_oblig)
 \arguments{
 \item{x}{objet de la classe \code{\link{RC}}, necessaire pour connaitre le stock de RC initial.}
 
-\item{pmr_oblig}{est un \code{numeric} correspondant au montant global annuel de plus ou moins values realisees sur des actifs obligataires.}
+\item{pmvr_oblig}{est un \code{numeric} correspondant au montant global annuel de plus ou moins values realisees sur des actifs obligataires.}
 }
 \value{
 Le format de la liste renvoyee est :

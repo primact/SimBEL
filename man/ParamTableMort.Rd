@@ -22,7 +22,7 @@ Une classe de parametres pour les tables de mortalite.
 }}
 
 \note{
-Les tables de mortalite doivent contenir des effectifs sous risque par age (Lx).
+Les tables de mortalite peuvent contenir des probabilites de deces par age (qx) ou le nombre de vivants par age (lx).
 }
 \seealso{
 Le calcul du taux de deces \code{\link{calc_qx}}.

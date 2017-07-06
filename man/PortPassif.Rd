@@ -15,6 +15,9 @@ Une classe regroupant l'ensemble des donnees de passifs et les hypotheses corres
 \item{\code{eei}}{une liste d'objets de la classe \code{\link{EpEuroInd}} contenant l'ensemble
 des produits de type epargne en euros.}
 
+\item{\code{rer}}{une liste d'objets de la classe \code{\link{RetraiteEuroRest}} contenant l'ensemble
+des produits de retraite en phase de restitution.}
+
 \item{\code{names_class_prod}}{un vecteur \code{character} indiquant les noms de classes de produits.}
 
 \item{\code{ht}}{un objet de classe \code{\link{HypTech}} contenant les hypotheses techniques.}
@@ -28,13 +31,15 @@ aux benefices par produit.}
 \item{\code{autres_passifs}}{un objet de classe \code{\link{AutresPassifs}}.}
 
 \item{\code{autres_reserves}}{un objet de classe \code{\link{AutresReserves}}.}
+
+\item{\code{calc_proba}}{un \code{logical} indiquant si les probabilites ont ete calculees.}
 }}
 
 \seealso{
 La projection des produits sur l'annee avant attributiuon de participation
 aux benefices : \code{\link{proj_annee_av_pb}}.
 Le vieillissement des model points de passifs avant et apres attributiuon de participation
-aux benefices : \code{\link{vieillissement_av_pb}}, \code{\link{vieillissement_ap_pb}}.
+aux benefices : \code{\link{viellissement_av_pb}}, \code{\link{vieillissment_ap_pb}}.
 }
 \author{
 Prim'Act

@@ -12,14 +12,16 @@ Une classe pour les passifs de retraite en euros en phase de restitution.
 \describe{
 \item{\code{mp}}{un objet \code{data.frame} au format fige contenant l'ensemble de model points retraite euros en phase de restitution.}
 
-\item{\code{tab}}{un objet de la classe \code{\link{TabRetEuroResttInd}} dedie au stockage de variables intermediaires.}
+\item{\code{tab}}{un objet de la classe \code{\link{TabRetEuroRest}} dedie au stockage de variables intermediaires.}
+
+\item{\code{tab_proba}}{un objet de la classe \code{\link{TabProbaRetEuroRest}} dedie au stockage des probabilites associees aux model point.}
 }}
 
 \seealso{
 Le calcul des prestations et des PM : \code{\link{calc_prest}}, \code{\link{calc_pm}}.
-Le calcul des taux de sortie, du taux minimum et des taux cible de revalorisation :
-\code{\link{calc_tx_sortie}}, \code{\link{calc_tx_min}}, \code{\link{calc_tx_cible}}.
-La revalorisation des PM apres participation aux benefices : \code{\link{calc_relavo_pm}}.
+Le calcul du taux minimum et des taux cible de revalorisation :
+\code{\link{calc_tx_min}}, \code{\link{calc_tx_cible}}.
+La revalorisation des PM apres participation aux benefices : \code{\link{calc_revalo_pm}}.
 Le vieillissement des model points sur une periode : \code{\link{vieilli_mp}}.
 }
 \author{

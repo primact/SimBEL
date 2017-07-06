@@ -15,7 +15,7 @@ calc_vm_immo(x, rdt)
 Contient autant d'elements que le portefeuille immobilier a de lignes.}
 }
 \value{
-L'objet \code{x} dont les valeurs de marche ont ete mises a jour.
+Les valeurs de marche mises a jour.
 }
 \description{
 \code{calc_vm_immo} est une methode permettant de calculer les valeurs de marche du portefeuille immobilier.

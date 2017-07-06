@@ -34,7 +34,7 @@ La probabilite de fin de contrat calculee.
 pour des contrats avec ou sans reversion.
 }
 \seealso{
-Le calcul des taux de deces \code{\link{calc_qx}}.
+Recuperer le taux de deces \code{\link{get_qx_mort}}.
 }
 \author{
 Prim'Act

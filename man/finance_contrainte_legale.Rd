@@ -11,6 +11,9 @@ finance_contrainte_legale(base_fin, base_fin_etendu, result_tech, it_stock,
 \arguments{
 \item{base_fin}{un vecteur \code{numeric} comprenant par produit la base de produits financiers.}
 
+\item{base_fin_etendu}{une valeur \code{numeric} comprenant la base totale de produits financiers
+(somme des produits modelise et des  passifs non modelises).}
+
 \item{result_tech}{une valeur \code{numeric} comprenant le resultat technique.}
 
 \item{it_stock}{un vecteur \code{numeric} comprenant par produit les interets techniques affectes au stock.}
@@ -30,9 +33,6 @@ sur stock.}
 
 \item{param_revalo}{un objet de la classe \code{\link{ParamRevaloEngine}}.
 comprenant les parametres de revalorisation.}
-
-\item{base_fin_entendu}{une valeur \code{numeric} comprenant la base totale de produits financiers
-(somme des produits modelise et des  passifs non modelises).}
 }
 \value{
 \code{rev_stock_nette} la valeur de la revalorisation nette servie apres application de la contrainte legale.

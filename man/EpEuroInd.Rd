@@ -13,14 +13,15 @@ Une classe pour les passifs epargne en euros.
 \item{\code{mp}}{un objet \code{data.frame} au format fige contenant l'ensemble de model points epargne en euros.}
 
 \item{\code{tab}}{un objet de la classe \code{\link{TabEpEuroInd}} dedie au stockage de variables intermediaires.}
+
+\item{\code{tab_proba}}{un objet de la classe \code{\link{TabProbaEpEuroInd}} dedie au stockage des probabilites.}
 }}
 
 \seealso{
 Le calcul des primes, des prestations et des PM : \code{\link{calc_primes}},
 \code{\link{calc_prest}}, \code{\link{calc_pm}}.
-Le calcul des taux de sortie, du taux minimum et des taux cible de revalorisation :
-\code{\link{calc_tx_sortie}}, \code{\link{calc_tx_min}}, \code{\link{calc_tx_cible}}.
-La revalorisation des PM apres participation aux benefices : \code{\link{calc_relavo_pm}}.
+Le calcul du taux minimum et des taux cible de revalorisation : \code{\link{calc_tx_min}}, \code{\link{calc_tx_cible}}.
+La revalorisation des PM apres participation aux benefices : \code{\link{calc_revalo_pm}}.
 Le vieillissement des model points sur une periode : \code{\link{vieilli_mp}}.
 }
 \author{

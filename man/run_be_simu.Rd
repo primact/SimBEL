@@ -16,28 +16,23 @@ run_be_simu(x, i, pre_on)
 de PRE dans le resultat technique utilisee pour le calcul de la participation aux benefices reglementaires.}
 }
 \value{
-\code{nom_produit} un vecteur contenant le liste des noms de produits.
+resultats une liste dont le format est le suivant :
+\describe{
+\item{\code{nom_produit} : }{un vecteur contenant le liste des noms de produits..}
+\item{\code{prime} : }{une matrice contenant les flux de primes par produit.}
+\item{\code{prestation} : }{une matrice contenant les flux de prestations par produit.}
+\item{\code{prestation_fdb} : }{une matrice contenant les flux de prestations discretionnaires par produit.}
+\item{\code{frais} : }{une matrice contenant les flux de frais par produit.}
+\item{\code{flux_be} : }{une matrice contenant les flux de best estimate par produit.}
+\item{\code{prime_actu} : }{une matrice contenant la valeur des primes actualisees par produit.}
+\item{\code{prestation_actu} : }{une matrice contenant la valeur des prestations actualisees par produit.}
+\item{\code{prestation_fdb_actu} : }{une matrice contenant la valeur des prestations
+discretionnaires actualisees par produit.}
+\item{\code{frais_actu} : }{une matrice contenant la valeur des frais actualisees par produit.}
+\item{\code{be} : }{une matrice contenant la valeur du best estimate par produit.}
+}
 
-\code{prime} une matrice contenant les flux de primes par produit.
-
-\code{prestation} une matrice contenant les flux de prestations par produit.
-
-\code{prestation_fdb} une matrice contenant les flux de prestations discretionnaires par produit.
-
-\code{frais} une matrice contenant les flux de frais par produit.
-
-\code{flux_be} une matrice contenant les flux de best estimate par produit.
-
-\code{prime_actu} une matrice contenant la valeur des primes actualisees par produit.
-
-\code{prestation_actu} une matrice contenant la valeur des prestations actualisees par produit.
-
-\code{prestation_fdb_actu} une matrice contenant la valeur des prestations
-discretionnaires actualisees par produit.
-
-\code{frais_actu} une matrice contenant la valeur des frais actualisees par produit.
-
-\code{be} une matrice contenant la valeur du best estimate par produit.
+canton un objet de type \code{\link{Canton}}.
 }
 \description{
 \code{run_be_simu} est une methode permettant de calculer un best estimate

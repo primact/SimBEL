@@ -3,7 +3,6 @@
 \docType{methods}
 \name{calc_primes}
 \alias{calc_primes}
-\alias{EpEuroInd}
 \title{Calcule les flux de primes pour des contrats epargne en euros et des retraites en phase de restitution.}
 \usage{
 calc_primes(x)

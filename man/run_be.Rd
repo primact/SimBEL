@@ -15,7 +15,7 @@ de PRE dans le resultat technique utilisee pour le calcul de la participation au
 
 \item{parallel}{une valeur \code{logical} qui indique si les calculs seront parallelises.}
 
-\item{nb_coeur}{une valeur \code{integer} qui indique le nombre de coeurs utilises dans le cas ou les calculs sont 
+\item{nb_coeur}{une valeur \code{integer} qui indique le nombre de coeurs utilises dans le cas ou les calculs sont
 parallelises. Par defaut cette valeur est egale a 0.}
 }
 \value{

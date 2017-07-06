@@ -16,7 +16,7 @@ L'objet de la classe \code{\link{PortPassif}} construit a partir des inputs rens
 }
 \description{
 \code{load_pp} est une methode permettant de charger les parametres et les donnees associees a un
-objet de classe \code{\link{PortPassifs}}.
+objet de classe \code{\link{PortPassif}}.
 }
 \seealso{
 La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}

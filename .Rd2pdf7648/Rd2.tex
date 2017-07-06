@@ -1,0 +1,148 @@
+\documentclass[a4paper]{book}
+\usepackage[times,inconsolata,hyper]{Rd}
+\usepackage{makeidx}
+\usepackage[latin1]{inputenc} % @SET ENCODING@
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package `SimBEL'}}
+\par\bigskip{\large \today}
+\end{center}
+\begin{description}
+\raggedright{}
+\item[Type]\AsIs{Package}
+\item[Title]\AsIs{Un package de calcul du best estimate epargne sous Solvabilite
+2.}
+\item[Version]\AsIs{2.0.0}
+\item[Description]\AsIs{Un modele de simulation Monte-Carlo s'appuyant sur une projection
+d'un canton (actif et passif) permettant l'evaluation des provisions best
+estimate d'un contrat d'epargne et retraite francais en euros. Plusieurs chocs de la formule
+standard peuvent etre effectues.}
+\item[Author]\AsIs{Prim'Act}
+\item[URL]\AsIs{}\url{http://github.com/gquibert/SimBEL}\AsIs{}
+\item[BugReports]\AsIs{}\url{http://github.com/qguibert/SimBEL/issues}\AsIs{}
+\item[Maintainer]\AsIs{Quentin Guibert }\email{quentin.guibert@primact.fr}\AsIs{}
+\item[Depends]\AsIs{R (>= 3.3.1)}
+\item[Imports]\AsIs{rootSolve}
+\item[Suggests]\AsIs{rootSolve}
+\item[License]\AsIs{GPL-2}
+\item[LazyData]\AsIs{TRUE}
+\item[RoxygenNote]\AsIs{6.0.1}
+\item[Collate]\AsIs{'Action\_class.R' 'Action\_buy.R' 'Action\_calc\_pmvl.R'
+'Action\_calc\_vm.R' 'Action\_internal.R' 'Action\_revalo.R'
+'Action\_sell.R' 'Action\_sell\_pvl.R' 'Action\_update\_dur\_det.R'
+'Action\_update\_vm.R' 'AlmEngine\_class.R'
+'AlmEngine\_create\_ptf\_bought\_action.R' 'Immo\_class.R'
+'AlmEngine\_create\_ptf\_bought\_immo.R' 'Oblig\_class.R'
+'AlmEngine\_create\_ptf\_bought\_oblig.R'
+'AlmEngine\_do\_calc\_nb\_sold\_action.R'
+'AlmEngine\_do\_calc\_nb\_sold\_immo.R'
+'AlmEngine\_do\_calc\_nb\_sold\_oblig.R' 'AlmEngine\_internal.R'
+'Treso\_class.R' 'RC\_class.R' 'PRE\_class.R' 'FraisFin\_class.R'
+'PortFin\_class.R' 'AlmEngine\_reallocate.R' 'AlmEngine\_update.R'
+'AutresPassifs-class.R' 'AutresPassifs-internal.R'
+'AutresPassifs-load.R' 'AutresPassifs-proj\_annee.R'
+'AutresReserves-class.R' 'AutresReserves-init\_debut\_pgg\_psap.R'
+'AutresReserves-internal.R' 'AutresReserves-load.R'
+'AutresReserves-update\_reserves.R' 'ESG\_class.R'
+'ParamBe\_class.R' 'ParamRevaloEngine\_class.R'
+'ParamAlmEngine\_class.R' 'HypCanton\_class.R' 'Ppb\_class.R'
+'ModelPointESG\_class.R' 'TabEpEuroInd-class.R'
+'EpEuroInd-class.R' 'TauxPB-class.R' 'FraisPassif-class.R'
+'ParamRachDyn-class.R' 'ParamComport-class.R'
+'ParamTableRach-class.R' 'ParamTableMort-class.R'
+'HypTech-class.R' 'PortPassif-class.R' 'Canton\_class.R'
+'Be\_class.R' 'Be-run\_be.R' 'Be-run\_be\_simu.R'
+'Be-write\_results.R' 'Be\_internal.R' 'Canton\_calc\_fin\_proj.R'
+'Canton\_calc\_result\_technique\_ap\_pb.R' 'Canton\_internal.R'
+'Canton\_proj\_an.R' 'ParamChocSousc-class.R'
+'ParamChocMket\_class.R' 'ChocSolvabilite2\_class.R'
+'ChocSolvabilite2\_do\_choc\_action\_type1.R'
+'ChocSolvabilite2\_do\_choc\_action\_type2.R'
+'ChocSolvabilite2\_do\_choc\_frais.R'
+'ChocSolvabilite2\_do\_choc\_immo.R'
+'ChocSolvabilite2\_do\_choc\_longevite.R'
+'ChocSolvabilite2\_do\_choc\_mortalite.R'
+'ChocSolvabilite2\_do\_choc\_rachat\_down.R'
+'ChocSolvabilite2\_do\_choc\_rachat\_up.R'
+'ChocSolvabilite2\_do\_choc\_spread.R'
+'ChocSolvabilite2\_do\_choc\_spread\_unitaire.R'
+'ChocSolvabilite2\_do\_choc\_taux.R' 'ChocSolvabilite2\_internal.R'
+'ChocSolvabilite2\_load.R' 'ESG-get\_choc\_inflation\_frais.R'
+'ESG\_chargement.R' 'ESG\_extract\_mp.R' 'ESG\_internal.R'
+'EpEuroInd-internal.R' 'FraisFin\_calc.R' 'FraisFin\_internal.R'
+'FraisFin\_load.R' 'FraisPassif-calc\_frais.R'
+'FraisPassif-internal.R' 'FraisPassif-load.R'
+'HypCanton\_internal.R' 'HypCanton\_load.R'
+'HypTech-get\_choc\_rach.R' 'HypTech-get\_choc\_table.R'
+'HypTech-get\_comport.R' 'HypTech-get\_proba\_paye\_retraite.R'
+'HypTech-get\_proba\_sortie\_retraite.R' 'HypTech-get\_qx\_mort.R'
+'HypTech-get\_qx\_rach.R' 'HypTech-get\_rach\_dyn.R'
+'HypTech-internal.R' 'Initialisation\_class.R'
+'Initialisation\_load.R' 'HypTech-load.R' 'Immo\_buy.R'
+'Immo\_calc\_pmvl.R' 'Immo\_calc\_vm.R' 'Immo\_internal.R'
+'Immo\_revalo.R' 'Immo\_sell.R' 'Immo\_update\_dur\_det.R'
+'Immo\_update\_vm.R' 'Initialisation\_create\_folder.R'
+'Initialisation\_initSimBEL.R' 'Initialisation\_init\_scenario.R'
+'Initialisation\_internal.R' 'Initialisation\_set\_architecture.R'
+'ModelPointESG\_internal.R' 'Oblig\_buy.R' 'Oblig\_calc\_coupon.R'
+'Oblig\_calc\_dur.R' 'Oblig\_calc\_nominal.R' 'Oblig\_calc\_pmvl.R'
+'Oblig\_calc\_sur\_dec.R' 'Oblig\_calc\_vm.R' 'Oblig\_calc\_vnc.R'
+'Oblig\_calc\_z\_spread.R' 'Oblig\_echeancier.R'
+'Oblig\_flux\_annee.R' 'Oblig\_internal.R' 'Oblig\_sell.R'
+'Oblig\_update\_cc.R' 'Oblig\_update\_dur.R'
+'Oblig\_update\_mat\_res.R' 'Oblig\_update\_sd.R'
+'Oblig\_update\_vm.R' 'Oblig\_update\_vnc.R' 'Oblig\_update\_zsp.R'
+'Oblig\_yield\_to\_maturity.R' 'PRE\_calc.R'
+'PRE\_do\_update\_val\_courante.R' 'PRE\_do\_update\_val\_debut.R'
+'PRE\_internal.R' 'PRE\_load.R' 'ParamAlmEngine\_internal.R'
+'ParamAlmEngine\_load.R' 'ParamBe\_internal.R'
+'ParamChocMket\_internal.R' 'ParamChocSousc-internal.R'
+'ParamComport-calc\_tx\_cible.R' 'ParamComport-internal.R'
+'ParamRachDyn-calc\_rach\_dyn.R' 'ParamRachDyn-internal.R'
+'ParamRevaloEngine\_internal.R' 'ParamRevaloEngine\_load.R'
+'ParamTableMort-calc\_coef\_rente.r'
+'ParamTableMort-calc\_proba\_deces.R'
+'ParamTableMort-calc\_proba\_survie.R' 'ParamTableMort-calc\_qx.R'
+'ParamTableMort-internal.R' 'ParamTableRach-calc\_rach.R'
+'ParamTableRach-internal.R' 'TabRetEuroRest\_class.R'
+'RetraiteEuroRest\_class.R' 'PassifBase-calc\_pm.R'
+'PassifBase-calc\_prest.R' 'PassifBase-calc\_primes.R'
+'PassifBase-calc\_proba\_flux.R' 'PassifBase-calc\_revalo\_pm.R'
+'PassifBase-calc\_tx\_cible.R' 'PassifBase-calc\_tx\_min.R'
+'PassifBase-calc\_tx\_sortie.R' 'PassifBase-vieilli\_mp.R'
+'PortFin\_calc\_pmvl.R' 'PortFin\_calc\_rdt.R'
+'PortFin\_calc\_resultat\_fin.R' 'PortFin\_calc\_tra.R'
+'PortFin\_chargement.R' 'PortFin\_chargement\_reference.R'
+'PortFin\_do\_update\_pmvl.R'
+'PortFin\_do\_update\_vm\_vnc\_precedent.R' 'PortFin\_internal.R'
+'PortFin\_print\_alloc.R' 'PortFin\_update.R'
+'PortFin\_update\_reference.R' 'PortFin\_vieillissement\_action.R'
+'PortFin\_vieillissement\_immo.R'
+'PortFin\_vieillissement\_oblig.R'
+'PortFin\_vieillissement\_treso.R'
+'PortPassif-calc\_rdt\_marche\_ref.R' 'PortPassif-internal.R'
+'PortPassif-load.R' 'PortPassif-proj\_annee\_av\_pb.R'
+'PortPassif-vieillissement\_ap\_pb.R'
+'PortPassif-vieillissement\_av\_pb.R' 'Ppb\_dotation\_reprise.R'
+'Ppb\_internal.R' 'Ppb\_load.R' 'Ppb\_ppb\_8ans.R'
+'Ppb\_vieillissement\_ppb.R' 'RC\_calc.R'
+'RC\_do\_update\_val\_courante.R' 'RC\_do\_update\_val\_debut.R'
+'RC\_internal.R' 'RC\_load.R' 'RetraiteEuroRest-get\_coef\_rente.R'
+'RetraiteEuroRest\_internal.R' 'RevaloEngine\_base\_prod\_fin.R'
+'RevaloEngine\_calc\_marge\_fin.R'
+'RevaloEngine\_calc\_result\_technique.R'
+'RevaloEngine\_calc\_revalo.R' 'RevaloEngine\_class.R'
+'RevaloEngine\_finance\_cible\_marge.R'
+'RevaloEngine\_finance\_cible\_pmvl.R'
+'RevaloEngine\_finance\_cible\_ppb.R'
+'RevaloEngine\_finance\_contrainte\_legale.R'
+'RevaloEngine\_finance\_tmg.R' 'RevaloEngine\_internal.R'
+'RevaloEngine\_pb\_contr.R' 'SimBEL.R' 'TabEpEuroInd-internal.R'
+'TabRetEuroRest\_internal.R' 'TauxPB-internal.R'
+'Treso\_calc\_vm.R' 'Treso\_internal.R' 'Treso\_revalo.R'
+'Treso\_revenu.R' 'Treso\_update.R' 'taux\_period-function.R'}
+\end{description}
+\Rdcontents{\R{} topics documented:}

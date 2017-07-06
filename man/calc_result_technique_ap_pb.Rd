@@ -10,7 +10,7 @@ calc_result_technique_ap_pb(passif_av_pb, passif_ap_pb, ppb, var_pre)
 \arguments{
 \item{passif_av_pb}{est une liste produit par la methode \code{\link{viellissement_av_pb}}.}
 
-\item{passif_ap_pb}{est une liste produit par la methode \code{\link{viellissement_ap_pb}}.}
+\item{passif_ap_pb}{est une liste produit par la methode \code{\link{vieillissment_ap_pb}}.}
 
 \item{ppb}{est un objet de la classe \code{\link{Ppb}} qui renvoie l'etat courant de la PPB.}
 

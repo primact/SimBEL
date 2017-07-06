@@ -10,7 +10,7 @@ Une classe comprenant les methodes pour l'application de la revalorisation des p
 \section{Slots}{
 
 \describe{
-\item{\code{param_revalo}}{est objet de type \code{\link{ParamRevalo}} comprenant
+\item{\code{param_revalo}}{est objet de type \code{\link{ParamRevaloEngine}} comprenant
 les parametres utilises pour la revalorisation des contrats.}
 }}
 

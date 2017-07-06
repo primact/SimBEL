@@ -18,7 +18,7 @@ Contient autant d'elements que le portefeuille a de lignes.}
 \item{flux_fin}{vecteur decrivant les flux de fin d'annee (positif =entrants,  negatifs = sortants).}
 }
 \value{
-L'objet \code{x} dont les valeurs de marche ont ete mises a jour.
+Les valeurs de marche mises a jour.
 }
 \description{
 \code{calc_vm_treso} est une methode permettant de calculer les valeurs de marche de chaque ligne du portefeuille treso.

@@ -1,7 +1,7 @@
 Package: SimBEL
 Type: Package
 Title: Un package de calcul du best estimate epargne sous Solvabilite 2.
-Version: 2.0.0
+Version: 2.5.0
 Description: Un modele de simulation Monte-Carlo s'appuyant sur une projection
     d'un canton (actif et passif) permettant l'evaluation des provisions best
     estimate d'un contrat d'epargne et retraite francais en euros. Plusieurs chocs de la formule
@@ -11,11 +11,10 @@ URL: http://github.com/gquibert/SimBEL
 BugReports: http://github.com/qguibert/SimBEL/issues
 Maintainer: Quentin Guibert <quentin.guibert@primact.fr>
 Depends:
-    R (>= 3.3.1)
-Imports:
-    rootSolve
+    R (>= 3.4.0), rootSolve(>= 1.7), doParallel(>= 1.0.10)
+Imports: Rcpp, utils, methods
 Suggests:
-    rootSolve
+LinkingTo: Rcpp
 License: GPL-2
 LazyData: TRUE
 RoxygenNote: 6.0.1
@@ -63,6 +62,7 @@ Collate:
     'HypCanton_class.R'
     'Ppb_class.R'
     'ModelPointESG_class.R'
+    'TabProbaEpEuroInd-class.R'
     'TabEpEuroInd-class.R'
     'EpEuroInd-class.R'
     'TauxPB-class.R'
@@ -100,9 +100,10 @@ Collate:
     'ChocSolvabilite2_internal.R'
     'ChocSolvabilite2_load.R'
     'ESG-get_choc_inflation_frais.R'
+    'ESG_internal.R'
     'ESG_chargement.R'
     'ESG_extract_mp.R'
-    'ESG_internal.R'
+    'EpEuroInd-calc_proba_dyn.R'
     'EpEuroInd-internal.R'
     'FraisFin_calc.R'
     'FraisFin_internal.R'
@@ -112,6 +113,7 @@ Collate:
     'FraisPassif-load.R'
     'HypCanton_internal.R'
     'HypCanton_load.R'
+    'HypTech-convert_table.R'
     'HypTech-get_choc_rach.R'
     'HypTech-get_choc_table.R'
     'HypTech-get_comport.R'
@@ -147,7 +149,6 @@ Collate:
     'Oblig_calc_vm.R'
     'Oblig_calc_vnc.R'
     'Oblig_calc_z_spread.R'
-    'Oblig_echeancier.R'
     'Oblig_flux_annee.R'
     'Oblig_internal.R'
     'Oblig_sell.R'
@@ -169,9 +170,7 @@ Collate:
     'ParamBe_internal.R'
     'ParamChocMket_internal.R'
     'ParamChocSousc-internal.R'
-    'ParamComport-calc_tx_cible.R'
     'ParamComport-internal.R'
-    'ParamRachDyn-calc_rach_dyn.R'
     'ParamRachDyn-internal.R'
     'ParamRevaloEngine_internal.R'
     'ParamRevaloEngine_load.R'
@@ -182,6 +181,7 @@ Collate:
     'ParamTableMort-internal.R'
     'ParamTableRach-calc_rach.R'
     'ParamTableRach-internal.R'
+    'TabProbaRetEuroRest-class.R'
     'TabRetEuroRest_class.R'
     'RetraiteEuroRest_class.R'
     'PassifBase-calc_pm.R'
@@ -191,7 +191,6 @@ Collate:
     'PassifBase-calc_revalo_pm.R'
     'PassifBase-calc_tx_cible.R'
     'PassifBase-calc_tx_min.R'
-    'PassifBase-calc_tx_sortie.R'
     'PassifBase-vieilli_mp.R'
     'PortFin_calc_pmvl.R'
     'PortFin_calc_rdt.R'
@@ -225,6 +224,7 @@ Collate:
     'RC_do_update_val_debut.R'
     'RC_internal.R'
     'RC_load.R'
+    'RcppExports.R'
     'RetraiteEuroRest-get_coef_rente.R'
     'RetraiteEuroRest_internal.R'
     'RevaloEngine_base_prod_fin.R'
@@ -241,6 +241,9 @@ Collate:
     'RevaloEngine_pb_contr.R'
     'SimBEL.R'
     'TabEpEuroInd-internal.R'
+    'TabProbaBase-update_tab_proba.R'
+    'TabProbaEpEuroInd-internal.R'
+    'TabProbaRetEuroRest-internal.R'
     'TabRetEuroRest_internal.R'
     'TauxPB-internal.R'
     'Treso_calc_vm.R'
@@ -248,4 +251,5 @@ Collate:
     'Treso_revalo.R'
     'Treso_revenu.R'
     'Treso_update.R'
+    'help.R'
     'taux_period-function.R'

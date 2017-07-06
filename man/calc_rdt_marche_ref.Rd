@@ -8,10 +8,10 @@
 calc_rdt_marche_ref(x, mp_esg)
 }
 \arguments{
-\item{mp_esg}{est un objet de type \code{ModelPointESG}, qui represente la situation courante
-en annee et simulations des valeurs de l'ESG.}
+\item{x}{un objet de la classe \code{\link{ParamComport}}.}
 
-\item{param_comport}{un objet de la classe \code{ParamComport}.}
+\item{mp_esg}{est un objet de type \code{\link{ModelPointESG}}, qui represente la situation courante
+en annee et simulations des valeurs de l'ESG.}
 }
 \value{
 Une liste contenant les rendements de reference du marche.

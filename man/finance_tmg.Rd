@@ -9,8 +9,9 @@ finance_tmg(bes_tmg_prest, bes_tmg_stock, ppb)
 }
 \arguments{
 \item{bes_tmg_prest}{un vecteur \code{numeric} comprenant
-par produit le besoin de finance des TMG sur prestations.
-@param bes_tmg_stock un vecteur \code{numeric} comprenant
+par produit le besoin de finance des TMG sur prestations.}
+
+\item{bes_tmg_stock}{un vecteur \code{numeric} comprenant
 par produit le besoin de finance des TMG sur le stock.}
 
 \item{ppb}{est un objet de la classe \code{\link{Ppb}} qui renvoie l'etat courant de la PPB.}

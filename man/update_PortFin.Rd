@@ -8,7 +8,7 @@
 update_PortFin(an, x, new_mp_ESG, flux_milieu, flux_fin)
 }
 \arguments{
-\item{an}{\code{numeric} correspond a l'annee de projection du portefeuille financier.}
+\item{an}{\code{integer} correspond a l'annee de projection du portefeuille financier.}
 
 \item{x}{objet de la classe \code{\link{PortFin}}, correspondant au portefeuille financier de l'assureur
 avant l'etape de vieillissement.}

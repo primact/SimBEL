@@ -5,16 +5,12 @@
 \alias{calc_proba_flux}
 \title{Calcul les probabilites de mouvement de flux pour des contrats epargne en euros et de retraite.}
 \usage{
-calc_proba_flux(x, y)
+calc_proba_flux(x, ht)
 }
 \arguments{
 \item{x}{un objet de la classe \code{\link{EpEuroInd}} ou de la classe \code{\link{RetraiteEuroRest}} contenant les model points epargne euros.}
 
-\item{y}{une liste contenant le parametre.
-\describe{
-\item{\code{ht} : }{un objet de la classe \code{\link{HypTech}} contenant differentes tables de mortalite et differentes
-lois de rachat.}
-}}
+\item{ht}{un objet de la classe \code{\link{HypTech}} contenant differentes tables de mortalite et differentes lois de rachat.}
 }
 \value{
 Une matrice contenant pour chaque model points en ligne :

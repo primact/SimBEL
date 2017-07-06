@@ -18,7 +18,7 @@ L'objet de la classe \code{\link{ParamAlmEngine}} construit a partir des inputs 
 }
 \description{
 \code{param_alm_engine_load} est la methode de chargement des attributs d'un objet \code{\link{ParamAlmEngine}}
-a partir des donnees de l'environnement utilisateur et d'un portefeuille financier de reference (charge par la fonction \code{\link{chargement_PortFin_ref}}.
+a partir des donnees de l'environnement utilisateur et d'un portefeuille financier de reference (charge par la fonction \code{\link{chargement_PortFin_reference}}.
 }
 \author{
 Prim'Act

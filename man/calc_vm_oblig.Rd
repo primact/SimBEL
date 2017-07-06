@@ -14,7 +14,7 @@ calc_vm_oblig(x, yield_curve)
 (l'attribut \code{yield_curve} des objets de la classe \code{\link{ModelPointESG}}).}
 }
 \value{
-L'objet \code{x} dont les valeurs de marche ont ete mises a jour.
+Les valeurs de marche mises a jour.
 }
 \description{
 \code{calc_vm_oblig} est une methode permettant de calculer les valeurs de marche du portefeuille obligataires.

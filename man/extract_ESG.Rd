@@ -17,16 +17,16 @@ dont on souhaite obtenir les valeurs.}
 (possibilite de selectionner les annees 0 a \code{nb_annee_proj}).}
 }
 \value{
-\code{x} l'objet de la classe \code{\link{ModelPoint_ESG}} construit.
+\code{x} l'objet de la classe \code{\link{ModelPointESG}} construit.
 }
 \description{
-\code{extract_ESG} construit l'objet de classe \code{\link{ModelPoint_ESG}} a partir d'un objet
+\code{extract_ESG} construit l'objet de classe \code{\link{ModelPointESG}} a partir d'un objet
  de la classe \code{\link{ESG}}.
 Le \code{ModelPointESG} ainsi construit correspond a l'extraction de donnees de l'ESG
  pour une annee specifique et pour une simulation specifique.
 }
 \seealso{
-La classe \code{\link{ModelPoint_ESG}}.
+La classe \code{\link{ModelPointESG}}.
 }
 \author{
 Prim'Act
