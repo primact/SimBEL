@@ -5,11 +5,13 @@
 ##'
 ##' Une classe comprenant les methodes pour l'application de la revalorisation des passifs.
 ##' @name RevaloEngine
-##' @slot param_revalo est objet de type \code{\link{ParamRevalo}} comprenant
+##' @slot param_revalo est objet de type \code{\link{ParamRevaloEngine}} comprenant
 ##'  les parametres utilises pour la revalorisation des contrats.
 ##' @docType class
 ##' @author Prim'Act
 ##' @keywords classes
+##' @include ParamRevaloEngine_class.R
+
 setClass(
   Class = "RevaloEngine",
   representation = representation(

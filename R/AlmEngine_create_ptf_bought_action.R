@@ -25,19 +25,30 @@ setMethod(
     f = "create_ptf_bought_action",
     signature = c(x = "Action", coefficient = "numeric"),
     definition = function(x, coefficient){
-        if (length(coefficient) != nrow(x@ptf_action)){
-          stop("[Action : create_ptf_bought_action] : Les inputs sont de dimensions distinctes \n")
-        }
-        nom_table  <- names(x@ptf_action)
+        
+        # Recuperation du PTF action
+        ptf_action <- x@ptf_action
+        
+        # Test input
+        if (length(coefficient) != nrow(ptf_action)) stop("[Action : create_ptf_bought_action] : Les inputs sont de dimensions distinctes \n")
+        
+        # Donnees
+        nom_table  <- names(ptf_action)
         val_marche <- which(nom_table == "val_marche")
         val_nc     <- which(nom_table == "val_nc")
         val_achat  <- which(nom_table == "val_achat")
         nb_unit    <- which(nom_table == "nb_unit")
 
-        x@ptf_action$val_marche <- coefficient * .subset2(x@ptf_action, val_marche)
-        x@ptf_action$val_nc     <- coefficient * .subset2(x@ptf_action, val_nc)
-        x@ptf_action$val_achat  <- coefficient * .subset2(x@ptf_action, val_achat)
-        x@ptf_action$nb_unit    <- coefficient * .subset2(x@ptf_action, nb_unit)
+        # Mise a jour des donnees du PTF action
+        ptf_action$val_marche <- coefficient * .subset2(ptf_action, val_marche)
+        ptf_action$val_nc     <- coefficient * .subset2(ptf_action, val_nc)
+        ptf_action$val_achat  <- coefficient * .subset2(ptf_action, val_achat)
+        ptf_action$nb_unit    <- coefficient * .subset2(ptf_action, nb_unit)
+        
+        # Mise a jour du PTF
+        x@ptf_action <- ptf_action
+        
+        # Output
         return(x)
     }
 )

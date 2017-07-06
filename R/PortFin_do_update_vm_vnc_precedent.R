@@ -33,6 +33,8 @@ setMethod(
                                       vnc = list(action = table_alloc["alloc_action", "alloc_valeur_nc"],
                                                  immo   = table_alloc["alloc_immo",   "alloc_valeur_nc"],
                                                  oblig  = table_alloc["alloc_oblig",  "alloc_valeur_nc"]))
+
+        # Output
         return(x)
     }
 )

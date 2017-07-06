@@ -27,12 +27,15 @@ setMethod(
         pmvl_immo   <- calc_pmvl_immo(x@ptf_immo)
         pmvl_oblig  <- calc_pmvl_oblig(x@ptf_oblig)
 
+        # Mise a jour des donnees
         x@pvl_action <- pmvl_action[["pvl"]]
         x@mvl_action <- pmvl_action[["mvl"]]
         x@pvl_immo   <- pmvl_immo[["pvl"]]
         x@mvl_immo   <- pmvl_immo[["mvl"]]
         x@pvl_oblig  <- pmvl_oblig[["pvl"]]
         x@mvl_oblig  <- pmvl_oblig[["mvl"]]
+        
+        # Output
         return(x)
     }
 )

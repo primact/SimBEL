@@ -50,7 +50,7 @@ setReplaceMethod(
            "vm_vnc_precedent" = {x@vm_vnc_precedent <- value},
            stop("[PortFin] : Cet attribut n'existe pas!")
     )
-    validObject(x)
+    # validObject(x)
     return(x)
   }
 )

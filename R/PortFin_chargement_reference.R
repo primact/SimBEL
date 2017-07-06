@@ -18,7 +18,6 @@
 ##' @export
 ##' @include PortFin_class.R ModelPointESG_class.R
 
-
 setGeneric(name = "chargement_PortFin_reference",function(folder_PortFin_reference_address, mp_ESG){standardGeneric("chargement_PortFin_reference")})
 setMethod(
     f = "chargement_PortFin_reference",
@@ -97,7 +96,7 @@ setMethod(
         ptf_oblig["ptf_oblig"][,"sd"]       <- calc_sur_dec(ptf_oblig)
         ptf_oblig["ptf_oblig"][,"duration"] <- duration_sensi(ptf_oblig)[, "duration"]
 
-        x <- new("PortFin", annee = as.integer(0),
+        x <- new("PortFin", annee = 0L,
                  ptf_action = ptf_action,
                  ptf_immo   = ptf_immo,
                  ptf_oblig  = ptf_oblig,

@@ -62,7 +62,7 @@ setReplaceMethod(
            "tab" = {x@tab <- value},
            stop("Cet attribut n'existe pas!")
     )
-    validObject(x)
+    # validObject(x)
     return(x)
   }
 )

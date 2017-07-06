@@ -22,35 +22,51 @@
 setGeneric(name = "update_PortFin_reference", def = function(an, x, mp_ESG){standardGeneric("update_PortFin_reference")})
 setMethod(
     f = "update_PortFin_reference",
-    signature = c(an = "numeric", x = "PortFin", mp_ESG = "ModelPointESG"),
+    signature = c(an = "integer", x = "PortFin", mp_ESG = "ModelPointESG"),
     definition = function(an, x, mp_ESG){
-
+        
         table_rdt <- calc_rdt(x, mp_ESG)
-
-        x@annee <- as.integer(an)
-        # Update Action
-
-        # table_rdt[["rdt_action"]][["rdt"]]
-            # VM
-            x@ptf_action@ptf_action$val_marche  <- calc_vm_action(x@ptf_action, table_rdt[["rdt_action"]]$rdt)
-            # VNC
-            x@ptf_action@ptf_action$val_nc      <- x@ptf_action@ptf_action$val_marche
-            # VA
-            x@ptf_action@ptf_action$val_achat   <- x@ptf_action@ptf_action$val_marche
-        # Update Immo
-            # VM
-            x@ptf_immo@ptf_immo$val_marche  <-  calc_vm_immo(x@ptf_immo,  table_rdt[["rdt_immo"]]$rdt)
-            # VNC
-            x@ptf_immo@ptf_immo$val_nc      <- x@ptf_immo@ptf_immo$val_marche
-            # VA
-            x@ptf_immo@ptf_immo$val_achat   <- x@ptf_immo@ptf_immo$val_marche
-        # Update Oblig
-            # VM
-            x@ptf_oblig@ptf_oblig$val_marche  <- calc_vm_oblig(x@ptf_oblig, mp_ESG@yield_curve)
-            # VNC
-            x@ptf_oblig@ptf_oblig$val_nc      <- x@ptf_oblig@ptf_oblig$val_marche
-            # VA
-            x@ptf_oblig@ptf_oblig$val_achat   <- x@ptf_oblig@ptf_oblig$val_marche
+        
+        # Mise a jour de l'annnee
+        x@annee <- an
+        
+        ### Update Action
+        # Donnees
+        ptf_action <- x@ptf_action@ptf_action
+        val_marche <- calc_vm_action(x@ptf_action, table_rdt[["rdt_action"]][, "rdt"])
+        
+        # Mise a jour
+        ptf_action$val_marche  <- val_marche # VM
+        ptf_action$val_nc      <- val_marche # VNC
+        ptf_action$val_achat   <- val_marche # VA
+        x@ptf_action@ptf_action <- ptf_action # Mise a jour PTF action
+        
+        
+        ### Update Immo
+        # Donnees
+        ptf_immo <- x@ptf_immo@ptf_immo
+        val_marche <- calc_vm_immo(x@ptf_immo,  table_rdt[["rdt_immo"]][, "rdt"])
+        
+        # Mise a jour
+        ptf_immo$val_marche  <- val_marche # VM
+        ptf_immo$val_nc      <- val_marche # VNC
+        ptf_immo$val_achat   <- val_marche # VA
+        x@ptf_immo@ptf_immo  <- ptf_immo # Mise a jourt PTF immo
+        
+        
+        ### Update Oblig
+        # Donnees
+        ptf_oblig <- x@ptf_oblig@ptf_oblig
+        nom_oblig <- names(ptf_oblig)
+        val_marche <- calc_vm_oblig(x@ptf_oblig, mp_ESG@yield_curve)
+        
+        # Mise a jour
+        ptf_oblig$val_marche  <- val_marche # VM
+        ptf_oblig$val_nc      <- val_marche # VNC
+        ptf_oblig$val_achat   <- val_marche # VA
+        x@ptf_oblig@ptf_oblig <- ptf_oblig # Mise a jourt PTF oblig
+        
+        # Output
         return(x)
     }
 )

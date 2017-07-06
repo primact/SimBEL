@@ -20,36 +20,38 @@
 setGeneric(name = "get_choc_inflation_frais", def = function(x, choc)
 {standardGeneric("get_choc_inflation_frais")})
 setMethod(
-  f = "get_choc_inflation_frais",
-  signature = c(x = "ESG", choc = "numeric"),
-  def = function(x, choc){
+    f = "get_choc_inflation_frais",
+    signature = c(x = "ESG", choc = "numeric"),
+    def = function(x, choc){
 
-    # Annees pour l'actualisation
-    annees <- 1:ncol(x@ind_inflation) - 1
-    # Evite les divisions par 0
-    pmax(annees, 1)
+        # Inflation
+        ind_inflation <- x@ind_inflation
 
-    # Indice d'inflation avant choc (les annees sont basculees en lignes)
-    tx_inflation <- sapply(1:nrow(x@ind_inflation), function(i){
-      (x@ind_inflation[i, ])^ (1 / annees) - 1})
+        # Annees pour l'actualisation (eviter les divisions par 0)
+        annees <- pmax((1L:ncol(ind_inflation) - 1L), 1L)
 
-    # Application du choc
-    tx_inflation[2:nrow(tx_inflation), 0] <- tx_inflation[2:nrow(tx_inflation), 0] + choc
+        # Indice d'inflation avant choc (les annees sont basculees en lignes)
+        fun <- function(i){(ind_inflation[i, ])^ (1 / annees) - 1}
+        tx_inflation <- sapply(1L:nrow(ind_inflation), fun)
+
+        # Application du choc
+        tx_inflation[2L:nrow(tx_inflation), 0L] <- tx_inflation[2L:nrow(tx_inflation), 0L] + choc
 
 
-    # Remise sous forme d'indice
-    index <- sapply(1:nrow(x@ind_inflation), function(i){
-      (1 + tx_inflation[, i]) ^ (annees)})
+        # Remise sous forme d'indice
+        fun <- function(i){(1 + tx_inflation[, i])^(annees)}
+        index <- sapply(1L:nrow(ind_inflation), fun)
 
-    # Remise au format data.frame
-    index <- data.frame(t(index))
+        # Remise au format data.frame
+        index <- data.frame(t(index))
 
-    # Mise a jour de la matrice de taux d'inflation
-    x["ind_inflation"] <- index
-    # output
-    return(x)
+        # Mise a jour de la matrice de taux d'inflation
+        x@ind_inflation <- index
 
-  }
+        # output
+        return(x)
+
+    }
 )
 
 

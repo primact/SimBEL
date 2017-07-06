@@ -34,70 +34,71 @@ setMethod(
     signature = c(x = "Canton", resultat_fin = "numeric", result_tech = "numeric",
                   pm_fin_ap_pb = "numeric", tx_pb = "numeric", tx_enc_moy = "numeric"),
     definition = function(x, resultat_fin, result_tech, pm_fin_ap_pb, tx_pb, tx_enc_moy){
-
+        
+        # Recuperation de donnees
+        ptf_fin <- x@ptf_fin
+        
         #---------------------------------------------------------------
         # Etape 1 : Ajustement sur actifs
         #---------------------------------------------------------------
-
+        
         # Choix de modelisation : on force la vente de PMVL action et immo et on annule la PRE
-        flux_fin_actif <- x@ptf_fin@pvl_action + x@ptf_fin@mvl_action +
-            x@ptf_fin@pvl_immo + x@ptf_fin@mvl_immo
-
+        flux_fin_actif <- ptf_fin@pvl_action + ptf_fin@mvl_action + ptf_fin@pvl_immo + ptf_fin@mvl_immo
+        
         # Choix de modelisation : on force la vente de PMVL oblig que lon compense avec la variation de RC
-        flux_fin_actif <- flux_fin_actif + x@ptf_fin@pvl_oblig + x@ptf_fin@mvl_oblig -
-            calc_RC(x@ptf_fin@rc, x@ptf_fin@pvl_oblig + x@ptf_fin@mvl_oblig)[["var_rc"]]
-
+        flux_fin_actif <- flux_fin_actif + ptf_fin@pvl_oblig + ptf_fin@mvl_oblig -
+            calc_RC(ptf_fin@rc, ptf_fin@pvl_oblig + ptf_fin@mvl_oblig)[["var_rc"]]
+        
         # Ajustement du resultats financier et technique
         resultat_fin <- resultat_fin + flux_fin_actif
-        result_tech <- result_tech + x@ptf_fin@pre@val_courante # Choix de modelisation : Reprise de PRE
-
+        result_tech  <- result_tech + ptf_fin@pre@val_courante # Choix de modelisation : Reprise de PRE
+        
+        
         #---------------------------------------------------------------
         # Etape 2 : Revalorisation finale des passifs
         #---------------------------------------------------------------
-
-
+        
         # Choix de modelisation : attribution du flux de fin a l'actif en PB et attribution au prorata des PM de fin
-        if(sum(pm_fin_ap_pb) != 0){
-            coef_alloc <- pm_fin_ap_pb / sum(pm_fin_ap_pb)
-        }else{ # Division par 0
-            coef_alloc <- rep(1, length(pm_fin_ap_pb)) / length(pm_fin_ap_pb)
-        }
-
+        sum_pm_fin <- sum(pm_fin_ap_pb)
+        len_pm_fin <- length(pm_fin_ap_pb)
+        if(sum_pm_fin != 0)
+            coef_alloc <- pm_fin_ap_pb / sum_pm_fin
+        else # Division par 0
+            coef_alloc <- rep(1, len_pm_fin) / len_pm_fin
+        
         # Coefficient de mise a l'echelle
-        vnc_actif <- .subset2(print_alloc(x@ptf_fin), 3)[5]
-        if(vnc_actif == 0){ # Gestion des divisions par 0
+        vnc_actif <- .subset2(print_alloc(ptf_fin), 3L * 5L)
+        if(vnc_actif == 0) # Gestion des divisions par 0
             coef_scale <- 0
-        }else{
+        else
             coef_scale <- (pm_fin_ap_pb + x@ppb@valeur_ppb) / vnc_actif
-        }
-
-
+        
+        
         revalo_fin_passif <- max(0, flux_fin_actif) * coef_alloc * coef_scale
-
+        
         # Choix de modelisation : application des taux de PB contractuel et liquidation de la PPB
         revalo_fin_passif <- revalo_fin_passif * tx_pb + x@ppb@valeur_ppb * coef_alloc
         # Calcul du net de chargement sur encours
         revalo_fin_passif <- revalo_fin_passif * (1 - tx_enc_moy)
         result_tech <- result_tech - revalo_fin_passif
-
+        
         # Calcul d'un flux de fin d'annee
         # Choix de modelisation : la PSAP residuelle est attribuee en totalite au passif modelise
-        flux_fin_passif <- pm_fin_ap_pb +
-            revalo_fin_passif +
-            x@ptf_passif@autres_reserves@psap_valeur * coef_alloc
-
+        flux_fin_passif <- pm_fin_ap_pb + revalo_fin_passif + x@ptf_passif@autres_reserves@psap_valeur * coef_alloc
+        
         # La reprise de PSAP n'a pas d'effet sur le resultat technique car elle est supposee
         # etre compensee par un flux immediat de prestations
-
+        
+        
         #---------------------------------------------------------------
         # Etape 3 : Recalcul du resultat
         #---------------------------------------------------------------
-
+        
         # Calcul du resultats brut et net d'impot
         result_brut <- result_tech + resultat_fin
         result_net <- result_brut * (1 - x@hyp_canton@tx_import) * (result_brut > 0) + result_brut * (result_brut <= 0)
         impot <- result_brut - result_net
-
+        
         # Output
         return(list(flux_fin_passif = flux_fin_passif,
                     result_tech = result_tech,

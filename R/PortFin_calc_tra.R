@@ -20,18 +20,18 @@
 
 setGeneric(name = "calc_tra", def = function(plac_moy, res_fin){standardGeneric("calc_tra")})
 setMethod(
-  f = "calc_tra",
-  signature = c(plac_moy = "numeric", res_fin = "numeric"),
-  definition = function(plac_moy, res_fin){
-
-    # Valeur moyenne des placements
-    if(plac_moy == 0){
-      tra <- 0
-    }else{
-      # Calcul du TRA
-      tra <- res_fin / plac_moy
+    f = "calc_tra",
+    signature = c(plac_moy = "numeric", res_fin = "numeric"),
+    definition = function(plac_moy, res_fin){
+        
+        # Valeur moyenne des placements
+        if(plac_moy == 0)
+            tra <- 0
+        else
+            tra <- res_fin / plac_moy # Calcul du TRA
+        
+        # Output
+        return(tra)
     }
-    return(tra)
-  }
 )
 

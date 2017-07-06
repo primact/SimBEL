@@ -18,30 +18,34 @@ setMethod(
     f = "calc_pmvl",
     signature = "PortFin",
     definition = function(x){
-
-      # Gestion des noms de colonnes du data.frame de donnnees
-      nom_table_action <- names(x@ptf_action@ptf_action)
-      val_marche_action <- which(nom_table_action == "val_marche")
-      val_nc_action <- which(nom_table_action == "val_nc")
-
-      nom_table_immo <- names(x@ptf_immo@ptf_immo)
-      val_marche_immo <- which(nom_table_immo == "val_marche")
-      val_nc_immo <- which(nom_table_immo == "val_nc")
-
-      # Calcul des PMVL
-      pmvl_action <- .subset2(x@ptf_action@ptf_action, val_marche_action) -
-        .subset2(x@ptf_action@ptf_action, val_nc_action) # Action
-      pmvl_immo <- .subset2(x@ptf_immo@ptf_immo, val_marche_immo) -
-        .subset2(x@ptf_immo@ptf_immo, val_nc_immo) # Immo
-
-
-      # Affectation des resultats
-      x@pvl_action <- sum(max(pmvl_action, 0))
-      x@mvl_action <- sum(min(pmvl_action, 0))
-      x@pvl_immo   <- sum(max(pmvl_immo, 0))
-      x@mvl_immo   <- sum(min(pmvl_immo, 0))
-
-      # Output
-      return(x)
+        
+        # Recuperation des PTF
+        ptf_action <- x@ptf_action@ptf_action
+        ptf_immo   <- x@ptf_immo@ptf_immo
+        
+        # Gestion des noms de colonnes du data.frame de donnnees
+        nom_table_action <- names(ptf_action)
+        val_marche_action <- which(nom_table_action == "val_marche")
+        val_nc_action <- which(nom_table_action == "val_nc")
+        
+        nom_table_immo <- names(ptf_immo)
+        val_marche_immo <- which(nom_table_immo == "val_marche")
+        val_nc_immo <- which(nom_table_immo == "val_nc")
+        
+        ### Calcul des PMVL
+        # Action
+        pmvl_action <- .subset2(ptf_action, val_marche_action) - .subset2(ptf_action, val_nc_action)
+        # Immo
+        pmvl_immo <- .subset2(ptf_immo, val_marche_immo) - .subset2(ptf_immo, val_nc_immo)
+        
+        
+        # Affectation des resultats
+        x@pvl_action <- sum(max(pmvl_action, 0))
+        x@mvl_action <- sum(min(pmvl_action, 0))
+        x@pvl_immo   <- sum(max(pmvl_immo, 0))
+        x@mvl_immo   <- sum(min(pmvl_immo, 0))
+        
+        # Output
+        return(x)
     }
 )

@@ -109,7 +109,7 @@ setMethod(
         rc        <- rc_load(file_RC_address)
         frais_fin <- frais_fin_load(file_frais_fin_address)
 
-        x <- new("PortFin", annee = as.integer(0),
+        x <- new("PortFin", annee = 0L,
                  ptf_action = ptf_action,
                  ptf_immo   = ptf_immo,
                  ptf_oblig  = ptf_oblig,

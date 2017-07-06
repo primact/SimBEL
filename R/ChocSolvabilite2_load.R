@@ -10,7 +10,7 @@
 ##' @name chargement_choc
 ##' @docType methods
 ##' @param x objet de la classe \code{\link{ChocSolvabilite2}}.
-##' @param folder_choc_address est un \code{character}. Cette chaine de caractere est construite par la methode
+##' @param folder_chocs_address est un \code{character}. Cette chaine de caractere est construite par la methode
 ##'  \code{\link{set_architecture}} de la classe \code{\link{Initialisation}}.
 ##' Elle contient l'adresse du dossier contenant les fichiers de parametres des chocs de la formule standard a appliquer.
 ##' Ces derniers doivent etre renseignes par l'utilisateur.

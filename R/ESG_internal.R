@@ -25,7 +25,7 @@ setReplaceMethod(
   signature = "ESG",
   definition = function(x,i,value){
     switch(EXPR = i,
-           "nb_simu"    = {x@nb_simu <- value},
+           "nb_simu"       = {x@nb_simu <- value},
            "ind_action"    = {x@ind_action <- value},
            "ind_immo"      = {x@ind_immo <- value},
            "ind_inflation" = {x@ind_inflation <- value},

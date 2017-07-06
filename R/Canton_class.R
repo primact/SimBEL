@@ -46,17 +46,19 @@ setClass(
   validity = function (object){
               retval <- NULL
 
-              if (!is.integer(object@annee))  {retval <- c(retval, "[Canton] : annee n'est pas integer/n")}
-              if(!validObject(object@ptf_fin)) {retval <- c("[Canton] : Objet PortFin non valide")}
-              if(!validObject(object@ptf_passif))   {retval <- c("[Canton] : Objet PortPassif non valide")}
-              if(!validObject(object@mp_esg))   {retval <- c("[Canton] : Objet MPESG non valide")}
-              if(!validObject(object@ppb))   {retval <- c("[Canton] : Objet Ppb non valide")}
-              if(!validObject(object@hyp_canton))   {retval <- c("[Canton] : Objet HypCanton non valide")}
-              if(!validObject(object@param_alm))   {retval <- c("[Canton] : Objet ParamAlmEngine non valide")}
-              if(!validObject(object@param_revalo))   {retval <- c("[Canton] : Objet ParamRevalo non valide")}
+              if (!is.integer(object@annee))        retval <- c(retval, "[Canton] : annee n'est pas integer/n")
+              if(!validObject(object@ptf_fin))      retval <- c(retval, "[Canton] : Objet PortFin non valide")
+              if(!validObject(object@ptf_passif))   retval <- c(retval, "[Canton] : Objet PortPassif non valide")
+              if(!validObject(object@mp_esg))       retval <- c(retval, "[Canton] : Objet MPESG non valide")
+              if(!validObject(object@ppb))          retval <- c(retval, "[Canton] : Objet Ppb non valide")
+              if(!validObject(object@hyp_canton))   retval <- c(retval, "[Canton] : Objet HypCanton non valide")
+              if(!validObject(object@param_alm))    retval <- c(retval, "[Canton] : Objet ParamAlmEngine non valide")
+              if(!validObject(object@param_revalo)) retval <- c(retval, "[Canton] : Objet ParamRevalo non valide")
 
-              if (is.null(retval)) return (TRUE)
-              else return (retval)
+              if (is.null(retval))
+                  return (TRUE)
+              else
+                  return (retval)
               }
             )
 
@@ -92,7 +94,7 @@ setMethod(
       validObject(.Object)
     } else {
       #Traitement du cas vide
-      .Object@annee = as.integer(0)
+      .Object@annee = 0L
       .Object@ptf_fin = new("PortFin")
       .Object@ptf_passif = new("PortPassif")
       .Object@mp_esg = new("ModelPointESG")

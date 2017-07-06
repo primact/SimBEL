@@ -24,18 +24,32 @@ setMethod(
     f = "vieillissement_immo_PortFin",
     signature = c(x = "PortFin", table_rdt = "list"),
     definition = function(x, table_rdt){
+        
+        # Extraction PTF
+        ptf_immo <- x@ptf_immo 
+        
         # Verification input :
-        if(nrow(x@ptf_immo@ptf_immo) > 0) {
+        if(nrow(ptf_immo@ptf_immo) > 0) {
 
+            # Extraction de la table des rdt immo
+            rdt_immo <- table_rdt[["rdt_immo"]]
+            
             # Calcul des loyers
-            loyer <- sum(table_rdt[["rdt_immo"]]$loyer)
+            loyer <- sum(rdt_immo[, "loyer"])
 
             # Mise a jour de la VM Immo en fin d'annee
-            x@ptf_immo   <- update_vm_immo(x@ptf_immo, calc_vm_immo(x@ptf_immo, table_rdt[["rdt_immo"]]$rdt ))
+            ptf_immo   <- update_vm_immo(ptf_immo, calc_vm_immo(ptf_immo, rdt_immo[, "rdt"]))
+            
             # Mise a jour des durees de detention Action/Immo
-            x@ptf_immo   <- update_dur_det_immo(x@ptf_immo)
-            return(list(portFin = x, loyer = loyer))
+            ptf_immo   <- update_dur_det_immo(ptf_immo)
+            
+            # Mise a jour PTF
+            x@ptf_immo <- ptf_immo
+            
         } else {
-            return(list(portFin = x, loyer = 0))
+            loyer = 0
         }
+        
+        # Output    
+            return(list(portFin = x, loyer = loyer))
     })

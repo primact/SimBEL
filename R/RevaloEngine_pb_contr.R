@@ -26,37 +26,33 @@
 setGeneric(name = "pb_contr", def = function(base_fin, tx_pb, rev_stock_brut, ch_enc_th,
                                              tx_enc_moy){standardGeneric("pb_contr")})
 setMethod(
-  f = "pb_contr",
-  signature = c(base_fin = "numeric", tx_pb = "numeric", rev_stock_brut = "numeric", ch_enc_th = "numeric",
-                tx_enc_moy  = "numeric"),
-  definition = function(base_fin, tx_pb, rev_stock_brut, ch_enc_th, tx_enc_moy){
-
-    # Controle
-    if(prod(tx_pb < 0)){
-      stop("[RevaloEngine-pb_contr] : les taux de PB doivent etre positifs.")
+    f = "pb_contr",
+    signature = c(base_fin = "numeric", tx_pb = "numeric", rev_stock_brut = "numeric", ch_enc_th = "numeric",
+                  tx_enc_moy  = "numeric"),
+    definition = function(base_fin, tx_pb, rev_stock_brut, ch_enc_th, tx_enc_moy){
+        
+        # Controle
+        if(prod(tx_pb < 0)) stop("[RevaloEngine-pb_contr] : les taux de PB doivent etre positifs.")
+        if(length(base_fin) != length(tx_pb) | length(tx_pb) != length(rev_stock_brut) |
+           length(rev_stock_brut) != length(ch_enc_th) | length(ch_enc_th) != length(tx_enc_moy))
+            stop("[RevaloEngine-pb_contr] : les vecteurs en entree ne sont pas de meme longueur.")
+        
+        
+        # Calcul de la PB contractuelle par produit
+        # base_fin <- c(base_fin, base_fin_hm) # Ajout de la base financiere hors modele
+        pb_contr <- pmax(0, base_fin) * tx_pb # Calcul de la PB contractuelle
+        
+        # Calcul du supplement de revalorisation par produit
+        add_pb_contr <- pmax(0, pb_contr - rev_stock_brut)
+        
+        # Chargements sur encours
+        # Calcul des chargements sur encours theoriques par produit
+        ch_enc_ap_pb_contr <- ch_enc_th + add_pb_contr * tx_enc_moy
+        # Calcul de la revalorisation nette sans application de limite sur les chargements sur encours
+        rev_stock_nette_contr <- rev_stock_brut + add_pb_contr - ch_enc_ap_pb_contr
+        
+        # Output
+        return(list(ch_enc_ap_pb_contr = ch_enc_ap_pb_contr, rev_stock_nette_contr = rev_stock_nette_contr))
+        
     }
-    if(length(base_fin) != length(tx_pb) | length(tx_pb) != length(rev_stock_brut) |
-       length(rev_stock_brut) != length(ch_enc_th) | length(ch_enc_th) != length(tx_enc_moy)){
-      stop("[RevaloEngine-pb_contr] : les vecteurs en entree ne sont pas de meme longueur.")
-    }
-
-
-
-    # Calcul de la PB contractuelle par produit
-    # base_fin <- c(base_fin, base_fin_hm) # Ajout de la base financiere hors modele
-    pb_contr <- pmax(0, base_fin) * tx_pb # Calcul de la PB contractuelle
-
-    # Calcul du supplement de revalorisation par produit
-    add_pb_contr <- pmax(0, pb_contr - rev_stock_brut)
-
-    # Chargements sur encours
-    # Calcul des chargements sur encours theoriques par produit
-    ch_enc_ap_pb_contr <- ch_enc_th + add_pb_contr * tx_enc_moy
-    # Calcul de la revalorisation nette sans application de limite sur les chargements sur encours
-    rev_stock_nette_contr <- rev_stock_brut + add_pb_contr - ch_enc_ap_pb_contr
-
-    # Output
-    return(list(ch_enc_ap_pb_contr = ch_enc_ap_pb_contr, rev_stock_nette_contr = rev_stock_nette_contr))
-
-  }
 )

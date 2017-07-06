@@ -39,7 +39,7 @@ setReplaceMethod(
            "param_revalo" = {x@param_revalo <- value},
            stop("[PortFin] : Cet attribut n'existe pas!")
     )
-    validObject(x)
+    # validObject(x)
     return(x)
   }
 )

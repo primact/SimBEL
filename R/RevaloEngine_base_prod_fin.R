@@ -28,14 +28,15 @@ setMethod(
         # calcul de la base de produit financier au global et par produit
         base_prod_fin_port <- tra * (pm_moy_port + ppb@ppb_debut)
 
-        if(pm_moy_port == 0) {
+        if(pm_moy_port == 0){
             base_prod_fin <- pm_moy * 0
             base_prod_fin_port <- sum(base_prod_fin)
-        } else {
+        }else{
             base_prod_fin <- base_prod_fin_port * pm_moy / pm_moy_port
         }
 
         # Output
-        return(list(base_prod_fin = base_prod_fin, base_prod_fin_port = base_prod_fin_port))
+        return(list(base_prod_fin = base_prod_fin,
+                    base_prod_fin_port = base_prod_fin_port))
     }
 )

@@ -25,19 +25,27 @@ setMethod(
     signature = c(x = "Oblig", montant_vente = "numeric", method_vente = "character"),
     definition = function(x, montant_vente, method_vente){
 
-        nom_table <- names(x@ptf_oblig)
-        val_marche <- which(nom_table == "val_marche")
-        num_mp     <- which(nom_table == "num_mp")
-        nb_unit    <- which(nom_table == "nb_unit")
+        # Donnees
+        ptf_oblig   <- x@ptf_oblig
+        nom_table   <- names(ptf_oblig)
+        val_marche  <- which(nom_table == "val_marche")
+        num_mp      <- which(nom_table == "num_mp")
+        nb_unit     <- which(nom_table == "nb_unit")
 
         if(method_vente == "proportionnelle"){
-            alloc         <- .subset2(x@ptf_oblig, val_marche) / sum(.subset2(x@ptf_oblig, val_marche))
-            montant_vente <- montant_vente * alloc
-            vm_unitaire   <- .subset2(x@ptf_oblig, val_marche) / .subset2(x@ptf_oblig, nb_unit)
-
-            num_mp  <- .subset2(x@ptf_oblig, num_mp)
-            nb_sold <- montant_vente / vm_unitaire
+            # Extraction de la valeur de marche
+            val_marche    <- .subset2(ptf_oblig, val_marche)
+            
+            alloc         <- val_marche / sum(val_marche) # Calul de l'allocation
+            montant_vente <- montant_vente * alloc # Calcul du montant_vente
+            vm_unitaire   <- val_marche / .subset2(ptf_oblig, nb_unit) # Calcul de la valeur de marche unitaire
+            nb_sold <- montant_vente / vm_unitaire # Calul du nombre d'unite a vendre
+            
+            # Extraction des numeros de MP
+            num_mp  <- .subset2(ptf_oblig, num_mp)
         }
-        return(data.frame(num_mp = num_mp, nb_sold = nb_sold))
+        
+        # Output
+        return(cbind(num_mp = num_mp, nb_sold = nb_sold))
     }
 )

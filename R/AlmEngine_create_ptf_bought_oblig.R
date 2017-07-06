@@ -20,14 +20,20 @@
 ##' @include AlmEngine_class.R Oblig_class.R
 
 
-setGeneric(name = "create_ptf_bought_oblig", def = function(x, coefficient){standardGeneric("create_ptf_bought_oblig")})
+setGeneric(name = "create_ptf_bought_oblig", def = function(x, coefficient) {standardGeneric("create_ptf_bought_oblig")})
 setMethod(
     f = "create_ptf_bought_oblig",
     signature = c(x = "Oblig", coefficient = "numeric"),
-    definition = function(x,coefficient){
-        if (length(coefficient) != nrow(x@ptf_oblig)){stop("[Oblig : create_ptf_bought_oblig] : Les inputs sont de dimensions distinctes \n")}
+    definition = function(x,coefficient) {
+        
+        # Recuperation du PTF oblig
+        ptf_oblig <- x@ptf_oblig
+        
+        # Test input
+        if (length(coefficient) != nrow(ptf_oblig)) stop("[Oblig : create_ptf_bought_oblig] : Les inputs sont de dimensions distinctes \n")
 
-        nom_table  <- names(x@ptf_oblig)
+        # Donnees
+        nom_table  <- names(ptf_oblig)
         val_marche <- which(nom_table == "val_marche")
         val_nc     <- which(nom_table == "val_nc")
         val_achat  <- which(nom_table == "val_achat")
@@ -35,14 +41,19 @@ setMethod(
         cc         <- which(nom_table == "cc")
         sd         <- which(nom_table == "sd")
 
-        x@ptf_oblig$val_marche <- coefficient * .subset2(x@ptf_oblig, val_marche)
-        x@ptf_oblig$val_nc     <- coefficient * .subset2(x@ptf_oblig, val_nc)
-        x@ptf_oblig$val_achat  <- coefficient * .subset2(x@ptf_oblig, val_achat)
-        x@ptf_oblig$nb_unit    <- coefficient * .subset2(x@ptf_oblig, nb_unit)
-        x@ptf_oblig$cc         <- coefficient * .subset2(x@ptf_oblig, cc)
-        x@ptf_oblig$sd         <- coefficient * .subset2(x@ptf_oblig, sd)
+        # Mise a jour des donnees du PTF
+        ptf_oblig$val_marche <- coefficient * .subset2(ptf_oblig, val_marche)
+        ptf_oblig$val_nc     <- coefficient * .subset2(ptf_oblig, val_nc)
+        ptf_oblig$val_achat  <- coefficient * .subset2(ptf_oblig, val_achat)
+        ptf_oblig$nb_unit    <- coefficient * .subset2(ptf_oblig, nb_unit)
+        ptf_oblig$cc         <- coefficient * .subset2(ptf_oblig, cc)
+        ptf_oblig$sd         <- coefficient * .subset2(ptf_oblig, sd)
         # Il n'y a pas a ajuster les durations et Zsp car un mouvement parallele des flux n'impacte pas ces quantites
-
+        
+        # Mise a jour du PTF
+        x@ptf_oblig <- ptf_oblig
+        
+        # Output
         return(x)
     }
 )

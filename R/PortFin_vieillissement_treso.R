@@ -22,15 +22,25 @@
 
 setGeneric(name = "vieillissement_treso_PortFin", def = function(x, flux_milieu, flux_fin, table_rdt){standardGeneric("vieillissement_treso_PortFin")})
 setMethod(
-  f = "vieillissement_treso_PortFin",
-  signature = c(x = "PortFin", flux_milieu = "numeric", flux_fin = "numeric", table_rdt = "list"),
-  definition = function(x, flux_milieu, flux_fin, table_rdt){
-    # Verification input :
-    if(nrow(x@ptf_treso@ptf_treso) > 0) {
-        # Revenu de la treso
-        rdt_treso <-  revenu_treso(x@ptf_treso, table_rdt[["rdt_treso"]], flux_milieu)
-        # Mise a jour de la treso en fin d'annee (revalo de la treso  en tenant compte des flux de loyer/div/coupons de milieu d'annee+ prise en comtpe des flux de tombee d'echeance percus en fin d'annee)
-        x@ptf_treso <- update_treso(x@ptf_treso, rdt_treso + flux_fin + flux_milieu)
-    }
-    return(x)
-  })
+    f = "vieillissement_treso_PortFin",
+    signature = c(x = "PortFin", flux_milieu = "numeric", flux_fin = "numeric", table_rdt = "list"),
+    definition = function(x, flux_milieu, flux_fin, table_rdt){
+        
+        # Recuperation du PTF treso
+        ptf_treso <- x@ptf_treso
+        
+        # Verification input :
+        if(nrow(ptf_treso@ptf_treso) > 0) {
+            # Revenu de la treso
+            rdt_treso <-  revenu_treso(ptf_treso, table_rdt[["rdt_treso"]], flux_milieu)
+            
+            # Mise a jour de la treso en fin d'annee (revalo de la treso  en tenant compte des flux de loyer/div/coupons de milieu d'annee+ prise en comtpe des flux de tombee d'echeance percus en fin d'annee)
+            ptf_treso <- update_treso(ptf_treso, rdt_treso + flux_fin + flux_milieu)
+            
+            # Mise a jour du PTF 
+            x@ptf_treso <- ptf_treso
+        }
+        
+        # Output
+        return(x)
+    })

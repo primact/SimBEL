@@ -17,17 +17,32 @@
 setGeneric(name = "init_create_folder", def = function(x){standardGeneric("init_create_folder")})
 setMethod(
     f = "init_create_folder",
-    signature = "Initialisation",
+    signature = c(x = "Initialisation"),
     definition = function(x){
+
+        # Donnees
+        save_folder <- x@address[["save_folder"]]
+
         # On ecrase tous les dossiers sauf le init qui contient la photo originale
         # Si les dossiers existent, on les ecrasent et on les recreent
         # Sinon on les creent
-        if (dir.exists(paste(racine@root_address, "internal_ws/data/scenario", sep = "/")) == F) { stop("[Initialisation : init_create_folder] L'architecture du dossier internal_ws requiert l'existence d'un dossier data/scenario.")}
-        lapply(names(x@address[["save_folder"]][names(x@address[["save_folder"]]) != "init"]),
-               function(y){
-                    path <- x@address[["save_folder"]][[y]]
-                    if (dir.exists(path) == F) { dir.create(path) } else { unlink(paste(path, "/*", sep = "")) }})
-        return(message("[Initialisation : init_create_folder] : Creation de l'architecture des scenario Solvabilite 2 reussie."))
+        if (! dir.exists(paste(x@root_address, "internal_ws/data/scenario", sep = "/")))
+            stop("[Initialisation : init_create_folder] L'architecture du dossier internal_ws requiert l'existence d'un dossier data/scenario.")
+
+        # Fonction
+        fun <- function(y){
+            path <- save_folder[[y]]
+            if (! dir.exists(path))
+                dir.create(path)
+            else
+                unlink(paste0(path, "/*"))
+        }
+
+        # Appel de la fonction
+        lapply(names(save_folder[which(names(save_folder) != "init")]), fun)
+
+        # Message
+        message("[Initialisation : init_create_folder] : Creation de l'architecture des scenario Solvabilite 2 reussie.")
     }
 
 )
