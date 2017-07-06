@@ -16,57 +16,66 @@
 ##' les montants de primes nettes \code{pri_net} et les chargements sur primes \code{pri_chgt}.
 ##' @author Prim'Act
 ##' @export
-##' @aliases EpEuroInd
 ##' @include EpEuroInd-class.R RetraiteEuroRest_class.R
 ##'
 
 #--------------------------------------------------------
 setGeneric(name = "calc_primes", def = function(x){standardGeneric("calc_primes")})
-#--------------------------------------------------------
 
+#--------------------------------------------------------
 setMethod(
     f = "calc_primes",
     signature = c(x = "EpEuroInd"),
     def = function(x){
 
+        # Tableau des ModelPoint
+        mp      <- x@mp
+        nom_mp  <- names(mp)
+
+        # Extraction des donnees
+        prime       <- .subset2(mp, which(nom_mp == "prime"))
+        nb_contr    <- .subset2(mp, which(nom_mp == "nb_contr"))
+        chgt_prime  <- .subset2(mp, which(nom_mp == "chgt_prime"))
+
         # Nombre de versements
-        nb_vers <- x@mp$nb_contr * (x@mp$prime > 0)
+        nb_vers <- nb_contr * (prime > 0)
 
         # Calcul les primes de l'annee
-        pri_brut <- x@mp$prime * x@mp$nb_contr # primes brutes
-        pri_net <- pri_brut * (1 - x@mp$chgt_prime) # primes nettes
-        pri_chgt <- pri_brut * x@mp$chgt_prime # Chargements sur primes
+        pri_brut <- prime * nb_contr # primes brutes
+        pri_net <- pri_brut * (1 - chgt_prime) # primes nettes
+        pri_chgt <- pri_brut * chgt_prime # Chargements sur primes
 
         # output
         return(list(stock = list(nb_vers = nb_vers),
                     flux = list(
                         pri_brut = pri_brut,
                         pri_net = pri_net,
-                        pri_chgt = pri_chgt
-                    )
-        )
-        )
+                        pri_chgt = pri_chgt)))
     }
 )
 
 
-
+#--------------------------------------------------------
 setMethod(
     f = "calc_primes",
     signature = c(x = "RetraiteEuroRest"),
     def = function(x){
 
+        # Tableau des ModelPoint
+        mp      <- x@mp
+        nom_mp  <- names(mp)
+
         # Nombre de versements
-        nb_vers <- x@mp$nb_contr
+        nb_vers <- .subset2(mp, which(nom_mp == "nb_contr"))
+
+        # Output zero
+        out_zero <- rep(0, nrow(mp))
 
         # output
         return(list(stock = list(nb_vers = nb_vers),
                     flux = list(
-                        pri_brut = rep(0, nrow(x@mp)),
-                        pri_net = rep(0, nrow(x@mp)),
-                        pri_chgt = rep(0, nrow(x@mp))
-                    )
-        )
-        )
+                        pri_brut = out_zero,
+                        pri_net  = out_zero,
+                        pri_chgt = out_zero)))
     }
 )
