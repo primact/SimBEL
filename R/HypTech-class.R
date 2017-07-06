@@ -38,16 +38,16 @@ setClass(
     retval <- NULL
 
     # Test que les listes ne sont pas vides
-    if(length(object@tables_mort) == 0){c(retval, "[HypTech] : 'tables_mort' ne doit pas etre vide \n")}
-    if(length(object@tables_rach) == 0){c(retval, "[HypTech] : 'tables_rach' ne doit pas etre vide \n")}
-    if(length(object@param_rach_dyn) == 0){c(retval, "[HypTech] : 'param_rach_dyn' ne doit pas etre vide \n")}
-    if(length(object@param_comport) == 0){c(retval, "[HypTech] : 'param_comport' ne doit pas etre vide \n")}
+    if(length(object@tables_mort) == 0L)        retval <- c(retval, "[HypTech] : 'tables_mort' ne doit pas etre vide \n")
+    if(length(object@tables_rach) == 0L)        retval <- c(retval, "[HypTech] : 'tables_rach' ne doit pas etre vide \n")
+    if(length(object@param_rach_dyn) == 0L)     retval <- c(retval, "[HypTech] : 'param_rach_dyn' ne doit pas etre vide \n")
+    if(length(object@param_comport) == 0L)      retval <- c(retval, "[HypTech] : 'param_comport' ne doit pas etre vide \n")
 
     # Tests de non absence de noms
-    if(is.null(names(object@tables_mort))){retval <- c(retval, "[HypTech] : 'tables_mort' doit etre une liste avec des noms \n")}
-    if(is.null(names(object@tables_rach))){retval <- c(retval, "[HypTech] : 'tables_rach' doit etre une liste avec des noms \n")}
-    if(is.null(names(object@param_rach_dyn))){retval <- c(retval, "[HypTech] : 'param_rach_dyn' doit etre une liste avec des noms \n")}
-    if(is.null(names(object@param_comport))){retval <- c(retval, "[HypTech] : 'param_comport' doit etre une liste avec des noms \n")}
+    if(is.null(names(object@tables_mort)))      retval <- c(retval, "[HypTech] : 'tables_mort' doit etre une liste avec des noms \n")
+    if(is.null(names(object@tables_rach)))      retval <- c(retval, "[HypTech] : 'tables_rach' doit etre une liste avec des noms \n")
+    if(is.null(names(object@param_rach_dyn)))   retval <- c(retval, "[HypTech] : 'param_rach_dyn' doit etre une liste avec des noms \n")
+    if(is.null(names(object@param_comport)))    retval <- c(retval, "[HypTech] : 'param_comport' doit etre une liste avec des noms \n")
 
     # Test si un nom n a pas ete oublie
     if(! prod(names(object@tables_mort) != c("") )){
