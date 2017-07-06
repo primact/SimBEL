@@ -10,7 +10,7 @@
 ##' @param x un objet de la classe \code{\link{EpEuroInd}} ou de la classe \code{\link{RetraiteEuroRest}} contenant les model points epargne euros ou retraite euro en phases de restitution.
 ##' @param y une liste contenant les parametres.
 ##' \describe{
-##' \item{\code{list_rd} : } {est liste contenant les rendements de reference.}
+##' \item{\code{list_rd} : }{est un vecteur contenant les rendements de reference.}
 ##' \item{\code{ht} : }{est un objet de la classe \code{\link{HypTech}}.}
 ##' }
 ##' Le format de \code{list_rd} est :
@@ -26,7 +26,6 @@
 ##' @author Prim'Act
 ##' @seealso La recuperation des taux cibles calcules : \code{\link{get_comport}}.
 ##' @export
-##' @aliases EpEuroInd
 ##' @include EpEuroInd-class.R HypTech-class.R RetraiteEuroRest_class.R
 
 #--------------------------------------------------------
@@ -34,84 +33,104 @@ setGeneric(name = "calc_tx_cible", def = function(x, y) {standardGeneric("calc_t
 #--------------------------------------------------------
 
 setMethod(
-  f = "calc_tx_cible",
-  signature = c(x = "EpEuroInd", y = "list" ),
-  def = function(x, y){
-    # Verification inputs
-    if (length(y) != 2)                     {stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2. \n")}
-    if (sum(names(y) == c("ht", "list_rd")) != length(y)) {stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2 de nom : ht, list_rd . \n")}
-    if (class(y[["ht"]])      != "HypTech") {stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list. \n")}
-    if (! is.list(y[["list_rd"]]))    {stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list. \n")}
-    ht      = y[["ht"]]
-    list_rd = y[["list_rd"]]
+    f = "calc_tx_cible",
+    signature = c(x = "EpEuroInd", y = "list" ),
+    def = function(x, y){
+
+        # Verification inputs
+        if (length(y) != 2L) stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2. \n")
+        if (sum(names(y) == c("ht", "list_rd")) != 2L) stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2 de nom : ht, list_rd . \n")
+
+        # Extraction listes
+        ht      <- .subset2(y, 1L)
+        list_rd <- .subset2(y, 2L)
+
+        if (class(ht) != "HypTech") stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list. \n")
+        if (! is.numeric(list_rd))  stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list. \n")
 
 
-    # Nom de ligne
-    nb_mp <- nrow(x@mp)
+        # ModelPoint
+        mp <- x@mp
 
-    # Gestion des noms de colonnes du data.frame de donnnees
-    nom_table = which(names(x@mp) == "tx_cible")
-    tx_cible_prec = which(names(x@mp) == "tx_cible_prec")
+        # Nom de ligne
+        nb_mp <- nrow(mp)
 
-    # Fonction d'extraction du taux cible
-    calc_tx_cible_mp <- function(i) {return(
-      get_comport(ht,
-        as.character(.subset2(x@mp, nom_table)[i]),
-        list_rd,
-        .subset2(x@mp, tx_cible_prec)[i])
-      )
+        # Gestion des noms de colonnes du data.frame de donnnees
+        nom_tx_cible <- names(mp)
+        num_tx_cible <- which(nom_tx_cible == "tx_cible")
+        num_tx_cible_prec <- which(nom_tx_cible == "tx_cible_prec")
+        tx_cible <- .subset2(mp, num_tx_cible)
+        tx_cible_prec <- .subset2(mp, num_tx_cible_prec)
+
+        # Extraction des differentes methodes
+        meth_tx_cible <- as.character(unique(tx_cible))
+
+        # Initialisation du vecteur tx_cible
+        tx_cible_an <-vector("numeric", length = nb_mp)
+
+        # Calcul des tx cibles pour chacune des methodes
+        for (meth in meth_tx_cible) {
+            row <- which(tx_cible == meth) # lignes associees a la methode en question
+            tx_cible_an[row] <- get_comport(ht, meth, list_rd, tx_cible_prec[row]) # calcul du taux cible : C++
+        }
+
+        # Calcul du taux cible annuel et semestriel
+        tx_cible_se <- taux_period(tx_cible_an, "se")
+
+        # Output
+        return(list(tx_cible_an = tx_cible_an, tx_cible_se = tx_cible_se))
+
     }
-
-    # Calcul du taux cible annuel et semestriel
-    tx_cible_an <- sapply(1:nb_mp, calc_tx_cible_mp)
-    tx_cible_se <- taux_period(tx_cible_an, "se")
-
-  return(list(tx_cible_an = tx_cible_an, tx_cible_se = tx_cible_se))
-
-  }
 )
 
 #--------------------------------------------------------
 setMethod(
-  f = "calc_tx_cible",
-  signature = c(x = "RetraiteEuroRest", y = "list" ),
-  def = function(x, y){
-    # Verification inputs
-    if (length(y) != 2)                     {
-      stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2. \n")}
-    if (sum(names(y) == c("ht", "list_rd")) != length(y)) {
-      stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2 de nom : ht, list_rd . \n")}
-    if (class(y[["ht"]])      != "HypTech") {
-      stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list. \n")}
-    if (! is.list(y[["list_rd"]]))    {
-      stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list. \n")}
-    ht      = y[["ht"]]
-    list_rd = y[["list_rd"]]
+    f = "calc_tx_cible",
+    signature = c(x = "RetraiteEuroRest", y = "list" ),
+    def = function(x, y){
 
+        # Verification inputs
+        if (length(y) != 2L) stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2. \n")
+        if (sum(names(y) == c("ht", "list_rd")) != 2L) stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2 de nom : ht, list_rd . \n")
 
-    # Nom de ligne
-    nb_mp <- nrow(x@mp)
+        # Extraction listes
+        ht      <- .subset2(y, 1L)
+        list_rd <- .subset2(y, 2L)
 
-    # Gestion des noms de colonnes du data.frame de donnnees
-    nom_table = which(names(x@mp) == "tx_cible")
-    tx_cible_prec = which(names(x@mp) == "tx_cible_prec")
+        if (! is.numeric(list_rd))  stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list. \n")
+        if (class(ht) != "HypTech") stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list. \n")
 
-    # Fonction d'extraction du taux cible
-    calc_tx_cible_mp <- function(i) {return(
-      get_comport(ht,
-                  as.character(.subset2(x@mp, nom_table)[i]),
-                  list_rd,
-                  .subset2(x@mp, tx_cible_prec)[i])
-    )
+        # ModelPoint
+        mp <- x@mp
+
+        # Nom de ligne
+        nb_mp <- nrow(mp)
+
+        # Gestion des noms de colonnes du data.frame de donnnees
+        nom_tx_cible <- names(mp)
+        num_tx_cible <- which(nom_tx_cible == "tx_cible")
+        num_tx_cible_prec <- which(nom_tx_cible == "tx_cible_prec")
+        tx_cible <- .subset2(mp, num_tx_cible)
+        tx_cible_prec <- .subset2(mp, num_tx_cible_prec)
+
+        # Extraction des differentes methodes
+        meth_tx_cible <- as.character(unique(tx_cible))
+
+        # Initialisation du vecteur tx_cible
+        tx_cible_an <-vector("numeric", length = nb_mp)
+
+        # Calcul des tx cibles pour chacune des methodes
+        for (meth in meth_tx_cible) {
+            row <- which(tx_cible == meth) # lignes associees a la methode en question
+            tx_cible_an[row] <- get_comport(ht, meth, list_rd, tx_cible_prec[row]) # calcul du taux cible : C++
+        }
+
+        # Calcul du taux cible semestriel
+        tx_cible_se <- taux_period(tx_cible_an, "se")
+
+        # Output
+        return(list(tx_cible_an = tx_cible_an, tx_cible_se = tx_cible_se))
     }
-
-    # Calcul du taux cible annuel et semestriel
-    tx_cible_an <- sapply(1:nb_mp, calc_tx_cible_mp)
-    tx_cible_se <- taux_period(tx_cible_an, "se")
-
-    return(list(tx_cible_an = tx_cible_an, tx_cible_se = tx_cible_se))
-
-  }
 )
 
 
