@@ -114,7 +114,7 @@ setMethod(
         # Calcul des valeurs moyennes
         alloc_cour <- print_alloc(x@ptf_fin)
         # Valeur moyenne des placements en valeur de marche
-        plac_moy_vm <- (.subset2(alloc_cour, 1)[5] + sum(unlist(x@ptf_fin@vm_vnc_precedent[["vm"]]))) /2
+        plac_moy_vm <- (.subset2(alloc_cour, 5L) + sum(unlist(x@ptf_fin@vm_vnc_precedent[["vm"]]))) /2
 
         frais_fin <- calc_frais_fin(x@ptf_fin@frais_fin, plac_moy_vm, coef_inf)
 
@@ -127,7 +127,7 @@ setMethod(
         # Reallocation a l'allocation cible
 
         # Gestion de l'anomalie : valeur de marche des actifs negatives
-        if(.subset2(print_alloc(x@ptf_fin), 1)[5] < 0){
+        if(.subset2(print_alloc(x@ptf_fin), 5L) < 0){
             warning(paste("Attention, la valeur de marche des actifs est negative pour
                     la simulation ", x@mp_esg@num_traj, " en annee ", x@annee,".", sep = ""))
 
