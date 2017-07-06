@@ -21,10 +21,13 @@ setMethod(
     f = "calc_frais_fin",
     signature = c(x = "FraisFin", vm_moy = "numeric", coef_inflation ="numeric"),
     definition = function(x, vm_moy, coef_inflation){
+        
         # Verification des inputs
-        # Suppose une dimension de 1 pour l'instant
-        if (length(vm_moy) != length(coef_inflation) | length(coef_inflation) != 1) { stop("[Frais : calc_frais] : Les inputs ne sont pas de la meme dimension \n")}
+        len_inflation <- length(coef_inflation)
+        if (length(vm_moy) != len_inflation | len_inflation != 1L) stop("[Frais : calc_frais] : Les inputs ne sont pas de la meme dimension \n")
+        
         # Calcul des frais
-        return (x@tx_chargement * vm_moy * ((x@indicatrice_inflation == FALSE) + coef_inflation * (x@indicatrice_inflation == TRUE)))
+        ind_inflation <- x@indicatrice_inflation
+        return (x@tx_chargement * vm_moy * ((! ind_inflation) + coef_inflation * ind_inflation))
     }
 )

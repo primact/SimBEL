@@ -12,7 +12,7 @@
 ##' Contient autant d'elements que le portefeuille a de lignes.
 ##' @param flux_milieu vecteur decrivant les flux de milieu d'annee (positif =entrants,  negatifs = sortants).
 ##' @param flux_fin vecteur decrivant les flux de fin d'annee (positif =entrants,  negatifs = sortants).
-##' @return L'objet \code{x} dont les valeurs de marche ont ete mises a jour.
+##' @return Les valeurs de marche mises a jour.
 ##' @author Prim'Act
 ##' @export
 ##' @include Treso_class.R
@@ -20,16 +20,26 @@
 
 setGeneric(name = "calc_vm_treso", def = function(x,rdt,flux_milieu,flux_fin){standardGeneric("calc_vm_treso")})
 setMethod(
-  f = "calc_vm_treso",
-  signature = c(x = "Treso", rdt = "numeric", flux_milieu = "numeric", flux_fin = "numeric"),
-  definition = function(x,rdt,flux_milieu, flux_fin){
-    # Verification des inputs
-    if(nrow(x@ptf_treso) == 0) {stop("[Treso : calc_vm_treso] : Tentative de calcul de VM sur un portfeuille de treso vide. \n")}
-    if(length(rdt) != nrow(x@ptf_treso) | length(rdt) != length(flux_milieu) | length(flux_milieu) != length(flux_fin)) {stop("[Treso : revalo] : Les inputs ont des dimensions distinctes\n")}
-      if(length(rdt) > 1 | length(flux_milieu) > 1 | length(flux_fin) > 1) {stop("[Treso : revalo] : Les inputs doivent etre de dimension 1. \n")}
+    f = "calc_vm_treso",
+    signature = c(x = "Treso", rdt = "numeric", flux_milieu = "numeric", flux_fin = "numeric"),
+    definition = function(x,rdt,flux_milieu, flux_fin){
 
-    val_marche <- x@ptf_treso$val_marche * (1 + rdt) + flux_milieu * (1 + rdt)^0.5 + flux_fin
+        # Recuperation du PTF
+        ptf_treso <- x@ptf_treso
+        nb_treso  <- nrow(x@ptf_treso)
 
-    return(val_marche)
-  }
+        # Verification des inputs
+        len_rdt <- length(rdt)
+        len_flux_milieu <- length(flux_milieu)
+        len_flux_fin <- length(flux_fin)
+        if(nb_treso == 0) stop("[Treso : calc_vm_treso] : Tentative de calcul de VM sur un portfeuille de treso vide. \n")
+        if(len_rdt != nb_treso | len_rdt != len_flux_milieu | len_flux_milieu != len_flux_fin) stop("[Treso : calc_vm_treso] : Les inputs ont des dimensions distinctes\n")
+        if(len_rdt > 1 | len_flux_milieu > 1 | len_flux_fin > 1) stop("[Treso : calc_vm_treso] : Les inputs doivent etre de dimension 1. \n")
+
+        # Calcul de la VM
+        val_marche <- ptf_treso$val_marche * (1 + rdt) + flux_milieu * sqrt(1 + rdt) + flux_fin
+
+        # Output
+        return(val_marche)
+    }
 )

@@ -19,11 +19,17 @@ setMethod(
     f = "param_revalo_load",
     signature = "character",
     definition = function(file_revalo_address){
+        
+        # Lecture du fichier
         temp <- read.csv2(file_revalo_address)
+        
+        # Creation de l'objet
         param_revalo  <- new("ParamRevaloEngine",
                              taux_pb_fi   = temp[,"taux_pb_fi"],
                              taux_pb_tech = temp[,"taux_pb_tech"],
                              tx_marge_min = temp[,"tx_marge_min"])
+        
+        # Output
         return(param_revalo)
     }
 )

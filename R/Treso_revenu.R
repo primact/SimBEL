@@ -20,11 +20,17 @@ setMethod(
     f = "revenu_treso",
     signature = c(x = "Treso", rdt = "numeric", flux_milieu = "numeric" ),
     definition = function(x, rdt, flux_milieu){
+        
         # Verification des inputs
-        if (nrow(x["ptf_treso"]) != length(rdt) | length(rdt) != length(flux_milieu)) {stop("[Treso : revenu_treso] : Les inputs ont des dimensions distinctes.")}
+        len_rdt <- length(rdt)
+        if (nrow(x["ptf_treso"]) != len_rdt | len_rdt != length(flux_milieu)) 
+            stop("[Treso : revenu_treso] : Les inputs ont des dimensions distinctes.")
+        
         # Calcul du vecteur de revenu : ATTENTION, il est essentiel que le portefeuille treso soit anterieur au flux et au rdt :
         # on calcule le revenu  du ptf sur la VM n-1
-        revenu = x["ptf_treso"][,"val_marche"] * rdt + flux_milieu * ((1 + rdt)^0.5 - 1)
+        revenu = x["ptf_treso"][,"val_marche"] * rdt + flux_milieu * (sqrt(1 + rdt) - 1)
+        
+        # Output
         return(revenu)
     }
 )

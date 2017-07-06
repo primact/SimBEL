@@ -49,15 +49,14 @@ setValidity(Class = "AutresReserves",
               retval <- NULL
 
               # Test sur les types
-              if (!is.numeric(object@pgg_debut))  {retval <- c(retval, "[AutresReserves] : pgg_debut n'est pas numeric/n")}
-              if (!is.numeric(object@psap_debut))  {retval <- c(retval, "[AutresReserves] : psap_debut n'est pas numeric/n")}
-              if (!is.numeric(object@pgg_valeur))  {retval <- c(retval, "[AutresReserves] : pgg_valeur n'est pas numeric/n")}
-              if (!is.numeric(object@psap_valeur))  {retval <- c(retval, "[AutresReserves] : psap_valeur n'est pas numeric/n")}
-
-              if (!is.numeric(object@tx_pgg_ep))  {retval <- c(retval, "[AutresReserves] : tx_pgg_ep n'est pas numeric/n")}
-              if (!is.numeric(object@tx_pgg_autres))  {retval <- c(retval, "[AutresReserves] : tx_pgg_autres n'est pas numeric/n")}
-              if (!is.numeric(object@tx_psap_ep))  {retval <- c(retval, "[AutresReserves] : tx_psap_ep n'est pas numeric/n")}
-              if (!is.numeric(object@tx_psap_autres))  {retval <- c(retval, "[AutresReserves] : tx_psap_autres n'est pas numeric/n")}
+              if (! is.numeric(object@pgg_debut))      retval <- c(retval, "[AutresReserves] : pgg_debut n'est pas numeric/n")
+              if (! is.numeric(object@psap_debut))     retval <- c(retval, "[AutresReserves] : psap_debut n'est pas numeric/n")
+              if (! is.numeric(object@pgg_valeur))     retval <- c(retval, "[AutresReserves] : pgg_valeur n'est pas numeric/n")
+              if (! is.numeric(object@psap_valeur))    retval <- c(retval, "[AutresReserves] : psap_valeur n'est pas numeric/n")
+              if (! is.numeric(object@tx_pgg_ep))      retval <- c(retval, "[AutresReserves] : tx_pgg_ep n'est pas numeric/n")
+              if (! is.numeric(object@tx_pgg_autres))  retval <- c(retval, "[AutresReserves] : tx_pgg_autres n'est pas numeric/n")
+              if (! is.numeric(object@tx_psap_ep))     retval <- c(retval, "[AutresReserves] : tx_psap_ep n'est pas numeric/n")
+              if (! is.numeric(object@tx_psap_autres)) retval <- c(retval, "[AutresReserves] : tx_psap_autres n'est pas numeric/n")
 
               # # Test sur la longueur
               # if (length(object@tx_pgg_ep) != 1)  {retval <- c(retval, "[AutresReserves] : tx_pgg_ep doit etre de longueur 1/n")}

@@ -33,15 +33,17 @@ setClass(
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Verificateur :
-setValidity ("FraisFin",
-             function (object){
-                 retval <- NULL
-                 #Verification du nombre de colonnes
-                 if(length(object@tx_chargement) > 1) {retval <- c(retval, "[FraisFin] : Dimension de l'attribut tx de chargement incorrecte \n")}
-                 if(length(object@indicatrice_inflation) > 1) {retval <- c(retval, "[FraisFin] : Dimension de l'attribut indicatrice inflation incorrecte \n")}
-                 if (is.null(retval)) return (TRUE)
-                 else return (retval)
-             })
+setValidity("FraisFin",
+            function (object){
+                retval <- NULL
+                #Verification du nombre de colonnes
+                if(length(object@tx_chargement) > 1L)           retval <- c(retval, "[FraisFin] : Dimension de l'attribut tx de chargement incorrecte \n")
+                if(length(object@indicatrice_inflation) > 1L)   retval <- c(retval, "[FraisFin] : Dimension de l'attribut indicatrice inflation incorrecte \n")
+                
+                if (is.null(retval)) return (TRUE)
+                else return (retval)
+            }
+)
 
 # Initialisateur : permet de construire l'objet initial, selon 2 cas :
 #           - Objet vide
@@ -53,9 +55,9 @@ setMethod(
     definition = function(.Object, tx_chargement = numeric(), indicatrice_inflation = logical()){
         # Traitement du cas ou tout les elements sont renseignes
         if(!missing(tx_chargement) & !missing(indicatrice_inflation)){
-           .Object@tx_chargement <- tx_chargement
-           .Object@indicatrice_inflation <- indicatrice_inflation
-           validObject(.Object)
+            .Object@tx_chargement <- tx_chargement
+            .Object@indicatrice_inflation <- indicatrice_inflation
+            validObject(.Object)
         }else if(missing(tx_chargement) & missing(indicatrice_inflation)){
             .Object@tx_chargement <- numeric()
             .Object@indicatrice_inflation <- logical()

@@ -19,7 +19,11 @@ setMethod(
     f = "do_update_RC_val_courante",
     signature = c(x = "RC", val_courante = "numeric"),
     definition = function(x, val_courante){
-        x["val_courante"] <- val_courante
+        
+        # Mise a jour de la valeur
+        x@val_courante <- val_courante
+        
+        # Output
         return(x)
     }
 )

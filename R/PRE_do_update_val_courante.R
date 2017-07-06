@@ -19,7 +19,11 @@ setMethod(
     f = "do_update_PRE_val_courante",
     signature = c(x = "PRE", val_courante = "numeric"),
     definition = function(x, val_courante){
+        
+        # Mise a jour valeur courante
         x@val_courante <- val_courante
+        
+        # Output
         return(x)
     }
 )

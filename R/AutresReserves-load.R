@@ -20,9 +20,13 @@
 setGeneric(name = "autres_reserves_load", def = function(file_autres_reserves_address){standardGeneric("autres_reserves_load")})
 setMethod(
     f = "autres_reserves_load",
-    signature = "character",
+    signature = c(file_autres_reserves_address = "character"),
     definition = function(file_autres_reserves_address){
+
+        # Lecture du fichier
         temp            <- read.csv2(file_autres_reserves_address)
+
+        # Creation de l'objet
         autres_reserves <- new("AutresReserves",
                                pgg_debut      = temp[,"pgg_debut"],
                                psap_debut     = temp[,"psap_debut"],
@@ -32,6 +36,8 @@ setMethod(
                                tx_pgg_autres  = temp[,"tx_pgg_autres"],
                                tx_psap_ep     = temp[,"tx_psap_ep"],
                                tx_psap_autres = temp[,"tx_psap_autres"])
+
+        # Output
         return(autres_reserves)
     }
 )

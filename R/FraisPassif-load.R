@@ -12,7 +12,7 @@
 ##' @return L'objet de la classe \code{\link{FraisPassif}} construit a partir des inputs renseignes par l'utilisateur.
 ##' @author Prim'Act
 ##' @seealso La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
-##'  pour renseigner l’input.
+##'  pour renseigner l'input.
 ##' @export
 ##' @include FraisPassif-class.R
 ##'
@@ -20,9 +20,15 @@ setGeneric(name = "frais_passif_load", def = function(file_frais_passif_address)
 setMethod(
     f = "frais_passif_load",
     signature = "character",
-    definition = function(file_frais_passif_address){
-        temp           <- read.csv2(file_frais_passif_address)
+    definition = function(file_frais_passif_address) {
+        
+        # Lecture du fichier
+        temp <- read.csv2(file_frais_passif_address)
+        
+        # Creation de l'objet
         frais_passifs  <- new(Class = "FraisPassif", mp = temp)
+        
+        # Output
         return(frais_passifs)
     }
 )

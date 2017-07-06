@@ -14,35 +14,35 @@
 #           - Objet renseigne.
 #           - Erreur autrement
 setMethod(
-  f = "initialize",
-  signature = "FraisPassif",
-  definition = function(.Object, mp = data.frame()){
-
-    if(! missing(mp)){
-      .Object@mp <- mp
-
-      # Validation du format
-      validObject(.Object)
-    } else {
-      #Traitement du cas vide
-      .Object@mp <- data.frame(nom_prod = character(),
-                               frais_fixe_prime = numeric(),
-                               frais_var_prime = numeric(),
-                               ind_inf_frais_fixe_prime = logical(),
-                               ind_inf_frais_var_prime = logical(),
-                               frais_fixe_prest = numeric(),
-                               frais_var_prest = numeric(),
-                               ind_inf_frais_fixe_prest = logical(),
-                               ind_inf_frais_var_prest = logical(),
-                               frais_fixe_enc = numeric(),
-                               frais_var_enc = numeric(),
-                               ind_inf_frais_fixe_enc = logical(),
-                               ind_inf_frais_var_enc = logical()
-                               )
+    f = "initialize",
+    signature = "FraisPassif",
+    definition = function(.Object, mp = data.frame()){
+        
+        if(! missing(mp)){
+            .Object@mp <- mp
+            
+            # Validation du format
+            validObject(.Object)
+        } else {
+            #Traitement du cas vide
+            .Object@mp <- data.frame(nom_prod = character(),
+                                     frais_fixe_prime = numeric(),
+                                     frais_var_prime = numeric(),
+                                     ind_inf_frais_fixe_prime = logical(),
+                                     ind_inf_frais_var_prime = logical(),
+                                     frais_fixe_prest = numeric(),
+                                     frais_var_prest = numeric(),
+                                     ind_inf_frais_fixe_prest = logical(),
+                                     ind_inf_frais_var_prest = logical(),
+                                     frais_fixe_enc = numeric(),
+                                     frais_var_enc = numeric(),
+                                     ind_inf_frais_fixe_enc = logical(),
+                                     ind_inf_frais_var_enc = logical()
+            )
+        }
+        # Output
+        return(.Object)
     }
-    # Output
-    return(.Object)
-  }
 )
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,28 +50,28 @@ setMethod(
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 # Getteur
 setMethod(
-  f = "[",
-  signature = "FraisPassif",
-  definition = function(x, i){
-    switch(EXPR = i,
-           "mp" = {return(x@mp)},
-           stop("Cet attribut n'existe pas!")
-    )
-  }
+    f = "[",
+    signature = "FraisPassif",
+    definition = function(x, i){
+        switch(EXPR = i,
+               "mp" = {return(x@mp)},
+               stop("Cet attribut n'existe pas!")
+        )
+    }
 )
 
 
 # Setteur
 setReplaceMethod(
-  f = "[",
-  signature = "FraisPassif",
-  definition = function(x, i, value){
-    switch(EXPR = i,
-           "mp" = {x@mp <- value},
-           stop("Cet attribut n'existe pas!")
-    )
-    validObject(x)
-    return(x)
-  }
+    f = "[",
+    signature = "FraisPassif",
+    definition = function(x, i, value){
+        switch(EXPR = i,
+               "mp" = {x@mp <- value},
+               stop("Cet attribut n'existe pas!")
+        )
+        validObject(x)
+        return(x)
+    }
 )
 

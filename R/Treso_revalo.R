@@ -24,15 +24,19 @@
 # Dans le cas general cette fonction devra donc etre appelee avec Rt_prev force a 0!!!!
 setGeneric(name = "revalo_treso", def = function(Rt,Rt_prev){standardGeneric("revalo_treso")})
 setMethod(
-  f = "revalo_treso",
-  signature = c(Rt = "numeric", Rt_prev = "numeric"),
-  definition = function(Rt, Rt_prev){
-    # Verification des inputs
-    if (length(Rt) != length(Rt_prev)) {stop("[Treso : revalo] : Les inputs ont des dimensions distinctes.")}
-    if (length(Rt) != 1 | length(Rt_prev) != 1) {stop("[Treso : revalo] : Les inputs doivent etre de dimension 1. \n")}
-    # Calcul du vecteur rdt : Prise en compte du fait que les dividendes soient reinvestis ou non
-    rdt = (1 + Rt) / (1 + Rt_prev) - 1
-    return(rdt)
-  }
+    f = "revalo_treso",
+    signature = c(Rt = "numeric", Rt_prev = "numeric"),
+    definition = function(Rt, Rt_prev){
+        
+        # Verification des inputs
+        len_rt <- length(Rt)
+        if ((len_rt != length(Rt_prev)) | (len_rt != 1L)) stop("[Treso : revalo] : Les inputs doivent etre de meme dimension (superieure a 1). \n")
+        
+        # Calcul du vecteur rdt : Prise en compte du fait que les dividendes soient reinvestis ou non
+        rdt = (1 + Rt) / (1 + Rt_prev) - 1
+        
+        # Output
+        return(rdt)
+    }
 )
 

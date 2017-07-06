@@ -35,12 +35,19 @@ setValidity ("PRE",
              function (object){
                  retval <- NULL
                  #Verification des dimensions des attributs
-                 if(length(object@val_debut) > 1)              {retval <- c(retval, "[PRE] : La longueur de l'attribut val_debut d'un objet PRE est au plus de 1\n")}
-                 if(length(object@val_courante) > 1)           {retval <- c(retval, "[PRE] : La longueur de l'attribut val_courante d'un objet PRE est au plus de 1 \n")}
-                 if(length(object@ryth_dot) > 1)               {retval <- c(retval, "[PRE] : La longueur de l'attribut ryth_dot d'un objet PRE est au plus de 1 \n")}
-                 if(length(object@ryth_dot) > 0) if(object@ryth_dot < 3 | object@ryth_dot > 8) {retval <- c(retval, "[PRE] : L'attribut 'ryth_dot' doit etre compris entre 3 et 8 \n")}
-                 if (is.null(retval)) return (TRUE)
-                 else return (retval)
+                 if(length(object@val_debut) > 1L)
+                     retval <- c(retval, "[PRE] : La longueur de l'attribut val_debut d'un objet PRE est au plus de 1\n")
+                 if(length(object@val_courante) > 1L)
+                     retval <- c(retval, "[PRE] : La longueur de l'attribut val_courante d'un objet PRE est au plus de 1 \n")
+                 if(length(object@ryth_dot) > 1L)
+                     retval <- c(retval, "[PRE] : La longueur de l'attribut ryth_dot d'un objet PRE est au plus de 1 \n")
+                 if(length(object@ryth_dot) > 0L) if(object@ryth_dot < 3 | object@ryth_dot > 8)
+                     retval <- c(retval, "[PRE] : L'attribut 'ryth_dot' doit etre compris entre 3 et 8 \n")
+
+                 if (is.null(retval))
+                     return (TRUE)
+                 else
+                     return (retval)
              })
 
 # Initialisateur : permet de construire l'objet initial, selon 2 cas :

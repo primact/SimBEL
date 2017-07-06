@@ -19,8 +19,14 @@ setMethod(
     f = "frais_fin_load",
     signature = "character",
     definition = function(file_frais_fin_address){
+        
+        # Lecture du fichier
         temp <- read.csv2(file_frais_fin_address)
+        
+        # Creation de l'objet
         frais_fin <- new("FraisFin", tx_chargement = temp[,"tx_chargement"], indicatrice_inflation = temp[,"indicatrice_inflation"])
+        
+        # Output
         return(frais_fin)
     }
 )

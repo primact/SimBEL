@@ -12,9 +12,9 @@
 ##' @keywords classes
 ##' @export
 setClass(Class = "ParamBe",
-  representation = representation(
-    nb_annee = "integer"
-    ))
+         representation = representation(
+             nb_annee = "integer"
+         ))
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Verificateur et initialisateur
@@ -22,10 +22,14 @@ setClass(Class = "ParamBe",
 # Verificateur : permet a chaque appel de l'objet de verifier quelques elements de base :
 setValidity(Class = "ParamBe",
             function (object){
-              retval <- NULL
-              if (!is.integer(object@nb_annee))  {retval <- c(retval, "[ParamBe] : nb_annee n'est pas entier/n")}
-              if (is.null(retval)) return (TRUE)
-              else return (retval)
+                
+                retval <- NULL
+                
+                # Test
+                if (!is.integer(object@nb_annee))  retval <- c(retval, "[ParamBe] : nb_annee n'est pas entier/n")
+                
+                if (is.null(retval)) return (TRUE)
+                else return (retval)
             }
 )
 
