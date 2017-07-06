@@ -18,7 +18,7 @@
 ##' @return \code{x} l'objet de la classe \code{\link{ESG}} construit.
 ##' @author Prim'Act
 ##' @export
-##' @include ESG_class.R
+##' @include ESG_class.R ESG_internal.R
 
 setGeneric(name = "chargement_ESG", function(folder_ESG_address, nb_simu, nb_annee_proj){standardGeneric("chargement_ESG")})
 setMethod(
@@ -27,7 +27,7 @@ setMethod(
     definition = function(folder_ESG_address, nb_simu, nb_annee_proj){
 
         # Valeur en dur du terme qui est utilise en temps normal. Utiliser pour message d'erreur
-        TERME <- 30
+        TERME <- 36L
 
         # Nom des fichiers et arborescence
         # La colonne 1 contient le nom de l'indice,
@@ -77,10 +77,10 @@ setMethod(
                 warning(paste("[ESG chargement : yield_curve] : Les courbes de taux spot forward ", y," ans, ne
                               contiennent pas exactement ", TERME," maturites."))
             } else {
-                if(colnames(temp_curve) != paste("X", 1:TERME, sep = ""))
+                if(! all(colnames(temp_curve) != paste("X", c(0.0833333, 0.25, 0.5, 0.75, 1:30, 40, 50))))
                   warning(paste("[ESG chargement : yield_curve] : Les colonnes des courbes de taux spot forward ",
                                 y, "ans, ne sont pas renseignees selon la convention retenue pour les maturites de 1 a ",
-                                TERME," (le nommage des colonnes doit etre 1,2,..., ", TERME,").", sep = ""))
+                                TERME," (le nommage des colonnes doit etre 0.0833333, 0.25, 0.5, 0.75, 1, 2, ..., ", TERME,").", sep = ""))
             }
             yield_curve[[y+1]] <- temp_curve})
         names(yield_curve) <- paste("annee", 0:nb_annee_proj, sep = "")
