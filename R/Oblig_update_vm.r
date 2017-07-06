@@ -20,10 +20,15 @@ setMethod(
     f = "update_vm_oblig",
     signature = c(x = "Oblig", vm = "numeric"),
     definition = function(x, vm){
+        
         # Verification des inputs
-        if (nrow(x@ptf_oblig) != length(vm)) { stop("[Oblig : update_oblig] Les inputs ne sont pas de memes dimensions")}
-        if(sum(vm < 0) > 0) { stop("[Oblig : update_vm_oblig] :  Le vecteur de VM initialement entre ne peut contenir de valeurs negatives. \n")}
+        if (nrow(x@ptf_oblig) != length(vm)) stop("[Oblig : update_oblig] : Les inputs ne sont pas de memes dimensions")
+        if (sum(vm < 0) > 0) stop("[Oblig : update_vm_oblig] :  Le vecteur de VM initialement entre ne peut contenir de valeurs negatives. \n")
+        
+        # Mise a jour des valeurs de marche du PTF
         x@ptf_oblig$val_marche <- vm
+        
+        # Output
         return(x)
     }
 )

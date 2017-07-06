@@ -22,31 +22,49 @@ setMethod(
     f = "sell_pvl_action",
     signature = c(x = "Action", montant = "numeric"),
     definition = function(x, montant){
-        nom_table   <- names(x@ptf_action)
-        num_mp      <- which(nom_table == "num_mp")
-        val_marche  <- which(nom_table == "val_marche")
-        val_achat   <- which(nom_table == "val_achat")
-        val_nc      <- which(nom_table == "val_nc")
+
+
+        # Portefeuille
+        ptf_action  <- x@ptf_action
 
         # Verification des inputs
-        if(nrow(x@ptf_action) > 0) {
+        if(nrow(ptf_action) > 0L) {
+
+            # Donnees
+            nom_table   <- names(ptf_action)
+            num_mp      <- which(nom_table == "num_mp")
+            val_marche  <- which(nom_table == "val_marche")
+            val_achat   <- which(nom_table == "val_achat")
+            val_nc      <- which(nom_table == "val_nc")
+
+            # Calcul de la moins value
             pvl_action <- calc_pmvl_action(x)[["pvl"]]
-            if(pvl_action < montant) {stop("[Action : sell_pvl_action] : Tentative de realisation de plus de plus value latente que ce que le portefeuille contient. \n")}
+
+            # Test
+            if(pvl_action < montant)
+                stop("[Action : sell_pvl_action] : Tentative de realisation de plus de plus value latente que ce que le portefeuille contient. \n")
 
             # Selection des lignes soumises a une operation de realisation des pvl
-            temp              <- x@ptf_action[which(.subset2(x@ptf_action, val_marche) > .subset2(x@ptf_action, val_nc)),]
+            temp              <- ptf_action[which(.subset2(ptf_action, val_marche) > .subset2(ptf_action, val_nc)),]
             num_mp_pvl        <- .subset2(temp, num_mp)
             vecteur_poids_pvl <- (.subset2(temp, val_marche) - .subset2(temp, val_nc)) / pvl_action
 
             # Realisation des pvl de maniere proportionnelle
             # Reviens uniquement a vendre et a racheter immediatement : seule la val_nc et la val_achat sont augmentees de montant * vecteur_poids_pvl
-            identifiant <- which(.subset2(x@ptf_action, num_mp) %in% num_mp_pvl)
-            x@ptf_action$val_nc[identifiant]    <- .subset2(x@ptf_action, val_nc)[identifiant] + vecteur_poids_pvl * montant
-            x@ptf_action$val_achat[identifiant] <- .subset2(x@ptf_action, val_achat)[identifiant] + vecteur_poids_pvl * montant
-            return(list(action = x, pmvr = montant))
+            prod_poids_montant <- vecteur_poids_pvl * montant
+            identifiant <- which(is.element(.subset2(ptf_action, num_mp), num_mp_pvl))
+            ptf_action$val_nc[identifiant]    <- .subset2(ptf_action, val_nc)[identifiant] + prod_poids_montant
+            ptf_action$val_achat[identifiant] <- .subset2(ptf_action, val_achat)[identifiant] + prod_poids_montant
+
+            # Mise a jour du PTF action
+            x@ptf_action <- ptf_action
+
         } else {
-            return(list(action = x, pmvr = 0))
+            montant = 0
         }
+
+        # Output
+        return(list(action = x, pmvr = montant))
     }
 )
 

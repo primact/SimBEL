@@ -18,11 +18,20 @@
 
 setGeneric(name = "calc_flux_annee", def = function(x){standardGeneric("calc_flux_annee")})
 setMethod(
-  f = "calc_flux_annee",
-  signature = "Oblig",
-  definition = function(x){
-    tombee_coupon   <- calc_coupon(x)
-    tombee_echeance <- calc_nominal(x) * (.subset2(x@ptf_oblig, which(names(x@ptf_oblig) == "mat_res")) <= 1) * 1
-    return(list(tombee_coupon = tombee_coupon, tombee_echeance = tombee_echeance))
-  }
+    f = "calc_flux_annee",
+    signature = "Oblig",
+    definition = function(x){
+        
+        # Recuperation PTF oblig
+        ptf_oblig <- x@ptf_oblig
+        
+        # Calcul coupon
+        tombee_coupon   <- calc_coupon(x)
+        
+        # Calcul echeance
+        tombee_echeance <- calc_nominal(x) * (.subset2(ptf_oblig, which(names(ptf_oblig) == "mat_res")) <= 1) * 1
+        
+        # Output
+        return(list(tombee_coupon = tombee_coupon, tombee_echeance = tombee_echeance))
+    }
 )

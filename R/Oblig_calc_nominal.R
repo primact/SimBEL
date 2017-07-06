@@ -15,16 +15,20 @@
 ##' @export
 ##' @include Oblig_class.R
 
-setGeneric(name = "calc_nominal", def = function(x){standardGeneric("calc_nominal")})
+setGeneric(name = "calc_nominal", def = function(x) {standardGeneric("calc_nominal")})
 setMethod(
     f = "calc_nominal",
     signature = c(x = "Oblig"),
     definition = function(x){
-        nom_table <- names(x@ptf_oblig)
+        
+        # Donnees
+        ptf_oblig <- x@ptf_oblig
+        nom_table <- names(ptf_oblig)
         par       <- which(nom_table == "par")
         nominal   <- which(nom_table == "nominal")
         nb_unit   <- which(nom_table == "nb_unit")
 
-        return(.subset2(x@ptf_oblig, par) * .subset2(x@ptf_oblig, nominal) * .subset2(x@ptf_oblig,nb_unit))
+        # Ouput
+        return(.subset2(ptf_oblig, par) * .subset2(ptf_oblig, nominal) * .subset2(ptf_oblig, nb_unit))
     }
 )

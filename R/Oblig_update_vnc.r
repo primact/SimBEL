@@ -21,10 +21,15 @@ setMethod(
     f = "update_vnc_oblig",
     signature = c(x = "Oblig", vnc = "numeric"),
     definition = function(x, vnc){
+        
         # Verification des inputs
-        if (nrow(x@ptf_oblig) != length(vnc)) { stop("[Oblig : update_oblig] Les inputs ne sont pas de memes dimensions")}
-        if(sum(vnc < 0) > 0) { stop("[Oblig : update_vnc_oblig] :  Le vecteur de VNC initialement entre ne peut contenir de valeurs negatives. \n")}
+        if (nrow(x@ptf_oblig) != length(vnc)) stop("[Oblig : update_oblig] Les inputs ne sont pas de memes dimensions")
+        if(sum(vnc < 0) > 0) stop("[Oblig : update_vnc_oblig] :  Le vecteur de VNC initialement entre ne peut contenir de valeurs negatives. \n")
+        
+        # Mise a jour des VNC du PTF
         x@ptf_oblig$val_nc <- vnc
+        
+        # Output
         return(x)
     }
 )

@@ -18,17 +18,24 @@
 
 setGeneric(name = "update_vm_action", def = function(x, vm){standardGeneric("update_vm_action")})
 setMethod(
-  f = "update_vm_action",
-  signature = c(x = "Action", vm = "numeric"),
-  definition = function(x, vm){
-    nom_table  <- names(x@ptf_action)
-    val_marche <- which(nom_table == "val_marche")
-
-    # Verification des inputs
-    if (nrow(x@ptf_action) != length(vm)) { stop("[Action : update_vm_action] Les inputs ne sont pas de memes dimensions")}
-    if(sum(vm < 0) > 0) { stop("[Action : update_vm_action] :  Le vecteur de VM initialement entre ne peut contenir de valeurs negatives. \n")}
-    x@ptf_action$val_marche <- vm
-    return(x)
-  }
+    f = "update_vm_action",
+    signature = c(x = "Action", vm = "numeric"),
+    definition = function(x, vm){
+        
+        # Donnees
+        ptf_action <- x@ptf_action
+        nom_table  <- names(ptf_action)
+        val_marche <- which(nom_table == "val_marche")
+        
+        # Verification des inputs
+        if (nrow(ptf_action) != length(vm)) stop("[Action : update_vm_action] : Les inputs ne sont pas de memes dimensions")
+        if (sum(vm < 0) > 0)                stop("[Action : update_vm_action] : Le vecteur de VM initialement entre ne peut contenir de valeurs negatives. \n")
+        
+        # Modification de la VM
+        x@ptf_action$val_marche <- vm
+        
+        # Output
+        return(x)
+    }
 )
 

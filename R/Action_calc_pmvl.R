@@ -19,6 +19,8 @@ setMethod(
     f = "calc_pmvl_action",
     signature = "Action",
     definition = function(x){
+        
+        # Numeros de colonnes des donnees
         nom_table  <- names(x@ptf_action)
         val_marche <- which(nom_table == "val_marche")
         val_nc     <- which(nom_table == "val_nc")
@@ -26,8 +28,11 @@ setMethod(
         # Plus ou moins value latentes
         pmvl <-.subset2(x@ptf_action, val_marche) - .subset2(x@ptf_action, val_nc)
 
+        # Calcul plus et moins values
         pvl <- sum( pmvl * (pmvl > 0))
         mvl <- sum( pmvl * (pmvl <= 0))
+        
+        # Output
         return(list(pvl = pvl, mvl = mvl))
     }
 )

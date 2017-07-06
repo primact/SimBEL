@@ -16,24 +16,34 @@
 
 setGeneric(name = "buy_action", def = function(x, ptf_bought){standardGeneric("buy_action")})
 setMethod(
-  f = "buy_action",
-  signature = c(x = "Action", ptf_bought = "Action"),
-  definition = function(x, ptf_bought){
+    f = "buy_action",
+    signature = c(x = "Action", ptf_bought = "Action"),
+    definition = function(x, ptf_bought){
 
-    nom_table <- names(x@ptf_action)
-    num_mp    <- which(nom_table == "num_mp")
+        # Donnees
+        ptf_action <- x@ptf_action
+        nom_table <- names(ptf_action)
+        num_mp    <- which(nom_table == "num_mp")
 
-    # Permet d'acheter un portefeuille lorsque l'initial est vide
-    n_init <- 0
-    if(nrow(x@ptf_action) > 0) {n_init <- max(.subset2(x@ptf_action, num_mp))}
-    n_bought <- nrow(ptf_bought@ptf_action)
+        # Permet d'acheter un portefeuille lorsque l'initial est vide
+        if(nrow(ptf_action) > 0L)
+            n_init <- max(.subset2(ptf_action, num_mp))
+        else
+            n_init <- 0
 
-    # Ne permet pas d'acheter un portefeuille vide :
-    if(n_bought == 0) {stop("[Action : buy] : Tentative d'acquisition d'un portefeuille vide \n")}
+        # Nombre d'actions achetees
+        n_bought <- nrow(ptf_bought@ptf_action)
 
-    ptf_bought@ptf_action$num_mp <- c((n_init + 1):(n_init + n_bought))
-    x@ptf_action <- rbind(x@ptf_action, ptf_bought@ptf_action)
+        # Ne permet pas d'acheter un portefeuille vide :
+        if(n_bought == 0L) stop("[Action : buy] : Tentative d'acquisition d'un portefeuille vide \n")
 
-    return(x)
-  }
+        # Mise a jour des numeros du PTF
+        ptf_bought@ptf_action$num_mp <- (n_init + 1L):(n_init + n_bought)
+
+        # Mise a jour PTF
+        x@ptf_action <- rbind(ptf_action, ptf_bought@ptf_action)
+
+        # Output
+        return(x)
+    }
 )

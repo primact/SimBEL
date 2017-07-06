@@ -18,15 +18,21 @@ setMethod(
     f = "calc_pmvl_oblig",
     signature = "Oblig",
     definition = function(x){
-        nom_table  <- names(x@ptf_oblig)
+        
+        # Donnees
+        ptf_oblig  <- x@ptf_oblig
+        nom_table  <- names(ptf_oblig)
         val_marche <- which(nom_table == "val_marche")
         val_nc     <- which(nom_table == "val_nc")
 
         # Plus ou moins value latentes
-        pmvl <-.subset2(x@ptf_oblig, val_marche) - .subset2(x@ptf_oblig, val_nc)
+        pmvl <-.subset2(ptf_oblig, val_marche) - .subset2(ptf_oblig, val_nc)
 
+        # Calcul des plus et moins values
         pvl <- sum( pmvl * (pmvl > 0))
         mvl <- sum( pmvl * (pmvl <= 0))
+        
+        # Ouput
         return(list(pvl = pvl, mvl = mvl))
     }
 )

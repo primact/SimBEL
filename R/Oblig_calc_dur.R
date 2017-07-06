@@ -16,31 +16,42 @@
 
 setGeneric(name = "duration_sensi", def = function(x){standardGeneric("duration_sensi")})
 setMethod(
-  f = "duration_sensi",
-  signature = "Oblig",
-  definition = function(x){
-
-    if(nrow(x@ptf_oblig) == 0){stop("[Oblig : duration_sensi] : Portefeuille vide")}
-    coupon   <- calc_coupon(x)
-    nominal  <- calc_nominal(x)
-    ytm      <- yield_to_maturity(x)
-    maturite <- x@ptf_oblig$mat_res
-    zspread  <- x@ptf_oblig$zspread
-    m        <- max(maturite)
-    n        <- length(coupon)
-
-    numerateur    <- matrix(1:m, nrow = n, ncol = m, byrow = T) *
-      echeancier(coupon, maturite, 0, nominal, numeric()) *
-      t(apply(matrix(1 / (1 + ytm + zspread), nrow = n, ncol = m, byrow = F), 1, cumprod))
-    denominateur  <- echeancier(coupon, maturite, 0, nominal, numeric()) *
-      t(apply(matrix(1 / (1 + ytm + zspread), nrow = n, ncol = m, byrow = F), 1, cumprod))
-
-    if (n == 1) {duration <- sum(numerateur) / sum(denominateur)
-    } else {duration <- rowSums(numerateur) / rowSums(denominateur)}
-
-    sensi <- duration /(1 + ytm)
-    return(data.frame(duration, sensi))
-  }
+    f = "duration_sensi",
+    signature = "Oblig",
+    definition = function(x){
+        
+        # Recuperation du PTF oblig
+        ptf_oblig <- x@ptf_oblig
+        
+        if(nrow(ptf_oblig) == 0) stop("[Oblig : duration_sensi] : Portefeuille vide")
+        
+        # Calcul de donnees
+        coupon   <- calc_coupon(x)
+        nominal  <- calc_nominal(x)
+        ytm      <- yield_to_maturity(x)
+        maturite <- ptf_oblig$mat_res
+        zspread  <- ptf_oblig$zspread
+        m        <- max(maturite)
+        n        <- length(coupon)
+        
+        
+        denominateur <- echeancier(coupon, maturite, 0, nominal, numeric()) *
+            t(apply(matrix(1 / (1 + ytm + zspread), nrow = n, ncol = m, byrow = F), 1, cumprod))
+        numerateur    <- matrix(1:m, nrow = n, ncol = m, byrow = T) * denominateur
+        
+        
+        # Calcul de la duration
+        if (n == 1L) 
+            duration <- sum(numerateur) / sum(denominateur)
+        else 
+            duration <- rowSums(numerateur) / rowSums(denominateur)
+        
+        # Calcul de la sensibilite
+        sensi <- duration / (1 + ytm)
+        
+        # Ouput
+        return(data.frame(duration, sensi))
+    }
 )
 
 

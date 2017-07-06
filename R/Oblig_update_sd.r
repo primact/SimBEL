@@ -20,9 +20,14 @@ setMethod(
     f = "update_sd_oblig",
     signature = c(x = "Oblig", sd = "numeric"),
     definition = function(x, sd){
+        
         # Verification des inputs
-        if (nrow(x@ptf_oblig) != length(sd)) { stop("[Oblig : update_oblig] Les inputs ne sont pas de memes dimensions")}
+        if (nrow(x@ptf_oblig) != length(sd)) stop("[Oblig : update_oblig] Les inputs ne sont pas de memes dimensions")
+        
+        # Mise a jour des surcotes/decotes du PTF
         x@ptf_oblig$sd <- sd
+        
+        # Output
         return(x)
     }
 )

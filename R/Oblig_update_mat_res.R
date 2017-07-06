@@ -25,21 +25,30 @@ setMethod(
     f = "update_mat_res",
     signature = c(x = "Oblig"),
     definition = function(x){
-        nom_table <- names(x@ptf_oblig)
+
+        # Donnees
+        ptf_oblig <- x@ptf_oblig
+        nom_table <- names(ptf_oblig)
         mat_res   <- which(nom_table == "mat_res")
         dur_det   <- which(nom_table == "dur_det")
-        num_mp    <- which(nom_table == "num_mp")
 
-        x@ptf_oblig$mat_res <- .subset2(x@ptf_oblig, mat_res) - 1
-        x@ptf_oblig$dur_det <- .subset2(x@ptf_oblig, dur_det) + 1
+        # Mise a jour des nouvelles donnees
+        new_mat_res <- .subset2(ptf_oblig, mat_res) - 1L
+        ptf_oblig$mat_res <- new_mat_res
+        ptf_oblig$dur_det <- .subset2(ptf_oblig, dur_det) + 1L
 
         # Operation de suppression des elements de maturite residuelle negative apres mise a jour
-        if(length(which(.subset2(x@ptf_oblig, mat_res) <= 0))>0) {
-          num_del <- which(.subset2(x@ptf_oblig, mat_res) > 0)
-          x@ptf_oblig  <- x@ptf_oblig[num_del, ]
-        }
+        num_del <- which(new_mat_res <= 0)
+        if(length(num_del) > 0L)
+            ptf_oblig  <- ptf_oblig[-num_del, ]
+
         # Reordonnancement des num_mp et verification que l'on ne vide pas le portefeuille
-        if(nrow(x@ptf_oblig) == 0) {warning(" [Oblig : update_mat_res] : Attention : portefeuille obligataire vide")}
+        if(nrow(ptf_oblig) == 0L) warning("[Oblig : update_mat_res] : Attention : portefeuille obligataire vide")
+
+        # Mise a jour du PTF oblig
+        x@ptf_oblig <- ptf_oblig
+
+        # Output
         return(x)
     }
 )

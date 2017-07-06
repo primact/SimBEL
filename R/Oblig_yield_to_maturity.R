@@ -20,24 +20,32 @@ setMethod(
     signature = "Oblig",
     definition = function(x){
 
-        nom_table <- names(x@ptf_oblig)
+        # Donnees
+        ptf_oblig <- x@ptf_oblig
+        nom_table <- names(ptf_oblig)
         mat_res   <- which(nom_table == "mat_res")
         zsp       <- which(nom_table == "zspread")
         val_mar   <- which(nom_table == "val_marche")
 
-        if(nrow(x@ptf_oblig)==0) {stop("[Oblig : yield_to_maturity] : Portefeuille vide")}
+        # Tests
+        if(nrow(ptf_oblig)==0) stop("[Oblig : yield_to_maturity] : Portefeuille vide")
+        
+        # Calcul et extraction de donnees
         coupon   <- calc_coupon(x)
         nominal  <- calc_nominal(x)
-        maturite <- .subset2(x@ptf_oblig, mat_res)
-        zspread  <- .subset2(x@ptf_oblig, zsp)
-        vm       <- .subset2(x@ptf_oblig, val_mar)
+        maturite <- .subset2(ptf_oblig, mat_res)
+        zspread  <- .subset2(ptf_oblig, zsp)
+        vm       <- .subset2(ptf_oblig, val_mar)
         m        <- max(maturite)
+        
         # Calcul des YtM pour chaque ligne obligataire du portefeuille
-        # On resout a chaque fois la fonction VM(YtM)-VA=0
+        # On resoud a chaque fois la fonction VM(YtM)-VA=0
         ytm <- unlist(lapply(1:length(coupon), function(i){
             multiroot(function(y){return(sum(echeancier(coupon[i], maturite[i], zspread[i], nominal[i], rep(y, m))) - vm[i])},
                       start = 0,
                       maxiter = 300)$root}))
+        
+        # Output
         return(ytm)
     }
 )

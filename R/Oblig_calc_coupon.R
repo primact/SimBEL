@@ -22,13 +22,16 @@ setMethod(
     f = "calc_coupon",
     signature ="Oblig",
     definition = function(x){
-        nom_table <- names(x@ptf_oblig)
+        
+        # Donnees
+        ptf_oblig <- x@ptf_oblig
+        nom_table <- names(ptf_oblig)
         tx_coupon <- which(nom_table == "tx_coupon")
         par       <- which(nom_table == "par")
         nominal   <- which(nom_table == "nominal")
         nb_unit   <- which(nom_table == "nb_unit")
 
-        # Tx_coupon * Parite * Nominal
-        return(.subset2(x@ptf_oblig, tx_coupon) * .subset2(x@ptf_oblig, par) * .subset2(x@ptf_oblig, nominal) * .subset2(x@ptf_oblig, nb_unit))
+        # Output = Tx_coupon * Parite * Nominal
+        return(.subset2(ptf_oblig, tx_coupon) * .subset2(ptf_oblig, par) * .subset2(ptf_oblig, nominal) * .subset2(ptf_oblig, nb_unit))
     }
 )

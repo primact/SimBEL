@@ -20,20 +20,33 @@ setMethod(
     f = "buy_oblig",
     signature = c(x = "Oblig", ptf_bought = "Oblig"),
     definition = function(x, ptf_bought){
-        nom_table <- names(x@ptf_oblig)
+
+        # Donnees
+        ptf_oblig <- x@ptf_oblig
+        nom_table <- names(ptf_oblig)
         num_mp <- which(nom_table == "num_mp")
 
-        n_init   <- 0
-        if(nrow(x@ptf_oblig)>0) {n_init <- max(.subset2(x@ptf_oblig, num_mp))}
+        # Permet d'acheter un portefeuille lorsque l'initial est vide
+        if(nrow(ptf_oblig) > 0L)
+            n_init <- max(.subset2(ptf_oblig, num_mp))
+        else
+            n_init <- 0
+
+        # Nombre d'oblig achetees
         n_bought <- nrow(ptf_bought@ptf_oblig)
 
-        if(n_bought == 0) {stop("[Oblig : buy_oblig] : Tentative d'achat d'un portefeuille vide\n")}
+        if(n_bought == 0L) stop("[Oblig : buy_oblig] : Tentative d'achat d'un portefeuille vide\n")
 
-        ptf_bought@ptf_oblig$num_mp <- c((n_init + 1):(n_init + n_bought))
+        # Mise a jour des numeros du PTF
+        ptf_bought@ptf_oblig$num_mp <- (n_init + 1L):(n_init + n_bought)
+
         # Mise a jour de la surcote decote du portefeuille achete en date d'achat
         ptf_bought <- update_sd_oblig(ptf_bought, calc_sur_dec(ptf_bought))
-        x@ptf_oblig <- rbind(x@ptf_oblig, ptf_bought@ptf_oblig)
 
+        # Mise a jour du PTF
+        x@ptf_oblig <- rbind(ptf_oblig, ptf_bought@ptf_oblig)
+
+        # Output
         return(x)
     }
 )

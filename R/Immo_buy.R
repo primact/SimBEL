@@ -20,20 +20,30 @@ setMethod(
     signature = c(x = "Immo", ptf_bought = "Immo"),
     definition = function(x, ptf_bought){
 
-        nom_table <- names(x@ptf_immo)
+        # Donnees
+        ptf_immo <- x@ptf_immo
+        nom_table <- names(ptf_immo)
         num_mp    <- which(nom_table == "num_mp")
 
         # Permet d'acheter un portefeuille lorsque l'initial est vide
-        n_init <- 0
-        if(nrow(x@ptf_immo) > 0) {n_init <- max(.subset2(x@ptf_immo, num_mp))}
+        if(nrow(ptf_immo) > 0L)
+            n_init <- max(.subset2(ptf_immo, num_mp))
+        else
+            n_init <- 0
+
+        # Nombre d'immo achetees
         n_bought <- nrow(ptf_bought@ptf_immo)
 
         # Ne permet pas d'acheter un portefeuille vide :
-        if(n_bought == 0) {stop("[Immo : buy] : Tentative d'acquisition d'un portefeuille vide \n")}
+        if(n_bought == 0L) stop("[Immo : buy] : Tentative d'acquisition d'un portefeuille vide \n")
 
-        ptf_bought@ptf_immo$num_mp <- c((n_init + 1):(n_init + n_bought))
-        x@ptf_immo <- rbind(x@ptf_immo, ptf_bought@ptf_immo)
+        # Mise a jour des numeros du PTF
+        ptf_bought@ptf_immo$num_mp <- (n_init + 1L):(n_init + n_bought)
 
+        # Mise a jour du PTF
+        x@ptf_immo <- rbind(ptf_immo, ptf_bought@ptf_immo)
+
+        # Output
         return(x)
     }
 )

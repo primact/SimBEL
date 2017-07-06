@@ -17,22 +17,33 @@
 ##' @export
 ##' @include Immo_class.R
 
-setGeneric(name = "revalo_immo", def = function(x,S,S_prev){standardGeneric("revalo_immo")})
+setGeneric(name = "revalo_immo", def = function(x,S,S_prev) {standardGeneric("revalo_immo")})
 setMethod(
-  f = "revalo_immo",
-  signature = c(x = "Immo", S = "numeric", S_prev = "numeric"),
-  definition = function(x,S,S_prev){
-    nom_table   <- names(x@ptf_immo)
-    loyer       <- which(nom_table == "loyer")
-    ind_invest  <- which(nom_table == "ind_invest")
-    val_marche  <- which(nom_table == "val_marche")
-
-    # Verification des inputs
-    if (length(S) != length(S_prev) | nrow(x@ptf_immo) != length(S)) {stop("[Immo : revalo] : Les inputs ont des dimensions distinctes.")}
-    # Calcul du vecteur rdt : Prise en compte du fait que les loyers soient reinvestis ou non
-    rdt <- (S/S_prev) / (1 + .subset2(x@ptf_immo, loyer) * .subset2(x@ptf_immo, ind_invest)) - 1
-    # Calcul des loyers verses en tresorerie en milieu d'annee
-    loyer <- .subset2(x@ptf_immo, val_marche) * (1 + rdt)^0.5 * .subset2(x@ptf_immo, loyer)
-    return(data.frame(rdt,loyer))
-  }
+    f = "revalo_immo",
+    signature = c(x = "Immo", S = "numeric", S_prev = "numeric"),
+    definition = function(x, S, S_prev){
+        
+        # Donnees
+        ptf_immo    <- x@ptf_immo
+        nb_immo     <- nrow(ptf_immo)
+        nom_table   <- names(ptf_immo)
+        loyer       <- which(nom_table == "loyer")
+        ind_invest  <- which(nom_table == "ind_invest")
+        val_marche  <- which(nom_table == "val_marche")
+        
+        # Verification des inputs
+        if (length(S) != length(S_prev) | nb_immo != length(S)) stop("[Immo : revalo] : Les inputs ont des dimensions distinctes.")
+        
+        # Extraction de donnees
+        loyer_immo <- .subset2(ptf_immo, loyer)
+        
+        # Calcul du vecteur rdt : Prise en compte du fait que les loyers soient reinvestis ou non
+        rdt <- (S / S_prev) / (1 + loyer_immo * .subset2(ptf_immo, ind_invest)) - 1
+        
+        # Calcul des loyers verses en tresorerie en milieu d'annee
+        loyer <- .subset2(ptf_immo, val_marche) * sqrt(1 + rdt) * loyer_immo
+        
+        # Ouput
+        return(cbind(rdt = rdt, loyer = loyer))
+    }
 )

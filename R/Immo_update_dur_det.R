@@ -17,12 +17,18 @@ setMethod(
     f = "update_dur_det_immo",
     signature = "Immo",
     definition = function(x){
-        nom_table <- names(x@ptf_immo)
+        
+        # Donnees
+        ptf_immo  <- x@ptf_immo
+        nom_table <- names(ptf_immo)
         dur_det   <- which(nom_table == "dur_det")
-
-        if(nrow(x@ptf_immo) == 0) {warning("[Immo : update_dur_det_immo] : Le portefeuille immo initial est vide.")
-            return(x)}
-        x@ptf_immo$dur_det <- .subset2(x@ptf_immo, dur_det) + 1
+        
+        if(nrow(ptf_immo) != 0L) 
+            x@ptf_immo$dur_det <- .subset2(ptf_immo, dur_det) + 1
+        else
+            warning("[Immo : update_dur_det_immo] : Le portefeuille immo initial est vide.")
+        
+        # Output
         return(x)
     }
 )

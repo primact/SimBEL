@@ -19,12 +19,21 @@ setMethod(
     f = "calc_vnc",
     signature = c("Oblig","numeric"),
     definition = function(x, sd_unitaire){
-        if(nrow(x@ptf_oblig) == 0) {stop("[Oblig:calc_vnc] : Portefeuille obligataire vide")}
-        if(length(sd_unitaire) != nrow(x@ptf_oblig)) {stop("[[Oblig:calc_vnc] : Inputs de mauvaise dimension")}
-        nom_table <- names(x@ptf_oblig)
+        
+        # Recuperation du PTF oblig
+        ptf_oblig <- x@ptf_oblig
+        nb_oblig  <- nrow(ptf_oblig)
+        
+        # Tests
+        if(nb_oblig == 0L)                  stop("[Oblig : calc_vnc] : Portefeuille obligataire vide")
+        if(length(sd_unitaire) != nb_oblig) stop("[[Oblig : calc_vnc] : Inputs de mauvaise dimension")
+        
+        # Donnees
+        nom_table <- names(ptf_oblig)
         nb_unit   <- which(nom_table == "nb_unit")
         val_nc    <- which(nom_table == "val_nc")
 
-        return(.subset2(x@ptf_oblig, val_nc) + sd_unitaire * .subset2(x@ptf_oblig, nb_unit))
+        # Output
+        return(.subset2(ptf_oblig, val_nc) + sd_unitaire * .subset2(ptf_oblig, nb_unit))
     }
 )
