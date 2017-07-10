@@ -139,7 +139,7 @@ setMethod(
             stop("[EpEuroInd : calc_prest] : L'input method dont etre egal a 'normal' ou 'gar' \n")
 
 
-        #Indicatrice de sortie en echeance
+        # Indicatrice de sortie en echeance
         ind_ech <- (an <= .subset2(mp, num_terme))
 
 
@@ -163,10 +163,10 @@ setMethod(
 
         # Calcul des flux de deces
         # Taux de deces sur la population des non rachetes
-        qx_dc <- qx_dc * (1 - qx_rach_tot_glob)
-        dc <- pm_deb * qx_dc * ind_ech # Flux de rachats totaux
+        qx_dc_rach <- qx_dc * (1 - qx_rach_tot_glob)
+        dc <- pm_deb * qx_dc_rach * ind_ech # Flux de rachats totaux
         rev_dc <- dc * tx_min_se # revalorisation au taux minimum
-        nb_dc <- nb_contr * qx_dc * ind_ech # nombre de contrats en deces
+        nb_dc <- nb_contr * qx_dc_rach * ind_ech # nombre de contrats en deces
 
         # Calcul des flux rachats partiels
         # Taux de rachat incluant les rachats structurels et conjoncturels sur la population des non rachetes et vivants

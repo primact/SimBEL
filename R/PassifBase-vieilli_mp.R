@@ -41,6 +41,7 @@ setMethod(
         x@mp$anc <- .subset2(mp, num_anc) + 1L
 
         # Ajustement du nombre de contrat, de la PM garanti (calcul FDB) et du taux cible.
+        x@mp$nb_contr <- tab[["nb_contr"]]
         x@mp$pm_gar <- tab[["pm_gar"]]
         x@mp$tx_cible_prec <- tab[["tx_cible"]]
 

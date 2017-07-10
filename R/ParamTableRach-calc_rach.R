@@ -42,10 +42,8 @@ setMethod(
         age_uniq <- unique(age_tab)
         anc_uniq <- unique(anc_tab)
 
-        anc_min <- pmin(anc, anc[])
-
         # Test si l age est bien present dans la table
-        if (! all(age_app %in% age)) stop("L'age doit etre present dans la table")
+        if (! all(age_app %in% age_tab)) stop("L'age doit etre present dans la table")
 
 
         # Numero de ligne

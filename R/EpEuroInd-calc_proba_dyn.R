@@ -69,7 +69,7 @@ setMethod(
 
         # Calcul des qx pour les rachats partiels
         for (tab in tab_rach_part) {
-            row <- which(rach_dyn_tot == tab) # lignes associees a la methode en question
+            row <- which(rach_dyn_part == tab) # lignes associees a la methode en question
             qx_rach_part_dyn[row] <- get_rach_dyn(ht, tab, tx_cible_prec[row], tx_revalo_prec[row])
         }
 
