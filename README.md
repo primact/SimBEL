@@ -13,6 +13,7 @@ Verison 1.2.0 : Gestion de la regle des 8 ans.
 Version 2.0.0 : Prise en compte des retraites en phase de restitution.
 Version 2.5.0 : Optimisation du package : 1. Stockage des tables de probabilites, 2. Optimisation Rccp, 3. Boucle sur les tables
 differentes plutot que sur les model points, 4. Gestion des appels de data.frame, 5. Optimisation mineures.
+Version 2.5.1 : Corrections mineures dues a des regressions dans le code.
 
 
 ``` r
