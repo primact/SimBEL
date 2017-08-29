@@ -51,6 +51,7 @@
 ##' \item{\code{rach_charg} : }{un vecteur contenant les chargements sur les rachats de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
 ##' \item{\code{soc_prest} : }{un vecteur contenant les prelevements sociaux sur prestations de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
 ##' \item{\code{it_tech_prest} : }{un vecteur contenant les interets techniques sur prestations de l'annee. : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
+##' \item{\code{arr_charg} : }{un vecteur contenant les chargements sur arrerages. : nul si l'objet est de type \code{\link{EpEuroInd}}.}
 ##' }
 ##' @return Le format de la liste \code{stock} est :
 ##' \describe{
@@ -201,31 +202,35 @@ setMethod(
         # Calcul des interets techniques sur prestations
         it_tech_prest <- prest * tx_min[["tx_tech_se"]]
 
+        # Output zero
+        out_zero <- rep(0, nb_mp)
+        
         # output
         return(list(method = method,
                     flux = list(
-                        ech = ech,
-                        rach_tot = rach_tot,
-                        dc = dc,
-                        rach_part = rach_part,
-                        rente = rep(0, nb_mp),
-                        prest = prest,
-                        rev_ech = rev_ech,
-                        rev_rach_tot = rev_rach_tot,
-                        rev_dc = rev_dc,
-                        rev_rach_part = rev_rach_part,
-                        rev_prest = rev_prest,
+                        ech             = ech,
+                        rach_tot        = rach_tot,
+                        dc              = dc,
+                        rach_part       = rach_part,
+                        rente           = out_zero,
+                        prest           = prest,
+                        rev_ech         = rev_ech,
+                        rev_rach_tot    = rev_rach_tot,
+                        rev_dc          = rev_dc,
+                        rev_rach_part   = rev_rach_part,
+                        rev_prest       = rev_prest,
                         rev_prest_nette = rev_prest_nette,
                         enc_charg_prest = enc_charg,
-                        rach_charg = rach_charg,
-                        soc_prest = soc_prest,
-                        it_tech_prest = it_tech_prest),
+                        rach_charg      = rach_charg,
+                        soc_prest       = soc_prest,
+                        it_tech_prest   = it_tech_prest,
+                        arr_charg       = out_zero),
                     stock = list(
-                        nb_ech = nb_ech,
-                        nb_rach_tot = nb_rach_tot,
-                        nb_dc = nb_dc,
-                        nb_debut = nb_contr_debut,
-                        nb_sortie = nb_sortie,
+                        nb_ech       = nb_ech,
+                        nb_rach_tot  = nb_rach_tot,
+                        nb_dc        = nb_dc,
+                        nb_debut     = nb_contr_debut,
+                        nb_sortie    = nb_sortie,
                         nb_contr_fin = nb_contr_fin,
                         nb_contr_moy = nb_contr_moy
                     )
@@ -273,21 +278,27 @@ setMethod(
         nb_contr_moy <- (nb_contr_debut + nb_contr_fin) / 2  # nombre de contrats moyen
 
 
-        ## Calcul des prestations
+        ## Prestations
         # Taux de chargement sur arrerage
         ch_arr <- .subset2(mp, num_ch_arr)
 
-        # Prestations
+        # Rentes
         if(method == "normal")
-            prestations <- nb_contr_debut * (.subset2(mp, num_rente) / (1 + ch_arr))
+            rente <- .subset2(mp, num_rente)
         else if (method == "gar")
-            prestations <- nb_contr_debut * (.subset2(mp, num_rente_gar) / (1 + ch_arr))
+            rente <- .subset2(mp, num_rente_gar)
         else
             stop("[RetraiteEuroRest : calc_prest] : L'input method doit etre egal a 'normal' ou 'gar' \n")
 
+        # Calcul des prestations
+        prestations <- nb_contr_debut * (rente / (1 + ch_arr))
+            
         # Calcul des rentes
         rente_flux <- proba_survie_un_an * prestations
 
+        
+        # Calcul des chargements
+        arr_charg <- rente * (ch_arr / (1 + ch_arr))
 
         # output zero
         out_zero <- rep(0, nb_mp)
@@ -310,7 +321,8 @@ setMethod(
                         enc_charg_prest = out_zero,
                         rach_charg      = out_zero,
                         soc_prest       = out_zero,
-                        it_tech_prest   = out_zero),
+                        it_tech_prest   = out_zero,
+                        arr_charg       = arr_charg),
                     stock = list(
                         nb_ech          = out_zero,
                         nb_rach_tot     = out_zero,
