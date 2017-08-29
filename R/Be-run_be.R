@@ -56,7 +56,7 @@ setMethod(
             cl <- makePSOCKcluster(nb_coeur)
             registerDoParallel(cl)
 
-            result_simu <- foreach(i=ens_simu, .packages = c("Rcpp", "SimBEL")) %dopar% {
+            result_simu <- foreach(i=ens_simu, .packages = c("SimBEL")) %dopar% {
 
                 # Calcul du BE pour la simulation
                 run_be_simu(x, i, pre_on)[["resultats"]]
@@ -86,7 +86,6 @@ setMethod(
             close(pb)
 
         }
-
 
         # Alimentation des tableaux de resultats
         message("Alimentation des tableaux de resultats")
@@ -129,12 +128,10 @@ setMethod(
             # Boucle de remplissage et de calcul des moyennes
             for(i in ens_simu[-1]){
                 # Boucle pour alimenter le tableau des flux
-                for(j in nom_flux[-1]){
+                for(j in nom_flux[-1])
                     res_flux[[j]] <- res_flux[[j]] + result_simu[[i]][[j]] / nb_simu # Moyenne sur les simulations
-                }
-                for(j in nom_be[-1]){
+                for(j in nom_be[-1])
                     res_be[[j]] <- res_be[[j]] + result_simu[[i]][[j]] / nb_simu # Moyenne sur les simulations
-                }
             }
         }
 
@@ -143,13 +140,22 @@ setMethod(
         res_be[["nom_produit"]] <- result_simu[[1]][["nom_produit"]]
 
         # Stockage des resultats
-        for(j in names(res_flux)){
+        for(j in names(res_flux))
             x["tab_flux"][[j]] <- res_flux[[j]]
-        }
-        for(j in names(res_be)){
+        for(j in names(res_be))
             x["tab_be"][[j]] <- res_be[[j]]
-        }
 
+        
+        # Travail sur la base de donnees
+        if(x@base@ecriture_base) {
+            # Alimentation de la base de donnees
+            insert_tables(x@base, result_simu, ens_simu)
+            
+            # Deconnexion de la base de donnees
+            dbDisconnect(x@base@database)
+        }
+        
+        
         # Messages de fin
         message("Fin de l'evaluation")
         # Affiche l'heure de fin de la simulation
