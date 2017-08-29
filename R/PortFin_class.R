@@ -72,7 +72,7 @@ setValidity(Class = "PortFin",
 
 
                 if(length(object@annee) > 1L | length(object@pvl_action) > 1L | length(object@mvl_action) > 1L | length(object@pvl_immo) > 1L | length(object@mvl_immo) > 1L | length(object@pvl_oblig) > 1L | length(object@mvl_oblig) > 1L )
-                    retval <- "[PortFin] : Les PMVL et l'annee doivent être des reels, pas de composantes vectorielles autorisees."
+                    retval <- "[PortFin] : Les PMVL et l'annee doivent etre des reels, pas de composantes vectorielles autorisees."
 
                 if (is.null(retval))
                     return (TRUE)
