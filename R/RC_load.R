@@ -21,6 +21,10 @@ setMethod(
         # Lecture du fichier
         temp <- read.csv2(file_RC_address)
         
+        # Tests
+        if (! all(! is.na(temp)))
+            stop("[RC - load] : Presence de NA dans le fichier d'input")
+        
         # Creation de l'objet
         rc <- new("RC",
                    val_debut    = temp[,"rc_init"],

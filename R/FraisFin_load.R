@@ -23,6 +23,10 @@ setMethod(
         # Lecture du fichier
         temp <- read.csv2(file_frais_fin_address)
         
+        # Tests
+        if (! all(! is.na(temp)))
+            stop("[FraisFin - load] : Presence de NA dans le fichier d'input.")
+        
         # Creation de l'objet
         frais_fin <- new("FraisFin", tx_chargement = temp[,"tx_chargement"], indicatrice_inflation = temp[,"indicatrice_inflation"])
         
