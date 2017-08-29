@@ -16,6 +16,7 @@
 ##' @param flux_fin est une valeur \code{numeric}  correspondant a la somme des flux percus en fin d'annee (tombee d'echeance d'obligation).
 ##' @return \code{ptf} un vecteur contenant les flux de sortie en echeance de l'annee
 ##' @return \code{revenu_fin} les revenus realises au cours de la periode (coupons, tombees d'echeance, dividendes et loyers).
+##' @return \code{revenu_fin_det} les revenus detaille pour chaque actif realises au cours de la periode.
 ##' @return \code{var_vnc_oblig} la variation de valeur nette comptable obligataire.
 ##' @author Prim'Act
 ##' @export
@@ -70,5 +71,10 @@ setMethod(
         # Revenu de la treso
         x <- vieillissement_treso_PortFin(x, revenu_fin + flux_milieu, echeance + flux_fin, table_rdt)
         
-        return(list(ptf = x, revenu_fin = revenu_fin, var_vnc_oblig = var_vnc_oblig))
+        return(list(ptf = x, 
+                    revenu_fin = revenu_fin, 
+                    revenu_fin_det = list(oblig = coupon,
+                                          action = dividende,
+                                          immo = loyer),
+                    var_vnc_oblig = var_vnc_oblig))
     })
