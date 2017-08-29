@@ -25,57 +25,79 @@ setMethod(
         # Recuperation de l'attribut 'address'
         address <- x@address
         
-        input_morta      <- read.csv2(paste(address[["param"]][["tables"]],"empl_tables_morta.csv",sep="/"),header = TRUE)
-        input_rach       <- read.csv2(paste(address[["param"]][["tables"]],"empl_tables_rachats.csv",sep="/"),header = TRUE)
-        input_param_rach <- read.csv2(paste(address[["param"]][["tables"]],"empl_param_rachats_conj.csv",sep="/"),header = TRUE)
+        input_morta      <- read.csv2(paste(address[["param"]][["tables"]], "empl_tables_morta.csv", sep="/"), header = TRUE)
+        input_rach       <- read.csv2(paste(address[["param"]][["tables"]], "empl_tables_rachats.csv", sep="/"), header = TRUE)
+        input_param_rach <- read.csv2(paste(address[["param"]][["tables"]], "empl_param_rachats_conj.csv", sep="/"), header = TRUE)
         
         list_morta       <- list()
         list_rach        <- list()
         list_param_rach  <- list()
         
+        ## 1 - Tables de mortalite
         # Chargement et instanciation des tables de moratlite
-        for (i in 1:nrow(input_morta["nom_table_R"])) 
-        {
-            # Lecture de la table
-            temp_csv     <- read.csv2(paste(address[["param"]][["tables"]], input_morta[i,"nom_table_csv"], sep = "/"), header = TRUE)
+        for (i in 1:nrow(input_morta["nom_table_R"])) {
             
-            if (input_morta[i,"type"] == "lx") { # Ajout d'une colonne qx
-                
+            # Lecture de la table
+            temp_csv     <- read.csv2(paste(address[["param"]][["tables"]], input_morta[i,"nom_table_csv"], sep = "/"), header = TRUE, colClasses = c("integer", "integer", "numeric"))
+            
+            # Tests
+            if (! all(! is.na(temp_csv)))
+                stop("[HypTech - load] : Presence de NA dans l'une des tables de mortalite.")
+            
+            # Conversion de la table en fonction du type
+            if (input_morta[i,"type"] == "lx")
                 table <- convert_table(temp_csv[order(temp_csv["gen"], temp_csv["age"]),], type = "lx")
-                list_morta[[i]] <- new(Class = "ParamTableMort", table)
-                
-            } else if (input_morta[i,"type"] == "qx") { # Ajout d'une colonne lx
-                
+            else if (input_morta[i,"type"] == "qx")
                 table <- convert_table(temp_csv[order(temp_csv["gen"], temp_csv["age"]),], type = "qx")
-                list_morta[[i]] <- new(Class = "ParamTableMort", table)
-                
-            } else {
-                stop("HypTech-load : Le type des tables de mortalite doit correspondre a l'un des deux types suivants : qx ou lx")
-            }
+            else
+                stop("HypTech-load : Le type des tables de mortalite doit correspondre a l'un des deux types suivants : qx ou lx.")
+            
+            # Creation de l'objet et ajout dans la liste
+            list_morta[[i]] <- new(Class = "ParamTableMort", table)
 
         }
+        # Nommage des tables
         names(list_morta) <- input_morta[,"nom_table_R"]
         
         
+        ## 2 - Tables de rachats
         # Chargement et instanciation des tables de rachat
-        for (i in 1:nrow(input_rach["nom_table_R"]))
-        {
-            temp_csv        <- read.csv2(paste(address[["param"]][["tables"]], input_rach[i,"nom_table_csv"], sep = "/"), header = TRUE)
+        for (i in 1:nrow(input_rach["nom_table_R"])) {
+            
+            # Lecture du fichier
+            temp_csv        <- read.csv2(paste(address[["param"]][["tables"]], input_rach[i,"nom_table_csv"], sep = "/"), header = TRUE, colClasses = c("integer", "integer", "numeric"))
+            
+            # Tests
+            if (! all(! is.na(temp_csv)))
+                stop("[HypTech - load] : Presence de NA dans l'une des tables de rachats.")
+            
+            # Creation de l'objet et ajout dans la liste
             list_rach[[i]]  <- new(Class ="ParamTableRach", temp_csv)
             
         }
+        # Nommage des tables
         names(list_rach) <- input_rach[,"nom_table_R"]
         
         
+        ## 3 - Parametres rachats dynamiques
         # Chargement et instanciation des tables de parametres de rachats dynamique
-        for (i in 1L:nrow(input_param_rach["nom_table_R"]))
-        {
+        for (i in 1L:nrow(input_param_rach["nom_table_R"])) {
+            
+            # Lecture du fichier
             temp_csv              <- read.csv2(paste(address[["param"]][["tables"]], input_param_rach[i,"nom_table_csv"], sep = "/"), header = TRUE)
+            
+            # Tests
+            if (! all(! is.na(temp_csv)))
+                stop("[HypTech - load] : Presence de NA dans l'une des tables de rachats dynamiques.")
+            
+            # Creation de l'objet et ajout dans la liste
             list_param_rach[[i]]  <- new(Class ="ParamRachDyn", temp_csv)
             
         }
+        # Nommage des tables
         names(list_param_rach) <- input_param_rach[,"nom_table_R"]
         
+        ## 4 - Parametres de comportement
         # Chargement et instanciation des parametres de comportement
         param_comport_csv   <- read.csv2(paste(address[["param"]][["tables"]], "param_comport.csv", sep = "/"), header = TRUE)
         nom_param_comport   <- as.character(param_comport_csv[,"nom_param_comport"])
@@ -89,6 +111,7 @@ setMethod(
         ch_enc_mar          <- as.numeric(param_comport_csv["ch_enc_mar"])
         ind_ref_action      <- as.numeric(param_comport_csv["ind_ref_action"])
         ind_ref_immo        <- as.numeric(param_comport_csv["ind_ref_immo"])
+        
         # instanciation de la classe ParamComport
         param_comport       <- new(Class = "ParamComport",
                                    mat_oblig,
@@ -98,8 +121,10 @@ setMethod(
                                    ch_enc_mar,
                                    ind_ref_action,
                                    ind_ref_immo )
+        
         list_param_comport  = list(param_comport)
         names(list_param_comport) <- nom_param_comport
+        
         # instanciation de la classe HypTech
         return(new(Class="HypTech",
                    list_morta,

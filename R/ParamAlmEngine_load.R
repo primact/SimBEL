@@ -23,6 +23,10 @@ setMethod(
 
         # Lecture du fichier
         temp          <- read.csv2(file_alm_address)
+        
+        # Tests
+        if (! all(! is.na(temp)))
+            stop("[ParamAlmEngine - load] : Presence de NA dans le fichier d'input")
 
         # Creation de l'objet
         param_alm     <- new("ParamAlmEngine",

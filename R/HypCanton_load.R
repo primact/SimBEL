@@ -25,6 +25,10 @@ setMethod(
         # Lecture du fichier
         temp <- read.csv2(file_hyp_canton_address)
         
+        # Tests
+        if (! all(! is.na(temp)))
+            stop("[HypCanton - load] : Presence de NA dans le fichier d'input")
+        
         # Creation de l'objet
         hyp_canton  <- new("HypCanton",
                            tx_soc            = temp[,"tx_soc"],

@@ -23,6 +23,10 @@ setMethod(
         # Lecture du fichier
         temp <- read.csv2(file_revalo_address)
         
+        # Tests
+        if (! all(! is.na(temp)))
+            stop("[ParamRevalo - load] : Presence de NA dans le fichier d'input")
+        
         # Creation de l'objet
         param_revalo  <- new("ParamRevaloEngine",
                              taux_pb_fi   = temp[,"taux_pb_fi"],

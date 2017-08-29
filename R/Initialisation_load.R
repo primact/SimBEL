@@ -20,6 +20,10 @@ setMethod(
 
         # Lecture du fichier csv
         temp            <- read.csv2(file_lancement_address, colClasses = c("integer", "integer"))
+        
+        # Tests
+        if (! all(! is.na(temp)))
+            stop("[Initialisation - load] : Presence de NA dans le fichier d'input")
 
         # Mise a jour des attributs
         x@nb_simu       <- temp[,"nb_simu"]
