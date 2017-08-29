@@ -52,6 +52,7 @@ setMethod(
             x@address[["param"]][["ESG_down"]]            <- paste(x@root_address, "input/parametres/esg/ESG_down", sep="/")
             # Autres param
             x@address[["param"]][["alm"]]                 <- paste(x@root_address, "input/parametres/alm", sep="/")
+            x@address[["param"]][["base"]]                <- paste(x@root_address, "input/parametres/base", sep="/")
             x@address[["param"]][["chocs"]]               <- paste(x@root_address, "input/parametres/chocs", sep="/")
             x@address[["param"]][["hyp_canton"]]          <- paste(x@root_address, "input/parametres/hyp_canton", sep="/")
             x@address[["param"]][["lancement"]]           <- paste(x@root_address, "input/parametres/lancement", sep="/")
