@@ -26,22 +26,40 @@
 setGeneric(name = "chargement_choc", def = function(x, folder_chocs_address){standardGeneric("chargement_choc")})
 setMethod(
     f = "chargement_choc",
-    signature = c("ChocSolvabilite2", "character"),
+    signature = c(x = "ChocSolvabilite2", folder_chocs_address = "character"),
     definition = function(x, folder_chocs_address){
-    # Lecture des chocs Action, Immo, Spread
-    table_choc_action_type1 <- read.csv2(paste(folder_chocs_address, "param_choc_mket_action_type1.csv", sep = "/"), colClasses = c("integer", "numeric"))
-    table_choc_action_type2 <- read.csv2(paste(folder_chocs_address, "param_choc_mket_action_type2.csv", sep = "/"), colClasses = c("integer", "numeric"))
-    table_choc_immo   <- read.csv2(paste(folder_chocs_address, "param_choc_mket_immo.csv", sep = "/"), colClasses = c("integer", "numeric"))
-    table_choc_spread <- read.csv2(paste(folder_chocs_address, "param_choc_mket_spread.csv", sep = "/"), colClasses = c("integer", "character", "numeric", "numeric"))
-
-    x@param_choc_mket <- new("ParamChocMket",
-                             table_choc_action_type1 = table_choc_action_type1,
-                             table_choc_action_type2 = table_choc_action_type2,
-                             table_choc_immo         = table_choc_immo,
-                             table_choc_spread       = table_choc_spread)
-    x@param_choc_sousc <- new("ParamChocSousc",
-                              read.csv2(paste(folder_chocs_address, "param_choc_sousc.csv", sep = "/")))
-
-    return(x)
+        
+        # Lecture des chocs Action, Immo, Spread
+        table_choc_action_type1 <- read.csv2(paste(folder_chocs_address, "param_choc_mket_action_type1.csv", sep = "/"), colClasses = c("integer", "numeric"))
+        table_choc_action_type2 <- read.csv2(paste(folder_chocs_address, "param_choc_mket_action_type2.csv", sep = "/"), colClasses = c("integer", "numeric"))
+        table_choc_immo   <- read.csv2(paste(folder_chocs_address, "param_choc_mket_immo.csv", sep = "/"), colClasses = c("integer", "numeric"))
+        table_choc_spread <- read.csv2(paste(folder_chocs_address, "param_choc_mket_spread.csv", sep = "/"), colClasses = c("integer", "character", "numeric", "numeric"))
+        
+        
+        # Tests
+        if ((! all(! is.na(table_choc_action_type1))) | (! all(! is.na(table_choc_action_type2))) | 
+            (! all(! is.na(table_choc_immo))) | (! all(! is.na(table_choc_spread))))
+            stop("[ChocSolvabilite2 - load] : Presence de NA dans un des fichiers d'input")
+        
+        # Creation de l'objet
+        x@param_choc_mket <- new("ParamChocMket",
+                                 table_choc_action_type1 = table_choc_action_type1,
+                                 table_choc_action_type2 = table_choc_action_type2,
+                                 table_choc_immo         = table_choc_immo,
+                                 table_choc_spread       = table_choc_spread)
+        
+        
+        # Lecture fichier choc souscrption
+        table_choc_sousc <- read.csv2(paste(folder_chocs_address, "param_choc_sousc.csv", sep = "/"))
+        
+        # Tests
+        if (! all(! is.na(table_choc_sousc)))
+            stop("[ChocSolvabilite2 - load] : Presence de NA dans un des fichiers d'input")
+        
+        # Creation de l'objet
+        x@param_choc_sousc <- new("ParamChocSousc", table_choc_sousc)
+        
+        # Output
+        return(x)
     }
 )
