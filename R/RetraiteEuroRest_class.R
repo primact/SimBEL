@@ -57,10 +57,10 @@ setClass(
 
 
         # Verification du nom des colonnes
-        if(sum(colnames(object@mp) == c("num_mp", "num_canton", "num_prod", "age", "gen", "num_tab_mort", "pm",
+        if(! all(colnames(object@mp) == c("num_mp", "num_canton", "num_prod", "age", "gen", "num_tab_mort", "pm",
                                         "nb_contr", "statut_rvs", "age_rvs", "gen_rvs", "num_tab_mort_rvs", "tx_rvs",
                                         "tx_tech", "tx_cible", "freq_rente", "rente", "rente_gar", "ch_arr", "echu",
-                                        "tx_cible_prec")) != nb_col_attendu){
+                                        "tx_cible_prec"))){
             retval <- c(retval, "[RetraiteEuroRest] : Noms de colonne incorrect \n")
         }
 

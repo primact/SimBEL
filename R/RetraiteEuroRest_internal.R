@@ -10,8 +10,28 @@ setMethod(
     f = "initialize",
     signature = "RetraiteEuroRest",
     definition = function(.Object, mp, tab, tab_proba){
-        if( !missing(mp) & !missing(tab)){
-            .Object@mp        <- mp
+        if( !missing(mp) & !missing(tab) & !missing(tab_proba)){
+            .Object@mp        <- data.frame(num_mp           = mp[,"num_mp"],
+                                            num_canton       = mp[,"num_canton"],
+                                            num_prod         = mp[,"num_prod"],
+                                            age              = mp[,"age"],
+                                            gen              = mp[,"gen"],
+                                            num_tab_mort     = mp[,"num_tab_mort"],
+                                            pm               = mp[,"pm"],
+                                            nb_contr         = mp[,"nb_contr"],
+                                            statut_rvs       = mp[,"statut_rvs"],
+                                            age_rvs          = mp[,"age_rvs"],
+                                            gen_rvs          = mp[,"gen_rvs"],
+                                            num_tab_mort_rvs = mp[,"num_tab_mort_rvs"],
+                                            tx_rvs           = mp[,"tx_rvs"],
+                                            tx_tech          = mp[,"tx_tech"],
+                                            tx_cible         = mp[,"tx_cible"],
+                                            freq_rente       = mp[,"freq_rente"],
+                                            rente            = mp[,"rente"],
+                                            rente_gar        = mp[,"rente"],
+                                            ch_arr           = mp[,"ch_arr"],
+                                            echu             = mp[,"echu"],
+                                            tx_cible_prec    = mp[,"tx_cible_prec"])
             .Object@tab       <- tab
             .Object@tab_proba <- tab_proba
             validObject(.Object)

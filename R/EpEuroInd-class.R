@@ -64,11 +64,11 @@ setClass(
     if (!is.numeric(.subset2(object@mp, 29L))) {retval <- c(retval, "[EpEuroInd] : tx_cible_prec n'est pas numeric\n")}
 
     # Verification du nom des colonnes
-    if(sum(colnames(object@mp) == c("num_mp","num_canton","num_prod","age","gen","num_tab_mort",
+    if(! all(colnames(object@mp) == c("num_mp","num_canton","num_prod","age","gen","num_tab_mort",
                                                "chgt_enc","ind_chgt_enc_pos","pm","nb_contr","anc","terme","type_cot",
                                                "periode_cot","tx_cible","chgt_prime","prime","tx_tech","terme_tx_tech",
                                                "tmg","terme_tmg","num_rach_tot","num_rach_part","num_rach_dyn_tot","num_rach_dyn_part",
-                                               "chgt_rach", "pm_gar", "tx_revalo_prec","tx_cible_prec")) != nb_col_attentu){
+                                               "chgt_rach", "pm_gar", "tx_revalo_prec","tx_cible_prec"))){
       retval <- c(retval, "[EpEuroInd] : Noms de colonne incorrect \n")
     }
 

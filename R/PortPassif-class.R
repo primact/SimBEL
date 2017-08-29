@@ -60,9 +60,9 @@ setClass(
 
         # Test si un nom n a pas ete oublie
         if(length(names(object@eei) != c("")) != nb_eei)
-            retval <- c(retval, "[PortPassif] : tous les elements de 'eei' n ont pas ete nommes")
+            retval <- c(retval, "[PortPassif] : tous les elements de 'eei' n'ont pas ete nommes")
         if(length(names(object@rer) != c("")) != nb_rer)
-            retval <- c(retval, "[PortPassif] : tous les elements de 'rer' n ont pas ete nommes")
+            retval <- c(retval, "[PortPassif] : tous les elements de 'rer' n'ont pas ete nommes")
 
         # Test sur le type des objets mis en parametre
         if(! validObject(object@ht)) retval <- c(retval, "[PortPassif] : Objet 'ht' non valide")
@@ -70,8 +70,8 @@ setClass(
         if(! validObject(object@tx_pb)) retval <- c(retval, "[PortPassif] : Objet 'tx_pb' non valide")
         if(! validObject(object@autres_passifs)) retval <- c(retval, "[PortPassif] : Objet 'autres_passifs' non valide")
         if(! validObject(object@autres_reserves)) retval <- c(retval, "[PortPassif] : Objet 'autres_reserves' non valide")
-        if(length(object@annee) > 1L) retval <- c("[PortPassif] : 'annee' doit être entier, pas de composante vectorielle autorisee.")
-        if(! is.integer(object@annee)) retval <- c("[PortPassif] : 'annee' doit être entier.")
+        if(length(object@annee) > 1L) retval <- c("[PortPassif] : 'annee' doit etre entier, pas de composante vectorielle autorisee.")
+        if(! is.integer(object@annee)) retval <- c("[PortPassif] : 'annee' doit etre entier.")
 
         # Test que les elements des listes sont bien des objets du bon type
         if(nb_eei != 0L){

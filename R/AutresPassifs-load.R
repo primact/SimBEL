@@ -12,7 +12,7 @@
 ##' @return L'objet de la classe \code{\link{AutresPassifs}} construit a partir des inputs renseignes par l'utilisateur.
 ##' @author Prim'Act
 ##' @seealso La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
-##'  pour renseigner l’input.
+##'  pour renseigner l'input.
 ##' @export
 ##' @include AutresPassifs-class.R
 
@@ -24,6 +24,10 @@ setMethod(
 
         # Lecture du fichier
         temp <- read.csv2(file_autres_passif_address, header = TRUE)
+        
+        # Tests
+        if (! all(! is.na(temp)))
+            stop("[AutresPassifs - load] : Presence de NA dans le fichier d'input")
 
         # Creation de l'objet
         if (nrow(temp) != 0L)

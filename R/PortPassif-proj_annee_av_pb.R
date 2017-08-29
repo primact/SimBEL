@@ -221,8 +221,7 @@ setMethod(
                     list_prodi[[j]] <- prodi
                     list_prodi[[j]]@tab["tab"] <- tab
 
-                }
-                else
+                } else
                     stop("[PortPassif : proj_annee_av_pb] : La liste list_prodi comporte au moins un element non instancie. \n")
 
 

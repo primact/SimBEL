@@ -23,7 +23,7 @@ setMethod(
     signature = c(x = "Initialisation"),
     def = function(x){
 
-        # Gestion des passifs epargne
+        ## 1 - Gestion des passifs epargne
         # Chargement des produits epargne
         input_epeuroind <- read.csv2(paste(x@address[["data"]][["passif"]],"empl_tables_epeuroind.csv",sep="/"),
                                      header = TRUE, colClasses = c("character", "character"))
@@ -36,11 +36,8 @@ setMethod(
 
             for (i in 1L:nb_epeuroind) {
 
-                # Lecture du fichier
-                temp_csv <- read.csv2(paste(x@address[["data"]][["passif"]],input_epeuroind[i,"nom_table_csv"],sep="/"),header = TRUE)
-
-                # Creation de l'objet
-                list_epeuroind[[i]] <- new(Class = "EpEuroInd", temp_csv, new("TabEpEuroInd"), new("TabProbaEpEuroInd", temp_csv$num_mp))
+                # Chargement de l'objet
+                list_epeuroind[[i]] <- load_epeuroind(paste(x@address[["data"]][["passif"]], input_epeuroind[i,"nom_table_csv"], sep="/"))
             }
 
             # Nommage de la liste
@@ -49,7 +46,7 @@ setMethod(
 
 
 
-        # Gestion des passifs retraite
+        ## 2 - Gestion des passifs retraite
         # Chargement des produits de retraite
         input_retraiteeurorest <- read.csv2(paste(x@address[["data"]][["passif"]],"empl_tables_reteurorest.csv",sep="/"),
                                             header = TRUE, colClasses = c("character", "character"))
@@ -62,12 +59,8 @@ setMethod(
 
             for (i in 1L:nb_retraiteeurorest) {
 
-                # Lecture du fichier
-                temp_csv <- read.csv2(paste(x@address[["data"]][["passif"]], input_retraiteeurorest[i,"nom_table_csv"], sep="/"),header = TRUE)
-
-                # Creation de l'objet
-                list_retraiteeurorest[[i]] <- new(Class ="RetraiteEuroRest", temp_csv, new("TabRetEuroRest"), new("TabProbaRetEuroRest", temp_csv$num_mp))
-
+                # Chargement de l'objet
+                list_retraiteeurorest[[i]] <- load_reteurorest(paste(x@address[["data"]][["passif"]], input_retraiteeurorest[i,"nom_table_csv"], sep="/"))
             }
 
             # Nommage de la liste
@@ -75,6 +68,7 @@ setMethod(
         }
 
 
+        
         # Chargement  autres passifs
         autres_passifs <- autres_passif_load(paste(x@address[["data"]][["passif"]], "autres_passifs.csv", sep = "/"))
 
@@ -82,12 +76,9 @@ setMethod(
         # Chargement  autres reserves
         autres_reserves <- autres_reserves_load(paste(x@address[["data"]][["passif"]], "autres_reserves.csv", sep = "/"))
 
-
-        # Chargement et instanciation des tables de taux de PB
-        taux_pb_csv <- read.csv2(paste(x@address[["data"]][["passif"]],"taux_pb.csv",sep="/"),header = TRUE)
-        taux_pb <- new(Class = "TauxPB", taux_pb_csv)
-
-
+        # Chargement TauxPB
+        taux_pb <- tauxpb_load(paste(x@address[["data"]][["passif"]],"taux_pb.csv",sep="/"))
+        
         # Chargement et instanciation des tables de frais passif
         frais_passif <- frais_passif_load(paste(x@address[["data"]][["passif"]],"frais_passif.csv",sep="/"))
 
