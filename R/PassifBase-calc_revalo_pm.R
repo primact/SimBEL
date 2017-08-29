@@ -180,10 +180,10 @@ setMethod(
     signature = c(x = "RetraiteEuroRest", y = "list"),
     def = function(x, y){
         # Verification inputs
-        if (length(y) != 1)  stop("[RetraiteEuroRest : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 1. \n")
+        if (length(y) != 1L)  stop("[RetraiteEuroRest : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 1. \n")
 
         # affectation pour eviter la modification des fonctions
-        rev_net_alloue <- .subset2(y, 1)
+        rev_net_alloue <- .subset2(y, 1L)
 
         # Verification des noms des elements de la liste
         if (sum(names(y) == c("rev_net_alloue")) != length(y)) stop("[RetraiteEuroRest : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 1 de nom : rev_net_alloue.")

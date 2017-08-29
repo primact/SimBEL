@@ -65,7 +65,9 @@ setMethod(
 
 
         # Output
-        return(list(contrib_tmg_prest = contrib_tmg_prest, contrib_tmg_stock = contrib_tmg_stock, ppb = ppb))
+        return(list(contrib_tmg_prest = contrib_tmg_prest, 
+                    contrib_tmg_stock = contrib_tmg_stock, 
+                    ppb = ppb))
     }
 )
 

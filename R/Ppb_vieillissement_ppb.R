@@ -14,7 +14,7 @@
 ##' @export
 ##' @include Ppb_class.R
 
-setGeneric(name = "vieillissement_ppb", def = function(x, pm_fin_ap_pb, tx_revalo){standardGeneric("vieillissement_ppb")})
+setGeneric(name = "vieillissement_ppb", def = function(x){standardGeneric("vieillissement_ppb")})
 setMethod(
     f = "vieillissement_ppb",
     signature = c(x = "Ppb"),

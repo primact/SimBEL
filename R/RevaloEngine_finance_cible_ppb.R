@@ -40,7 +40,7 @@ setMethod(
         if(length(ppb8_ind) != length(rev_stock_nette)) stop("[RevaloEngine-finance_cible_ppb] : les vecteurs en entree ne sont pas de meme longueur.")
 
 
-        # Total de PPB8ans ? attribuer
+        # Total de PPB8ans a attribuer
         ppb_8 <- sum(ppb8_ind)
 
         bes_add_ind <- pmax(bes_cible - ppb8_ind, 0) - rev_stock_nette
@@ -111,9 +111,9 @@ setMethod(
         }
 
         # Controle
-        if(prod(is.na(rev_stock_nette_cible)) | prod(is.nan(rev_stock_nette_cible))){
+        if(prod(is.na(rev_stock_nette_cible)) | prod(is.nan(rev_stock_nette_cible)))
             stop("[RevaloEngine-finance_cible_ppb] : erreur de division par zero.")
-        }
+        
 
         # Output
         return(list(rev_stock_nette = rev_stock_nette_cible,

@@ -254,9 +254,6 @@ setMethod(
         nom_tx_cib <- names(tx_cible)
         num_cib_an <- which(nom_tx_cib == "tx_cible_an")
 
-        # Initialisation de la PM finale a 0
-        pm_fin <- rep(0, nb_mp)
-
         # Recuperer la rente
         if(method == "normal") # calcul de la rente normal
             rente <- .subset2(mp, num_nb_contr) * .subset2(mp, num_rente)

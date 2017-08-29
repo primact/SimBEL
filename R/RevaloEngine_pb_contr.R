@@ -52,7 +52,8 @@ setMethod(
         rev_stock_nette_contr <- rev_stock_brut + add_pb_contr - ch_enc_ap_pb_contr
         
         # Output
-        return(list(ch_enc_ap_pb_contr = ch_enc_ap_pb_contr, rev_stock_nette_contr = rev_stock_nette_contr))
+        return(list(ch_enc_ap_pb_contr    = ch_enc_ap_pb_contr, 
+                    rev_stock_nette_contr = rev_stock_nette_contr))
         
     }
 )

@@ -8,7 +8,7 @@
 ##' @name init_debut_pgg_psap
 ##' @docType methods
 ##' @param x objet de la classe \code{AutresReserves}.
-#' @return L'objet x reinitialise.
+##' @return L'objet x reinitialise.
 ##' @author Prim'Act
 ##' @export
 ##' @include AutresReserves-class.R
