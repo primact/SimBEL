@@ -5,12 +5,12 @@
 context("ParamComport")
 
 # Lecture du fichier csv
-path <- "P:/Dossiers publics/02 - Missions/OUTIL BE PRIMACT/11_Travaux_Damien/02_Codes/03_TestsUnitaires/00_Data/input/parametres/tables"
+path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/parametres/tables"
 param_comport_csv <- read.csv2(paste(path, "param_comport.csv", sep = "/"), header = TRUE)
 
 # Recuperation des donnees
 mat_oblig <- param_comport_csv[,"mat_oblig"]
-alloc_mar <- c(param_comport_csv[,"alloc_mar_action"], param_comport_csv[,"alloc_mar_immo"], 
+alloc_mar <- c(param_comport_csv[,"alloc_mar_action"], param_comport_csv[,"alloc_mar_immo"],
                            param_comport_csv[,"alloc_mar_tres"], param_comport_csv[,"alloc_mar_oblig"])
 w_n <- param_comport_csv[,"w_n"]
 marge_mar <- param_comport_csv[,"marge_mar"]
@@ -24,10 +24,10 @@ param_comport <- new(Class = "ParamComport",mat_oblig , alloc_mar , w_n , marge_
 
 # Tests sur l'objet
 test_that("TEST_ParamComport", {
-    
+
     # Test classe
     expect_s4_class(param_comport, "ParamComport")
-    
+
     # Tests attributs
     expect_equal(param_comport@mat_oblig, expected = mat_oblig)
     expect_equal(param_comport@alloc_mar, expected = alloc_mar)

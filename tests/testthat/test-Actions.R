@@ -6,8 +6,9 @@ context("Actions")
 
 library(rootSolve)
 
+
 # Lecture du fichier csv
-path <- "P:/Dossiers publics/02 - Missions/OUTIL BE PRIMACT/11_Travaux_Damien/02_Codes/03_TestsUnitaires/00_Data/input/donnees/actif"
+path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/input/donnees/actif"
 ptf_action_csv <- read.csv2(paste(path, "Portefeuille_action.csv", sep = "/"), header = TRUE,
                                colClasses = c("integer","double","double", "double",
                                               "logical","logical","double",  "double",

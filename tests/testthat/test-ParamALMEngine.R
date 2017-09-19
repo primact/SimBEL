@@ -5,8 +5,8 @@
 context("ParamAlmEngine")
 
 
-path <- "P:/Dossiers publics/02 - Missions/OUTIL BE PRIMACT/11_Travaux_Damien/02_Codes/03_TestsUnitaires/00_Data/input/donnees/actif"
-folder_ESG_address <- "P:/Dossiers publics/02 - Missions/OUTIL BE PRIMACT/11_Travaux_Damien/02_Codes/03_TestsUnitaires/00_Data/input/parametres/esg/ESG"
+path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/donnees/actif"
+folder_ESG_address <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/parametres/esg/ESG"
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -23,10 +23,10 @@ param_alm_engine <- new("ParamAlmEngine", ptf_reference = PtfFin_ref, alloc_cibl
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 test_that("TEST_ParamAlmEngine", {
-    
+
     # Test classe
     expect_s4_class(param_alm_engine, "ParamAlmEngine")
-    
+
     # Tests attributs
     expect_equal(param_alm_engine@ptf_reference, PtfFin_ref)
     expect_equal(param_alm_engine@alloc_cible, alloc_cible)

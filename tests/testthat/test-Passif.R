@@ -4,7 +4,7 @@
 context("PortPassif")
 
 # Initialisation de l'objet BE
-racine <- new("Initialisation", root_address = "P:/Dossiers publics/02 - Missions/OUTIL BE PRIMACT/11_Travaux_Damien/02_Codes/03_TestsUnitaires/00_Data")
+racine <- new("Initialisation", root_address = "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests")
 racine <- set_architecture(racine)
 init_SimBEL(racine)
 init_scenario(racine)

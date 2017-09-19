@@ -5,7 +5,7 @@
 context("ModelPointESG")
 
 
-folder_ESG_address <- "P:/Dossiers publics/02 - Missions/OUTIL BE PRIMACT/11_Travaux_Damien/02_Codes/03_TestsUnitaires/00_Data/input/parametres/esg/ESG"
+folder_ESG_address <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/parametres/esg/ESG"
 
 # Donnees
 ind_inf <- (1:100)/100
@@ -28,10 +28,10 @@ mpesg <- new("ModelPointESG",
 #           Classe ModelPointESG
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 test_that("Test_Classe", {
-    
+
     # Test classe
     expect_s4_class(mpesg, "ModelPointESG")
-    
+
     # Attributs
     expect_equal(mpesg@annee, 1L)
     expect_equal(mpesg@num_traj, 1L)
