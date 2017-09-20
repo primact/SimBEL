@@ -91,7 +91,7 @@ test_that("TEST_update_val_debut", {
 test_that("TEST_load", {
 
     # Donnees
-    path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/donnees/actif"
+    path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/input/donnees/actif"
     file_PRE_address <- paste(path, "PRE.csv", sep = "/")
     csv_file <- read.csv2(file_PRE_address, header = T)
 

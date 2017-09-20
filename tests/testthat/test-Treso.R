@@ -5,7 +5,7 @@
 context("Treso")
 
 # Lecture du fichier csv
-path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/donnees/actif"
+path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/input/donnees/actif"
 ptf_treso_csv <- read.csv2(paste(path, "Tresorerie.csv", sep = "/"), header = TRUE,
                           colClasses = c("integer",  "double", "double"))
 

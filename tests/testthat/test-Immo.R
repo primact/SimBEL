@@ -5,7 +5,7 @@
 context("Immo")
 
 # Lecture du fichier csv
-path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/donnees/actif"
+path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/input/donnees/actif"
 ptf_immo_csv <- read.csv2(paste(path, "Portefeuille_immobilier.csv", sep = "/"), header = TRUE,
                             colClasses = c("integer","double","double", "double",
                                            "logical","logical","double", "double",

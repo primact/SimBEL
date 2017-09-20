@@ -77,7 +77,7 @@ test_that("TEST_update", {
 test_that("TEST_load", {
 
     # Donnees
-    path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/donnees/actif"
+    path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/input/donnees/actif"
     file_rc_address <- paste(path, "RC.csv", sep = "/")
     csv_file <- read.csv2(file_rc_address, header = T)
 

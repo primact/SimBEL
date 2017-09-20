@@ -5,7 +5,7 @@
 context("PPB")
 
 # Doosier de donnees
-folder <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/parametres/ppb/param_ppb.csv"
+folder <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/input/parametres/ppb/param_ppb.csv"
 
 # Creation de l'objet
 ppb_csv <- read.csv2(folder, header = TRUE)

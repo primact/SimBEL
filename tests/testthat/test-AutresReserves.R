@@ -5,7 +5,7 @@
 context("AutresReserves")
 
 # Dossier de DATA
-path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests"
+path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/input"
 folder_tab <- paste(path, "/donnees/passif/autres_reserves.csv", sep = "/")
 
 

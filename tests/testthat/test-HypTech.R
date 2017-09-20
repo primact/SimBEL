@@ -6,7 +6,7 @@ context("HypTech")
 
 # Dossier de DATA
 path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests"
-folder_tab <- paste(path, "/parametres/tables", sep = "/")
+folder_tab <- paste(path, "input/parametres/tables", sep = "/")
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------

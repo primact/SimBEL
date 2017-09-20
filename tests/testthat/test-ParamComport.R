@@ -5,7 +5,7 @@
 context("ParamComport")
 
 # Lecture du fichier csv
-path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/parametres/tables"
+path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/input/parametres/tables"
 param_comport_csv <- read.csv2(paste(path, "param_comport.csv", sep = "/"), header = TRUE)
 
 # Recuperation des donnees

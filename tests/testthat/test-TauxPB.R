@@ -5,7 +5,7 @@
 context("TauxPB")
 
 # Lecture du fichier csv
-path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/donnees/passif/taux_pb.csv"
+path <- "C:/Users/quentin.guibert.PRIMACT/Documents/Dropbox/Code_BE_Env_Dev/01_Dev/SimBEL/tests/donnees_tests/input/donnees/passif/taux_pb.csv"
 taux_pb_csv <- read.csv2(path, header = TRUE)
 
 # Creation de l'objet
