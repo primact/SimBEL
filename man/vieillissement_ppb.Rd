@@ -5,7 +5,7 @@
 \alias{vieillissement_ppb}
 \title{Vieillissement d'un an de la PPB.}
 \usage{
-vieillissement_ppb(x, pm_fin_ap_pb, tx_revalo)
+vieillissement_ppb(x)
 }
 \arguments{
 \item{x}{objet de la classe \code{\link{Ppb}}.}

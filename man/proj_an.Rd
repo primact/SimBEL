@@ -56,10 +56,10 @@ Le calcul de la PRE : \code{\link{calc_PRE}}.
 Le calcul du resultat technique : \code{\link{calc_result_technique}}, \code{\link{calc_result_technique_ap_pb}}.
 Le calcul du resultat financier et du TRA : \code{\link{calc_resultat_fin}}, \code{\link{calc_tra}}.
 L'application de l'algorithme d'attribution de la participation aux benefices : \code{\link{calc_revalo}}.
-Le viellissement du portefeuille de passif apres PB : \code{\link{viellissement_ap_pb}}.
+Le viellissement du portefeuille de passif apres PB : \code{\link{vieillissment_ap_pb}}.
 Les autres methodes de vieillissement des actifs et de passifs: \code{\link{sell_pvl_action}},
 \code{\link{do_update_pmvl}}, \code{\link{do_update_PRE_val_courante}},
-\code{\link{do_update_vm_vnc_precedent}}, \code{\link{init_debut_ppb}}, \code{\link{do_update_RC_val_debut}},
+\code{\link{do_update_vm_vnc_precedent}}, \code{\link{vieillissement_ppb}}, \code{\link{do_update_RC_val_debut}},
 \code{\link{do_update_PRE_val_debut}}, \code{\link{init_debut_pgg_psap}}.
 Le calcul des fins de projection : \code{\link{calc_fin_proj}}.
 }

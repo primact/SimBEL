@@ -9,8 +9,7 @@ autres_reserves_load(file_autres_reserves_address)
 }
 \arguments{
 \item{file_autres_reserves_address}{est un \code{character} contenant l'adresse exacte
-du fichier d'input utilisateur
-permettant de renseigner un objet \code{\link{AutresReserves}}.}
+du fichier d'input utilisateur permettant de renseigner un objet \code{\link{AutresReserves}}.}
 }
 \value{
 L'objet de la classe \code{\link{AutresReserves}} construit a partir des inputs renseignes par l'utilisateur.
@@ -21,7 +20,7 @@ objet de classe \code{\link{AutresReserves}}.
 }
 \seealso{
 La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
- pour renseigner l’input.
+ pour renseigner l'input.
 }
 \author{
 Prim'Act

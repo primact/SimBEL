@@ -25,6 +25,8 @@ economiques permettant d'effectuer le vieillissement du portefeuille financier.}
 
 \code{revenu_fin} les revenus realises au cours de la periode (coupons, tombees d'echeance, dividendes et loyers).
 
+\code{revenu_fin_det} les revenus detaille pour chaque actif realises au cours de la periode.
+
 \code{var_vnc_oblig} la variation de valeur nette comptable obligataire.
 }
 \description{

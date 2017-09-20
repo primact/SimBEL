@@ -12,6 +12,6 @@
 ##' @author Prim'Act
 ##' @note Il s'agit de donnees simulees, elles ont ete creees afin de tester les differents fonctions du package.
 ##' @examples
-##' data(canton)
+##' data("canton")
 ##' portefeuille_passif <- canton@ptf_passif
 "canton"

@@ -49,6 +49,7 @@ Le format de la liste \code{flux} est :
 \item{\code{rach_charg} : }{un vecteur contenant les chargements sur les rachats de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
 \item{\code{soc_prest} : }{un vecteur contenant les prelevements sociaux sur prestations de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
 \item{\code{it_tech_prest} : }{un vecteur contenant les interets techniques sur prestations de l'annee. : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
+\item{\code{arr_charg} : }{un vecteur contenant les chargements sur arrerages. : nul si l'objet est de type \code{\link{EpEuroInd}}.}
 }
 
 Le format de la liste \code{stock} est :

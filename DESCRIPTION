@@ -1,7 +1,7 @@
 Package: SimBEL
 Type: Package
 Title: Un package de calcul du best estimate epargne sous Solvabilite 2.
-Version: 2.5.1
+Version: 3.0.0
 Description: Un modele de simulation Monte-Carlo s'appuyant sur une projection
     d'un canton (actif et passif) permettant l'evaluation des provisions best
     estimate d'un contrat d'epargne et retraite francais en euros. Plusieurs chocs de la formule
@@ -11,7 +11,7 @@ URL: http://github.com/gquibert/SimBEL
 BugReports: http://github.com/qguibert/SimBEL/issues
 Maintainer: Quentin Guibert <quentin.guibert@primact.fr>
 Depends:
-    R (>= 3.4.0), rootSolve(>= 1.7), doParallel(>= 1.0.10)
+    R (>= 3.4.0), rootSolve(>= 1.7), doParallel(>= 1.0.10), RSQLite(>= 2.0), reshape2(>= 1.4.2), plyr(>= 1.8.4)
 Imports: Rcpp, utils, methods
 Suggests:
 LinkingTo: Rcpp
@@ -24,6 +24,7 @@ Collate:
     'Action_calc_pmvl.R'
     'Action_calc_vm.R'
     'Action_internal.R'
+    'Action_load.R'
     'Action_revalo.R'
     'Action_sell.R'
     'Action_sell_pvl.R'
@@ -55,6 +56,7 @@ Collate:
     'AutresReserves-internal.R'
     'AutresReserves-load.R'
     'AutresReserves-update_reserves.R'
+    'DataBase_class.R'
     'ESG_class.R'
     'ParamBe_class.R'
     'ParamRevaloEngine_class.R'
@@ -78,9 +80,11 @@ Collate:
     'Be-run_be.R'
     'Be-run_be_simu.R'
     'Be-write_results.R'
+    'Be_data.R'
     'Be_internal.R'
     'Canton_calc_fin_proj.R'
     'Canton_calc_result_technique_ap_pb.R'
+    'Canton_data.R'
     'Canton_internal.R'
     'Canton_proj_an.R'
     'ParamChocSousc-class.R'
@@ -99,12 +103,24 @@ Collate:
     'ChocSolvabilite2_do_choc_taux.R'
     'ChocSolvabilite2_internal.R'
     'ChocSolvabilite2_load.R'
+    'DataBase_init_tables.R'
+    'DataBase_insert_tables.R'
+    'DataBase_internal.R'
+    'DataBase_merge_actifs.R'
+    'DataBase_merge_be.R'
+    'DataBase_merge_flux_fin.R'
+    'DataBase_merge_pb.R'
+    'DataBase_merge_table_be.R'
+    'DataBase_merge_table_produit.R'
+    'DataBase_update_table_output_produit.R'
+    'DataBase_update_table_pb.R'
     'ESG-get_choc_inflation_frais.R'
     'ESG_internal.R'
     'ESG_chargement.R'
     'ESG_extract_mp.R'
     'EpEuroInd-calc_proba_dyn.R'
     'EpEuroInd-internal.R'
+    'EpEuroInd_load.R'
     'FraisFin_calc.R'
     'FraisFin_internal.R'
     'FraisFin_load.R'
@@ -117,8 +133,6 @@ Collate:
     'HypTech-get_choc_rach.R'
     'HypTech-get_choc_table.R'
     'HypTech-get_comport.R'
-    'HypTech-get_proba_paye_retraite.R'
-    'HypTech-get_proba_sortie_retraite.R'
     'HypTech-get_qx_mort.R'
     'HypTech-get_qx_rach.R'
     'HypTech-get_rach_dyn.R'
@@ -130,6 +144,7 @@ Collate:
     'Immo_calc_pmvl.R'
     'Immo_calc_vm.R'
     'Immo_internal.R'
+    'Immo_load.R'
     'Immo_revalo.R'
     'Immo_sell.R'
     'Immo_update_dur_det.R'
@@ -138,6 +153,7 @@ Collate:
     'Initialisation_initSimBEL.R'
     'Initialisation_init_scenario.R'
     'Initialisation_internal.R'
+    'Initialisation_load_be.R'
     'Initialisation_set_architecture.R'
     'ModelPointESG_internal.R'
     'Oblig_buy.R'
@@ -151,6 +167,7 @@ Collate:
     'Oblig_calc_z_spread.R'
     'Oblig_flux_annee.R'
     'Oblig_internal.R'
+    'Oblig_load.R'
     'Oblig_sell.R'
     'Oblig_update_cc.R'
     'Oblig_update_dur.R'
@@ -214,6 +231,7 @@ Collate:
     'PortPassif-proj_annee_av_pb.R'
     'PortPassif-vieillissement_ap_pb.R'
     'PortPassif-vieillissement_av_pb.R'
+    'Ppb_calc_ppb_attrib.R'
     'Ppb_dotation_reprise.R'
     'Ppb_internal.R'
     'Ppb_load.R'
@@ -227,6 +245,7 @@ Collate:
     'RcppExports.R'
     'RetraiteEuroRest-get_coef_rente.R'
     'RetraiteEuroRest_internal.R'
+    'RetraiteEuroRest_load.R'
     'RevaloEngine_base_prod_fin.R'
     'RevaloEngine_calc_marge_fin.R'
     'RevaloEngine_calc_result_technique.R'
@@ -246,8 +265,10 @@ Collate:
     'TabProbaRetEuroRest-internal.R'
     'TabRetEuroRest_internal.R'
     'TauxPB-internal.R'
+    'TauxPB_load.R'
     'Treso_calc_vm.R'
     'Treso_internal.R'
+    'Treso_load.R'
     'Treso_revalo.R'
     'Treso_revenu.R'
     'Treso_update.R'

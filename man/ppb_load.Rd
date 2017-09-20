@@ -8,8 +8,7 @@
 ppb_load(file_ppb_address)
 }
 \arguments{
-\item{file_ppb_address}{est un \code{character} contenant l'adresse exacte
-du fichier d'input utilisateur
+\item{file_ppb_address}{est un \code{character} contenant l'adresse exacte du fichier d'input utilisateur
 permettant de renseigner un objet \code{\link{Ppb}}.}
 }
 \value{
@@ -20,8 +19,7 @@ L'objet de la classe \code{\link{Ppb}} construit a partir des inputs renseignes 
 objet de classe \code{\link{Ppb}}.
 }
 \seealso{
-La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}}
- pour renseigner l'input.
+La classe \code{\link{Initialisation}} et sa methode \code{\link{set_architecture}} pour renseigner l'input.
 }
 \author{
 Prim'Act

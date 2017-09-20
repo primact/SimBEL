@@ -16,6 +16,8 @@ Une classe pour le calcul du best estimate d'un assureur.
 
 \item{\code{esg}}{un objet de type \code{\link{ESG}}.}
 
+\item{\code{base}}{un objet de type \code{\link{DataBase}}.}
+
 \item{\code{tab_flux}}{une liste qui contient les flux moyens de best estimate et de ses composantes.}
 
 \item{\code{tab_be}}{est une liste qui contient la valeur du best estimate et de ses composantes.}
