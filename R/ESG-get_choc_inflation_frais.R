@@ -32,10 +32,10 @@ setMethod(
 
         # Indice d'inflation avant choc (les annees sont basculees en lignes)
         fun <- function(i){(ind_inflation[i, ])^ (1 / annees) - 1}
-        tx_inflation <- sapply(1L:nrow(ind_inflation), fun)
+        tx_inflation <- t(do.call("rbind", lapply(1L:nrow(ind_inflation), fun)))
 
         # Application du choc
-        tx_inflation[2L:nrow(tx_inflation), 0L] <- tx_inflation[2L:nrow(tx_inflation), 0L] + choc
+        tx_inflation[2L:nrow(tx_inflation), ] <- tx_inflation[2L:nrow(tx_inflation), ] + choc
 
 
         # Remise sous forme d'indice
