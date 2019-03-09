@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // echeancier
 NumericMatrix echeancier(NumericVector coupon, NumericVector maturite, NumericVector zspread, NumericVector nominal, NumericVector yield);
-RcppExport SEXP SimBEL_echeancier(SEXP couponSEXP, SEXP maturiteSEXP, SEXP zspreadSEXP, SEXP nominalSEXP, SEXP yieldSEXP) {
+RcppExport SEXP _SimBEL_echeancier(SEXP couponSEXP, SEXP maturiteSEXP, SEXP zspreadSEXP, SEXP nominalSEXP, SEXP yieldSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -22,7 +22,7 @@ END_RCPP
 }
 // calc_tx_cible_ref_marche
 NumericVector calc_tx_cible_ref_marche(NumericVector rdt, NumericVector alloc_mar, float ch_enc_mar, float marge_mar, float w_n, NumericVector tx_cible_prec);
-RcppExport SEXP SimBEL_calc_tx_cible_ref_marche(SEXP rdtSEXP, SEXP alloc_marSEXP, SEXP ch_enc_marSEXP, SEXP marge_marSEXP, SEXP w_nSEXP, SEXP tx_cible_precSEXP) {
+RcppExport SEXP _SimBEL_calc_tx_cible_ref_marche(SEXP rdtSEXP, SEXP alloc_marSEXP, SEXP ch_enc_marSEXP, SEXP marge_marSEXP, SEXP w_nSEXP, SEXP tx_cible_precSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -38,7 +38,7 @@ END_RCPP
 }
 // calc_rach_dyn
 NumericVector calc_rach_dyn(NumericVector vec_param, NumericVector tx_cible, NumericVector tx_serv);
-RcppExport SEXP SimBEL_calc_rach_dyn(SEXP vec_paramSEXP, SEXP tx_cibleSEXP, SEXP tx_servSEXP) {
+RcppExport SEXP _SimBEL_calc_rach_dyn(SEXP vec_paramSEXP, SEXP tx_cibleSEXP, SEXP tx_servSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -48,4 +48,16 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(calc_rach_dyn(vec_param, tx_cible, tx_serv));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_SimBEL_echeancier", (DL_FUNC) &_SimBEL_echeancier, 5},
+    {"_SimBEL_calc_tx_cible_ref_marche", (DL_FUNC) &_SimBEL_calc_tx_cible_ref_marche, 6},
+    {"_SimBEL_calc_rach_dyn", (DL_FUNC) &_SimBEL_calc_rach_dyn, 3},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_SimBEL(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

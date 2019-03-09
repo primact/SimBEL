@@ -26,7 +26,7 @@
 NULL
 
 echeancier <- function(coupon, maturite, zspread, nominal, yield) {
-    .Call('SimBEL_echeancier', PACKAGE = 'SimBEL', coupon, maturite, zspread, nominal, yield)
+    .Call('_SimBEL_echeancier', PACKAGE = 'SimBEL', coupon, maturite, zspread, nominal, yield)
 }
 
 #' Calcule le taux de revalorisation cible.
@@ -52,7 +52,7 @@ echeancier <- function(coupon, maturite, zspread, nominal, yield) {
 NULL
 
 calc_tx_cible_ref_marche <- function(rdt, alloc_mar, ch_enc_mar, marge_mar, w_n, tx_cible_prec) {
-    .Call('SimBEL_calc_tx_cible_ref_marche', PACKAGE = 'SimBEL', rdt, alloc_mar, ch_enc_mar, marge_mar, w_n, tx_cible_prec)
+    .Call('_SimBEL_calc_tx_cible_ref_marche', PACKAGE = 'SimBEL', rdt, alloc_mar, ch_enc_mar, marge_mar, w_n, tx_cible_prec)
 }
 
 #' Calcule la composante rachats dynamique.
@@ -71,6 +71,6 @@ calc_tx_cible_ref_marche <- function(rdt, alloc_mar, ch_enc_mar, marge_mar, w_n,
 NULL
 
 calc_rach_dyn <- function(vec_param, tx_cible, tx_serv) {
-    .Call('SimBEL_calc_rach_dyn', PACKAGE = 'SimBEL', vec_param, tx_cible, tx_serv)
+    .Call('_SimBEL_calc_rach_dyn', PACKAGE = 'SimBEL', vec_param, tx_cible, tx_serv)
 }
 

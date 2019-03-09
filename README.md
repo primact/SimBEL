@@ -23,6 +23,8 @@ Version 2.5.1 : Corrections mineures dues a des regressions dans le code.
 
 Version 3.0.0 : Ajout de fonctionnalites de reporting en passant par un stockage via une base de donnees SQLite. Ajout de template Excel pour la visualisation des resultats. Decomposition des fonctions de chargement de donnees. 
 
+Version 3.0.1 : Correction du choc inflation (erreur methodologique) et import du choc inflation qui ne fonctionnait pas avec la version 3.5 de R. 
+
 
 L'environnement contenant les formats de données en entrée et les templates en sortie est disponible dans le dépôt https://github.com/qguibert/Environnement.
 

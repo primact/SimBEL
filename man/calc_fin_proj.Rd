@@ -5,7 +5,8 @@
 \alias{calc_fin_proj}
 \title{calcule le flux et les resultats ajustes en fin de projection.}
 \usage{
-calc_fin_proj(x, resultat_fin, result_tech, pm_fin_ap_pb, tx_pb, tx_enc_moy)
+calc_fin_proj(x, resultat_fin, result_tech, pm_fin_ap_pb, tx_pb,
+  tx_enc_moy)
 }
 \arguments{
 \item{x}{est un objet de la classe \code{\link{Canton}}.}

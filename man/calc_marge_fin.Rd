@@ -5,8 +5,8 @@
 \alias{calc_marge_fin}
 \title{Calcule la marge financiere de l'assureur.}
 \usage{
-calc_marge_fin(base_fin, rev_prest_nette, rev_stock_nette, contrib_tmg_prest,
-  contrib_tmg_stock, contrib_ppb_tx_cible)
+calc_marge_fin(base_fin, rev_prest_nette, rev_stock_nette,
+  contrib_tmg_prest, contrib_tmg_stock, contrib_ppb_tx_cible)
 }
 \arguments{
 \item{base_fin}{est un vecteur de type \code{numeric} comprenant par produit la base de produits financiers.}
