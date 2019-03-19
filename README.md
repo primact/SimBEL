@@ -1,10 +1,32 @@
 # SimBEL
 
-Un modele de simulation Monte-Carlo s'appuyant sur une projection d'un canton (actif et passif) permettant l'evaluation des provisions best estimate d'un contrat d'epargne et retraite francais en euros. 
+## Résumé
 
-Plusieurs chocs de la formule standard peuvent etre effectues.
+SimBEL est un modèle de simulation Monte-Carlo s'appuyant sur une projection d'un canton (actif et passif) permettant l'évaluation des provisions best estimate d'un contrat d'épargne et retraite francais en euros. Plusieur chocs de la formule standard peuvent etre effectués.
+
+## Installation
+
+1.	Avoir au moins la version 3.4.0, mais de préférence installer la version 3.5.0 de [R](https://www.r-project.org/).
+2.	Installer la library devtools.
+3.	Exécuter les commandes suivantes :
+
+``` r
+dev_mode(on = TRUE)
+
+install_github("qguibert/SimBEL")
+
+dev_mode(on = FALSE)
+
+library(SimBEL)
+```
+
+## Environnement de travail
+
+L'environnement contenant les formats de données en entrée et les templates en sortie est disponible dans ce [dépôt]( https://github.com/qguibert/Environnement).
 
 
+
+## Historique des principales versions diffusées
 
 Version 1.0.0 : Initialisation du projet.
 
@@ -23,11 +45,5 @@ Version 2.5.1 : Corrections mineures dues a des regressions dans le code.
 
 Version 3.0.0 : Ajout de fonctionnalites de reporting en passant par un stockage via une base de donnees SQLite. Ajout de template Excel pour la visualisation des resultats. Decomposition des fonctions de chargement de donnees. 
 
-Version 3.0.1 : Correction du choc inflation (erreur methodologique) et import du choc inflation qui ne fonctionnait pas avec la version 3.5 de R. 
+Version 3.0.1 : Correction du choc inflation (erreur methodologique) et import du choc inflation qui ne fonctionnait pas avec la version 3.5.0 de R. 
 
-
-L'environnement contenant les formats de donn�es en entr�e et les templates en sortie est disponible dans le d�p�t https://github.com/qguibert/Environnement.
-
-``` r
-## basic example code
-```
