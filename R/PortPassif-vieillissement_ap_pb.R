@@ -11,6 +11,8 @@
 ##' @param x un objet de la classe \code{\link{PortPassif}} contenant l'ensemble des produits de passifs.
 ##' @param rev_nette_alloue un vecteur \code{numeric} contenant par produit
 ##'  le supplement de revalorisation par rapport au taux minimum.
+##' @param rev_brute_alloue_gar un vecteur \code{numeric} contenant par produit
+##'  le supplement de revalorisation au titre de la part garantie initialement (PPB initiale).
 ##' @param tx_soc une valeur \code{numeric} correspondant au taux de charges sociales.
 ##' @return \code{x} l'objet \code{x} mis a jour.
 ##' @return \code{nom_produit} un vecteur de \code{character} contenant les noms des produits.
@@ -23,11 +25,11 @@
 ##' @include PortPassif-class.R
 ##'
 
-setGeneric(name = "vieillissment_ap_pb", def = function(x, rev_nette_alloue, tx_soc){standardGeneric("vieillissment_ap_pb")})
+setGeneric(name = "vieillissment_ap_pb", def = function(x, rev_nette_alloue, rev_brute_alloue_gar, tx_soc){standardGeneric("vieillissment_ap_pb")})
 setMethod(
     f = "vieillissment_ap_pb",
-    signature = c(x = "PortPassif", rev_nette_alloue = "numeric", tx_soc = "numeric"),
-    def = function(x, rev_nette_alloue, tx_soc){
+    signature = c(x = "PortPassif", rev_nette_alloue = "numeric", rev_brute_alloue_gar = "numeric", tx_soc = "numeric"),
+    def = function(x, rev_nette_alloue, rev_brute_alloue_gar, tx_soc){
 
         # Initialisation des listes de resultats
         list_res_stock_agg <- NULL # Liste des stocks aggregees par produit
@@ -62,17 +64,24 @@ setMethod(
                 if (type_prodi == "EpEuroInd") {
 
                     # Calcul de la revalorisation par produit
-                    revalo_prod <- calc_revalo_pm(x = prodi, y = list(rev_net_alloue = .subset2(rev_nette_alloue, k), tx_soc = tx_soc))
+                    revalo_prod <- calc_revalo_pm(x = prodi, y = list(rev_net_alloue = .subset2(rev_nette_alloue, k),
+                                                                      rev_brute_alloue_gar = .subset2(rev_brute_alloue_gar, k),
+                                                                      tx_soc = tx_soc))
                     # Vieilli les passifs et mise a jour
-                    list_prodi[[j]] <- vieilli_mp(x = prodi, revalo_prod[["stock"]][["pm_fin_ap_pb"]], revalo_prod[["tx_rev_net"]])
+                    list_prodi[[j]] <- vieilli_mp(x = prodi, revalo_prod[["stock"]][["pm_fin_ap_pb"]],
+                                                  revalo_prod[["stock"]][["pm_gar_ap_pb"]],
+                                                  revalo_prod[["tx_rev_net"]])
 
                 }
                 else if (type_prodi == "RetraiteEuroRest"){
 
                     # Calcul de la revalorisation par produit
-                    revalo_prod <- calc_revalo_pm(x = prodi, y = list(rev_net_alloue = .subset2(rev_nette_alloue, k)))
+                    revalo_prod <- calc_revalo_pm(x = prodi, y = list(rev_net_alloue = .subset2(rev_nette_alloue, k),
+                                                                      rev_brute_alloue_gar = .subset2(rev_brute_alloue_gar, k)))
                     # Vieilli les passifs et mise a jour
-                    list_prodi[[j]] <- vieilli_mp(x = prodi, revalo_prod[["stock"]][["pm_fin_ap_pb"]], revalo_prod[["tx_rev_net"]])
+                    list_prodi[[j]] <- vieilli_mp(x = prodi, revalo_prod[["stock"]][["pm_fin_ap_pb"]],
+                                                  revalo_prod[["stock"]][["pm_gar_ap_pb"]],
+                                                  revalo_prod[["tx_rev_net"]])
 
                 } else {
                     stop("[PortPassif : vieillissement_ap_pb] : La liste de produit comporte au moins un element non instancie.")
