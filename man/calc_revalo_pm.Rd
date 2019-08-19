@@ -13,6 +13,7 @@ calc_revalo_pm(x, y)
 \item{y}{une liste contenant les parametres.
 \describe{
 \item{\code{rev_net_alloue} : }{est une valeur \code{numeric} correspondant au montant de revalorisation a allouer.}
+\item{\code{rev_brute_alloue_gar} : }{est une valeur \code{numeric} correspondant au montant de revalorisation a allouer a la PM garantie.}
 \item{\code{tx_soc} : }{est une valeur \code{numeric} correspondant au taux de prelevement sociaux.
 A remplir uniquement si \code{x} est de type \code{\link{EpEuroInd}}.}
 }}

@@ -5,7 +5,7 @@
 \alias{calc_revalo}
 \title{Applique la politique de revalorisation d'un canton.}
 \usage{
-calc_revalo(x, passif_av_pb, tra, plac_moy_vnc, result_tech)
+calc_revalo(x, passif_av_pb, tra, plac_moy_vnc, result_tech, annee)
 }
 \arguments{
 \item{x}{un objet de la classe \code{\link{Canton}}.}
@@ -19,14 +19,21 @@ appliquee a un portefeuille de passif.}
 
 \item{result_tech}{est la valeur \code{numeric} du resultat technique prise en compte avant distribution
 de la PB.}
+
+\item{annee}{est la valeur \code{integer} correspondant a l'annee de projection.}
 }
 \value{
-\code{add_rev_nette_stock} une liste avec la valeur de la revalorisation nette servie par
+\code{add_rev_nette_stock} un vecteur \code{numeric} avec la valeur de la revalorisation nette servie par
  produit au titre de la participation aux benefices.
 
 \code{pmvl_liq} le montant de plus-values latentes en actions a realiser.
 
 \code{ppb} un objet \code{\link{Ppb}} correspondant a la PPB mise a jour.
+
+\code{ppb8_ind} un vecteur \code{numeric} avec la valeur de la PPB devant sortir au titre de la regle des 8 ans,
+ alloue par produit.
+
+\code{conso_ppb_init} un vecteur \code{numeric} avec la valeur de la PPB initiale consommee servant au calcul du BEG.
 
 \code{tx_pb} un vecteur reprenant les taux de PB par produit renseigne dans l'objet \code{x}.
 

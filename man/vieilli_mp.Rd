@@ -5,12 +5,14 @@
 \alias{vieilli_mp}
 \title{Veillissement d'un an des contrats epargne en euros.}
 \usage{
-vieilli_mp(x, pm_fin, tx_revalo)
+vieilli_mp(x, pm_fin, pm_gar, tx_revalo)
 }
 \arguments{
 \item{x}{un objet de la classe \code{\link{EpEuroInd}} ou de la classe \code{\link{RetraiteEuroRest}} contenant les model points epargne euros.}
 
 \item{pm_fin}{un vecteur de type \code{numeric} contenant par model point les montants de PM revalorises apres participation aux benefices.}
+
+\item{pm_gar}{un vecteur de type \code{numeric} contenant par model point les montants de PM garanties revalorises apres participation aux benefices au titre de la PPB initiale.}
 
 \item{tx_revalo}{un vecteur de type \code{numeric} contenant par model point les taux de revalorisation nets appliques.}
 }

@@ -6,13 +6,16 @@
 \title{Vieillissement du portefeuille sur l'annee apres attribution
 de participation aux benefices.}
 \usage{
-vieillissment_ap_pb(x, rev_nette_alloue, tx_soc)
+vieillissment_ap_pb(x, rev_nette_alloue, rev_brute_alloue_gar, tx_soc)
 }
 \arguments{
 \item{x}{un objet de la classe \code{\link{PortPassif}} contenant l'ensemble des produits de passifs.}
 
 \item{rev_nette_alloue}{un vecteur \code{numeric} contenant par produit
 le supplement de revalorisation par rapport au taux minimum.}
+
+\item{rev_brute_alloue_gar}{un vecteur \code{numeric} contenant par produit
+le supplement de revalorisation au titre de la part garantie initialement (PPB initiale).}
 
 \item{tx_soc}{une valeur \code{numeric} correspondant au taux de charges sociales.}
 }
