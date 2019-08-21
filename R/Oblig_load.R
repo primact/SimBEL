@@ -17,38 +17,47 @@ setMethod(
     f = "load_oblig",
     signature = "character",
     definition = function(file_oblig_address){
-        
+
         # Lecture du fichier
         temp <- read.csv2(file_oblig_address)
-        
+
         # Tests
         if (! all(! is.na(temp)))
             stop("[Oblig - load] : Presence de NA dans le fichier d'input.")
         if(! all(temp[,"nb_unit"] > 0))
-            stop("[Immo - load] : Le portefeuille Action ne peut contenir des nombres d'unites negatives ou nulles")
+            stop("[Oblig - load] : Le portefeuille Oblig ne peut contenir des nombres d'unites negatives ou nulles")
         if(! all(temp[,"val_marche"] > 0))
-            stop("[Immo - load] : Le portefeuille Action ne peut contenir des valeurs de marche negatives ou nulles")
-        
+            stop("[Oblig - load] : Le portefeuille Oblig ne peut contenir des valeurs de marche negatives ou nulles")
+        if(! all(temp[,"fx_rate"] > 0))
+          stop("[Oblig - load] : Le portefeuille Oblig ne peut contenir des taux de change negatifs ou nuls")
+
+        # Conversion du champs contenant les devises en character
+        ptf <- data.frame(num_mp     = (temp[,"num_mp"]),
+                         val_marche = (temp[,"val_marche"]),
+                         val_nc     = (temp[,"val_nc"]),
+                         val_achat  = (temp[,"val_achat"]),
+                         presence   = (temp[,"presence"]),
+                         cessible   = (temp[,"cessible"]),
+                         nb_unit    = (temp[,"nb_unit"]),
+                         dur_det    = (temp[,"dur_det"]),
+                         nominal    = (temp[,"nominal"]),
+                         tx_coupon  = (temp[,"tx_coupon"]),
+                         par        = (temp[,"par"]),
+                         mat_res    = (temp[,"mat_res"]),
+                         type       = (temp[,"type"]),
+                         rating     = (temp[,"rating"]),
+                         duration   = (temp[,"duration"]),
+                         zspread    = (temp[,"zspread"]),
+                         cc         = (temp[,"cc"]),
+                         sd         = (temp[,"sd"]),
+                         currency   = (temp[,"currency"]),
+                         fx_rate   =  (temp[,"fx_rate"])
+        )
+        ptf$currency <- as.character(ptf$currency)
+
         # Creation de l'objet
-        ptf_oblig <- new("Oblig", ptf = data.frame(num_mp     = (temp[,"num_mp"]),
-                                                   val_marche = (temp[,"val_marche"]),
-                                                   val_nc     = (temp[,"val_nc"]),
-                                                   val_achat  = (temp[,"val_achat"]),
-                                                   presence   = (temp[,"presence"]),
-                                                   cessible   = (temp[,"cessible"]),
-                                                   nb_unit    = (temp[,"nb_unit"]),
-                                                   dur_det    = (temp[,"dur_det"]),
-                                                   nominal    = (temp[,"nominal"]),
-                                                   tx_coupon  = (temp[,"tx_coupon"]),
-                                                   par        = (temp[,"par"]),
-                                                   mat_res    = (temp[,"mat_res"]),
-                                                   type       = (temp[,"type"]),
-                                                   rating     = (temp[,"rating"]),
-                                                   duration   = (temp[,"duration"]),
-                                                   zspread    = (temp[,"zspread"]),
-                                                   cc         = (temp[,"cc"]),
-                                                   sd         = (temp[,"sd"])))
-        
+        ptf_oblig <- new("Oblig", ptf = ptf)
+
         # Output
         return(ptf_oblig)
     }
