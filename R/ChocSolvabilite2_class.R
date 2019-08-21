@@ -22,6 +22,8 @@
 ##' \item{\code{action_type2} : }{le choc action de type 2}
 ##' \item{\code{immo} : }{le choc immobilier}
 ##' \item{\code{spread} : }{le choc spread sur les obligations corporates}
+##' \item{\code{currency_up} : }{les chocs sur devise a la hausse}
+##' \item{\code{currency_up} : }{les chocs sur devise a la baisse}
 ##' \item{\code{mortalite} : }{le choc mortalite sur les tables de mortalite}
 ##' \item{\code{longevite} : }{le choc longevite sur les tables de mortalite}
 ##' \item{\code{frais} : }{le choc depenses sur le niveau des frais et l'inflation des frais}
@@ -34,6 +36,7 @@
 ##' \code{\link{do_choc_action_type2}}.
 ##' L'application du choc de \code{immo} : \code{\link{do_choc_immo}}.
 ##' L'application du choc de \code{spread} : \code{\link{do_choc_spread}}.
+##' L'application des chocs de \code{currency_up} et \code{currency_down} : \code{\link{do_choc_currency}.
 ##' L'application du choc de \code{mortalite} : \code{\link{do_choc_mortalite}}.
 ##' L'application du choc de \code{longevite} : \code{\link{do_choc_longevite}}.
 ##' L'application du choc de \code{frais} : \code{\link{do_choc_frais}}, \code{\link{get_choc_inflation_frais}}.

@@ -29,6 +29,8 @@ setMethod(
             x@address[["save_folder"]][["taux_down"]]   <- paste(x@root_address, "internal_ws/data/scenario/taux_down", sep="/")
             x@address[["save_folder"]][["immo"]]        <- paste(x@root_address, "internal_ws/data/scenario/immobilier", sep="/")
             x@address[["save_folder"]][["spread"]]      <- paste(x@root_address, "internal_ws/data/scenario/spread", sep="/")
+            x@address[["save_folder"]][["currency_up"]]      <- paste(x@root_address, "internal_ws/data/scenario/currency_up", sep="/")
+            x@address[["save_folder"]][["currency_down"]]      <- paste(x@root_address, "internal_ws/data/scenario/currency_down", sep="/")
             # Choc souscription
             x@address[["save_folder"]][["frais"]]       <- paste(x@root_address, "internal_ws/data/scenario/frais", sep="/")
             x@address[["save_folder"]][["mortalite"]]   <- paste(x@root_address, "internal_ws/data/scenario/mortalite", sep="/")

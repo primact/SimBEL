@@ -25,12 +25,29 @@ setMethod(
 
         # a mettre sous forme de lecture d'un fichier csv
         table_choc <- chargement_choc(new("ChocSolvabilite2"), x@address[["param"]][["chocs"]])
-        scenario = c("central", "frais",
-                     "mortalite", "longevite",
-                     "rachat_up", "rachat_down",
-                     "action_type1", "action_type2", "immo",
-                     "taux_up", "taux_down",
-                     "spread")
+
+        # Liste des scenarios currency
+        tab_choc_currency <- table_choc@param_choc_mket@table_choc_currency
+        nom_choc_currency <- tab_choc_currency[which(tab_choc_currency$run_choc), "currency"]
+
+        if(length(nom_choc_currency) > 0){ # Si il y a des chocs currency
+          scenario <- c("central", "frais",
+                       "mortalite", "longevite",
+                       "rachat_up", "rachat_down",
+                       "action_type1", "action_type2", "immo",
+                       "taux_up", "taux_down",
+                       "spread",
+                       paste0("currency_up_", nom_choc_currency), paste0("currency_down_", nom_choc_currency)
+          )
+
+        } else {
+          scenario <- c("central", "frais",
+                       "mortalite", "longevite",
+                       "rachat_up", "rachat_down",
+                       "action_type1", "action_type2", "immo",
+                       "taux_up", "taux_down",
+                       "spread")
+        }
 
         for(name_scenario in scenario){
           # Message
@@ -66,6 +83,8 @@ setMethod(
                                               "action_type2" = canton_init@ptf_passif@autres_passifs,
                                               "immo"         = canton_init@ptf_passif@autres_passifs,
                                               "spread"       = canton_init@ptf_passif@autres_passifs,
+                                              "currency_up"  = canton_init@ptf_passif@autres_passifs,
+                                              "currency_down"= canton_init@ptf_passif@autres_passifs,
                                               "frais"        = autres_passif_load(
                                                                     paste(x@address[["data"]][["autres_passifs_choc"]],
                                                                     input_autres_passifs_choc[which(input_autres_passifs_choc$choc_sousc == "frais"), "nom_table_csv"],
@@ -91,16 +110,30 @@ setMethod(
 
                 # Transformation du canton apres choc
                 canton_init <- switch(EXPR = name_scenario,
-                                         "action_type1" = do_choc_action_type1(table_choc, canton_init),
-                                         "action_type2" = do_choc_action_type2(table_choc, canton_init),
-                                         "immo"         = do_choc_immo(table_choc, canton_init),
-                                         "spread"       = do_choc_spread(table_choc, canton_init),
-                                         "frais"        = do_choc_frais(table_choc, canton_init, autres_passifs_choc),
-                                         "mortalite"    = do_choc_mortalite(table_choc, canton_init, autres_passifs_choc),
-                                         "longevite"    = do_choc_longevite(table_choc, canton_init, autres_passifs_choc),
-                                         "rachat_up"    = do_choc_rachat_up(table_choc, canton_init, autres_passifs_choc),
-                                         "rachat_down"  = do_choc_rachat_down(table_choc, canton_init, autres_passifs_choc),
-                                         "central"      = canton_init)
+                                      "action_type1" = do_choc_action_type1(table_choc, canton_init),
+                                      "action_type2" = do_choc_action_type2(table_choc, canton_init),
+                                      "immo"         = do_choc_immo(table_choc, canton_init),
+                                      "spread"       = do_choc_spread(table_choc, canton_init),
+                                      "frais"        = do_choc_frais(table_choc, canton_init, autres_passifs_choc),
+                                      "mortalite"    = do_choc_mortalite(table_choc, canton_init, autres_passifs_choc),
+                                      "longevite"    = do_choc_longevite(table_choc, canton_init, autres_passifs_choc),
+                                      "rachat_up"    = do_choc_rachat_up(table_choc, canton_init, autres_passifs_choc),
+                                      "rachat_down"  = do_choc_rachat_down(table_choc, canton_init, autres_passifs_choc),
+                                      canton_init     # Alternative
+                )
+
+                # Choc de devise
+                nlong <- nchar(name_scenario)
+                if(length(grep("currency_up", name_scenario)) > 0){
+                  direction <- "currency_up"
+                  nom_currency <- substr(name_scenario, nlong - 2, nlong)
+                  canton_init <- do_choc_currency(table_choc, nom_currency, "up", canton_init)
+                }
+                if(length(grep("currency_down", name_scenario)) > 0){
+                  direction <- "currency_down"
+                  nom_currency <- substr(name_scenario, nlong - 2, nlong)
+                  canton_init <- do_choc_currency(table_choc, nom_currency, "down", canton_init)
+                }
 
                 # Ecraser les zpsreads renseignes par l'utilisateur dans le PortFin et le PortFin ref
                 # Port fin
@@ -171,9 +204,20 @@ setMethod(
             # Mise a jour du booleen de calcul des probas
             best_estimate@canton@ptf_passif@calc_proba <- FALSE
 
-            # Sauvegarde
-            save(best_estimate, file = paste(x@address[["save_folder"]][[name_scenario]], "best_estimate.RData", sep = "/"))
 
+            # Sauvegarde
+            # Choc de devise
+            if(length(grep("currency_up", name_scenario)) > 0){
+              direction <- "currency_up"
+              nom_currency <- substr(name_scenario, nlong - 2, nlong)
+              save(best_estimate, file = paste(x@address[["save_folder"]][[direction]], paste0(nom_currency,"_best_estimate.RData"), sep = "/"))
+            } else if(length(grep("currency_down", name_scenario)) > 0){
+              direction <- "currency_down"
+              nom_currency <- substr(name_scenario, nlong - 2, nlong)
+              save(best_estimate, file = paste(x@address[["save_folder"]][[direction]], paste0(nom_currency,"_best_estimate.RData"), sep = "/"))
+            } else{
+              save(best_estimate, file = paste(x@address[["save_folder"]][[name_scenario]], "best_estimate.RData", sep = "/"))
+            }
 
         }
         # Output
