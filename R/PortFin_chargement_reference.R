@@ -33,59 +33,78 @@ setMethod(
         Data_ref_Oblig      <- read.csv2(paste(folder_PortFin_reference_address, file_name[3,2], sep = "/"))
 
         # Construction du portefeuille de reference action
-        ptf_action <- new("Action", ptf = data.frame(num_mp     = (Data_ref_Action[,"num_mp"]),
-                                                     val_marche = (Data_ref_Action[,"val_unitaire_achat"]),
-                                                     val_nc     = (Data_ref_Action[,"val_unitaire_achat"]),
-                                                     val_achat  = (Data_ref_Action[,"val_unitaire_achat"]),
-                                                     presence   = (rep(TRUE, nrow(Data_ref_Action))),
-                                                     cessible   = (rep(TRUE, nrow(Data_ref_Action))),
-                                                     nb_unit    = (Data_ref_Action[,"allocation"]), # IMPORTANT : ici on affecte l'allocation, histoire de savoir quelle ventilation d'achat dans les nouvelles lignes est effectuee
-                                                     dur_det    = (rep(0, nrow(Data_ref_Action))),
-                                                     pdd        = (rep(0, nrow(Data_ref_Action))),
-                                                     num_index  = (Data_ref_Action[,"num_index"]),
-                                                     div        = (Data_ref_Action[,"div"]),
-                                                     ind_invest = (Data_ref_Action[,"ind_invest"])))
+        ptf <- data.frame(num_mp     = (Data_ref_Action[,"num_mp"]),
+                         val_marche = (Data_ref_Action[,"val_unitaire_achat"]),
+                         val_nc     = (Data_ref_Action[,"val_unitaire_achat"]),
+                         val_achat  = (Data_ref_Action[,"val_unitaire_achat"]),
+                         presence   = (rep(TRUE, nrow(Data_ref_Action))),
+                         cessible   = (rep(TRUE, nrow(Data_ref_Action))),
+                         nb_unit    = (Data_ref_Action[,"allocation"]), # IMPORTANT : ici on affecte l'allocation, histoire de savoir quelle ventilation d'achat dans les nouvelles lignes est effectuee
+                         dur_det    = (rep(0, nrow(Data_ref_Action))),
+                         pdd        = (rep(0, nrow(Data_ref_Action))),
+                         num_index  = (Data_ref_Action[,"num_index"]),
+                         div        = (Data_ref_Action[,"div"]),
+                         ind_invest = (Data_ref_Action[,"ind_invest"]),
+                         currency   = (Data_ref_Action[,"currency"]),
+                         fx_rate   = (Data_ref_Action[,"fx_rate"])
+        )
+        # currency en character
+        ptf$currency <- as.character(ptf$currency)
+        # Creation object
+        ptf_action <- new("Action", ptf = ptf)
         # Verification input action
         if(sum(ptf_action@ptf_action$val_marche <= 0) > 0 | sum(ptf_action@ptf_action$nb_unit <= 0) > 0) stop("[chargement_PortFin_reference] : Le portefeuille Action de reference ne peut contenir de ligne dont la valeur nominale unitaire est nulle. \n")
 
         # Construction du portefeuille de reference Immo
-        ptf_immo <- new("Immo", ptf = data.frame(num_mp     = (Data_ref_Immo[,"num_mp"]),
-                                                 val_marche = (Data_ref_Immo[,"val_unitaire_achat"]),
-                                                 val_nc     = (Data_ref_Immo[,"val_unitaire_achat"]),
-                                                 val_achat  = (Data_ref_Immo[,"val_unitaire_achat"]),
-                                                 presence   = (rep(TRUE, nrow(Data_ref_Immo))),
-                                                 cessible   = (rep(TRUE, nrow(Data_ref_Immo))),
-                                                 nb_unit    = (Data_ref_Immo[,"allocation"]), # IMPORTANT : ici on affecte l'allocation, histoire de savoir quelle ventilation d'achat dans les nouvelles lignes est effectuee
-                                                 dur_det    = (rep(0, nrow(Data_ref_Immo))),
-                                                 pdd        = (rep(0, nrow(Data_ref_Immo))),
-                                                 num_index  = (Data_ref_Immo[,"num_index"]),
-                                                 loyer      = (Data_ref_Immo[,"loyer"]),
-                                                 ind_invest = (Data_ref_Immo[,"ind_invest"])))
-
+        ptf <- data.frame(num_mp     = (Data_ref_Immo[,"num_mp"]),
+                         val_marche = (Data_ref_Immo[,"val_unitaire_achat"]),
+                         val_nc     = (Data_ref_Immo[,"val_unitaire_achat"]),
+                         val_achat  = (Data_ref_Immo[,"val_unitaire_achat"]),
+                         presence   = (rep(TRUE, nrow(Data_ref_Immo))),
+                         cessible   = (rep(TRUE, nrow(Data_ref_Immo))),
+                         nb_unit    = (Data_ref_Immo[,"allocation"]), # IMPORTANT : ici on affecte l'allocation, histoire de savoir quelle ventilation d'achat dans les nouvelles lignes est effectuee
+                         dur_det    = (rep(0, nrow(Data_ref_Immo))),
+                         pdd        = (rep(0, nrow(Data_ref_Immo))),
+                         num_index  = (Data_ref_Immo[,"num_index"]),
+                         loyer      = (Data_ref_Immo[,"loyer"]),
+                         ind_invest = (Data_ref_Immo[,"ind_invest"]),
+                         currency   = (Data_ref_Immo[,"currency"]),
+                         fx_rate   = (Data_ref_Immo[,"fx_rate"])
+        )
+        # currency en character
+        ptf$currency <- as.character(ptf$currency)
+        # Creation object
+        ptf_immo <- new("Immo", ptf = ptf)
         # Verification input immo
         if(sum(ptf_immo@ptf_immo$val_marche <= 0) > 0 | sum(ptf_immo@ptf_immo$nb_unit <= 0) > 0) stop("[chargement_PortFin_reference] : Le portefeuille Immo de reference ne peut contenir de ligne dont la valeur nominale unitaire est nulle. \n")
 
 
         # Construction du portefeuille de reference Oblig
-        ptf_oblig <- new("Oblig", ptf = data.frame(num_mp     = (Data_ref_Oblig[,"num_mp"]),
-                                                   val_marche = Data_ref_Oblig[,"nominal_unitaire"] * Data_ref_Oblig[,"parite"] * Data_ref_Oblig[,"allocation"],
-                                                   val_nc     = Data_ref_Oblig[,"nominal_unitaire"] * Data_ref_Oblig[,"parite"] * Data_ref_Oblig[,"allocation"],
-                                                   val_achat  = Data_ref_Oblig[,"nominal_unitaire"] * Data_ref_Oblig[,"parite"] * Data_ref_Oblig[,"allocation"],
-                                                   presence   = (rep(TRUE, nrow(Data_ref_Oblig))),
-                                                   cessible   = (rep(TRUE, nrow(Data_ref_Oblig))),
-                                                   nb_unit    = (Data_ref_Oblig[,"allocation"]), # IMPORTANT : ici on affecte l'allocation, histoire de savoir quelle ventilation d'achat dans les nouvelles lignes est effectuee
-                                                   dur_det    = (rep(0, nrow(Data_ref_Oblig))),
-                                                   nominal    = (Data_ref_Oblig[,"nominal_unitaire"]),
-                                                   tx_coupon  = (Data_ref_Oblig[,"tx_coupon"]),
-                                                   par        = (Data_ref_Oblig[,"parite"]),
-                                                   mat_res    = (Data_ref_Oblig[,"mat_res"]),
-                                                   type       = (Data_ref_Oblig[,"type"]),
-                                                   rating     = (Data_ref_Oblig[,"rating"]),
-                                                   duration   = (rep(0, nrow(Data_ref_Oblig))),
-                                                   zspread    = (rep(0, nrow(Data_ref_Oblig))),
-                                                   cc         = (rep(0, nrow(Data_ref_Oblig))),
-                                                   sd         = (rep(0, nrow(Data_ref_Oblig)))))
-
+        ptf <- data.frame(num_mp     = (Data_ref_Oblig[,"num_mp"]),
+                         val_marche = Data_ref_Oblig[,"nominal_unitaire"] * Data_ref_Oblig[,"parite"] * Data_ref_Oblig[,"allocation"],
+                         val_nc     = Data_ref_Oblig[,"nominal_unitaire"] * Data_ref_Oblig[,"parite"] * Data_ref_Oblig[,"allocation"],
+                         val_achat  = Data_ref_Oblig[,"nominal_unitaire"] * Data_ref_Oblig[,"parite"] * Data_ref_Oblig[,"allocation"],
+                         presence   = (rep(TRUE, nrow(Data_ref_Oblig))),
+                         cessible   = (rep(TRUE, nrow(Data_ref_Oblig))),
+                         nb_unit    = (Data_ref_Oblig[,"allocation"]), # IMPORTANT : ici on affecte l'allocation, histoire de savoir quelle ventilation d'achat dans les nouvelles lignes est effectuee
+                         dur_det    = (rep(0, nrow(Data_ref_Oblig))),
+                         nominal    = (Data_ref_Oblig[,"nominal_unitaire"]),
+                         tx_coupon  = (Data_ref_Oblig[,"tx_coupon"]),
+                         par        = (Data_ref_Oblig[,"parite"]),
+                         mat_res    = (Data_ref_Oblig[,"mat_res"]),
+                         type       = (Data_ref_Oblig[,"type"]),
+                         rating     = (Data_ref_Oblig[,"rating"]),
+                         duration   = (rep(0, nrow(Data_ref_Oblig))),
+                         zspread    = (rep(0, nrow(Data_ref_Oblig))),
+                         cc         = (rep(0, nrow(Data_ref_Oblig))),
+                         sd         = (rep(0, nrow(Data_ref_Oblig))),
+                         currency   = (Data_ref_Oblig[,"currency"]),
+                         fx_rate    = (Data_ref_Oblig[,"fx_rate"])
+        )
+        # currency en character
+        ptf$currency <- as.character(ptf$currency)
+        # Creation object
+        ptf_oblig <- new("Oblig", ptf = ptf)
         # Verification input oblig
         if(sum(ptf_oblig@ptf_oblig$val_marche <= 0) > 0 | sum(ptf_oblig@ptf_oblig$nb_unit <= 0) > 0) stop("[chargement_PortFin_reference] : Le portefeuille Oblig de reference ne peut contenir de ligne dont la valeur nominale unitaire est nulle. \n")
 
