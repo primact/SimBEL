@@ -29,10 +29,12 @@ setMethod(
         # Operation de mise a jour, on affecte a l'attribut VM/VNC precedente les valeurs de VM/VNC actuelle :
         x@vm_vnc_precedent <- list(vm = list(action = table_alloc["alloc_action", "alloc_valeur"],
                                                 immo   = table_alloc["alloc_immo",   "alloc_valeur"],
-                                                oblig  = table_alloc["alloc_oblig",  "alloc_valeur"]),
+                                                oblig  = table_alloc["alloc_oblig",  "alloc_valeur"],
+                                             treso = table_alloc["alloc_treso",  "alloc_valeur"]),
                                       vnc = list(action = table_alloc["alloc_action", "alloc_valeur_nc"],
                                                  immo   = table_alloc["alloc_immo",   "alloc_valeur_nc"],
-                                                 oblig  = table_alloc["alloc_oblig",  "alloc_valeur_nc"]))
+                                                 oblig  = table_alloc["alloc_oblig",  "alloc_valeur_nc"],
+                                                 treso = table_alloc["alloc_treso",  "alloc_valeur_nc"]))
 
         # Output
         return(x)

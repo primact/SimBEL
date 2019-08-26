@@ -7,6 +7,7 @@
 ##' Une Classe pour le portefeuille financier.
 ##'
 ##' @name PortFin
+##' @slot annee est un objet de type \code{integer}correspondant a l'annee courante.
 ##' @slot ptf_action est un objet de type \code{\link{Action}}, qui represente le portefeuille d'action d'un canton.
 ##' @slot ptf_immo est un objet de type \code{\link{Immo}}, qui represente le portefeuille immobilier d'un canton.
 ##' @slot ptf_oblig est un objet de type \code{\link{Oblig}}, qui represente le portefeuille obligataire d'un canton.

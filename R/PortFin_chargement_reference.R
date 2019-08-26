@@ -131,10 +131,12 @@ setMethod(
                  mvl_oblig  = 0,
                  vm_vnc_precedent = list(vm = list(action = sum(ptf_action@ptf_action$val_marche),
                                                    immo   = sum(ptf_immo@ptf_immo$val_marche),
-                                                   oblig  = sum(ptf_oblig@ptf_oblig$val_marche)),
+                                                   oblig  = sum(ptf_oblig@ptf_oblig$val_marche),
+                                                   treso  = 0),
                                          vnc = list(action = sum(ptf_action@ptf_action$val_nc),
                                                     immo   = sum(ptf_immo@ptf_immo$val_nc),
-                                                    oblig  = sum(ptf_oblig@ptf_oblig$val_nc))))
+                                                    oblig  = sum(ptf_oblig@ptf_oblig$val_nc),
+                                                    treso = 0)))
         return(x)
     }
 )
