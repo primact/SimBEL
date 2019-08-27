@@ -15,13 +15,16 @@
 ##' la participation aux benefices, et la valeur \code{gar} pour le calcul avec uniquement les flux garanti (calcul de la FDB).
 ##' @param y une liste a remplir uniquement si \code{x} est de type \code{\link{EpEuroInd}} contenant les parametres :
 ##' \describe{
+##' \item{\code{proba_dyn} : }{une liste contenant le taux de rachats dynamiques (totaux et partiels) par model points.
 ##' \item{\code{tx_min} : }{une liste contenant le taux de revalorisation minimum associes a chaque ligne de model points.
 ##' Le format de cette liste correspond a la sortie de la methode \code{\link{calc_tx_min}}.}
 ##' \item{\code{tx_soc} : }{est une valeur \code{numeric} correspondant au taux de prelevements sociaux.}
+##' \item{\code{choc_lapse_mass} : }{est une valeur \code{numeric} correspondant au choc de rachat massif.}
 ##' }
 ##' @details En epargne, cette methode permet de calculer les flux de sortie en echeance, les flux de rachat totaux et partiels et
 ##' les flux de deces d'un contrat epargne en euros. Ces prestations font l'objet d'une relavorisation
-##' au taux minimum contractuel. Les nombres de sortie sont egalement produits.
+##' au taux minimum contractuel. Les nombres de sortie sont egalement produits. Il est possible de realiser un choc de rachat
+##' massif si \code{an}. Dans ce cas, les prestations de rachats massifs sortent en debut d'annee et ne sont pas revalorisees.
 ##' Des chargements sont appliques sur flux de rachats. Des prelevements sur encours sont appliques sur les
 ##' prestations revalorises au taux minimum contractuel. Cette methode permet de gerer les contrats a taux de
 ##' revalorisation net negatif.
@@ -78,19 +81,22 @@ setMethod(
     signature = c(x = "EpEuroInd", method = "character", an = "integer", y = "list"),
     def = function(x, method, an, y){
         # Verification inputs
-        if (length(y) != 3L)               stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 3. \n")
+        if (length(y) != 4L)  stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4. \n")
         # Verification des noms des elements de la liste
-        if (sum(names(y) == c("proba_dyn", "tx_min", "tx_soc")) != length(y)) stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 3 de nom : proba_dyn, tx_min, tx_soc. \n")
+        if (sum(names(y) == c("proba_dyn", "tx_min", "tx_soc", "choc_lapse_mass")) != length(y))
+          stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4 de nom : proba_dyn, tx_min, tx_soc, choc_lapse_mass. \n")
 
         # affectation pour eviter la modification des fonctions
-        proba_dyn = .subset2(y, 1L)
-        tx_min    = .subset2(y, 2L)
-        tx_soc    = .subset2(y, 3L)
+        proba_dyn       <- .subset2(y, 1L)
+        tx_min          <- .subset2(y, 2L)
+        tx_soc          <- .subset2(y, 3L)
+        choc_lapse_mass <- .subset2(y, 4L)
 
         # Verification des types des elements de la liste
-        if (! is.list(proba_dyn))   stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 3, de nom : proba_dyn, tx_min, an, tx_soc, dont le type est : list, list, numeric. \n")
-        if (! is.list(tx_min))      stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 3, de nom : proba_dyn, tx_min, tx_soc, dont le type est : list, list, numeric \n")
-        if (! is.numeric(tx_soc))   stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 3, de nom : proba_dyn, tx_min, tx_soc, dont le type est : list, list, numeric \n")
+        if (! is.list(proba_dyn))   stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4, de nom : proba_dyn, tx_min, an, tx_soc, choc_lapse_mass, dont le type est : list, list, numeric. \n")
+        if (! is.list(tx_min))      stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4, de nom : proba_dyn, tx_min, tx_soc, choc_lapse_mass, dont le type est : list, list, numeric \n")
+        if (! is.numeric(tx_soc))   stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4, de nom : proba_dyn, tx_min, tx_soc, choc_lapse_mass, dont le type est : list, list, numeric \n")
+        if (! is.numeric(choc_lapse_mass))   stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4, de nom : proba_dyn, tx_min, tx_soc, choc_lapse_mass, dont le type est : list, list, numeric \n")
 
         # Extraction des donnees du tableau de probas
         annee <- paste("Annee", an , sep = "_")
@@ -140,6 +146,12 @@ setMethod(
             stop("[EpEuroInd : calc_prest] : L'input method dont etre egal a 'normal' ou 'gar' \n")
 
 
+        # Indicatrice de premiere annee pour application du choc de rachat massif et application du choc de rachat
+        # Ce choc en applique en debut d'annee. Il n'y a donc pas de revalorisation
+        choc_lapse_mass <- choc_lapse_mass *  (an == 1L)
+        rach_mass <- pm_deb * choc_lapse_mass
+        nb_rach_mass <- nb_contr * choc_lapse_mass
+
         # Indicatrice de sortie en echeance
         ind_ech <- (an <= .subset2(mp, num_terme))
 
@@ -150,36 +162,36 @@ setMethod(
 
 
         # Calcul des echeances et de la revalorisation
-        ech <- pm_deb * (1 - ind_ech)  # echeance
+        ech <- pm_deb * (1 - ind_ech) * (1 - choc_lapse_mass) # echeance
         rev_ech <- ech * tx_min_se # revalorisation au taux minimum
-        nb_ech <- nb_contr * (1 - ind_ech) # nombre de contrats en echeance
+        nb_ech <- nb_contr * (1 - ind_ech) * (1 - choc_lapse_mass)# nombre de contrats en echeance
 
 
         # Calcul des flux  rachats totaux
         # Taux de rachat incluant les rachats structurels et conjoncturels
         qx_rach_tot_glob <- pmax(0, pmin(1, qx_rach_tot + proba_dyn[["qx_rach_tot_dyn"]]))
-        rach_tot <- pm_deb * qx_rach_tot_glob * ind_ech # Flux de rachats totaux
+        rach_tot <- pm_deb * qx_rach_tot_glob * ind_ech * (1 - choc_lapse_mass) # Flux de rachats totaux
         rev_rach_tot <- rach_tot * tx_min_se # revalorisation au taux minimum
-        nb_rach_tot <- nb_contr * qx_rach_tot_glob * ind_ech # nombre de contrats en rachat total
+        nb_rach_tot <- nb_contr * qx_rach_tot_glob * ind_ech * (1 - choc_lapse_mass) # nombre de contrats en rachat total
 
         # Calcul des flux de deces
         # Taux de deces sur la population des non rachetes
         qx_dc_rach <- qx_dc * (1 - qx_rach_tot_glob)
-        dc <- pm_deb * qx_dc_rach * ind_ech # Flux de rachats totaux
+        dc <- pm_deb * qx_dc_rach * ind_ech * (1 - choc_lapse_mass) # Flux de rachats totaux
         rev_dc <- dc * tx_min_se # revalorisation au taux minimum
-        nb_dc <- nb_contr * qx_dc_rach * ind_ech # nombre de contrats en deces
+        nb_dc <- nb_contr * qx_dc_rach * ind_ech * (1 - choc_lapse_mass) # nombre de contrats en deces
 
         # Calcul des flux rachats partiels
         # Taux de rachat incluant les rachats structurels et conjoncturels sur la population des non rachetes et vivants
         qx_rach_part_glob <- (1 - qx_rach_tot_glob) * (1 - qx_dc) *
             pmax(0, pmin(1, qx_rach_part + proba_dyn[["qx_rach_part_dyn"]]))
-        rach_part <- pm_deb * qx_rach_part_glob * ind_ech # Flux de rachats partiels
+        rach_part <- pm_deb * qx_rach_part_glob * ind_ech * (1 - choc_lapse_mass) # Flux de rachats partiels
         rev_rach_part <- rach_part * tx_min_se # revalorisation au taux minimum
 
         # Total des prestations
-        prest <- ech + rach_tot + dc + rach_part # total prestations
+        prest <- rach_mass + ech + rach_tot + dc + rach_part # total prestations
         rev_prest <- rev_ech + rev_rach_tot + rev_dc + rev_rach_part # total revalorisation des prestations
-        nb_sortie <- nb_ech + nb_dc + nb_rach_tot # nombre de sorties
+        nb_sortie <- nb_rach_mass + nb_ech + nb_dc + nb_rach_tot # nombre de sorties
         nb_contr_debut <- nb_contr
         nb_contr_fin <- nb_contr_debut - nb_sortie # nombre de contrats en cours en fin d'annee
         nb_contr_moy <- (nb_contr_debut + nb_contr_fin) / 2  # nombre de contrats moyen
@@ -190,25 +202,27 @@ setMethod(
         chgt_enc <- pmin(chgt_enc, tx_min_an /(1 + tx_min_an)) * ind_chgt_enc_pos + chgt_enc * (1 - ind_chgt_enc_pos)
 
         # Calcul des chargements sur encours
-        enc_charg <- (prest + rev_prest) * chgt_period(chgt_enc, period = "se")
+        enc_charg <- (prest - rach_mass + rev_prest) * chgt_period(chgt_enc, period = "se")
 
         # Calcul de la revalorisation nette des prestations avec capitalisation sur un semestre
         rev_prest_nette <- rev_prest - enc_charg
 
         # Calcul des autres chargements et des prelevements sociaux
-        rach_charg <- (rach_tot + rach_part + rev_rach_tot + rev_rach_part) * .subset2(mp, num_chgt_rach)
+        rach_charg_mass <- rach_mass * .subset2(mp, num_chgt_rach)
+        rach_charg <- (rach_mass + rach_tot + rach_part + rev_rach_tot + rev_rach_part) * .subset2(mp, num_chgt_rach)
         soc_prest <- pmax(0, rev_prest_nette) * tx_soc # prelevements sociaux
 
         # Calcul des interets techniques sur prestations
-        it_tech_prest <- prest * tx_min[["tx_tech_se"]]
+        it_tech_prest <- (prest - rach_mass) * tx_min[["tx_tech_se"]]
 
         # Output zero
         out_zero <- rep(0, nb_mp)
-        
+
         # output
         return(list(method = method,
                     flux = list(
                         ech             = ech,
+                        rach_mass       = rach_mass,
                         rach_tot        = rach_tot,
                         dc              = dc,
                         rach_part       = rach_part,
@@ -222,11 +236,13 @@ setMethod(
                         rev_prest_nette = rev_prest_nette,
                         enc_charg_prest = enc_charg,
                         rach_charg      = rach_charg,
+                        rach_charg_mass = rach_charg_mass,
                         soc_prest       = soc_prest,
                         it_tech_prest   = it_tech_prest,
                         arr_charg       = out_zero),
                     stock = list(
                         nb_ech       = nb_ech,
+                        nb_rach_mass = nb_rach_mass,
                         nb_rach_tot  = nb_rach_tot,
                         nb_dc        = nb_dc,
                         nb_debut     = nb_contr_debut,
@@ -292,11 +308,11 @@ setMethod(
 
         # Calcul des prestations
         prestations <- nb_contr_debut * (rente / (1 + ch_arr))
-            
+
         # Calcul des rentes
         rente_flux <- proba_survie_un_an * prestations
 
-        
+
         # Calcul des chargements
         arr_charg <- rente * (ch_arr / (1 + ch_arr))
 
@@ -307,6 +323,7 @@ setMethod(
         return(list(method = method,
                     flux = list(
                         ech             = out_zero,
+                        rach_mass       = out_zero,
                         rach_tot        = out_zero,
                         dc              = out_zero,
                         rach_part       = out_zero,
@@ -320,11 +337,13 @@ setMethod(
                         rev_prest_nette = out_zero,
                         enc_charg_prest = out_zero,
                         rach_charg      = out_zero,
+                        rach_charg_mass = out_zero,
                         soc_prest       = out_zero,
                         it_tech_prest   = out_zero,
                         arr_charg       = arr_charg),
                     stock = list(
                         nb_ech          = out_zero,
+                        nb_rach_mass    = out_zero,
                         nb_rach_tot     = out_zero,
                         nb_dc           = nb_sortie,
                         nb_debut        = nb_contr_debut,

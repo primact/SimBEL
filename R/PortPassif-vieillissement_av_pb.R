@@ -97,12 +97,15 @@ setMethod(
         #---------------------------------------------------------------
         # Etape 5 : Evaluation des flux interagissant avec l'actif
         #---------------------------------------------------------------
+        #Calcul des flux de debut d'annee
+        flux_debut <- - sum(res_av_pb_flux_agg[, "rach_mass"] - res_av_pb_flux_agg[, "rach_charg_mass"])
+
         # Calcul des flux de mileu d'annee
         flux_milieu <- sum(res_av_pb_flux_agg[, "pri_brut"] - # Primes
                                ( # Prestations
                                    res_av_pb_flux_agg[,"rev_prest_nette"] +
-                                       res_av_pb_flux_agg[,"prest"] -
-                                       res_av_pb_flux_agg[,"rach_charg"]
+                                       res_av_pb_flux_agg[,"prest"] - res_av_pb_flux_agg[, "rach_mass"] -
+                                       (res_av_pb_flux_agg[,"rach_charg"] - res_av_pb_flux_agg[, "rach_charg_mass"])
                                ) - # Frais sur primes et sur prestations
                                (
                                    res_av_pb_flux_agg[,"frais_var_prime"] +
@@ -141,6 +144,7 @@ setMethod(
             result_av_pb = result_av_pb,
             result_autres_passifs = result_autres_passifs,
             var_psap = op_autres_reserves[["var_psap"]], var_pgg = op_autres_reserves[["var_pgg"]],
+            flux_debut = flux_debut,
             flux_milieu = flux_milieu, flux_fin = flux_fin
         )
         )

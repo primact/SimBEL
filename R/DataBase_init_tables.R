@@ -42,6 +42,7 @@ setMethod(
                     pri_net REAL,
                     pri_chgt REAL,
                     ech REAL,
+                    rach_mass REAL,
                     rach_tot REAL,
                     dc REAL,
                     rach_part REAL,
@@ -55,6 +56,7 @@ setMethod(
                     rev_prest_nette REAL,
                     enc_charg_prest REAL,
                     rach_charg REAL,
+                    rach_charg_mass REAL,
                     soc_prest REAL,
                     it_tech_prest REAL,
                     arr_charg REAL,
@@ -84,6 +86,7 @@ setMethod(
                     frais_fin REAL,
                     nb_vers REAL,
                     nb_ech REAL,
+                    nb_rach_mass REAL,
                     nb_rach_tot REAL,
                     nb_dc REAL,
                     nb_debut REAL,
@@ -102,7 +105,7 @@ setMethod(
                     credit REAL,
                     debit REAL,
                     resultat REAL)")
-        
+
         # 3 - Table des produits non modelisees
         dbSendQuery(conn = x@database,
                     "CREATE TABLE HORS_MODEL
@@ -115,14 +118,14 @@ setMethod(
                     pm_deb REAL,
                     pm_fin REAL,
                     it REAL)")
-        
+
         # 3 - Table des BE
         dbSendQuery(conn = x@database,
                     "CREATE TABLE BE
                     (num_sim INTEGER,
                     prod VARCHAR(20),
                     be REAL)")
-        
+
         # 4 - Table ACTIF
         dbSendQuery(conn = x@database,
                     "CREATE TABLE ACTIF
@@ -141,6 +144,8 @@ setMethod(
                     num_index INTEGER,
                     div REAL,
                     ind_invest REAL,
+                    currency VARCHAR(20),
+                    fx_rate REAL,
                     loyer REAL,
                     nominal REAL,
                     tx_coupon REAL,
@@ -152,7 +157,7 @@ setMethod(
                     zspread REAL,
                     cc REAL,
                     sd REAL)")
-        
+
         # 5 - Table FLUX_FIN
         dbSendQuery(conn = x@database,
                     "CREATE TABLE FLUX_FIN
@@ -167,7 +172,7 @@ setMethod(
                     pmvr_immo REAL,
                     frais_fin REAL,
                     var_rc REAL)")
-        
+
         # 6 - Table PB
         dbSendQuery(conn = x@database,
                     "CREATE TABLE PB

@@ -68,7 +68,7 @@ setMethod(
         }
 
 
-        
+
         # Chargement  autres passifs
         autres_passifs <- autres_passif_load(paste(x@address[["data"]][["passif"]], "autres_passifs.csv", sep = "/"))
 
@@ -78,13 +78,13 @@ setMethod(
 
         # Chargement TauxPB
         taux_pb <- tauxpb_load(paste(x@address[["data"]][["passif"]],"taux_pb.csv",sep="/"))
-        
+
         # Chargement et instanciation des tables de frais passif
         frais_passif <- frais_passif_load(paste(x@address[["data"]][["passif"]],"frais_passif.csv",sep="/"))
 
 
         # Instanciation de la classe PortPassif
         return(new(Class="PortPassif", 0L, list_epeuroind, list_retraiteeurorest, names_class_prod = c(if(nb_epeuroind > 0L) "eei", if(nb_retraiteeurorest > 0L) "rer"),
-                   load_ht(x), frais_passif, taux_pb, autres_passifs, autres_reserves, TRUE))
+                   load_ht(x), frais_passif, taux_pb, autres_passifs, autres_reserves, TRUE, choc_lapse_mass = 0, choc_mort_cat = 0))
     }
 )

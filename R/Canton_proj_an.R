@@ -80,7 +80,32 @@ setMethod(
         # Mise a jour des passifs
         x@ptf_passif <- passif_av_pb[["ptf"]]
         #---------------------------------------------------------------
-        # Etape 4 : Gestion des actifs avant allocation
+        # Etape 4 : Allocation des actifs pour faire face a des possibles rachats massifs
+        #---------------------------------------------------------------
+        #  Mise a jour de la tresorie et de l'actif suite a un rachat massif
+        if(passif_av_pb[["flux_debut"]] != 0){
+
+          x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso , passif_av_pb[["flux_debut"]])
+
+          # Gestion de l'anomalie : valeur de marche des actifs negatives
+          if(.subset2(print_alloc(x@ptf_fin), 5L) < 0){
+            warning(paste("Attention, la valeur de marche des actifs est negative pour
+                        la simulation ", x@mp_esg@num_traj, " en annee ", annee,".", sep = ""))
+
+            # Dans le cas d'un actif negatif, la simulation est arretee.
+            return(FALSE)
+          }
+
+          actif_realloc_mass <- reallocate(x@ptf_fin, x@param_alm@ptf_reference, x@param_alm@alloc_cible)
+          x@ptf_fin <- actif_realloc_mass[["portFin"]]
+          pmvr_mass <- list(oblig = actif_realloc_mass[["pmvr_oblig"]],
+                       action = actif_realloc_mass[["pmvr_action"]],
+                       immo = actif_realloc_mass[["pmvr_immo"]])
+
+        }
+
+        #---------------------------------------------------------------
+        # Etape 5 : Gestion des actifs avant allocation
         #---------------------------------------------------------------
         actif_vieil <- update_PortFin(annee, x@ptf_fin, x@mp_esg, passif_av_pb[["flux_milieu"]], passif_av_pb[["flux_fin"]])
         # Mise a jour des actifs
@@ -94,9 +119,8 @@ setMethod(
         # Mise a jour du portfeuille de reference
         x@param_alm@ptf_reference <- update_PortFin_reference(annee, x@param_alm@ptf_reference, x@mp_esg)
 
-
         #---------------------------------------------------------------
-        # Etape 5 : Calcul des frais financiers
+        # Etape 6 : Calcul des frais financiers
         #---------------------------------------------------------------
         # Calcul des valeurs moyennes
         alloc_cour <- print_alloc(x@ptf_fin)
@@ -109,7 +133,7 @@ setMethod(
         x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso , - frais_fin)
 
         #---------------------------------------------------------------
-        # Etape 6 : Re-allocation des actifs et mise a jour de la PRE et de la RC
+        # Etape 7 : Re-allocation des actifs et mise a jour de la PRE et de la RC
         #---------------------------------------------------------------
         # Reallocation a l'allocation cible
 
@@ -128,10 +152,19 @@ setMethod(
                      action = actif_realloc[["pmvr_action"]],
                      immo = actif_realloc[["pmvr_immo"]])
 
+        #  Ajout des pmvr obtenues suite a un rachat massif
+        if(passif_av_pb[["flux_debut"]] != 0){
+          pmvr <- list(oblig = actif_realloc[["pmvr_oblig"]] + pmvr_mass$oblig,
+                       action = actif_realloc[["pmvr_action"]] + pmvr_mass$action,
+                       immo = actif_realloc[["pmvr_immo"]] + pmvr_mass$immo)
+
+          }
+
         #---------------------------------------------------------------
-        # Etape 7 : Calcul du resultat technique
+        # Etape 8 : Calcul du resultat technique
         #---------------------------------------------------------------
         # Calcul du resultats technique avec attribution de PB
+        # actif_realloc[["var_pre"]] prend en compte la variation de PRE depuis le debut de l'annee
         resultat_tech <- calc_result_technique(passif_av_pb, actif_realloc[["var_pre"]] * pre_on)
 
         #---------------------------------------------------------------
@@ -139,14 +172,14 @@ setMethod(
         #---------------------------------------------------------------
 
         # Evaluation du resultat financier
-        resultat_fin <- calc_resultat_fin(revenu_fin + var_vnc_oblig, actif_realloc[["pmvr"]],
+        resultat_fin <- calc_resultat_fin(revenu_fin + var_vnc_oblig, sum(unlist(pmvr)),
                                           frais_fin, actif_realloc[["var_rc"]])
 
         # Calcul du TRA
         tra <- calc_tra(actif_realloc[["plac_moy_vnc"]], resultat_fin)
 
         #---------------------------------------------------------------
-        # Etape 9 : Application de la politique de revalorisation
+        # Etape  : Application de la politique de revalorisation
         #---------------------------------------------------------------
 
         # Calcul de la politique de revalorisation

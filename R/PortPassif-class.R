@@ -21,6 +21,10 @@
 ##' @slot autres_passifs un objet de classe \code{\link{AutresPassifs}}.
 ##' @slot autres_reserves un objet de classe \code{\link{AutresReserves}}.
 ##' @slot calc_proba un \code{logical} indiquant si les probabilites ont ete calculees.
+##' @slot choc_lapse_mass un \code{numeric} comprenant la valeur du choc de rachat massif. Cet attribut doit etre a 0 lorsque aucun
+##' choc n'est souhaite. Sa valeur est comprise entre 0 et 1. Il ne s'applique que la premiere annee de projection.
+##' @slot choc_mort_cat un \code{numeric} comprenant la valeur du choc de mortalite catastrophique Cet attribut doit etre a 0 lorsque aucun
+##' choc n'est souhaite. Sa valeur est comprise entre 0 et 1. Il ne s'applique que la premiere annee de projection.
 ##' @docType class
 ##' @author Prim'Act
 ##' @seealso La projection des produits sur l'annee avant attributiuon de participation
@@ -43,7 +47,9 @@ setClass(
         tx_pb = "TauxPB",
         autres_passifs = "AutresPassifs",
         autres_reserves = "AutresReserves",
-        calc_proba = "logical"),
+        calc_proba = "logical",
+        choc_lapse_mass = "numeric",
+        choc_mort_cat = "numeric"),
 
     validity = function (object){
 
@@ -72,6 +78,12 @@ setClass(
         if(! validObject(object@autres_reserves)) retval <- c(retval, "[PortPassif] : Objet 'autres_reserves' non valide")
         if(length(object@annee) > 1L) retval <- c("[PortPassif] : 'annee' doit etre entier, pas de composante vectorielle autorisee.")
         if(! is.integer(object@annee)) retval <- c("[PortPassif] : 'annee' doit etre entier.")
+        if(! is.logical(object@calc_proba)) retval <- c("[PortPassif] : 'calc_proba' doit etre logical.")
+        if(! is.numeric(object@choc_lapse_mass)) retval <- c("[PortPassif] : 'choc_lapse_mass' doit etre numeric.")
+        if(! is.numeric(object@choc_mort_cat)) retval <- c("[PortPassif] : 'choc_mort_cat' doit etre numeric.")
+
+        if(object@choc_lapse_mass > 1 | object@choc_lapse_mass < 0) retval <- c("[PortPassif] : 'choc_lapse_mass' doit etre compris entre 0 et 1.")
+        if(object@choc_mort_cat > 1 | object@choc_mort_cat < 0) retval <- c("[PortPassif] : 'choc_mort_cat' doit etre compris entre 0 et 1.")
 
         # Test que les elements des listes sont bien des objets du bon type
         if(nb_eei != 0L){

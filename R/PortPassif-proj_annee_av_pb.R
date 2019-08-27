@@ -56,6 +56,7 @@ setMethod(
         # Calcul des probabilites
         calc_proba <- x@calc_proba
 
+
         # Boucle sur les types de produits
         k <- 0L # Compteur de boucle
         for(i in 1:nb_type) {
@@ -95,7 +96,6 @@ setMethod(
                     if (calc_proba) {
                         # Calcul des probabilites portant sur les flux
                         proba_flux <- calc_proba_flux(x = prodi, ht = ht)
-
                         # Mise a jour du tableau de probas
                         prodi@tab_proba <- update_tab_proba(x = prodi@tab_proba, an = an, y = list(proba_flux = proba_flux))
                     }
@@ -104,8 +104,8 @@ setMethod(
                     proba_dyn <- calc_proba_dyn(prodi, ht = ht)
 
                     # Calcul des prestations du produits par model points
-                    prest <- calc_prest(prodi, method = "normal", an = an, y = list(proba_dyn = proba_dyn, tx_min = tx_min, tx_soc = tx_soc))
-                    prest_gar <- calc_prest(prodi, method = "gar", an = an, y = list(proba_dyn = proba_dyn, tx_min = tx_min, tx_soc = tx_soc))
+                    prest <- calc_prest(prodi, method = "normal", an = an, y = list(proba_dyn = proba_dyn, tx_min = tx_min, tx_soc = tx_soc, choc_lapse_mass = x@choc_lapse_mass))
+                    prest_gar <- calc_prest(prodi, method = "gar", an = an, y = list(proba_dyn = proba_dyn, tx_min = tx_min, tx_soc = tx_soc, choc_lapse_mass = x@choc_lapse_mass))
 
                     # Extraction de donnees (prest)
                     prest_flux  <- prest[["flux"]]
@@ -163,7 +163,6 @@ setMethod(
                     if (calc_proba) {
                         # Calcul des probabilites portant sur les flux
                         proba_flux <- calc_proba_flux(x = prodi, ht = ht)
-
                         # Mise a jour du tableau de probas
                         prodi@tab_proba <- update_tab_proba(x = prodi@tab_proba, an = an, y = list(proba_flux = proba_flux, coef_rente = NULL))
                     }

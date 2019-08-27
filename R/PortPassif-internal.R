@@ -20,7 +20,9 @@ setMethod(
                           tx_pb = new("TauxPB"),
                           autres_passifs = new("AutresPassifs"),
                           autres_reserves = new("AutresReserves"),
-                          calc_proba = logical()
+                          calc_proba = logical(),
+                          choc_lapse_mass = numeric(),
+                          choc_mort_cat = numeric()
     ){
         if(! missing(annee) & ! missing(names_class_prod) & ! missing(ht) & ! missing(fp)  & ! missing(tx_pb) &
            ! missing(autres_passifs) & ! missing(autres_reserves)){
@@ -34,6 +36,8 @@ setMethod(
             .Object@autres_passifs    <- autres_passifs
             .Object@autres_reserves   <- autres_reserves
             .Object@calc_proba        <- TRUE
+            .Object@choc_lapse_mass   <- 0
+            .Object@choc_mort_cat     <- 0
             validObject(.Object)
         } else {
             #Traitement du cas vide
@@ -48,6 +52,8 @@ setMethod(
             .Object@autres_reserves <- new("AutresReserves")
             .Object@autres_reserves <- new("AutresReserves")
             .Object@calc_proba      <- TRUE
+            .Object@choc_lapse_mass <- 0
+            .Object@choc_mort_cat   <- 0
         }
         return(.Object)
     }
@@ -73,6 +79,8 @@ setMethod(
                "autres_passifs" = {return(x@autres_passifs)},
                "autres_reserves" = {return(x@autres_reserves)},
                "calc_proba" = {return(x@calc_proba)},
+               "choc_lapse_mass" = {return(x@choc_lapse_mass)},
+               "choc_mort_cat" = {return(x@choc_mort_cat)},
                stop("Cet attribut n'existe pas!")
         )
     }
@@ -95,6 +103,8 @@ setReplaceMethod(
                "autres_passifs" = {x@autres_passifs <- value},
                "autres_reserves" = {x@autres_reserves <- value},
                "calc_proba" = {x@calc_proba <- value},
+               "choc_lapse_mass" = {x@choc_lapse_mass <- value},
+               "choc_mort_cat" = {x@choc_mort_cat <- value},
                stop("Cet attribut n'existe pas!")
         )
         # validObject(x)
