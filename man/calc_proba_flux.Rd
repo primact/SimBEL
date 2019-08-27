@@ -13,13 +13,17 @@ calc_proba_flux(x, ht)
 \item{ht}{un objet de la classe \code{\link{HypTech}} contenant differentes tables de mortalite et differentes lois de rachat.}
 }
 \value{
-Une matrice contenant pour chaque model points en ligne :
+Pour un objet \code{\link{EpEuroInd}}, renvoie une liste contenant pour chaque model points en ligne :
 \describe{
 \item{\code{qx_rach_tot} : }{un vecteur contenant les taux de rachats totaux}
-\item{\code{qx_rach_tot_dyn} : }{un vecteur contenant les taux de rachats totaux dynamiques}
 \item{\code{qx_dc} : }{un vecteur contenant les taux de deces}
 \item{\code{qx_rach_part} : }{un vecteur contenant les taux de rachats partiels}
-\item{\code{qx_rach_part_dyn} : }{un vecteur contenant les taux de rachats partiels dynamiques}.
+}
+
+Pour un objet \code{\link{RetraiteEuroRest}}, renvoie une liste contenant pour chaque model points en ligne :
+\describe{
+\item{\code{proba_sortie_retraite} : }{un vecteur contenant les probabilites de deces}
+\item{\code{proba_survie_un_an} : }{un vecteur contenantles probabilites de survie}
 }
 }
 \description{

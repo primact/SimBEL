@@ -18,9 +18,11 @@ la participation aux benefices, et la valeur \code{gar} pour le calcul avec uniq
 
 \item{y}{une liste a remplir uniquement si \code{x} est de type \code{\link{EpEuroInd}} contenant les parametres :
 \describe{
+\item{\code{proba_dyn} : }{une liste contenant le taux de rachats dynamiques (totaux et partiels) par model points.}
 \item{\code{tx_min} : }{une liste contenant le taux de revalorisation minimum associes a chaque ligne de model points.
 Le format de cette liste correspond a la sortie de la methode \code{\link{calc_tx_min}}.}
 \item{\code{tx_soc} : }{est une valeur \code{numeric} correspondant au taux de prelevements sociaux.}
+\item{\code{choc_lapse_mass} : }{est une valeur \code{numeric} correspondant au choc de rachat massif.}
 }}
 }
 \value{
@@ -69,7 +71,8 @@ les chargements sur encours relatifs a ces prestations et les nombres de sorties
 \details{
 En epargne, cette methode permet de calculer les flux de sortie en echeance, les flux de rachat totaux et partiels et
 les flux de deces d'un contrat epargne en euros. Ces prestations font l'objet d'une relavorisation
-au taux minimum contractuel. Les nombres de sortie sont egalement produits.
+au taux minimum contractuel. Les nombres de sortie sont egalement produits. Il est possible de realiser un choc de rachat
+massif si \code{an}. Dans ce cas, les prestations de rachats massifs sortent en debut d'annee et ne sont pas revalorisees.
 Des chargements sont appliques sur flux de rachats. Des prelevements sur encours sont appliques sur les
 prestations revalorises au taux minimum contractuel. Cette methode permet de gerer les contrats a taux de
 revalorisation net negatif.

@@ -33,6 +33,12 @@ aux benefices par produit.}
 \item{\code{autres_reserves}}{un objet de classe \code{\link{AutresReserves}}.}
 
 \item{\code{calc_proba}}{un \code{logical} indiquant si les probabilites ont ete calculees.}
+
+\item{\code{choc_lapse_mass}}{un \code{numeric} comprenant la valeur du choc de rachat massif. Cet attribut doit etre a 0 lorsque aucun
+choc n'est souhaite. Sa valeur est comprise entre 0 et 1. Il ne s'applique que la premiere annee de projection.}
+
+\item{\code{choc_mort_cat}}{un \code{numeric} comprenant la valeur du choc de mortalite catastrophique Cet attribut doit etre a 0 lorsque aucun
+choc n'est souhaite. Sa valeur est comprise entre 0 et 1. Il ne s'applique que la premiere annee de projection.}
 }}
 
 \seealso{

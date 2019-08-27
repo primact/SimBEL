@@ -47,4 +47,6 @@ Version 3.0.0 : Ajout de fonctionnalites de reporting en passant par un stockage
 
 Version 3.0.1 : Correction du choc inflation (erreur methodologique) et import du choc inflation qui ne fonctionnait pas avec la version 3.5.0 de R. 
 
-Version 3.1.0 : Prise en compte de l'ecoulement de la PPB initiale dans le calcul de la FDB. 
+Version 3.1.0 : Prise en compte de l'ecoulement de la PPB initiale dans le calcul de la FDB.
+
+Version 3.2.0 : Correction mineure sur la calcul de la valeur moyenne de l'actif. Ajout des chocs de devise et du choc rachat massif. 

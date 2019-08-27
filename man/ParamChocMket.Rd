@@ -17,6 +17,8 @@ Une classe contenant les parametres des chocs de marche de la formule standard.
 \item{\code{table_choc_immo}}{un \code{data.frame} contenant les parametres du choc immobilier.}
 
 \item{\code{table_choc_spread}}{un \code{data.frame} contenant les parametres du choc de spread.}
+
+\item{\code{table_choc_currency}}{un \code{data.frame} contenant les parametres du choc currency.}
 }}
 
 \author{

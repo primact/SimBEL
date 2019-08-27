@@ -21,16 +21,21 @@ a un objet de la classe \code{\link{Canton}}. Les chocs permis sont :
 \item{\code{action_type2} : }{le choc action de type 2}
 \item{\code{immo} : }{le choc immobilier}
 \item{\code{spread} : }{le choc spread sur les obligations corporates}
+\item{\code{currency_up} : }{les chocs sur devise a la hausse}
+\item{\code{currency_down} : }{les chocs sur devise a la baisse}
 \item{\code{mortalite} : }{le choc mortalite sur les tables de mortalite}
 \item{\code{longevite} : }{le choc longevite sur les tables de mortalite}
 \item{\code{frais} : }{le choc depenses sur le niveau des frais et l'inflation des frais}
 \item{\code{rachat_up} : }{le choc de rachat a la hausse}
-\item{\code{rachat_down} : }{le choc de rachat a la baisse.}
+\item{\code{rachat_down} : }{le choc de rachat a la baisse}
+\item{\code{rachat_mass} : }{le choc de rachat massif}
 }
 }
 \section{Slots}{
 
 \describe{
+\item{\code{scenario}}{un vecteur de type \code{character} comprenant les noms des chocs a initialiser}
+
 \item{\code{param_choc_mket}}{un objet de la classe \code{\link{ParamChocMket}}.}
 
 \item{\code{param_choc_sousc}}{un objet de la classe \code{\link{ParamChocSousc}}.}
@@ -38,15 +43,15 @@ a un objet de la classe \code{\link{Canton}}. Les chocs permis sont :
 
 \seealso{
 L'application des chocs de \code{taux_up} et \code{taux_down} : \code{\link{do_choc_taux}}.
-L'application des chocs de \code{action_type1} et \code{action_type2} : \code{\link{do_choc_action_type1}},
-\code{\link{do_choc_action_type2}}.
+L'application des chocs de \code{action_type1} et \code{action_type2} : \code{\link{do_choc_action_type1}}, \code{\link{do_choc_action_type2}}.
 L'application du choc de \code{immo} : \code{\link{do_choc_immo}}.
 L'application du choc de \code{spread} : \code{\link{do_choc_spread}}.
+L'application des chocs de \code{currency_up} et \code{currency_down} : \code{\link{do_choc_currency}}.
 L'application du choc de \code{mortalite} : \code{\link{do_choc_mortalite}}.
 L'application du choc de \code{longevite} : \code{\link{do_choc_longevite}}.
 L'application du choc de \code{frais} : \code{\link{do_choc_frais}}, \code{\link{get_choc_inflation_frais}}.
-L'application des chocs de \code{rachat_up} et \code{rachat_down} : \code{\link{do_choc_rachat_up}},
-\code{\link{do_choc_rachat_down}}.
+L'application des chocs de \code{rachat_up}, \code{rachat_down} et  \code{rachat_massif}: \code{\link{do_choc_rachat_up}},
+\code{\link{do_choc_rachat_down}} et \code{\link{do_choc_rachat_mass}}.
 }
 \author{
 Prim'Act

@@ -16,7 +16,7 @@ Elle contient l'adresse du dossier contenant les fichiers de parametres des choc
 Ces derniers doivent etre renseignes par l'utilisateur.}
 }
 \value{
-\code{x} l'objet  de la classe \\code{\link{ChocSolvabilite2}} dont les attributs \code{param_choc_mket}
+\code{x} l'objet  de la classe \\code{\link{ChocSolvabilite2}} dont les attributs \code{scenario}, \code{param_choc_mket}
  et \code{param_choc_sousc} ont ete mis a jour.
 }
 \description{

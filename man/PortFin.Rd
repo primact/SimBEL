@@ -10,6 +10,8 @@ Une Classe pour le portefeuille financier.
 \section{Slots}{
 
 \describe{
+\item{\code{annee}}{est un objet de type \code{integer}correspondant a l'annee courante.}
+
 \item{\code{ptf_action}}{est un objet de type \code{\link{Action}}, qui represente le portefeuille d'action d'un canton.}
 
 \item{\code{ptf_immo}}{est un objet de type \code{\link{Immo}}, qui represente le portefeuille immobilier d'un canton.}
