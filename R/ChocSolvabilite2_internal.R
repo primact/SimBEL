@@ -7,7 +7,7 @@ setMethod(
     signature = "ChocSolvabilite2",
     definition = function(x,i){
         switch(EXPR = i,
-               # Data frame Financier
+               "scenario"         = {return(x@scenario)},
                "param_choc_mket"  = {return(x@param_choc_mket)},
                "param_choc_sousc" = {return(x@param_choc_sousc)},
                stop("Cet attribut n'existe pas!")
@@ -20,6 +20,7 @@ setReplaceMethod(
     signature = "ChocSolvabilite2",
     definition = function(x,i,value){
         switch(EXPR = i,
+               "scenario"         = {x@scenario <- value},
                "param_choc_mket"  = {x@param_choc_mket <- value},
                "param_choc_sousc" = {x@param_choc_sousc <- value},
                stop("Cet attribut n'existe pas!")

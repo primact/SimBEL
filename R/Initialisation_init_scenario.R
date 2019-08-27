@@ -26,30 +26,8 @@ setMethod(
         # a mettre sous forme de lecture d'un fichier csv
         table_choc <- chargement_choc(new("ChocSolvabilite2"), x@address[["param"]][["chocs"]])
 
-        # Liste des scenarios currency
-        tab_choc_currency <- table_choc@param_choc_mket@table_choc_currency
-        nom_choc_currency <- tab_choc_currency[which(tab_choc_currency$run_choc), "currency"]
 
-        if(length(nom_choc_currency) > 0){ # Si il y a des chocs currency
-          scenario <- c("central", "frais",
-                       "mortalite", "longevite",
-                       "rachat_up", "rachat_down",
-                       "action_type1", "action_type2", "immo",
-                       "taux_up", "taux_down",
-                       "spread",
-                       paste0("currency_up_", nom_choc_currency), paste0("currency_down_", nom_choc_currency)
-          )
-
-        } else {
-          scenario <- c("central", "frais",
-                       "mortalite", "longevite",
-                       "rachat_up", "rachat_down",
-                       "action_type1", "action_type2", "immo",
-                       "taux_up", "taux_down",
-                       "spread")
-        }
-
-        for(name_scenario in scenario){
+        for(name_scenario in table_choc@scenario){
           # Message
           message(paste("Chargement du choc : ", name_scenario, sep = ""))
 
@@ -105,6 +83,10 @@ setMethod(
                                                                     paste(x@address[["data"]][["autres_passifs_choc"]],
                                                                         input_autres_passifs_choc[which(input_autres_passifs_choc$choc_sousc == "rachat_down"), "nom_table_csv"],
                                                                         sep = "/")),
+                                              "rachat_mass" = autres_passif_load(
+                                                paste(x@address[["data"]][["autres_passifs_choc"]],
+                                                      input_autres_passifs_choc[which(input_autres_passifs_choc$choc_sousc == "rachat_mass"), "nom_table_csv"],
+                                                      sep = "/")),
                                               "central"     = canton_init@ptf_passif@autres_passifs)
 
 
@@ -119,6 +101,7 @@ setMethod(
                                       "longevite"    = do_choc_longevite(table_choc, canton_init, autres_passifs_choc),
                                       "rachat_up"    = do_choc_rachat_up(table_choc, canton_init, autres_passifs_choc),
                                       "rachat_down"  = do_choc_rachat_down(table_choc, canton_init, autres_passifs_choc),
+                                      "rachat_mass"  = do_choc_rachat_mass(table_choc, canton_init, autres_passifs_choc),
                                       canton_init     # Alternative
                 )
 

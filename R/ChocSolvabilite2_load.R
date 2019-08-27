@@ -14,7 +14,7 @@
 ##'  \code{\link{set_architecture}} de la classe \code{\link{Initialisation}}.
 ##' Elle contient l'adresse du dossier contenant les fichiers de parametres des chocs de la formule standard a appliquer.
 ##' Ces derniers doivent etre renseignes par l'utilisateur.
-##' @return \code{x} l'objet  de la classe \\code{\link{ChocSolvabilite2}} dont les attributs \code{param_choc_mket}
+##' @return \code{x} l'objet  de la classe \\code{\link{ChocSolvabilite2}} dont les attributs \code{scenario}, \code{param_choc_mket}
 ##'  et \code{param_choc_sousc} ont ete mis a jour.
 ##' @author Prim'Act
 ##' @export
@@ -29,7 +29,33 @@ setMethod(
     signature = c(x = "ChocSolvabilite2", folder_chocs_address = "character"),
     definition = function(x, folder_chocs_address){
 
-        # Lecture des chocs Action, Immo, Spread
+        # Lecture de la liste des chocs
+        scenario <- read.csv2(paste(folder_chocs_address, "list_run_choc.csv", sep = "/"), colClasses = c("character", "logical"))
+        # Scenarios de chocs a considerer
+        scenario <- scenario$nom_choc[scenario$run_choc]
+
+        # Scenario doit au moins comprendre un element
+        if(length(scenario) == 0){
+          stop("[ChocSolvabilite2] : la liste de scenarios doit contenir au moins un element")
+        }
+
+        # Verifie les noms de scenarios
+        names_accepted <- c("central", "frais",
+                            "mortalite", "longevite",
+                            "rachat_up", "rachat_down", "rachat_mass",
+                            "action_type1", "action_type2", "immo",
+                            "taux_up", "taux_down",
+                            "spread",
+                            "currency_up", "currency_down")
+
+        if(! all(scenario %in% names_accepted)){
+          stop("[ChocSolvabilite2] : Les noms de scenarios proposes ne sont pas valides")
+        }
+
+        # Mise a jour des scenarios
+        x@scenario <- scenario
+
+        # Lecture des chocs Action, Immo, Spread, Currency
         table_choc_action_type1 <- read.csv2(paste(folder_chocs_address, "param_choc_mket_action_type1.csv", sep = "/"), colClasses = c("integer", "numeric"))
         table_choc_action_type2 <- read.csv2(paste(folder_chocs_address, "param_choc_mket_action_type2.csv", sep = "/"), colClasses = c("integer", "numeric"))
         table_choc_immo   <- read.csv2(paste(folder_chocs_address, "param_choc_mket_immo.csv", sep = "/"), colClasses = c("integer", "numeric"))
@@ -61,6 +87,31 @@ setMethod(
 
         # Creation de l'objet
         x@param_choc_sousc <- new("ParamChocSousc", table_choc_sousc)
+
+
+
+        # Finalisation de la liste de scenarios en precisant les chocs de devise
+
+        # Liste des scenarios currency
+        tab_choc_currency <- x@param_choc_mket@table_choc_currency
+        nom_choc_currency <- tab_choc_currency[which(tab_choc_currency$run_choc), "currency"]
+
+        if(length(nom_choc_currency) > 0 & any(c("currency_up", "currency_down") %in% scenario)){ # Si il y a des chocs currency
+          if("currency_up" %in% scenario){
+            rr <- which(scenario == "currency_up")
+            scenario <- scenario[-rr] # Retrait du nom de scenario pour le completer de la liste des devises
+            scenario <- c(scenario, paste0("currency_up_", nom_choc_currency))
+          }
+          if("currency_down" %in% scenario){
+            rr <- which(scenario == "currency_down")
+            scenario <- scenario[-rr] # Retrait du nom de scenario pour le completer de la liste des devises
+            scenario <- c(scenario, paste0("currency_down_", nom_choc_currency))
+          }
+
+        }
+
+        # Mise a jour des scenarios
+        x@scenario <- scenario
 
         # Output
         return(x)

@@ -37,6 +37,7 @@ setMethod(
             x@address[["save_folder"]][["longevite"]]   <- paste(x@root_address, "internal_ws/data/scenario/longevite", sep="/")
             x@address[["save_folder"]][["rachat_up"]]   <- paste(x@root_address, "internal_ws/data/scenario/rachat_up", sep="/")
             x@address[["save_folder"]][["rachat_down"]] <- paste(x@root_address, "internal_ws/data/scenario/rachat_down", sep="/")
+            x@address[["save_folder"]][["rachat_mass"]] <- paste(x@root_address, "internal_ws/data/scenario/rachat_mass", sep="/")
 
         # Adresses donnees
         x@address[["data"]] <- list()
