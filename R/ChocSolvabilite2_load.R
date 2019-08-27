@@ -108,6 +108,11 @@ setMethod(
             scenario <- c(scenario, paste0("currency_down_", nom_choc_currency))
           }
 
+        } else{ # Suppression des chocs currency appeles a tord
+          rr <- which(scenario == "currency_up" | scenario == "currency_down")
+          if(length(rr) > 0){
+            scenario <- scenario[-rr]
+          }
         }
 
         # Mise a jour des scenarios

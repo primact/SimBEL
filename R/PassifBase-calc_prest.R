@@ -15,7 +15,7 @@
 ##' la participation aux benefices, et la valeur \code{gar} pour le calcul avec uniquement les flux garanti (calcul de la FDB).
 ##' @param y une liste a remplir uniquement si \code{x} est de type \code{\link{EpEuroInd}} contenant les parametres :
 ##' \describe{
-##' \item{\code{proba_dyn} : }{une liste contenant le taux de rachats dynamiques (totaux et partiels) par model points.
+##' \item{\code{proba_dyn} : }{une liste contenant le taux de rachats dynamiques (totaux et partiels) par model points.}
 ##' \item{\code{tx_min} : }{une liste contenant le taux de revalorisation minimum associes a chaque ligne de model points.
 ##' Le format de cette liste correspond a la sortie de la methode \code{\link{calc_tx_min}}.}
 ##' \item{\code{tx_soc} : }{est une valeur \code{numeric} correspondant au taux de prelevements sociaux.}

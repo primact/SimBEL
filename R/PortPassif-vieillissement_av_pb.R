@@ -68,11 +68,11 @@ setMethod(
         # Etape 2 : Evaluation des flux et de PM sur les produits hors modeles
         #---------------------------------------------------------------
 
-        # Extraction des passifs hors modeles. Specifique MGP
+        # Extraction des passifs hors modeles.
         result_autres_passifs <- proj_annee_autres_passifs(an, x@autres_passifs, coef_inf)
 
         #---------------------------------------------------------------
-        # Etape 3 : Traitement de la PGG et de la PSAP --> Specifique MGP
+        # Etape 3 : Traitement de la PGG et de la PSAP
         #---------------------------------------------------------------
 
         # Evaluation et mise a jour de la PGG et de la PSAP.

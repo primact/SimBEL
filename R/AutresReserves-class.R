@@ -1,6 +1,6 @@
 #----------------------------------------------------------
 # Ce script est la definition de la classe AutresPassifs dediee aux model points des autres reserves
-# Il s'agit d'une classe ajoutee specifiquement pour le besoin MGP.
+# Il s'agit d'une classe ajoutee specifiquement pour gerer des passifs hors modeles.
 #----------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------

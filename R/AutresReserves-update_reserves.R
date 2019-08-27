@@ -37,7 +37,7 @@ setMethod(
             stop("[PortPassif : update_reservs] : Les vecteurs d'input doivent etre de longueur 1. \n")
         
         # Mise a jour de la valeur de la PSAP et de la PGG
-        # Application d'un proxy propre a la MGP
+        # Application d'un proxy 
         x@psap_valeur <- x@tx_psap_ep * prest_ep + x@tx_psap_autres * prest_autres
         x@pgg_valeur  <- x@tx_pgg_ep * pm_ep + x@tx_pgg_autres * pm_autres
         

@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-#           Fonction de calcul des flux et de pm des autras passifs. Methode specifique MGP
+#           Fonction de calcul des flux et de pm des autras passifs.
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Extrait les flux et les PM des produits non modelises
 ##'
