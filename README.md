@@ -6,7 +6,7 @@ SimBEL est un modèle de simulation Monte-Carlo s'appuyant sur une projection d'
 
 ## Installation
 
-1.	Avoir au moins la version 3.4.0, mais de préférence installer la version 3.5.0 de [R](https://www.r-project.org/).
+1.	Avoir au moins la version 3.6.0 de [R](https://www.r-project.org/).
 2.	Installer la library devtools.
 3.	Exécuter les commandes suivantes :
 
@@ -50,3 +50,7 @@ Version 3.0.1 : Correction du choc inflation (erreur methodologique) et import d
 Version 3.1.0 : Prise en compte de l'ecoulement de la PPB initiale dans le calcul de la FDB.
 
 Version 3.2.0 : Correction mineure sur la calcul de la valeur moyenne de l'actif. Ajout des chocs de devise et du choc rachat massif. 
+
+Version 3.2.1 : Correction mineure sur la calcul du choc rachat massif.
+
+
