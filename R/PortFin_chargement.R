@@ -26,7 +26,8 @@ setMethod(
     definition = function(folder_PortFin_address, mp_ESG){
 
         # Fichier contenant les noms des differnts PTF
-        file_name       <- read.csv2(paste(folder_PortFin_address, "/noms_fichiers.csv", sep = ""), header = T)
+        file_name       <- read.csv2(paste(folder_PortFin_address, "/noms_fichiers.csv", sep = ""), header = T,
+                                     colClasses = rep("character", 2))
 
         # Chargement des differents PTF
         ptf_action <- load_action(paste(folder_PortFin_address, file_name[1L,2L], sep = "/"))

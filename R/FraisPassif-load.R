@@ -21,17 +21,20 @@ setMethod(
     f = "frais_passif_load",
     signature = "character",
     definition = function(file_frais_passif_address) {
-        
+
         # Lecture du fichier
-        temp <- read.csv2(file_frais_passif_address)
-        
+        temp <- read.csv2(file_frais_passif_address, colClasses = c("factor", "numeric", "numeric",
+                                                                    "logical", "logical", "numeric",
+                                                                    "numeric", "logical", "logical",
+                                                                    "numeric", "numeric", "logical", "logical"))
+
         # Tests
         if (! all(! is.na(temp)))
             stop("[FraisPassif - load] : Presence de NA dans le fichier d'input.")
-        
+
         # Creation de l'objet
         frais_passifs  <- new(Class = "FraisPassif", mp = temp)
-        
+
         # Output
         return(frais_passifs)
     }

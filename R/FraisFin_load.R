@@ -19,17 +19,17 @@ setMethod(
     f = "frais_fin_load",
     signature = "character",
     definition = function(file_frais_fin_address){
-        
+
         # Lecture du fichier
-        temp <- read.csv2(file_frais_fin_address)
-        
+        temp <- read.csv2(file_frais_fin_address, colClasses = c("numeric", "logical"))
+
         # Tests
         if (! all(! is.na(temp)))
             stop("[FraisFin - load] : Presence de NA dans le fichier d'input.")
-        
+
         # Creation de l'objet
         frais_fin <- new("FraisFin", tx_chargement = temp[,"tx_chargement"], indicatrice_inflation = temp[,"indicatrice_inflation"])
-        
+
         # Output
         return(frais_fin)
     }

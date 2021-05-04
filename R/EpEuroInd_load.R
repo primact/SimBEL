@@ -17,20 +17,50 @@ setMethod(
     f = "load_epeuroind",
     signature = "character",
     definition = function(file_epeuroind_address){
-        
+
         # Lecture du fichier
-        temp <- read.csv2(file_epeuroind_address, header = TRUE)
-        
+        temp <- read.csv2(file_epeuroind_address, header = TRUE, colClasses = c(
+            "integer",
+            "integer",
+            "integer",
+            "integer",
+            "integer",
+            "factor",
+            "numeric",
+            "logical",
+            "numeric",
+            "numeric",
+            "integer",
+            "integer",
+            "factor",
+            "factor",
+            "factor",
+            "numeric",
+            "numeric",
+            "numeric",
+            "integer",
+            "numeric",
+            "integer",
+            "factor",
+            "factor",
+            "factor",
+            "factor",
+            "numeric",
+            "numeric",
+            "numeric",
+            "numeric"
+        ))
+
         # Tests
         if (! all(! is.na(temp)))
             stop("[PortPassif - load] : Presence de NA dans un fichier d'input d'epargne")
-        
+
         # Creation de l'objet
-        ptf_eei <- new(Class = "EpEuroInd", 
-                       mp = temp, 
-                       tab = new("TabEpEuroInd"), 
+        ptf_eei <- new(Class = "EpEuroInd",
+                       mp = temp,
+                       tab = new("TabEpEuroInd"),
                        tab_proba = new("TabProbaEpEuroInd", temp["num_mp"]))
-        
+
         # Output
         return(ptf_eei)
     }

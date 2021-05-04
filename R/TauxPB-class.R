@@ -26,7 +26,7 @@ setClass(
     }
 
     # Verification du type des colonnes
-    if (!is.factor(object@mp[,1]))   {retval <- c(retval, "[TauxPB] : nom_prod n'est pas character\n")}
+    if (!is.factor(object@mp[,1]))   {retval <- c(retval, "[TauxPB] : nom_prod n'est pas factor\n")}
     if (!is.numeric(object@mp[,2]))  {retval <- c(retval, "[TauxPB] : taux_pb n'est pas numeric\n")}
 
     if(prod(!object@mp[,2] < 0) * prod(!object@mp[,2] > 1) == 0) {retval <- c(retval, "[TauxPB] : taux_pb n'est pas entre 0 et 1 \n")}

@@ -17,22 +17,22 @@ setMethod(
     f = "pre_load",
     signature = "character",
     definition = function(file_PRE_address){
-        
+
         # Lecture du fichier
-        temp <- read.csv2(file_PRE_address)
-        
+        temp <- read.csv2(file_PRE_address, colClasses = rep("numeric", 2))
+
         # Tests
-        if(temp[,"ryth_dot"] != round(temp[,"ryth_dot"])) 
+        if(temp[,"ryth_dot"] != round(temp[,"ryth_dot"]))
             stop("[PRE : load] : L'input de rythme de dotation doit etre un entier. \n")
         if (! all(! is.na(temp)))
             stop("[PRE - load] : Presence de NA dans le fichier d'input")
-            
+
         # Creation de l'objet
         pre <- new("PRE",
                    val_debut    = temp[,"pre_init"],
                    val_courante = temp[,"pre_init"],
                    ryth_dot     = as.integer(temp[,"ryth_dot"]))
-        
+
         # Output
         return(pre)
     }

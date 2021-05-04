@@ -54,7 +54,7 @@ setMethod(
 
                 # Autres passifs choques
                 input_autres_passifs_choc <- read.csv2(paste(x@address[["data"]][["autres_passifs_choc"]],"noms_liens_autres_passifs_choc.csv",sep="/"),
-                                                       header = TRUE)
+                                                       header = TRUE, colClasses = rep("character", 2))
                 # Chargement des passifs choques
                 autres_passifs_choc <- switch(EXPR = name_scenario,
                                               "action_type1" = canton_init@ptf_passif@autres_passifs,

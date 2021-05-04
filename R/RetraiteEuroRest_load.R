@@ -17,20 +17,42 @@ setMethod(
     f = "load_reteurorest",
     signature = "character",
     definition = function(file_reteurorest_address){
-        
+
         # Lecture du fichier
-        temp <- read.csv2(file_reteurorest_address, header = TRUE)
-        
+        temp <- read.csv2(file_reteurorest_address, header = TRUE, colClasses = c(
+            "integer",
+            "integer",
+            "integer",
+            "integer",
+            "integer",
+            "factor",
+            "numeric",
+            "numeric",
+            "integer",
+            "integer",
+            "integer",
+            "factor",
+            "numeric",
+            "numeric",
+            "factor",
+            "integer",
+            "numeric",
+            "numeric",
+            "numeric",
+            "logical",
+            "numeric")
+        )
+
         # Tests
         if (! all(! is.na(temp)))
             stop("[RetraiteEuroRest - load] : Presence de NA dans un fichier d'input.")
-        
+
         # Creation de l'objet
-        ptf_rer <- new(Class ="RetraiteEuroRest", 
-                       mp = temp, 
-                       tab = new("TabRetEuroRest"), 
+        ptf_rer <- new(Class ="RetraiteEuroRest",
+                       mp = temp,
+                       tab = new("TabRetEuroRest"),
                        tab_proba = new("TabProbaRetEuroRest", temp["num_mp"]))
-        
+
         # Output
         return(ptf_rer)
     }

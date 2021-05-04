@@ -27,10 +27,19 @@ setMethod(
         # Nom des fichiers
         # La colonne 1 contient le type,
         # La colonne 2 contient le nom du fichier,
-        file_name           <- read.csv2(paste(folder_PortFin_reference_address, "/noms_fichiers_reference.csv", sep = ""), header = T)[1:3,1:2]
-        Data_ref_Action     <- read.csv2(paste(folder_PortFin_reference_address, file_name[1,2], sep = "/"))
-        Data_ref_Immo       <- read.csv2(paste(folder_PortFin_reference_address, file_name[2,2], sep = "/"))
-        Data_ref_Oblig      <- read.csv2(paste(folder_PortFin_reference_address, file_name[3,2], sep = "/"))
+        file_name           <- read.csv2(paste(folder_PortFin_reference_address, "/noms_fichiers_reference.csv", sep = ""), header = T,
+                                         colClasses = rep("character", 2))[1:3,1:2]
+        Data_ref_Action     <- read.csv2(paste(folder_PortFin_reference_address, file_name[1,2], sep = "/"),
+                                         colClasses = c("integer", "numeric", "integer", "numeric",
+                                                        "logical", "numeric",
+                                                        "character", "numeric"))
+        Data_ref_Immo       <- read.csv2(paste(folder_PortFin_reference_address, file_name[2,2], sep = "/"),
+                                         colClasses = c("integer", "numeric", "integer", "numeric",
+                                                        "logical", "numeric",
+                                                        "character", "numeric"))
+        Data_ref_Oblig      <- read.csv2(paste(folder_PortFin_reference_address, file_name[3,2], sep = "/"),
+                                         colClasses = c("integer", rep("numeric", 4), "factor", "integer",
+                                                        "numeric", "character", "numeric"))
 
         # Construction du portefeuille de reference action
         ptf <- data.frame(num_mp     = (Data_ref_Action[,"num_mp"]),

@@ -17,19 +17,19 @@ setMethod(
     f = "rc_load",
     signature = "character",
     definition = function(file_RC_address){
-        
+
         # Lecture du fichier
-        temp <- read.csv2(file_RC_address)
-        
+        temp <- read.csv2(file_RC_address, colClasses = c("numeric"))
+
         # Tests
         if (! all(! is.na(temp)))
             stop("[RC - load] : Presence de NA dans le fichier d'input")
-        
+
         # Creation de l'objet
         rc <- new("RC",
                    val_debut    = temp[,"rc_init"],
                    val_courante = temp[,"rc_init"])
-        
+
         # Output
         return(rc)
     }

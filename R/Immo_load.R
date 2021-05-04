@@ -19,7 +19,9 @@ setMethod(
     definition = function(file_immo_address){
 
         # Lecture du fichier
-        temp <- read.csv2(file_immo_address)
+        temp <- read.csv2(file_immo_address, colClasses = c("integer","numeric","numeric","numeric","logical",
+                                                            "logical","numeric","numeric","numeric","integer","numeric","logical",
+                                                            "character", "numeric"))
 
         # Tests
         if(! all(! is.na(temp)))

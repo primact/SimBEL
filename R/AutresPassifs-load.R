@@ -23,8 +23,10 @@ setMethod(
     definition = function(file_autres_passif_address) {
 
         # Lecture du fichier
-        temp <- read.csv2(file_autres_passif_address, header = TRUE)
-        
+        temp <- read.csv2(file_autres_passif_address, header = TRUE, colClasses = c("numeric", "numeric", "numeric",
+                                                                                    "numeric","numeric","numeric",
+                                                                                    "numeric"))
+
         # Tests
         if (! all(! is.na(temp)))
             stop("[AutresPassifs - load] : Presence de NA dans le fichier d'input")

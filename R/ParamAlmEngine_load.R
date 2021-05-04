@@ -22,8 +22,8 @@ setMethod(
     definition = function(file_alm_address, ptf_fin_ref){
 
         # Lecture du fichier
-        temp          <- read.csv2(file_alm_address)
-        
+        temp          <- read.csv2(file_alm_address, colClasses = rep("numeric", 5))
+
         # Tests
         if (! all(! is.na(temp)))
             stop("[ParamAlmEngine - load] : Presence de NA dans le fichier d'input")

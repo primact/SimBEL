@@ -17,15 +17,15 @@ setMethod(
     f = "initialize",
     signature = "FraisPassif",
     definition = function(.Object, mp = data.frame()){
-        
+
         if(! missing(mp)){
             .Object@mp <- mp
-            
+
             # Validation du format
             validObject(.Object)
         } else {
             #Traitement du cas vide
-            .Object@mp <- data.frame(nom_prod = character(),
+            .Object@mp <- data.frame(nom_prod = factor(),
                                      frais_fixe_prime = numeric(),
                                      frais_var_prime = numeric(),
                                      ind_inf_frais_fixe_prime = logical(),

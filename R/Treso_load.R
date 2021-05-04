@@ -17,19 +17,19 @@ setMethod(
     f = "load_treso",
     signature = "character",
     definition = function(file_treso_address){
-        
+
         # Lecture du fichier
-        temp <- read.csv2(file_treso_address)
-        
+        temp <- read.csv2(file_treso_address, colClasses = c("integer", rep("numeric", 2)))
+
         # Tests
         if (! all(! is.na(temp)))
             stop("[Action - load] : Presence de NA dans le fichier d'input.")
-        
+
         # Creation de l'objet
         ptf_treso <- new("Treso", ptf = data.frame(num_mp     = (temp[,"num_mp"]),
                                                    val_marche = (temp[,"val_marche"]),
                                                    val_nc     = (temp[,"val_nc"])))
-        
+
         # Output
         return(ptf_treso)
     }

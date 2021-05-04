@@ -79,7 +79,12 @@ setMethod(
 
 
         # Lecture fichier choc souscrption
-        table_choc_sousc <- read.csv2(paste(folder_chocs_address, "param_choc_sousc.csv", sep = "/"))
+        table_choc_sousc <- read.csv2(paste(folder_chocs_address, "param_choc_sousc.csv", sep = "/"), colClasses = c("numeric", "numeric",
+                                                                                                                     "numeric", "numeric",
+                                                                                                                     "numeric", "numeric",
+                                                                                                                     "numeric", "numeric",
+                                                                                                                     "numeric")
+        )
 
         # Tests
         if (! all(! is.na(table_choc_sousc)))
