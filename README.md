@@ -6,7 +6,7 @@ SimBEL est un modèle de simulation Monte-Carlo s'appuyant sur une projection d'
 
 ## Installation
 
-1.	Avoir au moins la version 3.6.0 de [R](https://www.r-project.org/).
+1.	Avoir au moins la version 4.0.0 de [R](https://www.r-project.org/).
 2.	Installer la library devtools.
 3.	Exécuter les commandes suivantes :
 
@@ -53,4 +53,5 @@ Version 3.2.0 : Correction mineure sur la calcul de la valeur moyenne de l'actif
 
 Version 3.2.1 : Correction mineure sur la calcul du choc rachat massif.
 
+Version 3.2.2 : Passage à la version de R 4.0.0.
 
