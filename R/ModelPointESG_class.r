@@ -58,7 +58,6 @@ setValidity(
         }
   )
 
-
 setMethod(
   f = "initialize",
   signature = "ModelPointESG",
