@@ -55,3 +55,4 @@ Version 3.2.1 : Correction mineure sur la calcul du choc rachat massif.
 
 Version 3.2.2 : Passage à la version de R 4.0.0.
 
+
