@@ -20,7 +20,7 @@ Ces derniers doivent etre renseignes par l'utilisateur.}
  et \code{param_choc_sousc} ont ete mis a jour.
 }
 \description{
-\code{chargement_choc} est une methode permettant de charger les parametres
+\code{chargement_choc} est une methode permettant de charger
 l'ensemble des parametres necessaires a la bonne application des chocs de marche et
 de souscription au sens de la formule standard de la directive Solvabilite 2,
  tels que renseignes par l'utilisateur.

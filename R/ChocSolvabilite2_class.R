@@ -11,7 +11,7 @@
 ##' @slot param_choc_mket un objet de la classe \code{\link{ParamChocMket}}.
 ##' @slot param_choc_sousc un objet de la classe \code{\link{ParamChocSousc}}.
 ##' @slot matrice_choc_action une matrice de correlation utilisee pour calculer le SCR action.
-##' @slot matrice_choc_mket une matrice de correlation utilisee pour calculer le SCR marché.
+##' @slot matrice_choc_mket une matrice de correlation utilisee pour calculer le SCR marche.
 ##' @slot matrice_choc_sousc une matrice de correlation utilisee pour calculer le SCR souscription vie.
 ##' @slot matrice_choc_bscr une matrice de correlation utilisee pour calculer le BSCR.
 ##' @docType class
@@ -71,7 +71,7 @@ setClass(
       if(!is.character(object@matrice_choc_mket))       retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_mket non valide")
       if(!is.character(object@matrice_choc_sousc))       retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_sousc non valide")
       if(!is.character(object@matrice_choc_bscr))       retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_bscr non valide")
-      
+
 
       if (is.null(retval)) return (TRUE)
       else return (retval)

@@ -39,6 +39,14 @@ a un objet de la classe \code{\link{Canton}}. Les chocs permis sont :
 \item{\code{param_choc_mket}}{un objet de la classe \code{\link{ParamChocMket}}.}
 
 \item{\code{param_choc_sousc}}{un objet de la classe \code{\link{ParamChocSousc}}.}
+
+\item{\code{matrice_choc_action}}{une matrice de correlation utilisee pour calculer le SCR action.}
+
+\item{\code{matrice_choc_mket}}{une matrice de correlation utilisee pour calculer le SCR marche.}
+
+\item{\code{matrice_choc_sousc}}{une matrice de correlation utilisee pour calculer le SCR souscription vie.}
+
+\item{\code{matrice_choc_bscr}}{une matrice de correlation utilisee pour calculer le BSCR.}
 }}
 
 \seealso{

@@ -56,3 +56,5 @@ Version 3.2.1 : Correction mineure sur la calcul du choc rachat massif.
 Version 3.2.2 : Passage à la version de R 4.0.0.
 
 Version 3.2.3 : Passage à la version de R 4.2.0.
+
+Version 3.3.0 : Ajout du calcul du BSCR.
