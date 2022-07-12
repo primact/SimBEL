@@ -10,6 +10,10 @@
 ##' @slot scenario un vecteur de type \code{character} comprenant les noms des chocs a initialiser
 ##' @slot param_choc_mket un objet de la classe \code{\link{ParamChocMket}}.
 ##' @slot param_choc_sousc un objet de la classe \code{\link{ParamChocSousc}}.
+##' @slot matrice_choc_action une matrice de correlation utilisee pour calculer le SCR action.
+##' @slot matrice_choc_mket une matrice de correlation utilisee pour calculer le SCR marché.
+##' @slot matrice_choc_sousc une matrice de correlation utilisee pour calculer le SCR souscription vie.
+##' @slot matrice_choc_bscr une matrice de correlation utilisee pour calculer le BSCR.
 ##' @docType class
 ##' @details Cette classe contient deux attributs
 ##' qui contiennent respectivement l'ensemble des parametres necessaires a l'application des chocs Marche et Souscription.
@@ -52,14 +56,22 @@ setClass(
     representation = representation(
         scenario         = "character",
         param_choc_mket  = "ParamChocMket",
-        param_choc_sousc = "ParamChocSousc"),
+        param_choc_sousc = "ParamChocSousc",
+        matrice_choc_action = "matrix",
+        matrice_choc_mket = "matrix",
+        matrice_choc_sousc = "matrix",
+        matrice_choc_bscr = "matrix"),
     validity = function (object){
 
       retval <- NULL
       if(!validObject(object@param_choc_mket))      retval <- c(retval, "[ChocSolvabilite2] : Objet param_choc_mket non valide")
       if(!validObject(object@param_choc_sousc))       retval <- c(retval, "[ChocSolvabilite2] : Objet param_choc_sousc non valide")
       if(!is.character(object@scenario))       retval <- c(retval, "[ChocSolvabilite2] : Objet scenario non valide")
-
+      if(!is.character(object@matrice_choc_action))       retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_action non valide")
+      if(!is.character(object@matrice_choc_mket))       retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_mket non valide")
+      if(!is.character(object@matrice_choc_sousc))       retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_sousc non valide")
+      if(!is.character(object@matrice_choc_bscr))       retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_bscr non valide")
+      
 
       if (is.null(retval)) return (TRUE)
       else return (retval)

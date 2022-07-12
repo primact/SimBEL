@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 ##' Permet de charger les parametres de choc de la formule standard.
 ##'
-##' \code{chargement_choc} est une methode permettant de charger les parametres
+##' \code{chargement_choc} est une methode permettant de charger
 ##' l'ensemble des parametres necessaires a la bonne application des chocs de marche et
 ##' de souscription au sens de la formule standard de la directive Solvabilite 2,
 ##'  tels que renseignes par l'utilisateur.
@@ -79,12 +79,7 @@ setMethod(
 
 
         # Lecture fichier choc souscrption
-        table_choc_sousc <- read.csv2(paste(folder_chocs_address, "param_choc_sousc.csv", sep = "/"), colClasses = c("numeric", "numeric",
-                                                                                                                     "numeric", "numeric",
-                                                                                                                     "numeric", "numeric",
-                                                                                                                     "numeric", "numeric",
-                                                                                                                     "numeric")
-        )
+        table_choc_sousc <- read.csv2(paste(folder_chocs_address, "param_choc_sousc.csv", sep = "/"))
 
         # Tests
         if (! all(! is.na(table_choc_sousc)))
@@ -119,10 +114,38 @@ setMethod(
             scenario <- scenario[-rr]
           }
         }
-
+        
         # Mise a jour des scenarios
         x@scenario <- scenario
 
+        # Lecture des matrices de correlation action, marche, souscription et bscr -- ajout VB
+        matrice_choc_action <- read.csv2(paste(folder_chocs_address, "matrices/matrice_choc_action.csv", sep = "/"), colClasses = c("numeric", "numeric"))
+        matrice_choc_mket <- read.csv2(paste(folder_chocs_address, "matrices/matrice_choc_mket.csv", sep = "/"), colClasses = c("numeric", "numeric", "numeric", "numeric", "numeric"))
+        matrice_choc_sousc <- read.csv2(paste(folder_chocs_address, "matrices/matrice_choc_sousc.csv", sep = "/"), colClasses = c("numeric", "numeric", "numeric", "numeric"))
+        matrice_choc_bscr <- read.csv2(paste(folder_chocs_address, "matrices/matrice_choc_bscr.csv", sep = "/"), colClasses = c("numeric", "numeric"))
+        
+        # Tests
+        if ((! all(! is.na(matrice_choc_action))) | (! all(! is.na(matrice_choc_mket))) |
+            (! all(! is.na(matrice_choc_sousc))) | (! all(! is.na(matrice_choc_bscr)))
+        )
+            stop("[ChocSolvabilite2 - load] : Presence de NA dans un des fichiers d'input")
+        
+        # Retraitement des matrices
+        matrice_choc_action <- as.matrix(matrice_choc_action)
+        rownames(matrice_choc_action) <- colnames(matrice_choc_action)
+        matrice_choc_mket <- as.matrix(matrice_choc_mket)
+        rownames(matrice_choc_mket) <- colnames(matrice_choc_mket)
+        matrice_choc_sousc <- as.matrix(matrice_choc_sousc)
+        rownames(matrice_choc_sousc) <- colnames(matrice_choc_sousc)
+        matrice_choc_bscr <- as.matrix(matrice_choc_bscr)
+        rownames(matrice_choc_bscr) <- colnames(matrice_choc_bscr)
+        
+        # Ajout des matrices dans l'objet
+        x@matrice_choc_action <- matrice_choc_action
+        x@matrice_choc_mket <- matrice_choc_mket
+        x@matrice_choc_sousc <- matrice_choc_sousc
+        x@matrice_choc_bscr <- matrice_choc_bscr
+        
         # Output
         return(x)
     }
