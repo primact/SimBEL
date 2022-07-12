@@ -1,20 +1,21 @@
 Package: SimBEL
 Type: Package
 Title: Un package de calcul du best estimate epargne sous Solvabilite 2
-Version: 3.2.2
+Version: 3.2.3
 Description: Un modele de simulation Monte-Carlo s'appuyant sur une projection d'un canton (actif et passif) permettant l'evaluation des provisions best estimate d'un contrat d'epargne et retraite francais en euros. Plusieurs chocs de la formule standard peuvent etre effectues.
 Author: Prim'Act
 URL: http://github.com/gquibert/SimBEL
 BugReports: http://github.com/qguibert/SimBEL/issues
 Maintainer: Quentin Guibert <quentin.guibert@primact.fr>
 Depends:
-    R (>= 4.0.1), rootSolve(>= 1.7), doParallel(>= 1.0.10), RSQLite(>= 2.0), reshape2(>= 1.4.2), plyr(>= 1.8.4)
+    R (>= 4.2.0), rootSolve(>= 1.7), doParallel(>= 1.0.10), RSQLite(>= 2.0.0), reshape2(>= 1.4.2), plyr(>= 1.8.4)
 Imports: Rcpp, utils, methods
 Suggests:
 LinkingTo: Rcpp
 License: GPL-2
 LazyData: TRUE
-RoxygenNote: 6.1.1
+RoxygenNote: 7.2.0
+Encoding: UTF-8
 Collate:
     'Action_class.R'
     'Action_buy.R'

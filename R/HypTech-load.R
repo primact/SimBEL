@@ -21,7 +21,6 @@ setMethod(
     f = "load_ht",
     signature = "Initialisation",
     def = function(x){
-
         # Recuperation de l'attribut 'address'
         address <- x@address
 
@@ -46,9 +45,9 @@ setMethod(
 
             # Conversion de la table en fonction du type
             if (input_morta[i,"type"] == "lx")
-                table <- convert_table(temp_csv[order(temp_csv["gen"], temp_csv["age"]),], type = "lx")
+                table <- convert_table(temp_csv[order(temp_csv[,"gen"], temp_csv[,"age"]),], type = "lx")
             else if (input_morta[i,"type"] == "qx")
-                table <- convert_table(temp_csv[order(temp_csv["gen"], temp_csv["age"]),], type = "qx")
+                table <- convert_table(temp_csv[order(temp_csv[,"gen"], temp_csv[,"age"]),], type = "qx")
             else
                 stop("HypTech-load : Le type des tables de mortalite doit correspondre a l'un des deux types suivants : qx ou lx.")
 

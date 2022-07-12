@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // echeancier
 NumericMatrix echeancier(NumericVector coupon, NumericVector maturite, NumericVector zspread, NumericVector nominal, NumericVector yield);
 RcppExport SEXP _SimBEL_echeancier(SEXP couponSEXP, SEXP maturiteSEXP, SEXP zspreadSEXP, SEXP nominalSEXP, SEXP yieldSEXP) {

@@ -5,8 +5,7 @@
 \alias{merge_table_produit}
 \title{Jointure et insertion de donnees dans la \code{DataBase}. Les donnees sont les ouputs \code{output_produit} de la fonction \code{\link{proj_an}}}
 \usage{
-merge_table_produit(flux, stock, hors_model, fin, nb_annee, sim,
-  nom_produit)
+merge_table_produit(flux, stock, hors_model, fin, nb_annee, sim, nom_produit)
 }
 \arguments{
 \item{flux}{une \code{matrix} a inserer dans la base.}

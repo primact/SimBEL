@@ -108,8 +108,8 @@ setMethod(
 setGeneric(name = "update_journal_action", def = function(x, ptf, annee, operation, pmvr){standardGeneric("update_journal_action")})
 setMethod(
     f = "update_journal_action",
-    signature = c(x = "AlmEngine", ptf = "Action", annee = "numeric", operation = "character"),
-    definition = function(x, ptf, annee, operation){
+    signature = c(x = "AlmEngine", ptf = "Action", annee = "numeric", operation = "character", pmvr = "numeric"),
+    definition = function(x, ptf, annee, operation, pmvr){
         
         if (operation == "achat") {
             operation_achat_vente = data.frame(annee      = rep(annee, nrow(ptf["ptf_action"])),

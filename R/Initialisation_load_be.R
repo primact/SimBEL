@@ -19,13 +19,13 @@ setMethod(
     definition = function(x, choc_name){
 
         # Chargement de l'objet BE
-        be <- get(load(paste(x@address$save_folder[choc_name], "best_estimate.RData", sep = "/")))
+        best_estimate <- get(load(paste(x@address$save_folder[choc_name], "best_estimate.RData", sep = "/")))
 
         # Suppression des objets .Rd non necessaires
-        rm(best_estimate) ; gc()
+        gc()
 
         # Lecture du fichier csv
-        temp            <- read.csv2(paste(racine@address$param$base, "param_base.csv", sep = "/"), colClasses = "logical")
+        temp            <- read.csv2(paste(x@address$param$base, "param_base.csv", sep = "/"), colClasses = "logical")
         
         # Tests
         if (! all(! is.na(temp)))
@@ -34,15 +34,15 @@ setMethod(
         # Mise a jour des attributs
         ecriture_base   <- temp[,"ecriture_base"]
         # chemin          <- temp[,"chemin"]
-        chemin          <- paste(racine@root_address, "internal_ws/data/database", sep = "/")
+        chemin          <- paste(x@root_address, "internal_ws/data/database", sep = "/")
 
         # Mise a jour de la base
-        be@base <- new("DataBase", chemin, ecriture_base, choc_name)
+        best_estimate@base <- new("DataBase", chemin, ecriture_base, choc_name)
 
         if(ecriture_base)
-            init_tables(be@base)
+            init_tables(best_estimate@base)
             
         # Output
-        return(be)
+        return(best_estimate)
     }
 )

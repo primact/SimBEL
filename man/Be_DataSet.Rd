@@ -5,7 +5,9 @@
 \alias{Be_DataSet}
 \alias{be}
 \title{Dataset Be.}
-\format{Objet de la classe \code{\link{Be}}.}
+\format{
+Objet de la classe \code{\link{Be}}.
+}
 \usage{
 data("be")
 }

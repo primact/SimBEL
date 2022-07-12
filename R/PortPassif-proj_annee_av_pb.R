@@ -77,7 +77,7 @@ setMethod(
                 prodi <- .subset2(list_prodi, j)
                 mp <- prodi@mp
 
-                if ( class(prodi) == "EpEuroInd" ) {
+                if ( inherits(prodi, "EpEuroInd") ) {
 
                     # Donnees
                     num_mp <- which(names(mp) == "num_mp")
@@ -148,7 +148,7 @@ setMethod(
 
 
 
-                } else if (class(prodi) == "RetraiteEuroRest") {
+                } else if (inherits(prodi, "RetraiteEuroRest")) {
 
                     # Donnees
                     nom_mp <- names(mp)

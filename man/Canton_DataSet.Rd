@@ -5,7 +5,9 @@
 \alias{Canton_DataSet}
 \alias{canton}
 \title{Dataset Canton.}
-\format{Objet de la classe \code{\link{Canton}}.}
+\format{
+Objet de la classe \code{\link{Canton}}.
+}
 \usage{
 data(canton)
 }

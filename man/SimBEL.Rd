@@ -3,7 +3,6 @@
 \docType{package}
 \name{SimBEL}
 \alias{SimBEL}
-\alias{SimBEL-package}
 \title{SimBEL: Un package de calcul du best estimate epargne sous Solvabilite 2.}
 \description{
 SimBEL fourni un ensemble de fonctionnalites pour permettre l'evaluation d'un best

@@ -5,8 +5,18 @@
 \alias{finance_contrainte_legale}
 \title{Applique la contrainte legale de participation aux benefices.}
 \usage{
-finance_contrainte_legale(base_fin, base_fin_etendu, result_tech, it_stock,
-  rev_stock_nette, rev_prest_nette, dot_ppb, marge_fin, ppb, param_revalo)
+finance_contrainte_legale(
+  base_fin,
+  base_fin_etendu,
+  result_tech,
+  it_stock,
+  rev_stock_nette,
+  rev_prest_nette,
+  dot_ppb,
+  marge_fin,
+  ppb,
+  param_revalo
+)
 }
 \arguments{
 \item{base_fin}{un vecteur \code{numeric} comprenant par produit la base de produits financiers.}
