@@ -115,6 +115,7 @@ Collate:
     'DataBase_merge_pb.R'
     'DataBase_merge_table_be.R'
     'DataBase_merge_table_produit.R'
+    'DataBase_merge_van_agg.R'
     'DataBase_update_table_output_produit.R'
     'DataBase_update_table_pb.R'
     'ESG-get_choc_inflation_frais.R'

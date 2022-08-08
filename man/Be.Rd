@@ -21,6 +21,9 @@ Une classe pour le calcul du best estimate d'un assureur.
 \item{\code{tab_flux}}{une liste qui contient les flux moyens de best estimate et de ses composantes.}
 
 \item{\code{tab_be}}{est une liste qui contient la valeur du best estimate et de ses composantes.}
+
+\item{\code{tab_result}}{est une liste contenant la valeur du resultat technique, du resultat financier,
+du resultat brut et du resultat net.}
 }}
 
 \seealso{
