@@ -1,7 +1,7 @@
 Package: SimBEL
 Type: Package
 Title: Un package de calcul du best estimate epargne sous Solvabilite 2
-Version: 3.3.1
+Version: 3.3.2
 Description: Un modele de simulation Monte-Carlo s'appuyant sur une projection d'un canton (actif et passif) permettant l'evaluation des provisions best estimate d'un contrat d'epargne et retraite francais en euros. Plusieurs chocs de la formule standard peuvent etre effectues.
 Author: Prim'Act
 URL: http://github.com/gquibert/SimBEL

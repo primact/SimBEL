@@ -1,3 +1,9 @@
+# SimBEL 3.3.2
+
+-   Ajout d'un différé pour les rentes.
+-   Ajout de nouvelles sorties dans la base SQLLite pour l'analyse des résutats.
+-   Calcul de la valeur actualisée de résultats.
+
 # SimBEL 3.3.1
 
 -   Ajout des tests unitaires sur Github.
