@@ -282,7 +282,7 @@ setMethod(
         num_rente_gar  <- which(nom_retraite == "rente_gar")
         num_nb_contr   <- which(nom_retraite == "nb_contr")
         num_ch_arr     <- which(nom_retraite == "ch_arr")
-
+        nom_diff       <- which(nom_retraite == "diff")
 
         ## Calcul du nombre de contrats
         # Nombre de contrat en debut de periode
@@ -297,12 +297,16 @@ setMethod(
         ## Prestations
         # Taux de chargement sur arrerage
         ch_arr <- .subset2(mp, num_ch_arr)
+        # Duree du differe
+        dur_diff <- .subset2(mp, nom_diff)
+        # Indicatrice differe
+        ind_diff <- dur_diff < an
 
         # Rentes
         if(method == "normal")
-            rente <- .subset2(mp, num_rente)
+            rente <- .subset2(mp, num_rente) * ind_diff
         else if (method == "gar")
-            rente <- .subset2(mp, num_rente_gar)
+            rente <- .subset2(mp, num_rente_gar) * ind_diff
         else
             stop("[RetraiteEuroRest : calc_prest] : L'input method doit etre egal a 'normal' ou 'gar' \n")
 

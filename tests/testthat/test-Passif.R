@@ -111,7 +111,8 @@ test_that("Classe_RetraiteEuroRest", {
                               "numeric",
                               "numeric",
                               "logical",
-                              "numeric")
+                              "numeric",
+                              "integer")
     )
 
 
@@ -145,6 +146,7 @@ test_that("Classe_RetraiteEuroRest", {
     expect_identical(object = retraite@mp[["rente"]], expected = temp_csv[["rente"]])
     expect_identical(object = retraite@mp[["rente_gar"]], expected = temp_csv[["rente_gar"]])
     expect_identical(object = retraite@mp[["ch_arr"]], expected = temp_csv[["ch_arr"]])
+    expect_identical(object = retraite@mp[["diff"]], expected = temp_csv[["diff"]])
 
     expect_equal(object = retraite@mp, expected = temp_csv)
 })
@@ -178,7 +180,12 @@ test_that("TEST_calc_pm",{
     # Tests (donnees CAREL)
     res_calc_pm <- calc_pm(x = retraite, method = "normal", an = 1L, tx_cible = tx_cible)
     expect_equal(object = sum(res_calc_pm$stock$pm_fin), expected = 115499.665)
+    expect_equal(object = sum(res_calc_pm$stock$pm_fin[7]), expected = 0)
 
+    # Test differe un an
+    res_calc_pm <- calc_pm(x = retraite, method = "normal", an = 2L, tx_cible = tx_cible)
+    expect_equal(object = sum(res_calc_pm$stock$pm_debut[7]), expected = 0)
+    expect_equal(object = sum(res_calc_pm$stock$pm_fin[7]), expected = res_calc_pm$stock$pm_fin[6])
 })
 
 #--------------------------------------------------
@@ -201,6 +208,12 @@ test_that("TEST_calc_prest", {
     expect_equal(object = res_calc_prest$stock$nb_debut, expected =retraite@mp$nb_contr)
     expect_equal(object = sum(res_calc_prest$flux$prest[1:3]), expected = 2490,015)
     expect_equal(object = sum(res_calc_prest$flux$prest[4:6]), expected = 6055,96)
+    expect_equal(object = res_calc_prest$flux$prest[7], expected = 0)
+
+    # Test differe un an
+    res_calc_prest <- calc_prest(x = retraite, method = "normal", an = 2L)
+    expect_equal(object = res_calc_prest$flux$prest[7], expected = res_calc_prest$flux$prest[6])
+    expect_equal(object = res_calc_prest$flux$rente[7], expected = res_calc_prest$flux$rente[6])
 })
 
 

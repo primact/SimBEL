@@ -11,6 +11,7 @@
 ##' @param pm_fin  un vecteur de type \code{numeric} contenant par model point les montants de PM revalorises apres participation aux benefices.
 ##' @param pm_gar  un vecteur de type \code{numeric} contenant par model point les montants de PM garanties revalorises apres participation aux benefices au titre de la PPB initiale.
 ##' @param tx_revalo un vecteur de type \code{numeric} contenant par model point les taux de revalorisation nets appliques.
+##' @param an une valeur \code{integer} correspondant a l'annee du calcul des prestations.
 ##' @return l'objet \code{x} vieilli d'une periode.
 ##' @author Prim'Act
 ##' @seealso Calcul de la revalorisation des PM \code{\link{calc_revalo_pm}}.
@@ -18,13 +19,13 @@
 ##' @include EpEuroInd-class.R RetraiteEuroRest_class.R
 
 #----------------------------------------------------
-setGeneric(name = "vieilli_mp", def = function(x, pm_fin, pm_gar, tx_revalo) {standardGeneric("vieilli_mp")})
+setGeneric(name = "vieilli_mp", def = function(x, pm_fin, pm_gar, tx_revalo, an) {standardGeneric("vieilli_mp")})
 
 #----------------------------------------------------
 setMethod(
     f = "vieilli_mp",
-    signature("EpEuroInd", "numeric", "numeric", "numeric"),
-    def = function(x, pm_fin, pm_gar, tx_revalo){
+    signature("EpEuroInd", "numeric", "numeric", "numeric", "integer"),
+    def = function(x, pm_fin, pm_gar, tx_revalo, an){
 
         # Tests
         nb_mp <- nrow(x@mp)
@@ -59,15 +60,21 @@ setMethod(
 #----------------------------------------------------
 setMethod(
     f = "vieilli_mp",
-    signature("RetraiteEuroRest", "numeric", "numeric", "numeric"),
-    def = function(x, pm_fin, pm_gar, tx_revalo){
+    signature("RetraiteEuroRest", "numeric", "numeric", "numeric", "integer"),
+    def = function(x, pm_fin, pm_gar, tx_revalo, an){
 
         # Test
         nb_mp <- nrow(x@mp)
         if ((length(tx_revalo) != nb_mp) | (length(pm_fin) != nb_mp)) stop("[PassifBase : vieilli_mp] : L'input 'tx_rev' n'est pas de bonne dimension.")
 
+        # Duree du differe
+        dur_diff <- .subset2(x@mp, which(names(x@mp) == "diff"))
+        #Indicatrice differe
+        ind_diff <- dur_diff < an
+
         # Ajustement de la rente
-        x@mp$rente <- .subset2(x@mp, which(names(x@mp) == "rente")) * ( 1 + tx_revalo)
+        x@mp$rente <- .subset2(x@mp, which(names(x@mp) == "rente")) * ( 1 + tx_revalo) * ind_diff +
+          (1 - ind_diff) * .subset2(x@mp, which(names(x@mp) == "rente"))
 
         # Ajustement de la PM garantie
         x@mp$pm <- pm_fin

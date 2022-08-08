@@ -249,16 +249,22 @@ setMethod(
         num_nb_contr   <- which(nom_retraite == "nb_contr")
         num_pm         <- which(nom_retraite == "pm")
         num_ch_arr     <- which(nom_retraite == "ch_arr")
+        nom_diff       <- which(nom_retraite == "diff")
 
         # Liste TxCible
         nom_tx_cib <- names(tx_cible)
         num_cib_an <- which(nom_tx_cib == "tx_cible_an")
 
+        # Duree du differe
+        dur_diff <- .subset2(mp, nom_diff)
+        # Indicatrice differe
+        ind_diff <- dur_diff < an
+
         # Recuperer la rente
         if(method == "normal") # calcul de la rente normal
-            rente <- .subset2(mp, num_nb_contr) * .subset2(mp, num_rente)
+            rente <- .subset2(mp, num_nb_contr) * .subset2(mp, num_rente) * ind_diff
         else if (method == "gar") # calcul de la rente avec revalorisation garantie uniquement
-            rente <- .subset2(mp, num_nb_contr) * .subset2(mp, num_rente_gar)
+            rente <- .subset2(mp, num_nb_contr) * .subset2(mp, num_rente_gar) * ind_diff
         else
             stop("[RetEuroRest : calc_pm] : L'input method dont etre egal a 'normal' ou 'gar' \n")
 

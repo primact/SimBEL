@@ -40,7 +40,8 @@ setMethod(
             "numeric",
             "numeric",
             "logical",
-            "numeric")
+            "numeric",
+            "integer")
         )
 
         # Tests

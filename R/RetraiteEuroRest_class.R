@@ -26,7 +26,7 @@ setClass(
     validity = function (object){
         # liste permettant de stocker les erreurs de chargement
         retval <- NULL
-        nb_col_attendu <- 21L
+        nb_col_attendu <- 22L
         # Verification du nombre de colonnes
         if(ncol(object@mp) != nb_col_attendu){
             retval <- c(retval, "[RetraiteEuroRest] : Nombre d'attributs incorrect, un ptf RetraiteEuroRest est compose d'un DF de 21 colonnes\n")
@@ -54,13 +54,14 @@ setClass(
         if (!is.numeric(.subset2(object@mp, 19L))) {retval <- c(retval, "[RetraiteEuroRest] : ch_arr n'est pas numeric\n")}
         if (!is.logical(.subset2(object@mp, 20L))) {retval <- c(retval, "[RetraiteEuroRest] : echu n'est pas logical\n")}
         if (!is.numeric(.subset2(object@mp, 21L))) {retval <- c(retval, "[RetraiteEuroRest] : tx_cible_prec n'est pas numeric\n")}
+        if (!is.integer(.subset2(object@mp, 22L))) {retval <- c(retval, "[RetraiteEuroRest] : diff n'est pas integer\n")}
 
 
         # Verification du nom des colonnes
         if(! all(colnames(object@mp) == c("num_mp", "num_canton", "num_prod", "age", "gen", "num_tab_mort", "pm",
                                         "nb_contr", "statut_rvs", "age_rvs", "gen_rvs", "num_tab_mort_rvs", "tx_rvs",
                                         "tx_tech", "tx_cible", "freq_rente", "rente", "rente_gar", "ch_arr", "echu",
-                                        "tx_cible_prec"))){
+                                        "tx_cible_prec", "diff"))){
             retval <- c(retval, "[RetraiteEuroRest] : Noms de colonne incorrect \n")
         }
 

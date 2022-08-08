@@ -70,7 +70,7 @@ setMethod(
                     # Vieilli les passifs et mise a jour
                     list_prodi[[j]] <- vieilli_mp(x = prodi, revalo_prod[["stock"]][["pm_fin_ap_pb"]],
                                                   revalo_prod[["stock"]][["pm_gar_ap_pb"]],
-                                                  revalo_prod[["tx_rev_net"]])
+                                                  revalo_prod[["tx_rev_net"]], x@annee)
 
                 }
                 else if (type_prodi == "RetraiteEuroRest"){
@@ -81,7 +81,7 @@ setMethod(
                     # Vieilli les passifs et mise a jour
                     list_prodi[[j]] <- vieilli_mp(x = prodi, revalo_prod[["stock"]][["pm_fin_ap_pb"]],
                                                   revalo_prod[["stock"]][["pm_gar_ap_pb"]],
-                                                  revalo_prod[["tx_rev_net"]])
+                                                  revalo_prod[["tx_rev_net"]], x@annee)
 
                 } else {
                     stop("[PortPassif : vieillissement_ap_pb] : La liste de produit comporte au moins un element non instancie.")

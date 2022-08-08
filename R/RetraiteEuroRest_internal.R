@@ -31,7 +31,8 @@ setMethod(
                                             rente_gar        = mp[,"rente"],
                                             ch_arr           = mp[,"ch_arr"],
                                             echu             = mp[,"echu"],
-                                            tx_cible_prec    = mp[,"tx_cible_prec"])
+                                            tx_cible_prec    = mp[,"tx_cible_prec"],
+                                            diff             = mp[,"diff"])
             .Object@tab       <- tab
             .Object@tab_proba <- tab_proba
             validObject(.Object)
@@ -59,7 +60,8 @@ setMethod(
                                      rente_gar        = numeric(),
                                      ch_arr           = numeric(),
                                      echu             = logical(),
-                                     tx_cible_prec    = numeric())
+                                     tx_cible_prec    = numeric(),
+                                     diff             = integer())
         }
         return(.Object)
     }
