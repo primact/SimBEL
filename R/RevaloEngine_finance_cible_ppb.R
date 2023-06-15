@@ -45,8 +45,7 @@ setMethod(
         }
 
 
-        # Total de PPB8ans a attribuer
-        ppb_8 <- sum(ppb8_ind)
+        # Total de PPB8ans a attribuer (ppb_8 <- sum(ppb8_ind))
 
         bes_add_ind <- pmax(bes_cible - ppb8_ind, 0) - rev_stock_nette
         bes_add <- sum(bes_add_ind)

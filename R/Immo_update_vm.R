@@ -24,8 +24,6 @@ setMethod(
     definition = function(x, vm) {
         # Donnees
         ptf_immo <- x@ptf_immo
-        nom_table <- names(ptf_immo)
-        val_marche <- which(nom_table == "val_marche")
 
         # Verification des inputs
         if (nrow(ptf_immo) != length(vm)) stop("[Immo : update_vm_immo] : Les inputs ne sont pas de memes dimensions")

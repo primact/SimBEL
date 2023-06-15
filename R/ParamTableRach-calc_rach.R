@@ -39,10 +39,6 @@ setMethod(
         age_tab <- .subset2(table, age_name)
         anc_tab <- .subset2(table, anc_name)
 
-
-        age_uniq <- unique(age_tab)
-        anc_uniq <- unique(anc_tab)
-
         # Test si l age est bien present dans la table
         if (!all(age_app %in% age_tab)) stop("L'age doit etre present dans la table")
 

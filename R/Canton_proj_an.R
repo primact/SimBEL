@@ -252,7 +252,7 @@ setMethod(
         result_brut <- resultat_tech + resultat_fin
         result_net <- result_brut * (1 - x@hyp_canton@tx_import) * (result_brut > 0) + result_brut * (result_brut <= 0)
         impot <- result_brut - result_net
-
+        stopifnot(impot >= 0)
         #---------------------------------------------------------------
         # Etape 13 : Mise a jour (des elements restants) du canton pour l'annee suivante
         #---------------------------------------------------------------

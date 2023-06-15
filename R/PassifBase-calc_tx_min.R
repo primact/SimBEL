@@ -33,7 +33,6 @@ setMethod(
     def = function(x, an) {
         # Data.frame ModelPoint
         mp <- x@mp
-        nb_mp <- nrow(mp)
         nom_mp <- names(mp)
         num_terme_tx_tech <- which(nom_mp == "terme_tx_tech")
         num_terme_tmg <- which(nom_mp == "terme_tmg")

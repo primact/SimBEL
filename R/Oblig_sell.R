@@ -91,9 +91,6 @@ setMethod(
 
         # Operations
         if (length(row_sold_tot) > 0L) {
-            # Donnees
-            nb_sold_tot <- nb_sold[which(num_sold %in% num_mp[row_sold_tot])]
-
             # Calcul PMVR
             pmvr_tot <- sum(val_marche[row_sold_tot] - val_nc[row_sold_tot])
 

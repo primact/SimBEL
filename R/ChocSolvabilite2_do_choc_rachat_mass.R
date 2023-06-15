@@ -19,19 +19,19 @@
 ##' @include ChocSolvabilite2_class.R Canton_class.R AutresPassifs-class.R
 
 setGeneric(name = "do_choc_rachat_mass", def = function(x, canton, autres_passifs_choc) {
-  standardGeneric("do_choc_rachat_mass")
+    standardGeneric("do_choc_rachat_mass")
 })
 setMethod(
-  f = "do_choc_rachat_mass",
-  signature = c("ChocSolvabilite2", "Canton", "AutresPassifs"),
-  definition = function(x, canton, autres_passifs_choc) {
-    # Application du choc lapse mass
-    choc <- as.numeric(x@param_choc_sousc["mp"]["choc_rachat_massif"])
-    canton@ptf_passif@choc_lapse_mass <- choc
+    f = "do_choc_rachat_mass",
+    signature = c("ChocSolvabilite2", "Canton", "AutresPassifs"),
+    definition = function(x, canton, autres_passifs_choc) {
+        # Application du choc lapse mass
+        choc <- as.numeric(x@param_choc_sousc["mp"]["choc_rachat_massif"])
+        canton@ptf_passif@choc_lapse_mass <- choc
 
-    # Chargement des autres passifs
-    canton@ptf_passif@autres_passifs <- autres_passifs_choc
+        # Chargement des autres passifs
+        canton@ptf_passif@autres_passifs <- autres_passifs_choc
 
-    return(canton)
-  }
+        return(canton)
+    }
 )

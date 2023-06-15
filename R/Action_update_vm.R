@@ -24,8 +24,6 @@ setMethod(
     definition = function(x, vm) {
         # Donnees
         ptf_action <- x@ptf_action
-        nom_table <- names(ptf_action)
-        val_marche <- which(nom_table == "val_marche")
 
         # Verification des inputs
         if (nrow(ptf_action) != length(vm)) stop("[Action : update_vm_action] : Les inputs ne sont pas de memes dimensions")

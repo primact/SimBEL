@@ -110,14 +110,10 @@ setMethod(
 
         # Table ModelPoint
         mp <- x@mp # Extraction
-        nb_mp <- nrow(mp) # Nombre de model point
         nom_epeuro <- names(mp)
         num_pm <- which(nom_epeuro == "pm")
         num_pm_gar <- which(nom_epeuro == "pm_gar")
-        num_terme <- which(nom_epeuro == "terme")
-        num_nb_contr <- which(nom_epeuro == "nb_contr")
         num_chgt_enc <- which(nom_epeuro == "chgt_enc")
-        num_chgt_rach <- which(nom_epeuro == "chgt_rach")
         num_ind_chgt_enc_pos <- which(nom_epeuro == "ind_chgt_enc_pos")
 
         # Extraction de donnees
@@ -169,8 +165,7 @@ setMethod(
         # Calcul de la revalorisation sur stock
         rev_stock_nette <- rev_stock_brut - enc_charg_stock
 
-        # Revalorisation nette totale
-        rev_total_nette <- rev_stock_nette + tab_prest[["rev_prest_nette"]]
+        # Revalorisation nette totale (rev_total_nette <- rev_stock_nette + tab_prest[["rev_prest_nette"]])
 
         # Prelevement sociaux
         soc_stock <- pmax(0, rev_stock_nette) * tx_soc

@@ -58,7 +58,6 @@ setMethod(
         ### Update Oblig
         # Donnees
         ptf_oblig <- x@ptf_oblig@ptf_oblig
-        nom_oblig <- names(ptf_oblig)
         val_marche <- calc_vm_oblig(x@ptf_oblig, mp_ESG@yield_curve)
 
         # Mise a jour
