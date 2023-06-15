@@ -12,22 +12,24 @@
 ##' @export
 ##' @include Action_class.R
 
-setGeneric(name = "update_dur_det_action", def = function(x) {standardGeneric("update_dur_det_action")})
+setGeneric(name = "update_dur_det_action", def = function(x) {
+    standardGeneric("update_dur_det_action")
+})
 setMethod(
     f = "update_dur_det_action",
     signature = "Action",
-    definition = function(x){
-        
+    definition = function(x) {
         # Donnees
-        ptf_action  <- x@ptf_action
-        nom_table   <- names(ptf_action)
-        dur_det     <- which(nom_table == "dur_det")
-        
-        if(nrow(ptf_action) != 0L) 
+        ptf_action <- x@ptf_action
+        nom_table <- names(ptf_action)
+        dur_det <- which(nom_table == "dur_det")
+
+        if (nrow(ptf_action) != 0L) {
             x@ptf_action$dur_det <- .subset2(ptf_action, dur_det) + 1
-        else
+        } else {
             warning("[Action : update_dur_det_action] : Le portefeuille action initial est vide.")
-            
+        }
+
         # Output
         return(x)
     }

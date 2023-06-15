@@ -17,13 +17,13 @@
 ##' @export
 ##' @include ESG_class.R
 ##'
-setGeneric(name = "get_choc_inflation_frais", def = function(x, choc)
-{standardGeneric("get_choc_inflation_frais")})
+setGeneric(name = "get_choc_inflation_frais", def = function(x, choc) {
+    standardGeneric("get_choc_inflation_frais")
+})
 setMethod(
     f = "get_choc_inflation_frais",
     signature = c(x = "ESG", choc = "numeric"),
-    def = function(x, choc){
-
+    def = function(x, choc) {
         # Inflation
         ind_inflation <- x@ind_inflation
 
@@ -31,7 +31,9 @@ setMethod(
         annees <- pmax((1L:ncol(ind_inflation) - 1L), 1L)
 
         # Indice d'inflation avant choc (les annees sont basculees en lignes)
-        fun <- function(i){(ind_inflation[i, ])^ (1 / annees) - 1}
+        fun <- function(i) {
+            (ind_inflation[i, ])^(1 / annees) - 1
+        }
         tx_inflation <- t(do.call("rbind", lapply(1L:nrow(ind_inflation), fun)))
 
         # Application du choc
@@ -39,7 +41,9 @@ setMethod(
 
 
         # Remise sous forme d'indice
-        fun <- function(i){(1 + tx_inflation[, i])^(annees)}
+        fun <- function(i) {
+            (1 + tx_inflation[, i])^(annees)
+        }
         index <- sapply(1L:nrow(ind_inflation), fun)
 
         # Remise au format data.frame
@@ -50,9 +54,5 @@ setMethod(
 
         # output
         return(x)
-
     }
 )
-
-
-

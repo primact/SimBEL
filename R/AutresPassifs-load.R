@@ -16,26 +16,31 @@
 ##' @export
 ##' @include AutresPassifs-class.R
 
-setGeneric(name = "autres_passif_load", def = function(file_autres_passif_address){standardGeneric("autres_passif_load")})
+setGeneric(name = "autres_passif_load", def = function(file_autres_passif_address) {
+    standardGeneric("autres_passif_load")
+})
 setMethod(
     f = "autres_passif_load",
     signature(file_autres_passif_address = "character"),
     definition = function(file_autres_passif_address) {
-
         # Lecture du fichier
-        temp <- read.csv2(file_autres_passif_address, header = TRUE, colClasses = c("numeric", "numeric", "numeric",
-                                                                                    "numeric","numeric","numeric",
-                                                                                    "numeric"))
+        temp <- read.csv2(file_autres_passif_address, header = TRUE, colClasses = c(
+            "numeric", "numeric", "numeric",
+            "numeric", "numeric", "numeric",
+            "numeric"
+        ))
 
         # Tests
-        if (! all(! is.na(temp)))
+        if (!all(!is.na(temp))) {
             stop("[AutresPassifs - load] : Presence de NA dans le fichier d'input")
+        }
 
         # Creation de l'objet
-        if (nrow(temp) != 0L)
+        if (nrow(temp) != 0L) {
             autres_passifs <- new("AutresPassifs", mp = temp)
-        else
+        } else {
             autres_passifs <- new("AutresPassifs")
+        }
 
         # Output
         return(autres_passifs)

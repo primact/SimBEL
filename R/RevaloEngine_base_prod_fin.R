@@ -16,27 +16,30 @@
 ##' @export
 ##' @include Ppb_class.R
 
-setGeneric(name = "base_prod_fin", def = function(tra, pm_moy, ppb){standardGeneric("base_prod_fin")})
+setGeneric(name = "base_prod_fin", def = function(tra, pm_moy, ppb) {
+    standardGeneric("base_prod_fin")
+})
 setMethod(
     f = "base_prod_fin",
     signature = c(tra = "numeric", pm_moy = "numeric", ppb = "Ppb"),
-    definition = function(tra, pm_moy, ppb){
-
+    definition = function(tra, pm_moy, ppb) {
         # Extrait les valeurs moyennes des PM par produit et au global
         pm_moy_port <- sum(pm_moy)
 
         # calcul de la base de produit financier au global et par produit
         base_prod_fin_port <- tra * (pm_moy_port + ppb@ppb_debut)
 
-        if(pm_moy_port == 0){
+        if (pm_moy_port == 0) {
             base_prod_fin <- pm_moy * 0
             base_prod_fin_port <- sum(base_prod_fin)
-        }else{
+        } else {
             base_prod_fin <- base_prod_fin_port * pm_moy / pm_moy_port
         }
 
         # Output
-        return(list(base_prod_fin = base_prod_fin,
-                    base_prod_fin_port = base_prod_fin_port))
+        return(list(
+            base_prod_fin = base_prod_fin,
+            base_prod_fin_port = base_prod_fin_port
+        ))
     }
 )

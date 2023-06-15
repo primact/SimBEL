@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           do_choc_rachat_up
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -22,17 +21,18 @@
 ##' @export
 ##' @include ChocSolvabilite2_class.R Canton_class.R AutresPassifs-class.R
 
-setGeneric(name = "do_choc_rachat_up", def = function(x, canton, autres_passifs_choc){standardGeneric("do_choc_rachat_up")})
+setGeneric(name = "do_choc_rachat_up", def = function(x, canton, autres_passifs_choc) {
+    standardGeneric("do_choc_rachat_up")
+})
 setMethod(
     f = "do_choc_rachat_up",
     signature = c("ChocSolvabilite2", "Canton", "AutresPassifs"),
-    definition = function(x, canton, autres_passifs_choc){
-
-        choc_rachat_up     <- as.numeric(x@param_choc_sousc["mp"]["choc_rachat_up"])
+    definition = function(x, canton, autres_passifs_choc) {
+        choc_rachat_up <- as.numeric(x@param_choc_sousc["mp"]["choc_rachat_up"])
         choc_rachat_up_lim <- as.numeric(x@param_choc_sousc["mp"]["choc_rachat_up_lim"])
         ptf_passif <- canton@ptf_passif
 
-        ptf_passif["ht"]   <- get_choc_rach(ptf_passif["ht"], "up", choc_rachat_up, choc_rachat_up_lim)
+        ptf_passif["ht"] <- get_choc_rach(ptf_passif["ht"], "up", choc_rachat_up, choc_rachat_up_lim)
 
         # Chargement des autres passifs
         ptf_passif@autres_passifs <- autres_passifs_choc

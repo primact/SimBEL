@@ -40,17 +40,18 @@
 ##' @export
 ##' @include Canton_class.R
 
-setGeneric(name = "calc_revalo", def = function(x, passif_av_pb, tra, plac_moy_vnc, result_tech, annee){standardGeneric("calc_revalo")})
+setGeneric(name = "calc_revalo", def = function(x, passif_av_pb, tra, plac_moy_vnc, result_tech, annee) {
+    standardGeneric("calc_revalo")
+})
 setMethod(
     f = "calc_revalo",
-    signature = c(x = "Canton", passif_av_pb ="list", tra = "numeric", plac_moy_vnc ="numeric", result_tech ="numeric", annee = "integer"),
-    definition = function(x, passif_av_pb, tra, plac_moy_vnc, result_tech, annee){
-
+    signature = c(x = "Canton", passif_av_pb = "list", tra = "numeric", plac_moy_vnc = "numeric", result_tech = "numeric", annee = "integer"),
+    definition = function(x, passif_av_pb, tra, plac_moy_vnc, result_tech, annee) {
         # Extraction de donnees
         result_av_pb <- passif_av_pb[["result_av_pb"]]
         passif_av_pb_stock <- result_av_pb[["stock_agg"]]
-        passif_av_pb_flux  <- result_av_pb[["flux_agg"]]
-        rev_stock_brute <- passif_av_pb_flux[,"rev_stock_brut"]
+        passif_av_pb_flux <- result_av_pb[["flux_agg"]]
+        rev_stock_brute <- passif_av_pb_flux[, "rev_stock_brut"]
 
         # Stock de PPB encore present depuis la date de lancement
         nb_annee_res <- max(length(x@ppb@hist_ppb) - annee + 1L, 0) # 8 ans - nombre d'annees passees
@@ -62,7 +63,7 @@ setMethod(
         #---------------------------------------------------------------
 
         # Base de produits financiers
-        base_fin <- base_prod_fin(tra, passif_av_pb_stock[,"pm_moy"], x@ppb)
+        base_fin <- base_prod_fin(tra, passif_av_pb_stock[, "pm_moy"], x@ppb)
         base_prod_fin <- base_fin[["base_prod_fin"]]
 
         #---------------------------------------------------------------
@@ -73,12 +74,14 @@ setMethod(
         ptf_passif <- x@ptf_passif
         tx_pb <- ptf_passif@tx_pb@mp # Extrait le vecteur des taux de PB contractuelle
         names_class_prod <- ptf_passif@names_class_prod # Nom des classes de produits
-        nom_prod <- sapply(names_class_prod, function(i){names(ptf_passif[i])}) # Extrait les numeros de produits
+        nom_prod <- sapply(names_class_prod, function(i) {
+            names(ptf_passif[i])
+        }) # Extrait les numeros de produits
         tx_pb <- tx_pb[which(tx_pb$nom_prod == nom_prod), "taux_pb"] # Taux de PB reordonnees selon le nom des produits
 
         # Chargement sur encours theorique par produit
-        ch_enc_th <- passif_av_pb_flux[,"enc_charg_base_th"] + passif_av_pb_flux[,"enc_charg_rmin_th"]
-        base_enc_th <- passif_av_pb_flux[,"base_enc_th"]
+        ch_enc_th <- passif_av_pb_flux[, "enc_charg_base_th"] + passif_av_pb_flux[, "enc_charg_rmin_th"]
+        base_enc_th <- passif_av_pb_flux[, "base_enc_th"]
 
         # Evaluation du taux de chargement sur encours moyen par produit
         tx_enc_moy <- ch_enc_th / base_enc_th
@@ -139,7 +142,7 @@ setMethod(
         base_prod_fin_port <- base_fin[["base_prod_fin_port"]]
 
         # Calcul du coefficient d'ajustement pour ajustement a l'echelle du passif
-        coef_ajust <-  base_prod_fin_port / plac_moy_vnc
+        coef_ajust <- base_prod_fin_port / plac_moy_vnc
 
         # Calcul du seuil de PMVL action
         seuil_pmvl <- x@param_alm@seuil_realisation_PVL * x@ptf_fin@pvl_action * coef_ajust
@@ -149,17 +152,18 @@ setMethod(
         pmvl_liq <- tx_cibl_pmvl[["pmvl_liq"]]
 
         # Met a jour la base financiere
-        if(base_prod_fin_port != 0) {
+        if (base_prod_fin_port != 0) {
             # Allocation par produit
             base_prod_fin <- base_prod_fin + pmvl_liq * base_prod_fin / base_prod_fin_port
             base_prod_fin_port <- sum(base_prod_fin)
         }
 
         # Extraction et remise a l'echelle de l'actif de la PMVL action realisee
-        if(coef_ajust != 0)
+        if (coef_ajust != 0) {
             pmvl_liq <- pmvl_liq / coef_ajust
-        else
+        } else {
             pmvl_liq <- 0
+        }
 
 
         #---------------------------------------------------------------
@@ -167,12 +171,14 @@ setMethod(
         #---------------------------------------------------------------
 
         # Marge minimum que veut realisee l'assureur
-        marge_min <- passif_av_pb_stock[,"pm_moy"] * x@param_revalo@tx_marge_min
+        marge_min <- passif_av_pb_stock[, "pm_moy"] * x@param_revalo@tx_marge_min
 
         # Calcul de la marge financiere de l'assureur
-        marge_fin <- calc_marge_fin(base_prod_fin, passif_av_pb_flux[,"rev_prest_nette"],
-                                    tx_cibl_pmvl[["rev_stock_nette"]], financement_tmg[["contrib_tmg_prest"]],
-                                    financement_tmg[["contrib_tmg_stock"]], tx_cibl_ppb[["reprise"]])
+        marge_fin <- calc_marge_fin(
+            base_prod_fin, passif_av_pb_flux[, "rev_prest_nette"],
+            tx_cibl_pmvl[["rev_stock_nette"]], financement_tmg[["contrib_tmg_prest"]],
+            financement_tmg[["contrib_tmg_stock"]], tx_cibl_ppb[["reprise"]]
+        )
 
         # Financement du taux cible par la marge de l'assureur
         tx_cibl_marge <- finance_cible_marge(marge_fin, bes_tx_cible, tx_cibl_pmvl[["rev_stock_nette"]], marge_min)
@@ -195,12 +201,14 @@ setMethod(
         base_fin_etendu <- base_prod_fin_port + tra * pm_moy
 
 
-        revalo_finale <- finance_contrainte_legale(base_prod_fin, base_fin_etendu,
-                                                   result_tech,  passif_av_pb_flux[,"it_tech_stock"],
-                                                   tx_cibl_marge[["rev_stock_nette"]],
-                                                   passif_av_pb_flux[,"rev_prest_nette"],
-                                                   tx_cibl_ppb[["dotation"]], tx_cibl_marge[["marge_fin"]], x@ppb,
-                                                   x@param_revalo)
+        revalo_finale <- finance_contrainte_legale(
+            base_prod_fin, base_fin_etendu,
+            result_tech, passif_av_pb_flux[, "it_tech_stock"],
+            tx_cibl_marge[["rev_stock_nette"]],
+            passif_av_pb_flux[, "rev_prest_nette"],
+            tx_cibl_ppb[["dotation"]], tx_cibl_marge[["marge_fin"]], x@ppb,
+            x@param_revalo
+        )
 
         # Mise a jour de la PPB
         x@ppb <- revalo_finale[["ppb"]]
@@ -222,8 +230,9 @@ setMethod(
 
 
         # Ce montant ne doit pas etre negatif
-        if(! all(add_rev_nette_stock >= 0))
+        if (!all(add_rev_nette_stock >= 0)) {
             stop("[RevaloEngine_calc_revalo] Le montant de le revalorisation additionnelle ne peut pas etre negatif.")
+        }
 
         #---------------------------------------------------------------
         # Etape 9 : Montant total de PB attribuee
@@ -240,18 +249,16 @@ setMethod(
         # Allocation au prorata de l'allocation des besoins
         som_bes <- sum(add_rev_nette_stock)
         som <- sum(passif_av_pb_stock[, "pm_fin"])
-        if(som_bes !=0){
-          conso_ppb_init <- conso_ppb_init * add_rev_nette_stock / som_bes
-        } else if(som != 0){
-          # Sinon calcul de la PPB a attribuer par contrat : Attribution proportionnelle a la PM
-          conso_ppb_init <- conso_ppb_init * passif_av_pb_stock[, "pm_fin"] / som
+        if (som_bes != 0) {
+            conso_ppb_init <- conso_ppb_init * add_rev_nette_stock / som_bes
+        } else if (som != 0) {
+            # Sinon calcul de la PPB a attribuer par contrat : Attribution proportionnelle a la PM
+            conso_ppb_init <- conso_ppb_init * passif_av_pb_stock[, "pm_fin"] / som
         } else {
-          l <- length(passif_av_pb_stock[, "pm_fin"])
-          conso_ppb_init <- conso_ppb_init * rep(1, l) / l
+            l <- length(passif_av_pb_stock[, "pm_fin"])
+            conso_ppb_init <- conso_ppb_init * rep(1, l) / l
         }
 
-        # Validation de la PPB
-        # validObject(x@ppb)
 
         # Output
         return(list(
@@ -262,10 +269,7 @@ setMethod(
             ppb8_ind            = ppb8_ind,
             conso_ppb_init      = conso_ppb_init,
             tx_pb               = tx_pb,
-            tx_enc_moy          = tx_enc_moy)
-        )
+            tx_enc_moy          = tx_enc_moy
+        ))
     }
-
 )
-
-

@@ -14,37 +14,36 @@
 ##' @export
 ##' @include Oblig_class.R
 
-setGeneric(name = "calc_vm_oblig", def = function(x, yield_curve){standardGeneric("calc_vm_oblig")})
+setGeneric(name = "calc_vm_oblig", def = function(x, yield_curve) {
+    standardGeneric("calc_vm_oblig")
+})
 setMethod(
     f = "calc_vm_oblig",
     signature = c(x = "Oblig", yield_curve = "numeric"),
-    definition = function(x, yield_curve){
-
+    definition = function(x, yield_curve) {
         # Donnees
         ptf_oblig <- x@ptf_oblig
         nom_table <- names(ptf_oblig)
-        mat_res   <- which(nom_table == "mat_res")
-        zsp       <- which(nom_table == "zspread")
+        mat_res <- which(nom_table == "mat_res")
+        zsp <- which(nom_table == "zspread")
 
         # Test
-        if(nrow(ptf_oblig) == 0L) stop("[Oblig : calc_vm_oblig] : Portefeuille obligataire vide")
+        if (nrow(ptf_oblig) == 0L) stop("[Oblig : calc_vm_oblig] : Portefeuille obligataire vide")
 
         # Definition des vecteurs et variables utiles
-        coupon   <- calc_coupon(x)
-        nominal  <- calc_nominal(x)
+        coupon <- calc_coupon(x)
+        nominal <- calc_nominal(x)
         maturite <- .subset2(ptf_oblig, mat_res)
-        zspread  <- .subset2(ptf_oblig, zsp)
+        zspread <- .subset2(ptf_oblig, zsp)
 
         # Appel de la fonction echeancier : traitement separe du cas pft a une ligne et ptf a plusieurs lignes
-        if(nrow(ptf_oblig) == 1L)
-            res <- sum(echeancier(coupon, maturite, zspread, nominal, yield_curve)) # Ptf a une ligne
-        else
-            res <- rowSums(echeancier(coupon, maturite, zspread, nominal, yield_curve)) # Ptf a plusieurs lignes
+        if (nrow(ptf_oblig) == 1L) { # Ptf a une ligne
+            res <- sum(echeancier(coupon, maturite, zspread, nominal, yield_curve))
+        } else { # Ptf a plusieurs lignes
+            res <- rowSums(echeancier(coupon, maturite, zspread, nominal, yield_curve))
+        }
 
         # Output
         return(res)
     }
 )
-
-
-

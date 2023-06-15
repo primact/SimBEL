@@ -22,17 +22,20 @@
 ##' @include Ppb_class.R
 
 
-setGeneric(name = "finance_tmg", def = function(bes_tmg_prest, bes_tmg_stock, ppb){standardGeneric("finance_tmg")})
+setGeneric(name = "finance_tmg", def = function(bes_tmg_prest, bes_tmg_stock, ppb) {
+    standardGeneric("finance_tmg")
+})
 setMethod(
     f = "finance_tmg",
     signature = c(bes_tmg_prest = "numeric", bes_tmg_stock = "numeric", ppb = "Ppb"),
-    definition = function(bes_tmg_prest, bes_tmg_stock, ppb){
-
+    definition = function(bes_tmg_prest, bes_tmg_stock, ppb) {
         # Controle
-        if(prod(bes_tmg_prest < 0))
+        if (prod(bes_tmg_prest < 0)) {
             stop("[RevaloEngine-finance_tmg] : les besoins de financements par produit doivent etre positifs.")
-        if(prod(bes_tmg_stock < 0))
+        }
+        if (prod(bes_tmg_stock < 0)) {
             stop("[RevaloEngine-finance_tmg] : les besoins de financements par produit doivent etre positifs.")
+        }
 
 
         # Calcul du besoin en TMG du portefeuille pour les prestations et le stock
@@ -65,9 +68,10 @@ setMethod(
 
 
         # Output
-        return(list(contrib_tmg_prest = contrib_tmg_prest, 
-                    contrib_tmg_stock = contrib_tmg_stock, 
-                    ppb = ppb))
+        return(list(
+            contrib_tmg_prest = contrib_tmg_prest,
+            contrib_tmg_stock = contrib_tmg_stock,
+            ppb = ppb
+        ))
     }
 )
-

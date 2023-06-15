@@ -35,15 +35,17 @@
 ##' La classe \code{\link{Be}}.
 ##' @export
 ##' @include Be_class.R
-setGeneric(name = "run_be_simu", def = function(x, i, pre_on){standardGeneric("run_be_simu")})
+setGeneric(name = "run_be_simu", def = function(x, i, pre_on) {
+  standardGeneric("run_be_simu")
+})
 setMethod(
   f = "run_be_simu",
   signature = c(x = "Be", i = "integer", pre_on = "logical"),
-  definition = function(x, i, pre_on){
-
+  definition = function(x, i, pre_on) {
     # Controle
-    if(i < 0L | i > x@esg@nb_simu)
+    if (i < 0L | i > x@esg@nb_simu) {
       stop("[Be-run_be_simu] : le numero de simulation est incorrect. \n")
+    }
 
     # Nombre d'annees de projection
     nb_annee <- x@param_be@nb_annee
@@ -73,8 +75,7 @@ setMethod(
     canton <- x@canton
 
     # Boucle sur les annees de projection
-    for(an in 1L:nb_annee){
-
+    for (an in 1L:nb_annee) {
       # Extraction du model point ESG
       mp_esg <- extract_ESG(x@esg, i, an)
       deflateur <- c(deflateur, mp_esg@deflateur)
@@ -85,8 +86,8 @@ setMethod(
 
       # Gestion des simulation pour lesquel l'actif devient negatif
       # On retourne le numero de simulation
-      if(is.logical(result_proj_an)){
-        if(! result_proj_an){
+      if (is.logical(result_proj_an)) {
+        if (!result_proj_an) {
           return(list(erreur = i))
         }
       }
@@ -120,30 +121,31 @@ setMethod(
       flux_fin[[an]] <- result_proj_an[["flux_fin"]]
       flux_ptf_fin <- result_proj_an[["flux_ptf_fin"]]
       action[[an]] <- flux_ptf_fin[["action"]]
-      immo[[an]]   <- flux_ptf_fin[["immo"]]
-      oblig[[an]]  <- flux_ptf_fin[["oblig"]]
-      treso[[an]]  <- flux_ptf_fin[["treso"]]
+      immo[[an]] <- flux_ptf_fin[["immo"]]
+      oblig[[an]] <- flux_ptf_fin[["oblig"]]
+      treso[[an]] <- flux_ptf_fin[["treso"]]
     }
 
     # Mise a jour du booleen de calcul des probas
-    if(x@canton@ptf_passif@calc_proba)
+    if (x@canton@ptf_passif@calc_proba) {
       x@canton@ptf_passif@calc_proba <- FALSE
+    }
 
     # Aggregation de donnees flux
-    prime           <- do.call("rbind", prime)
-    prestation      <- do.call("rbind", prestation)
-    prestation_fdb  <- do.call("rbind", prestation_fdb)
-    frais           <- do.call("rbind", frais)
-    flux_produit    <- do.call("rbind", flux_produit)
-    stock_produit   <- do.call("rbind", stock_produit)
-    hors_model      <- do.call("rbind", hors_model)
-    fin             <- do.call("rbind", fin)
-    flux_fin        <- do.call("rbind", flux_fin)
-    action          <- do.call("rbind", action)
-    immo            <- do.call("rbind", immo)
-    oblig           <- do.call("rbind", oblig)
-    treso           <- do.call("rbind", treso)
-    output_pb       <- do.call("rbind", output_pb)
+    prime <- do.call("rbind", prime)
+    prestation <- do.call("rbind", prestation)
+    prestation_fdb <- do.call("rbind", prestation_fdb)
+    frais <- do.call("rbind", frais)
+    flux_produit <- do.call("rbind", flux_produit)
+    stock_produit <- do.call("rbind", stock_produit)
+    hors_model <- do.call("rbind", hors_model)
+    fin <- do.call("rbind", fin)
+    flux_fin <- do.call("rbind", flux_fin)
+    action <- do.call("rbind", action)
+    immo <- do.call("rbind", immo)
+    oblig <- do.call("rbind", oblig)
+    treso <- do.call("rbind", treso)
+    output_pb <- do.call("rbind", output_pb)
     flux_be <- prestation + frais - prime
 
     # Aggregation des flux de resultats
@@ -181,9 +183,11 @@ setMethod(
 
     # Aggregation des bases
     table_output_be <- merge_table_be(prime, frais, prestation, prestation_fdb, i, nom_produit)
-    table_output_produits <- merge_table_produit(flux_produit, stock_produit, hors_model, fin,
-                                                 nb_annee, i, nom_produit,
-                                                 result_tech, result_fin, result_brut, result_net)
+    table_output_produits <- merge_table_produit(
+      flux_produit, stock_produit, hors_model, fin,
+      nb_annee, i, nom_produit,
+      result_tech, result_fin, result_brut, result_net
+    )
     table_be <- merge_be(be, i, nom_produit)
     table_van_agg <- merge_van_agg(result_tech_actu, result_fin_actu, result_brut_actu, result_net_actu, i)
     table_actifs <- merge_actifs(action, immo, oblig, treso, i)
@@ -191,31 +195,36 @@ setMethod(
     table_output_pb <- merge_pb(output_pb, i)
 
     # Output
-    return(list(resultats = list(nom_produit = nom_produit,
-                                 prime = prime,
-                                 prestation = prestation,
-                                 prestation_fdb = prestation_fdb,
-                                 frais = frais,
-                                 flux_be = flux_be,
-                                 prime_actu = prime_actu,
-                                 prestation_actu = prestation_actu,
-                                 prestation_fdb_actu = prestation_fdb_actu,
-                                 frais_actu = frais_actu,
-                                 be = be,
-                                 tables = list(table_output_be = table_output_be,
-                                               table_output_produit_model = table_output_produits[["df_model"]],
-                                               table_output_produit_hors_model = table_output_produits[["df_hors_model"]],
-                                               table_output_produit_model_agg = table_output_produits[["df_model_agg"]],
-                                               table_output_pb = table_output_pb,
-                                               table_van_agg = table_van_agg,
-                                               table_be = table_be,
-                                               table_actifs = table_actifs,
-                                               table_flux_fin = table_flux_fin),
-                                 result_tech_actu = result_tech_actu,
-                                 result_fin_actu = result_fin_actu,
-                                 result_brut_actu = result_brut_actu,
-                                 result_net_actu = result_net_actu),
-                canton = canton))
+    return(list(
+      resultats = list(
+        nom_produit = nom_produit,
+        prime = prime,
+        prestation = prestation,
+        prestation_fdb = prestation_fdb,
+        frais = frais,
+        flux_be = flux_be,
+        prime_actu = prime_actu,
+        prestation_actu = prestation_actu,
+        prestation_fdb_actu = prestation_fdb_actu,
+        frais_actu = frais_actu,
+        be = be,
+        tables = list(
+          table_output_be = table_output_be,
+          table_output_produit_model = table_output_produits[["df_model"]],
+          table_output_produit_hors_model = table_output_produits[["df_hors_model"]],
+          table_output_produit_model_agg = table_output_produits[["df_model_agg"]],
+          table_output_pb = table_output_pb,
+          table_van_agg = table_van_agg,
+          table_be = table_be,
+          table_actifs = table_actifs,
+          table_flux_fin = table_flux_fin
+        ),
+        result_tech_actu = result_tech_actu,
+        result_fin_actu = result_fin_actu,
+        result_brut_actu = result_brut_actu,
+        result_net_actu = result_net_actu
+      ),
+      canton = canton
+    ))
   }
 )
-

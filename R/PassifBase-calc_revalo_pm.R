@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Fonction de calcul de la revalo des PM d'un model point
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -48,32 +47,33 @@
 ##'
 
 #--------------------------------------------------------
-setGeneric(name = "calc_revalo_pm", def = function(x, y) {standardGeneric("calc_revalo_pm")})
-# Epargne
-# y = list(rev_net_alloue, tx_soc)
-# Retraite
-# y = list()
+setGeneric(name = "calc_revalo_pm", def = function(x, y) {
+    standardGeneric("calc_revalo_pm")
+})
+# Epargne y = list(rev_net_alloue, tx_soc)
+# Retraite y = list()
 #--------------------------------------------------------
 
 setMethod(
     f = "calc_revalo_pm",
     signature = c(x = "EpEuroInd", y = "list"),
-    def = function(x, y){
+    def = function(x, y) {
         # Verification inputs
-        if (length(y) != 3)                            stop("[EpEuroInd : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 3. \n")
+        if (length(y) != 3) stop("[EpEuroInd : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 3. \n")
         # Verification des noms des elements de la liste
-        if (sum(names(y) == c("rev_net_alloue", "rev_brute_alloue_gar","tx_soc")) != length(y)) stop("[EpEuroInd : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 3 de nom :
-                                                                                                     rev_net_alloue, rev_brute_alloue_gar, tx_soc . \n")
+        if (sum(names(y) == c("rev_net_alloue", "rev_brute_alloue_gar", "tx_soc")) != length(y)) {
+            stop("[EpEuroInd : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 3 de nom : rev_net_alloue, rev_brute_alloue_gar, tx_soc.\n") # nolint: line_length_linter.
+        }
 
         # affectation pour eviter la modification des fonctions
         rev_net_alloue <- .subset2(y, 1)
         rev_brute_alloue_gar <- .subset2(y, 2)
-        tx_soc         <- .subset2(y, 3)
+        tx_soc <- .subset2(y, 3)
 
         # Verification des types des elements de la liste
-        if (! is.numeric(rev_net_alloue)) stop("[EpEuroInd : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 3, de nom : rev_net_alloue, rev_brute_alloue_gar, tx_soc, dont le type est : numeric, numeric. \n")
-        if (! is.numeric(rev_brute_alloue_gar)) stop("[EpEuroInd : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 3, de nom : rev_net_alloue, rev_brute_alloue_gar,  tx_soc, dont le type est : numeric, numeric. \n")
-        if (! is.numeric(tx_soc))         stop("[EpEuroInd : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 3, de nom : rev_net_alloue, rev_brute_alloue_gar, tx_soc dont le type est : numeric, numeric. \n")
+        if (!is.numeric(rev_net_alloue) | !is.numeric(rev_brute_alloue_gar) | !is.numeric(tx_soc)) {
+            stop("[EpEuroInd : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 3, de nom : rev_net_alloue, rev_brute_alloue_gar, tx_soc, dont le type est : numeric, numeric.\n") # nolint: line_length_linter.
+        }
 
 
         # Seuil pour gerer les problemes d'arrondi
@@ -120,23 +120,22 @@ setMethod(
             rev_stock_nette_av_pb * (1 - ind_chgt_enc_pos)
 
         # Calucl des chargements et de la revalorisation nette
-        if(rev_net_alloue == 0){
-
+        if (rev_net_alloue == 0) {
             # Chargements reels
             chgt_enc_stock <- rev_stock_brut * ind_chgt_enc_pos + chgt_enc_stock_th_av_pb * (1 - ind_chgt_enc_pos)
 
             # Revalorisation nette
             rev_stock_nette <- rev_stock_nette_av_pb
         } else {
-
             # Allocation de la revalorisation additionnelle selon le taux cible.
-            if(sum(bes_tx_cible) != 0)
+            if (sum(bes_tx_cible) != 0) {
                 rev_net_alloue_mp <- rev_net_alloue * (bes_tx_cible / sum(bes_tx_cible))
-            else # Attribution proportionnelle
+            } else { # Attribution proportionnelle
                 rev_net_alloue_mp <- rev_net_alloue * (1 / nb_mp)
+            }
 
             # Revalorisation nette
-            rev_stock_nette <- rev_stock_nette_av_pb * (rev_stock_nette_av_pb > 0)  + rev_net_alloue_mp
+            rev_stock_nette <- rev_stock_nette_av_pb * (rev_stock_nette_av_pb > 0) + rev_net_alloue_mp
 
             # Chargements reels
             chgt_enc_stock <- chgt_enc_stock_th_av_pb + rev_net_alloue_mp / (1 - chgt_enc_an) * chgt_enc_an
@@ -145,22 +144,22 @@ setMethod(
             # Revalorisation brute
             rev_stock_brut <- rev_stock_brut * (rev_stock_nette_av_pb > 0) +
                 chgt_enc_stock_th_av_pb * (rev_stock_nette_av_pb <= 0) + rev_net_alloue_mp / (1 - chgt_enc_an)
-
         }
 
         # Attribution de la revalorisation garantie
-        if(rev_brute_alloue_gar != 0){
-          # Allocation de la revalorisation additionnelle selon le taux cible.
-          if(sum(bes_tx_cible) != 0)
-            rev_brute_alloue_gar_mp <- rev_brute_alloue_gar * (bes_tx_cible / sum(bes_tx_cible))
-          else # Attribution proportionnelle
-            rev_brute_alloue_gar_mp <- rev_brute_alloue_gar * (1 / nb_mp)
-        } else{
-          rev_brute_alloue_gar_mp <- 0
+        if (rev_brute_alloue_gar != 0) {
+            # Allocation de la revalorisation additionnelle selon le taux cible.
+            if (sum(bes_tx_cible) != 0) {
+                rev_brute_alloue_gar_mp <- rev_brute_alloue_gar * (bes_tx_cible / sum(bes_tx_cible))
+            } else { # Attribution proportionnelle
+                rev_brute_alloue_gar_mp <- rev_brute_alloue_gar * (1 / nb_mp)
+            }
+        } else {
+            rev_brute_alloue_gar_mp <- 0
         }
 
 
-        #Calcul du taux de revalorisation net
+        # Calcul du taux de revalorisation net
         tx_rev_net <- rev_stock_nette / (pm_deb - prest + 0.5 * pri_net)
         # Controle des denominateurs negatifs
         tx_rev_net[which((pm_deb - prest + 0.5 * pri_net) == 0)] <- 0
@@ -178,23 +177,25 @@ setMethod(
         pm_fin_ap_pb[which(abs(pm_fin_ap_pb) < SEUIL_ARRONDI)] <- 0
 
         # Message d'erreur si PM negative
-        if(! all(pm_fin_ap_pb >= 0))
+        if (!all(pm_fin_ap_pb >= 0)) {
             stop("[EpEuro-calc_revalo_pm] : la valeur des PM ne peut pas etre negative.")
+        }
 
         # output
-        return(list(stock = list(
-            pm_fin_ap_pb = pm_fin_ap_pb,
-            pm_gar_ap_pb = pm_gar_ap_pb
-        ),
-        flux = list(
-            rev_stock_brut_ap_pb = rev_stock_brut,
-            rev_stock_nette_ap_pb = rev_stock_nette,
-            enc_charg_stock_ap_pb = chgt_enc_stock,
-            soc_stock_ap_pb = soc_stock,
-            supp_brut_gar_ap_pb = rev_brute_alloue_gar_mp,
-            supp_nette_gar_ap_pb = rev_brute_alloue_gar_mp * (1 - chgt_enc_an)
-        ),
-        tx_rev_net = tx_rev_net
+        return(list(
+            stock = list(
+                pm_fin_ap_pb = pm_fin_ap_pb,
+                pm_gar_ap_pb = pm_gar_ap_pb
+            ),
+            flux = list(
+                rev_stock_brut_ap_pb = rev_stock_brut,
+                rev_stock_nette_ap_pb = rev_stock_nette,
+                enc_charg_stock_ap_pb = chgt_enc_stock,
+                soc_stock_ap_pb = soc_stock,
+                supp_brut_gar_ap_pb = rev_brute_alloue_gar_mp,
+                supp_nette_gar_ap_pb = rev_brute_alloue_gar_mp * (1 - chgt_enc_an)
+            ),
+            tx_rev_net = tx_rev_net
         ))
     }
 )
@@ -203,18 +204,18 @@ setMethod(
 setMethod(
     f = "calc_revalo_pm",
     signature = c(x = "RetraiteEuroRest", y = "list"),
-    def = function(x, y){
+    def = function(x, y) {
         # Verification inputs
-        if (length(y) != 2L)  stop("[RetraiteEuroRest : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 2. \n")
+        if (length(y) != 2L) stop("[RetraiteEuroRest : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 2. \n")
 
         # affectation pour eviter la modification des fonctions
         rev_net_alloue <- .subset2(y, 1L)
         rev_brute_alloue_gar <- .subset2(y, 2)
 
         # Verification des types des elements de la liste
-        if (! is.numeric(rev_net_alloue)) stop("[RetraiteEuroRest : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 2, de nom : rev_net_alloue, rev_brute_alloue_gar dont le type est : numeric, numeric. \n")
-        if (! is.numeric(rev_brute_alloue_gar)) stop("[RetraiteEuroRest : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 2, de nom : rev_net_alloue, rev_brute_alloue_gar, dont le type est : numeric, numeric. \n")
-
+        if (!is.numeric(rev_net_alloue) | !is.numeric(rev_brute_alloue_gar)) {
+            stop("[RetraiteEuroRest : calc_revalo_pm] : L'input y doit correspondre a une liste de longueur 2, de nom : rev_net_alloue, rev_brute_alloue_gar dont le type est : numeric, numeric.\n") # nolint: line_length_linter.
+        }
 
         # Seuil pour gerer les problemes d'arrondi
         SEUIL_ARRONDI <- 0.00001
@@ -238,15 +239,13 @@ setMethod(
         som <- sum(bes_tx_cible)
 
         # Allocation de la revalorisation additionnelle et le surplus garanti (en brut) selon le taux cible
-        if (som != 0){
-          rev_net_alloue_mp <- rev_net_alloue * (bes_tx_cible / som)
-          rev_brute_alloue_gar_mp <- rev_brute_alloue_gar * (bes_tx_cible / som)
-        }
-
-        else{
-          # Attribution proportionnelle
-          rev_net_alloue_mp <- rev_net_alloue * (rep(1, nb_mp) / nb_mp)
-          rev_brute_alloue_gar_mp <- rev_brute_alloue_gar * (rep(1, nb_mp) / nb_mp)
+        if (som != 0) {
+            rev_net_alloue_mp <- rev_net_alloue * (bes_tx_cible / som)
+            rev_brute_alloue_gar_mp <- rev_brute_alloue_gar * (bes_tx_cible / som)
+        } else {
+            # Attribution proportionnelle
+            rev_net_alloue_mp <- rev_net_alloue * (rep(1, nb_mp) / nb_mp)
+            rev_brute_alloue_gar_mp <- rev_brute_alloue_gar * (rep(1, nb_mp) / nb_mp)
         }
 
 
@@ -264,33 +263,35 @@ setMethod(
         pm_gar_ap_pb <- pm_gar + rev_stock_nette_gar
 
         # Application d'un seuil pour eviter les problemes d'arrondi
-        pm_fin_ap_pb [which(abs(pm_fin_ap_pb) < SEUIL_ARRONDI)] <- 0
+        pm_fin_ap_pb[which(abs(pm_fin_ap_pb) < SEUIL_ARRONDI)] <- 0
 
-        #Calcul du taux de revalorisation net
+        # Calcul du taux de revalorisation net
         tx_rev_net <- rev_net_alloue_mp / pm_fin_ap_pb
         # Controle des denominateurs negatifs
         tx_rev_net[which(pm_fin == 0)] <- 0
 
 
         # Message d'erreur si PM negative
-        if(! all(pm_fin_ap_pb >= 0))
+        if (!all(pm_fin_ap_pb >= 0)) {
             stop("[RetraiteEuroRest-calc_revalo_pm] : la valeur des PM ne peut pas etre negative.")
+        }
 
         # output
         out_zero <- rep(0, nb_mp) # OutPut zero
-        return(list(stock = list(
-            pm_fin_ap_pb = pm_fin_ap_pb,
-            pm_gar_ap_pb = pm_gar_ap_pb
-        ),
-        flux = list(
-            rev_stock_brut_ap_pb = rev_stock_brut,
-            rev_stock_nette_ap_pb = rev_stock_nette,
-            supp_brut_gar__ap_pb = rev_stock_brut_gar, # Supplement brut de revalorisation sur le PM gar
-            supp_nette_gar_ap_pb = rev_stock_nette_gar,  # Supplement net de revalorisation sur le PM gar
-            enc_charg_stock_ap_pb = out_zero, # Pas de chargement sur encours pour les retraites
-            soc_stock_ap_pb = out_zero # Pas de pr?l?vements sociaux pour les retraites
-        ),
-        tx_rev_net = tx_rev_net
+        return(list(
+            stock = list(
+                pm_fin_ap_pb = pm_fin_ap_pb,
+                pm_gar_ap_pb = pm_gar_ap_pb
+            ),
+            flux = list(
+                rev_stock_brut_ap_pb = rev_stock_brut,
+                rev_stock_nette_ap_pb = rev_stock_nette,
+                supp_brut_gar__ap_pb = rev_stock_brut_gar, # Supplement brut de revalorisation sur le PM gar
+                supp_nette_gar_ap_pb = rev_stock_nette_gar, # Supplement net de revalorisation sur le PM gar
+                enc_charg_stock_ap_pb = out_zero, # Pas de chargement sur encours pour les retraites
+                soc_stock_ap_pb = out_zero # Pas de pr?l?vements sociaux pour les retraites
+            ),
+            tx_rev_net = tx_rev_net
         ))
     }
 )

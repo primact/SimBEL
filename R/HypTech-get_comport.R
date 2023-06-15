@@ -21,20 +21,20 @@
 ##' @seealso Le calcul du taux cible \code{\link{calc_tx_cible_ref_marche}}.
 ##' @export
 ##' @include HypTech-class.R
-setGeneric("get_comport", function(x, nom_table, list_rd, tx_cible_prec){standardGeneric("get_comport")})
+setGeneric("get_comport", function(x, nom_table, list_rd, tx_cible_prec) {
+    standardGeneric("get_comport")
+})
 setMethod(
     f = "get_comport",
-    signature = c(x = "HypTech",  nom_table = "character", list_rd = "numeric", tx_cible_prec = "numeric"),
-    def = function(x, nom_table, list_rd , tx_cible_prec){
-        
+    signature = c(x = "HypTech", nom_table = "character", list_rd = "numeric", tx_cible_prec = "numeric"),
+    def = function(x, nom_table, list_rd, tx_cible_prec) {
         # Ajout d un test de presence du nom
-        if (! is.element(nom_table, names(x@param_comport))) stop("[Hyptech : get_comport] Tables de parametres de taux cible non trouve")
-        
+        if (!is.element(nom_table, names(x@param_comport))) stop("[Hyptech : get_comport] Tables de parametres de taux cible non trouve")
+
         # Extraction de la table
         table <- x@param_comport[[nom_table]]
-        
+
         # Output : calcul du taux cible (C++)
         return(calc_tx_cible_ref_marche(list_rd, table@alloc_mar, table@ch_enc_mar, table@marge_mar, table@w_n, tx_cible_prec))
-        
     }
 )

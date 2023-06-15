@@ -1,7 +1,3 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Ce script comprend la fonction qui calcule le taux de rendement de l'actif du portefeuille
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           calc_tra
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -18,20 +14,21 @@
 ##' @export
 ##' @include PortFin_class.R
 
-setGeneric(name = "calc_tra", def = function(plac_moy, res_fin){standardGeneric("calc_tra")})
+setGeneric(name = "calc_tra", def = function(plac_moy, res_fin) {
+    standardGeneric("calc_tra")
+})
 setMethod(
     f = "calc_tra",
     signature = c(plac_moy = "numeric", res_fin = "numeric"),
-    definition = function(plac_moy, res_fin){
-        
+    definition = function(plac_moy, res_fin) {
         # Valeur moyenne des placements
-        if(plac_moy == 0)
+        if (plac_moy == 0) {
             tra <- 0
-        else
-            tra <- res_fin / plac_moy # Calcul du TRA
-        
+        } else {
+            tra <- res_fin / plac_moy
+        } # Calcul du TRA
+
         # Output
         return(tra)
     }
 )
-

@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Fonction d'initialisation de HypTech
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -18,11 +17,9 @@ setMethod(
   definition = function(.Object,
                         tables_mort = list(),
                         tables_rach = list(),
-                        param_rach_dyn =list(),
-                        param_comport = list()
-                        ){
-
-    if(! missing(tables_mort) & ! missing(tables_rach) & ! missing(param_rach_dyn) & ! missing(param_comport)){
+                        param_rach_dyn = list(),
+                        param_comport = list()) {
+    if (!missing(tables_mort) & !missing(tables_rach) & !missing(param_rach_dyn) & !missing(param_comport)) {
       .Object@tables_mort <- tables_mort
       .Object@tables_rach <- tables_rach
       .Object@param_rach_dyn <- param_rach_dyn
@@ -31,7 +28,7 @@ setMethod(
       # Validation du format
       validObject(.Object)
     } else {
-      #Traitement du cas vide
+      # Traitement du cas vide
       .Object@tables_mort <- list()
       .Object@tables_rach <- list()
       .Object@param_rach_dyn <- list()
@@ -49,13 +46,21 @@ setMethod(
 setMethod(
   f = "[",
   signature = "HypTech",
-  definition = function(x, i){
+  definition = function(x, i) {
     switch(EXPR = i,
-           "tables_mort" = {return(x@tables_mort)},
-           "tables_rach" = {return(x@tables_rach)},
-           "param_rach_dyn" = {return(x@param_rach_dyn)},
-           "param_comport" = {return(x@param_comport)},
-           stop("Cet attribut n'existe pas!")
+      "tables_mort" = {
+        return(x@tables_mort)
+      },
+      "tables_rach" = {
+        return(x@tables_rach)
+      },
+      "param_rach_dyn" = {
+        return(x@param_rach_dyn)
+      },
+      "param_comport" = {
+        return(x@param_comport)
+      },
+      stop("Cet attribut n'existe pas!")
     )
   }
 )
@@ -65,13 +70,21 @@ setMethod(
 setReplaceMethod(
   f = "[",
   signature = "HypTech",
-  definition = function(x, i, value){
+  definition = function(x, i, value) {
     switch(EXPR = i,
-           "tables_mort" = {x@tables_mort <- value},
-           "tables_rach" = {x@tables_rach <- value},
-           "param_rach_dyn" = {x@param_rach_dyn <- value},
-           "param_comport" = {x@param_comport <- value},
-           stop("Cet attribut n'existe pas!")
+      "tables_mort" = {
+        x@tables_mort <- value
+      },
+      "tables_rach" = {
+        x@tables_rach <- value
+      },
+      "param_rach_dyn" = {
+        x@param_rach_dyn <- value
+      },
+      "param_comport" = {
+        x@param_comport <- value
+      },
+      stop("Cet attribut n'existe pas!")
     )
     validObject(x)
     return(x)

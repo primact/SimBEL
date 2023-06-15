@@ -17,54 +17,55 @@
 ##' @include PortPassif-class.R
 ##'
 
-setGeneric(name = "load_pp", def = function(x){standardGeneric("load_pp")})
+setGeneric(name = "load_pp", def = function(x) {
+    standardGeneric("load_pp")
+})
 setMethod(
     f = "load_pp",
     signature = c(x = "Initialisation"),
-    def = function(x){
-
+    def = function(x) {
         ## 1 - Gestion des passifs epargne
         # Chargement des produits epargne
-        input_epeuroind <- read.csv2(paste(x@address[["data"]][["passif"]],"empl_tables_epeuroind.csv",sep="/"),
-                                     header = TRUE, colClasses = c("character", "character"))
+        input_epeuroind <- read.csv2(paste(x@address[["data"]][["passif"]], "empl_tables_epeuroind.csv", sep = "/"),
+            header = TRUE, colClasses = c("character", "character")
+        )
         nb_epeuroind <- nrow(input_epeuroind)
 
         # Initilisation de la liste
         list_epeuroind <- list()
 
         if (nb_epeuroind > 0L) {
-
             for (i in 1L:nb_epeuroind) {
-
                 # Chargement de l'objet
-                list_epeuroind[[i]] <- load_epeuroind(paste(x@address[["data"]][["passif"]], input_epeuroind[i,"nom_table_csv"], sep="/"))
+                list_epeuroind[[i]] <- load_epeuroind(paste(x@address[["data"]][["passif"]], input_epeuroind[i, "nom_table_csv"], sep = "/"))
             }
 
             # Nommage de la liste
-            names(list_epeuroind) <- input_epeuroind[,"nom_table_R"]
+            names(list_epeuroind) <- input_epeuroind[, "nom_table_R"]
         }
 
 
 
         ## 2 - Gestion des passifs retraite
         # Chargement des produits de retraite
-        input_retraiteeurorest <- read.csv2(paste(x@address[["data"]][["passif"]],"empl_tables_reteurorest.csv",sep="/"),
-                                            header = TRUE, colClasses = c("character", "character"))
+        input_retraiteeurorest <- read.csv2(paste(x@address[["data"]][["passif"]], "empl_tables_reteurorest.csv", sep = "/"),
+            header = TRUE, colClasses = c("character", "character")
+        )
         nb_retraiteeurorest <- nrow(input_retraiteeurorest)
 
         # Initialisation de la liste
         list_retraiteeurorest <- list()
 
         if (nb_retraiteeurorest > 0L) {
-
             for (i in 1L:nb_retraiteeurorest) {
-
                 # Chargement de l'objet
-                list_retraiteeurorest[[i]] <- load_reteurorest(paste(x@address[["data"]][["passif"]], input_retraiteeurorest[i,"nom_table_csv"], sep="/"))
+                list_retraiteeurorest[[i]] <- load_reteurorest(
+                    paste(x@address[["data"]][["passif"]], input_retraiteeurorest[i, "nom_table_csv"], sep = "/")
+                )
             }
 
             # Nommage de la liste
-            names(list_retraiteeurorest) <- input_retraiteeurorest[,"nom_table_R"]
+            names(list_retraiteeurorest) <- input_retraiteeurorest[, "nom_table_R"]
         }
 
 
@@ -77,14 +78,17 @@ setMethod(
         autres_reserves <- autres_reserves_load(paste(x@address[["data"]][["passif"]], "autres_reserves.csv", sep = "/"))
 
         # Chargement TauxPB
-        taux_pb <- tauxpb_load(paste(x@address[["data"]][["passif"]],"taux_pb.csv",sep="/"))
+        taux_pb <- tauxpb_load(paste(x@address[["data"]][["passif"]], "taux_pb.csv", sep = "/"))
 
         # Chargement et instanciation des tables de frais passif
-        frais_passif <- frais_passif_load(paste(x@address[["data"]][["passif"]],"frais_passif.csv",sep="/"))
+        frais_passif <- frais_passif_load(paste(x@address[["data"]][["passif"]], "frais_passif.csv", sep = "/"))
 
 
         # Instanciation de la classe PortPassif
-        return(new(Class="PortPassif", 0L, list_epeuroind, list_retraiteeurorest, names_class_prod = c(if(nb_epeuroind > 0L) "eei", if(nb_retraiteeurorest > 0L) "rer"),
-                   load_ht(x), frais_passif, taux_pb, autres_passifs, autres_reserves, TRUE, choc_lapse_mass = 0, choc_mort_cat = 0))
+        return(new(
+            Class = "PortPassif", 0L, list_epeuroind, list_retraiteeurorest,
+            names_class_prod = c(if (nb_epeuroind > 0L) "eei", if (nb_retraiteeurorest > 0L) "rer"),
+            load_ht(x), frais_passif, taux_pb, autres_passifs, autres_reserves, TRUE, choc_lapse_mass = 0, choc_mort_cat = 0
+        ))
     }
 )

@@ -30,18 +30,17 @@
 ##' @include EpEuroInd-class.R HypTech-class.R RetraiteEuroRest_class.R
 
 #--------------------------------------------------------
-setGeneric(name = "calc_proba_flux", def = function(x, ht){standardGeneric("calc_proba_flux")})
-# Epargne
-# y = list(ht)
-# Retraite
-# y = list(ht)
+setGeneric(name = "calc_proba_flux", def = function(x, ht) {
+    standardGeneric("calc_proba_flux")
+})
+# Epargne y = list(ht)
+# Retraite y = list(ht)
 #--------------------------------------------------------
 
 setMethod(
     f = "calc_proba_flux",
     signature = c(x = "EpEuroInd", ht = "HypTech"),
-    def = function(x, ht){
-
+    def = function(x, ht) {
         # ModelPoint
         epi_mp <- x@mp
 
@@ -53,30 +52,30 @@ setMethod(
         age <- which(nom_epi == "age")
         anc <- which(nom_epi == "anc")
         gen <- which(nom_epi == "gen")
-        tx_cible_prec    <- which(nom_epi == "tx_cible_prec")
-        tx_revalo_prec   <- which(nom_epi == "tx_revalo_prec")
+        tx_cible_prec <- which(nom_epi == "tx_cible_prec")
+        tx_revalo_prec <- which(nom_epi == "tx_revalo_prec")
         num_rach_dyn_tot <- which(nom_epi == "num_rach_dyn_tot")
-        num_tab_mort     <- which(nom_epi == "num_tab_mort")
-        num_rach_part    <- which(nom_epi == "num_rach_part")
-        num_rach_tot     <- which(nom_epi == "num_rach_tot")
+        num_tab_mort <- which(nom_epi == "num_tab_mort")
+        num_rach_part <- which(nom_epi == "num_rach_part")
+        num_rach_tot <- which(nom_epi == "num_rach_tot")
 
 
         # Donnees des MPs
         age <- .subset2(epi_mp, age)
         anc <- .subset2(epi_mp, anc)
         gen <- .subset2(epi_mp, gen)
-        tab_mort  <- .subset2(epi_mp, num_tab_mort)
-        rach_tot  <- .subset2(epi_mp, num_rach_tot)
+        tab_mort <- .subset2(epi_mp, num_tab_mort)
+        rach_tot <- .subset2(epi_mp, num_rach_tot)
         rach_part <- .subset2(epi_mp, num_rach_part)
 
         # Tables
-        tab_mort_unique  <- levels(tab_mort)
-        rach_tot_unique  <- levels(rach_tot)
+        tab_mort_unique <- levels(tab_mort)
+        rach_tot_unique <- levels(rach_tot)
         rach_part_unique <- levels(rach_part)
 
         # Initialisation des vecteurs
-        qx_dc        <- vector("numeric", length = nb_mp)
-        qx_rach_tot  <- vector("numeric", length = nb_mp)
+        qx_dc <- vector("numeric", length = nb_mp)
+        qx_rach_tot <- vector("numeric", length = nb_mp)
         qx_rach_part <- vector("numeric", length = nb_mp)
 
         # Calcul des qx_rach_tot
@@ -98,9 +97,11 @@ setMethod(
         }
 
         # Output
-        return(list(qx_rach_tot = qx_rach_tot,
-                    qx_dc = qx_dc,
-                    qx_rach_part = qx_rach_part))
+        return(list(
+            qx_rach_tot = qx_rach_tot,
+            qx_dc = qx_dc,
+            qx_rach_part = qx_rach_part
+        ))
     }
 )
 
@@ -108,8 +109,7 @@ setMethod(
 setMethod(
     f = "calc_proba_flux",
     signature = c(x = "RetraiteEuroRest", ht = "HypTech"),
-    def = function(x, ht){
-
+    def = function(x, ht) {
         # Model Point
         epi_mp <- x@mp
 
@@ -120,39 +120,38 @@ setMethod(
         nom_epi <- names(epi_mp)
 
         # Recuperer numeros colonnes
-        num_tab_mort     <- which(nom_epi == "num_tab_mort")
+        num_tab_mort <- which(nom_epi == "num_tab_mort")
         num_tab_mort_rvs <- which(nom_epi == "num_tab_mort_rvs")
-        num_age          <- which(nom_epi == "age")
-        num_age_rvs      <- which(nom_epi == "age_rvs")
-        num_gen          <- which(nom_epi == "gen")
-        num_gen_rvs      <- which(nom_epi == "gen_rvs")
-        num_statut       <- which(nom_epi == "statut_rvs")
-        num_tx_rvs       <- which(nom_epi == "tx_rvs")
+        num_age <- which(nom_epi == "age")
+        num_age_rvs <- which(nom_epi == "age_rvs")
+        num_gen <- which(nom_epi == "gen")
+        num_gen_rvs <- which(nom_epi == "gen_rvs")
+        num_statut <- which(nom_epi == "statut_rvs")
+        num_tx_rvs <- which(nom_epi == "tx_rvs")
 
         # Extraction des donnees
-        tab_mort     <- .subset2(epi_mp, num_tab_mort)
+        tab_mort <- .subset2(epi_mp, num_tab_mort)
         tab_mort_rvs <- .subset2(epi_mp, num_tab_mort_rvs)
-        age          <- .subset2(epi_mp, num_age)
-        age_rvs      <- .subset2(epi_mp, num_age_rvs)
-        gen          <- .subset2(epi_mp, num_gen)
-        gen_rvs      <- .subset2(epi_mp, num_gen_rvs)
-        statut       <- .subset2(epi_mp, num_statut)
-        tx_rvs       <- .subset2(epi_mp, num_tx_rvs)
+        age <- .subset2(epi_mp, num_age)
+        age_rvs <- .subset2(epi_mp, num_age_rvs)
+        gen <- .subset2(epi_mp, num_gen)
+        gen_rvs <- .subset2(epi_mp, num_gen_rvs)
+        statut <- .subset2(epi_mp, num_statut)
+        tx_rvs <- .subset2(epi_mp, num_tx_rvs)
 
         # Tables
-        tab_mort_unique     <- levels(tab_mort)
+        tab_mort_unique <- levels(tab_mort)
         tab_mort_rvs_unique <- levels(tab_mort_rvs)
         bool_tab <- vector(mode = "logical", length = nlevels(tab_mort_rvs))
         names(bool_tab) <- tab_mort_rvs_unique
 
         # Initialisation des vecteurs
         proba_sortie_retraite <- vector("numeric", length = nb_mp)
-        proba_survie_un_an    <- vector("numeric", length = nb_mp)
+        proba_survie_un_an <- vector("numeric", length = nb_mp)
 
 
         # Calcul des probas
-        for(tab in tab_mort_unique) {
-
+        for (tab in tab_mort_unique) {
             ## Statut = 1 (Pas de reversataire)
             # Ligne de donnees
             row <- which((tab_mort == tab) & (statut == 1L))
@@ -163,9 +162,8 @@ setMethod(
             proba_survie_un_an[row] <- 1 - qx_a
 
 
-            for(tab_rvs in tab_mort_rvs_unique) {
-
-                ## Statut = 2 (Assure + reversataire)
+            for (tab_rvs in tab_mort_rvs_unique) {
+                ## Statut vaut 2 (Assure + reversataire)
                 # Lignes de donnees
                 row <- which((tab_mort == tab) & (tab_mort_rvs == tab_rvs) & (statut == 2L))
 
@@ -178,8 +176,7 @@ setMethod(
 
 
                 ## Statut = 3 (Que reversataire)
-                if (! bool_tab[tab_rvs]) {
-
+                if (!bool_tab[tab_rvs]) {
                     # Lignes de donnees
                     row <- which((tab_mort_rvs == tab_rvs) & (statut == 3L))
 
@@ -191,13 +188,14 @@ setMethod(
                     # Modification du tableau de booleen
                     bool_tab[tab_rvs] <- TRUE
                 }
-
             }
         }
 
 
         # Output
-        return(list(proba_sortie_retraite = proba_sortie_retraite,
-                    proba_survie_un_an = proba_survie_un_an))
+        return(list(
+            proba_sortie_retraite = proba_sortie_retraite,
+            proba_survie_un_an = proba_survie_un_an
+        ))
     }
 )

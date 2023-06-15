@@ -14,17 +14,17 @@
 ##' @seealso La methode de calcul de la RC \code{\link{calc_RC}}
 ##' @include RC_class.R
 
-setGeneric("do_update_RC_val_debut", def = function(x, val_debut){standardGeneric("do_update_RC_val_debut")})
+setGeneric("do_update_RC_val_debut", def = function(x, val_debut) {
+    standardGeneric("do_update_RC_val_debut")
+})
 setMethod(
     f = "do_update_RC_val_debut",
     signature = c(x = "RC", val_debut = "numeric"),
-    definition = function(x, val_debut){
-        
+    definition = function(x, val_debut) {
         # Mise a jour de la valeur
         x@val_debut <- val_debut
-        
+
         # Output
         return(x)
     }
 )
-

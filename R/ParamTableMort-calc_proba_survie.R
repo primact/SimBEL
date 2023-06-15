@@ -14,15 +14,17 @@
 ##' @author Prim'Act
 ##' @include ParamTableMort-class.R
 ##' @export
-setGeneric("calc_proba_survie", function(table_mort, age, gen, n_periodes){standardGeneric("calc_proba_survie")})
+setGeneric("calc_proba_survie", function(table_mort, age, gen, n_periodes) {
+    standardGeneric("calc_proba_survie")
+})
 setMethod(
     f = "calc_proba_survie",
     signature = c(table_mort = "ParamTableMort", age = "integer", gen = "integer", n_periodes = "integer"),
-    def = function(table_mort, age, gen, n_periodes){
-
+    def = function(table_mort, age, gen, n_periodes) {
         # Ajout de test sur le format
-        if(age < table_mort@age_min)
+        if (age < table_mort@age_min) {
             stop("L'age doit etre superieur a l'age minimum de la table")
+        }
 
         # Age applique
         age_app <- min(age, table_mort@age_max - 1L)
@@ -41,27 +43,28 @@ setMethod(
 
         # Numero de ligne pour les Lx et Lx+1
         index_denominateur <- which(gen_tab == gen_app & age_tab == age_app)
-        index_numerateur   <- which(gen_tab == gen_app & age_tab == age_app + 1L)
+        index_numerateur <- which(gen_tab == gen_app & age_tab == age_app + 1L)
         index_max <- which(gen_tab == gen_app & age_tab == table_mort@age_max)
-        index_numerateur <- index_numerateur : index_max
+        index_numerateur <- index_numerateur:index_max
 
 
         # Calcul des probabilites de deces
-        numerateur   <- lx[index_numerateur]
+        numerateur <- lx[index_numerateur]
         denominateur <- lx[index_denominateur]
-        if(length(numerateur) >= n_periodes)
+        if (length(numerateur) >= n_periodes) {
             numerateur <- numerateur[1:n_periodes]
-        else
+        } else {
             numerateur <- c(numerateur, rep(0, n_periodes - length(numerateur)))
+        }
 
 
-        if(denominateur == 0)
+        if (denominateur == 0) {
             proba <- rep(0, n_periodes)
-        else
+        } else {
             proba <- numerateur / denominateur
+        }
 
         # Output
         return(proba)
     }
 )
-

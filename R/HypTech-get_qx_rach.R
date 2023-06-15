@@ -18,17 +18,17 @@
 ##' @seealso Le calcul du taux de rachat \code{\link{calc_rach}}.
 ##' @export
 ##' @include HypTech-class.R
-setGeneric("get_qx_rach", function(x, nom_table, age, anc){standardGeneric("get_qx_rach")})
+setGeneric("get_qx_rach", function(x, nom_table, age, anc) {
+    standardGeneric("get_qx_rach")
+})
 setMethod(
     f = "get_qx_rach",
-    signature = c(x = "HypTech",  nom_table = "character", age = "integer", anc = "integer"),
-    def = function(x, nom_table, age, anc){
-        
+    signature = c(x = "HypTech", nom_table = "character", age = "integer", anc = "integer"),
+    def = function(x, nom_table, age, anc) {
         # Ajout d un test de presence du nom
-        if (! nom_table %in% names(x@tables_rach)) stop("[Hyptech : get_qx_rach] Nom de table de rachat non trouve")
-        
+        if (!nom_table %in% names(x@tables_rach)) stop("[Hyptech : get_qx_rach] Nom de table de rachat non trouve")
+
         # Calcul du taux de rachat
-        return(calc_rach(x@tables_rach[[nom_table]],age,anc))
-        
+        return(calc_rach(x@tables_rach[[nom_table]], age, anc))
     }
 )

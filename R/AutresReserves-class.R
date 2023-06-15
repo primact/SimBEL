@@ -38,34 +38,33 @@ setClass(
     tx_pgg_autres = "numeric",
     tx_psap_ep = "numeric",
     tx_psap_autres = "numeric"
-    ))
+  )
+)
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Verificateur et initialisateur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 # Verificateur : permet a chaque appel de l'objet de verifier quelques elements de base :
-setValidity(Class = "AutresReserves",
-            function (object){
-              retval <- NULL
+setValidity(
+  Class = "AutresReserves",
+  function(object) {
+    retval <- NULL
 
-              # Test sur les types
-              if (! is.numeric(object@pgg_debut))      retval <- c(retval, "[AutresReserves] : pgg_debut n'est pas numeric/n")
-              if (! is.numeric(object@psap_debut))     retval <- c(retval, "[AutresReserves] : psap_debut n'est pas numeric/n")
-              if (! is.numeric(object@pgg_valeur))     retval <- c(retval, "[AutresReserves] : pgg_valeur n'est pas numeric/n")
-              if (! is.numeric(object@psap_valeur))    retval <- c(retval, "[AutresReserves] : psap_valeur n'est pas numeric/n")
-              if (! is.numeric(object@tx_pgg_ep))      retval <- c(retval, "[AutresReserves] : tx_pgg_ep n'est pas numeric/n")
-              if (! is.numeric(object@tx_pgg_autres))  retval <- c(retval, "[AutresReserves] : tx_pgg_autres n'est pas numeric/n")
-              if (! is.numeric(object@tx_psap_ep))     retval <- c(retval, "[AutresReserves] : tx_psap_ep n'est pas numeric/n")
-              if (! is.numeric(object@tx_psap_autres)) retval <- c(retval, "[AutresReserves] : tx_psap_autres n'est pas numeric/n")
+    # Test sur les types
+    if (!is.numeric(object@pgg_debut)) retval <- c(retval, "[AutresReserves] : pgg_debut n'est pas numeric/n")
+    if (!is.numeric(object@psap_debut)) retval <- c(retval, "[AutresReserves] : psap_debut n'est pas numeric/n")
+    if (!is.numeric(object@pgg_valeur)) retval <- c(retval, "[AutresReserves] : pgg_valeur n'est pas numeric/n")
+    if (!is.numeric(object@psap_valeur)) retval <- c(retval, "[AutresReserves] : psap_valeur n'est pas numeric/n")
+    if (!is.numeric(object@tx_pgg_ep)) retval <- c(retval, "[AutresReserves] : tx_pgg_ep n'est pas numeric/n")
+    if (!is.numeric(object@tx_pgg_autres)) retval <- c(retval, "[AutresReserves] : tx_pgg_autres n'est pas numeric/n")
+    if (!is.numeric(object@tx_psap_ep)) retval <- c(retval, "[AutresReserves] : tx_psap_ep n'est pas numeric/n")
+    if (!is.numeric(object@tx_psap_autres)) retval <- c(retval, "[AutresReserves] : tx_psap_autres n'est pas numeric/n")
 
-              # # Test sur la longueur
-              # if (length(object@tx_pgg_ep) != 1)  {retval <- c(retval, "[AutresReserves] : tx_pgg_ep doit etre de longueur 1/n")}
-              # if (length(object@tx_pgg_autres) != 1)  {retval <- c(retval, "[AutresReserves] : tx_pgg_autres doit etre de longueur 1/n")}
-              # if (length(object@tx_psap_ep) != 1)  {retval <- c(retval, "[AutresReserves] : tx_psap_ep doit etre de longueur 1/n")}
-              # if (length(object@tx_psap_autres) != 1)  {retval <- c(retval, "[AutresReserves] : tx_psap_autres doit etre de longueur 1/n")}
 
-              if (is.null(retval)) return (TRUE)
-              else return (retval)
-              }
-              )
-
+    if (is.null(retval)) {
+      return(TRUE)
+    } else {
+      return(retval)
+    }
+  }
+)

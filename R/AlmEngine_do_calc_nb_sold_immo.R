@@ -20,32 +20,33 @@
 ##' @export
 ##' @include AlmEngine_class.R Immo_class.R
 
-setGeneric(name = "do_calc_nb_sold_immo", def = function(x, montant_vente, method_vente){standardGeneric("do_calc_nb_sold_immo")})
+setGeneric(name = "do_calc_nb_sold_immo", def = function(x, montant_vente, method_vente) {
+    standardGeneric("do_calc_nb_sold_immo")
+})
 setMethod(
     f = "do_calc_nb_sold_immo",
     signature = c(x = "Immo", montant_vente = "numeric", method_vente = "character"),
-    definition = function(x, montant_vente, method_vente){
-
+    definition = function(x, montant_vente, method_vente) {
         # Donnees
-        ptf_immo    <- x@ptf_immo
-        nom_table   <- names(ptf_immo)
-        val_marche  <- which(nom_table == "val_marche")
-        num_mp      <- which(nom_table == "num_mp")
-        nb_unit     <- which(nom_table == "nb_unit")
+        ptf_immo <- x@ptf_immo
+        nom_table <- names(ptf_immo)
+        val_marche <- which(nom_table == "val_marche")
+        num_mp <- which(nom_table == "num_mp")
+        nb_unit <- which(nom_table == "nb_unit")
 
-        if(method_vente == "proportionnelle"){
+        if (method_vente == "proportionnelle") {
             # Extraction de la valeur de marche
-            val_marche  <- .subset2(ptf_immo, val_marche)
-            
-            alloc           <- val_marche / sum(val_marche) # Calul de l'allocation
-            montant_vente   <- montant_vente * alloc # Calcul du montant_vente
-            vm_unitaire     <- val_marche / .subset2(ptf_immo, nb_unit) # Calcul de la valeur de marche unitaire
-            nb_sold         <- montant_vente / vm_unitaire # Calul du nombre d'unite a vendre
+            val_marche <- .subset2(ptf_immo, val_marche)
+
+            alloc <- val_marche / sum(val_marche) # Calul de l'allocation
+            montant_vente <- montant_vente * alloc # Calcul du montant_vente
+            vm_unitaire <- val_marche / .subset2(ptf_immo, nb_unit) # Calcul de la valeur de marche unitaire
+            nb_sold <- montant_vente / vm_unitaire # Calul du nombre d'unite a vendre
 
             # Extraction des numeros de MP
-            num_mp  <- .subset2(ptf_immo, num_mp)
+            num_mp <- .subset2(ptf_immo, num_mp)
         }
-        
+
         # Output
         return(cbind(num_mp = num_mp, nb_sold = nb_sold))
     }

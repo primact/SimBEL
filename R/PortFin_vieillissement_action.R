@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           vieillissement_action_PortFin
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -21,37 +20,37 @@
 ##' @seealso La fonction de calcul des rendements des actifs \code{\link{calc_rdt}}.
 ##' @include PortFin_class.R
 
-setGeneric(name = "vieillissement_action_PortFin", def = function(x, table_rdt){standardGeneric("vieillissement_action_PortFin")})
+setGeneric(name = "vieillissement_action_PortFin", def = function(x, table_rdt) {
+    standardGeneric("vieillissement_action_PortFin")
+})
 setMethod(
     f = "vieillissement_action_PortFin",
     signature = c(x = "PortFin", table_rdt = "list"),
-    definition = function(x, table_rdt){
-        
+    definition = function(x, table_rdt) {
         # Extraction du PTF
         ptf_action <- x@ptf_action
-        
+
         # Verification input :
-        if(nrow(ptf_action@ptf_action) > 0) {
-            
+        if (nrow(ptf_action@ptf_action) > 0) {
             # Extraction table rdt
             rdt_action <- table_rdt[["rdt_action"]]
-            
+
             # Calcul des dividendes
-            dividende  <- sum(rdt_action[, "div"])
-            
+            dividende <- sum(rdt_action[, "div"])
+
             # Mise a jour de la VM Action en fin d'annee
-            ptf_action <- update_vm_action(ptf_action, calc_vm_action(ptf_action, rdt_action[, "rdt"] ))
-            
+            ptf_action <- update_vm_action(ptf_action, calc_vm_action(ptf_action, rdt_action[, "rdt"]))
+
             # Mise a jour des durees de detention Action/Immo
             ptf_action <- update_dur_det_action(ptf_action)
-            
+
             # Mise a jour du PTF
             x@ptf_action <- ptf_action
-            
         } else {
-            dividende = 0
+            dividende <- 0
         }
-        
+
         # Output
         return(list(portFin = x, dividende = dividende))
-    })
+    }
+)

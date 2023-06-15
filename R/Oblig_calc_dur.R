@@ -14,44 +14,44 @@
 ##' @export
 ##' @include Oblig_class.R
 
-setGeneric(name = "duration_sensi", def = function(x){standardGeneric("duration_sensi")})
+setGeneric(name = "duration_sensi", def = function(x) {
+    standardGeneric("duration_sensi")
+})
 setMethod(
     f = "duration_sensi",
     signature = "Oblig",
-    definition = function(x){
-        
+    definition = function(x) {
         # Recuperation du PTF oblig
         ptf_oblig <- x@ptf_oblig
-        
-        if(nrow(ptf_oblig) == 0) stop("[Oblig : duration_sensi] : Portefeuille vide")
-        
+
+        if (nrow(ptf_oblig) == 0) stop("[Oblig : duration_sensi] : Portefeuille vide")
+
         # Calcul de donnees
-        coupon   <- calc_coupon(x)
-        nominal  <- calc_nominal(x)
-        ytm      <- yield_to_maturity(x)
+        coupon <- calc_coupon(x)
+        nominal <- calc_nominal(x)
+        ytm <- yield_to_maturity(x)
         maturite <- ptf_oblig$mat_res
-        zspread  <- ptf_oblig$zspread
-        m        <- max(maturite)
-        n        <- length(coupon)
-        
-        
+        zspread <- ptf_oblig$zspread
+        m <- max(maturite)
+        n <- length(coupon)
+
+
         denominateur <- echeancier(coupon, maturite, 0, nominal, numeric()) *
-            t(apply(matrix(1 / (1 + ytm + zspread), nrow = n, ncol = m, byrow = F), 1, cumprod))
-        numerateur    <- matrix(1:m, nrow = n, ncol = m, byrow = T) * denominateur
-        
-        
+            t(apply(matrix(1 / (1 + ytm + zspread), nrow = n, ncol = m, byrow = FALSE), 1, cumprod))
+        numerateur <- matrix(1:m, nrow = n, ncol = m, byrow = TRUE) * denominateur
+
+
         # Calcul de la duration
-        if (n == 1L) 
+        if (n == 1L) {
             duration <- sum(numerateur) / sum(denominateur)
-        else 
+        } else {
             duration <- rowSums(numerateur) / rowSums(denominateur)
-        
+        }
+
         # Calcul de la sensibilite
         sensi <- duration / (1 + ytm)
-        
+
         # Ouput
         return(data.frame(duration, sensi))
     }
 )
-
-

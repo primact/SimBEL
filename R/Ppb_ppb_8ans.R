@@ -16,12 +16,13 @@
 ##' @export
 ##' @include Ppb_class.R
 
-setGeneric(name = "ppb_8ans", def = function(x){ standardGeneric("ppb_8ans") })
+setGeneric(name = "ppb_8ans", def = function(x) {
+    standardGeneric("ppb_8ans")
+})
 setMethod(
     f = "ppb_8ans",
     signature = c(x = "Ppb"),
-    definition = function(x){
-
+    definition = function(x) {
         # Recuperer la ppb de l'annee t-8
         ppb_8 <- x@hist_ppb[8L]
 
@@ -39,4 +40,5 @@ setMethod(
             ppb_8 = ppb_8,
             ppb = x
         ))
-    })
+    }
+)

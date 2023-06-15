@@ -13,15 +13,16 @@
 ##' @author Prim'Act
 ##' @include ParamTableRach-class.R
 ##' @export
-setGeneric("calc_rach", function(table_rach, age, anc){standardGeneric("calc_rach")})
+setGeneric("calc_rach", function(table_rach, age, anc) {
+    standardGeneric("calc_rach")
+})
 setMethod(
     f = "calc_rach",
     signature = c(table_rach = "ParamTableRach", age = "integer", anc = "integer"),
-    def = function(table_rach, age, anc){
-
+    def = function(table_rach, age, anc) {
         # Ajout de test sur le format
-        if(! all(age >= table_rach@age_min)) stop("L'age doit etre superieur a l'age minimum de la table")
-        if(! all(anc >= table_rach@anc_min)) stop("L'anciennete doit etre superieure a l'anciennete minimum de la table")
+        if (!all(age >= table_rach@age_min)) stop("L'age doit etre superieur a l'age minimum de la table")
+        if (!all(anc >= table_rach@anc_min)) stop("L'anciennete doit etre superieure a l'anciennete minimum de la table")
 
         # Gestion des ages superieur a l age maximum de la table
         age_app <- pmin(age, table_rach@age_max)
@@ -32,9 +33,9 @@ setMethod(
         # Gestion des noms de colonnes du data.frame de donnnees
         table <- table_rach@table
         nom_table <- names(table)
-        age_name  <- which(nom_table == "age")
-        anc_name  <- which(nom_table == "anc")
-        tx_name   <- which(nom_table == "taux_rachat")
+        age_name <- which(nom_table == "age")
+        anc_name <- which(nom_table == "anc")
+        tx_name <- which(nom_table == "taux_rachat")
         age_tab <- .subset2(table, age_name)
         anc_tab <- .subset2(table, anc_name)
 
@@ -43,7 +44,7 @@ setMethod(
         anc_uniq <- unique(anc_tab)
 
         # Test si l age est bien present dans la table
-        if (! all(age_app %in% age_tab)) stop("L'age doit etre present dans la table")
+        if (!all(age_app %in% age_tab)) stop("L'age doit etre present dans la table")
 
 
         # Numero de ligne
@@ -55,4 +56,3 @@ setMethod(
         return(res)
     }
 )
-

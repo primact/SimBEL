@@ -15,21 +15,22 @@
 ##' @export
 ##' @include Action_class.R
 
-setGeneric(name = "calc_vm_action", def = function(x,rdt){standardGeneric("calc_vm_action")})
+setGeneric(name = "calc_vm_action", def = function(x, rdt) {
+    standardGeneric("calc_vm_action")
+})
 setMethod(
     f = "calc_vm_action",
     signature = c(x = "Action", rdt = "numeric"),
-    definition = function(x, rdt){
-
+    definition = function(x, rdt) {
         # Numeros colonnes donnees
         ptf_action <- x@ptf_action
-        nb_action  <- nrow(ptf_action)
-        nom_table  <- names(ptf_action)
+        nb_action <- nrow(ptf_action)
+        nom_table <- names(ptf_action)
         val_marche <- which(nom_table == "val_marche")
 
         # Verificateurs
-        if(nb_action == 0L)            stop("[Action : calc_vm_action] : Tentative de calcul de VM sur un ptf vide.")
-        if(length(rdt) != nb_action)   stop("[Action : calc_vm_action] : Les inputs ont des dimensions distinctes\n")
+        if (nb_action == 0L) stop("[Action : calc_vm_action] : Tentative de calcul de VM sur un ptf vide.")
+        if (length(rdt) != nb_action) stop("[Action : calc_vm_action] : Les inputs ont des dimensions distinctes\n")
 
         # Output
         return(.subset2(ptf_action, val_marche) * (1 + rdt))

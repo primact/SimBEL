@@ -11,25 +11,29 @@
 ##' @author Prim'Act
 ##' @keywords classes
 ##' @export
-setClass(Class = "ParamBe",
-         representation = representation(
-             nb_annee = "integer"
-         ))
+setClass(
+    Class = "ParamBe",
+    representation = representation(
+        nb_annee = "integer"
+    )
+)
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Verificateur et initialisateur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 # Verificateur : permet a chaque appel de l'objet de verifier quelques elements de base :
-setValidity(Class = "ParamBe",
-            function (object){
-                
-                retval <- NULL
-                
-                # Test
-                if (!is.integer(object@nb_annee))  retval <- c(retval, "[ParamBe] : nb_annee n'est pas entier/n")
-                
-                if (is.null(retval)) return (TRUE)
-                else return (retval)
-            }
-)
+setValidity(
+    Class = "ParamBe",
+    function(object) {
+        retval <- NULL
 
+        # Test
+        if (!is.integer(object@nb_annee)) retval <- c(retval, "[ParamBe] : nb_annee n'est pas entier/n")
+
+        if (is.null(retval)) {
+            return(TRUE)
+        } else {
+            return(retval)
+        }
+    }
+)

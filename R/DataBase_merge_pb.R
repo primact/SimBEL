@@ -11,15 +11,16 @@
 ##' @export
 ##' @include DataBase_class.R
 
-setGeneric(name = "merge_pb", def = function(output_pb, sim) {standardGeneric("merge_pb")})
+setGeneric(name = "merge_pb", def = function(output_pb, sim) {
+    standardGeneric("merge_pb")
+})
 setMethod(
     f = "merge_pb",
     signature = c(output_pb = "data.frame", sim = "integer"),
-    definition = function(output_pb, sim){
-        
+    definition = function(output_pb, sim) {
         # Aggregation des donnes
         df <- cbind(num_sim = sim, output_pb)
-        
+
         # Output
         return(df)
     }

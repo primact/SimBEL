@@ -7,7 +7,8 @@
 ##'   de chaque model point.
 ##' @name calc_tx_cible
 ##' @docType methods
-##' @param x un objet de la classe \code{\link{EpEuroInd}} ou de la classe \code{\link{RetraiteEuroRest}} contenant les model points epargne euros ou retraite euro en phases de restitution.
+##' @param x un objet de la classe \code{\link{EpEuroInd}} ou de la classe \code{\link{RetraiteEuroRest}}
+##' contenant les model points epargne euros ou retraite euro en phases de restitution.
 ##' @param y une liste contenant les parametres.
 ##' \describe{
 ##' \item{\code{list_rd} : }{est un vecteur contenant les rendements de reference.}
@@ -29,25 +30,28 @@
 ##' @include EpEuroInd-class.R HypTech-class.R RetraiteEuroRest_class.R
 
 #--------------------------------------------------------
-setGeneric(name = "calc_tx_cible", def = function(x, y) {standardGeneric("calc_tx_cible")})
+setGeneric(name = "calc_tx_cible", def = function(x, y) {
+    standardGeneric("calc_tx_cible")
+})
 #--------------------------------------------------------
 
 setMethod(
     f = "calc_tx_cible",
-    signature = c(x = "EpEuroInd", y = "list" ),
-    def = function(x, y){
-
+    signature = c(x = "EpEuroInd", y = "list"),
+    def = function(x, y) {
         # Verification inputs
         if (length(y) != 2L) stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2. \n")
-        if (sum(names(y) == c("ht", "list_rd")) != 2L) stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2 de nom : ht, list_rd . \n")
+        if (sum(names(y) == c("ht", "list_rd")) != 2L) {
+            stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2 de nom : ht, list_rd . \n")
+        }
 
         # Extraction listes
-        ht      <- .subset2(y, 1L)
+        ht <- .subset2(y, 1L)
         list_rd <- .subset2(y, 2L)
 
-        if (class(ht) != "HypTech") stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list. \n")
-        if (! is.numeric(list_rd))  stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list. \n")
-
+        if (class(ht) != "HypTech" | !is.numeric(list_rd)) {
+            stop("[EpEuroInd : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list.\n") # nolint: line_length_linter.
+        }
 
         # ModelPoint
         mp <- x@mp
@@ -66,7 +70,7 @@ setMethod(
         meth_tx_cible <- as.character(unique(tx_cible))
 
         # Initialisation du vecteur tx_cible
-        tx_cible_an <-vector("numeric", length = nb_mp)
+        tx_cible_an <- vector("numeric", length = nb_mp)
 
         # Calcul des tx cibles pour chacune des methodes
         for (meth in meth_tx_cible) {
@@ -79,26 +83,27 @@ setMethod(
 
         # Output
         return(list(tx_cible_an = tx_cible_an, tx_cible_se = tx_cible_se))
-
     }
 )
 
 #--------------------------------------------------------
 setMethod(
     f = "calc_tx_cible",
-    signature = c(x = "RetraiteEuroRest", y = "list" ),
-    def = function(x, y){
-
+    signature = c(x = "RetraiteEuroRest", y = "list"),
+    def = function(x, y) {
         # Verification inputs
         if (length(y) != 2L) stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2. \n")
-        if (sum(names(y) == c("ht", "list_rd")) != 2L) stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2 de nom : ht, list_rd . \n")
+        if (sum(names(y) == c("ht", "list_rd")) != 2L) {
+            stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2 de nom : ht, list_rd . \n")
+        }
 
         # Extraction listes
-        ht      <- .subset2(y, 1L)
+        ht <- .subset2(y, 1L)
         list_rd <- .subset2(y, 2L)
 
-        if (! is.numeric(list_rd))  stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list. \n")
-        if (class(ht) != "HypTech") stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list. \n")
+        if (class(ht) != "HypTech" | !is.numeric(list_rd)) {
+            stop("[RetraiteEuroRest : calc_tx_cible] : L'input y doit correspondre a une liste de longueur 2, de nom : ht, list_rd, dont le type est : HypTech, list. \n") # nolint: line_length_linter.
+        }
 
         # ModelPoint
         mp <- x@mp
@@ -117,7 +122,7 @@ setMethod(
         meth_tx_cible <- as.character(unique(tx_cible))
 
         # Initialisation du vecteur tx_cible
-        tx_cible_an <-vector("numeric", length = nb_mp)
+        tx_cible_an <- vector("numeric", length = nb_mp)
 
         # Calcul des tx cibles pour chacune des methodes
         for (meth in meth_tx_cible) {
@@ -132,5 +137,3 @@ setMethod(
         return(list(tx_cible_an = tx_cible_an, tx_cible_se = tx_cible_se))
     }
 )
-
-

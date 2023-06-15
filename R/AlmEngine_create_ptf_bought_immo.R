@@ -19,34 +19,35 @@
 ##' @export
 ##' @include AlmEngine_class.R Immo_class.R
 
-setGeneric(name = "create_ptf_bought_immo", def = function(x, coefficient){standardGeneric("create_ptf_bought_immo")})
+setGeneric(name = "create_ptf_bought_immo", def = function(x, coefficient) {
+    standardGeneric("create_ptf_bought_immo")
+})
 setMethod(
     f = "create_ptf_bought_immo",
     signature = c(x = "Immo", coefficient = "numeric"),
-    definition = function(x, coefficient){
-        
+    definition = function(x, coefficient) {
         # Recuperation du PTF immo
         ptf_immo <- x@ptf_immo
-        
+
         # Test input
         if (length(coefficient) != nrow(ptf_immo)) stop("[Immo : create_ptf_bought_immo] : Les inputs sont de dimensions distinctes \n")
 
         # Donnees
-        nom_table  <- names(ptf_immo)
+        nom_table <- names(ptf_immo)
         val_marche <- which(nom_table == "val_marche")
-        val_nc     <- which(nom_table == "val_nc")
-        val_achat  <- which(nom_table == "val_achat")
-        nb_unit    <- which(nom_table == "nb_unit")
+        val_nc <- which(nom_table == "val_nc")
+        val_achat <- which(nom_table == "val_achat")
+        nb_unit <- which(nom_table == "nb_unit")
 
         # Mise a jour des donnes du PTF
         ptf_immo$val_marche <- coefficient * .subset2(ptf_immo, val_marche)
-        ptf_immo$val_nc     <- coefficient * .subset2(ptf_immo, val_nc)
-        ptf_immo$val_achat  <- coefficient * .subset2(ptf_immo, val_achat)
-        ptf_immo$nb_unit    <- coefficient * .subset2(ptf_immo, nb_unit)
+        ptf_immo$val_nc <- coefficient * .subset2(ptf_immo, val_nc)
+        ptf_immo$val_achat <- coefficient * .subset2(ptf_immo, val_achat)
+        ptf_immo$nb_unit <- coefficient * .subset2(ptf_immo, nb_unit)
 
         # Mise a jour du PTF
         x@ptf_immo <- ptf_immo
-        
+
         # Ouput
         return(x)
     }

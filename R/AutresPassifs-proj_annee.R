@@ -16,29 +16,26 @@
 ##' @export
 ##' @include AutresPassifs-class.R
 ##'
-setGeneric(name = "proj_annee_autres_passifs", def = function(an, x, coef_inf) {standardGeneric("proj_annee_autres_passifs")})
+setGeneric(name = "proj_annee_autres_passifs", def = function(an, x, coef_inf) {
+    standardGeneric("proj_annee_autres_passifs")
+})
 setMethod(
     f = "proj_annee_autres_passifs",
     signature = c(an = "integer", x = "AutresPassifs", coef_inf = "numeric"),
-    def = function(an, x, coef_inf){
-        
+    def = function(an, x, coef_inf) {
         # Recuperation du df autres passifs
         mp <- x@mp
         nom_mp <- names(mp)
         num_frais <- which(nom_mp == "frais")
-        annee  <- .subset2(mp, which(nom_mp == "annee"))
-        
+        annee <- .subset2(mp, which(nom_mp == "annee"))
+
         # Extraction des autres passsifs de l'annee.
-        passif_hm_an <- mp[which(annee == an),]
-        
+        passif_hm_an <- mp[which(annee == an), ]
+
         # Inflation des frais autres passifs
         passif_hm_an$frais <- .subset2(passif_hm_an, num_frais) * coef_inf
-        
+
         # output
         return(passif_hm_an)
-        
     }
 )
-
-
-

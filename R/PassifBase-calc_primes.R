@@ -20,22 +20,23 @@
 ##'
 
 #--------------------------------------------------------
-setGeneric(name = "calc_primes", def = function(x){standardGeneric("calc_primes")})
+setGeneric(name = "calc_primes", def = function(x) {
+    standardGeneric("calc_primes")
+})
 
 #--------------------------------------------------------
 setMethod(
     f = "calc_primes",
     signature = c(x = "EpEuroInd"),
-    def = function(x){
-
+    def = function(x) {
         # Tableau des ModelPoint
-        mp      <- x@mp
-        nom_mp  <- names(mp)
+        mp <- x@mp
+        nom_mp <- names(mp)
 
         # Extraction des donnees
-        prime       <- .subset2(mp, which(nom_mp == "prime"))
-        nb_contr    <- .subset2(mp, which(nom_mp == "nb_contr"))
-        chgt_prime  <- .subset2(mp, which(nom_mp == "chgt_prime"))
+        prime <- .subset2(mp, which(nom_mp == "prime"))
+        nb_contr <- .subset2(mp, which(nom_mp == "nb_contr"))
+        chgt_prime <- .subset2(mp, which(nom_mp == "chgt_prime"))
 
         # Nombre de versements
         nb_vers <- nb_contr * (prime > 0)
@@ -46,11 +47,14 @@ setMethod(
         pri_chgt <- pri_brut * chgt_prime # Chargements sur primes
 
         # output
-        return(list(stock = list(nb_vers = nb_vers),
-                    flux = list(
-                        pri_brut = pri_brut,
-                        pri_net = pri_net,
-                        pri_chgt = pri_chgt)))
+        return(list(
+            stock = list(nb_vers = nb_vers),
+            flux = list(
+                pri_brut = pri_brut,
+                pri_net = pri_net,
+                pri_chgt = pri_chgt
+            )
+        ))
     }
 )
 
@@ -59,11 +63,10 @@ setMethod(
 setMethod(
     f = "calc_primes",
     signature = c(x = "RetraiteEuroRest"),
-    def = function(x){
-
+    def = function(x) {
         # Tableau des ModelPoint
-        mp      <- x@mp
-        nom_mp  <- names(mp)
+        mp <- x@mp
+        nom_mp <- names(mp)
 
         # Nombre de versements
         nb_vers <- .subset2(mp, which(nom_mp == "nb_contr"))
@@ -72,10 +75,13 @@ setMethod(
         out_zero <- rep(0, nrow(mp))
 
         # output
-        return(list(stock = list(nb_vers = nb_vers),
-                    flux = list(
-                        pri_brut = out_zero,
-                        pri_net  = out_zero,
-                        pri_chgt = out_zero)))
+        return(list(
+            stock = list(nb_vers = nb_vers),
+            flux = list(
+                pri_brut = out_zero,
+                pri_net  = out_zero,
+                pri_chgt = out_zero
+            )
+        ))
     }
 )

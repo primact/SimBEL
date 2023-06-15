@@ -13,23 +13,30 @@
 ##' @include ParamRevaloEngine_class.R
 
 setClass(
-  Class = "RevaloEngine",
-  representation = representation(
-    param_revalo = "ParamRevaloEngine"))
+    Class = "RevaloEngine",
+    representation = representation(
+        param_revalo = "ParamRevaloEngine"
+    )
+)
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Verificateur et initialisateur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 # Verificateur : permet a chaque appel de l'objet de verifier quelques elements de base :
-setValidity(Class = "RevaloEngine",
-            function (object){
-              retval <- NULL
+setValidity(
+    Class = "RevaloEngine",
+    function(object) {
+        retval <- NULL
 
-              if(!validObject(object@param_revalo))  {retval <- "[RevaloEngine] : Objet ParamRevalo non valide"}
+        if (!validObject(object@param_revalo)) {
+            retval <- "[RevaloEngine] : Objet ParamRevalo non valide"
+        }
 
 
-              if (is.null(retval)) return (TRUE)
-              else return (retval)
-            }
+        if (is.null(retval)) {
+            return(TRUE)
+        } else {
+            return(retval)
+        }
+    }
 )
-

@@ -16,18 +16,19 @@
 ##' @export
 ##' @include Oblig_class.R
 
-setGeneric(name = "update_cc_oblig", def = function(x,coupon){standardGeneric("update_cc_oblig")})
+setGeneric(name = "update_cc_oblig", def = function(x, coupon) {
+    standardGeneric("update_cc_oblig")
+})
 setMethod(
     f = "update_cc_oblig",
     signature = c(x = "Oblig", coupon = "numeric"),
-    definition = function(x, coupon){
-        
+    definition = function(x, coupon) {
         # Verification des inputs
         if (nrow(x@ptf_oblig) != length(coupon)) stop("[Oblig : update_oblig] : Les inputs ne sont pas de memes dimensions")
-        
+
         # Mise a jour coupons courus du PTF
         x@ptf_oblig$cc <- coupon
-        
+
         # Output
         return(x)
     }

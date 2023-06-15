@@ -17,23 +17,24 @@
 
 
 # Fonction qui permet d'accroitre ou de decroitre un objet tresorerie d'un certain flux
-setGeneric(name = "update_treso", def = function(x,flux){standardGeneric("update_treso")})
+setGeneric(name = "update_treso", def = function(x, flux) {
+    standardGeneric("update_treso")
+})
 setMethod(
     f = "update_treso",
     signature = c(x = "Treso", flux = "numeric"),
-    definition = function(x, flux){
-        
+    definition = function(x, flux) {
         # Test input
         if (length(flux) > 1) stop("[Treso : update_treso] : Le flux d'input doit etre compose d'un unique element \n")
-        
+
         # Donnees
         ptf_treso <- x@ptf_treso
         nom_ptf <- names(ptf_treso)
-        
+
         # Mise a jour des donnees
         x@ptf_treso$val_marche <- .subset2(ptf_treso, which(nom_ptf == "val_marche")) + flux
-        x@ptf_treso$val_nc     <- .subset2(ptf_treso, which(nom_ptf == "val_nc")) + flux
-        
+        x@ptf_treso$val_nc <- .subset2(ptf_treso, which(nom_ptf == "val_nc")) + flux
+
         # Output
         return(x)
     }

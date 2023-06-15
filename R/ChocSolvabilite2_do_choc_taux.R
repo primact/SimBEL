@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           do_choc_taux
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -14,22 +13,28 @@
 ##' @include ChocSolvabilite2_class.R Canton_class.R
 
 
-setGeneric(name = "do_choc_taux", def = function(canton){standardGeneric("do_choc_taux")})
+setGeneric(name = "do_choc_taux", def = function(canton) {
+    standardGeneric("do_choc_taux")
+})
 setMethod(
     f = "do_choc_taux",
     signature = c("Canton"),
-    definition = function(canton){
+    definition = function(canton) {
         # Verification des inputs
-        if(nrow(canton@ptf_fin@ptf_oblig@ptf_oblig) == 0) {stop("[choc Mket : Taux] :
-                                                            tentative de calcul du choc taux avec un objet Oblig vide
-                                                            impossible. \n")}
+        if (nrow(canton@ptf_fin@ptf_oblig@ptf_oblig) == 0) {
+            stop("[choc Mket : Taux] : tentative de calcul du choc taux avec un objet Oblig vide impossible.\n")
+        }
         # Mise a jour des valeurs de marche du portefeuille
-        canton@ptf_fin@ptf_oblig@ptf_oblig$val_marche <- calc_vm_oblig(canton@ptf_fin@ptf_oblig,
-                                                                       canton@mp_esg@yield_curve)
+        canton@ptf_fin@ptf_oblig@ptf_oblig$val_marche <- calc_vm_oblig(
+            canton@ptf_fin@ptf_oblig,
+            canton@mp_esg@yield_curve
+        )
         # Mise a jour des valeurs de marche du portefeuille de reference
-        canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig$val_marche <- calc_vm_oblig(canton@param_alm@ptf_reference@ptf_oblig,
-                                                                                       canton@mp_esg@yield_curve)
-        canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig$val_nc    <- canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig$val_marche
+        canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig$val_marche <- calc_vm_oblig(
+            canton@param_alm@ptf_reference@ptf_oblig,
+            canton@mp_esg@yield_curve
+        )
+        canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig$val_nc <- canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig$val_marche
         canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig$val_achat <- canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig$val_marche
 
         # Mise a jour des PMVL Action/Immo/Oblig

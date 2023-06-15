@@ -1,5 +1,3 @@
-
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Fonction d'initialisation d'un model point
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -8,16 +6,17 @@
 #           - Objet renseigne.
 #           - Erreur autrement
 setMethod(
-  f = "initialize",
-  signature = "ParamChocSousc",
-  definition = function(.Object, df_mp){
-    if( missing(df_mp)){
-      stop("L'objet 'df_mp' doit etre renseigne")
-    }else{
-      .Object@mp <- df_mp
-      validObject(.Object)}
-    return(.Object)
-  }
+    f = "initialize",
+    signature = "ParamChocSousc",
+    definition = function(.Object, df_mp) {
+        if (missing(df_mp)) {
+            stop("L'objet 'df_mp' doit etre renseigne")
+        } else {
+            .Object@mp <- df_mp
+            validObject(.Object)
+        }
+        return(.Object)
+    }
 )
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -25,27 +24,31 @@ setMethod(
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 # Getteur
 setMethod(
-  f = "[",
-  signature = "ParamChocSousc",
-  definition = function(x, i){
-    switch(EXPR = i,
-           "mp" = {return(x@mp)},
-           stop("Cet attribut n'existe pas!")
-    )
-  }
+    f = "[",
+    signature = "ParamChocSousc",
+    definition = function(x, i) {
+        switch(EXPR = i,
+            "mp" = {
+                return(x@mp)
+            },
+            stop("Cet attribut n'existe pas!")
+        )
+    }
 )
 
 
 # Setteur
 setReplaceMethod(
-  f = "[",
-  signature = "ParamChocSousc",
-  definition = function(x, i, value){
-    switch(EXPR = i,
-           "mp" = {x@mp <- value},
-           stop("Cet attribut n'existe pas!")
-    )
-    validObject(x)
-    return(x)
-  }
+    f = "[",
+    signature = "ParamChocSousc",
+    definition = function(x, i, value) {
+        switch(EXPR = i,
+            "mp" = {
+                x@mp <- value
+            },
+            stop("Cet attribut n'existe pas!")
+        )
+        validObject(x)
+        return(x)
+    }
 )

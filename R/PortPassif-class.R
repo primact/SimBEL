@@ -36,7 +36,6 @@
 ##' @include HypTech-class.R FraisPassif-class.R TauxPB-class.R AutresPassifs-class.R AutresReserves-class.R EpEuroInd-class.R
 setClass(
     Class = "PortPassif",
-
     representation = representation(
         annee = "integer",
         eei = "list",
@@ -49,10 +48,9 @@ setClass(
         autres_reserves = "AutresReserves",
         calc_proba = "logical",
         choc_lapse_mass = "numeric",
-        choc_mort_cat = "numeric"),
-
-    validity = function (object){
-
+        choc_mort_cat = "numeric"
+    ),
+    validity = function(object) {
         # liste permettant de stocker les erreurs de chargement
         retval <- NULL
 
@@ -61,50 +59,53 @@ setClass(
         nb_rer <- length(object@rer)
 
         # Tests de non absence de noms
-        if(nb_eei != 0L & is.null(names(object@eei))) retval <- c(retval, "[PortPassif] : 'eei' doit etre une liste avec des noms")
-        if(nb_rer != 0L & is.null(names(object@rer))) retval <- c(retval, "[PortPassif] : 'rer' doit etre une liste avec des noms")
+        if (nb_eei != 0L & is.null(names(object@eei))) retval <- c(retval, "[PortPassif] : 'eei' doit etre une liste avec des noms")
+        if (nb_rer != 0L & is.null(names(object@rer))) retval <- c(retval, "[PortPassif] : 'rer' doit etre une liste avec des noms")
 
         # Test si un nom n a pas ete oublie
-        if(length(names(object@eei) != c("")) != nb_eei)
+        if (length(names(object@eei) != c("")) != nb_eei) {
             retval <- c(retval, "[PortPassif] : tous les elements de 'eei' n'ont pas ete nommes")
-        if(length(names(object@rer) != c("")) != nb_rer)
+        }
+        if (length(names(object@rer) != c("")) != nb_rer) {
             retval <- c(retval, "[PortPassif] : tous les elements de 'rer' n'ont pas ete nommes")
+        }
 
         # Test sur le type des objets mis en parametre
-        if(! validObject(object@ht)) retval <- c(retval, "[PortPassif] : Objet 'ht' non valide")
-        if(! validObject(object@fp)) retval <- c(retval, "[PortPassif] : Objet 'fp' non valide")
-        if(! validObject(object@tx_pb)) retval <- c(retval, "[PortPassif] : Objet 'tx_pb' non valide")
-        if(! validObject(object@autres_passifs)) retval <- c(retval, "[PortPassif] : Objet 'autres_passifs' non valide")
-        if(! validObject(object@autres_reserves)) retval <- c(retval, "[PortPassif] : Objet 'autres_reserves' non valide")
-        if(length(object@annee) > 1L) retval <- c("[PortPassif] : 'annee' doit etre entier, pas de composante vectorielle autorisee.")
-        if(! is.integer(object@annee)) retval <- c("[PortPassif] : 'annee' doit etre entier.")
-        if(! is.logical(object@calc_proba)) retval <- c("[PortPassif] : 'calc_proba' doit etre logical.")
-        if(! is.numeric(object@choc_lapse_mass)) retval <- c("[PortPassif] : 'choc_lapse_mass' doit etre numeric.")
-        if(! is.numeric(object@choc_mort_cat)) retval <- c("[PortPassif] : 'choc_mort_cat' doit etre numeric.")
+        if (!validObject(object@ht)) retval <- c(retval, "[PortPassif] : Objet 'ht' non valide")
+        if (!validObject(object@fp)) retval <- c(retval, "[PortPassif] : Objet 'fp' non valide")
+        if (!validObject(object@tx_pb)) retval <- c(retval, "[PortPassif] : Objet 'tx_pb' non valide")
+        if (!validObject(object@autres_passifs)) retval <- c(retval, "[PortPassif] : Objet 'autres_passifs' non valide")
+        if (!validObject(object@autres_reserves)) retval <- c(retval, "[PortPassif] : Objet 'autres_reserves' non valide")
+        if (length(object@annee) > 1L) retval <- c("[PortPassif] : 'annee' doit etre entier, pas de composante vectorielle autorisee.")
+        if (!is.integer(object@annee)) retval <- c("[PortPassif] : 'annee' doit etre entier.")
+        if (!is.logical(object@calc_proba)) retval <- c("[PortPassif] : 'calc_proba' doit etre logical.")
+        if (!is.numeric(object@choc_lapse_mass)) retval <- c("[PortPassif] : 'choc_lapse_mass' doit etre numeric.")
+        if (!is.numeric(object@choc_mort_cat)) retval <- c("[PortPassif] : 'choc_mort_cat' doit etre numeric.")
 
-        if(object@choc_lapse_mass > 1 | object@choc_lapse_mass < 0) retval <- c("[PortPassif] : 'choc_lapse_mass' doit etre compris entre 0 et 1.")
-        if(object@choc_mort_cat > 1 | object@choc_mort_cat < 0) retval <- c("[PortPassif] : 'choc_mort_cat' doit etre compris entre 0 et 1.")
+        if (object@choc_lapse_mass > 1 | object@choc_lapse_mass < 0) retval <- c("[PortPassif] : 'choc_lapse_mass' doit etre compris entre 0 et 1.")
+        if (object@choc_mort_cat > 1 | object@choc_mort_cat < 0) retval <- c("[PortPassif] : 'choc_mort_cat' doit etre compris entre 0 et 1.")
 
         # Test que les elements des listes sont bien des objets du bon type
-        if(nb_eei != 0L){
-            for(i in 1L:nb_eei){
-                if(! validObject(object@eei[[i]]))
+        if (nb_eei != 0L) {
+            for (i in 1L:nb_eei) {
+                if (!validObject(object@eei[[i]])) {
                     retval <- c(retval, paste("[PortPassif] : l element", i, "de 'eei' est non valide \n"))
+                }
             }
         }
-        if(nb_rer != 0L) {
-            for(i in 1L:nb_rer){
-                if(! validObject(object@rer[[i]]))
+        if (nb_rer != 0L) {
+            for (i in 1L:nb_rer) {
+                if (!validObject(object@rer[[i]])) {
                     retval <- c(retval, paste("[PortPassif] : l element", i, "de 'rer' est non valide \n"))
+                }
             }
         }
 
         # Resultats du controle
-        if (is.null(retval)){
-            return (TRUE)
-        }else{
-            return (retval)
+        if (is.null(retval)) {
+            return(TRUE)
+        } else {
+            return(retval)
         }
-
     }
 )

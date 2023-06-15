@@ -42,25 +42,26 @@ setClass(
     hyp_canton = "HypCanton",
     param_alm = "ParamAlmEngine",
     param_revalo = "ParamRevaloEngine"
-    ),
-  validity = function (object){
-              retval <- NULL
+  ),
+  validity = function(object) {
+    retval <- NULL
 
-              if (!is.integer(object@annee))        retval <- c(retval, "[Canton] : annee n'est pas integer/n")
-              if(!validObject(object@ptf_fin))      retval <- c(retval, "[Canton] : Objet PortFin non valide")
-              if(!validObject(object@ptf_passif))   retval <- c(retval, "[Canton] : Objet PortPassif non valide")
-              if(!validObject(object@mp_esg))       retval <- c(retval, "[Canton] : Objet MPESG non valide")
-              if(!validObject(object@ppb))          retval <- c(retval, "[Canton] : Objet Ppb non valide")
-              if(!validObject(object@hyp_canton))   retval <- c(retval, "[Canton] : Objet HypCanton non valide")
-              if(!validObject(object@param_alm))    retval <- c(retval, "[Canton] : Objet ParamAlmEngine non valide")
-              if(!validObject(object@param_revalo)) retval <- c(retval, "[Canton] : Objet ParamRevalo non valide")
+    if (!is.integer(object@annee)) retval <- c(retval, "[Canton] : annee n'est pas integer/n")
+    if (!validObject(object@ptf_fin)) retval <- c(retval, "[Canton] : Objet PortFin non valide")
+    if (!validObject(object@ptf_passif)) retval <- c(retval, "[Canton] : Objet PortPassif non valide")
+    if (!validObject(object@mp_esg)) retval <- c(retval, "[Canton] : Objet MPESG non valide")
+    if (!validObject(object@ppb)) retval <- c(retval, "[Canton] : Objet Ppb non valide")
+    if (!validObject(object@hyp_canton)) retval <- c(retval, "[Canton] : Objet HypCanton non valide")
+    if (!validObject(object@param_alm)) retval <- c(retval, "[Canton] : Objet ParamAlmEngine non valide")
+    if (!validObject(object@param_revalo)) retval <- c(retval, "[Canton] : Objet ParamRevalo non valide")
 
-              if (is.null(retval))
-                  return (TRUE)
-              else
-                  return (retval)
-              }
-            )
+    if (is.null(retval)) {
+      return(TRUE)
+    } else {
+      return(retval)
+    }
+  }
+)
 
 
 
@@ -79,29 +80,28 @@ setMethod(
                         ppb = new("Ppb"),
                         hyp_canton = new("HypCanton"),
                         param_alm = new("ParamAlmEngine"),
-                        param_revalo = new("ParamRevaloEngine")
-  ){
-    if(!missing(annee)      & !missing(ptf_fin) & ! missing(ptf_passif) & !missing(mp_esg)  & !missing(ppb) &
-       !missing(hyp_canton) & !missing(param_alm)   & !missing(param_revalo)){
-      .Object@annee      <- annee
+                        param_revalo = new("ParamRevaloEngine")) {
+    if (!missing(annee) & !missing(ptf_fin) & !missing(ptf_passif) & !missing(mp_esg) & !missing(ppb) &
+      !missing(hyp_canton) & !missing(param_alm) & !missing(param_revalo)) {
+      .Object@annee <- annee
       .Object@ptf_fin <- ptf_fin
-      .Object@ptf_passif   <- ptf_passif
-      .Object@mp_esg  <- mp_esg
-      .Object@ppb  <- ppb
+      .Object@ptf_passif <- ptf_passif
+      .Object@mp_esg <- mp_esg
+      .Object@ppb <- ppb
       .Object@hyp_canton <- hyp_canton
-      .Object@param_alm  <- param_alm
-      .Object@param_revalo  <- param_revalo
+      .Object@param_alm <- param_alm
+      .Object@param_revalo <- param_revalo
       validObject(.Object)
     } else {
-      #Traitement du cas vide
-      .Object@annee = 0L
-      .Object@ptf_fin = new("PortFin")
-      .Object@ptf_passif = new("PortPassif")
-      .Object@mp_esg = new("ModelPointESG")
-      .Object@ppb = new("Ppb")
-      .Object@hyp_canton = new("HypCanton")
-      .Object@param_alm = new("ParamAlmEngine")
-      .Object@param_revalo = new("ParamRevaloEngine")
+      # Traitement du cas vide
+      .Object@annee <- 0L
+      .Object@ptf_fin <- new("PortFin")
+      .Object@ptf_passif <- new("PortPassif")
+      .Object@mp_esg <- new("ModelPointESG")
+      .Object@ppb <- new("Ppb")
+      .Object@hyp_canton <- new("HypCanton")
+      .Object@param_alm <- new("ParamAlmEngine")
+      .Object@param_revalo <- new("ParamRevaloEngine")
     }
     return(.Object)
   }

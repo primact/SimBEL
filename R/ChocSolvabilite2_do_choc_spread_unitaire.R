@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           do_choc_spread_unitaire
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -21,15 +20,17 @@
 ##' @include ChocSolvabilite2_class.R
 
 
-setGeneric(name = "do_choc_spread_unitaire", def = function(table_choc_spread, ligne_oblig){standardGeneric("do_choc_spread_unitaire")})
+setGeneric(name = "do_choc_spread_unitaire", def = function(table_choc_spread, ligne_oblig) {
+    standardGeneric("do_choc_spread_unitaire")
+})
 setMethod(
     f = "do_choc_spread_unitaire",
     signature = c("data.frame", "data.frame"),
-    definition = function(table_choc_spread, ligne_oblig){
+    definition = function(table_choc_spread, ligne_oblig) {
         # Vecteur permettant d'effectuer un tri selon le rating de la ligne obligataire etudiee
         # necessaire pour lire l'input confere forme speciale du fichier
         tri_rating <- which(table_choc_spread$rating == ligne_oblig$rating)
-        duration_consideree = max(1, ligne_oblig$duration)
+        duration_consideree <- max(1, ligne_oblig$duration)
 
         if (duration_consideree <= 5) {
             # Application du tri selon les bornes de duration
@@ -37,43 +38,39 @@ setMethod(
             # Selection de la ligne dans la table de parametre
             line_select <- tri_rating[tri_rating %in% tri_duration]
             # Calcul de la vm choquee
-            coef        <- table_choc_spread$param_B[line_select] * duration_consideree
-            vm_choquee  <- (1 - coef) * ligne_oblig$val_marche
-        }
-        else if (duration_consideree <= 10 & duration_consideree > 5) {
+            coef <- table_choc_spread$param_B[line_select] * duration_consideree
+            vm_choquee <- (1 - coef) * ligne_oblig$val_marche
+        } else if (duration_consideree <= 10 & duration_consideree > 5) {
             # Application du tri selon les bornes de duration
             tri_duration <- which(table_choc_spread$duration == "5-10ans")
             # Selection de la ligne dans la table de parametre
             line_select <- tri_rating[tri_rating %in% tri_duration]
             # Calcul de la vm choquee
-            coef        <- table_choc_spread$param_A[line_select] + table_choc_spread$param_B[line_select] * (duration_consideree - 5)
-            vm_choquee  <- (1 - coef) * ligne_oblig$val_marche
-        }
-        else if (duration_consideree <= 15 & duration_consideree > 10) {
+            coef <- table_choc_spread$param_A[line_select] + table_choc_spread$param_B[line_select] * (duration_consideree - 5)
+            vm_choquee <- (1 - coef) * ligne_oblig$val_marche
+        } else if (duration_consideree <= 15 & duration_consideree > 10) {
             # Application du tri selon les bornes de duration
             tri_duration <- which(table_choc_spread$duration == "10-15ans")
             # Selection de la ligne dans la table de parametre
             line_select <- tri_rating[tri_rating %in% tri_duration]
             # Calcul de la vm choquee
-            coef        <- table_choc_spread$param_A[line_select] + table_choc_spread$param_B[line_select] * (duration_consideree - 10)
-            vm_choquee  <- (1 - coef)  * ligne_oblig$val_marche
-        }
-        else if (duration_consideree <= 20 & duration_consideree > 15) {
+            coef <- table_choc_spread$param_A[line_select] + table_choc_spread$param_B[line_select] * (duration_consideree - 10)
+            vm_choquee <- (1 - coef) * ligne_oblig$val_marche
+        } else if (duration_consideree <= 20 & duration_consideree > 15) {
             # Application du tri selon les bornes de duration
             tri_duration <- which(table_choc_spread$duration == "15-20ans")
             # Selection de la ligne dans la table de parametre
             line_select <- tri_rating[tri_rating %in% tri_duration]
             # Calcul de la vm choquee
-            coef        <- table_choc_spread$param_A[line_select] + table_choc_spread$param_B[line_select] * (duration_consideree - 15)
-            vm_choquee  <- (1 - coef)  * ligne_oblig$val_marche
-        }
-        else if (duration_consideree > 20) {# Application du tri selon les bornes de duration
+            coef <- table_choc_spread$param_A[line_select] + table_choc_spread$param_B[line_select] * (duration_consideree - 15)
+            vm_choquee <- (1 - coef) * ligne_oblig$val_marche
+        } else if (duration_consideree > 20) { # Application du tri selon les bornes de duration
             tri_duration <- which(table_choc_spread$duration == "20ans")
             # Selection de la ligne dans la table de parametre
             line_select <- tri_rating[tri_rating %in% tri_duration]
             # Calcul de la vm choquee
-            coef        <- min(1,table_choc_spread$param_A[line_select] + table_choc_spread$param_B[line_select] * (duration_consideree - 20))
-            vm_choquee  <- (1 - coef) * ligne_oblig$val_marche
+            coef <- min(1, table_choc_spread$param_A[line_select] + table_choc_spread$param_B[line_select] * (duration_consideree - 20))
+            vm_choquee <- (1 - coef) * ligne_oblig$val_marche
         }
         return(vm_choquee)
     }

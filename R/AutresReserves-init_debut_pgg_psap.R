@@ -13,16 +13,17 @@
 ##' @export
 ##' @include AutresReserves-class.R
 
-setGeneric(name = "init_debut_pgg_psap", def = function(x){standardGeneric("init_debut_pgg_psap")})
+setGeneric(name = "init_debut_pgg_psap", def = function(x) {
+    standardGeneric("init_debut_pgg_psap")
+})
 setMethod(
     f = "init_debut_pgg_psap",
     signature = c(x = "AutresReserves"),
-    definition = function(x){
-        
+    definition = function(x) {
         # Mise a jour du montant de PSAP et de PGG initial
         x@psap_debut <- x@psap_valeur
         x@pgg_debut <- x@pgg_valeur
-        
+
         # Output
         return(x)
     }

@@ -8,3 +8,6 @@
 src/*.o
 src/*.so
 src/*.dll
+
+#Lintr config file
+.lintr

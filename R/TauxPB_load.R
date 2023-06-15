@@ -14,18 +14,20 @@
 ##'  pour renseigner l'input.
 ##' @export
 ##' @include HypCanton_class.R
-setGeneric(name = "tauxpb_load", def = function(file_tauxpb_address){standardGeneric("tauxpb_load")})
+setGeneric(name = "tauxpb_load", def = function(file_tauxpb_address) {
+    standardGeneric("tauxpb_load")
+})
 setMethod(
     f = "tauxpb_load",
     signature = c(file_tauxpb_address = "character"),
-    definition = function(file_tauxpb_address){
-
+    definition = function(file_tauxpb_address) {
         # Lecture du fichier
         temp <- read.csv2(file_tauxpb_address, header = TRUE, colClasses = c("factor", "numeric"))
 
         # Tests
-        if (! all(! is.na(temp)))
+        if (!all(!is.na(temp))) {
             stop("[TauxPB - load] : Presence de NA dans le fichier d'input")
+        }
 
         # Creation de l'objet
         taux_pb <- new(Class = "TauxPB", temp)

@@ -14,28 +14,30 @@
 ##' @export
 ##' @include Action_class.R
 
-setGeneric(name = "buy_action", def = function(x, ptf_bought){standardGeneric("buy_action")})
+setGeneric(name = "buy_action", def = function(x, ptf_bought) {
+    standardGeneric("buy_action")
+})
 setMethod(
     f = "buy_action",
     signature = c(x = "Action", ptf_bought = "Action"),
-    definition = function(x, ptf_bought){
-
+    definition = function(x, ptf_bought) {
         # Donnees
         ptf_action <- x@ptf_action
         nom_table <- names(ptf_action)
-        num_mp    <- which(nom_table == "num_mp")
+        num_mp <- which(nom_table == "num_mp")
 
         # Permet d'acheter un portefeuille lorsque l'initial est vide
-        if(nrow(ptf_action) > 0L)
+        if (nrow(ptf_action) > 0L) {
             n_init <- max(.subset2(ptf_action, num_mp))
-        else
+        } else {
             n_init <- 0
+        }
 
         # Nombre d'actions achetees
         n_bought <- nrow(ptf_bought@ptf_action)
 
         # Ne permet pas d'acheter un portefeuille vide :
-        if(n_bought == 0L) stop("[Action : buy] : Tentative d'acquisition d'un portefeuille vide \n")
+        if (n_bought == 0L) stop("[Action : buy] : Tentative d'acquisition d'un portefeuille vide \n")
 
         # Mise a jour des numeros du PTF
         ptf_bought@ptf_action$num_mp <- (n_init + 1L):(n_init + n_bought)

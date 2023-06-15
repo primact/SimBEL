@@ -12,24 +12,27 @@
 ##' @export
 ##' @include Ppb_class.R
 
-setGeneric(name = "calc_pb_attrib", def = function(x){ standardGeneric("calc_pb_attrib") })
+setGeneric(name = "calc_pb_attrib", def = function(x) {
+    standardGeneric("calc_pb_attrib")
+})
 setMethod(
     f = "calc_pb_attrib",
     signature = c(x = "Ppb"),
     definition = function(x) {
-        
         # Stock PPB
         stock_ppb <- x@ppb_debut
-        
+
         # PB attribuee
         pb_rep <- x@compte_rep
-        
+
         # PB dotee
         pb_dot <- x@compte_dot
-        
+
         # Output
-        return(list(stock_ppb = stock_ppb,
-                    pb_rep = pb_rep,
-                    pb_dot = pb_dot))
+        return(list(
+            stock_ppb = stock_ppb,
+            pb_rep = pb_rep,
+            pb_dot = pb_dot
+        ))
     }
 )

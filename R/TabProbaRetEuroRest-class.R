@@ -17,25 +17,28 @@
 
 setClass(
     Class = "TabProbaRetEuroRest",
-    slots = c(ax              = "data.frame",
-              sortie_retraite = "data.frame",
-              survie_un_an    = "data.frame"),
-    validity = function (object){
+    slots = c(
+        ax = "data.frame",
+        sortie_retraite = "data.frame",
+        survie_un_an = "data.frame"
+    ),
+    validity = function(object) {
         # liste permettant de stocker les erreurs de chargement
         retval <- NULL
 
 
         # Verification du type de variables de la liste
-        if (!is.data.frame(object@ax))                  retval <- c(retval, "[TabProbaRetEuroRest] : ax n'est pas un data.frame\n")
-        if (!is.data.frame(object@sortie_retraite))     retval <- c(retval, "[TabProbaRetEuroRest] : sortie_retraite n'est pas un data.frame\n")
-        if (!is.data.frame(object@survie_un_an))        retval <- c(retval, "[TabProbaRetEuroRest] : survie_un_an n'est pas un data.frame\n")
+        if (!is.data.frame(object@ax)) retval <- c(retval, "[TabProbaRetEuroRest] : ax n'est pas un data.frame\n")
+        if (!is.data.frame(object@sortie_retraite)) retval <- c(retval, "[TabProbaRetEuroRest] : sortie_retraite n'est pas un data.frame\n")
+        if (!is.data.frame(object@survie_un_an)) retval <- c(retval, "[TabProbaRetEuroRest] : survie_un_an n'est pas un data.frame\n")
 
 
 
         # Resultats du controle
-        if (is.null(retval))
+        if (is.null(retval)) {
             return(TRUE)
-        else
+        } else {
             return(retval)
+        }
     }
 )
