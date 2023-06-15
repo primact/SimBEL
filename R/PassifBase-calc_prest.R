@@ -185,7 +185,9 @@ setMethod(
         # Calcul des flux  rachats totaux
         # Taux de rachat incluant les rachats structurels et conjoncturels
         qx_rach_tot_glob <- pmax(0, pmin(1, qx_rach_tot + proba_dyn[["qx_rach_tot_dyn"]]))
+        part_struct_rach_tot <- qx_rach_tot / qx_rach_tot_glob
         rach_tot <- pm_deb * qx_rach_tot_glob * ind_ech * (1 - choc_lapse_mass) # Flux de rachats totaux
+        rach_tot_struct <- part_struct_rach_tot * rach_tot
         rev_rach_tot <- rach_tot * tx_min_se # revalorisation au taux minimum
         nb_rach_tot <- nb_contr * qx_rach_tot_glob * ind_ech * (1 - choc_lapse_mass) # nombre de contrats en rachat total
 
@@ -200,7 +202,12 @@ setMethod(
         # Taux de rachat incluant les rachats structurels et conjoncturels sur la population des non rachetes et vivants
         qx_rach_part_glob <- (1 - qx_rach_tot_glob) * (1 - qx_dc) *
             pmax(0, pmin(1, qx_rach_part + proba_dyn[["qx_rach_part_dyn"]]))
+        part_struct_rach_part <- (1 - qx_rach_tot_glob) * (1 - qx_dc) *
+            qx_rach_part / qx_rach_part_glob
         rach_part <- pm_deb * qx_rach_part_glob * ind_ech * (1 - choc_lapse_mass) # Flux de rachats partiels
+        rach_part_struct <- part_struct_rach_part * rach_part
+
+
         rev_rach_part <- rach_part * tx_min_se # revalorisation au taux minimum
 
         # Total des prestations
@@ -237,25 +244,29 @@ setMethod(
         return(list(
             method = method,
             flux = list(
-                ech             = ech,
-                rach_mass       = rach_mass,
-                rach_tot        = rach_tot,
-                dc              = dc,
-                rach_part       = rach_part,
-                rente           = out_zero,
-                prest           = prest,
-                rev_ech         = rev_ech,
-                rev_rach_tot    = rev_rach_tot,
-                rev_dc          = rev_dc,
-                rev_rach_part   = rev_rach_part,
-                rev_prest       = rev_prest,
+                ech = ech,
+                rach_mass = rach_mass,
+                rach_tot = rach_tot,
+                dc = dc,
+                rach_part = rach_part,
+                rente = out_zero,
+                prest = prest,
+                rev_ech = rev_ech,
+                rev_rach_tot = rev_rach_tot,
+                rev_dc = rev_dc,
+                rev_rach_part = rev_rach_part,
+                rev_prest = rev_prest,
                 rev_prest_nette = rev_prest_nette,
                 enc_charg_prest = enc_charg,
-                rach_charg      = rach_charg,
+                rach_charg = rach_charg,
                 rach_charg_mass = rach_charg_mass,
-                soc_prest       = soc_prest,
-                it_tech_prest   = it_tech_prest,
-                arr_charg       = out_zero
+                soc_prest = soc_prest,
+                it_tech_prest = it_tech_prest,
+                arr_charg = out_zero,
+                rach_tot_struct = rach_tot_struct,
+                rach_tot_conj = rach_tot - rach_tot_struct,
+                rach_part_struct = rach_part_struct,
+                rach_part_conj = rach_part - rach_part_struct
             ),
             stock = list(
                 nb_ech       = nb_ech,
@@ -344,25 +355,29 @@ setMethod(
         return(list(
             method = method,
             flux = list(
-                ech             = out_zero,
-                rach_mass       = out_zero,
-                rach_tot        = out_zero,
-                dc              = out_zero,
-                rach_part       = out_zero,
-                rente           = rente_flux,
-                prest           = rente_flux,
-                rev_ech         = out_zero,
-                rev_rach_tot    = out_zero,
-                rev_dc          = out_zero,
-                rev_rach_part   = out_zero,
-                rev_prest       = out_zero,
+                ech = out_zero,
+                rach_mass = out_zero,
+                rach_tot = out_zero,
+                dc = out_zero,
+                rach_part = out_zero,
+                rente = rente_flux,
+                prest = rente_flux,
+                rev_ech = out_zero,
+                rev_rach_tot = out_zero,
+                rev_dc = out_zero,
+                rev_rach_part = out_zero,
+                rev_prest = out_zero,
                 rev_prest_nette = out_zero,
                 enc_charg_prest = out_zero,
-                rach_charg      = out_zero,
+                rach_charg = out_zero,
                 rach_charg_mass = out_zero,
-                soc_prest       = out_zero,
-                it_tech_prest   = out_zero,
-                arr_charg       = arr_charg
+                soc_prest = out_zero,
+                it_tech_prest = out_zero,
+                arr_charg = arr_charg,
+                rach_tot_struct = out_zero,
+                rach_tot_conj = out_zero,
+                rach_part_struct = out_zero,
+                rach_part_conj = out_zero
             ),
             stock = list(
                 nb_ech          = out_zero,
