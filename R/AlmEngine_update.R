@@ -34,7 +34,7 @@ setGeneric(name = "update_journal_action", def = function(x, ptf, annee, operati
 setMethod(
     f = "update_journal_action",
     signature = c(x = "AlmEngine", ptf = "Action", annee = "numeric", operation = "character"),
-    definition = function(x, ptf, annee, operation) {
+    definition = function(x, ptf, annee, operation, pmvr) {
         if (operation == "achat") {
             operation_achat_vente <- data.frame(
                 annee = rep(annee, nrow(ptf["ptf_action"])),
@@ -116,37 +116,37 @@ setMethod(
 #           update ptf oblig
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 
-setGeneric(name = "update_journal_action", def = function(x, ptf, annee, operation, pmvr) {
-    standardGeneric("update_journal_action")
+setGeneric(name = "update_journal_oblig", def = function(x, ptf, annee, operation, pmvr) {
+    standardGeneric("update_journal_oblig")
 })
 setMethod(
-    f = "update_journal_action",
-    signature = c(x = "AlmEngine", ptf = "Action", annee = "numeric", operation = "character", pmvr = "numeric"),
+    f = "update_journal_oblig",
+    signature = c(x = "AlmEngine", ptf = "Oblig", annee = "numeric", operation = "character", pmvr = "numeric"),
     definition = function(x, ptf, annee, operation, pmvr) {
         if (operation == "achat") {
             operation_achat_vente <- data.frame(
-                annee = rep(annee, nrow(ptf["ptf_action"])),
-                operation = rep(operation, nrow(ptf["ptf_action"])),
-                type_actif = "action",
-                num_mp = ptf["ptf_action"][, "num_mp"],
-                num_index = ptf["ptf_action"][, "num_index"],
-                montant = ptf["ptf_action"][, "val_marche"],
-                nb_unit = ptf["ptf_action"][, "nb_unit"],
-                pmvr = rep(0, nrow(x["ptf_action"]))
+                annee = rep(annee, nrow(ptf["ptf_oblig"])),
+                operation = rep(operation, nrow(ptf["ptf_oblig"])),
+                type_actif = "Oblig",
+                num_mp = ptf["ptf_oblig"][, "num_mp"],
+                num_index = ptf["ptf_oblig"][, "num_index"],
+                montant = ptf["ptf_oblig"][, "val_marche"],
+                nb_unit = ptf["ptf_oblig"][, "nb_unit"],
+                pmvr = rep(0, nrow(x["ptf_oblig"]))
             )
         } else if (operation == "vente") {
             operation_achat_vente <- data.frame(
-                annee = rep(annee, nrow(ptf["ptf_action"])),
-                operation = rep(operation, nrow(ptf["ptf_action"])),
-                type_actif = "action",
-                num_mp = ptf["ptf_action"][, "num_mp"],
-                num_index = ptf["ptf_action"][, "num_index"],
-                montant = ptf["ptf_action"][, "val_marche"],
-                nb_unit = ptf["ptf_action"][, "nb_unit"],
+                annee = rep(annee, nrow(ptf["ptf_oblig"])),
+                operation = rep(operation, nrow(ptf["ptf_oblig"])),
+                type_actif = "Oblig",
+                num_mp = ptf["ptf_oblig"][, "num_mp"],
+                num_index = ptf["ptf_oblig"][, "num_index"],
+                montant = ptf["ptf_oblig"][, "val_marche"],
+                nb_unit = ptf["ptf_oblig"][, "nb_unit"],
                 pmvr = pmvr
             )
         } else {
-            stop("[AlmEngine : update_journal_action] : L'operation realisee est soit un achat soit une vente \n")
+            stop("[AlmEngine : update_journal_oblig] : L'operation realisee est soit un achat soit une vente \n")
         }
 
 
