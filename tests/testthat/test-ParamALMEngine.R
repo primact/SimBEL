@@ -13,7 +13,7 @@ path <- paste0(path, "/donnees/actif")
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 # Elements necessaires aux calculs ulterieurs
-alloc_cible <- c(.25,.25,.48,.02)
+alloc_cible <- c(.25, .25, .48, .02)
 table_ESG <- chargement_ESG(folder_ESG_address, 2L, 5L)
 mp_ESG <- extract_ESG(table_ESG, 1L, 0L)
 
@@ -25,7 +25,6 @@ param_alm_engine <- new("ParamAlmEngine", ptf_reference = PtfFin_ref, alloc_cibl
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 test_that("TEST_ParamAlmEngine", {
-
     # Test classe
     expect_s4_class(param_alm_engine, "ParamAlmEngine")
 

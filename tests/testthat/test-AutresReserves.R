@@ -12,18 +12,21 @@ folder_tab <- paste(path, "/donnees/passif/autres_reserves.csv", sep = "/")
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 # Elements necessaires aux calculs
 
-reserves_csv <- read.csv2(folder_tab, header = TRUE, colClasses = c("numeric", "numeric", "numeric",
-                                                                    "numeric", "numeric", "numeric",
-                                                                    "numeric", "numeric"))
-reserves <- new("AutresReserves", reserves_csv$pgg_debut, reserves_csv$psap_debut, reserves_csv$pgg_valeur, reserves_csv$psap_valeur,
-                reserves_csv$tx_pgg_ep, reserves_csv$tx_pgg_autres, reserves_csv$tx_psap_ep, reserves_csv$tx_psap_autres)
+reserves_csv <- read.csv2(folder_tab, header = TRUE, colClasses = c(
+    "numeric", "numeric", "numeric",
+    "numeric", "numeric", "numeric",
+    "numeric", "numeric"
+))
+reserves <- new(
+    "AutresReserves", reserves_csv$pgg_debut, reserves_csv$psap_debut, reserves_csv$pgg_valeur, reserves_csv$psap_valeur,
+    reserves_csv$tx_pgg_ep, reserves_csv$tx_pgg_autres, reserves_csv$tx_psap_ep, reserves_csv$tx_psap_autres
+)
 
 
 #----------------------------------------------------------------------------------
 # Classe
 #----------------------------------------------------------------------------------
 test_that("TEST_classe", {
-
     # Classe
     expect_s4_class(reserves, "AutresReserves")
 
@@ -43,7 +46,6 @@ test_that("TEST_classe", {
 # load
 #----------------------------------------------------------------------------------
 test_that("TEST_load", {
-
     # Appel de la fonction
     res <- autres_reserves_load(folder_tab)
 
@@ -56,7 +58,6 @@ test_that("TEST_load", {
 # update_reserves
 #----------------------------------------------------------------------------------
 test_that("TEST_update_reserves", {
-
     # Donnees
     prest_ep <- 10
     prest_autres <- 20
@@ -72,7 +73,6 @@ test_that("TEST_update_reserves", {
 # init_debut_pgg_psap
 #----------------------------------------------------------------------------------
 test_that("TEST_init_debut_pgg_psap", {
-
     # Appel de la fonction
     res <- init_debut_pgg_psap(reserves)
 

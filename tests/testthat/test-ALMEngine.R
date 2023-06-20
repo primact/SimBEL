@@ -13,12 +13,12 @@ path <- paste0(path, "/donnees/actif")
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 # Elements necessaires aux calculs ulterieurs
-alloc_cible <- c(.25,.25,.48,.02)
+alloc_cible <- c(.25, .25, .48, .02)
 table_ESG <- chargement_ESG(folder_ESG_address, 2L, 5L)
 mp_ESG <- extract_ESG(table_ESG, 1L, 0L)
 
 
-PtfFin     <- chargement_PortFin(path, mp_ESG)
+PtfFin <- chargement_PortFin(path, mp_ESG)
 PtfFin_ref <- chargement_PortFin_reference(paste(path, "Portefeuille_reference", sep = "/"), mp_ESG)
 
 param_alm_engine <- new("ParamAlmEngine", ptf_reference = PtfFin_ref, alloc_cible = alloc_cible, seuil_realisation_PVL = 0)
@@ -28,25 +28,23 @@ param_alm_engine <- new("ParamAlmEngine", ptf_reference = PtfFin_ref, alloc_cibl
 #           Test fonctions : vnc et vm precedent
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 test_that("TEST_vnc_vm_precendet", {
+    # Test au chargement
+    alloc <- print_alloc(PtfFin)
+    expect_equivalent(unlist(PtfFin@vm_vnc_precedent$vm), alloc[1:4, 1])
+    expect_equivalent(unlist(PtfFin@vm_vnc_precedent$vnc), alloc[1:4, 3])
 
-  # Test au chargement
-  alloc <- print_alloc(PtfFin)
-  expect_equivalent(unlist(PtfFin@vm_vnc_precedent$vm), alloc[1:4,1])
-  expect_equivalent(unlist(PtfFin@vm_vnc_precedent$vnc), alloc[1:4,3])
+    # Test apres une modification
+    PtfFin_2 <- PtfFin
+    PtfFin_2@ptf_action@ptf_action$val_marche <- PtfFin_2@ptf_action@ptf_action$val_marche * 0.9
+    PtfFin_3 <- do_update_vm_vnc_precedent(PtfFin_2)
+    test <- alloc[1:4, 1]
+    test[1] <- test[1] * 0.9
+    expect_equivalent(unlist(PtfFin_3@vm_vnc_precedent$vm), test)
+    expect_equivalent(unlist(PtfFin_3@vm_vnc_precedent$vnc), alloc[1:4, 3])
 
-  # Test apres une modification
-  PtfFin_2 <- PtfFin
-  PtfFin_2@ptf_action@ptf_action$val_marche <- PtfFin_2@ptf_action@ptf_action$val_marche * 0.9
-  PtfFin_3 <- do_update_vm_vnc_precedent(PtfFin_2)
-  test <- alloc[1:4,1]
-  test[1] <- test[1] * 0.9
-  expect_equivalent(unlist(PtfFin_3@vm_vnc_precedent$vm), test)
-  expect_equivalent(unlist(PtfFin_3@vm_vnc_precedent$vnc), alloc[1:4,3])
-
-  # Test de la valeur moyenne
-  plac_moy_vm <- (.subset2(alloc, 5L) + sum(unlist(PtfFin_3@vm_vnc_precedent[["vm"]]))) / 2
-  expect_equivalent(plac_moy_vm, (sum(alloc[1:4,1]) + sum(test)) / 2)
-
+    # Test de la valeur moyenne
+    plac_moy_vm <- (.subset2(alloc, 5L) + sum(unlist(PtfFin_3@vm_vnc_precedent[["vm"]]))) / 2
+    expect_equivalent(plac_moy_vm, (sum(alloc[1:4, 1]) + sum(test)) / 2)
 })
 
 
@@ -55,7 +53,6 @@ test_that("TEST_vnc_vm_precendet", {
 #           Test fonctions : Reallocate
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 test_that("TEST_classe", {
-
     # Test classe
     expect_s4_class(param_alm_engine, "ParamAlmEngine")
 
@@ -69,10 +66,9 @@ test_that("TEST_classe", {
 # do_calc_nb_sold
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 test_that("TEST_do_calc_nb_sold", {
-
     # Donnees necessaires
-    montant_vente = 10000
-    method_vente = "proportionnelle"
+    montant_vente <- 10000
+    method_vente <- "proportionnelle"
 
 
     ## 1 - Action
@@ -112,7 +108,6 @@ test_that("TEST_do_calc_nb_sold", {
 
     # Test
     expect_equal(res[, "nb_sold"], res_att, tolerance = 0.01)
-
 })
 
 
@@ -120,11 +115,10 @@ test_that("TEST_do_calc_nb_sold", {
 # nb_sold
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 test_that("TEST_create_ptf_bought", {
-
     ## 1 - Action
     # Appel de la fonction
     ptf_action <- PtfFin_ref@ptf_action
-    res     <- create_ptf_bought_action(ptf_action, coefficient = rep(2, nrow(ptf_action@ptf_action)))
+    res <- create_ptf_bought_action(ptf_action, coefficient = rep(2, nrow(ptf_action@ptf_action)))
 
     # Tests
     expect_equal(res@ptf_action$val_marche, 2 * ptf_action@ptf_action$val_marche)
@@ -144,7 +138,7 @@ test_that("TEST_create_ptf_bought", {
     ## 2 - Immo
     # Appel de la fonction
     ptf_immo <- PtfFin_ref@ptf_immo
-    res     <- create_ptf_bought_immo(ptf_immo, coefficient = rep(2, nrow(ptf_immo@ptf_immo)))
+    res <- create_ptf_bought_immo(ptf_immo, coefficient = rep(2, nrow(ptf_immo@ptf_immo)))
 
     # Tests
     expect_equal(res@ptf_immo$val_marche, 2 * ptf_immo@ptf_immo$val_marche)
@@ -164,7 +158,7 @@ test_that("TEST_create_ptf_bought", {
     ## 3 - Oblig
     # Appel de la fonction
     ptf_oblig <- PtfFin_ref@ptf_oblig
-    res     <- create_ptf_bought_oblig(ptf_oblig, coefficient = rep(2, nrow(ptf_oblig@ptf_oblig)))
+    res <- create_ptf_bought_oblig(ptf_oblig, coefficient = rep(2, nrow(ptf_oblig@ptf_oblig)))
 
     # Tests
     expect_equal(res@ptf_oblig$val_marche, 2 * ptf_oblig@ptf_oblig$val_marche)
@@ -192,16 +186,15 @@ test_that("TEST_create_ptf_bought", {
 # reallocate
 #--------------------------------------------------------------------------------------------------------------------------
 test_that("TEST_reallocate", {
-
     # Appel de la fonction
     res <- reallocate(PtfFin, param_alm_engine@ptf_reference, param_alm_engine@alloc_cible)
 
     # Test
-    expect_equal(as.numeric(print_alloc(res[[1]])[,"alloc_proportion"]), c(alloc_cible, 1))
+    expect_equal(as.numeric(print_alloc(res[[1]])[, "alloc_proportion"]), c(alloc_cible, 1))
 
     # Test avec erreur
-    expect_error(reallocate(PtfFin, param_alm_engine@ptf_reference, c(0.3,0.5,0.48,0.2)))
-    expect_error(reallocate(PtfFin, param_alm_engine@ptf_reference, c(0.5,0.5,-0.2,0.2)))
+    expect_error(reallocate(PtfFin, param_alm_engine@ptf_reference, c(0.3, 0.5, 0.48, 0.2)))
+    expect_error(reallocate(PtfFin, param_alm_engine@ptf_reference, c(0.5, 0.5, -0.2, 0.2)))
 })
 
 
@@ -209,42 +202,41 @@ test_that("TEST_reallocate", {
 # create_ptf_bought_action
 #--------------------------------------------------------------------------------------------------------------------------
 test_that("TEST_create_ptf_bough", {
-
     ## 1 - Action
     # Appel de la fonction
-    coefficient = c(1/3, 1/3, 1/3)
+    coefficient <- c(1 / 3, 1 / 3, 1 / 3)
     res <- create_ptf_bought_action(PtfFin@ptf_action, coefficient)
 
     # Tests
-    expect_equal(res@ptf_action$val_marche, 1/3 * PtfFin@ptf_action@ptf_action$val_marche)
-    expect_equal(res@ptf_action$val_nc, 1/3 * PtfFin@ptf_action@ptf_action$val_nc)
-    expect_equal(res@ptf_action$val_achat, 1/3 * PtfFin@ptf_action@ptf_action$val_achat)
+    expect_equal(res@ptf_action$val_marche, 1 / 3 * PtfFin@ptf_action@ptf_action$val_marche)
+    expect_equal(res@ptf_action$val_nc, 1 / 3 * PtfFin@ptf_action@ptf_action$val_nc)
+    expect_equal(res@ptf_action$val_achat, 1 / 3 * PtfFin@ptf_action@ptf_action$val_achat)
 
 
     ## 2 - Immo
     # Appel de la fonction
-    coefficient = c(1/3, 1/3)
+    coefficient <- c(1 / 3, 1 / 3)
     res <- create_ptf_bought_immo(PtfFin@ptf_immo, coefficient)
 
     # Tests
-    expect_equal(res@ptf_immo$val_marche, 1/3 * PtfFin@ptf_immo@ptf_immo$val_marche)
-    expect_equal(res@ptf_immo$val_nc, 1/3 * PtfFin@ptf_immo@ptf_immo$val_nc)
-    expect_equal(res@ptf_immo$val_achat, 1/3 * PtfFin@ptf_immo@ptf_immo$val_achat)
+    expect_equal(res@ptf_immo$val_marche, 1 / 3 * PtfFin@ptf_immo@ptf_immo$val_marche)
+    expect_equal(res@ptf_immo$val_nc, 1 / 3 * PtfFin@ptf_immo@ptf_immo$val_nc)
+    expect_equal(res@ptf_immo$val_achat, 1 / 3 * PtfFin@ptf_immo@ptf_immo$val_achat)
 
 
     ## 3 - Oblig
     # Appel de la fonction
-    coefficient = c(1/4,1/4,1/4,1/4)
+    coefficient <- c(1 / 4, 1 / 4, 1 / 4, 1 / 4)
     res <- create_ptf_bought_oblig(PtfFin@ptf_oblig, coefficient)
 
     # Tests
-    expect_equal(res@ptf_oblig$val_marche, 1/4 * PtfFin@ptf_oblig@ptf_oblig$val_marche)
-    expect_equal(res@ptf_oblig$val_nc, 1/4 * PtfFin@ptf_oblig@ptf_oblig$val_nc)
-    expect_equal(res@ptf_oblig$val_achat, 1/4 * PtfFin@ptf_oblig@ptf_oblig$val_achat)
+    expect_equal(res@ptf_oblig$val_marche, 1 / 4 * PtfFin@ptf_oblig@ptf_oblig$val_marche)
+    expect_equal(res@ptf_oblig$val_nc, 1 / 4 * PtfFin@ptf_oblig@ptf_oblig$val_nc)
+    expect_equal(res@ptf_oblig$val_achat, 1 / 4 * PtfFin@ptf_oblig@ptf_oblig$val_achat)
 
 
     ## Autre tets
-    expect_equal(create_ptf_bought_action(PtfFin@ptf_action, c(1,1,1)), PtfFin@ptf_action)
-    expect_equal(create_ptf_bought_immo(PtfFin@ptf_immo, c(1,1)), PtfFin@ptf_immo)
-    expect_equal(create_ptf_bought_oblig(PtfFin@ptf_oblig, c(1,1,1,1)), PtfFin@ptf_oblig)
+    expect_equal(create_ptf_bought_action(PtfFin@ptf_action, c(1, 1, 1)), PtfFin@ptf_action)
+    expect_equal(create_ptf_bought_immo(PtfFin@ptf_immo, c(1, 1)), PtfFin@ptf_immo)
+    expect_equal(create_ptf_bought_oblig(PtfFin@ptf_oblig, c(1, 1, 1, 1)), PtfFin@ptf_oblig)
 })

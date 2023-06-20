@@ -12,7 +12,6 @@ path <- paste0(path, "/donnees/actif")
 #           Classe ESG
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 test_that("TEST_ESG", {
-
     # Chargement de l'ensemble des donnees d'inputs (indices + courbes de taux) : doit fonctionner
     x <- chargement_ESG(folder_ESG_address, 2L, 5L)
 

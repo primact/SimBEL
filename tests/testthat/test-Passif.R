@@ -20,9 +20,8 @@ list_rd <- calc_rdt_marche_ref(central@canton@ptf_passif@ht@param_comport[[centr
 # calc_rdt_marche_ref
 #--------------------------------------------------
 test_that("TEST_calc_rdt_marche_ref", {
-
     # Test
-    expect_true(all(names(list_rd) %in% c("rdt_oblig", "rdt_action", "rdt_immo", "rdt_tre" )))
+    expect_true(all(names(list_rd) %in% c("rdt_oblig", "rdt_action", "rdt_immo", "rdt_tre")))
 })
 
 
@@ -46,7 +45,6 @@ tx_cible <- list(tx_cible_an = retraite@mp$tx_cible_prec)
 # Classe TabRetEuroRest
 #--------------------------------------------------
 test_that("Classe_TabRetEuroRest", {
-
     # Test classe
     expect_is(object = retraite@tab, class = "TabRetEuroRest")
 
@@ -68,7 +66,6 @@ test_that("Classe_TabRetEuroRest", {
 # calc_coupon TabProbaRetEuroRest
 #--------------------------------------------------
 test_that("Classe_TabProbaRetEuroRest", {
-
     # Test classe
     expect_is(object = retraite@tab_proba, class = "TabProbaRetEuroRest")
 
@@ -84,35 +81,35 @@ test_that("Classe_TabProbaRetEuroRest", {
 # Classe RetraiteEuroRes
 #--------------------------------------------------
 test_that("Classe_RetraiteEuroRest", {
-
     # Test creation classe
     expect_is(object = retraite, class = "RetraiteEuroRest")
 
     # Fichier de data
     temp_csv <- read.csv2(paste(racine@address$data$passif, "ret_euro_rest1.csv", sep = "/"),
-                          colClasses = c(
-                              "integer",
-                              "integer",
-                              "integer",
-                              "integer",
-                              "integer",
-                              "factor",
-                              "numeric",
-                              "numeric",
-                              "integer",
-                              "integer",
-                              "integer",
-                              "factor",
-                              "numeric",
-                              "numeric",
-                              "factor",
-                              "integer",
-                              "numeric",
-                              "numeric",
-                              "numeric",
-                              "logical",
-                              "numeric",
-                              "integer")
+        colClasses = c(
+            "integer",
+            "integer",
+            "integer",
+            "integer",
+            "integer",
+            "factor",
+            "numeric",
+            "numeric",
+            "integer",
+            "integer",
+            "integer",
+            "factor",
+            "numeric",
+            "numeric",
+            "factor",
+            "integer",
+            "numeric",
+            "numeric",
+            "numeric",
+            "logical",
+            "numeric",
+            "integer"
+        )
     )
 
 
@@ -155,8 +152,7 @@ test_that("Classe_RetraiteEuroRest", {
 #--------------------------------------------------
 # calc_pm
 #--------------------------------------------------
-test_that("TEST_calc_pm",{
-
+test_that("TEST_calc_pm", {
     # Tests sur les erreurs d'input
     expect_error(calc_pm(x = retraite))
     expect_error(calc_pm(y = list(hypt, tx_cible, "normal")))
@@ -167,13 +163,13 @@ test_that("TEST_calc_pm",{
     expect_error(calc_pm(x = retraite, y = list(method = "normal", tx_cible = tx_cible)))
     expect_error(calc_pm(x = retraite, y = list(method = hypt, ht = "normal", tx_cible = tx_cible)))
     expect_error(calc_pm(x = retraite, y = list(ht = hypt, method = "normal", tx_cible = tx_cible)))
-    expect_error(calc_pm(x = retraite, y = list(tx_cible = tx_cible, ht =  hypt, method = "gar")))
+    expect_error(calc_pm(x = retraite, y = list(tx_cible = tx_cible, ht = hypt, method = "gar")))
     expect_error(calc_pm(x = retraite, y = list(tx_cible = tx_cible, method = "gar", hypt)))
     expect_error(calc_pm(x = 0.01, y = list(hypt, tx_cible = tx_cible, method = "normal")))
     expect_error(calc_pm(x = 0.01, y = list(hypt, tx_cible = tx_cible, method = "gar")))
     expect_error(calc_pm(x = retraite, y = list(ht = hypt, tx_cible = 0.04, method = "gar")))
-    expect_error(calc_pm(x = retraite, y = list(ht = hypt, tx_cible = c(1,2), method = "normal")))
-    expect_error(calc_pm(x = retraite, y = list(ht = hypt, tx_cible = list(1,2), method = "normal")))
+    expect_error(calc_pm(x = retraite, y = list(ht = hypt, tx_cible = c(1, 2), method = "normal")))
+    expect_error(calc_pm(x = retraite, y = list(ht = hypt, tx_cible = list(1, 2), method = "normal")))
     expect_error(calc_pm(x = retraite, y = list(ht = hypt, tx_cible = tx_cible, method = "test")))
 
 
@@ -192,7 +188,6 @@ test_that("TEST_calc_pm",{
 # calc_prest
 #--------------------------------------------------
 test_that("TEST_calc_prest", {
-
     # Tests sur les erreurs d'input
     expect_error(calc_prest(x = retraite))
     expect_error(calc_prest(y = list(ht = hypt)))
@@ -205,9 +200,9 @@ test_that("TEST_calc_prest", {
     res_calc_prest <- calc_prest(x = retraite, method = "normal", an = 1L)
 
     # Tests avec les donnees CAREL
-    expect_equal(object = res_calc_prest$stock$nb_debut, expected =retraite@mp$nb_contr)
-    expect_equal(object = sum(res_calc_prest$flux$prest[1:3]), expected = 2490,015)
-    expect_equal(object = sum(res_calc_prest$flux$prest[4:6]), expected = 6055,96)
+    expect_equal(object = res_calc_prest$stock$nb_debut, expected = retraite@mp$nb_contr)
+    expect_equal(object = sum(res_calc_prest$flux$prest[1:3]), expected = 2490, 015)
+    expect_equal(object = sum(res_calc_prest$flux$prest[4:6]), expected = 6055, 96)
     expect_equal(object = res_calc_prest$flux$prest[7], expected = 0)
 
     # Test differe un an
@@ -236,7 +231,6 @@ test_that("TEST_calc_prest", {
 # calc_revalo_pm
 #--------------------------------------------------
 test_that("TEST_calc_revalo_pm", {
-
     # Appel de la fonction
     res <- calc_revalo_pm(x = retraite, y = list(rev_net_alloue = 50, rev_net_alloue_gar = 0))
 
@@ -246,7 +240,6 @@ test_that("TEST_calc_revalo_pm", {
     expect_equal(object = res$flux$rev_stock_nette_ap_pb, expected = 50 * rep(1, nrow(retraite@mp)) / nrow(retraite@mp))
     expect_equal(object = res$flux$enc_charg_stock_ap_pb, expected = rep(0, nrow(retraite@mp)))
     expect_equal(object = res$flux$soc_stock_ap_pb, expected = rep(0, nrow(retraite@mp)))
-
 })
 
 
@@ -296,28 +289,26 @@ proba_dyn <- calc_proba_dyn(epeuro, ht = hypt)
 # calc_primes
 #--------------------------------------------------
 test_that("TEST_calc_primes", {
-
     # Appel de la fonction
     res <- calc_primes(epeuro)
 
     # Tests
-    expect_equal(object = res$stock$nb_vers, expected = c(0,0))
-    expect_equal(object = res$flux$pri_brut, expected = c(0,0))
-    expect_equal(object = res$flux$pri_net, expected = c(0,0))
-    expect_equal(object = res$flux$pri_chgt, expected = c(0,0))
+    expect_equal(object = res$stock$nb_vers, expected = c(0, 0))
+    expect_equal(object = res$flux$pri_brut, expected = c(0, 0))
+    expect_equal(object = res$flux$pri_net, expected = c(0, 0))
+    expect_equal(object = res$flux$pri_chgt, expected = c(0, 0))
 
 
     # Prime non nulle
     epeuro_bis <- epeuro
-    epeuro_bis@mp$prime <- c(1,1)
+    epeuro_bis@mp$prime <- c(1, 1)
     res <- calc_primes(epeuro_bis)
 
     # Tests
-    expect_equal(object = res$stock$nb_vers, expected = c(1,1))
-    expect_equal(object = res$flux$pri_brut, expected = c(1,1))
+    expect_equal(object = res$stock$nb_vers, expected = c(1, 1))
+    expect_equal(object = res$flux$pri_brut, expected = c(1, 1))
     expect_equal(object = res$flux$pri_net, expected = (1 - epeuro_bis@mp$chgt_prime))
     expect_equal(object = res$flux$pri_chgt, expected = epeuro_bis@mp$chgt_prime)
-
 })
 
 
@@ -325,15 +316,14 @@ test_that("TEST_calc_primes", {
 # calc_prest
 #--------------------------------------------------
 test_that("TEST_calc_prest", {
-
     # Donnees
-    tx_an <- c(0.05,0.05)
-    tx_min <- list(tx_an = c(0.05,0.05), tx_se = sqrt(1 + tx_an) - 1)
+    tx_an <- c(0.05, 0.05)
+    tx_min <- list(tx_an = c(0.05, 0.05), tx_se = sqrt(1 + tx_an) - 1)
 
     # Erreurs d'input
     expect_error(calc_prest(x = epeuro))
     expect_error(calc_prest(y = list(proba_dyn = proba_dyn)))
-    expect_error(calc_prest(x = epeuro, an = 1L,  y = list(proba_dyn)))
+    expect_error(calc_prest(x = epeuro, an = 1L, y = list(proba_dyn)))
     expect_error(calc_prest(x = epeuro, method = "test", an = 1L, y = list(proba_dyn = 10, tx_min = tx_min, tx_soc = 0.155, choc_lapse_mass = 0)))
 
     # Appel de la fonction
@@ -346,28 +336,26 @@ test_that("TEST_calc_prest", {
 # calc_tx_cible
 #--------------------------------------------------
 test_that("TEST_calc_tx_cible", {
-
     # Appel de la fonction
     res <- calc_tx_cible(x = epeuro, y = list(ht = hypt, list_rd = list_rd))
 
     # Tests
-    expect_equal(res$tx_cible_se, expected = sqrt(1+res$tx_cible_an)-1)
-
+    expect_equal(res$tx_cible_se, expected = sqrt(1 + res$tx_cible_an) - 1)
 })
 
 #--------------------------------------------------
 # calc_pm
 #--------------------------------------------------
 test_that("TEST_calc_pm", {
-
     # Donnees
     prime <- calc_primes(epeuro)
-    tx_min <-  calc_tx_min(epeuro, an = 1L)
+    tx_min <- calc_tx_min(epeuro, an = 1L)
     prest <- calc_prest(x = epeuro, method = "normal", an = 1L, y = list(proba_dyn = proba_dyn, tx_min = tx_min, tx_soc = 0.155, choc_lapse_mass = 0))
     tx_cible <- calc_tx_cible(x = epeuro, y = list(ht = hypt, list_rd = list_rd))
 
     # Appel de la fonction
-    res <- calc_pm(epeuro, method = "normal", an = 1L, tx_cible = tx_cible, list(tab_prime = prime[["flux"]], tab_prest = prest[["flux"]],
-                                                                                 tx_min = tx_min, tx_soc = 0.155))
-
+    res <- calc_pm(epeuro, method = "normal", an = 1L, tx_cible = tx_cible, list(
+        tab_prime = prime[["flux"]], tab_prest = prest[["flux"]],
+        tx_min = tx_min, tx_soc = 0.155
+    ))
 })
