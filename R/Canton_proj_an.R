@@ -378,6 +378,80 @@ setMethod(
             tot_pb_dot = result_revalo[["pb_attrib"]][["pb_dot"]]
         )
 
+        #---------------------------------------------------------------
+        # Etape 18 : Creation du DF stockant les elements du CDR
+        #---------------------------------------------------------------
+
+        alloc_pm_moy <- prop.table(stock_produit[, "pm_moy"])
+
+        bes_pos <- pmax(flux_produit[, "bes_tx_cible"] -
+            flux_produit[, "rev_stock_nette"], 0)
+        bes_neg <- pmax(flux_produit[, "rev_stock_nette"] -
+            flux_produit[, "bes_tx_cible"], 0)
+
+        if (!all(bes_pos == 0)) {
+            alloc_dot_ppb <- prop.table(bes_pos)
+        } else {
+            alloc_dot_ppb <- bes_pos
+        }
+
+        if (!all(bes_neg == 0)) {
+            alloc_rep_ppb <- prop.table(bes_neg)
+        } else {
+            alloc_rep_ppb <- bes_neg
+        }
+
+        print(x@ptf_passif@autres_reserves["psap_debut"] -
+            x@ptf_passif@autres_reserves["psap_valeur"] +
+            x@ptf_passif@autres_reserves["pgg_debut"] -
+            x@ptf_passif@autres_reserves["pgg_valeur"])
+
+
+        output_cdr <- data.frame(
+            pri_chgt = flux_produit[, "pri_chgt"],
+            frais_prime = flux_produit[, "frais_var_prime"] +
+                flux_produit[, "frais_fixe_prime"],
+            pri_brut = flux_produit[, "pri_brut"],
+            rach_conj = flux_produit[, "rach_mass"] +
+                flux_produit[, "rach_part_conj"] +
+                flux_produit[, "rach_tot_conj"],
+            rach_struct = flux_produit[, "rach_part_struct"] +
+                flux_produit[, "rach_tot_struct"],
+            dc = flux_produit[, "dc"],
+            ech = flux_produit[, "ech"],
+            arr_rentes = flux_produit[, "arr_charg"],
+            pb_liq = flux_produit[, "rev_prest"] -
+                flux_produit[, "it_tech_prest"],
+            it_tech_prest = flux_produit[, "it_tech_prest"],
+            enc_charg_prest = flux_produit[, "enc_charg_prest"],
+            pm_deb = stock_produit[, "pm_deb"],
+            pm_fin = stock_produit[, "pm_fin"],
+            var_psap_pgg = x@ptf_passif@autres_reserves["psap_debut"] -
+                x@ptf_passif@autres_reserves["psap_valeur"] +
+                x@ptf_passif@autres_reserves["pgg_debut"] -
+                x@ptf_passif@autres_reserves["pgg_valeur"], # A VENTILER ENTRE PRODUITS
+            pb_nette_it_stock = flux_produit[, "rev_stock_brut"] -
+                flux_produit[, "it_tech_stock"],
+            it_tech_stock = flux_produit[, "it_tech_stock"],
+            soc_stock = flux_produit[, "soc_stock_ap_pb"],
+            enc_charg_stock = flux_produit[, "enc_charg_stock_ap_pb"],
+            frais_var_enc = flux_produit[, "frais_var_enc"],
+            frais_var_prest = flux_produit[, "frais_var_prest"],
+            frais_generaux = flux_produit[, "frais_fixe_enc"] +
+                flux_produit[, "frais_fixe_prest"] +
+                flux_produit[, "frais_fin"],
+            result_fin = resultat_fin * alloc_pm_moy,
+            var_pre = x@ptf_fin@pre["val_debut"] -
+                x@ptf_fin@pre["val_courante"],
+            tot_pb_rep = result_revalo[["pb_attrib"]][["pb_rep"]] * alloc_rep_ppb,
+            tot_pb_dot = result_revalo[["pb_attrib"]][["pb_dot"]] * alloc_dot_ppb,
+            autres = list(
+                var_rc = actif_realloc[["var_rc"]],
+                impot = impot
+            )
+        )
+
+
 
         # Output
         return(list(
@@ -393,7 +467,8 @@ setMethod(
             result_fin = resultat_fin,
             tra = tra,
             result_brut = result_brut,
-            result_net = result_net
+            result_net = result_net,
+            output_cdr = output_cdr
         ))
     }
 )
