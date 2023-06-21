@@ -401,11 +401,6 @@ setMethod(
             alloc_rep_ppb <- bes_neg
         }
 
-        print(x@ptf_passif@autres_reserves["psap_debut"] -
-            x@ptf_passif@autres_reserves["psap_valeur"] +
-            x@ptf_passif@autres_reserves["pgg_debut"] -
-            x@ptf_passif@autres_reserves["pgg_valeur"])
-
 
         output_cdr <- data.frame(
             pri_chgt = flux_produit[, "pri_chgt"],
