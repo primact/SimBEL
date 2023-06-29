@@ -21,27 +21,27 @@
 ##' @include EpEuroInd-class.R RetraiteEuroRest_class.R
 
 #--------------------------------------------------------
-setGeneric(name = "calc_tx_min", def = function(x, an){standardGeneric("calc_tx_min")})
+setGeneric(name = "calc_tx_min", def = function(x, an) {
+    standardGeneric("calc_tx_min")
+})
 
 
 #--------------------------------------------------------
 setMethod(
     f = "calc_tx_min",
-    signature = c(x = "EpEuroInd", an ="numeric"),
-    def = function(x, an){
-
+    signature = c(x = "EpEuroInd", an = "numeric"),
+    def = function(x, an) {
         # Data.frame ModelPoint
-        mp      <- x@mp
-        nb_mp   <- nrow(mp)
-        nom_mp  <- names(mp)
-        num_terme_tx_tech   <- which(nom_mp == "terme_tx_tech")
-        num_terme_tmg       <- which(nom_mp == "terme_tmg")
-        num_tx_tech         <- which(nom_mp == "tx_tech")
-        num_tmg             <- which(nom_mp == "tmg")
+        mp <- x@mp
+        nom_mp <- names(mp)
+        num_terme_tx_tech <- which(nom_mp == "terme_tx_tech")
+        num_terme_tmg <- which(nom_mp == "terme_tmg")
+        num_tx_tech <- which(nom_mp == "tx_tech")
+        num_tmg <- which(nom_mp == "tmg")
 
         # Calcul des indicatrice de versement du taux technique et du tmg
         ind_tx_tech <- (an <= .subset2(mp, num_terme_tx_tech)) # indicatrice taux technique pour l'annee en cours
-        ind_tmg     <- (an <= .subset2(mp, num_terme_tmg)) # indicatrice taux technique pour l'annee en cours
+        ind_tmg <- (an <= .subset2(mp, num_terme_tmg)) # indicatrice taux technique pour l'annee en cours
 
         # Calul du produit du TxTech_MP et de l'incatrice
         tx_tech_mp <- .subset2(mp, num_tx_tech) * ind_tx_tech
@@ -59,8 +59,8 @@ setMethod(
             tx_tech_an = tx_tech,
             tx_tech_se = tx_tech_se,
             tx_an = tx_min,
-            tx_se = tx_min_se))
-
+            tx_se = tx_min_se
+        ))
     }
 )
 
@@ -68,8 +68,7 @@ setMethod(
 setMethod(
     f = "calc_tx_min",
     signature = c(x = "RetraiteEuroRest"),
-    def = function(x){
-
+    def = function(x) {
         # Output zero
         out_zero <- rep(0, nrow(x@mp))
 
@@ -78,7 +77,7 @@ setMethod(
             tx_tech_an = out_zero,
             tx_tech_se = out_zero,
             tx_an = out_zero,
-            tx_se = out_zero))
-
+            tx_se = out_zero
+        ))
     }
 )
