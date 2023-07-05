@@ -19,7 +19,8 @@ calc_reprise_ppb(x, montant)
 }
 \description{
 \code{calc_reprise_ppb} est une methode permettant de reprendre sur la PPB.
-La reprise est effectuee si les limites de reprise de la PPB sur l'annee ne sont pas atteintes. La valeur de cette limite est mise a jour suite a la reprise
+La reprise est effectuee si les limites de reprise de la PPB sur l'annee ne sont pas atteintes.
+La valeur de cette limite est mise a jour suite a la reprise
 }
 \author{
 Prim'Act

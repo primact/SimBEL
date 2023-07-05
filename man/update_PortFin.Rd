@@ -16,7 +16,8 @@ avant l'etape de vieillissement.}
 \item{new_mp_ESG}{est un objet de la classe \code{\link{ModelPointESG}}, decrivant les conditions
 economiques permettant d'effectuer le vieillissement du portefeuille financier.}
 
-\item{flux_milieu}{est une valeur \code{numeric} correspondant a la somme des flux percus en milieu d'annee (coupons des obligations, loyers immobiliers, dividendes des actions, revenus de la tresorerie).}
+\item{flux_milieu}{est une valeur \code{numeric} correspondant a la somme des flux percus en milieu d'annee
+(coupons des obligations, loyers immobiliers, dividendes des actions, revenus de la tresorerie).}
 
 \item{flux_fin}{est une valeur \code{numeric}  correspondant a la somme des flux percus en fin d'annee (tombee d'echeance d'obligation).}
 }

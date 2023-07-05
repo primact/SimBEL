@@ -22,7 +22,8 @@ Ces derniers ont ete renseignes par l'utilisateur en donnees.}
  des taux de rachats au sens de la formule standard Solvabilite 2.
 }
 \description{
-\code{do_choc_rachat_down} est une methode permettant d'appliquer le choc a la baisse des taux de rachat de la formule standard Solvabilite 2 a un canton.
+\code{do_choc_rachat_down} est une methode permettant d'appliquer le choc a la baisse des taux de rachat de la formule standard Solvabilite 2
+a un canton.
 }
 \note{
 La parametrisation des chocs a la baisse des taux de rachat est effectuee dans les fichiers d'inputs

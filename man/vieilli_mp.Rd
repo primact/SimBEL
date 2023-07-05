@@ -12,7 +12,8 @@ vieilli_mp(x, pm_fin, pm_gar, tx_revalo, an)
 
 \item{pm_fin}{un vecteur de type \code{numeric} contenant par model point les montants de PM revalorises apres participation aux benefices.}
 
-\item{pm_gar}{un vecteur de type \code{numeric} contenant par model point les montants de PM garanties revalorises apres participation aux benefices au titre de la PPB initiale.}
+\item{pm_gar}{un vecteur de type \code{numeric} contenant par model point les montants de PM garanties revalorises apres participation aux
+benefices au titre de la PPB initiale.}
 
 \item{tx_revalo}{un vecteur de type \code{numeric} contenant par model point les taux de revalorisation nets appliques.}
 

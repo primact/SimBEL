@@ -8,7 +8,7 @@
 load_action(file_action_address)
 }
 \arguments{
-\item{file_action_address}{est un \code{character} contenant l'adresse exacte du fichier d'input utilisateur permettant de renseigner le portefeuille.}
+\item{file_action_address}{est un \code{character} contenant l'adresse exacte du fichier d'input utilisateur renseignant le portefeuille.}
 }
 \value{
 L'objet de la classe \code{\link{Action}} construit a partir des inputs renseignes par l'utilisateur.

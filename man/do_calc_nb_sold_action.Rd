@@ -10,7 +10,8 @@ do_calc_nb_sold_action(x, montant_vente, method_vente)
 \arguments{
 \item{x}{objet de la classe \code{\link{Action}}, correspondant au portefeuille action de l'assureur.}
 
-\item{montant_vente}{est un reel de type \code{numeric} correspondant a un montant de vente (en valeur de marche) totale d'action que l'assureur souhaite effectuer.}
+\item{montant_vente}{est un reel de type \code{numeric} correspondant a un montant de vente (en valeur de marche) totale d'action que l'assureur
+souhaite effectuer.}
 
 \item{method_vente}{est un element de type \code{character} correspondant a methode de vente
 retenue (seule la methode proportionnelle est implementee actuellement).}

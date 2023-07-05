@@ -8,7 +8,8 @@
 frais_fin_load(file_frais_fin_address)
 }
 \arguments{
-\item{file_frais_fin_address}{est un \code{character} contenant l'adresse exacte du fichier d'input utilisateur permettant de renseigner les Frais financier.}
+\item{file_frais_fin_address}{est un \code{character} contenant l'adresse exacte du fichier d'input utilisateur permettant de renseigner les Frais
+financier.}
 }
 \value{
 L'objet de la classe \code{FraisFin} construit a partir des inputs renseignes par l'utilisateur.

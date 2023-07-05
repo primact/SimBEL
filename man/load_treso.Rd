@@ -8,7 +8,8 @@
 load_treso(file_treso_address)
 }
 \arguments{
-\item{file_treso_address}{est un \code{character} contenant l'adresse exacte du fichier d'input utilisateur permettant de renseigner le portefeuille.}
+\item{file_treso_address}{est un \code{character} contenant l'adresse exacte du fichier d'input utilisateur permettant de renseigner le
+portefeuille.}
 }
 \value{
 L'objet de la classe \code{\link{Treso}} construit a partir des inputs renseignes par l'utilisateur.

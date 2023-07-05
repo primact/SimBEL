@@ -14,7 +14,8 @@ do_choc_immo(x, canton)
 de l'assureur.}
 }
 \value{
-\code{canton} l'objet  de la classe \code{\link{Canton}} correspondant au scenario choque immobilier au sens de la formule standard Solvabilite 2.
+\code{canton} l'objet  de la classe \code{\link{Canton}} correspondant au scenario choque immobilier au sens
+de la formule standard Solvabilite 2.
 }
 \description{
 \code{do_choc_immo} est une methode permettant d'appliquer le choc immobilier de la formule standard Solvabilite 2

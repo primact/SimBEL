@@ -17,8 +17,8 @@ L'objet \code{\link{PortFin}} correspondant au portefeuille financier de reinves
 tel que precise par les donnees initiales et les parametres renseignes par l'utilisateur.
 }
 \description{
-\code{chargement_PortFin_reference} est une methode permettant de creer un objet \code{PortFin} correspondant au portefeuille finanicer de reinvestissement
-a partir des donnees renseignees par l'utilisateur.
+\code{chargement_PortFin_reference} est une methode permettant de creer un objet \code{PortFin} correspondant au portefeuille finanicer de
+reinvestissement a partir des donnees renseignees par l'utilisateur.
 }
 \author{
 Prim'Act

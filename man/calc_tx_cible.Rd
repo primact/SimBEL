@@ -8,7 +8,8 @@
 calc_tx_cible(x, y)
 }
 \arguments{
-\item{x}{un objet de la classe \code{\link{EpEuroInd}} ou de la classe \code{\link{RetraiteEuroRest}} contenant les model points epargne euros ou retraite euro en phases de restitution.}
+\item{x}{un objet de la classe \code{\link{EpEuroInd}} ou de la classe \code{\link{RetraiteEuroRest}}
+contenant les model points epargne euros ou retraite euro en phases de restitution.}
 
 \item{y}{une liste contenant les parametres.
 \describe{

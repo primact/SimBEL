@@ -21,7 +21,8 @@ Cette table contient les tables d'evolution des cours et rendements sur l'annee 
  des classes d'actif. Les tables sont constuites a partir des extractions du Generateur de Scenario Economique de Prim'Act.}
 }
 \value{
-L'objet renvoye de la classe \code{PortFin} correspond au portefeuille financier initial dont l'attribut \code{ptf_treso} a ete vieilli d'une annee.
+L'objet renvoye de la classe \code{PortFin} correspond au portefeuille financier initial dont l'attribut \code{ptf_treso}
+a ete vieilli d'une annee.
 }
 \description{
 \code{vieillissement_treso_PortFin} est une methode permettant de projeter la composante obligataire d'un portefeuille financier.

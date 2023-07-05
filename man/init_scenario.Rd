@@ -17,7 +17,8 @@ Pas de sortie.
 \code{init_scenario} est la methode d'initialisation.
 }
 \note{
-Cette methode cree l'architecture, puis les objets \code{\link{Be}} correspondant a chacun des scenarios : central et de chocs de la formule standard.
+Cette methode cree l'architecture, puis les objets \code{\link{Be}} correspondant a chacun des scenarios :
+central et de chocs de la formule standard.
 }
 \author{
 Prim'Act

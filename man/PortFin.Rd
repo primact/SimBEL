@@ -26,17 +26,23 @@ Une Classe pour le portefeuille financier.
 
 \item{\code{frais_fin}}{est un objet de type \code{\link{FraisFin}}, qui represente les frais financiers d'un canton.}
 
-\item{\code{pvl_action}}{est un \code{numeric}, qui correspond a la somme des plus values latentes des actifs Actions qui sont en situation de plus values latentes.}
+\item{\code{pvl_action}}{est un \code{numeric}, qui correspond a la somme des plus values latentes des actifs Actions qui sont en situation de
+plus values latentes.}
 
-\item{\code{pvl_immo}}{est un \code{numeric}, qui correspond a la somme des plus values latentes des actifs Immo qui sont en situation de plus values latentes.}
+\item{\code{pvl_immo}}{est un \code{numeric}, qui correspond a la somme des plus values latentes des actifs Immo qui sont en situation de
+plus values latentes.}
 
-\item{\code{pvl_oblig}}{est un \code{numeric}, qui correspond a la somme des plus values latentes des actifs Obligs qui sont en situation de plus values latentes.}
+\item{\code{pvl_oblig}}{est un \code{numeric}, qui correspond a la somme des plus values latentes des actifs Obligs qui sont en situation de
+plus values latentes.}
 
-\item{\code{mvl_action}}{est un \code{numeric}, qui correspond a la somme des moins values latentes des actifs Actions qui sont en situation de moins values latentes.}
+\item{\code{mvl_action}}{est un \code{numeric}, qui correspond a la somme des moins values latentes des actifs Actions qui sont en situation de
+moins values latentes.}
 
-\item{\code{mvl_immo}}{est un \code{numeric}, qui correspond a la somme des moins values latentes des actifs Immos qui sont en situation de moins values latentes.}
+\item{\code{mvl_immo}}{est un \code{numeric}, qui correspond a la somme des moins values latentes des actifs Immos qui sont en situation de
+moins values latentes.}
 
-\item{\code{mvl_oblig}}{est un \code{numeric}, qui correspond a la somme des moins values latentes des actifs Obligs qui sont en situation de moins values latentes.}
+\item{\code{mvl_oblig}}{est un \code{numeric}, qui correspond a la somme des moins values latentes des actifs Obligs qui sont en situation de
+moins values latentes.}
 
 \item{\code{vm_vnc_precedent}}{est une liste composee de deux elements : la \code{vm_precedente} et la
  \code{vnc_precedente}, correspondant respectivement a la valeur de marche

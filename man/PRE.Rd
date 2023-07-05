@@ -16,7 +16,8 @@ Une classe pour la gestion de la provision pour risque d'exigibilite (PRE).
 }}
 
 \seealso{
-Les methodes de calcul de la PRE \code{\link{calc_PRE}}, et de mises a jour des PRE initiales et courantes \code{\link{do_update_PRE_val_courante}}, \code{\link{do_update_PRE_val_debut}}.
+Les methodes de calcul de la PRE \code{\link{calc_PRE}}, et de mises a jour des PRE initiales et courantes
+\code{\link{do_update_PRE_val_courante}}, \code{\link{do_update_PRE_val_debut}}.
 }
 \author{
 Prim'Act

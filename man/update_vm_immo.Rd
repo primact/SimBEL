@@ -10,7 +10,8 @@ update_vm_immo(x, vm)
 \arguments{
 \item{x}{objet de la classe \code{\link{Immo}} (decrivant le portefeuille immobilier en detention).}
 
-\item{vm}{un vecteur de \code{numeric} ayant la meme longueur que le portefeuille immobilier a de lignes et correspondant aux nouvelles valeurs de marche du portefeuille immobilier.}
+\item{vm}{un vecteur de \code{numeric} ayant la meme longueur que le portefeuille immobilier a de lignes et correspondant aux nouvelles valeurs
+de marche du portefeuille immobilier.}
 }
 \value{
 L'objet \code{x} mis a jour.

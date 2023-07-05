@@ -10,8 +10,8 @@ calc_vnc(x, sd_unitaire)
 \arguments{
 \item{x}{objet de la classe \code{\link{Oblig}} (decrivant le portefeuille d'obligation).}
 
-\item{sd_unitaire}{vecteur de type \code{numeric} decrivant la surcote decote de chacune des lignes d'obligation du portefeuille obligation de l'assureur.
-Contient autant d'elements que le portefeuille a de lignes.}
+\item{sd_unitaire}{vecteur de type \code{numeric} decrivant la surcote decote de chacune des lignes d'obligation du portefeuille obligation de
+l'assureur. Contient autant d'elements que le portefeuille a de lignes.}
 }
 \value{
 L'objet \code{x} dont les valeurs nettes comptables ont ete mises a jour.

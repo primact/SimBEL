@@ -12,7 +12,8 @@ Objet de la classe \code{\link{Be}}.
 data("be")
 }
 \description{
-Dataset de la classe \code{\link{Be}} contenant des donnees correspondant aux classes : \code{\link{Canton}}, \code{\link{ParamBe}}, \code{\link{ESG}}.
+Dataset de la classe \code{\link{Be}} contenant des donnees correspondant aux classes :
+\code{\link{Canton}}, \code{\link{ParamBe}}, \code{\link{ESG}}.
 }
 \note{
 Il s'agit de donnees simulees, elles ont ete creees afin de tester les differents fonctions du package.

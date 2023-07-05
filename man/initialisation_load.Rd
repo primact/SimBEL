@@ -16,7 +16,8 @@ initialisation_load(x, file_lancement_address)
 Pas de sortie.
 }
 \description{
-\code{initialisation_load} est la methode de chargement des attributs \code{nb_simu} et \code{nb_annee_proj} a partir des donnees de l'environnement utilisateur.
+\code{initialisation_load} est la methode de chargement des attributs \code{nb_simu} et \code{nb_annee_proj} a partir des donnees de
+l'environnement utilisateur.
 }
 \note{
 Cette methode permet de creer l'objet \code{\link{Canton}} initial et de le sauvegarder dans le repertoire adequat de l'architecture.

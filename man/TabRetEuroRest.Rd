@@ -5,7 +5,8 @@
 \alias{TabRetEuroRest}
 \title{La classe \code{TabRetEuroRest}.}
 \description{
-Une classe pour le stockage en memoire de variable de calcul au niveau du model point de retraite euro en phase de restitution \code{\link{TabRetEuroRest}}.
+Une classe pour le stockage en memoire de variable de calcul au niveau du model point de retraite euro en phase de restitution
+\code{\link{TabRetEuroRest}}.
 }
 \section{Slots}{
 

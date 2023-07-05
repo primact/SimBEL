@@ -12,7 +12,8 @@ do_choc_longevite(x, canton, autres_passifs_choc)
 
 \item{canton}{est un objet de la classe \code{\link{Canton}}. Il correspond au canton non choque (i.e. central) de l'assureur.}
 
-\item{autres_passifs_choc}{est un objet de la classe \code{\link{AutresPassifs}}, il correspond au chargement des autres passifs choques en longevite.
+\item{autres_passifs_choc}{est un objet de la classe \code{\link{AutresPassifs}}, il correspond au chargement des autres passifs
+choques en longevite.
 Ces derniers ont ete renseignes par l'utilisateur en donnees.}
 }
 \value{

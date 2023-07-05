@@ -8,7 +8,8 @@
 load_oblig(file_oblig_address)
 }
 \arguments{
-\item{file_oblig_address}{est un \code{character} contenant l'adresse exacte du fichier d'input utilisateur permettant de renseigner le portefeuille.}
+\item{file_oblig_address}{est un \code{character} contenant l'adresse exacte du fichier d'input utilisateur permettant de renseigner le
+portefeuille.}
 }
 \value{
 L'objet de la classe \code{\link{Oblig}} construit a partir des inputs renseignes par l'utilisateur.

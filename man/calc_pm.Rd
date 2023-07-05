@@ -8,7 +8,8 @@
 calc_pm(x, method, an, tx_cible, y)
 }
 \arguments{
-\item{x}{un objet de la classe \code{\link{EpEuroInd}} ou de la classe \code{\link{RetraiteEuroRest}} contenant les model points epargne euros ou retraite euro en phases de restitution.}
+\item{x}{un objet de la classe \code{\link{EpEuroInd}} ou de la classe \code{\link{RetraiteEuroRest}} contenant les model points epargne euros ou
+retraite euro en phases de restitution.}
 
 \item{method}{un \code{character} prenant pour valeur \code{normal} pour le calcul des flux avec application de la revalorisation au titre de
 la participation aux benefices, et la valeur \code{gar} pour le calcul avec uniquement les flux garanti (calcul de la FDB).}
