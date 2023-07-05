@@ -9,10 +9,14 @@ library(rootSolve)
 
 # Lecture du fichier csv
 path <- paste0(getwd(), "/donnees_tests/input/donnees/actif")
-ptf_action_csv <- read.csv2(paste(path, "Portefeuille_action.csv", sep = "/"), header = TRUE,
-                               colClasses = c("integer","double","double", "double",
-                                              "logical","logical","double",  "double",
-                                              "double","integer","double","logical", "character", "numeric"))
+ptf_action_csv <- read.csv2(paste(path, "Portefeuille_action.csv", sep = "/"),
+    header = TRUE,
+    colClasses = c(
+        "integer", "double", "double", "double",
+        "logical", "logical", "double", "double",
+        "double", "integer", "double", "logical", "character", "numeric"
+    )
+)
 
 # Creation de l'objet
 ptf_action <- new("Action", ptf_action_csv)
@@ -23,7 +27,6 @@ ptf_action <- new("Action", ptf_action_csv)
 #           Classe Action
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 test_that("TEST_action_classe", {
-
     # Test classe
     expect_s4_class(ptf_action, "Action")
 
@@ -47,10 +50,9 @@ test_that("TEST_action_classe", {
 # revalo_action
 #----------------------------------------------------------------------------------
 test_that("TEST_revalo_action", {
-
     # Appel de la fonction
-    S <- c(102,115,130)
-    S_prev <- c(100,120,125)
+    S <- c(102, 115, 130)
+    S_prev <- c(100, 120, 125)
     res <- revalo_action(ptf_action, S, S_prev)
 
     # Tests
@@ -62,10 +64,9 @@ test_that("TEST_revalo_action", {
 # calc_vm_action
 #----------------------------------------------------------------------------------
 test_that("TEST_calc_vm_action", {
-
     # Appel de la fonction
-    S <- c(102,115,130)
-    S_prev <- c(100,120,125)
+    S <- c(102, 115, 130)
+    S_prev <- c(100, 120, 125)
     rdt <- revalo_action(ptf_action, S, S_prev)[, "rdt"]
     res <- calc_vm_action(ptf_action, rdt)
 
@@ -77,20 +78,18 @@ test_that("TEST_calc_vm_action", {
 # calc_pmvl_action
 #----------------------------------------------------------------------------------
 test_that("TEST_calc_pmvl_action", {
-
     # Appel de la fonction
     res <- calc_pmvl_action(ptf_action)
 
     # Calcul des resultats
     val_marche <- ptf_action@ptf_action$val_marche
     val_nc <- ptf_action@ptf_action$val_nc
-    pvl <- sum((val_marche > val_nc) * (val_marche - val_nc ))
-    mvl <- sum((val_marche < val_nc) * (val_marche - val_nc ))
+    pvl <- sum((val_marche > val_nc) * (val_marche - val_nc))
+    mvl <- sum((val_marche < val_nc) * (val_marche - val_nc))
 
     # Test
     expect_equal(res$pvl, pvl)
     expect_equal(res$mvl, mvl)
-
 })
 
 
@@ -99,23 +98,22 @@ test_that("TEST_calc_pmvl_action", {
 # sell_action
 #----------------------------------------------------------------------------------
 test_that("TEST_sell_action", {
-
     ## 1 : Vente partielle uniquement
     # Appel de la fonction
-    num_sold = 1:2
-    nb_sold  = ptf_action@ptf_action$nb_unit[which(ptf_action@ptf_action$num_mp %in% num_sold)] / 2
+    num_sold <- 1:2
+    nb_sold <- ptf_action@ptf_action$nb_unit[which(ptf_action@ptf_action$num_mp %in% num_sold)] / 2
     res <- sell_action(ptf_action, num_sold, nb_sold)
 
     # Calcul des resultats attendus
     pct_sell <- c(nb_sold, 0) / ptf_action@ptf_action$nb_unit
 
     # Test
-    expect_equal(res$action@ptf_action$val_marche, ptf_action@ptf_action$val_marche * ( 1 - pct_sell))
-    expect_equal(res$action@ptf_action$val_nc, ptf_action@ptf_action$val_nc * ( 1 - pct_sell))
-    expect_equal(res$action@ptf_action$val_achat, ptf_action@ptf_action$val_achat * ( 1 - pct_sell))
+    expect_equal(res$action@ptf_action$val_marche, ptf_action@ptf_action$val_marche * (1 - pct_sell))
+    expect_equal(res$action@ptf_action$val_nc, ptf_action@ptf_action$val_nc * (1 - pct_sell))
+    expect_equal(res$action@ptf_action$val_achat, ptf_action@ptf_action$val_achat * (1 - pct_sell))
     expect_equal(res$action@ptf_action$presence, ptf_action@ptf_action$presence)
     expect_equal(res$action@ptf_action$cessible, ptf_action@ptf_action$cessible)
-    expect_equal(res$action@ptf_action$nb_unit, ptf_action@ptf_action$nb_unit * ( 1 - pct_sell))
+    expect_equal(res$action@ptf_action$nb_unit, ptf_action@ptf_action$nb_unit * (1 - pct_sell))
     expect_equal(res$action@ptf_action$dur_det, ptf_action@ptf_action$dur_det)
     expect_equal(res$action@ptf_action$pdd, ptf_action@ptf_action$pdd)
     expect_equal(res$action@ptf_action$num_index, ptf_action@ptf_action$num_index)
@@ -126,8 +124,8 @@ test_that("TEST_sell_action", {
 
     ## 2 : Vente totale uniquement
     # Appel de la fonction
-    num_sold = 3
-    nb_sold = ptf_action@ptf_action$nb_unit[which(ptf_action@ptf_action$num_mp == num_sold)]
+    num_sold <- 3
+    nb_sold <- ptf_action@ptf_action$nb_unit[which(ptf_action@ptf_action$num_mp == num_sold)]
     res <- sell_action(ptf_action, num_sold, nb_sold)
 
     # Test
@@ -141,8 +139,8 @@ test_that("TEST_sell_action", {
     ## 3 : Vente partielle et totale simultanee
     # Appel de la fonction
     num_sold <- 1:3
-    nb_sold_part  = ptf_action@ptf_action$nb_unit[which(ptf_action@ptf_action$num_mp %in% 1:2)] / 2
-    nb_sold_tot = ptf_action@ptf_action$nb_unit[which(ptf_action@ptf_action$num_mp == 3)]
+    nb_sold_part <- ptf_action@ptf_action$nb_unit[which(ptf_action@ptf_action$num_mp %in% 1:2)] / 2
+    nb_sold_tot <- ptf_action@ptf_action$nb_unit[which(ptf_action@ptf_action$num_mp == 3)]
     nb_sold <- c(nb_sold_part, nb_sold_tot)
     res <- sell_action(ptf_action, num_sold, nb_sold)
 
@@ -151,10 +149,10 @@ test_that("TEST_sell_action", {
 
     # Test
     expect_equal(nrow(res$action@ptf_action), 2L)
-    expect_equal(res$action@ptf_action$val_marche, ptf_action@ptf_action$val_marche[1:2] * ( 1 - pct_sell[1:2]))
-    expect_equal(res$action@ptf_action$val_nc, ptf_action@ptf_action$val_nc[1:2] * ( 1 - pct_sell[1:2]))
-    expect_equal(res$action@ptf_action$val_achat, ptf_action@ptf_action$val_achat[1:2] * ( 1 - pct_sell[1:2]))
-    expect_equal(res$action@ptf_action$nb_unit, ptf_action@ptf_action$nb_unit[1:2] * ( 1 - pct_sell[1:2]))
+    expect_equal(res$action@ptf_action$val_marche, ptf_action@ptf_action$val_marche[1:2] * (1 - pct_sell[1:2]))
+    expect_equal(res$action@ptf_action$val_nc, ptf_action@ptf_action$val_nc[1:2] * (1 - pct_sell[1:2]))
+    expect_equal(res$action@ptf_action$val_achat, ptf_action@ptf_action$val_achat[1:2] * (1 - pct_sell[1:2]))
+    expect_equal(res$action@ptf_action$nb_unit, ptf_action@ptf_action$nb_unit[1:2] * (1 - pct_sell[1:2]))
 
 
     ## 4.1 : Problemes de vente
@@ -163,9 +161,8 @@ test_that("TEST_sell_action", {
     # Vente en trop grande quantite
     expect_error(sell_action(ptf_action, 1, 10000))
     # Idem en vente multiple
-    expect_error(sell_action(ptf_action, c(1,17), c(100,100)))
-    expect_error(sell_action(ptf_action, c(1,2), c(10,10000)))
-
+    expect_error(sell_action(ptf_action, c(1, 17), c(100, 100)))
+    expect_error(sell_action(ptf_action, c(1, 2), c(10, 10000)))
 })
 
 
@@ -173,7 +170,6 @@ test_that("TEST_sell_action", {
 # buy_action
 #----------------------------------------------------------------------------------
 test_that("TEST_buy_action", {
-
     ## 1 : Achat d'un PTF non vide
     # Appel de la fonction
     res <- buy_action(ptf_action, new("Action", ptf_action_csv))
@@ -192,7 +188,6 @@ test_that("TEST_buy_action", {
 
     # Achat d'un PTF vide
     expect_error(buy_action(ptf_action, new("Action")))
-
 })
 
 
@@ -201,7 +196,6 @@ test_that("TEST_buy_action", {
 # sell_pvl_action
 #----------------------------------------------------------------------------------
 test_that("TEST_sell_pvl_action", {
-
     # Appel de la fonction
     montant <- 50000
     res <- sell_pvl_action(ptf_action, montant)
@@ -219,9 +213,8 @@ test_that("TEST_sell_pvl_action", {
 # update_vm_action
 #----------------------------------------------------------------------------------
 test_that("TEST_update_vm_action", {
-
     # Appel de la fonction
-    vm <- c(10000,10000,10000)
+    vm <- c(10000, 10000, 10000)
     res <- update_vm_action(ptf_action, vm)
 
     # Test
@@ -240,8 +233,8 @@ test_that("TEST_update_vm_action", {
 
 
     # Tests avec erreur
-    expect_error(update_vm_action(ptf_action, c(10000,-10000,10000)))
-    expect_error(update_vm_action(ptf_action, c(10000,10000)))
+    expect_error(update_vm_action(ptf_action, c(10000, -10000, 10000)))
+    expect_error(update_vm_action(ptf_action, c(10000, 10000)))
 })
 
 
@@ -250,7 +243,6 @@ test_that("TEST_update_vm_action", {
 # update_dur_det_action
 #----------------------------------------------------------------------------------
 test_that("TEST_update_dur_det_action", {
-
     # Appel de la fonction
     res <- update_dur_det_action(ptf_action)
 

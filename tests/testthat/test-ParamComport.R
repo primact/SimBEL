@@ -9,22 +9,23 @@ path <- paste0(getwd(), "/donnees_tests/input/parametres/tables")
 param_comport_csv <- read.csv2(paste(path, "param_comport.csv", sep = "/"), header = TRUE)
 
 # Recuperation des donnees
-mat_oblig <- param_comport_csv[,"mat_oblig"]
-alloc_mar <- c(param_comport_csv[,"alloc_mar_action"], param_comport_csv[,"alloc_mar_immo"],
-                           param_comport_csv[,"alloc_mar_tres"], param_comport_csv[,"alloc_mar_oblig"])
-w_n <- param_comport_csv[,"w_n"]
-marge_mar <- param_comport_csv[,"marge_mar"]
-ch_enc_mar <- param_comport_csv[,"ch_enc_mar"]
-ind_ref_action <- param_comport_csv[,"ind_ref_action"]
-ind_ref_immo <- param_comport_csv[,"ind_ref_immo"]
+mat_oblig <- param_comport_csv[, "mat_oblig"]
+alloc_mar <- c(
+    param_comport_csv[, "alloc_mar_action"], param_comport_csv[, "alloc_mar_immo"],
+    param_comport_csv[, "alloc_mar_tres"], param_comport_csv[, "alloc_mar_oblig"]
+)
+w_n <- param_comport_csv[, "w_n"]
+marge_mar <- param_comport_csv[, "marge_mar"]
+ch_enc_mar <- param_comport_csv[, "ch_enc_mar"]
+ind_ref_action <- param_comport_csv[, "ind_ref_action"]
+ind_ref_immo <- param_comport_csv[, "ind_ref_immo"]
 
 
 # Creation de l'objet
-param_comport <- new(Class = "ParamComport",mat_oblig , alloc_mar , w_n , marge_mar, ch_enc_mar, ind_ref_action , ind_ref_immo)
+param_comport <- new(Class = "ParamComport", mat_oblig, alloc_mar, w_n, marge_mar, ch_enc_mar, ind_ref_action, ind_ref_immo)
 
 # Tests sur l'objet
 test_that("TEST_ParamComport", {
-
     # Test classe
     expect_s4_class(param_comport, "ParamComport")
 

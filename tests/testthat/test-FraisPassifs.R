@@ -8,10 +8,12 @@ path <- paste0(getwd(), "/donnees_tests/input")
 path <- paste0(path, "/donnees/passif/frais_passif.csv")
 
 # Lecture du fichier csv
-frais_passifs_csv <- read.csv2(path, header = TRUE, colClasses = c("factor", "numeric", "numeric",
-                                                                   "logical", "logical", "numeric",
-                                                                   "numeric", "logical", "logical",
-                                                                   "numeric", "numeric", "logical", "logical"))
+frais_passifs_csv <- read.csv2(path, header = TRUE, colClasses = c(
+    "factor", "numeric", "numeric",
+    "logical", "logical", "numeric",
+    "numeric", "logical", "logical",
+    "numeric", "numeric", "logical", "logical"
+))
 
 # Creation de l'objet
 frais_passif <- new("FraisPassif", frais_passifs_csv)
@@ -20,7 +22,6 @@ frais_passif <- new("FraisPassif", frais_passifs_csv)
 # Classe et attributs
 #----------------------------------------------------------------------------------
 test_that("TEST_frais_passif", {
-
     # Test classe
     expect_s4_class(frais_passif, "FraisPassif")
 
@@ -46,7 +47,6 @@ test_that("TEST_frais_passif", {
 # Load
 #----------------------------------------------------------------------------------
 test_that("TEST_load", {
-
     # Appel de la fonction
     res <- frais_passif_load(path)
 
@@ -60,7 +60,6 @@ test_that("TEST_load", {
 # calc_frais
 #----------------------------------------------------------------------------------
 test_that("TEST_calc_frais", {
-
     # Appel de la fonction
     res <- calc_frais(frais_passif, "prime", "epeuro1", 3, 5, 1.02)
 

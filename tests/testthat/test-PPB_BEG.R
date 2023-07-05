@@ -19,14 +19,14 @@ central <- get(load(paste(racine@address$save_folder$central, "best_estimate.RDa
 # --------------------------------------------------------------------------------------------------------------------------
 x <- central@canton
 annee_fin <- 10L
-pre_on <- F
+pre_on <- FALSE
 
 #---------------------------------------------------------------
 # Etape 1 : Mise a jour des annees de projection
 #---------------------------------------------------------------
 x@annee <- x@annee + 1L
 
-annee <-  x@annee
+annee <- x@annee
 
 #---------------------------------------------------------------
 # Etape 2 : variables economiques utilisees au passif
@@ -86,12 +86,12 @@ x@param_alm@ptf_reference <- update_PortFin_reference(annee, x@param_alm@ptf_ref
 # Calcul des valeurs moyennes
 alloc_cour <- print_alloc(x@ptf_fin)
 # Valeur moyenne des placements en valeur de marche
-plac_moy_vm <- (.subset2(alloc_cour, 5L) + sum(unlist(x@ptf_fin@vm_vnc_precedent[["vm"]]))) /2
+plac_moy_vm <- (.subset2(alloc_cour, 5L) + sum(unlist(x@ptf_fin@vm_vnc_precedent[["vm"]]))) / 2
 
 frais_fin <- calc_frais_fin(x@ptf_fin@frais_fin, plac_moy_vm, coef_inf)
 
 #  Mise a jour de la tresorie
-x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso , - frais_fin)
+x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso, -frais_fin)
 
 #---------------------------------------------------------------
 # Etape 6 : Re-allocation des actifs et mise a jour de la PRE et de la RC
@@ -99,19 +99,21 @@ x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso , - frais_fin)
 # Reallocation a l'allocation cible
 
 # Gestion de l'anomalie : valeur de marche des actifs negatives
-if(.subset2(print_alloc(x@ptf_fin), 5L) < 0){
-  warning(paste("Attention, la valeur de marche des actifs est negative pour
-                la simulation ", x@mp_esg@num_traj, " en annee ", annee,".", sep = ""))
+if (.subset2(print_alloc(x@ptf_fin), 5L) < 0) {
+    warning(paste("Attention, la valeur de marche des actifs est negative pour
+                la simulation ", x@mp_esg@num_traj, " en annee ", annee, ".", sep = ""))
 
-  # Dans le cas d'un actif negatif, la simulation est arretee.
-  return(FALSE)
+    # Dans le cas d'un actif negatif, la simulation est arretee.
+    return(FALSE)
 }
 
 actif_realloc <- reallocate(x@ptf_fin, x@param_alm@ptf_reference, x@param_alm@alloc_cible)
 x@ptf_fin <- actif_realloc[["portFin"]]
-pmvr <- list(oblig = actif_realloc[["pmvr_oblig"]],
-             action = actif_realloc[["pmvr_action"]],
-             immo = actif_realloc[["pmvr_immo"]])
+pmvr <- list(
+    oblig = actif_realloc[["pmvr_oblig"]],
+    action = actif_realloc[["pmvr_action"]],
+    immo = actif_realloc[["pmvr_immo"]]
+)
 
 #---------------------------------------------------------------
 # Etape 7 : Calcul du resultat technique
@@ -124,8 +126,10 @@ resultat_tech <- calc_result_technique(passif_av_pb, actif_realloc[["var_pre"]] 
 #---------------------------------------------------------------
 
 # Evaluation du resultat financier
-resultat_fin <- calc_resultat_fin(revenu_fin + var_vnc_oblig, actif_realloc[["pmvr"]],
-                                  frais_fin, actif_realloc[["var_rc"]])
+resultat_fin <- calc_resultat_fin(
+    revenu_fin + var_vnc_oblig, actif_realloc[["pmvr"]],
+    frais_fin, actif_realloc[["var_rc"]]
+)
 
 # Calcul du TRA
 tra <- calc_tra(actif_realloc[["plac_moy_vnc"]], resultat_fin)
@@ -137,89 +141,92 @@ plac_moy_vnc <- actif_realloc[["plac_moy_vnc"]]
 # Controle le calcul de la conso de PPB
 #---------------------------------------------------------------
 test_that("TEST_conso_PPB", {
+    x1 <- x
+    x1@ppb@hist_ppb <- sum(x@ppb@hist_ppb) / 8 * rep(1, 8)
 
-  x1 <- x
-  x1@ppb@hist_ppb  <- sum(x@ppb@hist_ppb) / 8 * rep(1, 8)
-
-  # annee 1
-  temp <- calc_revalo(x1, passif_av_pb, tra, actif_realloc[["plac_moy_vnc"]], resultat_tech, annee = 1L)
-  expect_equal(sum(temp$conso_ppb_init), temp$ppb@compte_rep)
-  temp$ppb <- vieillissement_ppb(temp$ppb)
-
-  # annnee 2-8
-  for(i in 2:8){
-    x2 <- x1
-    x2@ppb <- temp$ppb
-    temp <- calc_revalo(x2, passif_av_pb, tra, actif_realloc[["plac_moy_vnc"]], resultat_tech, annee = as.integer(i))
+    # annee 1
+    temp <- calc_revalo(x1, passif_av_pb, tra, actif_realloc[["plac_moy_vnc"]], resultat_tech, annee = 1L)
     expect_equal(sum(temp$conso_ppb_init), temp$ppb@compte_rep)
     temp$ppb <- vieillissement_ppb(temp$ppb)
-  }
 
-  # annnee 9
-  x2 <- x1
-  x2@ppb <- temp$ppb
-  temp <- calc_revalo(x2, passif_av_pb, tra, actif_realloc[["plac_moy_vnc"]], resultat_tech, annee = 9L)
-  expect_equal(sum(temp$conso_ppb_init), 0)
+    # annnee 2-8
+    for (i in 2:8) {
+        x2 <- x1
+        x2@ppb <- temp$ppb
+        temp <- calc_revalo(x2, passif_av_pb, tra, actif_realloc[["plac_moy_vnc"]], resultat_tech, annee = as.integer(i))
+        expect_equal(sum(temp$conso_ppb_init), temp$ppb@compte_rep)
+        temp$ppb <- vieillissement_ppb(temp$ppb)
+    }
 
-
-  # annee 1 besoin de prelever la PPB
-  passif_av_pb_temp <- passif_av_pb
-  passif_av_pb_temp[["result_av_pb"]][["flux_agg"]][, "bes_tx_cible"] <- 10 * passif_av_pb_temp[["result_av_pb"]][["flux_agg"]][, "bes_tx_cible"]
-
-  temp <- calc_revalo(x1, passif_av_pb_temp, tra = 0, actif_realloc[["plac_moy_vnc"]], resultat_tech, annee = 1L)
-  expect_equal(sum(temp$conso_ppb_init), temp$ppb@compte_rep)
-  temp$ppb <- vieillissement_ppb(temp$ppb)
-
-  # annnee 2-8
-  for(i in 2:8){
+    # annnee 9
     x2 <- x1
     x2@ppb <- temp$ppb
-    temp <- calc_revalo(x2, passif_av_pb_temp, tra = 0, actif_realloc[["plac_moy_vnc"]], resultat_tech, annee = as.integer(i))
+    temp <- calc_revalo(x2, passif_av_pb, tra, actif_realloc[["plac_moy_vnc"]], resultat_tech, annee = 9L)
+    expect_equal(sum(temp$conso_ppb_init), 0)
+
+
+    # annee 1 besoin de prelever la PPB
+    passif_av_pb_temp <- passif_av_pb
+    passif_av_pb_temp[["result_av_pb"]][["flux_agg"]][, "bes_tx_cible"] <- 10 * passif_av_pb_temp[["result_av_pb"]][["flux_agg"]][, "bes_tx_cible"]
+
+    temp <- calc_revalo(x1, passif_av_pb_temp, tra = 0, actif_realloc[["plac_moy_vnc"]], resultat_tech, annee = 1L)
     expect_equal(sum(temp$conso_ppb_init), temp$ppb@compte_rep)
     temp$ppb <- vieillissement_ppb(temp$ppb)
-  }
 
-  })
+    # annnee 2-8
+    for (i in 2:8) {
+        x2 <- x1
+        x2@ppb <- temp$ppb
+        temp <- calc_revalo(x2, passif_av_pb_temp, tra = 0, actif_realloc[["plac_moy_vnc"]], resultat_tech, annee = as.integer(i))
+        expect_equal(sum(temp$conso_ppb_init), temp$ppb@compte_rep)
+        temp$ppb <- vieillissement_ppb(temp$ppb)
+    }
+})
 
 #---------------------------------------------------------------
 # Controle le calcul de la conso de PPB
 #---------------------------------------------------------------
 test_that("TEST_viellissement_passif", {
-
-  # Evaluation du passif vieilli d'un an apres pb
-  passif_ap_pb <- vieillissment_ap_pb(x@ptf_passif,  rev_nette_alloue = c(3, 3 , 0, 0),rev_brute_alloue_gar =
-                                        c(0, 0 , 0, 0),
-                                      x@hyp_canton@tx_soc)
-  # Pas de changement avec et apres
-  expect_equal(passif_ap_pb$stock_agg[, "pm_gar_ap_pb"], passif_av_pb$result_av_pb$stock_agg[, "pm_fin"])
-  expect_equal(passif_ap_pb$flux_agg[, "supp_brut_gar_ap_pb"], rep(0, 4))
-  expect_equal(passif_ap_pb$flux_agg[, "supp_nette_gar_ap_pb"], rep(0, 4))
-  expect_equal(passif_ap_pb$ptf@eei$epeuro1@tab@tab$pm_gar, x@ptf_passif@eei$epeuro1@tab@tab$pm_gar)
-  expect_equal(passif_ap_pb$ptf@eei$epeuro1@mp$pm_gar, x@ptf_passif@eei$epeuro1@tab@tab$pm_gar)
-  expect_equal(passif_ap_pb$ptf@rer$reteurorest1@tab@tab$pm_gar, x@ptf_passif@rer$reteurorest1@tab@tab$pm_gar)
-  expect_equal(passif_ap_pb$ptf@rer$reteurorest1@mp$pm_gar, x@ptf_passif@rer$reteurorest1@tab@tab$pm_gar)
-
-
-  # Evaluation du passif vieilli d'un an apres pb
-  passif_ap_pb2 <- vieillissment_ap_pb(x@ptf_passif,  rev_nette_alloue = c(3, 3 , 0, 0),rev_brute_alloue_gar =
-                                        c(2, 2 , 0, 0),
-                                      x@hyp_canton@tx_soc)
-  tx_enc <- x@ptf_passif@eei$epeuro1@mp$chgt_en
-  alloc_mp <- x@ptf_passif@eei$epeuro1@tab@tab$bes_tx_cible / sum(x@ptf_passif@eei$epeuro1@tab@tab$bes_tx_cible)
+    # Evaluation du passif vieilli d'un an apres pb
+    passif_ap_pb <- vieillissment_ap_pb(x@ptf_passif,
+        rev_nette_alloue = c(3, 3, 0, 0), rev_brute_alloue_gar =
+            c(0, 0, 0, 0),
+        x@hyp_canton@tx_soc
+    )
+    # Pas de changement avec et apres
+    expect_equal(passif_ap_pb$stock_agg[, "pm_gar_ap_pb"], passif_av_pb$result_av_pb$stock_agg[, "pm_fin"])
+    expect_equal(passif_ap_pb$flux_agg[, "supp_brut_gar_ap_pb"], rep(0, 4))
+    expect_equal(passif_ap_pb$flux_agg[, "supp_nette_gar_ap_pb"], rep(0, 4))
+    expect_equal(passif_ap_pb$ptf@eei$epeuro1@tab@tab$pm_gar, x@ptf_passif@eei$epeuro1@tab@tab$pm_gar)
+    expect_equal(passif_ap_pb$ptf@eei$epeuro1@mp$pm_gar, x@ptf_passif@eei$epeuro1@tab@tab$pm_gar)
+    expect_equal(passif_ap_pb$ptf@rer$reteurorest1@tab@tab$pm_gar, x@ptf_passif@rer$reteurorest1@tab@tab$pm_gar)
+    expect_equal(passif_ap_pb$ptf@rer$reteurorest1@mp$pm_gar, x@ptf_passif@rer$reteurorest1@tab@tab$pm_gar)
 
 
-  # Pas de changement avec et apres
-  expect_equal(passif_ap_pb2$stock_agg[, "pm_gar_ap_pb"], passif_av_pb$result_av_pb$stock_agg[, "pm_fin"] + c(2, 2 , 0, 0) *  (1- tx_enc) * (1 - x@hyp_canton@tx_soc))
-  expect_equal(passif_ap_pb2$flux_agg[, "supp_brut_gar_ap_pb"], c(2, 2 , 0, 0))
-  expect_equal(passif_ap_pb2$flux_agg[, "supp_nette_gar_ap_pb"], c(2, 2 , 0, 0) *  (1- tx_enc) )
-  expect_equal(passif_ap_pb2$ptf@eei$epeuro1@tab@tab$pm_gar, x@ptf_passif@eei$epeuro1@tab@tab$pm_gar +
-                 2 * alloc_mp *  (1- tx_enc) * (1 - x@hyp_canton@tx_soc))
-  expect_equal(passif_ap_pb2$ptf@eei$epeuro1@mp$pm_gar, passif_ap_pb2$ptf@eei$epeuro1@tab@tab$pm_gar)
-  expect_equal(passif_ap_pb2$ptf@rer$reteurorest1@tab@tab$pm_gar, x@ptf_passif@rer$reteurorest1@tab@tab$pm_gar)
-  expect_equal(passif_ap_pb2$ptf@rer$reteurorest1@mp$pm_gar, x@ptf_passif@rer$reteurorest1@tab@tab$pm_gar)
-  expect_equal(passif_ap_pb2$ptf@eei$epeuro1@mp$pm, passif_ap_pb$ptf@eei$epeuro1@mp$pm) # Pas de changement sur la vraie PM
-  expect_equal(passif_ap_pb2$ptf@rer$reteurorest1@mp$pm, passif_ap_pb$ptf@rer$reteurorest1@mp$pm) # Pas de changement sur la vraie PM
+    # Evaluation du passif vieilli d'un an apres pb
+    passif_ap_pb2 <- vieillissment_ap_pb(x@ptf_passif,
+        rev_nette_alloue = c(3, 3, 0, 0), rev_brute_alloue_gar =
+            c(2, 2, 0, 0),
+        x@hyp_canton@tx_soc
+    )
+    tx_enc <- x@ptf_passif@eei$epeuro1@mp$chgt_en
+    alloc_mp <- x@ptf_passif@eei$epeuro1@tab@tab$bes_tx_cible / sum(x@ptf_passif@eei$epeuro1@tab@tab$bes_tx_cible)
 
+
+    # Pas de changement avec et apres
+    expect_equal(
+        passif_ap_pb2$stock_agg[, "pm_gar_ap_pb"],
+        passif_av_pb$result_av_pb$stock_agg[, "pm_fin"] + c(2, 2, 0, 0) * (1 - tx_enc) * (1 - x@hyp_canton@tx_soc)
+    )
+    expect_equal(passif_ap_pb2$flux_agg[, "supp_brut_gar_ap_pb"], c(2, 2, 0, 0))
+    expect_equal(passif_ap_pb2$flux_agg[, "supp_nette_gar_ap_pb"], c(2, 2, 0, 0) * (1 - tx_enc))
+    expect_equal(passif_ap_pb2$ptf@eei$epeuro1@tab@tab$pm_gar, x@ptf_passif@eei$epeuro1@tab@tab$pm_gar +
+        2 * alloc_mp * (1 - tx_enc) * (1 - x@hyp_canton@tx_soc))
+    expect_equal(passif_ap_pb2$ptf@eei$epeuro1@mp$pm_gar, passif_ap_pb2$ptf@eei$epeuro1@tab@tab$pm_gar)
+    expect_equal(passif_ap_pb2$ptf@rer$reteurorest1@tab@tab$pm_gar, x@ptf_passif@rer$reteurorest1@tab@tab$pm_gar)
+    expect_equal(passif_ap_pb2$ptf@rer$reteurorest1@mp$pm_gar, x@ptf_passif@rer$reteurorest1@tab@tab$pm_gar)
+    expect_equal(passif_ap_pb2$ptf@eei$epeuro1@mp$pm, passif_ap_pb$ptf@eei$epeuro1@mp$pm) # Pas de changement sur la vraie PM
+    expect_equal(passif_ap_pb2$ptf@rer$reteurorest1@mp$pm, passif_ap_pb$ptf@rer$reteurorest1@mp$pm) # Pas de changement sur la vraie PM
 })
 
 
@@ -228,12 +235,6 @@ test_that("TEST_viellissement_passif", {
 # Controle d'integration
 #---------------------------------------------------------------
 test_that("TEST_proj_an", {
-  test <- proj_an(x , 10L, pre_on = F)
-  expect_lte(sum(test$canton@ptf_passif@eei$epeuro1@mp$pm_gar), sum(test$canton@ptf_passif@eei$epeuro1@mp$pm))
-
+    test <- proj_an(x, 10L, pre_on = FALSE)
+    expect_lte(sum(test$canton@ptf_passif@eei$epeuro1@mp$pm_gar), sum(test$canton@ptf_passif@eei$epeuro1@mp$pm))
 })
-
-
-
-
-

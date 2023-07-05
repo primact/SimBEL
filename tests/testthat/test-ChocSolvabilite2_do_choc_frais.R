@@ -35,17 +35,17 @@ test_that("TEST_choc_frais", {
     expect_equal(choc_frais_assiette, choc_frais_assiette)
 
     # Verifications de la modification des frais
-    expect_equal(frais@canton@ptf_passif@fp@mp$frais_fixe_prime, (1+choc_frais_assiette)*central@canton@ptf_passif@fp@mp$frais_fixe_prime )
-    expect_equal(frais@canton@ptf_passif@fp@mp$frais_var_prime, (1+choc_frais_assiette)*central@canton@ptf_passif@fp@mp$frais_var_prime)
-    expect_equal(frais@canton@ptf_passif@fp@mp$frais_fixe_prest, (1+choc_frais_assiette)*central@canton@ptf_passif@fp@mp$frais_fixe_prest)
-    expect_equal(frais@canton@ptf_passif@fp@mp$frais_var_prest, (1+choc_frais_assiette)*central@canton@ptf_passif@fp@mp$frais_var_prest)
-    expect_equal(frais@canton@ptf_passif@fp@mp$frais_var_enc, (1+choc_frais_assiette)*central@canton@ptf_passif@fp@mp$frais_var_enc)
-    expect_equal(frais@canton@ptf_passif@fp@mp$frais_var_enc, (1+choc_frais_assiette)*central@canton@ptf_passif@fp@mp$frais_var_enc)
+    expect_equal(frais@canton@ptf_passif@fp@mp$frais_fixe_prime, (1 + choc_frais_assiette) * central@canton@ptf_passif@fp@mp$frais_fixe_prime)
+    expect_equal(frais@canton@ptf_passif@fp@mp$frais_var_prime, (1 + choc_frais_assiette) * central@canton@ptf_passif@fp@mp$frais_var_prime)
+    expect_equal(frais@canton@ptf_passif@fp@mp$frais_fixe_prest, (1 + choc_frais_assiette) * central@canton@ptf_passif@fp@mp$frais_fixe_prest)
+    expect_equal(frais@canton@ptf_passif@fp@mp$frais_var_prest, (1 + choc_frais_assiette) * central@canton@ptf_passif@fp@mp$frais_var_prest)
+    expect_equal(frais@canton@ptf_passif@fp@mp$frais_var_enc, (1 + choc_frais_assiette) * central@canton@ptf_passif@fp@mp$frais_var_enc)
+    expect_equal(frais@canton@ptf_passif@fp@mp$frais_var_enc, (1 + choc_frais_assiette) * central@canton@ptf_passif@fp@mp$frais_var_enc)
 
     # Verification du chargement de l'indice inflation
-    for (i in 0:50){
-        expect_equal(central@esg@ind_inflation[,i], ind_infl_csv[,i])
-        expect_equal(central@esg@ind_inflation[,i], ind_infl_up_csv[,i])
-        expect_equal(central@esg@ind_inflation[,i], ind_infl_down_csv[,i])
+    for (i in 0:50) {
+        expect_equal(central@esg@ind_inflation[, i], ind_infl_csv[, i])
+        expect_equal(central@esg@ind_inflation[, i], ind_infl_up_csv[, i])
+        expect_equal(central@esg@ind_inflation[, i], ind_infl_down_csv[, i])
     }
 })

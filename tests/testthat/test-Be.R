@@ -17,7 +17,6 @@ central <- get(load(paste(racine@address$save_folder$central, "best_estimate.RDa
 context("Class Be")
 
 test_that("Classe_Be", {
-
     # Test classe
     expect_is(object = central, class = "Be")
 
@@ -35,13 +34,12 @@ test_that("Classe_Be", {
 #--------------------------------------------------
 # run_be_simu
 #--------------------------------------------------
-test_that("TEST_run_be_simu",{
-
-  expect_error(test <- run_be_simu(x = central, i = 1L, pre_on = T), NA)
+test_that("TEST_run_be_simu", {
+    expect_error(test <- run_be_simu(x = central, i = 1L, pre_on = TRUE), NA)
 
     # Tests sur les erreurs d'input
     expect_error(run_be_simu(x = central))
-    expect_error(run_be_simu(x = central, i = 1, pre_on = T))
+    expect_error(run_be_simu(x = central, i = 1, pre_on = TRUE))
 
     # Test sur le ouput
     expect_is(object = test$resultats, class = "list")
@@ -61,30 +59,33 @@ test_that("TEST_run_be_simu",{
 #--------------------------------------------------
 # run_be
 #--------------------------------------------------
-test_that("TEST_run_be",{
+test_that("TEST_run_be", {
+    central@base <- new("DataBase",
+        file_adress = paste(racine@root_address, "internal_ws/data/database", sep = "/"), ecriture_base = TRUE, choc_name = "central"
+    )
+    central@base@ecriture_base <- TRUE
+    expect_error(test <- run_be(x = central, pre_on = TRUE, parallel = FALSE), NA)
 
-  central@base <- new("DataBase", file_adress = paste(racine@root_address, "internal_ws/data/database", sep = "/"), ecriture_base = T, choc_name = "central")
-  central@base@ecriture_base <- T
-  expect_error(test <- run_be(x = central, pre_on = T, parallel = F), NA)
+    # Tab flux
+    expect_equal(object = sum(test$be@tab_flux$prime), expected = 0)
+    expect_equal(object = sum(test$be@tab_flux$prestation), expected = 629732.7355)
+    expect_equal(object = sum(test$be@tab_flux$prestation_fdb), expected = 40331.13317)
+    expect_equal(object = sum(test$be@tab_flux$frais), expected = 32207.58731)
+    expect_equal(
+        object = sum(test$be@tab_flux$flux_be), expected =
+            -sum(test$be@tab_flux$prime) + sum(test$be@tab_flux$prestation) + sum(test$be@tab_flux$frais)
+    )
 
-  # Tab flux
-  expect_equal(object = sum(test$be@tab_flux$prime), expected = 0)
-  expect_equal(object = sum(test$be@tab_flux$prestation), expected = 629732.7355)
-  expect_equal(object = sum(test$be@tab_flux$prestation_fdb), expected = 40331.13317)
-  expect_equal(object = sum(test$be@tab_flux$frais), expected = 32207.58731)
-  expect_equal(object = sum(test$be@tab_flux$flux_be), expected =
-                 - sum(test$be@tab_flux$prime) + sum(test$be@tab_flux$prestation) + sum(test$be@tab_flux$frais))
+    # Tab Be
+    expect_equal(object = sum(test$be@tab_be$prime_actu), expected = 0)
+    expect_equal(object = sum(test$be@tab_be$prestation_actu), expected = 598264.202)
+    expect_equal(object = sum(test$be@tab_be$prestation_fdb_actu), expected = 38510.53482)
+    expect_equal(object = sum(test$be@tab_be$frais_actu), expected = 31323.384)
+    expect_equal(object = sum(test$be@tab_be$be), expected = 629587.586)
 
-  # Tab Be
-  expect_equal(object = sum(test$be@tab_be$prime_actu), expected = 0)
-  expect_equal(object = sum(test$be@tab_be$prestation_actu), expected = 598264.202)
-  expect_equal(object = sum(test$be@tab_be$prestation_fdb_actu), expected = 38510.53482)
-  expect_equal(object = sum(test$be@tab_be$frais_actu), expected = 31323.384)
-  expect_equal(object = sum(test$be@tab_be$be), expected = 629587.586)
-
-  # Tab result
-  expect_equal(object = sum(test$be@tab_result$result_tech_actu), expected = -505458.419)
-  expect_equal(object = sum(test$be@tab_result$result_fin_actu), expected = 1526894.222)
-  expect_equal(object = sum(test$be@tab_result$result_brut_actu), expected = 1021435.802)
-  expect_equal(object = sum(test$be@tab_result$result_net_actu), expected = 327237.638)
+    # Tab result
+    expect_equal(object = sum(test$be@tab_result$result_tech_actu), expected = -505458.419)
+    expect_equal(object = sum(test$be@tab_result$result_fin_actu), expected = 1526894.222)
+    expect_equal(object = sum(test$be@tab_result$result_brut_actu), expected = 1021435.802)
+    expect_equal(object = sum(test$be@tab_result$result_net_actu), expected = 327237.638)
 })

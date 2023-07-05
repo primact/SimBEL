@@ -10,7 +10,6 @@ rc <- new("RC", val_debut = 100, val_courante = 150)
 #           Classe RC
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 test_that("TEST_Classe", {
-
     # Test classe
     expect_s4_class(rc, "RC")
 
@@ -23,7 +22,6 @@ test_that("TEST_Classe", {
 # Calcul de la valeur courante de RC
 #----------------------------------------------------------------------------------
 test_that("TEST_calc_rc", {
-
     ## 1 - Moins value
     # Appel de la fonction
     res <- calc_RC(rc, -200)
@@ -47,7 +45,6 @@ test_that("TEST_calc_rc", {
 # Fonctions d'update de RC
 #----------------------------------------------------------------------------------
 test_that("TEST_update", {
-
     # Donnees
     pmvr <- calc_RC(rc, -200)[[1]]
 
@@ -75,16 +72,15 @@ test_that("TEST_update", {
 # rc_load
 #----------------------------------------------------------------------------------
 test_that("TEST_load", {
+    # Donnees
+    path <- paste0(getwd(), "/donnees_tests/input/donnees/actif")
+    file_rc_address <- paste(path, "RC.csv", sep = "/")
+    csv_file <- read.csv2(file_rc_address, header = TRUE)
 
-  # Donnees
-  path <- paste0(getwd(), "/donnees_tests/input/donnees/actif")
-  file_rc_address <- paste(path, "RC.csv", sep = "/")
-  csv_file <- read.csv2(file_rc_address, header = T)
+    # Appel de la fonction
+    res <- rc_load(file_rc_address)
 
-  # Appel de la fonction
-  res <- rc_load(file_rc_address)
-
-  # Tests
-  expect_equal(res@val_debut, csv_file[1,"rc_init"])
-  expect_equal(res@val_courante, csv_file[1,"rc_init"])
+    # Tests
+    expect_equal(res@val_debut, csv_file[1, "rc_init"])
+    expect_equal(res@val_courante, csv_file[1, "rc_init"])
 })

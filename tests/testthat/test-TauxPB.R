@@ -13,7 +13,6 @@ taux_pb <- new("TauxPB", taux_pb_csv)
 
 # Tests sur la creation de la classe
 test_that("TEST_taux_pb", {
-
     # Test classe
     expect_s4_class(taux_pb, "TauxPB")
 

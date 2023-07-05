@@ -7,8 +7,10 @@ context("Treso")
 # Lecture du fichier csv
 path <- paste0(getwd(), "/donnees_tests/input")
 path <- paste0(path, "/donnees/actif")
-ptf_treso_csv <- read.csv2(paste(path, "Tresorerie.csv", sep = "/"), header = TRUE,
-                          colClasses = c("integer",  "double", "double"))
+ptf_treso_csv <- read.csv2(paste(path, "Tresorerie.csv", sep = "/"),
+    header = TRUE,
+    colClasses = c("integer", "double", "double")
+)
 
 # Creation de l'objet
 ptf_treso <- new("Treso", ptf_treso_csv)
@@ -18,7 +20,6 @@ ptf_treso <- new("Treso", ptf_treso_csv)
 #           Classe Tresorerie
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 test_that("TEST_treso_classe", {
-
     # Test classe
     expect_s4_class(ptf_treso, "Treso")
 
@@ -31,9 +32,8 @@ test_that("TEST_treso_classe", {
 # revalo_treso
 #--------------------------------------------------
 test_that("TEST_revalo_treso", {
-
     # Appel de la fonction
-    Rt      <- .102
+    Rt <- .102
     Rt_prev <- .100
     res <- revalo_treso(Rt, Rt_prev)
 
@@ -41,7 +41,7 @@ test_that("TEST_revalo_treso", {
     expect_equal(res, (1 + Rt) / (1 + Rt_prev) - 1)
 
     # Test avec erreur
-    expect_error(revalo_treso(c(0.102,0.115), c(0.100,0.120)))
+    expect_error(revalo_treso(c(0.102, 0.115), c(0.100, 0.120)))
 })
 
 
@@ -49,12 +49,10 @@ test_that("TEST_revalo_treso", {
 # revenu_treso
 #--------------------------------------------------
 test_that("TEST_revenu_treso", {
-
     # Appel de la fonction
     flux_milieu <- 500
     rdt <- 0.02
     revenu_treso(ptf_treso, rdt, flux_milieu)
-
 })
 
 
@@ -62,7 +60,6 @@ test_that("TEST_revenu_treso", {
 # Test fonction calc_vm :
 #--------------------------------------------------
 test_that("TEST_calc_vm_treso", {
-
     # Appel de la fonction
     flux_milieu <- 1000
     flux_fin <- 500
@@ -85,7 +82,6 @@ test_that("TEST_calc_vm_treso", {
 # Test fonction update_treso:
 #--------------------------------------------------
 test_that("TEST_update_treso", {
-
     ## 1 - Montant positif
     # Appel de la fonction
     flux <- 5000
@@ -115,4 +111,3 @@ test_that("TEST_update_treso", {
     expect_equal(res@ptf_treso$val_marche, ptf_treso@ptf_treso$val_marche + flux)
     expect_equal(res@ptf_treso$val_nc, ptf_treso@ptf_treso$val_nc + flux)
 })
-

@@ -12,9 +12,11 @@ folder_tab <- paste(path, "/donnees/passif/autres_passifs.csv", sep = "/")
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 # Elements necessaires aux calculs
 
-ptf_csv <- read.csv2(folder_tab, header = TRUE, colClasses = c("numeric", "numeric", "numeric",
-                                                               "numeric","numeric","numeric",
-                                                               "numeric"))
+ptf_csv <- read.csv2(folder_tab, header = TRUE, colClasses = c(
+    "numeric", "numeric", "numeric",
+    "numeric", "numeric", "numeric",
+    "numeric"
+))
 ptf <- new("AutresPassifs", ptf_csv)
 
 
@@ -22,7 +24,6 @@ ptf <- new("AutresPassifs", ptf_csv)
 # Classe
 #----------------------------------------------------------------------------------
 test_that("TEST_classe", {
-
     # Classe
     expect_s4_class(ptf, "AutresPassifs")
 
@@ -35,7 +36,6 @@ test_that("TEST_classe", {
 # load
 #----------------------------------------------------------------------------------
 test_that("TEST_load", {
-
     # Appel de la fonction
     res <- autres_passif_load(folder_tab)
 
@@ -49,7 +49,6 @@ test_that("TEST_load", {
 # proj_annee
 #----------------------------------------------------------------------------------
 test_that("TEST_proj_annee", {
-
     # Donnees
     an <- 1L
     inf <- 1.02
@@ -64,4 +63,3 @@ test_that("TEST_proj_annee", {
     # Test
     expect_equal(res, res_att, tolerance = 0.03)
 })
-

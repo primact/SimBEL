@@ -26,16 +26,16 @@ test_that("TEST_choc_immo", {
 
     # Verifications de la maj du portefeuille
     # alloc_valeur
-    expect_equal(actif_immo[1,1], actif_central[1,1])
-    expect_equal(actif_immo[2,1], actif_central[2,1]*(1-choc_immo))
-    expect_equal(actif_immo[3,1], actif_central[3,1])
-    expect_equal(actif_immo[4,1], actif_central[4,1])
-    expect_equal(actif_immo[1,1] + actif_immo[2,1]/(1-choc_immo) + actif_immo[3,1] + actif_immo[4,1], actif_central[5,1])
+    expect_equal(actif_immo[1, 1], actif_central[1, 1])
+    expect_equal(actif_immo[2, 1], actif_central[2, 1] * (1 - choc_immo))
+    expect_equal(actif_immo[3, 1], actif_central[3, 1])
+    expect_equal(actif_immo[4, 1], actif_central[4, 1])
+    expect_equal(actif_immo[1, 1] + actif_immo[2, 1] / (1 - choc_immo) + actif_immo[3, 1] + actif_immo[4, 1], actif_central[5, 1])
 
-    #alloc_valeur_nc
-    expect_equal(actif_immo[1,3], actif_central[1,3])
-    expect_equal(actif_immo[2,3], actif_central[2,3])
-    expect_equal(actif_immo[3,3], actif_central[3,3])
-    expect_equal(actif_immo[4,3], actif_central[4,3])
-    expect_equal(actif_immo[5,3], actif_central[5,3])
+    # alloc_valeur_nc
+    expect_equal(actif_immo[1, 3], actif_central[1, 3])
+    expect_equal(actif_immo[2, 3], actif_central[2, 3])
+    expect_equal(actif_immo[3, 3], actif_central[3, 3])
+    expect_equal(actif_immo[4, 3], actif_central[4, 3])
+    expect_equal(actif_immo[5, 3], actif_central[5, 3])
 })

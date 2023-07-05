@@ -23,7 +23,6 @@ hypt <- load_ht(init)
 # Classe
 #----------------------------------------------------------------------------------
 test_that("Test_classe", {
-
     # Classe
     expect_s4_class(hypt, "HypTech")
 
@@ -40,7 +39,6 @@ test_that("Test_classe", {
 # Tables de mortalite
 #----------------------------------------------------------------------------------
 test_that("TEST_tables_morta", {
-
     # Recuperation de l'objet
     tab_mort <- hypt@tables_mort[[1]]
 
@@ -53,15 +51,15 @@ test_that("TEST_tables_morta", {
     # Tests table
     tab_mort <- tab_mort@table
     expect_true(all(colnames(tab_mort) %in% c("age", "gen", "qx", "lx")))
-    expect_equal(prod(tab_mort$qx<=1), 1)
-    expect_equal(prod(0<=tab_mort$qx), 1)
-    expect_equal(prod(0<=tab_mort$lx), 1)
+    expect_equal(prod(tab_mort$qx <= 1), 1)
+    expect_equal(prod(0 <= tab_mort$qx), 1)
+    expect_equal(prod(0 <= tab_mort$lx), 1)
 
     # Tests qx
     i <- 70
     lx <- tab_mort$lx[i]
-    lx1 <- tab_mort$lx[i+1]
-    qx <- 1 - lx1/lx
+    lx1 <- tab_mort$lx[i + 1]
+    qx <- 1 - lx1 / lx
     expect_equal(tab_mort$qx[70], qx)
 })
 
@@ -72,7 +70,6 @@ test_that("TEST_tables_morta", {
 # Tables de rachats
 #----------------------------------------------------------------------------------
 test_that("TEST_tables_rachats", {
-
     # Recuperation de l'objet
     tab_rach <- hypt@tables_rach[[1]]
 
@@ -83,15 +80,15 @@ test_that("TEST_tables_rachats", {
     expect_equal(tab_rach@anc_max, max(tab_rach@table$anc))
 
     # Lecture fichier csv
-    nom_tab <- as.character(read.csv2(paste(folder_tab, "empl_tables_rachats.csv", sep = "/"))[1,"nom_table_csv"])
+    nom_tab <- as.character(read.csv2(paste(folder_tab, "empl_tables_rachats.csv", sep = "/"))[1, "nom_table_csv"])
     tab_csv <- read.csv2(paste(folder_tab, nom_tab, sep = "/"))
 
     # Tests table
     tab_rach <- tab_rach@table
     expect_equal(tab_rach, tab_csv)
     expect_true(all(colnames(tab_rach) %in% c("age", "anc", "taux_rachat")))
-    expect_equal(prod(tab_rach$taux_rachat<=1), 1)
-    expect_equal(prod(0<=tab_rach$taux_rachat), 1)
+    expect_equal(prod(tab_rach$taux_rachat <= 1), 1)
+    expect_equal(prod(0 <= tab_rach$taux_rachat), 1)
 })
 
 
@@ -101,12 +98,11 @@ test_that("TEST_tables_rachats", {
 # Tables de param comport
 #----------------------------------------------------------------------------------
 test_that("TEST_param_comport", {
-
     # Recuperation de l'objet
     param_comport <- hypt@param_comport[[1]]
 
     # Lecture fichier csv
-    tab_csv <- read.csv2(paste(folder_tab, "param_comport.csv", sep = "/"))[1,]
+    tab_csv <- read.csv2(paste(folder_tab, "param_comport.csv", sep = "/"))[1, ]
 
     # Test attributs
     expect_equal(param_comport@mat_oblig, tab_csv$mat_oblig)
@@ -124,12 +120,11 @@ test_that("TEST_param_comport", {
 # ParamRachDyn
 #----------------------------------------------------------------------------------
 test_that("TEST_ParamRachDyn", {
-
     # Recuperation de l'objet
     param <- hypt@param_rach_dyn[[1]]
 
     # Lecture du fichier csv
-    nom_tab <- as.character(read.csv2(paste(folder_tab, "empl_param_rachats_conj.csv", sep = "/"))[1,"nom_table_csv"])
+    nom_tab <- as.character(read.csv2(paste(folder_tab, "empl_param_rachats_conj.csv", sep = "/"))[1, "nom_table_csv"])
     tab_csv <- read.csv2(paste(folder_tab, nom_tab, sep = "/"))
 
     # Tests attributs
@@ -142,16 +137,15 @@ test_that("TEST_ParamRachDyn", {
 # convert_table
 #----------------------------------------------------------------------------------
 test_that("TEST_convert_table", {
-
     # Recuperation d'une table
     tab_mort <- hypt@tables_mort[[1]]@table
 
     # Appels de la fonction
     res <- convert_table(tab_mort[1:3], "lx")
-    res2 <- convert_table(res[c(1,2,4)], "qx")
+    res2 <- convert_table(res[c(1, 2, 4)], "qx")
 
     # Test
-    expect_equal(res2, tab_mort[c(1,2,4,3)])
+    expect_equal(res2, tab_mort[c(1, 2, 4, 3)])
 })
 
 
@@ -160,7 +154,6 @@ test_that("TEST_convert_table", {
 # calc_proba_deces
 #----------------------------------------------------------------------------------
 test_that("TEST_calc_proba_deces", {
-
     # Donnees necessaires
     tab_mort <- hypt@tables_mort[[1]]
 
