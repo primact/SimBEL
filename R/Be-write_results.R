@@ -1,6 +1,6 @@
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------------------------------------
 # Ce script execute enregistre les resultats.
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           write_be_results
@@ -18,34 +18,33 @@
 ##' @export
 ##' @include Be_class.R
 ##'
-setGeneric(name = "write_be_results", def = function(nom_run, path, x){standardGeneric("write_be_results")})
+setGeneric(name = "write_be_results", def = function(nom_run, path, x) {
+    standardGeneric("write_be_results")
+})
 setMethod(
     f = "write_be_results",
     signature = c(nom_run = "character", path = "character", x = "Be"),
-    definition = function(nom_run, path, x){
-
+    definition = function(nom_run, path, x) {
         # Liste des fichiers de sorties
         nom_flux <- names(x@tab_flux)
         nom_be <- names(x@tab_be)
 
         # Boucle sur les flux de BE
-        for(i in nom_flux[- which(nom_flux == "nom_produit")]){
+        for (i in nom_flux[-which(nom_flux == "nom_produit")]) {
             m <- x@tab_flux[[i]] # Matrice de flux
-            colnames(m) <-  x@tab_flux[["nom_produit"]] # Nom des produits en colonne
+            colnames(m) <- x@tab_flux[["nom_produit"]] # Nom des produits en colonne
 
             # Sauvegarde des resultats
-            write.csv2(m, file = paste(path, nom_run, "_", i,  ".csv", sep = ""))
+            write.csv2(m, file = paste(path, nom_run, "_", i, ".csv", sep = ""))
         }
 
         # Boucle sur les elements de BE
-        for(i in nom_be[- which(nom_be == "nom_produit")]){
+        for (i in nom_be[-which(nom_be == "nom_produit")]) {
             vec <- x@tab_be[[i]] # vecteur de be
             colnames(vec) <- x@tab_be[["nom_produit"]] # Nom des produits en colonne
 
             # Sauvegarde des resultats
             write.csv2(vec, file = paste(path, nom_run, "_", i, ".csv", sep = ""))
         }
-
     }
 )
-

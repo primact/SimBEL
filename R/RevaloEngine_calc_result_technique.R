@@ -15,12 +15,13 @@
 ##' @seealso \code{\link{PRE}}, \code{\link{viellissement_av_pb}}.
 ##' @export
 
-setGeneric(name = "calc_result_technique", def = function(passif_av_pb, var_pre){standardGeneric("calc_result_technique")})
+setGeneric(name = "calc_result_technique", def = function(passif_av_pb, var_pre) {
+    standardGeneric("calc_result_technique")
+})
 setMethod(
     f = "calc_result_technique",
     signature = c(passif_av_pb = "list", var_pre = "numeric"),
-    definition = function(passif_av_pb, var_pre){
-
+    definition = function(passif_av_pb, var_pre) {
         # Donnees
         stock_agg <- passif_av_pb[["result_av_pb"]][["stock_agg"]]
         result_autres_passifs <- passif_av_pb[["result_autres_passifs"]]
@@ -29,7 +30,7 @@ setMethod(
         num_pm_fin <- which(nom_passif == "pm_fin")
 
         # Evaluation du resultats
-        result_tech <-  passif_av_pb[["flux_debut"]] + passif_av_pb[["flux_milieu"]] + passif_av_pb[["flux_fin"]] -
+        result_tech <- passif_av_pb[["flux_debut"]] + passif_av_pb[["flux_milieu"]] + passif_av_pb[["flux_fin"]] -
             sum(stock_agg[, "pm_fin"] - stock_agg[, "pm_deb"]) - # Variation PM  sur les produits inclus dans le modele
             (.subset2(result_autres_passifs, num_pm_fin) - .subset2(result_autres_passifs, num_pm_deb)) -
             var_pre - passif_av_pb[["var_psap"]] - passif_av_pb[["var_pgg"]]
@@ -38,5 +39,3 @@ setMethod(
         return(result_tech)
     }
 )
-
-

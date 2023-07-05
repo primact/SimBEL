@@ -25,25 +25,28 @@
 setGeneric(name = "calc_marge_fin", def = function(base_fin,
                                                    rev_prest_nette, rev_stock_nette,
                                                    contrib_tmg_prest, contrib_tmg_stock,
-                                                   contrib_ppb_tx_cible){
-    standardGeneric("calc_marge_fin")})
+                                                   contrib_ppb_tx_cible) {
+    standardGeneric("calc_marge_fin")
+})
 setMethod(
     f = "calc_marge_fin",
-    signature = c(base_fin = "numeric",
-                  rev_prest_nette = "numeric", rev_stock_nette = "numeric",
-                  contrib_tmg_prest = "numeric", contrib_tmg_stock = "numeric",
-                  contrib_ppb_tx_cible = "numeric"),
+    signature = c(
+        base_fin = "numeric",
+        rev_prest_nette = "numeric", rev_stock_nette = "numeric",
+        contrib_tmg_prest = "numeric", contrib_tmg_stock = "numeric",
+        contrib_ppb_tx_cible = "numeric"
+    ),
     definition = function(base_fin,
                           rev_prest_nette, rev_stock_nette,
                           contrib_tmg_prest, contrib_tmg_stock,
-                          contrib_ppb_tx_cible){
-
-
+                          contrib_ppb_tx_cible) {
         # Controle
-        if(length(base_fin) != length(rev_prest_nette) | length(rev_stock_nette) != length(rev_prest_nette))
+        if (length(base_fin) != length(rev_prest_nette) | length(rev_stock_nette) != length(rev_prest_nette)) {
             stop("[RevaloEngine-calc_marge_fin] : les vecteurs en entree ne sont pas de meme longueur.")
-        if(length(contrib_tmg_prest) > 1L  | length(contrib_tmg_stock) > 1 | length(contrib_ppb_tx_cible) > 1L)
+        }
+        if (length(contrib_tmg_prest) > 1L | length(contrib_tmg_stock) > 1 | length(contrib_ppb_tx_cible) > 1L) {
             stop("[RevaloEngine-calc_marge_fin] : les vecteurs correspondant au contribution de la PPB doivent etre de taille 1.")
+        }
 
 
 
@@ -57,5 +60,3 @@ setMethod(
         return(marge_fin)
     }
 )
-
-

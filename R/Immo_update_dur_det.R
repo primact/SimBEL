@@ -12,22 +12,24 @@
 ##' @export
 ##' @include Immo_class.R
 
-setGeneric(name = "update_dur_det_immo", def = function(x){standardGeneric("update_dur_det_immo")})
+setGeneric(name = "update_dur_det_immo", def = function(x) {
+    standardGeneric("update_dur_det_immo")
+})
 setMethod(
     f = "update_dur_det_immo",
     signature = "Immo",
-    definition = function(x){
-        
+    definition = function(x) {
         # Donnees
-        ptf_immo  <- x@ptf_immo
+        ptf_immo <- x@ptf_immo
         nom_table <- names(ptf_immo)
-        dur_det   <- which(nom_table == "dur_det")
-        
-        if(nrow(ptf_immo) != 0L) 
+        dur_det <- which(nom_table == "dur_det")
+
+        if (nrow(ptf_immo) != 0L) {
             x@ptf_immo$dur_det <- .subset2(ptf_immo, dur_det) + 1
-        else
+        } else {
             warning("[Immo : update_dur_det_immo] : Le portefeuille immo initial est vide.")
-        
+        }
+
         # Output
         return(x)
     }

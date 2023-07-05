@@ -19,32 +19,33 @@
 ##' @seealso La classe \code{\link{Oblig}}.
 ##' @export
 ##' @include AlmEngine_class.R Oblig_class.R
-setGeneric(name = "do_calc_nb_sold_oblig", def = function(x, montant_vente, method_vente){standardGeneric("do_calc_nb_sold_oblig")})
+setGeneric(name = "do_calc_nb_sold_oblig", def = function(x, montant_vente, method_vente) {
+    standardGeneric("do_calc_nb_sold_oblig")
+})
 setMethod(
     f = "do_calc_nb_sold_oblig",
     signature = c(x = "Oblig", montant_vente = "numeric", method_vente = "character"),
-    definition = function(x, montant_vente, method_vente){
-
+    definition = function(x, montant_vente, method_vente) {
         # Donnees
-        ptf_oblig   <- x@ptf_oblig
-        nom_table   <- names(ptf_oblig)
-        val_marche  <- which(nom_table == "val_marche")
-        num_mp      <- which(nom_table == "num_mp")
-        nb_unit     <- which(nom_table == "nb_unit")
+        ptf_oblig <- x@ptf_oblig
+        nom_table <- names(ptf_oblig)
+        val_marche <- which(nom_table == "val_marche")
+        num_mp <- which(nom_table == "num_mp")
+        nb_unit <- which(nom_table == "nb_unit")
 
-        if(method_vente == "proportionnelle"){
+        if (method_vente == "proportionnelle") {
             # Extraction de la valeur de marche
-            val_marche    <- .subset2(ptf_oblig, val_marche)
-            
-            alloc         <- val_marche / sum(val_marche) # Calul de l'allocation
+            val_marche <- .subset2(ptf_oblig, val_marche)
+
+            alloc <- val_marche / sum(val_marche) # Calul de l'allocation
             montant_vente <- montant_vente * alloc # Calcul du montant_vente
-            vm_unitaire   <- val_marche / .subset2(ptf_oblig, nb_unit) # Calcul de la valeur de marche unitaire
+            vm_unitaire <- val_marche / .subset2(ptf_oblig, nb_unit) # Calcul de la valeur de marche unitaire
             nb_sold <- montant_vente / vm_unitaire # Calul du nombre d'unite a vendre
-            
+
             # Extraction des numeros de MP
-            num_mp  <- .subset2(ptf_oblig, num_mp)
+            num_mp <- .subset2(ptf_oblig, num_mp)
         }
-        
+
         # Output
         return(cbind(num_mp = num_mp, nb_sold = nb_sold))
     }

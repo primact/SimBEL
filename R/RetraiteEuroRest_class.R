@@ -23,57 +23,107 @@
 setClass(
     Class = "RetraiteEuroRest",
     slots = c(mp = "data.frame", tab = "TabRetEuroRest", tab_proba = "TabProbaRetEuroRest"),
-    validity = function (object){
+    validity = function(object) {
         # liste permettant de stocker les erreurs de chargement
         retval <- NULL
         nb_col_attendu <- 22L
         # Verification du nombre de colonnes
-        if(ncol(object@mp) != nb_col_attendu){
+        if (ncol(object@mp) != nb_col_attendu) {
             retval <- c(retval, "[RetraiteEuroRest] : Nombre d'attributs incorrect, un ptf RetraiteEuroRest est compose d'un DF de 21 colonnes\n")
         }
 
         # Verification du type des colonnes
-        if (!is.integer(.subset2(object@mp, 1L)))  {retval <- c(retval, "[RetraiteEuroRest] : num_mp n'est pas entier\n")}
-        if (!is.integer(.subset2(object@mp, 2L)))  {retval <- c(retval, "[RetraiteEuroRest] : num_canton n'est pas entier\n")}
-        if (!is.integer(.subset2(object@mp, 3L)))  {retval <- c(retval, "[RetraiteEuroRest] : num_prod n'est pas entier\n")}
-        if (!is.integer(.subset2(object@mp, 4L)))  {retval <- c(retval, "[RetraiteEuroRest] : age n'est pas entier\n")}
-        if (!is.integer(.subset2(object@mp, 5L)))  {retval <- c(retval, "[RetraiteEuroRest] : gen n'est pas entier\n")}
-        if (!is.factor(.subset2(object@mp, 6L)))   {retval <- c(retval, "[RetraiteEuroRest] : num_tab_mort n'est pas factor\n")}
-        if (!is.numeric(.subset2(object@mp, 7L)))  {retval <- c(retval, "[RetraiteEuroRest] : pm n'est pas numeric\n")}
-        if (!is.numeric(.subset2(object@mp, 8L)))  {retval <- c(retval, "[RetraiteEuroRest] : nb_contr n'est pas numeric\n")}
-        if (!is.integer(.subset2(object@mp, 9L)))  {retval <- c(retval, "[RetraiteEuroRest] : statut_rvs n'est pas entier\n")}
-        if (!is.integer(.subset2(object@mp, 10L))) {retval <- c(retval, "[RetraiteEuroRest] : age_rvs n'est pas entier\n")}
-        if (!is.integer(.subset2(object@mp, 11L))) {retval <- c(retval, "[RetraiteEuroRest] : gen_rvs n'est pas entier\n")}
-        if (!is.factor(.subset2(object@mp, 12L)))  {retval <- c(retval, "[RetraiteEuroRest] : num_tab_mort_rvs n'est pas factor\n")}
-        if (!is.numeric(.subset2(object@mp, 13L))) {retval <- c(retval, "[RetraiteEuroRest] : tx_rvs n'est pas numeric\n")}
-        if (!is.numeric(.subset2(object@mp, 14L))) {retval <- c(retval, "[RetraiteEuroRest] : tx_tech n'est pas numeric\n")}
-        if (!is.factor(.subset2(object@mp, 15L)))  {retval <- c(retval, "[RetraiteEuroRest] : tx_cible n'est pas numeric\n")}
-        if (!is.numeric(.subset2(object@mp, 16L))) {retval <- c(retval, "[RetraiteEuroRest] : freq_rente n'est pas factor\n")}
-        if (!is.numeric(.subset2(object@mp, 17L))) {retval <- c(retval, "[RetraiteEuroRest] : rente n'est pas numeric\n")}
-        if (!is.numeric(.subset2(object@mp, 18L))) {retval <- c(retval, "[RetraiteEuroRest] : rente_gar n'est pas numeric\n")}
-        if (!is.numeric(.subset2(object@mp, 19L))) {retval <- c(retval, "[RetraiteEuroRest] : ch_arr n'est pas numeric\n")}
-        if (!is.logical(.subset2(object@mp, 20L))) {retval <- c(retval, "[RetraiteEuroRest] : echu n'est pas logical\n")}
-        if (!is.numeric(.subset2(object@mp, 21L))) {retval <- c(retval, "[RetraiteEuroRest] : tx_cible_prec n'est pas numeric\n")}
-        if (!is.integer(.subset2(object@mp, 22L))) {retval <- c(retval, "[RetraiteEuroRest] : diff n'est pas integer\n")}
+        if (!is.integer(.subset2(object@mp, 1L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : num_mp n'est pas entier\n")
+        }
+        if (!is.integer(.subset2(object@mp, 2L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : num_canton n'est pas entier\n")
+        }
+        if (!is.integer(.subset2(object@mp, 3L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : num_prod n'est pas entier\n")
+        }
+        if (!is.integer(.subset2(object@mp, 4L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : age n'est pas entier\n")
+        }
+        if (!is.integer(.subset2(object@mp, 5L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : gen n'est pas entier\n")
+        }
+        if (!is.factor(.subset2(object@mp, 6L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : num_tab_mort n'est pas factor\n")
+        }
+        if (!is.numeric(.subset2(object@mp, 7L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : pm n'est pas numeric\n")
+        }
+        if (!is.numeric(.subset2(object@mp, 8L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : nb_contr n'est pas numeric\n")
+        }
+        if (!is.integer(.subset2(object@mp, 9L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : statut_rvs n'est pas entier\n")
+        }
+        if (!is.integer(.subset2(object@mp, 10L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : age_rvs n'est pas entier\n")
+        }
+        if (!is.integer(.subset2(object@mp, 11L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : gen_rvs n'est pas entier\n")
+        }
+        if (!is.factor(.subset2(object@mp, 12L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : num_tab_mort_rvs n'est pas factor\n")
+        }
+        if (!is.numeric(.subset2(object@mp, 13L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : tx_rvs n'est pas numeric\n")
+        }
+        if (!is.numeric(.subset2(object@mp, 14L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : tx_tech n'est pas numeric\n")
+        }
+        if (!is.factor(.subset2(object@mp, 15L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : tx_cible n'est pas numeric\n")
+        }
+        if (!is.numeric(.subset2(object@mp, 16L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : freq_rente n'est pas factor\n")
+        }
+        if (!is.numeric(.subset2(object@mp, 17L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : rente n'est pas numeric\n")
+        }
+        if (!is.numeric(.subset2(object@mp, 18L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : rente_gar n'est pas numeric\n")
+        }
+        if (!is.numeric(.subset2(object@mp, 19L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : ch_arr n'est pas numeric\n")
+        }
+        if (!is.logical(.subset2(object@mp, 20L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : echu n'est pas logical\n")
+        }
+        if (!is.numeric(.subset2(object@mp, 21L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : tx_cible_prec n'est pas numeric\n")
+        }
+        if (!is.integer(.subset2(object@mp, 22L))) {
+            retval <- c(retval, "[RetraiteEuroRest] : diff n'est pas integer\n")
+        }
 
 
         # Verification du nom des colonnes
-        if(! all(colnames(object@mp) == c("num_mp", "num_canton", "num_prod", "age", "gen", "num_tab_mort", "pm",
-                                        "nb_contr", "statut_rvs", "age_rvs", "gen_rvs", "num_tab_mort_rvs", "tx_rvs",
-                                        "tx_tech", "tx_cible", "freq_rente", "rente", "rente_gar", "ch_arr", "echu",
-                                        "tx_cible_prec", "diff"))){
+        if (!all(colnames(object@mp) == c(
+            "num_mp", "num_canton", "num_prod", "age", "gen", "num_tab_mort", "pm",
+            "nb_contr", "statut_rvs", "age_rvs", "gen_rvs", "num_tab_mort_rvs", "tx_rvs",
+            "tx_tech", "tx_cible", "freq_rente", "rente", "rente_gar", "ch_arr", "echu",
+            "tx_cible_prec", "diff"
+        ))) {
             retval <- c(retval, "[RetraiteEuroRest] : Noms de colonne incorrect \n")
         }
 
         # Verification des tables de resultats et de probas
-        if(! validObject(object@tab)){retval <- c(retval, "[RetraiteEuroRest] : Objet 'tab' non valide")}
-        if(! validObject(object@tab_proba)){retval <- c(retval, "[RetraiteEuroRest] : Objet 'tab_proba' non valide")}
+        if (!validObject(object@tab)) {
+            retval <- c(retval, "[RetraiteEuroRest] : Objet 'tab' non valide")
+        }
+        if (!validObject(object@tab_proba)) {
+            retval <- c(retval, "[RetraiteEuroRest] : Objet 'tab_proba' non valide")
+        }
 
         # Resultats du controle
-        if (is.null(retval)){
-            return (TRUE)
-        }else{
-            return (retval)
+        if (is.null(retval)) {
+            return(TRUE)
+        } else {
+            return(retval)
         }
     }
 )

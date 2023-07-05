@@ -14,20 +14,23 @@
 ##' @export
 ##' @include DataBase_class.R
 
-setGeneric(name = "merge_van_agg", def = function(result_tech, result_fin, result_brut, result_net, sim){standardGeneric("merge_van_agg")})
+setGeneric(name = "merge_van_agg", def = function(result_tech, result_fin, result_brut, result_net, sim) {
+    standardGeneric("merge_van_agg")
+})
 setMethod(
-  f = "merge_van_agg",
-  signature = c( result_tech = "matrix", result_fin = "matrix", result_brut = "matrix", result_net = "matrix", sim = "integer"),
-  definition = function(result_tech, result_fin, result_brut, result_net, sim){
+    f = "merge_van_agg",
+    signature = c(result_tech = "matrix", result_fin = "matrix", result_brut = "matrix", result_net = "matrix", sim = "integer"),
+    definition = function(result_tech, result_fin, result_brut, result_net, sim) {
+        # Creation et mise en forme du dataframe a inserer dans la base
+        df <- data.frame(
+            num_sim = sim,
+            result_tech = result_tech,
+            result_fin = result_fin,
+            result_brut = result_brut,
+            result_net = result_net
+        )
 
-    # Creation et mise en forme du dataframe a inserer dans la base
-    df <- data.frame(num_sim = sim,
-                     result_tech = result_tech,
-                     result_fin = result_fin,
-                     result_brut = result_brut,
-                     result_net = result_net)
-
-    # Output
-    return(df)
-  }
+        # Output
+        return(df)
+    }
 )

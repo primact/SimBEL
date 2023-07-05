@@ -22,18 +22,17 @@
 ##' @include EpEuroInd-class.R HypTech-class.R
 
 #--------------------------------------------------------
-setGeneric(name = "calc_proba_dyn", def = function(x, ht){standardGeneric("calc_proba_dyn")})
-# Epargne
-# y = list(ht)
-# Retraite
-# y = list()
+setGeneric(name = "calc_proba_dyn", def = function(x, ht) {
+    standardGeneric("calc_proba_dyn")
+})
+# Epargne y = list(ht)
+# Retraite y = list()
 #--------------------------------------------------------
 
 setMethod(
     f = "calc_proba_dyn",
     signature = c(x = "EpEuroInd", ht = "HypTech"),
-    def = function(x, ht){
-
+    def = function(x, ht) {
         # Model point
         epi_mp <- x@mp
 
@@ -42,24 +41,24 @@ setMethod(
 
         # Gestion des noms de colonnes du data.frame de donnnees
         nom_epi <- names(epi_mp)
-        num_rach_dyn_tot   <- which(nom_epi == "num_rach_dyn_tot")
-        num_rach_dyn_part  <- which(nom_epi == "num_rach_dyn_part")
-        num_tx_cible_prec  <- which(nom_epi == "tx_cible_prec")
+        num_rach_dyn_tot <- which(nom_epi == "num_rach_dyn_tot")
+        num_rach_dyn_part <- which(nom_epi == "num_rach_dyn_part")
+        num_tx_cible_prec <- which(nom_epi == "tx_cible_prec")
         num_tx_revalo_prec <- which(nom_epi == "tx_revalo_prec")
 
         # Extraction des donnees
-        rach_dyn_tot  <- .subset2(epi_mp, num_rach_dyn_tot)
+        rach_dyn_tot <- .subset2(epi_mp, num_rach_dyn_tot)
         rach_dyn_part <- .subset2(epi_mp, num_rach_dyn_part)
-        tx_cible_prec  <- .subset2(epi_mp, num_tx_cible_prec)
+        tx_cible_prec <- .subset2(epi_mp, num_tx_cible_prec)
         tx_revalo_prec <- .subset2(epi_mp, num_tx_revalo_prec)
 
         # Extraction des differentes methodes
-        tab_rach_tot  <- levels(rach_dyn_tot)
+        tab_rach_tot <- levels(rach_dyn_tot)
         tab_rach_part <- levels(rach_dyn_part)
 
         # Initialisation du vecteur tx_cible
-        qx_rach_tot_dyn  <-vector("numeric", length = nb_mp)
-        qx_rach_part_dyn <-vector("numeric", length = nb_mp)
+        qx_rach_tot_dyn <- vector("numeric", length = nb_mp)
+        qx_rach_part_dyn <- vector("numeric", length = nb_mp)
 
         # Calcul des qx pour les rachats totaux
         for (tab in tab_rach_tot) {
@@ -74,7 +73,9 @@ setMethod(
         }
 
         # Output
-        return(list(qx_rach_tot_dyn = qx_rach_tot_dyn,
-                    qx_rach_part_dyn = qx_rach_part_dyn))
+        return(list(
+            qx_rach_tot_dyn = qx_rach_tot_dyn,
+            qx_rach_part_dyn = qx_rach_part_dyn
+        ))
     }
 )

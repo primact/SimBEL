@@ -13,19 +13,29 @@
 ##' @return Le taux periodique.
 ##' @author Prim'Act
 
-setGeneric(name = "taux_period", def = function(x, period){standardGeneric("taux_period")})
+setGeneric(name = "taux_period", def = function(x, period) {
+    standardGeneric("taux_period")
+})
 setMethod(
     f = "taux_period",
     signature("numeric", "character"),
-    definition = function(x, period){
-
+    definition = function(x, period) {
         # Taux
         switch(period,
-               "an"   = {valeur_period <- 1},
-               "se"   = {valeur_period <- 0.5},
-               "tri"  = {valeur_period <- 0.25},
-               "mens" = {valeur_period <- 1 / 12},
-               stop("Le nom de la 'period' doit etre controle"))
+            "an" = {
+                valeur_period <- 1
+            },
+            "se" = {
+                valeur_period <- 0.5
+            },
+            "tri" = {
+                valeur_period <- 0.25
+            },
+            "mens" = {
+                valeur_period <- 1 / 12
+            },
+            stop("Le nom de la 'period' doit etre controle")
+        )
 
 
         # Output
@@ -51,19 +61,29 @@ setMethod(
 ##' @author Prim'Act
 ##'
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-setGeneric(name = "chgt_period", def = function(x, period){standardGeneric("chgt_period")})
+setGeneric(name = "chgt_period", def = function(x, period) {
+    standardGeneric("chgt_period")
+})
 setMethod(
     f = "chgt_period",
     signature("numeric", "character"),
-    definition = function(x, period){
-
+    definition = function(x, period) {
         # Taux
         switch(period,
-               "an"   = {valeur_period <- 1},
-               "se"   = {valeur_period <- 0.5},
-               "tri"  = {valeur_period <- 0.25},
-               "mens" = {valeur_period <- 1 / 12},
-               stop("Le nom de la 'period' doit etre controle"))
+            "an" = {
+                valeur_period <- 1
+            },
+            "se" = {
+                valeur_period <- 0.5
+            },
+            "tri" = {
+                valeur_period <- 0.25
+            },
+            "mens" = {
+                valeur_period <- 1 / 12
+            },
+            stop("Le nom de la 'period' doit etre controle")
+        )
 
 
         # Output

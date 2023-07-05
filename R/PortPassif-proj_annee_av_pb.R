@@ -32,13 +32,13 @@
 ##' @include PortPassif-class.R
 ##'
 
-setGeneric(name = "proj_annee_av_pb", def = function(an, x, tx_soc, coef_inf, list_rd) {standardGeneric("proj_annee_av_pb")})
+setGeneric(name = "proj_annee_av_pb", def = function(an, x, tx_soc, coef_inf, list_rd) {
+    standardGeneric("proj_annee_av_pb")
+})
 setMethod(
     f = "proj_annee_av_pb",
     signature = c(an = "integer", x = "PortPassif", tx_soc = "numeric", coef_inf = "numeric", list_rd = "numeric"),
-    def = function(an, x, tx_soc, coef_inf, list_rd){
-
-
+    def = function(an, x, tx_soc, coef_inf, list_rd) {
         # Initialisation des listes de resultats
         list_res_stock_agg <- NULL # Liste des stocks aggregees par produit
         list_res_flux_agg <- NULL # Liste des flux aggregees par produit
@@ -59,8 +59,7 @@ setMethod(
 
         # Boucle sur les types de produits
         k <- 0L # Compteur de boucle
-        for(i in 1:nb_type) {
-
+        for (i in 1:nb_type) {
             # Liste des produits
             ncpi <- .subset2(x@names_class_prod, i) # Nom du type i
             list_prodi <- x[ncpi] # Liste de produits pour le type i
@@ -68,7 +67,7 @@ setMethod(
             noms_prodi <- names(list_prodi)
 
             # Boucle sur les produits de type i
-            for(j in 1:longi){
+            for (j in 1:longi) {
                 k <- k + 1L # Compteur pour les listes de stockage
                 # Nom du produit
                 nom_prod <- .subset2(noms_prodi, j)
@@ -77,8 +76,7 @@ setMethod(
                 prodi <- .subset2(list_prodi, j)
                 mp <- prodi@mp
 
-                if ( inherits(prodi, "EpEuroInd") ) {
-
+                if (inherits(prodi, "EpEuroInd")) {
                     # Donnees
                     num_mp <- which(names(mp) == "num_mp")
 
@@ -86,11 +84,11 @@ setMethod(
                     prime <- calc_primes(prodi)
 
                     # Extraction de donnees (primes)
-                    prime_flux  <- prime[["flux"]]
+                    prime_flux <- prime[["flux"]]
                     prime_stock <- prime[["stock"]]
 
                     # Calcul du taux minimum
-                    tx_min <-  calc_tx_min(prodi, an)
+                    tx_min <- calc_tx_min(prodi, an)
 
                     # Calcul des probas lorsqu'elles n'ont pas encore ete calculees
                     if (calc_proba) {
@@ -104,11 +102,17 @@ setMethod(
                     proba_dyn <- calc_proba_dyn(prodi, ht = ht)
 
                     # Calcul des prestations du produits par model points
-                    prest <- calc_prest(prodi, method = "normal", an = an, y = list(proba_dyn = proba_dyn, tx_min = tx_min, tx_soc = tx_soc, choc_lapse_mass = x@choc_lapse_mass))
-                    prest_gar <- calc_prest(prodi, method = "gar", an = an, y = list(proba_dyn = proba_dyn, tx_min = tx_min, tx_soc = tx_soc, choc_lapse_mass = x@choc_lapse_mass))
+                    prest <- calc_prest(prodi,
+                        method = "normal", an = an,
+                        y = list(proba_dyn = proba_dyn, tx_min = tx_min, tx_soc = tx_soc, choc_lapse_mass = x@choc_lapse_mass)
+                    )
+                    prest_gar <- calc_prest(prodi,
+                        method = "gar", an = an,
+                        y = list(proba_dyn = proba_dyn, tx_min = tx_min, tx_soc = tx_soc, choc_lapse_mass = x@choc_lapse_mass)
+                    )
 
                     # Extraction de donnees (prest)
-                    prest_flux  <- prest[["flux"]]
+                    prest_flux <- prest[["flux"]]
                     prest_stock <- prest[["stock"]]
                     prest_gar_flux <- prest_gar[["flux"]]
 
@@ -116,10 +120,14 @@ setMethod(
                     tx_cible <- calc_tx_cible(prodi, list(ht = ht, list_rd = list_rd))
 
                     # Calcul des PM avant revalorisation par model points
-                    pm <- calc_pm(prodi, method = "normal", an = an, tx_cible = tx_cible,
-                                  list(tab_prime = prime_flux, tab_prest = prest_flux, tx_min = tx_min, tx_soc = tx_soc))
-                    pm_gar <- calc_pm(prodi, method = "gar", an = an, tx_cible = tx_cible,
-                                      list(tab_prime = prime_flux, tab_prest = prest_gar_flux, tx_min = tx_min, tx_soc = tx_soc))
+                    pm <- calc_pm(prodi,
+                        method = "normal", an = an, tx_cible = tx_cible,
+                        list(tab_prime = prime_flux, tab_prest = prest_flux, tx_min = tx_min, tx_soc = tx_soc)
+                    )
+                    pm_gar <- calc_pm(prodi,
+                        method = "gar", an = an, tx_cible = tx_cible,
+                        list(tab_prime = prime_flux, tab_prest = prest_gar_flux, tx_min = tx_min, tx_soc = tx_soc)
+                    )
 
 
                     # Extraction de donnees (PM)
@@ -145,11 +153,7 @@ setMethod(
                     # Mise a jour de la liste de produits
                     list_prodi[[j]] <- prodi
                     list_prodi[[j]]@tab["tab"] <- tab
-
-
-
                 } else if (inherits(prodi, "RetraiteEuroRest")) {
-
                     # Donnees
                     nom_mp <- names(mp)
                     num_mp <- which(nom_mp == "num_mp")
@@ -173,7 +177,7 @@ setMethod(
 
 
                     # Extraction de donnees (prest)
-                    prest_flux  <- prest[["flux"]]
+                    prest_flux <- prest[["flux"]]
                     prest_stock <- prest[["stock"]]
                     prest_gar_flux <- prest_gar[["flux"]]
 
@@ -181,8 +185,8 @@ setMethod(
                     tx_cible <- calc_tx_cible(prodi, list(ht = ht, list_rd = unlist(list_rd)))
 
                     # viellissement de 1 an
-                    prodi@mp$age      <- .subset2(mp, num_age) + 1L
-                    prodi@mp$age_rvs  <- .subset2(mp, num_age_rvs) + 1L
+                    prodi@mp$age <- .subset2(mp, num_age) + 1L
+                    prodi@mp$age_rvs <- .subset2(mp, num_age_rvs) + 1L
                     prodi@mp$nb_contr <- prest_stock[["nb_contr_fin"]]
 
                     # Calcul des coefficients de rente et insertion des donnees dans la table
@@ -202,13 +206,13 @@ setMethod(
                     # Extraction de donnees
                     pm_stock <- pm[["stock"]]
                     pm_flux <- pm[["flux"]]
-                    prime_flux  <- prime[["flux"]]
-                    prime_stock  <- prime[["stock"]]
+                    prime_flux <- prime[["flux"]]
+                    prime_stock <- prime[["stock"]]
 
                     # Mise a jour du tableau de sauvegarde
                     tab <- prodi@tab["tab"]
                     tab[["num_mp"]] <- .subset2(mp, num_mp)
-                    tab[["prest"]] <-  prest_flux[["prest"]]
+                    tab[["prest"]] <- prest_flux[["prest"]]
                     tab[["pm_deb"]] <- pm_stock[["pm_deb"]]
                     tab[["pm_fin"]] <- pm_stock[["pm_fin"]]
                     tab[["bes_tx_cible"]] <- pm_flux[["bes_tx_cible"]]
@@ -219,9 +223,9 @@ setMethod(
                     # Mise a jour de la liste de produits
                     list_prodi[[j]] <- prodi
                     list_prodi[[j]]@tab["tab"] <- tab
-
-                } else
+                } else {
                     stop("[PortPassif : proj_annee_av_pb] : La liste list_prodi comporte au moins un element non instancie. \n")
+                }
 
 
                 # Alimentation des listes de stock et de flux, puis et aggregation
@@ -236,23 +240,29 @@ setMethod(
                 list_res_flux_agg_k <- c(list_res_flux_agg_k, prest_fdb = prest_fdb)
 
                 # Calcul des frais sur primes
-                frais_primes <- calc_frais(fp, "prime", nom_prod, nb = list_res_stock_agg_k[["nb_vers"]],
-                                           mt = list_res_flux_agg_k[["pri_brut"]], coef_inf)
+                frais_primes <- calc_frais(fp, "prime", nom_prod,
+                    nb = list_res_stock_agg_k[["nb_vers"]],
+                    mt = list_res_flux_agg_k[["pri_brut"]], coef_inf
+                )
 
                 # Calcul des frais sur prestations
-                frais_prest <- calc_frais(fp, "prest", nom_prod, nb = list_res_stock_agg_k[["nb_sortie"]],
-                                          mt = list_res_flux_agg_k[["prest"]], coef_inf)
+                frais_prest <- calc_frais(fp, "prest", nom_prod,
+                    nb = list_res_stock_agg_k[["nb_sortie"]],
+                    mt = list_res_flux_agg_k[["prest"]], coef_inf
+                )
 
                 # Calcul des frais sur encours
-                frais_enc <- calc_frais(fp, "enc", nom_prod, nb = list_res_stock_agg_k[["nb_contr_moy"]],
-                                        mt = list_res_stock_agg_k[["pm_moy"]], coef_inf)
+                frais_enc <- calc_frais(fp, "enc", nom_prod,
+                    nb = list_res_stock_agg_k[["nb_contr_moy"]],
+                    mt = list_res_stock_agg_k[["pm_moy"]], coef_inf
+                )
 
                 # Ajout des frais au flux
                 list_res_flux_agg_k <- c(list_res_flux_agg_k, frais_primes, frais_prest, frais_enc)
 
 
                 # Mise a jour des listes
-                list_res_flux_agg[[k]]    <- list_res_flux_agg_k
+                list_res_flux_agg[[k]] <- list_res_flux_agg_k
                 list_res_stock_agg[[k]] <- list_res_stock_agg_k
 
 
@@ -266,8 +276,8 @@ setMethod(
         }
 
         # Mise au format matrice des listes de flug_agg et stock_agg
-        flux_agg = matrix(unlist(do.call("rbind",list_res_flux_agg)), length(index), byrow = F)
-        stock_agg = matrix(unlist(do.call("rbind",list_res_stock_agg)), length(index), byrow = F)
+        flux_agg <- matrix(unlist(do.call("rbind", list_res_flux_agg)), length(index), byrow = FALSE)
+        stock_agg <- matrix(unlist(do.call("rbind", list_res_stock_agg)), length(index), byrow = FALSE)
 
         # Nom des colonnes matrices
         colnames(flux_agg) <- names(.subset2(list_res_flux_agg, 1L))
@@ -275,16 +285,13 @@ setMethod(
 
 
         # Stockage dans une liste generale en aggregeant par produit
-        res <- list(x = x,
-                    nom_produit = index,
-                    flux_agg = flux_agg,
-                    stock_agg = stock_agg
+        res <- list(
+            x = x,
+            nom_produit = index,
+            flux_agg = flux_agg,
+            stock_agg = stock_agg
         )
         # output
         return(res)
-
     }
 )
-
-
-

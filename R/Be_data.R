@@ -2,7 +2,8 @@
 #
 ##' Dataset Be.
 ##'
-##' Dataset de la classe \code{\link{Be}} contenant des donnees correspondant aux classes : \code{\link{Canton}}, \code{\link{ParamBe}}, \code{\link{ESG}}.
+##' Dataset de la classe \code{\link{Be}} contenant des donnees correspondant aux classes :
+##' \code{\link{Canton}}, \code{\link{ParamBe}}, \code{\link{ESG}}.
 ##'
 ##' @name Be_DataSet
 ##' @docType data

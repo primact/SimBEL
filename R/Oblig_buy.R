@@ -15,27 +15,29 @@
 ##' @include Oblig_class.R
 
 
-setGeneric(name = "buy_oblig", def = function(x, ptf_bought){standardGeneric("buy_oblig")})
+setGeneric(name = "buy_oblig", def = function(x, ptf_bought) {
+    standardGeneric("buy_oblig")
+})
 setMethod(
     f = "buy_oblig",
     signature = c(x = "Oblig", ptf_bought = "Oblig"),
-    definition = function(x, ptf_bought){
-
+    definition = function(x, ptf_bought) {
         # Donnees
         ptf_oblig <- x@ptf_oblig
         nom_table <- names(ptf_oblig)
         num_mp <- which(nom_table == "num_mp")
 
         # Permet d'acheter un portefeuille lorsque l'initial est vide
-        if(nrow(ptf_oblig) > 0L)
+        if (nrow(ptf_oblig) > 0L) {
             n_init <- max(.subset2(ptf_oblig, num_mp))
-        else
+        } else {
             n_init <- 0
+        }
 
         # Nombre d'oblig achetees
         n_bought <- nrow(ptf_bought@ptf_oblig)
 
-        if(n_bought == 0L) stop("[Oblig : buy_oblig] : Tentative d'achat d'un portefeuille vide\n")
+        if (n_bought == 0L) stop("[Oblig : buy_oblig] : Tentative d'achat d'un portefeuille vide\n")
 
         # Mise a jour des numeros du PTF
         ptf_bought@ptf_oblig$num_mp <- (n_init + 1L):(n_init + n_bought)

@@ -15,26 +15,24 @@
 ##' @export
 ##' @include Immo_class.R
 
-setGeneric(name = "calc_vm_immo", def = function(x,rdt){standardGeneric("calc_vm_immo")})
+setGeneric(name = "calc_vm_immo", def = function(x, rdt) {
+    standardGeneric("calc_vm_immo")
+})
 setMethod(
     f = "calc_vm_immo",
     signature = c(x = "Immo", rdt = "numeric"),
-    definition = function(x, rdt){
-
+    definition = function(x, rdt) {
         # Donnees
-        ptf_immo    <- x@ptf_immo
-        nb_immo     <- nrow(ptf_immo)
-        nom_table   <- names(ptf_immo)
-        val_marche  <- which(nom_table == "val_marche")
+        ptf_immo <- x@ptf_immo
+        nb_immo <- nrow(ptf_immo)
+        nom_table <- names(ptf_immo)
+        val_marche <- which(nom_table == "val_marche")
 
         # Verificateurs
-        if(nb_immo == 0)            stop("[Immo : calc_vm_immo] : Tentative de calcul de VM sur un ptf vide.")
-        if(length(rdt) != nb_immo)  stop("[Immo : calc_vm_immo] : Les inputs ont des dimensions distinctes\n")
+        if (nb_immo == 0) stop("[Immo : calc_vm_immo] : Tentative de calcul de VM sur un ptf vide.")
+        if (length(rdt) != nb_immo) stop("[Immo : calc_vm_immo] : Les inputs ont des dimensions distinctes\n")
 
         # Output
         return(.subset2(x@ptf_immo, val_marche) * (1 + rdt))
     }
 )
-
-
-

@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           revenu_treso
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -15,21 +14,23 @@
 ##' @export
 ##' @include Treso_class.R
 
-setGeneric(name = "revenu_treso", def = function(x, rdt, flux_milieu){standardGeneric("revenu_treso")})
+setGeneric(name = "revenu_treso", def = function(x, rdt, flux_milieu) {
+    standardGeneric("revenu_treso")
+})
 setMethod(
     f = "revenu_treso",
-    signature = c(x = "Treso", rdt = "numeric", flux_milieu = "numeric" ),
-    definition = function(x, rdt, flux_milieu){
-        
+    signature = c(x = "Treso", rdt = "numeric", flux_milieu = "numeric"),
+    definition = function(x, rdt, flux_milieu) {
         # Verification des inputs
         len_rdt <- length(rdt)
-        if (nrow(x["ptf_treso"]) != len_rdt | len_rdt != length(flux_milieu)) 
+        if (nrow(x["ptf_treso"]) != len_rdt | len_rdt != length(flux_milieu)) {
             stop("[Treso : revenu_treso] : Les inputs ont des dimensions distinctes.")
-        
+        }
+
         # Calcul du vecteur de revenu : ATTENTION, il est essentiel que le portefeuille treso soit anterieur au flux et au rdt :
         # on calcule le revenu  du ptf sur la VM n-1
-        revenu = x["ptf_treso"][,"val_marche"] * rdt + flux_milieu * (sqrt(1 + rdt) - 1)
-        
+        revenu <- x["ptf_treso"][, "val_marche"] * rdt + flux_milieu * (sqrt(1 + rdt) - 1)
+
         # Output
         return(revenu)
     }

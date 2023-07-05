@@ -11,15 +11,16 @@
 ##' @export
 ##' @include DataBase_class.R
 
-setGeneric(name = "merge_flux_fin", def = function(flux_fin, sim) {standardGeneric("merge_flux_fin")})
+setGeneric(name = "merge_flux_fin", def = function(flux_fin, sim) {
+    standardGeneric("merge_flux_fin")
+})
 setMethod(
     f = "merge_flux_fin",
     signature = c(flux_fin = "data.frame", sim = "integer"),
-    definition = function(flux_fin, sim){
-        
+    definition = function(flux_fin, sim) {
         # Aggregation des donnes
         df <- cbind(num_sim = sim, flux_fin)
-        
+
         # Output
         return(df)
     }

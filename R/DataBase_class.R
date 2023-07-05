@@ -16,10 +16,11 @@
 
 setClass(
     Class = "DataBase",
-
     representation = representation(
         database = "SQLiteConnection",
-        ecriture_base = "logical"),
+        ecriture_base = "logical"
+    ),
+    validity = function(object) {
 
-    validity = function (object){}
+    }
 )

@@ -11,15 +11,16 @@
 ##' @export
 ##' @include DataBase_class.R
 
-setGeneric(name = "update_table_output_pb", def = function(table){standardGeneric("update_table_output_pb")})
+setGeneric(name = "update_table_output_pb", def = function(table) {
+    standardGeneric("update_table_output_pb")
+})
 setMethod(
     f = "update_table_output_pb",
     signature = c(table = "data.frame"),
-    definition = function(table){
-        
+    definition = function(table) {
         # Creation et mise en forme du dataframe a inserer dans la base
-        table["diff_pb"]       <- table["tot_pb_rep"] - table["ppb8"]
-        
+        table["diff_pb"] <- table["tot_pb_rep"] - table["ppb8"]
+
         # Output
         return(table)
     }

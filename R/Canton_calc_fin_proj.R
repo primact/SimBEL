@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Methode de calcul des fins de projection : calc_fin_proj
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -26,14 +25,17 @@
 ##' @export
 ##' @include Canton_class.R
 
-setGeneric(name = "calc_fin_proj", def = function(x, resultat_fin, result_tech, pm_fin_ap_pb, tx_pb, tx_enc_moy){
-    standardGeneric("calc_fin_proj")})
+setGeneric(name = "calc_fin_proj", def = function(x, resultat_fin, result_tech, pm_fin_ap_pb, tx_pb, tx_enc_moy) {
+    standardGeneric("calc_fin_proj")
+})
 
 setMethod(
     f = "calc_fin_proj",
-    signature = c(x = "Canton", resultat_fin = "numeric", result_tech = "numeric",
-                  pm_fin_ap_pb = "numeric", tx_pb = "numeric", tx_enc_moy = "numeric"),
-    definition = function(x, resultat_fin, result_tech, pm_fin_ap_pb, tx_pb, tx_enc_moy){
+    signature = c(
+        x = "Canton", resultat_fin = "numeric", result_tech = "numeric",
+        pm_fin_ap_pb = "numeric", tx_pb = "numeric", tx_enc_moy = "numeric"
+    ),
+    definition = function(x, resultat_fin, result_tech, pm_fin_ap_pb, tx_pb, tx_enc_moy) {
         # Recuperation de donnees
         ptf_fin <- x@ptf_fin
 
@@ -50,7 +52,7 @@ setMethod(
 
         # Ajustement du resultats financier et technique
         resultat_fin <- resultat_fin + flux_fin_actif
-        result_tech  <- result_tech + ptf_fin@pre@val_courante # Choix de modelisation : Reprise de PRE
+        result_tech <- result_tech + ptf_fin@pre@val_courante # Choix de modelisation : Reprise de PRE
 
 
         #---------------------------------------------------------------
@@ -60,17 +62,19 @@ setMethod(
         # Choix de modelisation : attribution du flux de fin a l'actif en PB et attribution au prorata des PM de fin
         sum_pm_fin <- sum(pm_fin_ap_pb)
         len_pm_fin <- length(pm_fin_ap_pb)
-        if(sum_pm_fin != 0)
+        if (sum_pm_fin != 0) {
             coef_alloc <- pm_fin_ap_pb / sum_pm_fin
-        else # Division par 0
+        } else { # Division par 0
             coef_alloc <- rep(1, len_pm_fin) / len_pm_fin
+        }
 
         # Coefficient de mise a l'echelle
         vnc_actif <- .subset2(print_alloc(ptf_fin), 3L * 5L)
-        if(vnc_actif == 0) # Gestion des divisions par 0
+        if (vnc_actif == 0) { # Gestion des divisions par 0
             coef_scale <- 0
-        else
+        } else {
             coef_scale <- (pm_fin_ap_pb + x@ppb@valeur_ppb) / vnc_actif
+        }
 
 
         revalo_fin_passif <- max(0, flux_fin_actif) * coef_alloc * coef_scale
@@ -99,13 +103,13 @@ setMethod(
         impot <- result_brut - result_net
 
         # Output
-        return(list(flux_fin_passif = flux_fin_passif,
-                    result_tech = result_tech,
-                    resultat_fin = resultat_fin,
-                    result_brut = result_brut,
-                    result_net = result_net,
-                    impot = impot))
+        return(list(
+            flux_fin_passif = flux_fin_passif,
+            result_tech = result_tech,
+            resultat_fin = resultat_fin,
+            result_brut = result_brut,
+            result_net = result_net,
+            impot = impot
+        ))
     }
 )
-
-

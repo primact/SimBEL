@@ -17,13 +17,17 @@
 ##' @include ChocSolvabilite2_class.R Canton_class.R
 # Creer une fonction qui puisse appliquer le choc spread a un objet Oblig selon la maturite et le rating
 # table _choc_action est l'element d'un objet : ChocSolvabilite2@param_choc_mket$table_choc_action
-setGeneric(name = "do_choc_action_type1", def = function(x, canton){standardGeneric("do_choc_action_type1")})
+setGeneric(name = "do_choc_action_type1", def = function(x, canton) {
+    standardGeneric("do_choc_action_type1")
+})
 setMethod(
     f = "do_choc_action_type1",
     signature = c("ChocSolvabilite2", "Canton"),
-    definition = function(x, canton){
+    definition = function(x, canton) {
         # Verification des inputs
-        if (nrow(canton@ptf_fin@ptf_action@ptf_action) == 0) { stop("[choc Mket : Action] : tentative de calcul du choc action avec un objet Action vide impossible. \n")}
+        if (nrow(canton@ptf_fin@ptf_action@ptf_action) == 0) {
+            stop("[choc Mket : Action] : tentative de calcul du choc action avec un objet Action vide impossible. \n")
+        }
         table_choc_action <- x@param_choc_mket@table_choc_action_type1
         ptf_action <- canton@ptf_fin@ptf_action
 
@@ -33,22 +37,26 @@ setMethod(
         # Trier par numero d'index
         # Dans l'exemple initial les num_mp sont ordonnes et les num_index aussi neanmoins au cours de la projection il va y avoir des permutations
         # Pour acceler l'algo de selection on prefere trier initialement le df par num_index croissante
-        temp <- ptf_action@ptf_action[order(ptf_action@ptf_action$num_index),]
+        temp <- ptf_action@ptf_action[order(ptf_action@ptf_action$num_index), ]
 
         # Spliter le dataframe action par numero d'index
         split_ptf_action <- list()
-        split_ptf_action <- lapply(index, function(x){split_ptf_action[[x]] <- temp[which(temp$num_index == index[x]),]})
+        split_ptf_action <- lapply(index, function(x) {
+            split_ptf_action[[x]] <- temp[which(temp$num_index == index[x]), ]
+        })
 
         # Appliquer le choc par bloc de numero d'index
-        split_ptf_action <- lapply(1:length(index), function(x){
-            split_ptf_action[[x]]$val_marche <- (1-table_choc_action[which(table_choc_action$num_index == index[x]),"choc_action"]) * split_ptf_action[[x]]$val_marche
-            return(split_ptf_action[[x]])})
+        split_ptf_action <- lapply(1:length(index), function(x) {
+            split_ptf_action[[x]]$val_marche <- (1 - table_choc_action[which(table_choc_action$num_index == index[x]), "choc_action"]) *
+                split_ptf_action[[x]]$val_marche
+            return(split_ptf_action[[x]])
+        })
 
         # Refusionner le data.frame
         merged_ptf_action <- do.call("rbind", split_ptf_action)
 
         # Resortir un objet action, dont l'attribut ptf_action est trie comme initialement i.e. par ordre croissant du num_mp
-        ptf_action_mod    <- new("Action", merged_ptf_action[order(merged_ptf_action$num_mp),])
+        ptf_action_mod <- new("Action", merged_ptf_action[order(merged_ptf_action$num_mp), ])
         canton@ptf_fin@ptf_action <- ptf_action_mod
 
         # Mise a jour des PMVL Action/Immo/Oblig
@@ -60,17 +68,23 @@ setMethod(
         canton@ptf_fin <- do_update_vm_vnc_precedent(canton@ptf_fin)
 
         # APPLICATION SIMPLIFIEE DU CHOC AU PORTEFEUILLE DE REFERENCE :
-        if(nrow(canton@param_alm@ptf_reference@ptf_action@ptf_action) == 0) {stop("[choc Mket : Action type 1] : Portefeuille de reference Action vide - application du choc impossible. \n")}
+        if (nrow(canton@param_alm@ptf_reference@ptf_action@ptf_action) == 0) {
+            stop("[choc Mket : Action type 1] : Portefeuille de reference Action vide - application du choc impossible. \n")
+        }
         temp <- canton@param_alm@ptf_reference@ptf_action@ptf_action
-        # Methode bourrine : le portefeuille de reference est cense etre de petite taille --> il ne necessite pas les etapes de decoupages effectues pour le portefeuille immo standard qui peut devenir gros
+        # Methode bourrine : le portefeuille de reference est cense etre de petite taille --> il ne necessite pas les etapes de decoupages
+        # effectues pour le portefeuille immo standard qui peut devenir gros
         # Creation du vecteur de choc selon les index constituants le portefeuille de reference
         index <- canton@param_alm@ptf_reference@ptf_action@ptf_action$num_index
         vecteur_choc_action_ref <- numeric()
-        vecteur_choc_action_ref <- unlist(lapply(1:length(index), function(x){vecteur_choc_action_ref <- c(vecteur_choc_action_ref, table_choc_action[which(table_choc_action$num_index == index[x]),"choc_action"])}))
+        vecteur_choc_action_ref <- unlist(lapply(1:length(index), function(x) {
+            vecteur_choc_action_ref <- c(vecteur_choc_action_ref, table_choc_action[which(table_choc_action$num_index == index[x]), "choc_action"])
+        }))
         # Application du choc sur le portefeuille de reference
-        canton@param_alm@ptf_reference@ptf_action@ptf_action$val_marche <- (1 - vecteur_choc_action_ref) * canton@param_alm@ptf_reference@ptf_action@ptf_action$val_marche
-        canton@param_alm@ptf_reference@ptf_action@ptf_action$val_achat  <- canton@param_alm@ptf_reference@ptf_action@ptf_action$val_marche
-        canton@param_alm@ptf_reference@ptf_action@ptf_action$val_nc     <- canton@param_alm@ptf_reference@ptf_action@ptf_action$val_marche
+        canton@param_alm@ptf_reference@ptf_action@ptf_action$val_marche <- (1 - vecteur_choc_action_ref) *
+            canton@param_alm@ptf_reference@ptf_action@ptf_action$val_marche
+        canton@param_alm@ptf_reference@ptf_action@ptf_action$val_achat <- canton@param_alm@ptf_reference@ptf_action@ptf_action$val_marche
+        canton@param_alm@ptf_reference@ptf_action@ptf_action$val_nc <- canton@param_alm@ptf_reference@ptf_action@ptf_action$val_marche
 
         return(canton)
     }

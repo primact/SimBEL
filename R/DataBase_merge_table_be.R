@@ -15,18 +15,23 @@
 ##' @export
 ##' @include DataBase_class.R
 
-setGeneric(name = "merge_table_be", def = function(prime, frais, prestation, prestation_fdb, sim, nom_produit){standardGeneric("merge_table_be")})
+setGeneric(name = "merge_table_be", def = function(prime, frais, prestation, prestation_fdb, sim, nom_produit) {
+    standardGeneric("merge_table_be")
+})
 setMethod(
     f = "merge_table_be",
-    signature = c(prime = "matrix", frais = "matrix", prestation = "matrix", prestation_fdb = "matrix",
-                  sim = "integer", nom_produit = "character"),
-    definition = function(prime, frais, prestation, prestation_fdb, sim, nom_produit){
-
+    signature = c(
+        prime = "matrix", frais = "matrix", prestation = "matrix", prestation_fdb = "matrix",
+        sim = "integer", nom_produit = "character"
+    ),
+    definition = function(prime, frais, prestation, prestation_fdb, sim, nom_produit) {
         # Creation et mise en forme du dataframe a inserer dans la base
         nb_annee <- nrow(prime)
-        nb_prod  <- length(nom_produit)
-        df <- data.frame(num_sim = rep(sim, nb_annee * nb_prod), annee = rep(1L:nb_annee, nb_prod), prod = rep(nom_produit, each = nb_annee),
-                         prime = melt(prime)$value, frais = melt(frais)$value, prestation = melt(prestation)$value, prestation_fdb = melt(prestation_fdb)$value)
+        nb_prod <- length(nom_produit)
+        df <- data.frame(
+            num_sim = rep(sim, nb_annee * nb_prod), annee = rep(1L:nb_annee, nb_prod), prod = rep(nom_produit, each = nb_annee),
+            prime = melt(prime)$value, frais = melt(frais)$value, prestation = melt(prestation)$value, prestation_fdb = melt(prestation_fdb)$value
+        )
 
         # Output
         return(df)

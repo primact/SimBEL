@@ -8,23 +8,23 @@
 setMethod(
   f = "initialize",
   signature = "AutresPassifs",
-  definition = function(.Object, mp = data.frame()){
-
-    if(! missing(mp)){
+  definition = function(.Object, mp = data.frame()) {
+    if (!missing(mp)) {
       .Object@mp <- mp
 
       # Validation du format
       validObject(.Object)
     } else {
-      #Traitement du cas vide
-      .Object@mp <- data.frame(annee = numeric(),
-                               prime = numeric(),
-                               prestation = numeric(),
-                               frais = numeric(),
-                               pm_deb = numeric(),
-                               pm_fin = numeric(),
-                               it = numeric()
-                                 )
+      # Traitement du cas vide
+      .Object@mp <- data.frame(
+        annee = numeric(),
+        prime = numeric(),
+        prestation = numeric(),
+        frais = numeric(),
+        pm_deb = numeric(),
+        pm_fin = numeric(),
+        it = numeric()
+      )
     }
     # Output
     return(.Object)
@@ -38,10 +38,12 @@ setMethod(
 setMethod(
   f = "[",
   signature = "AutresPassifs",
-  definition = function(x, i){
+  definition = function(x, i) {
     switch(EXPR = i,
-           "mp" = {return(x@mp)},
-           stop("Cet attribut n'existe pas!")
+      "mp" = {
+        return(x@mp)
+      },
+      stop("Cet attribut n'existe pas!")
     )
   }
 )
@@ -51,13 +53,14 @@ setMethod(
 setReplaceMethod(
   f = "[",
   signature = "AutresPassifs",
-  definition = function(x, i, value){
+  definition = function(x, i, value) {
     switch(EXPR = i,
-           "mp" = {x@mp <- value},
-           stop("Cet attribut n'existe pas!")
+      "mp" = {
+        x@mp <- value
+      },
+      stop("Cet attribut n'existe pas!")
     )
     validObject(x)
     return(x)
   }
 )
-

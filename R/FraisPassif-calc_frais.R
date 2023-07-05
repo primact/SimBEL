@@ -20,38 +20,36 @@
 ##' @export
 ##' @include FraisPassif-class.R
 
-setGeneric(name = "calc_frais", def = function(x, type, nom_prod, nb, mt, coef_inf){standardGeneric("calc_frais")})
+setGeneric(name = "calc_frais", def = function(x, type, nom_prod, nb, mt, coef_inf) {
+    standardGeneric("calc_frais")
+})
 setMethod(
     f = "calc_frais",
-    signature = c(x = "FraisPassif", type = "character", nom_prod = "character", nb = "numeric", mt ="numeric", coef_inf ="numeric"),
-    def = function(x, type, nom_prod, nb, mt, coef_inf){
-        
-        
+    signature = c(x = "FraisPassif", type = "character", nom_prod = "character", nb = "numeric", mt = "numeric", coef_inf = "numeric"),
+    def = function(x, type, nom_prod, nb, mt, coef_inf) {
         # Table ModelPoint
         mp <- x@mp
         names_col <- names(mp)
-        frais_fixe <- which(names_col == paste("frais_fixe", type, sep ="_"))
-        frais_var <- which(names_col == paste("frais_var", type, sep ="_"))
-        ind_inf_frais_fixe <- which(names_col == paste("ind_inf_frais_fixe", type, sep ="_"))
-        ind_inf_frais_var <- which(names_col == paste("ind_inf_frais_var", type, sep ="_"))
+        frais_fixe <- which(names_col == paste("frais_fixe", type, sep = "_"))
+        frais_var <- which(names_col == paste("frais_var", type, sep = "_"))
+        ind_inf_frais_fixe <- which(names_col == paste("ind_inf_frais_fixe", type, sep = "_"))
+        ind_inf_frais_var <- which(names_col == paste("ind_inf_frais_var", type, sep = "_"))
         num_nom_prod <- which(names_col == "nom_prod")
-        
+
         # Nom de la ligne produit et des colonnes
         row <- which(.subset2(mp, num_nom_prod) == nom_prod)
-        
+
         # Calcul des frais fixes
         frais_fixe <- nb * .subset2(mp, frais_fixe)[row] *
             (1 + .subset2(mp, ind_inf_frais_fixe)[row] * (coef_inf - 1))
-        
+
         # Calcul des frais variables
         frais_var <- mt * .subset2(mp, frais_var)[row] *
             (1 + .subset2(mp, ind_inf_frais_var)[row] * (coef_inf - 1))
-        
+
         # Output
-        ret = list(frais_fixe, frais_var)
+        ret <- list(frais_fixe, frais_var)
         names(ret) <- c(paste("frais_fixe", type, sep = "_"), paste("frais_var", type, sep = "_")) # Nommage des sorties
         return(ret)
     }
 )
-
-

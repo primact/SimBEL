@@ -14,12 +14,13 @@
 ##' @export
 ##' @include DataBase_class.R
 
-setGeneric(name = "merge_actifs", def = function(action, immo, oblig, treso, sim) {standardGeneric("merge_actifs")})
+setGeneric(name = "merge_actifs", def = function(action, immo, oblig, treso, sim) {
+    standardGeneric("merge_actifs")
+})
 setMethod(
     f = "merge_actifs",
     signature = c(action = "data.frame", immo = "data.frame", oblig = "data.frame", treso = "data.frame", sim = "integer"),
-    definition = function(action, immo, oblig, treso, sim){
-
+    definition = function(action, immo, oblig, treso, sim) {
         # Aggregation des donnes
         df <- cbind(num_sim = sim, rbind.fill(action, immo, oblig, treso))
 

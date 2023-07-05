@@ -16,18 +16,19 @@
 ##' @include Oblig_class.R
 
 
-setGeneric(name = "update_zsp_oblig", def = function(x,zspread){standardGeneric("update_zsp_oblig")})
+setGeneric(name = "update_zsp_oblig", def = function(x, zspread) {
+    standardGeneric("update_zsp_oblig")
+})
 setMethod(
     f = "update_zsp_oblig",
     signature = c(x = "Oblig", zspread = "numeric"),
-    definition = function(x, zspread){
-        
+    definition = function(x, zspread) {
         # Verification des inputs
         if (nrow(x@ptf_oblig) != length(zspread)) stop("[Oblig : update_oblig] : Les inputs ne sont pas de memes dimensions")
-        
+
         # Mise a jour des z-spreads du PTF
         x@ptf_oblig$zspread <- zspread
-        
+
         # Output
         return(x)
     }

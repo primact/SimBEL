@@ -14,18 +14,18 @@
 ##' @author Prim'Act
 ##' @export
 ##' @include HypTech-class.R
-setGeneric("get_choc_table", function(x, choc){standardGeneric("get_choc_table")})
+setGeneric("get_choc_table", function(x, choc) {
+    standardGeneric("get_choc_table")
+})
 setMethod(
     f = "get_choc_table",
-    signature = c(x = "HypTech",  choc = "numeric"),
-    def = function(x, choc){
-
+    signature = c(x = "HypTech", choc = "numeric"),
+    def = function(x, choc) {
         tables <- x@tables_mort
         nom_tables <- names(tables)
         nb_tables <- length(tables)
 
-        for(i in 1:nb_tables){
-
+        for (i in 1:nb_tables) {
             param_mort <- tables[[nom_tables[i]]]
             df_mort <- param_mort@table
             genmin <- param_mort@gen_min
@@ -33,16 +33,14 @@ setMethod(
             agemin <- param_mort@age_min
             agemax <- param_mort@age_max
 
-            for (gen in genmin : genmax)
-            {
-                for(age in (agemin + 1L) : agemax){
-
+            for (gen in genmin:genmax) {
+                for (age in (agemin + 1L):agemax) {
                     lx_anc <- df_mort[df_mort$gen == gen & df_mort$age == age - 1L, "lx"]
                     lx_anc_central <- param_mort@table[df_mort$gen == gen & df_mort$age == age - 1L, "lx"]
                     ferm <- param_mort@table[df_mort$gen == gen & df_mort$age == age, "lx"]
                     if (lx_anc == 0 || lx_anc_central == 0 | ferm == 0) {
                         df_mort[df_mort$gen == gen & df_mort$age == age, "lx"] <- 0
-                    }else{
+                    } else {
                         qx_choc <- min((calc_qx(param_mort, age - 1L, gen) * (1 + choc)), 1)
                         df_mort[df_mort$gen == gen & df_mort$age == age, "lx"] <- lx_anc * (1 - qx_choc)
                     }
@@ -57,8 +55,9 @@ setMethod(
             df_mort[row, "qx"] <- 1
 
             # Mise a jour de la table
-            x@tables_mort[[nom_tables[i]]]@table <-  df_mort
+            x@tables_mort[[nom_tables[i]]]@table <- df_mort
         }
 
-        return(x)}
+        return(x)
+    }
 )

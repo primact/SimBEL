@@ -11,30 +11,34 @@
 ##' @export
 ##' @include DataBase_class.R
 
-setGeneric(name = "init_tables", def = function(x) {standardGeneric("init_tables")})
+setGeneric(name = "init_tables", def = function(x) {
+    standardGeneric("init_tables")
+})
 setMethod(
-  f = "init_tables",
-  signature = c(x = "DataBase"),
-  definition = function(x){
+    f = "init_tables",
+    signature = c(x = "DataBase"),
+    definition = function(x) {
+        ## Suppression des tables existantes
+        sapply(dbListTables(x@database), function(t) dbRemoveTable(x@database, t))
 
-    ## Suppression des tables existantes
-    sapply(dbListTables(x@database), function(t) dbRemoveTable(x@database, t))
-
-    ## Creation des differentes tables
-    # 1 - Table OUTPUT_BE
-    dbSendQuery(conn = x@database,
-                "CREATE TABLE OUTPUT_BE
+        ## Creation des differentes tables
+        # 1 - Table OUTPUT_BE
+        dbSendQuery(
+            conn = x@database,
+            "CREATE TABLE OUTPUT_BE
                     (num_sim INTEGER,
                     annee INTEGER,
                     prod VARCHAR(20),
                     prime REAL,
                     frais REAL,
                     prestation REAL,
-                    prestation_fdb REAL)")
+                    prestation_fdb REAL)"
+        )
 
-    # 2 - Table OUTPUT_VAN_AGG
-    dbSendQuery(conn = x@database,
-                "CREATE TABLE OUTPUT_VAN_AGG
+        # 2 - Table OUTPUT_VAN_AGG
+        dbSendQuery(
+            conn = x@database,
+            "CREATE TABLE OUTPUT_VAN_AGG
                     (num_sim INTEGER,
                     annee INTEGER,
                     prime REAL,
@@ -44,11 +48,13 @@ setMethod(
                     result_tech REAL,
                     result_fin REAL,
                     result_brut REAL,
-                    result_net REAL)")
+                    result_net REAL)"
+        )
 
-    # 3 - Table OUTPUT_PRODUIT
-    dbSendQuery(conn = x@database,
-                "CREATE TABLE OUTPUT_PRODUIT
+        # 3 - Table OUTPUT_PRODUIT
+        dbSendQuery(
+            conn = x@database,
+            "CREATE TABLE OUTPUT_PRODUIT
                     (num_sim INTEGER,
                     annee INTEGER,
                     prod VARCHAR(20),
@@ -74,6 +80,10 @@ setMethod(
                     soc_prest REAL,
                     it_tech_prest REAL,
                     arr_charg REAL,
+                    rach_tot_struct REAL,
+                    rach_tot_conj REAL,
+                    rach_part_struct REAL,
+                    rach_part_conj REAL,
                     rev_stock_brut REAL,
                     rev_stock_nette REAL,
                     enc_charg_stock REAL,
@@ -117,11 +127,13 @@ setMethod(
                     delta_pm REAL,
                     frais REAL,
                     credit REAL,
-                    debit REAL)")
+                    debit REAL)"
+        )
 
-    # 4 - Table OUTPUT_PRODUIT_AGG
-    dbSendQuery(conn = x@database,
-                "CREATE TABLE OUTPUT_PRODUIT_AGG
+        # 4 - Table OUTPUT_PRODUIT_AGG
+        dbSendQuery(
+            conn = x@database,
+            "CREATE TABLE OUTPUT_PRODUIT_AGG
                     (num_sim INTEGER,
                     annee INTEGER,
                     pri_brut REAL,
@@ -146,6 +158,10 @@ setMethod(
                     soc_prest REAL,
                     it_tech_prest REAL,
                     arr_charg REAL,
+                    rach_tot_struct REAL,
+                    rach_tot_conj REAL,
+                    rach_part_struct REAL,
+                    rach_part_conj REAL,
                     rev_stock_brut REAL,
                     rev_stock_nette REAL,
                     enc_charg_stock REAL,
@@ -194,11 +210,13 @@ setMethod(
                     result_tech REAL,
                     result_fin REAL,
                     result_brut REAL,
-                    result_net REAL)")
+                    result_net REAL)"
+        )
 
-    # 5 - Table des produits non modelisees
-    dbSendQuery(conn = x@database,
-                "CREATE TABLE HORS_MODEL
+        # 5 - Table des produits non modelisees
+        dbSendQuery(
+            conn = x@database,
+            "CREATE TABLE HORS_MODEL
                     (num_sim INTEGER,
                     prod VARCHAR(20),
                     annee INTEGER,
@@ -207,18 +225,22 @@ setMethod(
                     frais REAL,
                     pm_deb REAL,
                     pm_fin REAL,
-                    it REAL)")
+                    it REAL)"
+        )
 
-    # 6 - Table des BE
-    dbSendQuery(conn = x@database,
-                "CREATE TABLE BE
+        # 6 - Table des BE
+        dbSendQuery(
+            conn = x@database,
+            "CREATE TABLE BE
                     (num_sim INTEGER,
                     prod VARCHAR(20),
-                    be REAL)")
+                    be REAL)"
+        )
 
-    # 7 - Table ACTIF
-    dbSendQuery(conn = x@database,
-                "CREATE TABLE ACTIF
+        # 7 - Table ACTIF
+        dbSendQuery(
+            conn = x@database,
+            "CREATE TABLE ACTIF
                     (num_sim INTEGER,
                     annee INTEGER,
                     actif VARCHAR(20),
@@ -246,11 +268,13 @@ setMethod(
                     duration REAL,
                     zspread REAL,
                     cc REAL,
-                    sd REAL)")
+                    sd REAL)"
+        )
 
-    # 8 - Table FLUX_FIN
-    dbSendQuery(conn = x@database,
-                "CREATE TABLE FLUX_FIN
+        # 8 - Table FLUX_FIN
+        dbSendQuery(
+            conn = x@database,
+            "CREATE TABLE FLUX_FIN
                     (num_sim INTEGER,
                     annee INTEGER,
                     revenu_oblig REAL,
@@ -261,20 +285,20 @@ setMethod(
                     pmvr_action REAL,
                     pmvr_immo REAL,
                     frais_fin REAL,
-                    var_rc REAL)")
+                    var_rc REAL)"
+        )
 
-    # 9 - Table PB
-    dbSendQuery(conn = x@database,
-                "CREATE TABLE PB
+        # 9 - Table PB
+        dbSendQuery(
+            conn = x@database,
+            "CREATE TABLE PB
                     (num_sim INTEGER,
                     annee INTEGER,
                     ppb8 REAL,
                     stock_ppb REAL,
                     tot_pb_rep REAL,
                     tot_pb_dot REAL,
-                    diff_pb REAL)")
-
-    # Output
-    # return(x)
-  }
+                    diff_pb REAL)"
+        )
+    }
 )

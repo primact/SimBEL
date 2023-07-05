@@ -14,14 +14,15 @@
 ##' @include ParamTableMort-class.R
 ##' @export
 
-setGeneric("calc_qx", function(table_mort, age, gen){standardGeneric("calc_qx")})
+setGeneric("calc_qx", function(table_mort, age, gen) {
+    standardGeneric("calc_qx")
+})
 setMethod(
     f = "calc_qx",
     signature = c(table_mort = "ParamTableMort", age = "integer", gen = "integer"),
-    def = function(table_mort, age, gen){
-
+    def = function(table_mort, age, gen) {
         # Ajout de test sur le format
-        if(! all(age >= table_mort@age_min)) {
+        if (!all(age >= table_mort@age_min)) {
             stop("L'age doit etre superieur a l'age minimum de la table")
         }
 
@@ -34,15 +35,15 @@ setMethod(
 
         # Gestion des noms de colonnes du data.frame de donnnees
         nom_table <- names(table_mort@table)
-        age_name  <- which(nom_table == "age")
-        gen_name  <- which(nom_table == "gen")
-        qx_name   <- which(nom_table == "qx")
+        age_name <- which(nom_table == "age")
+        gen_name <- which(nom_table == "gen")
+        qx_name <- which(nom_table == "qx")
 
         # Numero de ligne du qx (cle : gen-app)
         row_qx <- match(paste0(gen_app, age_app), paste0(.subset2(table_mort@table, gen_name), .subset2(table_mort@table, age_name)))
 
         # Calcul de la probabilite de survie
-        q_x    <- .subset2(table_mort@table, qx_name)[row_qx]
+        q_x <- .subset2(table_mort@table, qx_name)[row_qx]
 
         return(q_x)
     }

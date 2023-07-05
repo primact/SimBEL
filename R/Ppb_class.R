@@ -20,50 +20,85 @@
 ##' @keywords classes
 ##' @export
 setClass(
-  Class = "Ppb",
-  representation = representation(
-    hist_ppb = "numeric",
-    valeur_ppb = "numeric",
-    ppb_debut = "numeric",
-    seuil_rep = "numeric",
-    seuil_dot = "numeric",
-    compte_rep = "numeric",
-    compte_dot = "numeric"))
+    Class = "Ppb",
+    representation = representation(
+        hist_ppb = "numeric",
+        valeur_ppb = "numeric",
+        ppb_debut = "numeric",
+        seuil_rep = "numeric",
+        seuil_dot = "numeric",
+        compte_rep = "numeric",
+        compte_dot = "numeric"
+    )
+)
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Verificateur et initialisateur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 # Verificateur : permet a chaque appel de l'objet de verifier quelques elements de base :
-setValidity(Class = "Ppb",
-            function (object){
-              retval <- NULL
+setValidity(
+    Class = "Ppb",
+    function(object) {
+        retval <- NULL
 
-              # Test sur les types
-              if (!is.numeric(object@hist_ppb))  {retval <- c(retval, "[Ppb] : hist_ppb n'est pas numeric/n")}
-              if (!is.numeric(object@valeur_ppb))  {retval <- c(retval, "[Ppb] : valeur_ppb n'est pas numeric/n")}
-              if (!is.numeric(object@ppb_debut))  {retval <- c(retval, "[Ppb] : ppb_debut n'est pas numeric/n")}
-              if (!is.numeric(object@seuil_rep))  {retval <- c(retval, "[Ppb] : seuil_rep n'est pas numeric/n")}
-              if (!is.numeric(object@seuil_dot))  {retval <- c(retval, "[Ppb] : seuil_dot n'est pas numeric/n")}
-              if (!is.numeric(object@compte_rep))  {retval <- c(retval, "[Ppb] : compte_rep n'est pas numeric/n")}
-              if (!is.numeric(object@compte_dot))  {retval <- c(retval, "[Ppb] : compte_dot n'est pas numeric/n")}
+        # Test sur les types
+        if (!is.numeric(object@hist_ppb)) {
+            retval <- c(retval, "[Ppb] : hist_ppb n'est pas numeric.\n")
+        }
+        if (!is.numeric(object@valeur_ppb)) {
+            retval <- c(retval, "[Ppb] : valeur_ppb n'est pas numeric.\n")
+        }
+        if (!is.numeric(object@ppb_debut)) {
+            retval <- c(retval, "[Ppb] : ppb_debut n'est pas numeric.\n")
+        }
+        if (!is.numeric(object@seuil_rep)) {
+            retval <- c(retval, "[Ppb] : seuil_rep n'est pas numeric.\n")
+        }
+        if (!is.numeric(object@seuil_dot)) {
+            retval <- c(retval, "[Ppb] : seuil_dot n'est pas numeric.\n")
+        }
+        if (!is.numeric(object@compte_rep)) {
+            retval <- c(retval, "[Ppb] : compte_rep n'est pas numeric.\n")
+        }
+        if (!is.numeric(object@compte_dot)) {
+            retval <- c(retval, "[Ppb] : compte_dot n'est pas numeric.\n")
+        }
 
-              # Test sur la longueur
-              if (length(object@hist_ppb) != 8)  {retval <- c(retval, "[Ppb] : hist_ppb doit etre de longueur 8/n")}
-              if (length(object@valeur_ppb) != 1)  {retval <- c(retval, "[Ppb] : valeur_ppb doit etre de longueur 1/n")}
-              if (length(object@ppb_debut) != 1)  {retval <- c(retval, "[Ppb] : ppb_debut doit etre de longueur 1/n")}
-              if (length(object@seuil_rep) != 1)  {retval <- c(retval, "[Ppb] : seuil_rep doit etre de longueur 1/n")}
-              if (length(object@seuil_dot) != 1)  {retval <- c(retval, "[Ppb] : seuil_dot doit etre de longueur 1/n")}
-              if (length(object@compte_rep) != 1)  {retval <- c(retval, "[Ppb] : compte_rep doit etre de longueur 1/n")}
-              if (length(object@compte_dot) != 1)  {retval <- c(retval, "[Ppb] : compte_dot doit etre de longueur 1/n")}
+        # Test sur la longueur
+        if (length(object@hist_ppb) != 8) {
+            retval <- c(retval, "[Ppb] : hist_ppb doit etre de longueur 8.\n")
+        }
+        if (length(object@valeur_ppb) != 1) {
+            retval <- c(retval, "[Ppb] : valeur_ppb doit etre de longueur 1.\n")
+        }
+        if (length(object@ppb_debut) != 1) {
+            retval <- c(retval, "[Ppb] : ppb_debut doit etre de longueur 1.\n")
+        }
+        if (length(object@seuil_rep) != 1) {
+            retval <- c(retval, "[Ppb] : seuil_rep doit etre de longueur 1.\n")
+        }
+        if (length(object@seuil_dot) != 1) {
+            retval <- c(retval, "[Ppb] : seuil_dot doit etre de longueur 1.\n")
+        }
+        if (length(object@compte_rep) != 1) {
+            retval <- c(retval, "[Ppb] : compte_rep doit etre de longueur 1.\n")
+        }
+        if (length(object@compte_dot) != 1) {
+            retval <- c(retval, "[Ppb] : compte_dot doit etre de longueur 1.\n")
+        }
 
-              if (object@seuil_rep > 1 | object@seuil_rep < 0)  {retval <- c(retval, "[Ppb] : seuil_rep doit etre compris
-                                                                             entre 0 et 1/n")}
-              if (object@seuil_dot < 0)  {retval <- c(retval, "[Ppb] : seuil_dot doit etre compris
-                                                                             positif/n")}
+        if (object@seuil_rep > 1 | object@seuil_rep < 0) {
+            retval <- c(retval, "[Ppb] : seuil_rep doit etre compris entre 0 et 1.\n")
+        }
+        if (object@seuil_dot < 0) {
+            retval <- c(retval, "[Ppb] : seuil_dot doit etre positif.\n")
+        }
 
 
-              if (is.null(retval)) return (TRUE)
-              else return (retval)
-            }
+        if (is.null(retval)) {
+            return(TRUE)
+        } else {
+            return(retval)
+        }
+    }
 )
-

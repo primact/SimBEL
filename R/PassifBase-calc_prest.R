@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Fonction de calcul des flux de prestations d un model point
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -41,25 +40,38 @@
 ##' \item{\code{ech} : }{un vecteur contenant les flux de sortie en echeance de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
 ##' \item{\code{rach_tot} : }{un vecteur contenant les flux de rachat totaux de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
 ##' \item{\code{dc} : }{un vecteur contenant les flux de deces de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
-##' \item{\code{rach_part} : }{un vecteur contenant les flux de rachat partiel de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
+##' \item{\code{rach_part} : }{un vecteur contenant les flux de rachat partiel de l'annee : nul si l'objet est de type
+##' \code{\link{RetraiteEuroRest}}.}
 ##' \item{\code{rente} : }{le flux annuel de rente par model point : nul si l'objet est de type \code{\link{EpEuroInd}}.}
-##' \item{\code{prest} : }{un vecteur contenant les flux prestations de l'annee (renseigne que l'objet x soit de type \code{\link{RetraiteEuroRest}} ou \code{\link{EpEuroInd}}).}
-##' \item{\code{rev_ech} : }{un vecteur contenant la revalorisation des echeances de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
-##' \item{\code{rev_rach_tot} : }{un vecteur contenant la revalorisation des rachats totaux de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
+##' \item{\code{prest} : }{un vecteur contenant les flux prestations de l'annee (renseigne que l'objet x soit de type \code{\link{RetraiteEuroRest}}
+##' ou \code{\link{EpEuroInd}}).}
+##' \item{\code{rev_ech} : }{un vecteur contenant la revalorisation des echeances de l'annee : nul si l'objet est de type
+##' \code{\link{RetraiteEuroRest}}.}
+##' \item{\code{rev_rach_tot} : }{un vecteur contenant la revalorisation des rachats totaux de l'annee : nul si l'objet est de type
+##' \code{\link{RetraiteEuroRest}}.}
 ##' \item{\code{rev_dc} : }{un vecteur contenant la revalorisation des deces de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
-##' \item{\code{rev_rach_part} : }{un vecteur contenant la revalorisation des rachats partiels de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
-##' \item{\code{rev_prest} : }{un vecteur contenant la revalorisation brute des prestations de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
-##' \item{\code{rev_prest_nette} : }{un vecteur contenant la revalorisation des prestations nette de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
-##' \item{\code{enc_charg} : }{un vecteur contenant les chargements sur l'encours de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
-##' \item{\code{rach_charg} : }{un vecteur contenant les chargements sur les rachats de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
-##' \item{\code{soc_prest} : }{un vecteur contenant les prelevements sociaux sur prestations de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
-##' \item{\code{it_tech_prest} : }{un vecteur contenant les interets techniques sur prestations de l'annee. : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
+##' \item{\code{rev_rach_part} : }{un vecteur contenant la revalorisation des rachats partiels de l'annee : nul si l'objet est de type
+##' \code{\link{RetraiteEuroRest}}.}
+##' \item{\code{rev_prest} : }{un vecteur contenant la revalorisation brute des prestations de l'annee : nul si l'objet est de type
+##' \code{\link{RetraiteEuroRest}}.}
+##' \item{\code{rev_prest_nette} : }{un vecteur contenant la revalorisation des prestations nette de l'annee : nul si l'objet est de type
+##' \code{\link{RetraiteEuroRest}}.}
+##' \item{\code{enc_charg} : }{un vecteur contenant les chargements sur l'encours de l'annee : nul si l'objet est de type
+##' \code{\link{RetraiteEuroRest}}.}
+##' \item{\code{rach_charg} : }{un vecteur contenant les chargements sur les rachats de l'annee : nul si l'objet est de type
+##' \code{\link{RetraiteEuroRest}}.}
+##' \item{\code{soc_prest} : }{un vecteur contenant les prelevements sociaux sur prestations de l'annee : nul si l'objet est de type
+##' \code{\link{RetraiteEuroRest}}.}
+##' \item{\code{it_tech_prest} : }{un vecteur contenant les interets techniques sur prestations de l'annee. : nul si l'objet est de type
+##' \code{\link{RetraiteEuroRest}}.}
 ##' \item{\code{arr_charg} : }{un vecteur contenant les chargements sur arrerages. : nul si l'objet est de type \code{\link{EpEuroInd}}.}
 ##' }
 ##' @return Le format de la liste \code{stock} est :
 ##' \describe{
-##' \item{\code{nb_ech : }}{un vecteur contenant le nombre de sorties en echeance de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
-##' \item{\code{nb_rach_tot : }}{un vecteur contenant le nombre de rachats totaux de l'annee : nul si l'objet est de type \code{\link{RetraiteEuroRest}}.}
+##' \item{\code{nb_ech : }}{un vecteur contenant le nombre de sorties en echeance de l'annee : nul si l'objet est de type
+##' \code{\link{RetraiteEuroRest}}.}
+##' \item{\code{nb_rach_tot : }}{un vecteur contenant le nombre de rachats totaux de l'annee : nul si l'objet est de type
+##' \code{\link{RetraiteEuroRest}}.}
 ##' \item{\code{nb_dc : }}{un vecteur contenant le nombre de deces de l'annee}
 ##' \item{\code{nb_sortie : }}{un vecteur contenant le nombre de sorties de l'annee}
 ##' \item{\code{nb_contr_fin : }}{un vecteur contenant le nombre de contrats en cours en fin d'annee}
@@ -72,83 +84,86 @@
 ##'
 
 #--------------------------------------------------------
-setGeneric(name = "calc_prest", def = function(x, method, an, y){standardGeneric("calc_prest")})
+setGeneric(name = "calc_prest", def = function(x, method, an, y) {
+    standardGeneric("calc_prest")
+})
 
 
 #--------------------------------------------------------
 setMethod(
     f = "calc_prest",
     signature = c(x = "EpEuroInd", method = "character", an = "integer", y = "list"),
-    def = function(x, method, an, y){
+    def = function(x, method, an, y) {
         # Verification inputs
-        if (length(y) != 4L)  stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4. \n")
+        if (length(y) != 4L) stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4. \n")
         # Verification des noms des elements de la liste
-        if (sum(names(y) == c("proba_dyn", "tx_min", "tx_soc", "choc_lapse_mass")) != length(y))
-          stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4 de nom : proba_dyn, tx_min, tx_soc, choc_lapse_mass. \n")
+        if (sum(names(y) == c("proba_dyn", "tx_min", "tx_soc", "choc_lapse_mass")) != length(y)) {
+            stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4 de nom : proba_dyn, tx_min, tx_soc, choc_lapse_mass. \n") # nolint: line_length_linter.
+        }
 
         # affectation pour eviter la modification des fonctions
-        proba_dyn       <- .subset2(y, 1L)
-        tx_min          <- .subset2(y, 2L)
-        tx_soc          <- .subset2(y, 3L)
+        proba_dyn <- .subset2(y, 1L)
+        tx_min <- .subset2(y, 2L)
+        tx_soc <- .subset2(y, 3L)
         choc_lapse_mass <- .subset2(y, 4L)
 
         # Verification des types des elements de la liste
-        if (! is.list(proba_dyn))   stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4, de nom : proba_dyn, tx_min, an, tx_soc, choc_lapse_mass, dont le type est : list, list, numeric. \n")
-        if (! is.list(tx_min))      stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4, de nom : proba_dyn, tx_min, tx_soc, choc_lapse_mass, dont le type est : list, list, numeric \n")
-        if (! is.numeric(tx_soc))   stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4, de nom : proba_dyn, tx_min, tx_soc, choc_lapse_mass, dont le type est : list, list, numeric \n")
-        if (! is.numeric(choc_lapse_mass))   stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4, de nom : proba_dyn, tx_min, tx_soc, choc_lapse_mass, dont le type est : list, list, numeric \n")
+        if (!is.list(proba_dyn) | !is.list(tx_min) | !is.numeric(tx_soc) | !is.numeric(choc_lapse_mass)) {
+            stop("[EpEuroInd : calc_prest] : L'input y doit correspondre a une liste de longueur 4, de nom : proba_dyn, tx_min, an, tx_soc, choc_lapse_mass, dont le type est : list, list, numeric. \n") # nolint: line_length_linter.
+        }
 
         # Extraction des donnees du tableau de probas
-        annee <- paste("Annee", an , sep = "_")
+        annee <- paste("Annee", an, sep = "_")
 
         # Table de proba
         tab_proba <- x@tab_proba
 
         # Extraction des probabilites de rachat total
         name_rachat_tot <- names(tab_proba@qx_rach_tot)
-        num_rachat_tot  <- which(name_rachat_tot ==  annee)
-        qx_rach_tot     <- .subset2(tab_proba@qx_rach_tot, num_rachat_tot)
+        num_rachat_tot <- which(name_rachat_tot == annee)
+        qx_rach_tot <- .subset2(tab_proba@qx_rach_tot, num_rachat_tot)
 
         # Extraction des probabilites de rachats partiels
         name_rachat_part <- names(tab_proba@qx_rach_part)
-        num_rachat_part  <- which(name_rachat_part ==  annee)
-        qx_rach_part     <- .subset2(tab_proba@qx_rach_part, num_rachat_part)
+        num_rachat_part <- which(name_rachat_part == annee)
+        qx_rach_part <- .subset2(tab_proba@qx_rach_part, num_rachat_part)
 
         # Extraction des probabilites de DC
         name_proba_dc <- names(tab_proba@qx_dc)
-        num_proba_dc  <- which(name_proba_dc ==  annee)
-        qx_dc         <- .subset2(tab_proba@qx_dc, num_proba_dc)
+        num_proba_dc <- which(name_proba_dc == annee)
+        qx_dc <- .subset2(tab_proba@qx_dc, num_proba_dc)
 
         # Model Point
-        mp      <- x@mp # Extraction
-        nb_mp   <- nrow(mp) # Nombre de model point
-        nom_epeuro      <- names(mp)
-        num_pm          <- which(nom_epeuro == "pm")
-        num_pm_gar      <- which(nom_epeuro == "pm_gar")
-        num_terme       <- which(nom_epeuro == "terme")
-        num_nb_contr    <- which(nom_epeuro == "nb_contr")
-        num_chgt_enc    <- which(nom_epeuro == "chgt_enc")
-        num_chgt_rach   <- which(nom_epeuro == "chgt_rach")
-        num_ind_chgt_enc_pos    <- which(nom_epeuro == "ind_chgt_enc_pos")
+        mp <- x@mp # Extraction
+        nb_mp <- nrow(mp) # Nombre de model point
+        nom_epeuro <- names(mp)
+        num_pm <- which(nom_epeuro == "pm")
+        num_pm_gar <- which(nom_epeuro == "pm_gar")
+        num_terme <- which(nom_epeuro == "terme")
+        num_nb_contr <- which(nom_epeuro == "nb_contr")
+        num_chgt_enc <- which(nom_epeuro == "chgt_enc")
+        num_chgt_rach <- which(nom_epeuro == "chgt_rach")
+        num_ind_chgt_enc_pos <- which(nom_epeuro == "ind_chgt_enc_pos")
 
         # Extraction de donnees du MP
-        nb_contr         <- .subset2(mp, num_nb_contr)
+        nb_contr <- .subset2(mp, num_nb_contr)
         ind_chgt_enc_pos <- .subset2(mp, num_ind_chgt_enc_pos)
-        chgt_enc         <- .subset2(mp, num_chgt_enc)
+        chgt_enc <- .subset2(mp, num_chgt_enc)
 
 
         # Applique la methode de calcul
-        if(method == "normal") # calcul des flux normaux
+        if (method == "normal") { # calcul des flux normaux
             pm_deb <- .subset2(mp, num_pm)
-        else if (method == "gar") # calcul des flux avec revalorisation garantie uniquement
+        } else if (method == "gar") { # calcul des flux avec revalorisation garantie uniquement
             pm_deb <- .subset2(mp, num_pm_gar)
-        else
+        } else {
             stop("[EpEuroInd : calc_prest] : L'input method dont etre egal a 'normal' ou 'gar' \n")
+        }
 
 
         # Indicatrice de premiere annee pour application du choc de rachat massif et application du choc de rachat
         # Ce choc en applique en debut d'annee. Il n'y a donc pas de revalorisation
-        choc_lapse_mass <- choc_lapse_mass *  (an == 1L)
+        choc_lapse_mass <- choc_lapse_mass * (an == 1L)
         rach_mass <- pm_deb * choc_lapse_mass
         nb_rach_mass <- nb_contr * choc_lapse_mass
 
@@ -157,20 +172,22 @@ setMethod(
 
 
         # Extraction des taux de revalorisation minimum et des taux technique
-        tx_min_an  <- tx_min[["tx_an"]]
-        tx_min_se  <- tx_min[["tx_se"]]
+        tx_min_an <- tx_min[["tx_an"]]
+        tx_min_se <- tx_min[["tx_se"]]
 
 
         # Calcul des echeances et de la revalorisation
         ech <- pm_deb * (1 - ind_ech) * (1 - choc_lapse_mass) # echeance
         rev_ech <- ech * tx_min_se # revalorisation au taux minimum
-        nb_ech <- nb_contr * (1 - ind_ech) * (1 - choc_lapse_mass)# nombre de contrats en echeance
+        nb_ech <- nb_contr * (1 - ind_ech) * (1 - choc_lapse_mass) # nombre de contrats en echeance
 
 
         # Calcul des flux  rachats totaux
         # Taux de rachat incluant les rachats structurels et conjoncturels
         qx_rach_tot_glob <- pmax(0, pmin(1, qx_rach_tot + proba_dyn[["qx_rach_tot_dyn"]]))
+        part_struct_rach_tot <- qx_rach_tot / qx_rach_tot_glob
         rach_tot <- pm_deb * qx_rach_tot_glob * ind_ech * (1 - choc_lapse_mass) # Flux de rachats totaux
+        rach_tot_struct <- part_struct_rach_tot * rach_tot
         rev_rach_tot <- rach_tot * tx_min_se # revalorisation au taux minimum
         nb_rach_tot <- nb_contr * qx_rach_tot_glob * ind_ech * (1 - choc_lapse_mass) # nombre de contrats en rachat total
 
@@ -185,7 +202,12 @@ setMethod(
         # Taux de rachat incluant les rachats structurels et conjoncturels sur la population des non rachetes et vivants
         qx_rach_part_glob <- (1 - qx_rach_tot_glob) * (1 - qx_dc) *
             pmax(0, pmin(1, qx_rach_part + proba_dyn[["qx_rach_part_dyn"]]))
+        part_struct_rach_part <- (1 - qx_rach_tot_glob) * (1 - qx_dc) *
+            qx_rach_part / qx_rach_part_glob
         rach_part <- pm_deb * qx_rach_part_glob * ind_ech * (1 - choc_lapse_mass) # Flux de rachats partiels
+        rach_part_struct <- part_struct_rach_part * rach_part
+
+
         rev_rach_part <- rach_part * tx_min_se # revalorisation au taux minimum
 
         # Total des prestations
@@ -194,12 +216,12 @@ setMethod(
         nb_sortie <- nb_rach_mass + nb_ech + nb_dc + nb_rach_tot # nombre de sorties
         nb_contr_debut <- nb_contr
         nb_contr_fin <- nb_contr_debut - nb_sortie # nombre de contrats en cours en fin d'annee
-        nb_contr_moy <- (nb_contr_debut + nb_contr_fin) / 2  # nombre de contrats moyen
+        nb_contr_moy <- (nb_contr_debut + nb_contr_fin) / 2 # nombre de contrats moyen
 
         # Calcul du taux de chargement sur encours
         # Applique une limite sur le chargement sur encours selon la valeur de l'indicatrice
         # permettant les taux negatifs.
-        chgt_enc <- pmin(chgt_enc, tx_min_an /(1 + tx_min_an)) * ind_chgt_enc_pos + chgt_enc * (1 - ind_chgt_enc_pos)
+        chgt_enc <- pmin(chgt_enc, tx_min_an / (1 + tx_min_an)) * ind_chgt_enc_pos + chgt_enc * (1 - ind_chgt_enc_pos)
 
         # Calcul des chargements sur encours
         enc_charg <- (prest - rach_mass + rev_prest) * chgt_period(chgt_enc, period = "se")
@@ -219,37 +241,43 @@ setMethod(
         out_zero <- rep(0, nb_mp)
 
         # output
-        return(list(method = method,
-                    flux = list(
-                        ech             = ech,
-                        rach_mass       = rach_mass,
-                        rach_tot        = rach_tot,
-                        dc              = dc,
-                        rach_part       = rach_part,
-                        rente           = out_zero,
-                        prest           = prest,
-                        rev_ech         = rev_ech,
-                        rev_rach_tot    = rev_rach_tot,
-                        rev_dc          = rev_dc,
-                        rev_rach_part   = rev_rach_part,
-                        rev_prest       = rev_prest,
-                        rev_prest_nette = rev_prest_nette,
-                        enc_charg_prest = enc_charg,
-                        rach_charg      = rach_charg,
-                        rach_charg_mass = rach_charg_mass,
-                        soc_prest       = soc_prest,
-                        it_tech_prest   = it_tech_prest,
-                        arr_charg       = out_zero),
-                    stock = list(
-                        nb_ech       = nb_ech,
-                        nb_rach_mass = nb_rach_mass,
-                        nb_rach_tot  = nb_rach_tot,
-                        nb_dc        = nb_dc,
-                        nb_debut     = nb_contr_debut,
-                        nb_sortie    = nb_sortie,
-                        nb_contr_fin = nb_contr_fin,
-                        nb_contr_moy = nb_contr_moy
-                    )
+        return(list(
+            method = method,
+            flux = list(
+                ech = ech,
+                rach_mass = rach_mass,
+                rach_tot = rach_tot,
+                dc = dc,
+                rach_part = rach_part,
+                rente = out_zero,
+                prest = prest,
+                rev_ech = rev_ech,
+                rev_rach_tot = rev_rach_tot,
+                rev_dc = rev_dc,
+                rev_rach_part = rev_rach_part,
+                rev_prest = rev_prest,
+                rev_prest_nette = rev_prest_nette,
+                enc_charg_prest = enc_charg,
+                rach_charg = rach_charg,
+                rach_charg_mass = rach_charg_mass,
+                soc_prest = soc_prest,
+                it_tech_prest = it_tech_prest,
+                arr_charg = out_zero,
+                rach_tot_struct = rach_tot_struct,
+                rach_tot_conj = rach_tot - rach_tot_struct,
+                rach_part_struct = rach_part_struct,
+                rach_part_conj = rach_part - rach_part_struct
+            ),
+            stock = list(
+                nb_ech       = nb_ech,
+                nb_rach_mass = nb_rach_mass,
+                nb_rach_tot  = nb_rach_tot,
+                nb_dc        = nb_dc,
+                nb_debut     = nb_contr_debut,
+                nb_sortie    = nb_sortie,
+                nb_contr_fin = nb_contr_fin,
+                nb_contr_moy = nb_contr_moy
+            )
         ))
     }
 )
@@ -258,40 +286,39 @@ setMethod(
 setMethod(
     f = "calc_prest",
     signature = c(x = "RetraiteEuroRest", method = "character", an = "integer"),
-    def = function(x, method, an){
-
+    def = function(x, method, an) {
         # Annee en cours
-        annee <- paste("Annee", an , sep = "_")
+        annee <- paste("Annee", an, sep = "_")
 
         # Table de proba
         tab_proba <- x@tab_proba
 
         # Extraction des probabilites de sortie
-        num_sortie_retraite     <- which(names(tab_proba@sortie_retraite) ==  annee)
-        proba_sortie_retraite   <- .subset2(tab_proba@sortie_retraite, num_sortie_retraite)
+        num_sortie_retraite <- which(names(tab_proba@sortie_retraite) == annee)
+        proba_sortie_retraite <- .subset2(tab_proba@sortie_retraite, num_sortie_retraite)
 
         # Extraction des probabilites de survie un an
-        num_survie_un_an    <- which(names(tab_proba@survie_un_an) ==  annee)
-        proba_survie_un_an  <- .subset2(tab_proba@survie_un_an, num_survie_un_an)
+        num_survie_un_an <- which(names(tab_proba@survie_un_an) == annee)
+        proba_survie_un_an <- .subset2(tab_proba@survie_un_an, num_survie_un_an)
 
         # Extraction de donnees du data.frame de ModelPoint
         mp <- x@mp
-        nb_mp          <- nrow(mp)
-        nom_retraite   <- names(mp)
-        num_rente      <- which(nom_retraite == "rente")
-        num_rente_gar  <- which(nom_retraite == "rente_gar")
-        num_nb_contr   <- which(nom_retraite == "nb_contr")
-        num_ch_arr     <- which(nom_retraite == "ch_arr")
-        nom_diff       <- which(nom_retraite == "diff")
+        nb_mp <- nrow(mp)
+        nom_retraite <- names(mp)
+        num_rente <- which(nom_retraite == "rente")
+        num_rente_gar <- which(nom_retraite == "rente_gar")
+        num_nb_contr <- which(nom_retraite == "nb_contr")
+        num_ch_arr <- which(nom_retraite == "ch_arr")
+        nom_diff <- which(nom_retraite == "diff")
 
         ## Calcul du nombre de contrats
         # Nombre de contrat en debut de periode
         nb_contr_debut <- .subset2(mp, num_nb_contr)
 
         # Nombre de contrats
-        nb_sortie    <-  proba_sortie_retraite * nb_contr_debut          # Nombre de contrats sortis
-        nb_contr_fin <- nb_contr_debut - nb_sortie           # nombre de contrats en cours en fin d'annee
-        nb_contr_moy <- (nb_contr_debut + nb_contr_fin) / 2  # nombre de contrats moyen
+        nb_sortie <- proba_sortie_retraite * nb_contr_debut # Nombre de contrats sortis
+        nb_contr_fin <- nb_contr_debut - nb_sortie # nombre de contrats en cours en fin d'annee
+        nb_contr_moy <- (nb_contr_debut + nb_contr_fin) / 2 # nombre de contrats moyen
 
 
         ## Prestations
@@ -303,12 +330,13 @@ setMethod(
         ind_diff <- dur_diff < an
 
         # Rentes
-        if(method == "normal")
+        if (method == "normal") {
             rente <- .subset2(mp, num_rente) * ind_diff
-        else if (method == "gar")
+        } else if (method == "gar") {
             rente <- .subset2(mp, num_rente_gar) * ind_diff
-        else
+        } else {
             stop("[RetraiteEuroRest : calc_prest] : L'input method doit etre egal a 'normal' ou 'gar' \n")
+        }
 
         # Calcul des prestations
         prestations <- nb_contr_debut * (rente / (1 + ch_arr))
@@ -324,37 +352,43 @@ setMethod(
         out_zero <- rep(0, nb_mp)
 
         # output
-        return(list(method = method,
-                    flux = list(
-                        ech             = out_zero,
-                        rach_mass       = out_zero,
-                        rach_tot        = out_zero,
-                        dc              = out_zero,
-                        rach_part       = out_zero,
-                        rente           = rente_flux,
-                        prest           = rente_flux,
-                        rev_ech         = out_zero,
-                        rev_rach_tot    = out_zero,
-                        rev_dc          = out_zero,
-                        rev_rach_part   = out_zero,
-                        rev_prest       = out_zero,
-                        rev_prest_nette = out_zero,
-                        enc_charg_prest = out_zero,
-                        rach_charg      = out_zero,
-                        rach_charg_mass = out_zero,
-                        soc_prest       = out_zero,
-                        it_tech_prest   = out_zero,
-                        arr_charg       = arr_charg),
-                    stock = list(
-                        nb_ech          = out_zero,
-                        nb_rach_mass    = out_zero,
-                        nb_rach_tot     = out_zero,
-                        nb_dc           = nb_sortie,
-                        nb_debut        = nb_contr_debut,
-                        nb_sortie       = nb_sortie,
-                        nb_contr_fin    = nb_contr_fin,
-                        nb_contr_moy    = nb_contr_moy
-                    )
+        return(list(
+            method = method,
+            flux = list(
+                ech = out_zero,
+                rach_mass = out_zero,
+                rach_tot = out_zero,
+                dc = out_zero,
+                rach_part = out_zero,
+                rente = rente_flux,
+                prest = rente_flux,
+                rev_ech = out_zero,
+                rev_rach_tot = out_zero,
+                rev_dc = out_zero,
+                rev_rach_part = out_zero,
+                rev_prest = out_zero,
+                rev_prest_nette = out_zero,
+                enc_charg_prest = out_zero,
+                rach_charg = out_zero,
+                rach_charg_mass = out_zero,
+                soc_prest = out_zero,
+                it_tech_prest = out_zero,
+                arr_charg = arr_charg,
+                rach_tot_struct = out_zero,
+                rach_tot_conj = out_zero,
+                rach_part_struct = out_zero,
+                rach_part_conj = out_zero
+            ),
+            stock = list(
+                nb_ech          = out_zero,
+                nb_rach_mass    = out_zero,
+                nb_rach_tot     = out_zero,
+                nb_dc           = nb_sortie,
+                nb_debut        = nb_contr_debut,
+                nb_sortie       = nb_sortie,
+                nb_contr_fin    = nb_contr_fin,
+                nb_contr_moy    = nb_contr_moy
+            )
         ))
     }
 )

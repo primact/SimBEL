@@ -16,31 +16,36 @@
 ##' @export
 ##' @include AutresReserves-class.R
 ##'
-setGeneric(name = "autres_reserves_load", def = function(file_autres_reserves_address){standardGeneric("autres_reserves_load")})
+setGeneric(name = "autres_reserves_load", def = function(file_autres_reserves_address) {
+    standardGeneric("autres_reserves_load")
+})
 setMethod(
     f = "autres_reserves_load",
     signature = c(file_autres_reserves_address = "character"),
-    definition = function(file_autres_reserves_address){
-
+    definition = function(file_autres_reserves_address) {
         # Lecture du fichier
-        temp            <- read.csv2(file_autres_reserves_address, colClasses = c("numeric", "numeric", "numeric",
-                                                                                  "numeric", "numeric", "numeric",
-                                                                                  "numeric", "numeric"))
+        temp <- read.csv2(file_autres_reserves_address, colClasses = c(
+            "numeric", "numeric", "numeric",
+            "numeric", "numeric", "numeric",
+            "numeric", "numeric"
+        ))
 
         # Tests
-        if (! all(! is.na(temp)))
+        if (!all(!is.na(temp))) {
             stop("[AutresReserves - load] : Presence de NA dans le fichier d'input")
+        }
 
         # Creation de l'objet
         autres_reserves <- new("AutresReserves",
-                               pgg_debut      = temp[,"pgg_debut"],
-                               psap_debut     = temp[,"psap_debut"],
-                               pgg_valeur     = temp[,"pgg_valeur"],
-                               psap_valeur    = temp[,"psap_valeur"],
-                               tx_pgg_ep      = temp[,"tx_pgg_ep"],
-                               tx_pgg_autres  = temp[,"tx_pgg_autres"],
-                               tx_psap_ep     = temp[,"tx_psap_ep"],
-                               tx_psap_autres = temp[,"tx_psap_autres"])
+            pgg_debut      = temp[, "pgg_debut"],
+            psap_debut     = temp[, "psap_debut"],
+            pgg_valeur     = temp[, "pgg_valeur"],
+            psap_valeur    = temp[, "psap_valeur"],
+            tx_pgg_ep      = temp[, "tx_pgg_ep"],
+            tx_pgg_autres  = temp[, "tx_pgg_autres"],
+            tx_psap_ep     = temp[, "tx_psap_ep"],
+            tx_psap_autres = temp[, "tx_psap_autres"]
+        )
 
         # Output
         return(autres_reserves)

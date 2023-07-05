@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Calc_coupon
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -17,21 +16,21 @@
 ##' @export
 ##' @include Oblig_class.R
 
-setGeneric(name = "calc_coupon", def = function(x){standardGeneric("calc_coupon")})
+setGeneric(name = "calc_coupon", def = function(x) {
+    standardGeneric("calc_coupon")
+})
 setMethod(
     f = "calc_coupon",
-    signature ="Oblig",
-    definition = function(x){
-        
+    signature = "Oblig",
+    definition = function(x) {
         # Donnees
         ptf_oblig <- x@ptf_oblig
         nom_table <- names(ptf_oblig)
         tx_coupon <- which(nom_table == "tx_coupon")
-        par       <- which(nom_table == "par")
-        nominal   <- which(nom_table == "nominal")
-        nb_unit   <- which(nom_table == "nb_unit")
+        par <- which(nom_table == "par")
+        nominal <- which(nom_table == "nominal")
+        nb_unit <- which(nom_table == "nb_unit")
 
-        # Output = Tx_coupon * Parite * Nominal
         return(.subset2(ptf_oblig, tx_coupon) * .subset2(ptf_oblig, par) * .subset2(ptf_oblig, nominal) * .subset2(ptf_oblig, nb_unit))
     }
 )

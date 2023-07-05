@@ -20,23 +20,27 @@
 ##' @export
 ##' @include ChocSolvabilite2_class.R Canton_class.R
 
-setGeneric(name = "do_choc_spread", def = function(x, canton){standardGeneric("do_choc_spread")})
+setGeneric(name = "do_choc_spread", def = function(x, canton) {
+    standardGeneric("do_choc_spread")
+})
 setMethod(
     f = "do_choc_spread",
     signature = c("ChocSolvabilite2", "Canton"),
-    definition = function(x, canton){
-
+    definition = function(x, canton) {
         # GESTION PORT FIN ASSUREUR
         # Verification des inputs
-        if(nrow(canton@ptf_fin@ptf_oblig@ptf_oblig) == 0) {stop("[choc Mket : Spread] : tentative de calcul du choc spread avec un objet Oblig vide impossible. \n")}
+        if (nrow(canton@ptf_fin@ptf_oblig@ptf_oblig) == 0) {
+            stop("[choc Mket : Spread] : tentative de calcul du choc spread avec un objet Oblig vide impossible. \n")
+        }
         temp <- canton@ptf_fin@ptf_oblig@ptf_oblig
-        # temp <- canton@ptf_fin@ptf_oblig@ptf_oblig[canton@ptf_fin@ptf_oblig@ptf_oblig$type == "corp", ]
-        type_num     <- which(names(canton@ptf_fin@ptf_oblig@ptf_oblig) == "type")
+        type_num <- which(names(canton@ptf_fin@ptf_oblig@ptf_oblig) == "type")
         row_corp <- which(.subset2(canton@ptf_fin@ptf_oblig@ptf_oblig, type_num) == "corp")
-        
+
         # Methode bourrine
         table_choc_spread <- x@param_choc_mket@table_choc_spread
-        temp[row_corp,]$val_marche <- unlist(lapply(row_corp, function(x){do_choc_spread_unitaire(table_choc_spread, temp[x,])}))
+        temp[row_corp, ]$val_marche <- unlist(lapply(row_corp, function(x) {
+            do_choc_spread_unitaire(table_choc_spread, temp[x, ])
+        }))
         canton@ptf_fin@ptf_oblig <- new("Oblig", temp)
 
         # Mise a jour des PMVL Action/Immo/Oblig
@@ -53,14 +57,18 @@ setMethod(
 
         # GESTION PORT FIN REFERENCE
         # Verification des inputs
-        if(nrow(canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig) == 0) {stop("[choc Mket : Spread] : Portefeuille de reinvestissement - tentative de calcul du choc spread avec un objet Oblig vide impossible. \n")}
+        if (nrow(canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig) == 0) {
+            stop("[choc Mket : Spread] : Portefeuille de reinvestissement - tentative de calcul du choc spread avec un objet Oblig vide impossible.\n") # nolint: line_length_linter.
+        }
         temp <- canton@param_alm@ptf_reference@ptf_oblig@ptf_oblig
 
         # Methode bourrine
         table_choc_spread <- x@param_choc_mket@table_choc_spread
-        temp$val_marche <- unlist(lapply(1:nrow(temp), function(x){do_choc_spread_unitaire(table_choc_spread, temp[x,])}))
-        temp$val_achat  <- temp$val_marche
-        temp$val_nc     <- temp$val_marche
+        temp$val_marche <- unlist(lapply(1:nrow(temp), function(x) {
+            do_choc_spread_unitaire(table_choc_spread, temp[x, ])
+        }))
+        temp$val_achat <- temp$val_marche
+        temp$val_nc <- temp$val_marche
         canton@param_alm@ptf_reference@ptf_oblig <- new("Oblig", temp)
 
         # Mise a jour des PMVL Action/Immo/Oblig

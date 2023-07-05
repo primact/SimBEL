@@ -16,25 +16,26 @@
 ##' @export
 ##' @include PortFin_class.R
 
-setGeneric(name = "do_update_pmvl", def = function(x){standardGeneric("do_update_pmvl")})
+setGeneric(name = "do_update_pmvl", def = function(x) {
+    standardGeneric("do_update_pmvl")
+})
 setMethod(
     f = "do_update_pmvl",
     signature = "PortFin",
-    definition = function(x){
-
+    definition = function(x) {
         # Affectation des valeurs dans l'objet PortFin
         pmvl_action <- calc_pmvl_action(x@ptf_action)
-        pmvl_immo   <- calc_pmvl_immo(x@ptf_immo)
-        pmvl_oblig  <- calc_pmvl_oblig(x@ptf_oblig)
+        pmvl_immo <- calc_pmvl_immo(x@ptf_immo)
+        pmvl_oblig <- calc_pmvl_oblig(x@ptf_oblig)
 
         # Mise a jour des donnees
         x@pvl_action <- pmvl_action[["pvl"]]
         x@mvl_action <- pmvl_action[["mvl"]]
-        x@pvl_immo   <- pmvl_immo[["pvl"]]
-        x@mvl_immo   <- pmvl_immo[["mvl"]]
-        x@pvl_oblig  <- pmvl_oblig[["pvl"]]
-        x@mvl_oblig  <- pmvl_oblig[["mvl"]]
-        
+        x@pvl_immo <- pmvl_immo[["pvl"]]
+        x@mvl_immo <- pmvl_immo[["mvl"]]
+        x@pvl_oblig <- pmvl_oblig[["pvl"]]
+        x@mvl_oblig <- pmvl_oblig[["mvl"]]
+
         # Output
         return(x)
     }

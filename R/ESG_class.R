@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Definition de la classe ESG
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -26,28 +25,31 @@
 ##' @export
 
 setClass(
-  Class = "ESG",
-  representation = representation(
-    nb_simu       = "integer",
-    ind_action    = "list",
-    ind_immo      = "list",
-    ind_inflation = "list",
-    yield_curve   = "list",
-    deflateur     = "list"),
-  validity = function(object){
-                  retval <- NULL
+    Class = "ESG",
+    representation = representation(
+        nb_simu       = "integer",
+        ind_action    = "list",
+        ind_immo      = "list",
+        ind_inflation = "list",
+        yield_curve   = "list",
+        deflateur     = "list"
+    ),
+    validity = function(object) {
+        retval <- NULL
 
-                  if(!is.integer(object@nb_simu))   retval <- c(retval, "[ESG] : Objet nb_simu non valide")
-                  if(!is.list(object@ind_action))   retval <- c(retval, "[ESG] : Objet ind_action non valide")
-                  if(!is.list(object@ind_immo))     retval <- c(retval, "[ESG] : Objet ind_immo non valide")
-                  if(!is.list(object@ind_inflation))retval <- c(retval, "[ESG] : Objet ind_inflation non valide")
-                  if(!is.list(object@yield_curve))  retval <- c(retval, "[ESG] : Objet yield_curve non valide")
-                  if(!is.list(object@deflateur))    retval <- c(retval, "[ESG] : Objet deflateur non valide")
+        if (!is.integer(object@nb_simu)) retval <- c(retval, "[ESG] : Objet nb_simu non valide")
+        if (!is.list(object@ind_action)) retval <- c(retval, "[ESG] : Objet ind_action non valide")
+        if (!is.list(object@ind_immo)) retval <- c(retval, "[ESG] : Objet ind_immo non valide")
+        if (!is.list(object@ind_inflation)) retval <- c(retval, "[ESG] : Objet ind_inflation non valide")
+        if (!is.list(object@yield_curve)) retval <- c(retval, "[ESG] : Objet yield_curve non valide")
+        if (!is.list(object@deflateur)) retval <- c(retval, "[ESG] : Objet deflateur non valide")
 
-                  if(object@nb_simu < 1L) retval <- c(retval, "[ESG] : Objet nb_sim doit etre superieur a 1.")
+        if (object@nb_simu < 1L) retval <- c(retval, "[ESG] : Objet nb_sim doit etre superieur a 1.")
 
-                  if (is.null(retval)) return (TRUE)
-                  else return (retval)
-
-  }
-  )
+        if (is.null(retval)) {
+            return(TRUE)
+        } else {
+            return(retval)
+        }
+    }
+)

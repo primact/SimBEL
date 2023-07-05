@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Fonction d'initialisation d'un model point
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -22,38 +21,37 @@ setMethod(
                           autres_reserves = new("AutresReserves"),
                           calc_proba = logical(),
                           choc_lapse_mass = numeric(),
-                          choc_mort_cat = numeric()
-    ){
-        if(! missing(annee) & ! missing(names_class_prod) & ! missing(ht) & ! missing(fp)  & ! missing(tx_pb) &
-           ! missing(autres_passifs) & ! missing(autres_reserves)){
-            .Object@annee             <- annee
-            .Object@eei               <- eei
-            .Object@rer               <- rer
-            .Object@names_class_prod  <- names_class_prod
-            .Object@ht                <- ht
-            .Object@fp                <- fp
-            .Object@tx_pb             <- tx_pb
-            .Object@autres_passifs    <- autres_passifs
-            .Object@autres_reserves   <- autres_reserves
-            .Object@calc_proba        <- TRUE
-            .Object@choc_lapse_mass   <- 0
-            .Object@choc_mort_cat     <- 0
+                          choc_mort_cat = numeric()) {
+        if (!missing(annee) & !missing(names_class_prod) & !missing(ht) & !missing(fp) & !missing(tx_pb) &
+            !missing(autres_passifs) & !missing(autres_reserves)) {
+            .Object@annee <- annee
+            .Object@eei <- eei
+            .Object@rer <- rer
+            .Object@names_class_prod <- names_class_prod
+            .Object@ht <- ht
+            .Object@fp <- fp
+            .Object@tx_pb <- tx_pb
+            .Object@autres_passifs <- autres_passifs
+            .Object@autres_reserves <- autres_reserves
+            .Object@calc_proba <- TRUE
+            .Object@choc_lapse_mass <- 0
+            .Object@choc_mort_cat <- 0
             validObject(.Object)
         } else {
-            #Traitement du cas vide
-            .Object@annee           <- 0L
-            .Object@eei             <- list()
-            .Object@rer             <- list()
+            # Traitement du cas vide
+            .Object@annee <- 0L
+            .Object@eei <- list()
+            .Object@rer <- list()
             .Object@names_class_prod <- character()
-            .Object@ht              <- new("HypTech")
-            .Object@fp              <- new("FraisPassif")
-            .Object@tx_pb           <- new("TauxPB")
-            .Object@autres_passifs  <- new("AutresPassifs")
+            .Object@ht <- new("HypTech")
+            .Object@fp <- new("FraisPassif")
+            .Object@tx_pb <- new("TauxPB")
+            .Object@autres_passifs <- new("AutresPassifs")
             .Object@autres_reserves <- new("AutresReserves")
             .Object@autres_reserves <- new("AutresReserves")
-            .Object@calc_proba      <- TRUE
+            .Object@calc_proba <- TRUE
             .Object@choc_lapse_mass <- 0
-            .Object@choc_mort_cat   <- 0
+            .Object@choc_mort_cat <- 0
         }
         return(.Object)
     }
@@ -67,21 +65,45 @@ setMethod(
 setMethod(
     f = "[",
     signature = "PortPassif",
-    definition = function(x, i){
+    definition = function(x, i) {
         switch(EXPR = i,
-               "annee" = {return(x@annee)},
-               "eei" = {return(x@eei)},
-               "rer" = {return(x@rer)},
-               "names_class_prod" = {return(x@names_class_prod)},
-               "ht" = {return(x@ht)},
-               "fp" = {return(x@fp)},
-               "tx_pb" = {return(x@tx_pb)},
-               "autres_passifs" = {return(x@autres_passifs)},
-               "autres_reserves" = {return(x@autres_reserves)},
-               "calc_proba" = {return(x@calc_proba)},
-               "choc_lapse_mass" = {return(x@choc_lapse_mass)},
-               "choc_mort_cat" = {return(x@choc_mort_cat)},
-               stop("Cet attribut n'existe pas!")
+            "annee" = {
+                return(x@annee)
+            },
+            "eei" = {
+                return(x@eei)
+            },
+            "rer" = {
+                return(x@rer)
+            },
+            "names_class_prod" = {
+                return(x@names_class_prod)
+            },
+            "ht" = {
+                return(x@ht)
+            },
+            "fp" = {
+                return(x@fp)
+            },
+            "tx_pb" = {
+                return(x@tx_pb)
+            },
+            "autres_passifs" = {
+                return(x@autres_passifs)
+            },
+            "autres_reserves" = {
+                return(x@autres_reserves)
+            },
+            "calc_proba" = {
+                return(x@calc_proba)
+            },
+            "choc_lapse_mass" = {
+                return(x@choc_lapse_mass)
+            },
+            "choc_mort_cat" = {
+                return(x@choc_mort_cat)
+            },
+            stop("Cet attribut n'existe pas!")
         )
     }
 )
@@ -91,23 +113,46 @@ setMethod(
 setReplaceMethod(
     f = "[",
     signature = "PortPassif",
-    definition = function(x, i, value){
+    definition = function(x, i, value) {
         switch(EXPR = i,
-               "annee" = {x@annee <- value},
-               "eei" = {x@eei <- value},
-               "rer" = {x@rer <- value},
-               "names_class_prod" = {x@names_class_prod <- value},
-               "ht" = {x@ht <- value},
-               "fp" = {x@fp <- value},
-               "tx_pb" = {x@tx_pb <- value},
-               "autres_passifs" = {x@autres_passifs <- value},
-               "autres_reserves" = {x@autres_reserves <- value},
-               "calc_proba" = {x@calc_proba <- value},
-               "choc_lapse_mass" = {x@choc_lapse_mass <- value},
-               "choc_mort_cat" = {x@choc_mort_cat <- value},
-               stop("Cet attribut n'existe pas!")
+            "annee" = {
+                x@annee <- value
+            },
+            "eei" = {
+                x@eei <- value
+            },
+            "rer" = {
+                x@rer <- value
+            },
+            "names_class_prod" = {
+                x@names_class_prod <- value
+            },
+            "ht" = {
+                x@ht <- value
+            },
+            "fp" = {
+                x@fp <- value
+            },
+            "tx_pb" = {
+                x@tx_pb <- value
+            },
+            "autres_passifs" = {
+                x@autres_passifs <- value
+            },
+            "autres_reserves" = {
+                x@autres_reserves <- value
+            },
+            "calc_proba" = {
+                x@calc_proba <- value
+            },
+            "choc_lapse_mass" = {
+                x@choc_lapse_mass <- value
+            },
+            "choc_mort_cat" = {
+                x@choc_mort_cat <- value
+            },
+            stop("Cet attribut n'existe pas!")
         )
-        # validObject(x)
         return(x)
     }
 )

@@ -13,25 +13,26 @@
 ##' @export
 ##' @include Immo_class.R
 
-setGeneric(name = "calc_pmvl_immo", def = function(x){standardGeneric("calc_pmvl_immo")})
+setGeneric(name = "calc_pmvl_immo", def = function(x) {
+    standardGeneric("calc_pmvl_immo")
+})
 setMethod(
     f = "calc_pmvl_immo",
     signature = "Immo",
-    definition = function(x){
-        
+    definition = function(x) {
         # Donnees
-        ptf_immo   <- x@ptf_immo
-        nom_table  <- names(ptf_immo)
+        ptf_immo <- x@ptf_immo
+        nom_table <- names(ptf_immo)
         val_marche <- which(nom_table == "val_marche")
-        val_nc     <- which(nom_table == "val_nc")
+        val_nc <- which(nom_table == "val_nc")
 
         # Plus ou moins value latentes
-        pmvl <-.subset2(ptf_immo, val_marche) - .subset2(ptf_immo, val_nc)
+        pmvl <- .subset2(ptf_immo, val_marche) - .subset2(ptf_immo, val_nc)
 
         # Calcul des plus et moins values
-        pvl <- sum( pmvl * (pmvl > 0))
-        mvl <- sum( pmvl * (pmvl <= 0))
-        
+        pvl <- sum(pmvl * (pmvl > 0))
+        mvl <- sum(pmvl * (pmvl <= 0))
+
         # Output
         return(list(pvl = pvl, mvl = mvl))
     }

@@ -29,155 +29,163 @@
 ##' @export
 ##' @include Be_class.R
 ##'
-setGeneric(name = "run_be", def = function(x, pre_on, parallel, nb_coeur = 0L){standardGeneric("run_be")})
+setGeneric(name = "run_be", def = function(x, pre_on, parallel, nb_coeur = 0L) {
+    standardGeneric("run_be")
+})
 setMethod(
-  f = "run_be",
-  signature = c(x = "Be", pre_on = "logical", parallel = "logical", nb_coeur = "ANY"),
-  definition = function(x, pre_on, parallel, nb_coeur){
+    f = "run_be",
+    signature = c(x = "Be", pre_on = "logical", parallel = "logical", nb_coeur = "ANY"),
+    definition = function(x, pre_on, parallel, nb_coeur) {
+        # Verification des input
+        if (parallel & (nb_coeur == 0L)) {
+            stop("[Be : run_be] : Input nb_coeur incorrect.")
+        }
+        if (!is.integer(nb_coeur)) {
+            stop("[Be : run_be] : L'input nb_coeur doit etre de type integer.")
+        }
 
-    # Verification des input
-    if (parallel & (nb_coeur == 0L)) {stop("[Be : run_be] : Input nb_coeur incorrect.")}
-    if (! is.integer(nb_coeur)) {stop("[Be : run_be] : L'input nb_coeur doit etre de type integer.")}
-
-    # Affiche l'heure de demarrage de la simulation
-    start_time <- Sys.time()
-    message(paste("Date de lancement de l'evaluation : ", start_time, sep = ""))
-
-
-    # Nombre de simulations
-    nb_simu <- x@esg@nb_simu
-
-    # Ensemble de simulation
-    ens_simu <- 1L:nb_simu
-
-    if (parallel) { # Calcul avec parallelisation
-
-      # Initialisation de la parallelisation
-      cl <- makePSOCKcluster(nb_coeur)
-      registerDoParallel(cl)
-
-      result_simu <- foreach(i=ens_simu, .packages = c("SimBEL")) %dopar% {
-
-        # Calcul du BE pour la simulation
-        run_be_simu(x, i, pre_on)[["resultats"]]
-      }
+        # Affiche l'heure de demarrage de la simulation
+        start_time <- Sys.time()
+        message(paste("Date de lancement de l'evaluation : ", start_time, sep = ""))
 
 
-      # Stoppe la parallelisation
-      stopCluster(cl)
+        # Nombre de simulations
+        nb_simu <- x@esg@nb_simu
 
-    } else { # Calcul sans parallelisation
+        # Ensemble de simulation
+        ens_simu <- 1L:nb_simu
+
+        if (parallel) { # Calcul avec parallelisation
+
+            # Initialisation de la parallelisation
+            cl <- makePSOCKcluster(nb_coeur)
+            registerDoParallel(cl)
+
+            result_simu <- foreach(i = ens_simu, .packages = c("SimBEL")) %dopar% {
+                # Calcul du BE pour la simulation
+                run_be_simu(x, i, pre_on)[["resultats"]]
+            }
 
 
-      # Barre de progression
-      pb <- txtProgressBar(min = 0, max = nb_simu, style = 3)
+            # Stoppe la parallelisation
+            stopCluster(cl)
+        } else { # Calcul sans parallelisation
 
-      # Boucle sur les simulations
-      result_simu <- lapply(ens_simu,function(i){
 
-        # Calcul du BE pour la simulation
-        res <- run_be_simu(x, i, pre_on)[["resultats"]]
-        # Mise a jour barre de progression
-        setTxtProgressBar(pb, i)
+            # Barre de progression
+            pb <- txtProgressBar(min = 0, max = nb_simu, style = 3)
 
-        return(res)})
+            # Boucle sur les simulations
+            result_simu <- lapply(ens_simu, function(i) {
+                # Calcul du BE pour la simulation
+                res <- run_be_simu(x, i, pre_on)[["resultats"]]
+                # Mise a jour barre de progression
+                setTxtProgressBar(pb, i)
 
-      # Ferme la barre de progression
-      close(pb)
+                return(res)
+            })
 
-    }
+            # Ferme la barre de progression
+            close(pb)
+        }
 
-    # Alimentation des tableaux de resultats
-    message("Alimentation des tableaux de resultats")
-    # Ensemble des simulations sur lequelles il n'y a pas d'erreur
-    err_simu <- NULL
-    for(i in 1:nb_simu){
-      if(is.null(result_simu[[i]])){ # S il y a une erreur, on exclue les flux de la simulation 1
-        err_simu <- c(err_simu, i)
-      }
-    }
+        # Alimentation des tableaux de resultats
+        message("Alimentation des tableaux de resultats")
+        # Ensemble des simulations sur lequelles il n'y a pas d'erreur
+        err_simu <- NULL
+        for (i in 1:nb_simu) {
+            if (is.null(result_simu[[i]])) { # S il y a une erreur, on exclue les flux de la simulation 1
+                err_simu <- c(err_simu, i)
+            }
+        }
 
-    # Mise a jour de l'ensemble de simulation
-    ens_simu <- ens_simu[which(! (ens_simu %in% err_simu))]
-    nb_simu <- length(ens_simu)
+        # Mise a jour de l'ensemble de simulation
+        ens_simu <- ens_simu[which(!(ens_simu %in% err_simu))]
+        nb_simu <- length(ens_simu)
 
-    if(nb_simu == 0){ # Gestion du nombre de simulation nulle
-      stop("[Be-run_be : Aucune simulation exploitable. Verifier les simulations
+        if (nb_simu == 0) { # Gestion du nombre de simulation nulle
+            stop("[Be-run_be : Aucune simulation exploitable. Verifier les simulations
            du generateur de scenarios economiques]")
+        }
+
+        # Nom de la liste qui permettent d'alimenter les tableaux de flux
+        nom_flux <- c("nom_produit", "prime", "prestation", "prestation_fdb", "frais", "flux_be")
+        # Nom de la liste qui permettent d'alimenter les tableaux de flux
+        nom_be <- c("nom_produit", "prime_actu", "prestation_actu", "prestation_fdb_actu", "frais_actu", "be")
+        nom_result <- c("result_tech_actu", "result_fin_actu", "result_brut_actu", "result_net_actu")
+
+        # Initialisation des calculs de moyenne
+        res_flux <- lapply(nom_flux[-1], function(x) {
+            result_simu[[ens_simu[1]]][[x]] / nb_simu
+        })
+
+        res_be <- lapply(nom_be[-1], function(x) {
+            result_simu[[ens_simu[1]]][[x]] / nb_simu
+        })
+
+        res_result <- lapply(nom_result, function(x) {
+            result_simu[[ens_simu[1]]][[x]] / nb_simu
+        })
+
+        # Nom des flux et des postes de BE
+        names(res_flux) <- nom_flux[-1]
+        names(res_be) <- nom_be[-1]
+        names(res_result) <- nom_result
+
+        if (nb_simu > 2) {
+            # Boucle de remplissage et de calcul des moyennes
+            for (i in ens_simu[-1]) {
+                # Boucle pour alimenter le tableau des flux
+                for (j in nom_flux[-1]) {
+                    res_flux[[j]] <- res_flux[[j]] + result_simu[[i]][[j]] / nb_simu
+                } # Moyenne sur les simulations
+                for (j in nom_be[-1]) {
+                    res_be[[j]] <- res_be[[j]] + result_simu[[i]][[j]] / nb_simu
+                } # Moyenne sur les simulations
+                for (j in nom_result) {
+                    res_result[[j]] <- res_result[[j]] + result_simu[[i]][[j]] / nb_simu
+                } # Moyenne sur les simulations
+            }
+        }
+
+        # Ajout des noms de produits
+        res_flux[["nom_produit"]] <- result_simu[[1]][["nom_produit"]]
+        res_be[["nom_produit"]] <- result_simu[[1]][["nom_produit"]]
+
+        # Stockage des resultats
+        for (j in names(res_flux)) {
+            x["tab_flux"][[j]] <- res_flux[[j]]
+        }
+        for (j in names(res_be)) {
+            x["tab_be"][[j]] <- res_be[[j]]
+        }
+        for (j in names(res_result)) {
+            x["tab_result"][[j]] <- res_result[[j]]
+        }
+
+        # Travail sur la base de donnees
+        if (x@base@ecriture_base) {
+            # Alimentation de la base de donnees
+            insert_tables(x@base, result_simu, ens_simu)
+
+            # Deconnexion de la base de donnees
+            dbDisconnect(x@base@database)
+        }
+
+
+        # Messages de fin
+        message("Fin de l'evaluation")
+        # Affiche l'heure de fin de la simulation
+        end_time <- Sys.time()
+        time_taken <- end_time - start_time
+        message(paste("Date de fin de l'evaluation : ", end_time, sep = ""))
+        message(paste("Temps necessaire a l'evaluation : ", as.numeric(time_taken, units = "mins"), " minutes", sep = ""))
+
+        # Affichage des erreurs
+        if (length(err_simu) > 0) {
+            warning(paste("Les simulations suivantes n'ont pas pu etre exploitees : ", paste(err_simu, collapse = ", "), ".", sep = ""))
+        }
+        # Output
+        return(list(be = x, err_simu = err_simu))
     }
-
-    # Nom de la liste qui permettent d'alimenter les tableaux de flux
-    nom_flux <- c("nom_produit","prime", "prestation", "prestation_fdb", "frais", "flux_be")
-    # Nom de la liste qui permettent d'alimenter les tableaux de flux
-    nom_be <- c("nom_produit", "prime_actu", "prestation_actu", "prestation_fdb_actu", "frais_actu", "be")
-    nom_result <- c("result_tech_actu", "result_fin_actu", "result_brut_actu", "result_net_actu")
-
-    # Initialisation des calculs de moyenne
-    res_flux <- lapply(nom_flux[-1], function(x){
-      result_simu[[ens_simu[1]]][[x]] / nb_simu
-    })
-
-    res_be <- lapply(nom_be[-1], function(x){
-      result_simu[[ens_simu[1]]][[x]] / nb_simu
-    })
-
-    res_result <- lapply(nom_result, function(x){
-      result_simu[[ens_simu[1]]][[x]] / nb_simu
-    })
-
-    # Nom des flux et des postes de BE
-    names(res_flux) <- nom_flux[-1]
-    names(res_be) <- nom_be[-1]
-    names(res_result) <- nom_result
-
-    if(nb_simu > 2){
-      # Boucle de remplissage et de calcul des moyennes
-      for(i in ens_simu[-1]){
-        # Boucle pour alimenter le tableau des flux
-        for(j in nom_flux[-1])
-          res_flux[[j]] <- res_flux[[j]] + result_simu[[i]][[j]] / nb_simu # Moyenne sur les simulations
-        for(j in nom_be[-1])
-          res_be[[j]] <- res_be[[j]] + result_simu[[i]][[j]] / nb_simu # Moyenne sur les simulations
-        for(j in nom_result)
-          res_result[[j]] <- res_result[[j]] + result_simu[[i]][[j]] / nb_simu # Moyenne sur les simulations
-      }
-    }
-
-    # Ajout des noms de produits
-    res_flux[["nom_produit"]] <- result_simu[[1]][["nom_produit"]]
-    res_be[["nom_produit"]] <- result_simu[[1]][["nom_produit"]]
-
-    # Stockage des resultats
-    for(j in names(res_flux))
-      x["tab_flux"][[j]] <- res_flux[[j]]
-    for(j in names(res_be))
-      x["tab_be"][[j]] <- res_be[[j]]
-    for(j in names(res_result))
-      x["tab_result"][[j]] <- res_result[[j]]
-
-    # Travail sur la base de donnees
-    if(x@base@ecriture_base) {
-      # Alimentation de la base de donnees
-      insert_tables(x@base, result_simu, ens_simu)
-
-      # Deconnexion de la base de donnees
-      dbDisconnect(x@base@database)
-    }
-
-
-    # Messages de fin
-    message("Fin de l'evaluation")
-    # Affiche l'heure de fin de la simulation
-    end_time <- Sys.time()
-    time_taken <- end_time - start_time
-    message(paste("Date de fin de l'evaluation : ", end_time, sep = ""))
-    message(paste("Temps necessaire a l'evaluation : ", as.numeric(time_taken, units = "mins"), " minutes", sep = ""))
-
-    # Affichage des erreurs
-    if(length(err_simu) > 0){
-      warning(paste("Les simulations suivantes n'ont pas pu etre exploitees : ", paste(err_simu, collapse = ", "), ".", sep = ""))
-    }
-    # Output
-    return(list(be = x, err_simu = err_simu))
-  }
 )

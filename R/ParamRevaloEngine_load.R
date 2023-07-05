@@ -14,25 +14,28 @@
 ##' @export
 ##' @include ParamRevaloEngine_class.R PortFin_class.R
 
-setGeneric(name = "param_revalo_load", def = function(file_revalo_address){standardGeneric("param_revalo_load")})
+setGeneric(name = "param_revalo_load", def = function(file_revalo_address) {
+    standardGeneric("param_revalo_load")
+})
 setMethod(
     f = "param_revalo_load",
     signature = "character",
-    definition = function(file_revalo_address){
-        
+    definition = function(file_revalo_address) {
         # Lecture du fichier
         temp <- read.csv2(file_revalo_address)
-        
+
         # Tests
-        if (! all(! is.na(temp)))
+        if (!all(!is.na(temp))) {
             stop("[ParamRevalo - load] : Presence de NA dans le fichier d'input")
-        
+        }
+
         # Creation de l'objet
-        param_revalo  <- new("ParamRevaloEngine",
-                             taux_pb_fi   = temp[,"taux_pb_fi"],
-                             taux_pb_tech = temp[,"taux_pb_tech"],
-                             tx_marge_min = temp[,"tx_marge_min"])
-        
+        param_revalo <- new("ParamRevaloEngine",
+            taux_pb_fi   = temp[, "taux_pb_fi"],
+            taux_pb_tech = temp[, "taux_pb_tech"],
+            tx_marge_min = temp[, "tx_marge_min"]
+        )
+
         # Output
         return(param_revalo)
     }

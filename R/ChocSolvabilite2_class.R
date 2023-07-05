@@ -1,4 +1,3 @@
-
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #           Declarateur
 #----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,26 +53,29 @@
 setClass(
     Class = "ChocSolvabilite2",
     representation = representation(
-        scenario         = "character",
-        param_choc_mket  = "ParamChocMket",
+        scenario = "character",
+        param_choc_mket = "ParamChocMket",
         param_choc_sousc = "ParamChocSousc",
         matrice_choc_action = "matrix",
         matrice_choc_mket = "matrix",
         matrice_choc_sousc = "matrix",
-        matrice_choc_bscr = "matrix"),
-    validity = function (object){
+        matrice_choc_bscr = "matrix"
+    ),
+    validity = function(object) {
+        retval <- NULL
+        if (!validObject(object@param_choc_mket)) retval <- c(retval, "[ChocSolvabilite2] : Objet param_choc_mket non valide")
+        if (!validObject(object@param_choc_sousc)) retval <- c(retval, "[ChocSolvabilite2] : Objet param_choc_sousc non valide")
+        if (!is.character(object@scenario)) retval <- c(retval, "[ChocSolvabilite2] : Objet scenario non valide")
+        if (!is.character(object@matrice_choc_action)) retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_action non valide")
+        if (!is.character(object@matrice_choc_mket)) retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_mket non valide")
+        if (!is.character(object@matrice_choc_sousc)) retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_sousc non valide")
+        if (!is.character(object@matrice_choc_bscr)) retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_bscr non valide")
 
-      retval <- NULL
-      if(!validObject(object@param_choc_mket))      retval <- c(retval, "[ChocSolvabilite2] : Objet param_choc_mket non valide")
-      if(!validObject(object@param_choc_sousc))       retval <- c(retval, "[ChocSolvabilite2] : Objet param_choc_sousc non valide")
-      if(!is.character(object@scenario))       retval <- c(retval, "[ChocSolvabilite2] : Objet scenario non valide")
-      if(!is.character(object@matrice_choc_action))       retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_action non valide")
-      if(!is.character(object@matrice_choc_mket))       retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_mket non valide")
-      if(!is.character(object@matrice_choc_sousc))       retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_sousc non valide")
-      if(!is.character(object@matrice_choc_bscr))       retval <- c(retval, "[ChocSolvabilite2] : Objet matrice_choc_bscr non valide")
 
-
-      if (is.null(retval)) return (TRUE)
-      else return (retval)
+        if (is.null(retval)) {
+            return(TRUE)
+        } else {
+            return(retval)
+        }
     }
 )

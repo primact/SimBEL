@@ -13,20 +13,23 @@
 setMethod(
     f = "initialize",
     signature = "TabRetEuroRest",
-    definition = function(.Object, tab = list()){
-        if(!missing(tab)){
+    definition = function(.Object, tab = list()) {
+        if (!missing(tab)) {
             .Object@tab <- tab
             validObject(.Object)
-        }  else {
-            #Traitement du cas vide
-            .Object@tab <- list(num_mp = 0,
-                                prest = 0,
-                                pm_deb = 0,
-                                pm_fin = 0,
-                                bes_tx_cible = 0,
-                                nb_contr = 0,
-                                tx_cible = 0,
-                                pm_gar = 0)}
+        } else {
+            # Traitement du cas vide
+            .Object@tab <- list(
+                num_mp = 0,
+                prest = 0,
+                pm_deb = 0,
+                pm_fin = 0,
+                bes_tx_cible = 0,
+                nb_contr = 0,
+                tx_cible = 0,
+                pm_gar = 0
+            )
+        }
         return(.Object)
     }
 )
@@ -40,10 +43,12 @@ setMethod(
 setMethod(
     f = "[",
     signature = "TabRetEuroRest",
-    definition = function(x, i){
+    definition = function(x, i) {
         switch(EXPR = i,
-               "tab" = {return(x@tab)},
-               stop("Cet attribut n'existe pas!")
+            "tab" = {
+                return(x@tab)
+            },
+            stop("Cet attribut n'existe pas!")
         )
     }
 )
@@ -53,13 +58,13 @@ setMethod(
 setReplaceMethod(
     f = "[",
     signature = "TabRetEuroRest",
-    definition = function(x, i, value){
+    definition = function(x, i, value) {
         switch(EXPR = i,
-               "tab" = {x@tab <- value},
-               stop("Cet attribut n'existe pas!")
+            "tab" = {
+                x@tab <- value
+            },
+            stop("Cet attribut n'existe pas!")
         )
-        # validObject(x)
         return(x)
     }
 )
-

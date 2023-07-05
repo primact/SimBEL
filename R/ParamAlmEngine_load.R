@@ -4,7 +4,8 @@
 ##' Chargement des attributs d'un objet \code{ParamAlmEngine} a partir des donnees utilisateurs.
 ##'
 ##' \code{param_alm_engine_load} est la methode de chargement des attributs d'un objet \code{\link{ParamAlmEngine}}
-##' a partir des donnees de l'environnement utilisateur et d'un portefeuille financier de reference (charge par la fonction \code{\link{chargement_PortFin_reference}}.
+##' a partir des donnees de l'environnement utilisateur et d'un portefeuille financier de reference (charge par la fonction
+##' \code{\link{chargement_PortFin_reference}}.
 ##' @name param_alm_engine_load
 ##' @docType methods
 ##' @param file_alm_address un \code{character} contenant l'adresse exacte
@@ -15,27 +16,32 @@
 ##' @export
 ##' @include ParamAlmEngine_class.R PortFin_class.R
 
-setGeneric(name = "param_alm_engine_load", def = function(file_alm_address, ptf_fin_ref){standardGeneric("param_alm_engine_load")})
+setGeneric(name = "param_alm_engine_load", def = function(file_alm_address, ptf_fin_ref) {
+    standardGeneric("param_alm_engine_load")
+})
 setMethod(
     f = "param_alm_engine_load",
-    signature = c("character","PortFin"),
-    definition = function(file_alm_address, ptf_fin_ref){
-
+    signature = c("character", "PortFin"),
+    definition = function(file_alm_address, ptf_fin_ref) {
         # Lecture du fichier
-        temp          <- read.csv2(file_alm_address, colClasses = rep("numeric", 5))
+        temp <- read.csv2(file_alm_address, colClasses = rep("numeric", 5))
 
         # Tests
-        if (! all(! is.na(temp)))
+        if (!all(!is.na(temp))) {
             stop("[ParamAlmEngine - load] : Presence de NA dans le fichier d'input")
+        }
 
         # Creation de l'objet
-        param_alm     <- new("ParamAlmEngine",
-                             ptf_reference = ptf_fin_ref,
-                             alloc_cible   = c(temp[,"alloc_action"],
-                                               temp[,"alloc_immo"],
-                                               temp[,"alloc_oblig"],
-                                               temp[,"alloc_treso"]),
-                             seuil_realisation_PVL  = temp[,"seuil_realisation_PVL"])
+        param_alm <- new("ParamAlmEngine",
+            ptf_reference = ptf_fin_ref,
+            alloc_cible = c(
+                temp[, "alloc_action"],
+                temp[, "alloc_immo"],
+                temp[, "alloc_oblig"],
+                temp[, "alloc_treso"]
+            ),
+            seuil_realisation_PVL = temp[, "seuil_realisation_PVL"]
+        )
 
         # Output
         return(param_alm)

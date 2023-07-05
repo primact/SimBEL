@@ -16,24 +16,27 @@
 ##'  pour renseigner l'input.
 ##' @export
 ##' @include HypCanton_class.R
-setGeneric(name = "hyp_canton_load", def = function(file_hyp_canton_address) {standardGeneric("hyp_canton_load")})
+setGeneric(name = "hyp_canton_load", def = function(file_hyp_canton_address) {
+    standardGeneric("hyp_canton_load")
+})
 setMethod(
     f = "hyp_canton_load",
     signature = "character",
-    definition = function(file_hyp_canton_address){
-
+    definition = function(file_hyp_canton_address) {
         # Lecture du fichier
         temp <- read.csv2(file_hyp_canton_address, colClasses = c("numeric", "numeric", "character"))
 
         # Tests
-        if (! all(! is.na(temp)))
+        if (!all(!is.na(temp))) {
             stop("[HypCanton - load] : Presence de NA dans le fichier d'input")
+        }
 
         # Creation de l'objet
-        hyp_canton  <- new("HypCanton",
-                           tx_soc            = temp[,"tx_soc"],
-                           tx_import         = temp[,"tx_import"],
-                           method_taux_cible = as.character(temp[,"method_taux_cible"]))
+        hyp_canton <- new("HypCanton",
+            tx_soc            = temp[, "tx_soc"],
+            tx_import         = temp[, "tx_import"],
+            method_taux_cible = as.character(temp[, "method_taux_cible"])
+        )
 
         # Output
         return(hyp_canton)

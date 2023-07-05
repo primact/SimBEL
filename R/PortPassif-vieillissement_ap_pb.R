@@ -25,12 +25,13 @@
 ##' @include PortPassif-class.R
 ##'
 
-setGeneric(name = "vieillissment_ap_pb", def = function(x, rev_nette_alloue, rev_brute_alloue_gar, tx_soc){standardGeneric("vieillissment_ap_pb")})
+setGeneric(name = "vieillissment_ap_pb", def = function(x, rev_nette_alloue, rev_brute_alloue_gar, tx_soc) {
+    standardGeneric("vieillissment_ap_pb")
+})
 setMethod(
     f = "vieillissment_ap_pb",
     signature = c(x = "PortPassif", rev_nette_alloue = "numeric", rev_brute_alloue_gar = "numeric", tx_soc = "numeric"),
-    def = function(x, rev_nette_alloue, rev_brute_alloue_gar, tx_soc){
-
+    def = function(x, rev_nette_alloue, rev_brute_alloue_gar, tx_soc) {
         # Initialisation des listes de resultats
         list_res_stock_agg <- NULL # Liste des stocks aggregees par produit
         list_res_flux_agg <- NULL # Liste des flux aggregees par produit
@@ -42,8 +43,7 @@ setMethod(
         # Boucle sur les types de produits
         k <- 0L # Compteur de boucle
 
-        for(i in 1:nb_type) {
-
+        for (i in 1:nb_type) {
             # Liste des produits
             ncpi <- x@names_class_prod[i] # Nom du type i
             list_prodi <- x[ncpi] # Liste de produits pour le type i
@@ -51,7 +51,7 @@ setMethod(
             noms_prodi <- names(list_prodi)
 
             # Boucle sur les produits de type i
-            for(j in 1:longi) {
+            for (j in 1:longi) {
                 k <- k + 1L # Compteur pour les listes de stockage
                 # Nom du produit
                 nom_prod <- noms_prodi[j]
@@ -62,27 +62,30 @@ setMethod(
 
                 # Calcul de la revalorisation par produit et vieillissment des passifs avec mise a jour
                 if (type_prodi == "EpEuroInd") {
-
                     # Calcul de la revalorisation par produit
-                    revalo_prod <- calc_revalo_pm(x = prodi, y = list(rev_net_alloue = .subset2(rev_nette_alloue, k),
-                                                                      rev_brute_alloue_gar = .subset2(rev_brute_alloue_gar, k),
-                                                                      tx_soc = tx_soc))
+                    revalo_prod <- calc_revalo_pm(x = prodi, y = list(
+                        rev_net_alloue = .subset2(rev_nette_alloue, k),
+                        rev_brute_alloue_gar = .subset2(rev_brute_alloue_gar, k),
+                        tx_soc = tx_soc
+                    ))
                     # Vieilli les passifs et mise a jour
-                    list_prodi[[j]] <- vieilli_mp(x = prodi, revalo_prod[["stock"]][["pm_fin_ap_pb"]],
-                                                  revalo_prod[["stock"]][["pm_gar_ap_pb"]],
-                                                  revalo_prod[["tx_rev_net"]], x@annee)
-
-                }
-                else if (type_prodi == "RetraiteEuroRest"){
-
+                    list_prodi[[j]] <- vieilli_mp(
+                        x = prodi, revalo_prod[["stock"]][["pm_fin_ap_pb"]],
+                        revalo_prod[["stock"]][["pm_gar_ap_pb"]],
+                        revalo_prod[["tx_rev_net"]], x@annee
+                    )
+                } else if (type_prodi == "RetraiteEuroRest") {
                     # Calcul de la revalorisation par produit
-                    revalo_prod <- calc_revalo_pm(x = prodi, y = list(rev_net_alloue = .subset2(rev_nette_alloue, k),
-                                                                      rev_brute_alloue_gar = .subset2(rev_brute_alloue_gar, k)))
+                    revalo_prod <- calc_revalo_pm(x = prodi, y = list(
+                        rev_net_alloue = .subset2(rev_nette_alloue, k),
+                        rev_brute_alloue_gar = .subset2(rev_brute_alloue_gar, k)
+                    ))
                     # Vieilli les passifs et mise a jour
-                    list_prodi[[j]] <- vieilli_mp(x = prodi, revalo_prod[["stock"]][["pm_fin_ap_pb"]],
-                                                  revalo_prod[["stock"]][["pm_gar_ap_pb"]],
-                                                  revalo_prod[["tx_rev_net"]], x@annee)
-
+                    list_prodi[[j]] <- vieilli_mp(
+                        x = prodi, revalo_prod[["stock"]][["pm_fin_ap_pb"]],
+                        revalo_prod[["stock"]][["pm_gar_ap_pb"]],
+                        revalo_prod[["tx_rev_net"]], x@annee
+                    )
                 } else {
                     stop("[PortPassif : vieillissement_ap_pb] : La liste de produit comporte au moins un element non instancie.")
                 }
@@ -103,21 +106,21 @@ setMethod(
 
         # Mise au format matrice des listes de flug_agg et stock_agg
         len_index <- length(index)
-        flux_agg = matrix(unlist(do.call("rbind",list_res_flux_agg)), len_index, byrow = F)
-        stock_agg = matrix(unlist(do.call("rbind",list_res_stock_agg)), len_index, byrow = F)
+        flux_agg <- matrix(unlist(do.call("rbind", list_res_flux_agg)), len_index, byrow = FALSE)
+        stock_agg <- matrix(unlist(do.call("rbind", list_res_stock_agg)), len_index, byrow = FALSE)
 
         # Nom des colonnes matrices
         colnames(flux_agg) <- names(.subset2(list_res_flux_agg, 1L))
         colnames(stock_agg) <- names(.subset2(list_res_stock_agg, 1L))
 
         # Stockage dans une liste generale en aggregeant par produit
-        res <- list(ptf = x,
-                    nom_produit = index,
-                    flux_agg = flux_agg,
-                    stock_agg = stock_agg
+        res <- list(
+            ptf = x,
+            nom_produit = index,
+            flux_agg = flux_agg,
+            stock_agg = stock_agg
         )
         # output
         return(res)
-
     }
 )

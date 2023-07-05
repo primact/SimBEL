@@ -5,11 +5,13 @@
 setMethod(
     f = "[",
     signature = "Immo",
-    definition = function(x,i){
+    definition = function(x, i) {
         switch(EXPR = i,
-               # Data frame Financier
-               "ptf_immo" = {return(x@ptf_immo)},
-               stop("Cet attribut n'existe pas!")
+            # Data frame Financier
+            "ptf_immo" = {
+                return(x@ptf_immo)
+            },
+            stop("Cet attribut n'existe pas!")
         )
     }
 )
@@ -18,10 +20,12 @@ setMethod(
 setReplaceMethod(
     f = "[",
     signature = "Immo",
-    definition = function(x,i,value){
+    definition = function(x, i, value) {
         switch(EXPR = i,
-               "ptf_immo" = {x@ptf_immo <- value},
-               stop("Cet attribut n'existe pas!")
+            "ptf_immo" = {
+                x@ptf_immo <- value
+            },
+            stop("Cet attribut n'existe pas!")
         )
         validObject(x)
         return(x)

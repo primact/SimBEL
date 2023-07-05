@@ -16,18 +16,19 @@
 ##' @export
 ##' @include FraisFin_class.R
 
-setGeneric(name = "calc_frais_fin", def = function(x, vm_moy, coef_inflation){standardGeneric("calc_frais_fin")})
+setGeneric(name = "calc_frais_fin", def = function(x, vm_moy, coef_inflation) {
+    standardGeneric("calc_frais_fin")
+})
 setMethod(
     f = "calc_frais_fin",
-    signature = c(x = "FraisFin", vm_moy = "numeric", coef_inflation ="numeric"),
-    definition = function(x, vm_moy, coef_inflation){
-        
+    signature = c(x = "FraisFin", vm_moy = "numeric", coef_inflation = "numeric"),
+    definition = function(x, vm_moy, coef_inflation) {
         # Verification des inputs
         len_inflation <- length(coef_inflation)
         if (length(vm_moy) != len_inflation | len_inflation != 1L) stop("[Frais : calc_frais] : Les inputs ne sont pas de la meme dimension \n")
-        
+
         # Calcul des frais
         ind_inflation <- x@indicatrice_inflation
-        return (x@tx_chargement * vm_moy * ((! ind_inflation) + coef_inflation * ind_inflation))
+        return(x@tx_chargement * vm_moy * ((!ind_inflation) + coef_inflation * ind_inflation))
     }
 )

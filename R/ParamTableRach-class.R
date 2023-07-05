@@ -21,38 +21,42 @@
 
 setClass(
     Class = "ParamTableRach",
-    slots = c(age_min = "integer",
-              age_max = "integer",
-              anc_min = "integer",
-              anc_max = "integer",
-              table = "data.frame"),
-    validity = function (object){
-        
+    slots = c(
+        age_min = "integer",
+        age_max = "integer",
+        anc_min = "integer",
+        anc_max = "integer",
+        table = "data.frame"
+    ),
+    validity = function(object) {
         # liste permettant de stocker les erreurs de chargement
         retval <- NULL
         nb_col_attentu <- 3L
-        
+
         # Extraction table
         table <- object@table
-        
-        #Verification du nombre de colonnes
-        if(dim(table)[2L]!=nb_col_attentu) retval <- c(retval, "[ParamTableRach] : Nombre d'attributs incorrect /n")
-        
+
+        # Verification du nombre de colonnes
+        if (dim(table)[2L] != nb_col_attentu) retval <- c(retval, "[ParamTableRach] : Nombre d'attributs incorrect /n")
+
         # Verification du type des colonnes
-        if (!is.integer(table[,1L]))  retval <- c(retval, "[ParamTableRach] : anc n'est pas entier/n")
-        if (!is.integer(table[,2L]))  retval <- c(retval, "[ParamTableRach] : age n'est pas entier/n")
-        if (!is.double(table[,3L]))   retval <- c(retval, "[ParamTableRach] : taux_rachat n'est pas un double /n")
-        
-        if (sum(table[,1L] < 0) != 0L)  retval <- c(retval, "[ParamTableRach] : anc < 0 /n")
-        if (sum(table[,2L] <= 0) != 0L) retval <- c(retval, "[ParamTableRach] : age <= 0 /n")
-        if (sum(table[,3L] < 0) != 0L)  retval <- c(retval, "[ParamTableRach] : taux_rachat < 0 /n")
-        
+        if (!is.integer(table[, 1L])) retval <- c(retval, "[ParamTableRach] : anc n'est pas entier/n")
+        if (!is.integer(table[, 2L])) retval <- c(retval, "[ParamTableRach] : age n'est pas entier/n")
+        if (!is.double(table[, 3L])) retval <- c(retval, "[ParamTableRach] : taux_rachat n'est pas un double /n")
+
+        if (sum(table[, 1L] < 0) != 0L) retval <- c(retval, "[ParamTableRach] : anc < 0 /n")
+        if (sum(table[, 2L] <= 0) != 0L) retval <- c(retval, "[ParamTableRach] : age <= 0 /n")
+        if (sum(table[, 3L] < 0) != 0L) retval <- c(retval, "[ParamTableRach] : taux_rachat < 0 /n")
+
         # Verification du nom des colonnes
-        if(sum(colnames(table) == c("anc","age","taux_rachat")) != 3L)
+        if (sum(colnames(table) == c("anc", "age", "taux_rachat")) != 3L) {
             retval <- c(retval, "[ParamTableRach] : Noms de colonne incorrect/n")
-        
-        if (is.null(retval)) 
-            return (TRUE)
-        else 
-            return (retval)
-    })
+        }
+
+        if (is.null(retval)) {
+            return(TRUE)
+        } else {
+            return(retval)
+        }
+    }
+)

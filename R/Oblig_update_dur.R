@@ -15,19 +15,22 @@
 ##' @export
 ##' @include Oblig_class.R
 
-setGeneric(name = "update_dur_oblig", def = function(x,duration){standardGeneric("update_dur_oblig")})
+setGeneric(name = "update_dur_oblig", def = function(x, duration) {
+    standardGeneric("update_dur_oblig")
+})
 setMethod(
     f = "update_dur_oblig",
     signature = c(x = "Oblig", duration = "numeric"),
-    definition = function(x, duration){
-        
+    definition = function(x, duration) {
         # Verification des inputs
         if (nrow(x@ptf_oblig) != length(duration)) stop("[Oblig : update_oblig] : Les inputs ne sont pas de memes dimensions")
-        if(sum(duration < 0) > 0) stop("[Oblig : update_dur_oblig] :  Le vecteur de duration initialement entre ne peut contenir de valeurs negatives. \n")
-        
+        if (sum(duration < 0) > 0) {
+            stop("[Oblig : update_dur_oblig] :  Le vecteur de duration initialement entre ne peut contenir de valeurs negatives. \n")
+        }
+
         # Mise a jour des durations du PTF
         x@ptf_oblig$duration <- duration
-        
+
         # Output
         return(x)
     }

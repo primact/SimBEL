@@ -15,12 +15,13 @@
 ##' @export
 ##' @include PortFin_class.R
 
-setGeneric(name = "calc_resultat_fin", def = function(revenu, produit, frais_fin, var_rc){standardGeneric("calc_resultat_fin")})
+setGeneric(name = "calc_resultat_fin", def = function(revenu, produit, frais_fin, var_rc) {
+    standardGeneric("calc_resultat_fin")
+})
 setMethod(
     f = "calc_resultat_fin",
     signature = c(revenu = "numeric", produit = "numeric", frais_fin = "numeric", var_rc = "numeric"),
-    definition = function(revenu, produit, frais_fin, var_rc){
-
+    definition = function(revenu, produit, frais_fin, var_rc) {
         # Calcul du resultat financier
         res <- revenu + produit - frais_fin - var_rc
 
@@ -28,4 +29,3 @@ setMethod(
         return(res)
     }
 )
-

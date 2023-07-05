@@ -13,25 +13,26 @@
 ##' @export
 ##' @include Oblig_class.R
 
-setGeneric(name = "calc_pmvl_oblig", def = function(x){standardGeneric("calc_pmvl_oblig")})
+setGeneric(name = "calc_pmvl_oblig", def = function(x) {
+    standardGeneric("calc_pmvl_oblig")
+})
 setMethod(
     f = "calc_pmvl_oblig",
     signature = "Oblig",
-    definition = function(x){
-        
+    definition = function(x) {
         # Donnees
-        ptf_oblig  <- x@ptf_oblig
-        nom_table  <- names(ptf_oblig)
+        ptf_oblig <- x@ptf_oblig
+        nom_table <- names(ptf_oblig)
         val_marche <- which(nom_table == "val_marche")
-        val_nc     <- which(nom_table == "val_nc")
+        val_nc <- which(nom_table == "val_nc")
 
         # Plus ou moins value latentes
-        pmvl <-.subset2(ptf_oblig, val_marche) - .subset2(ptf_oblig, val_nc)
+        pmvl <- .subset2(ptf_oblig, val_marche) - .subset2(ptf_oblig, val_nc)
 
         # Calcul des plus et moins values
-        pvl <- sum( pmvl * (pmvl > 0))
-        mvl <- sum( pmvl * (pmvl <= 0))
-        
+        pvl <- sum(pmvl * (pmvl > 0))
+        mvl <- sum(pmvl * (pmvl <= 0))
+
         # Ouput
         return(list(pvl = pvl, mvl = mvl))
     }
