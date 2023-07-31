@@ -82,6 +82,7 @@ Collate:
     'Be_internal.R'
     'Canton_calc_fin_proj.R'
     'Canton_calc_result_technique_ap_pb.R'
+    'Canton_calc_res_ana.R'
     'Canton_data.R'
     'Canton_internal.R'
     'Canton_proj_an.R'
