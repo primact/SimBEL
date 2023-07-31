@@ -48,18 +48,19 @@
 ##' @export
 ##' @include Canton_class.R
 ##'
-setGeneric(name = "proj_an", def = function(x, annee_fin, pre_on){standardGeneric("proj_an")})
+setGeneric(name = "proj_an", def = function(x, annee_fin, pre_on) {
+    standardGeneric("proj_an")
+})
 setMethod(
     f = "proj_an",
     signature = c(x = "Canton", annee_fin = "integer", pre_on = "logical"),
-    definition = function(x, annee_fin, pre_on){
-
+    definition = function(x, annee_fin, pre_on) {
         #---------------------------------------------------------------
         # Etape 1 : Mise a jour des annees de projection
         #---------------------------------------------------------------
         x@annee <- x@annee + 1L
 
-        annee <-  x@annee
+        annee <- x@annee
 
         #---------------------------------------------------------------
         # Etape 2 : variables economiques utilisees au passif
@@ -83,25 +84,25 @@ setMethod(
         # Etape 4 : Allocation des actifs pour faire face a des possibles rachats massifs
         #---------------------------------------------------------------
         #  Mise a jour de la tresorie et de l'actif suite a un rachat massif
-        if(passif_av_pb[["flux_debut"]] != 0){
+        if (passif_av_pb[["flux_debut"]] != 0) {
+            x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso, passif_av_pb[["flux_debut"]])
 
-          x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso , passif_av_pb[["flux_debut"]])
+            # Gestion de l'anomalie : valeur de marche des actifs negatives
+            if (.subset2(print_alloc(x@ptf_fin), 5L) < 0) {
+                warning(paste("Attention, la valeur de marche des actifs est negative pour
+                        la simulation ", x@mp_esg@num_traj, " en annee ", annee, ".", sep = ""))
 
-          # Gestion de l'anomalie : valeur de marche des actifs negatives
-          if(.subset2(print_alloc(x@ptf_fin), 5L) < 0){
-            warning(paste("Attention, la valeur de marche des actifs est negative pour
-                        la simulation ", x@mp_esg@num_traj, " en annee ", annee,".", sep = ""))
+                # Dans le cas d'un actif negatif, la simulation est arretee.
+                return(FALSE)
+            }
 
-            # Dans le cas d'un actif negatif, la simulation est arretee.
-            return(FALSE)
-          }
-
-          actif_realloc_mass <- reallocate(x@ptf_fin, x@param_alm@ptf_reference, x@param_alm@alloc_cible)
-          x@ptf_fin <- actif_realloc_mass[["portFin"]]
-          pmvr_mass <- list(oblig = actif_realloc_mass[["pmvr_oblig"]],
-                       action = actif_realloc_mass[["pmvr_action"]],
-                       immo = actif_realloc_mass[["pmvr_immo"]])
-
+            actif_realloc_mass <- reallocate(x@ptf_fin, x@param_alm@ptf_reference, x@param_alm@alloc_cible)
+            x@ptf_fin <- actif_realloc_mass[["portFin"]]
+            pmvr_mass <- list(
+                oblig = actif_realloc_mass[["pmvr_oblig"]],
+                action = actif_realloc_mass[["pmvr_action"]],
+                immo = actif_realloc_mass[["pmvr_immo"]]
+            )
         }
 
         #---------------------------------------------------------------
@@ -125,12 +126,12 @@ setMethod(
         # Calcul des valeurs moyennes
         alloc_cour <- print_alloc(x@ptf_fin)
         # Valeur moyenne des placements en valeur de marche
-        plac_moy_vm <- (.subset2(alloc_cour, 5L) + sum(unlist(x@ptf_fin@vm_vnc_precedent[["vm"]]))) /2
+        plac_moy_vm <- (.subset2(alloc_cour, 5L) + sum(unlist(x@ptf_fin@vm_vnc_precedent[["vm"]]))) / 2
 
         frais_fin <- calc_frais_fin(x@ptf_fin@frais_fin, plac_moy_vm, coef_inf)
 
         #  Mise a jour de la tresorie
-        x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso , - frais_fin)
+        x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso, -frais_fin)
 
         #---------------------------------------------------------------
         # Etape 7 : Re-allocation des actifs et mise a jour de la PRE et de la RC
@@ -138,9 +139,9 @@ setMethod(
         # Reallocation a l'allocation cible
 
         # Gestion de l'anomalie : valeur de marche des actifs negatives
-        if(.subset2(print_alloc(x@ptf_fin), 5L) < 0){
+        if (.subset2(print_alloc(x@ptf_fin), 5L) < 0) {
             warning(paste("Attention, la valeur de marche des actifs est negative pour
-                    la simulation ", x@mp_esg@num_traj, " en annee ", annee,".", sep = ""))
+                    la simulation ", x@mp_esg@num_traj, " en annee ", annee, ".", sep = ""))
 
             # Dans le cas d'un actif negatif, la simulation est arretee.
             return(FALSE)
@@ -148,17 +149,20 @@ setMethod(
 
         actif_realloc <- reallocate(x@ptf_fin, x@param_alm@ptf_reference, x@param_alm@alloc_cible)
         x@ptf_fin <- actif_realloc[["portFin"]]
-        pmvr <- list(oblig = actif_realloc[["pmvr_oblig"]],
-                     action = actif_realloc[["pmvr_action"]],
-                     immo = actif_realloc[["pmvr_immo"]])
+        pmvr <- list(
+            oblig = actif_realloc[["pmvr_oblig"]],
+            action = actif_realloc[["pmvr_action"]],
+            immo = actif_realloc[["pmvr_immo"]]
+        )
 
         #  Ajout des pmvr obtenues suite a un rachat massif
-        if(passif_av_pb[["flux_debut"]] != 0){
-          pmvr <- list(oblig = actif_realloc[["pmvr_oblig"]] + pmvr_mass$oblig,
-                       action = actif_realloc[["pmvr_action"]] + pmvr_mass$action,
-                       immo = actif_realloc[["pmvr_immo"]] + pmvr_mass$immo)
-
-          }
+        if (passif_av_pb[["flux_debut"]] != 0) {
+            pmvr <- list(
+                oblig = actif_realloc[["pmvr_oblig"]] + pmvr_mass$oblig,
+                action = actif_realloc[["pmvr_action"]] + pmvr_mass$action,
+                immo = actif_realloc[["pmvr_immo"]] + pmvr_mass$immo
+            )
+        }
 
         #---------------------------------------------------------------
         # Etape 8 : Calcul du resultat technique
@@ -172,8 +176,10 @@ setMethod(
         #---------------------------------------------------------------
 
         # Evaluation du resultat financier
-        resultat_fin <- calc_resultat_fin(revenu_fin + var_vnc_oblig, sum(unlist(pmvr)),
-                                          frais_fin, actif_realloc[["var_rc"]])
+        resultat_fin <- calc_resultat_fin(
+            revenu_fin + var_vnc_oblig, sum(unlist(pmvr)),
+            frais_fin, actif_realloc[["var_rc"]]
+        )
 
         # Calcul du TRA
         tra <- calc_tra(actif_realloc[["plac_moy_vnc"]], resultat_fin)
@@ -193,16 +199,18 @@ setMethod(
         #---------------------------------------------------------------
 
         # Evaluation du passif vieilli d'un an apres pb
-        passif_ap_pb <- vieillissment_ap_pb(x@ptf_passif, result_revalo[["add_rev_nette_stock"]],
-                                            result_revalo[["conso_ppb_init"]],
-                                            x@hyp_canton@tx_soc)
+        passif_ap_pb <- vieillissment_ap_pb(
+            x@ptf_passif, result_revalo[["add_rev_nette_stock"]],
+            result_revalo[["conso_ppb_init"]],
+            x@hyp_canton@tx_soc
+        )
         # Mise a jour des passifs a fin d'annee
         x@ptf_passif <- passif_ap_pb[["ptf"]]
 
         # Allocation des frais financiers par produit
         pm_moy <- passif_av_pb[["result_av_pb"]][["stock_agg"]][, "pm_moy"]
         sum_pm_moy <- sum(pm_moy)
-        if(sum_pm_moy != 0) {
+        if (sum_pm_moy != 0) {
             coef_alloc <- pm_moy / sum_pm_moy
             # Les frais financiers sont mis a l'echelle des passifs et alloues
             frais_fin_prod <- frais_fin * (sum_pm_moy + x@ppb["ppb_debut"]) / actif_realloc[["plac_moy_vnc"]] * coef_alloc
@@ -212,7 +220,7 @@ setMethod(
 
         # Frais financier associes au autres passifs
         result_autres_passifs <- passif_av_pb[["result_autres_passifs"]]
-        frais_fin_hors_model <- frais_fin * ((result_autres_passifs$pm_fin + result_autres_passifs$pm_deb ) / 2) /
+        frais_fin_hors_model <- frais_fin * ((result_autres_passifs$pm_fin + result_autres_passifs$pm_deb) / 2) /
             actif_realloc[["plac_moy_vnc"]]
 
         #---------------------------------------------------------------
@@ -228,9 +236,9 @@ setMethod(
 
         # Re-evaluation et mise a jour de la PRE
         res_pre <- calc_PRE(x@ptf_fin@pre, x@ptf_fin@pvl_action + x@ptf_fin@mvl_action +
-                                x@ptf_fin@pvl_immo + x@ptf_fin@mvl_immo)
+            x@ptf_fin@pvl_immo + x@ptf_fin@mvl_immo)
         # Mise a jour de la valeur courante de la PRE
-        x@ptf_fin["pre"] <-  do_update_PRE_val_courante(x@ptf_fin@pre, res_pre[["pre_courante"]])
+        x@ptf_fin["pre"] <- do_update_PRE_val_courante(x@ptf_fin@pre, res_pre[["pre_courante"]])
 
         #---------------------------------------------------------------
         # Etape 12 : Mise a jour des resultats financier et technique
@@ -254,7 +262,7 @@ setMethod(
         #---------------------------------------------------------------
 
         #  Mise a jour de la tresorie : prelevement sociaux sur stock
-        x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso , - sum(passif_ap_pb[["flux_agg"]][,"soc_stock_ap_pb"]))
+        x@ptf_fin@ptf_treso <- update_treso(x@ptf_fin@ptf_treso, -sum(passif_ap_pb[["flux_agg"]][, "soc_stock_ap_pb"]))
         # Mise a jour des montant totaux de VM et de VNC des actifs
         x@ptf_fin <- do_update_vm_vnc_precedent(x@ptf_fin)
 
@@ -262,10 +270,10 @@ setMethod(
         x@ppb <- vieillissement_ppb(x@ppb)
 
         # PRE, RC
-        x@ptf_fin@rc <-  do_update_RC_val_debut(x@ptf_fin@rc, x@ptf_fin@rc@val_courante)
-        x@ptf_fin["pre"] <-  do_update_PRE_val_debut(x@ptf_fin@pre, x@ptf_fin@pre@val_courante) # On conserve la validation car pas fait dans l'objet
+        x@ptf_fin@rc <- do_update_RC_val_debut(x@ptf_fin@rc, x@ptf_fin@rc@val_courante)
+        x@ptf_fin["pre"] <- do_update_PRE_val_debut(x@ptf_fin@pre, x@ptf_fin@pre@val_courante) # On conserve la validation car pas fait dans l'objet
         # PGG, PSAP
-        x@ptf_passif["autres_reserves"] <-  init_debut_pgg_psap(x@ptf_passif@autres_reserves) # On conserve la validation car pas fait dans l'objet
+        x@ptf_passif["autres_reserves"] <- init_debut_pgg_psap(x@ptf_passif@autres_reserves) # On conserve la validation car pas fait dans l'objet
 
         # # Controle que l'actif en valeur de marche n'est pas negatif
         # if(.subset2(print_alloc(x@ptf_fin), 1)[5] < 0)
@@ -274,10 +282,12 @@ setMethod(
         #---------------------------------------------------------------
         # Etape 14 : Gestion des fins de projection
         #---------------------------------------------------------------
-        if(annee == annee_fin){
+        if (annee == annee_fin) {
             # Calcul des fins de projection
-            fin_proj <- calc_fin_proj(x, resultat_fin, resultat_tech, passif_ap_pb[["stock_agg"]][,"pm_fin_ap_pb"],
-                                      result_revalo[["tx_pb"]], result_revalo[["tx_enc_moy"]])
+            fin_proj <- calc_fin_proj(
+                x, resultat_fin, resultat_tech, passif_ap_pb[["stock_agg"]][, "pm_fin_ap_pb"],
+                result_revalo[["tx_pb"]], result_revalo[["tx_enc_moy"]]
+            )
 
             # Extraction des resultats
             flux_fin_passif <- fin_proj[["flux_fin_passif"]]
@@ -286,9 +296,8 @@ setMethod(
             result_brut <- fin_proj[["result_brut"]]
             result_net <- fin_proj[["result_net"]]
             impot <- fin_proj[["impot"]]
-
         } else { # Sinon le flux de fin est nul
-            flux_fin_passif = rep(0, length(passif_av_pb[["nom_produit"]]))
+            flux_fin_passif <- rep(0, length(passif_av_pb[["nom_produit"]]))
         }
 
         #---------------------------------------------------------------
@@ -300,82 +309,114 @@ setMethod(
 
         # Reprendre les flux de resultats
         flux_produit <- cbind(passif_av_pb[["result_av_pb"]][["flux_agg"]],
-                              passif_ap_pb[["flux_agg"]], frais_fin = frais_fin_prod)
+            passif_ap_pb[["flux_agg"]],
+            frais_fin = frais_fin_prod
+        )
 
-        stock_produit <- cbind(passif_av_pb[["result_av_pb"]][["stock_agg"]],
-                               passif_ap_pb[["stock_agg"]])
+        stock_produit <- cbind(
+            passif_av_pb[["result_av_pb"]][["stock_agg"]],
+            passif_ap_pb[["stock_agg"]]
+        )
 
         # Reprendre les flux de resultats hors models
         hors_model <- passif_av_pb[["result_autres_passifs"]]
 
-        fin <- cbind(melt(flux_fin_passif, value.name = "flux_fin_passif"),
-                     melt(result_revalo[["ppb8_ind"]], value.name = "ppb8"),
-                     melt(result_revalo[["conso_ppb_init"]], value.name = "conso_ppb_init"))
+        fin <- cbind(
+            melt(flux_fin_passif, value.name = "flux_fin_passif"),
+            melt(result_revalo[["ppb8_ind"]], value.name = "ppb8"),
+            melt(result_revalo[["conso_ppb_init"]], value.name = "conso_ppb_init")
+        )
 
 
-        output_produit <- list(flux_produit  = flux_produit,
-                               stock_produit = stock_produit,
-                               fin           = fin,
-                               hors_model    = hors_model)
+        output_produit <- list(
+            flux_produit = flux_produit,
+            stock_produit = stock_produit,
+            fin = fin,
+            hors_model = hors_model
+        )
 
-        output_be <- list(prime = c(flux_produit[, "pri_brut"], hors_model$prime),
-                          prestation = c(flux_produit[, "prest"] +
-                                             flux_produit[, "rev_prest_nette"] -
-                                             flux_produit[,"rach_charg"] +
-                                             flux_produit[,"soc_stock_ap_pb"] +
-                                             flux_fin_passif, hors_model$prestation),
-                          prestation_fdb = c(flux_produit[, "prest_fdb"], 0),
-                          frais = c(flux_produit[,"frais_var_prime"] +
-                                        flux_produit[,"frais_fixe_prime"] +
-                                        flux_produit[,"frais_var_prest"] +
-                                        flux_produit[,"frais_fixe_prest"] +
-                                        flux_produit[,"frais_var_enc"] +
-                                        flux_produit[,"frais_fixe_enc"] +
-                                        flux_produit[,"frais_fin"], hors_model$frais + frais_fin_hors_model))
+        output_be <- list(
+            prime = c(flux_produit[, "pri_brut"], hors_model$prime),
+            prestation = c(flux_produit[, "prest"] +
+                flux_produit[, "rev_prest_nette"] -
+                flux_produit[, "rach_charg"] +
+                flux_produit[, "soc_stock_ap_pb"] +
+                flux_fin_passif, hors_model$prestation),
+            prestation_fdb = c(flux_produit[, "prest_fdb"], 0),
+            frais = c(flux_produit[, "frais_var_prime"] +
+                flux_produit[, "frais_fixe_prime"] +
+                flux_produit[, "frais_var_prest"] +
+                flux_produit[, "frais_fixe_prest"] +
+                flux_produit[, "frais_var_enc"] +
+                flux_produit[, "frais_fixe_enc"] +
+                flux_produit[, "frais_fin"], hors_model$frais + frais_fin_hors_model)
+        )
 
 
         #---------------------------------------------------------------
         # Etape 16 : Creation de listes stockant les flux des actifs
         #---------------------------------------------------------------
 
-        flux_ptf_fin <- list(action = cbind(annee = annee, actif = "Action", x@ptf_fin@ptf_action@ptf_action),
-                             immo   = cbind(annee = annee, actif = "Immobilier", x@ptf_fin@ptf_immo@ptf_immo),
-                             oblig  = cbind(annee = annee, actif = "Obligation", x@ptf_fin@ptf_oblig@ptf_oblig),
-                             treso  = cbind(annee = annee, actif = "Tresorerie", x@ptf_fin@ptf_treso@ptf_treso))
+        flux_ptf_fin <- list(
+            action = cbind(annee = annee, actif = "Action", x@ptf_fin@ptf_action@ptf_action),
+            immo = cbind(annee = annee, actif = "Immobilier", x@ptf_fin@ptf_immo@ptf_immo),
+            oblig = cbind(annee = annee, actif = "Obligation", x@ptf_fin@ptf_oblig@ptf_oblig),
+            treso = cbind(annee = annee, actif = "Tresorerie", x@ptf_fin@ptf_treso@ptf_treso)
+        )
 
-        flux_fin <- data.frame(annee = annee, revenu_oblig = revenu_fin_det[["oblig"]],  revenu_action = revenu_fin_det[["action"]],
-                               revenu_immo = revenu_fin_det[["immo"]], var_vnc_oblig = var_vnc_oblig,
-                               pmvr_oblig = pmvr[["oblig"]],  pmvr_action = pmvr[["action"]],  pmvr_immo = pmvr[["immo"]],
-                               frais_fin = frais_fin, var_rc = actif_realloc[["var_rc"]])
+        flux_fin <- data.frame(
+            annee = annee, revenu_oblig = revenu_fin_det[["oblig"]], revenu_action = revenu_fin_det[["action"]],
+            revenu_immo = revenu_fin_det[["immo"]], var_vnc_oblig = var_vnc_oblig,
+            pmvr_oblig = pmvr[["oblig"]], pmvr_action = pmvr[["action"]], pmvr_immo = pmvr[["immo"]],
+            frais_fin = frais_fin, var_rc = actif_realloc[["var_rc"]]
+        )
 
 
         #---------------------------------------------------------------
         # Etape 17 : Creation du DF stockant la PB
         #---------------------------------------------------------------
 
-        output_pb <- data.frame(annee = annee,
-                                ppb8 = sum(result_revalo[["ppb8_ind"]]),
-                                conso_ppb_init = sum(result_revalo[["conso_ppb_init"]]),
-                                stock_ppb  = result_revalo[["pb_attrib"]][["stock_ppb"]],
-                                tot_pb_rep = result_revalo[["pb_attrib"]][["pb_rep"]],
-                                tot_pb_dot = result_revalo[["pb_attrib"]][["pb_dot"]])
+        output_pb <- data.frame(
+            annee = annee,
+            ppb8 = sum(result_revalo[["ppb8_ind"]]),
+            conso_ppb_init = sum(result_revalo[["conso_ppb_init"]]),
+            stock_ppb = result_revalo[["pb_attrib"]][["stock_ppb"]],
+            tot_pb_rep = result_revalo[["pb_attrib"]][["pb_rep"]],
+            tot_pb_dot = result_revalo[["pb_attrib"]][["pb_dot"]]
+        )
 
         # validation de l'objet
         # validObject(x)
 
+        #---------------------------------------------------------------
+        # Etape 18 : Compte de résultat analytique
+        #---------------------------------------------------------------
+
+        cdr <- calc_res_ana(
+            passif_av_pb = passif_av_pb,
+            passif_ap_pb = passif_ap_pb,
+            resultat_fin = resultat_fin,
+            ppb = x@ppb,
+            result_revalo = result_revalo,
+            var_pre = res_pre[["var_pre"]]
+        )
+
         # Output
-        return(list(canton         = x,
-                    annee          = annee,
-                    nom_produit    = c(nom_produits, "hors_model"),
-                    output_produit = output_produit,
-                    output_be      = output_be,
-                    output_pb      = output_pb,
-                    flux_ptf_fin   = flux_ptf_fin,
-                    flux_fin       = flux_fin,
-                    result_tech    = resultat_tech,
-                    result_fin     = resultat_fin,
-                    tra            = tra,
-                    result_brut    = result_brut,
-                    result_net     = result_net))
+        return(list(
+            canton = x,
+            annee = annee,
+            nom_produit = c(nom_produits, "hors_model"),
+            output_produit = output_produit,
+            output_be = output_be,
+            output_pb = output_pb,
+            flux_ptf_fin = flux_ptf_fin,
+            flux_fin = flux_fin,
+            result_tech = resultat_tech,
+            result_fin = resultat_fin,
+            tra = tra,
+            result_brut = result_brut,
+            result_net = result_net,
+            cdr = cdr
+        ))
     }
 )
