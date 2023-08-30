@@ -11,8 +11,9 @@
 ##' @param passif_ap_pb est une liste produit par la methode \code{\link{vieillissment_ap_pb}}.
 ##' @param resultat_fin est une valeur \code{numeric} correspondant au resultat financier.
 ##' @param ppb est un objet de la classe \code{\link{Ppb}} qui renvoie l'etat courant de la PPB.
-##' @param result_revalo
-##' @param var_pre est une valeur \code{numeric} correspondant a la variation de PRE.
+##' @param result_revalo est une valeur \code{numeric} correspondant au resultat financier.
+##' @param revalo_fin_passif est un vecteur \code{numeric} contenant les flux de revalo de fin de projection.
+##' @param var_pre est une liste contenant les resutaltats de la politique de revalorisation calculee dans proj_an().
 ##' @return Un compte de resultat analytique apres participation aux benefices.
 ##' @export
 ##' @include Canton_class.R
@@ -24,6 +25,7 @@ setGeneric(
                    resultat_fin,
                    ppb,
                    result_revalo,
+                   revalo_fin_passif,
                    var_pre) {
         standardGeneric("calc_res_ana")
     }
@@ -38,6 +40,7 @@ setMethod(
         resultat_fin = "numeric",
         ppb = "Ppb",
         result_revalo = "list",
+        revalo_fin_passif = "numeric",
         var_pre = "numeric"
     ),
     definition = function(passif_av_pb,
@@ -45,6 +48,7 @@ setMethod(
                           resultat_fin,
                           ppb,
                           result_revalo,
+                          revalo_fin_passif,
                           var_pre) {
         #### FLUX ET STOCKS ####
         flux_av_pb <- passif_av_pb[["result_av_pb"]][["flux_agg"]]
@@ -60,17 +64,19 @@ setMethod(
         primes_totales <- flux_av_pb[, "pri_brut"]
         dc <- flux_av_pb[, "dc"]
         ech <- flux_av_pb[, "ech"]
-        arr_rentes <- flux_av_pb[, "arr_charg"]
+        rentes <- flux_av_pb[, "rente"] - flux_av_pb[, "arr_charg"]
         rach_struct <- flux_av_pb[, "rach_part_struct"] +
             flux_av_pb[, "rach_tot_struct"]
         rach_conj <- flux_av_pb[, "rach_mass"] +
             flux_av_pb[, "rach_part_conj"] +
             flux_av_pb[, "rach_tot_conj"]
-        pb_liq <- flux_av_pb[, "rev_prest"] -
-            flux_av_pb[, "it_tech_prest"]
+        rach_charg <- flux_av_pb[, "rach_charg"]
+        pb_liq <- pmax(flux_av_pb[, "rev_prest"] -
+            flux_av_pb[, "it_tech_prest"], 0)
         it_tech_prest <- flux_av_pb[, "it_tech_prest"]
         it_tech_stock <- flux_av_pb[, "it_tech_stock"]
         chgt_sur_encours <- flux_av_pb[, "enc_charg_prest"]
+        flux_fin <- revalo_fin_passif
         pm_deb <- stock_av_pb[, "pm_deb"]
         pm_fin <- stock_ap_pb[, "pm_fin_ap_pb"]
         prov_div <- passif_av_pb[["var_psap"]] + passif_av_pb[["var_pgg"]]
@@ -122,14 +128,16 @@ setMethod(
                     prestations = list(
                         rachats = list(
                             rach_struct = -(rach_struct),
-                            rach_conj = -(rach_conj)
+                            rach_conj = -(rach_conj),
+                            rach_charg = rach_charg
                         ),
                         dc = -(dc),
                         ech = -(ech),
-                        arr_rentes = -(arr_rentes),
+                        rentes = -(rentes),
                         pb_liq = -(pb_liq),
                         it_tech_prest = -(it_tech_prest),
-                        chgt_sur_encours = chgt_sur_encours
+                        chgt_sur_encours = chgt_sur_encours,
+                        flux_fin = -(flux_fin)
                     ),
                     charges_prov = list(
                         prov_deb = pm_deb,
