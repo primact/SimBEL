@@ -80,6 +80,7 @@ setMethod(
         passif_av_pb <- viellissement_av_pb(annee, x@ptf_passif, coef_inf, list_rd, x@hyp_canton@tx_soc)
         # Mise a jour des passifs
         x@ptf_passif <- passif_av_pb[["ptf"]]
+
         #---------------------------------------------------------------
         # Etape 4 : Allocation des actifs pour faire face a des possibles rachats massifs
         #---------------------------------------------------------------
@@ -291,6 +292,8 @@ setMethod(
 
             # Extraction des resultats
             flux_fin_passif <- fin_proj[["flux_fin_passif"]]
+            revalo_fin_passif  <- fin_proj[["revalo_fin_passif"]]
+            annul_pre <- fin_proj[["annul_pre"]]
             resultat_tech <- fin_proj[["result_tech"]]
             resultat_fin <- fin_proj[["resultat_fin"]]
             result_brut <- fin_proj[["result_brut"]]
@@ -298,6 +301,8 @@ setMethod(
             impot <- fin_proj[["impot"]]
         } else { # Sinon le flux de fin est nul
             flux_fin_passif <- rep(0, length(passif_av_pb[["nom_produit"]]))
+            revalo_fin_passif <- rep(0, length(passif_av_pb[["nom_produit"]]))
+            annul_pre <- 0
         }
 
         #---------------------------------------------------------------
@@ -339,7 +344,8 @@ setMethod(
             prime = c(flux_produit[, "pri_brut"], hors_model$prime),
             prestation = c(flux_produit[, "prest"] +
                 flux_produit[, "rev_prest_nette"] -
-                flux_produit[, "rach_charg"] +
+                flux_produit[, "rach_charg"] -
+                flux_produit[, "arr_charg"] +
                 flux_produit[, "soc_stock_ap_pb"] +
                 flux_fin_passif, hors_model$prestation),
             prestation_fdb = c(flux_produit[, "prest_fdb"], 0),
@@ -391,14 +397,14 @@ setMethod(
         #---------------------------------------------------------------
         # Etape 18 : Compte de résultat analytique
         #---------------------------------------------------------------
-
         cdr <- calc_res_ana(
             passif_av_pb = passif_av_pb,
             passif_ap_pb = passif_ap_pb,
             resultat_fin = resultat_fin,
             ppb = x@ppb,
             result_revalo = result_revalo,
-            var_pre = res_pre[["var_pre"]]
+            revalo_fin_passif = revalo_fin_passif,
+            var_pre = res_pre[["var_pre"]] - annul_pre
         )
 
         # Output
