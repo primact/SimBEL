@@ -108,7 +108,8 @@ setMethod(
             ( # Prestations
                 res_av_pb_flux_agg[, "rev_prest_nette"] +
                     res_av_pb_flux_agg[, "prest"] - res_av_pb_flux_agg[, "rach_mass"] -
-                    (res_av_pb_flux_agg[, "rach_charg"] - res_av_pb_flux_agg[, "rach_charg_mass"])
+                    (res_av_pb_flux_agg[, "rach_charg"] - res_av_pb_flux_agg[, "rach_charg_mass"]) -
+                    res_av_pb_flux_agg[, "arr_charg"]
             ) - # Frais sur primes et sur prestations
             (
                 res_av_pb_flux_agg[, "frais_var_prime"] +
