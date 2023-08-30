@@ -31,7 +31,9 @@ setMethod(
         # Evaluation du resultats
         result_tech <- passif_av_pb[["flux_debut"]] + passif_av_pb[["flux_milieu"]] + passif_av_pb[["flux_fin"]] -
             sum(passif_ap_pb[["stock_agg"]][, "pm_fin_ap_pb"] - # Variation PM  sur les produits inclus dans le modele
-                passif_av_pb[["result_av_pb"]][["stock_agg"]][, "pm_deb"]) -
+                    passif_av_pb[["result_av_pb"]][["stock_agg"]][, "pm_deb"] -
+                    passif_ap_pb[["flux_agg"]][, "soc_stock_ap_pb"] +
+                    passif_ap_pb[["flux_agg"]][, "enc_charg_stock_ap_pb"]) -
             (.subset2(result_autres_passifs_av_pb, num_pm_fin) - .subset2(result_autres_passifs_av_pb, num_pm_deb)) -
             var_pre - passif_av_pb[["var_psap"]] - passif_av_pb[["var_pgg"]] - (ppb@valeur_ppb - ppb@ppb_debut)
 
