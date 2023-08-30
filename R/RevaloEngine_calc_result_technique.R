@@ -29,9 +29,10 @@ setMethod(
         num_pm_deb <- which(nom_passif == "pm_deb")
         num_pm_fin <- which(nom_passif == "pm_fin")
 
+
         # Evaluation du resultats
         result_tech <- passif_av_pb[["flux_debut"]] + passif_av_pb[["flux_milieu"]] + passif_av_pb[["flux_fin"]] -
-            sum(stock_agg[, "pm_fin"] - stock_agg[, "pm_deb"]) - # Variation PM  sur les produits inclus dans le modele
+            sum(stock_agg[, "pm_fin"] - stock_agg[, "pm_deb"] - passif_av_pb[["flux_agg"]][, "soc_stock_ap_pb"]) - # Variation PM  sur les produits inclus dans le modele
             (.subset2(result_autres_passifs, num_pm_fin) - .subset2(result_autres_passifs, num_pm_deb)) -
             var_pre - passif_av_pb[["var_psap"]] - passif_av_pb[["var_pgg"]]
 
