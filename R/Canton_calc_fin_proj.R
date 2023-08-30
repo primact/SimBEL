@@ -105,10 +105,12 @@ setMethod(
         # Output
         return(list(
             flux_fin_passif = flux_fin_passif,
+            revalo_fin_passif = revalo_fin_passif,
             result_tech = result_tech,
             resultat_fin = resultat_fin,
             result_brut = result_brut,
             result_net = result_net,
+            annul_pre = ptf_fin@pre@val_courante,
             impot = impot
         ))
     }
